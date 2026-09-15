@@ -1,0 +1,7 @@
+{
+  "unique_connection_ids_01_to_16": true,
+  "all_routes_end_at_named_anchors": true,
+  "all_segments_axis_aligned": true,
+  "only_wire_03_crosses_CT_aperture": true,
+  "physical_build_validated": false
+}

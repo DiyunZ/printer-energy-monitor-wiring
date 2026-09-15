@@ -1,0 +1,92 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Wiring references</title><style>body{font:16px/1.6 system-ui,sans-serif;color:#20364b;max-width:1400px;margin:35px auto;padding:0 24px}table{border-collapse:collapse;font-size:14px}td,th{padding:12px;border:1px solid #ccd6df;vertical-align:top}th{background:#eef3f7}a{color:#1668a1}h1{font-size:30px}h2{margin-top:32px}</style><p><a href="index.html">← Back to wiring diagram</a></p><h1>Wiring and assembly references</h1>
+<p>For <code>wiring_routes.svg</code> / <code>index.html</code>, Rev. 2. Sources checked, September 14–15, 2026.</p>
+<p><strong>Finding:</strong> manufacturer documentation supports the basic single-phase measurement connections and the individual assembly methods. No source below approves this complete custom enclosure. The upstream voltage/power branch, protection sizing and physical layout remain project design decisions requiring review.</p>
+<h2>Primary references and what they support</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Reference and location</th>
+<th>Application to this drawing</th>
+<th>Evidence boundary</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>R1</td>
+<td>DENT Instruments, <em>ELITEpro XC / ELOG 19 Operator&#39;s Guide</em>, November 15, 2024. <a href="https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf">Official PDF</a>. Printed pp. 19–23, 29 and 55; printed p. 55 is PDF page 54.</td>
+<td>Single-phase terminal relationships; CT installation/polarity; voltage-lead connection; USB insulation. Relevant to 03–09 and 14–16.</td>
+<td>The factory single-phase diagram takes the line-voltage tap downstream of CT. It does not specify our enclosure layout or 15 A / 1 A breaker pair.</td>
+</tr>
+<tr>
+<td>R2</td>
+<td>DENT Instruments, <em>ELITEpro XC Datasheet</em>, file <code>ELITEproXC_Datasheet_01272026.pdf</code>. <a href="https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf">Official PDF</a>, Specifications.</td>
+<td>Meter line power is supplied between L1 and L2. Supports retaining both connections in the single-phase setup.</td>
+<td>Does not establish compatibility with an unidentified lab sensor.</td>
+</tr>
+<tr>
+<td>R3</td>
+<td>DENT Instruments, <em>Replacement Unterminated Voltage Leads (10 in) for ELITEpro Series</em>. <a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/">Official product instructions</a>, Description.</td>
+<td>LD-SKTSP adapters connect to the full 2 m voltage leads and provide a tinned end for panel hard-wiring. Applies to 05, 08 and 09.</td>
+<td>The selected receiving terminals must accept the actual conductor construction and size. The drawing does not show the complete lead length.</td>
+</tr>
+<tr>
+<td>R4</td>
+<td>WAGO, <em>Data Sheet: 221-415</em>, version 08.05.2024. <a href="https://www.netxl.com/wago/docs/221-415-data-sheet.pdf">Manufacturer-authored PDF, hosted by NetXL</a>, pp. 3–5. <a href="https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415">Official product page</a>.</td>
+<td>Five connection points share one potential; specified strip length is 11 mm. Supports three distinct JL, JN and JPE connectors. The certificate table also lists UL 486C and UL 467.</td>
+<td>Product approval is not approval of the assembled enclosure. Apply the relevant certificate conditions, wire range and mounting requirements.</td>
+</tr>
+<tr>
+<td>R5</td>
+<td>WAGO, <em>221-505 Mounting Carrier</em>. <a href="https://www.wago.com/us/wire-splicing-connectors/mounting-carrier-221-series-24-12-awg/p/221-505">Official product page</a>.</td>
+<td>The five-conductor carrier is intended for panel mounting. Supports fixing the connectors to the mounting plate.</td>
+<td>Does not select our screw length, hole locations or terminal cover.</td>
+</tr>
+<tr>
+<td>R6</td>
+<td>Leviton, <em>Plugs and Connectors Installation Instructions</em>, document PK-A3154-10-01-0F. <a href="https://leviton.com/content/dam/leviton/residential/product_documents/instruction_sheet/515_Instruction_Sheet.pdf">Official PDF</a>, English page, section listing 515PV / 515CV; Diagram 2a on PDF page 2.</td>
+<td>Identifies hot-to-brass, neutral-to-silver and ground-to-green; specifies cable preparation, terminal tightening and clamping the outer jacket. Supports input/output terminations for 01, 03, 06, 07, 10 and 11.</td>
+<td>Use the 515PV/515CV section, not the adjacent two-wire or angle-plug instructions. Actual lab receptacle compatibility remains unconfirmed.</td>
+</tr>
+<tr>
+<td>R7</td>
+<td>Eaton, <em>UL 489 and UL 1077 DIN Rail Miniature Circuit Breakers</em>, PG01101009E. <a href="https://www.eaton.com/content/dam/eaton/products/electrical-circuit-protection/industrial-miniature-circuit-breakers/FAZ-product-guide-pg01101009e.pdf">Official guide</a>, printed pp. 2–3, FAZ-NA overview/installation options.</td>
+<td>Supports FAZ-NA branch protection and standard 35 mm DIN-rail mounting. Related to Q0 / Qv and 01, 02, 04, 05.</td>
+<td>Does not calculate the required protection for these printers, available fault current, conductors or DENT leads. UL 1077 supplementary protectors are not interchangeable with branch breakers merely because they look similar.</td>
+</tr>
+<tr>
+<td>R8</td>
+<td>Hammond, <em>PCJ Series, Solid and Clear Cover</em>. <a href="https://www.hammfg.com/electrical/products/non-metallic/pcj-sc">Official selection table</a>; <a href="https://www.hammfg.com/part/PCJ16148CC">PCJ16148CC page</a>.</td>
+<td>The table pairs PCJ16148CC with optional panel 14R1513. Supports the proposed enclosure/panel combination.</td>
+<td>Product dimensions do not prove connector clearance, cable bending space or assembled enclosure rating after modifications.</td>
+</tr>
+<tr>
+<td>R9</td>
+<td>Hammond, <em>1427NCG Nylon Liquid-Tight Cordgrips</em>. <a href="https://www.hammfg.com/electronics/small-case/accessories/1427ncg">Official specifications</a>, Features and Metric Threads table.</td>
+<td>The 1427NCGM20B entry specifies a 6–12 mm cable range; the series includes locknut and O-ring. Supports strain relief at the two power-cable entries.</td>
+<td>Select against actual cable diameter and wall thickness; the completed enclosure rating is not automatically established.</td>
+</tr>
+<tr>
+<td>R10</td>
+<td>icotek, <em>KVT 20 bk, 45024</em>. <a href="https://www.icotek.com/en-us/products/cable-glands/kvt-45024">Official product/assembly page</a>, Product description and Assembly video.</td>
+<td>Split gland and slit insert can enclose a cable with an existing connector. Supports the separate USB entry concept.</td>
+<td>Insert bore, connector passage and panel fit must be checked. This gland does not provide the USB cable&#39;s required electrical insulation.</td>
+</tr>
+<tr>
+<td>R11</td>
+<td>OSHA, <em>29 CFR 1910.304, Wiring Design and Protection</em>. <a href="https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.304">Official text</a>, (b)(2)(iii), (f)(1)(i), (g)(5).</td>
+<td>General basis for grounding-contact continuity and overcurrent protection matched to conductors/equipment. Applies to 10–13 and protection review.</td>
+<td>General regulatory context, not a certification of this portable assembly or a determination of all locally applicable rules.</td>
+</tr>
+</tbody></table>
+<h2>Decisions not directly established by the references</h2>
+<ol>
+<li><strong>Upstream DENT branch:</strong> the project moves the voltage/power tap before CT to keep meter self-consumption out of the measured current. This is an engineering adaptation, not the factory figure. Cable voltage drop can still affect the relationship to printer-inlet energy. Review the topology and validate it against a reference meter.</li>
+<li><strong>Q0 = 15 A and Qv = 1 A:</strong> the products exist (<a href="https://www.eaton.com/us/en-us/skuPage.167135.html">15 A</a>, <a href="https://www.eaton.com/us/en-us/skuPage.FAZ-C1%7B%7D1-NA-SP.html">1 A</a>), but their suitability has not been established by a load, inrush, fault-current and conductor/protection assessment.</li>
+<li><strong>Existing CT:</strong> model, output, range and polarity have not been identified. R1 printed p. 9 specifies compatible shunted CTs with a 333 mV maximum output. A generic “Hall effect” description is insufficient to establish compatibility.</li>
+<li><strong>Plate and rail bonding hardware:</strong> dedicated connections are shown, but actual earth terminals, hardware, conductor compatibility and continuity testing remain unspecified. Ordinary support screws are not an assumed electrical bond.</li>
+<li><strong>Physical routing:</strong> positions in the drawing are expanded for readability. Wire lengths, bend radii, protection covers, fastening points, complete voltage-lead slack and insulation clearances require a real dry fit. Separate USB routing is a design choice; suitable insulation is still necessary.</li>
+</ol>
+<h2>Drawing status</h2>
+<p>The 16 endpoint pairs match the project connection list. Automated graph checks found no joining of L, N, PE or CT signal nets; only wire 03 crosses the illustrated CT aperture. The interactive groups, individual-wire highlighting and English-only visible text were checked. These are drawing/UI checks, not electrical tests.</p>
+<p>The SVG/PNG is drawn deterministically from explicit endpoints. Physical assembly and electrical acceptance remain unverified.</p>
+</html>
