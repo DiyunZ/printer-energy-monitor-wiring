@@ -4,7 +4,7 @@
 
 An English-language interactive diagram of a candidate DENT ELITEpro XC measurement enclosure for one 3D printer. Trace all 16 connections individually or by circuit group. The drawing includes the wall outlet and input plug, printer connection, and USB connection to a computer.
 
-Use the website buttons to highlight a circuit, click a numbered row to trace one wire, and select **Zoom 150%** for a closer view. PNG and SVG downloads and an 11-source reference matrix are available from the page.
+Use the website buttons to highlight a circuit, click a numbered row to trace one wire, and use **Zoom out** / **Zoom in** to adjust the size. **Fit to screen** shows the whole diagram within the available screen, and **Reset 100%** restores the default width. PNG and SVG downloads and an 11-source reference matrix are available from the page.
 
 ## Design status
 
