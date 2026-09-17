@@ -1,31 +1,31 @@
 # Printer energy monitor wiring guide
 
-[Open the interactive website](https://DiyunZ.github.io/printer-energy-monitor-wiring/)
+[Open the interactive website](https://diyunz.github.io/printer-energy-monitor-wiring/)
 
-An English-language interactive diagram of a candidate DENT ELITEpro XC measurement enclosure for one 3D printer. Trace all 16 connections individually or by circuit group. The drawing includes the wall outlet and input plug, printer connection, and USB connection to a computer.
+Rev. 3, September 17, 2026: an English-language design for one 120 V printer and a DENT ELITEpro XC. It uses **one operating breaker**, a **dedicated enclosure receptacle for the existing two-pin adapter**, **three labeled blue voltage pigtails**, and **one CT around printer hot only**.
 
-Use the website buttons to highlight a circuit, click a numbered row to trace one wire, and use **Zoom out** / **Zoom in** to adjust the size. **Fit to screen** shows the whole diagram within the available screen, and **Reset 100%** restores the default width. PNG and SVG downloads and an 11-source reference matrix are available from the page.
+The blue pigtails are **L1 / hot, L2 / neutral, and N / neutral**. Protective earth has its own rated wiring. A passive voltage-tap fuse Fv is proposed in place of the old Qv breaker; final protection ratings require qualified review. Adapter and voltage-tap branches are before CT.
+
+The site contains the full schematic, a connector / meter-port detail drawing, a hardware list with an outlet candidate, routine operating steps and 23 individually traceable paths. Circuit highlighting, keyboard selection, zoom, fit-to-screen and SVG / PNG downloads are available. The adapter plug and barrel cable are factory connections, not parts to rewire.
 
 ## Design status
 
-This is an educational candidate routing plan, not an approved construction drawing. It assumes a 120 V single-phase L/N/PE supply. Actual outlet and printer connections, CT compatibility, breaker ratings, clearances and assembly must be verified by qualified lab electrical personnel. No physical assembly or electrical acceptance testing has been performed. The upstream DENT branch is a project adaptation pending review.
+This is a design-review candidate, not an approved construction drawing. CT model/range, adapter label, pigtail ratings, breaker/fuse coordination, physical fit and electrical acceptance remain unverified. No hardware has been energized or tested by this update. The upstream voltage tap is a project adaptation; downstream cable losses still affect the measurement boundary.
 
-See [the reference matrix](Wiring_References_EN.md) for supporting manufacturer documentation and remaining design questions.
+See [sources and design decisions](Wiring_References_EN.md). The existing enclosure remains a candidate only. The user confirmed that the proposed outlet is for the black two-pin AC/DC adapter.
 
-## Files
+## Files and editing
 
-- `index.html`: self-contained interactive page; no external runtime dependencies.
-- `wiring_routes.svg` / `wiring_routes.png`: vector drawing and high-resolution raster export.
-- `routes.json`: named endpoints and drawing coordinates for the 16 connections.
-- `references.html` / `Wiring_References_EN.md`: reference matrix and evidence limits.
-- `build_routes.py` / `draw_external.py`: editable diagram generators.
-- `validation.json`: generator assertions about the drawing only, not electrical testing.
-- `wiring_routes.html`: compatibility redirect to the homepage.
+- `build_routes.py`: circuit endpoints, paths, SVG generator and connectivity checks (Python standard library).
+- `draw_external.py`: blue-adapter chain, actual meter end view and panel / operating detail.
+- `page_template.html`: English page content, responsive styles and interaction code.
+- `index.html`: generated self-contained website; `wiring_routes.html` redirects here.
+- `wiring_routes.svg` / `.png`: main schematic.
+- `connector_detail.svg` / `.png`: connector detail drawing.
+- `routes.json` / `validation.json`: generated endpoint list and drawing checks, not hardware validation.
+- `test_routes.py`: regression cases that reject CT, PE and breaker-bypass miswiring in the drawing.
+- `Wiring_References_EN.md` / `references.html`: matching references and evidence limits.
 
-## Edit and preview
+Run `python3 build_routes.py` and `python3 -m unittest -v test_routes.py`, then `python3 -m http.server 8000` to preview. Export both SVGs to PNG after a drawing change. Regenerate `references.html` from the Markdown reference text when editing it. The checked-in page needs no external runtime or build service.
 
-Run `python3 build_routes.py` to regenerate the interactive page, SVG, routes and drawing checks. If the drawing changes, re-export `wiring_routes.svg` to `wiring_routes.png` with an SVG-capable image editor. Keep the Markdown and HTML reference tables in sync when editing sources.
-
-Run `python3 -m http.server 8000` from this folder to preview locally. No build is required to view the checked-in website.
-
-GitHub Pages publishes the root of the `main` branch. Pushing website updates to that branch updates the public site.
+GitHub Pages publishes the repository root on `main`. Pushing reviewed website changes updates [the public site](https://diyunz.github.io/printer-energy-monitor-wiring/).

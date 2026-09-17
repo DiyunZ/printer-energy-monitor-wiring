@@ -1,7 +1,20 @@
 {
-  "unique_connection_ids_01_to_16": true,
-  "all_routes_end_at_named_anchors": true,
-  "all_segments_axis_aligned": true,
-  "only_wire_03_crosses_CT_aperture": true,
-  "physical_build_validated": false
+  "revision": "Rev. 3 \u00b7 2026-09-17",
+  "connection_count": 23,
+  "circuit_breaker_count": 1,
+  "blue_adapters": {
+    "A1": "L1 / hot",
+    "A2": "L2 / neutral",
+    "A3": "N / neutral"
+  },
+  "endpoints_and_orthogonal_routes": true,
+  "no_unrelated_terminal_dot_crossings": true,
+  "only_printer_hot_through_CT": true,
+  "mains_neutral_PE_CT_DC_nets_separate": true,
+  "Q0_opens_all_downstream_hot_branches": true,
+  "PE_continuity_independent_of_Q0": true,
+  "aux_and_voltage_taps_before_CT": true,
+  "lead_fuse_rating": "TBD by qualified electrical personnel",
+  "physical_build_validated": false,
+  "protection_coordination_validated": false
 }
