@@ -1,0 +1,154 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Materials and purchase links · ELITEpro XC</title><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#layout">← Interactive 3D layout</a><a href="index.html#wiring">Circuit</a><a href="materials.html">Materials</a><a href="references.html">Sources</a><a href="Procurement_BOM.md" download>Download Markdown</a></nav><h1>Materials and fit notes — Rev. 4</h1>
+<p>2026-09-19. One 120 V printer, one operating breaker, one ELITEpro XC. The existing black two-pin adapter plugs into the dedicated enclosure outlet. These are purchasing candidates; no orders have been placed. Final electrical selection and physical fit remain open where stated.</p>
+<h2>Layout choice</h2>
+<p>Use <strong>Hammond PCJ16148CC + 14R1513</strong> as the proposed enclosure / steel panel. The panel is approximately <strong>327 × 374.7 mm</strong>, from the manufacturer&#39;s drawing and STEP assembly. The current DENT meter specification is <strong>216 × 63 × 47 mm</strong>. The older manual gives <strong>203 × 69 × 58 mm</strong>, so measure the photographed unit before drilling. <a href="https://www.hammfg.com/files/parts/pdf/PCJ16148CC.pdf">Hammond drawing</a>, <a href="https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf">DENT current datasheet</a>.</p>
+<p>With the 216 mm case at its proposed panel position, the body leaves approximately 71 mm at its sensing end and 87 mm at its power/USB end to the panel edges. Plugs, bending, restraint and tolerances consume that space. The logger is on the right; distribution, Fv and the retained voltage leads occupy the left. These allocations explain choosing a larger enclosure; they are not proof that every cable bundle fits.</p>
+<p>The enclosure geometry is imported without scaling from Hammond&#39;s STEP file. Its full assembly bounds, including feet and molded projections, are about 393.8 × 479.4 × 240.2 mm. These differ from the catalog&#39;s nominal 16 × 14 × 8 in. The unmodified CAD does not contain the proposed machined openings. The 3D view uses one unit per millimetre for every part.</p>
+<p>Q0 now has its handle on the front wall, and XA is on the right wall. Both retain their mains terminations inside. XA&#39;s metal rear box sits above the meter in the model: nominal vertical body gap is about 17 mm, before wiring and tolerances. The black adapter stays outside, with its original DC lead returning through a split entry. A transparent-wall viewing mode lets you inspect the closed enclosure; the real walls are gray and only the cover is clear.</p>
+<h2>Purchase candidates</h2>
+<p>Prices and inventory change; check exact manufacturer part numbers and lead times at checkout. A quote link is not a promise of stock.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Quantity</th>
+<th>Candidate and selection reason</th>
+<th>Purchase / specification</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Enclosure</td>
+<td>1</td>
+<td><strong>Hammond PCJ16148CC</strong> — Gray polycarbonate body with a clear lift-off lid. Selected for connector clearance and lead storage around the long meter. Nominal 16 × 14 × 8 in; use the manufacturer drawing/CAD for real outside dimensions.</td>
+<td><a href="https://www.solutionsdirectonline.com/hammond-16x14x8-polycarbonate-electrical-enclosure-with-clear-cover-pcj16148cc">Buy · Solutions Direct</a><br><a href="https://www.hammfg.com/files/parts/pdf/PCJ16148CC.pdf">Hammond drawing</a></td>
+<td>Selected size; physical dry fit pending</td>
+</tr>
+<tr>
+<td>Mounting panel</td>
+<td>1</td>
+<td><strong>Hammond 14R1513</strong> — Steel panel, approximately 327 × 374.7 × 1.9 mm. Ordered separately from the box. Provide its own PE bond; do not depend on painted mounting screws.</td>
+<td><a href="https://www.digikey.com/en/products/detail/hammond-manufacturing/14R1513/2359585">Buy · DigiKey</a><br><a href="https://www.hammfg.com/part/14R1513">Hammond</a></td>
+<td>Matches selected enclosure</td>
+</tr>
+<tr>
+<td>Q0 operating breaker</td>
+<td>1</td>
+<td><strong>Carling CA1-B0-24-615-121-DG</strong> — Panel-mounted, one-pole 15 A candidate with exterior handle. Manufacturer ordering code specifies 50/60 Hz medium delay, stud terminals and the 240 VAC UL 489 / CSA option. Confirm exact suffix, branch-circuit suitability, supply fault level, combined printer + logger load, inrush and switching duty. Do not substitute a DC-only or UL 1077 variant.</td>
+<td><a href="https://www.mouser.kr/ProductDetail/Carling-Technologies/CA1-B0-24-615-121-DG?qs=vln4JGBFwFoweMB2W4WfRg%3D%3D">Quote · Mouser listing</a><br><a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">Carling specification</a></td>
+<td>Confirm electrical selection; request price / lead time</td>
+</tr>
+<tr>
+<td>XA adapter receptacle</td>
+<td>1</td>
+<td><strong>Leviton 5261 / 5261-W</strong> — One NEMA 5-15R, 15 A / 125 V receptacle. Existing black two-pin adapter plugs in outside the right wall. Rear terminations stay in the bonded device box. Label ELITEpro ADAPTER ONLY · UNMETERED.</td>
+<td><a href="https://us.rs-online.com/product/leviton/5261-w/71692784/">Buy · RS</a><br><a href="https://leviton.com/products/5261">Leviton</a></td>
+<td>Confirm adapter clearance and mounting stack</td>
+</tr>
+<tr>
+<td>XA rear device box</td>
+<td>1</td>
+<td><strong>RACO 670RAC / retail 8670</strong> — 4 × 2.125 × 2.188 in handy-box envelope, about 101.6 × 54 × 55.6 mm. Guards the rear of XA. Include a dedicated PE bond, listed knockout closure(s) and a suitable wire-entry fitting. Wall support remains a fabricated item.</td>
+<td><a href="https://www.platt.com/p/0052365/hubbell-raco/handy-box-2-1-8-deep-1-2-kos-welded-metallic/050169906705/rac670rac">Buy · Platt</a><br><a href="https://hubbellcdn.com/specsheet/RACO-670RAC-SPEC-EN.pdf">RACO dimensions</a></td>
+<td>Confirm yoke / box / support fit</td>
+</tr>
+<tr>
+<td>XA faceplate</td>
+<td>1</td>
+<td><strong>Leviton 84004-40</strong> — Single round 1.406 in opening; standard stainless wallplate, approximately 114.3 × 69.9 mm. Fits the single-receptacle concept. Bond accessible metalwork through the approved device/box arrangement.</td>
+<td><a href="https://store.leviton.com/products/1-gang-single-1-406-inch-hole-device-receptacle-wall-plate-standard-size-device-mount-stainless-steel-84004-40">Buy · Leviton</a><br><a href="https://leviton.com/products/84004-40">Leviton specification</a></td>
+<td>Confirm complete stack before cutting wall</td>
+</tr>
+<tr>
+<td>Fv holder</td>
+<td>1</td>
+<td><strong>Eaton Bussmann CHCC1DU</strong> — Single Class CC DIN fuse-holder candidate for the hot voltage tap before A1. Body approximately 17.5 × 73.9 × 83.2 mm. Holder rating does not specify the required fuse ampere rating. Confirm lead size and termination acceptance.</td>
+<td><a href="https://www.digikey.com/en/products/detail/eaton-bussmann-electrical-division/CHCC1DU/2767773">Buy · DigiKey</a><br><a href="https://www.eaton.com/content/dam/eaton/products/electrical-circuit-protection/bussmann-iec-low-voltage-fuses/eaton-bussmann-series-low-voltage-fuses-catalog-ca134002en-en-us.pdf">Bussmann catalog · p.145</a></td>
+<td>Confirm protection / conductor compatibility</td>
+</tr>
+<tr>
+<td>Fv fuse</td>
+<td>1 + spare</td>
+<td><strong>Compatible Class CC fuse · value pending</strong> — Select voltage, ampere, interrupting rating and time characteristic for the exact sensing leads and prospective fault current. KTK-R / FNQ-R / LP-CC are holder-compatible families in the catalog; no particular value has been approved. Fv is passive and adds no operating switch.</td>
+<td><a href="https://www.eaton.com/content/dam/eaton/products/electrical-circuit-protection/bussmann-iec-low-voltage-fuses/eaton-bussmann-series-low-voltage-fuses-catalog-ca134002en-en-us.pdf">Compatible families / selection</a></td>
+<td>Do not order a guessed fuse value</td>
+</tr>
+<tr>
+<td>Distribution connectors</td>
+<td>4</td>
+<td><strong>WAGO 221-415</strong> — One each for JL and JN; two bridged connectors for JPE and six external PE connections. Use only with permitted copper conductors, sizes and terminations; confirm tinned blue pigtail and protective-bonding suitability. All groups remain separate.</td>
+<td><a href="https://www.digikey.com/en/products/detail/wago-corporation/221-415/13549457">Buy · DigiKey</a><br><a href="https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415">WAGO</a></td>
+<td>Confirm conductor / bonding acceptance</td>
+</tr>
+<tr>
+<td>Connector carriers</td>
+<td>4</td>
+<td><strong>WAGO 221-505</strong> — Secure the connector groups to the backpanel using the carrier&#39;s permitted mounting method. 3D carrier envelope is provisional. Add guards as needed; loose connectors must not rely on the wire for support.</td>
+<td><a href="https://www.digikey.com/en/products/detail/wago-corporation/221-505/15568477">Buy · DigiKey</a><br><a href="https://www.wago.com/us/wire-splicing-connectors/mounting-carrier-221-series-24-12-awg/p/221-505">WAGO</a></td>
+<td>Confirm purchased carrier drawing</td>
+</tr>
+<tr>
+<td>Short DIN rail</td>
+<td>100 mm cut + 2 end stops</td>
+<td><strong>DINnector DN-R35S1-2</strong> — 35 × 7.5 mm steel profile for Fv only; package contains two 1 m lengths. Reuse a suitable offcut if available. Deburr, secure both ends and bond the rail. Q0 is panel mounted, not mounted on this rail.</td>
+<td><a href="https://www.automationdirect.com/adc/shopping/catalog/wire_-a-_cable_management/din_rail/din_rail/dn-r35s1-2">Buy · AutomationDirect</a></td>
+<td>Confirm end stops and fixing screws</td>
+</tr>
+<tr>
+<td>Mains cord</td>
+<td>Length after routing</td>
+<td><strong>Southwire 55808699 · 14/3 SJOOW</strong> — Candidate 3-conductor flexible cord for input and printer output. Catalog nominal OD is about 9.17 mm; measure actual cord and choose fittings accordingly. Final current rating depends on the complete assembly and use conditions.</td>
+<td><a href="https://www.homedepot.com/p/Southwire-By-the-Foot-14-3-300-Volt-CU-Black-Flexible-Portable-Power-SJOOW-Cord-55808699/204633006">Buy · Home Depot</a></td>
+<td>Confirm load, length and actual OD</td>
+</tr>
+<tr>
+<td>Supply plug / printer connector</td>
+<td>1 each</td>
+<td><strong>Leviton 515PV + 515CV</strong> — Grounded NEMA 5-15P supply plug and 5-15R female printer connector. Confirm their accepted wire size / jacket OD against the chosen cord. The printer plugs into the measured connector, not XA.</td>
+<td><a href="https://www.homedepot.com/p/Leviton-15-Amp-125-Volt-3-Wire-Plug-Yellow-515PV-YL-R10-515PV-0YL/309610976">Buy plug · Home Depot</a><br><a href="https://www.supplyhouse.com/Leviton-515CV-Residential-Grade-Straight-Blade-Connector-15A-NEMA-5-15R-Yellow-2P-125V">Buy connector · SupplyHouse</a><br><a href="https://leviton.com/content/dam/leviton/residential/product_documents/instruction_sheet/515_Instruction_Sheet.pdf">Leviton cord instructions</a></td>
+<td>Confirm cord acceptance</td>
+</tr>
+<tr>
+<td>Mains / printer strain relief</td>
+<td>2</td>
+<td><strong>Hammond 1427NCGM20B</strong> — M20 × 1.5 cable gland candidate for a 6–12 mm cable OD, with correct locknut / sealing parts. Terminate the cord after feeding through. The model uses a provisional envelope, not its drilling dimensions.</td>
+<td><a href="https://www.solutionsdirectonline.com/hammond-liquid-tight-nylon-cable-gland-black-6-to-12-mm-1427ncgm20b">Buy · Solutions Direct</a><br><a href="https://www.hammfg.com/electronics/small-case/accessories/1427ncg">Hammond selection table</a></td>
+<td>Confirm exact package, OD and wall thickness</td>
+</tr>
+<tr>
+<td>DC / USB cable entry</td>
+<td>2 + matched grommets</td>
+<td><strong>icotek KVT 20 · 45024 + KT grommets</strong> — Split entry permits retaining the factory barrel / USB connectors. Choose each grommet from the measured cable OD and verify connector transit, wall thickness and separate strain relief. The 3D entry shape is a placeholder; it is not a KVT cutout drawing.</td>
+<td><a href="https://www.icotek.com/en-us/products/cable-glands/kvt-45024">Part / quote · icotek</a></td>
+<td>Request matched grommets before ordering</td>
+</tr>
+<tr>
+<td>Bonding, supports and small hardware</td>
+<td>1 fabrication set</td>
+<td><strong>Rated PE wire, bonding hardware, guarded supports, cable restraints and labels</strong> — Include the PE bridge, panel/rail/XA/device-box bonds, compatible ring lugs, Q0 stud insulation and nuts, listed rear-box entry/closures, insulating wall inserts, logger restraint and coil ties. Exact gauges, lug sizes, materials, cutouts and fasteners depend on the approved termination and mechanical stack; ordinary 3D-printed plastic is not specified for mains guards.</td>
+<td><a href="https://www.hammfg.com/files/parts/pdf/PCJ16148CC.pdf">Enclosure machining drawing</a><br><a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">Breaker mounting / terminal drawings</a></td>
+<td>Fabrication / termination schedule pending measured parts</td>
+</tr>
+</tbody></table></div>
+<h2>Reuse the equipment already available</h2>
+<ul>
+<li>ELITEpro XC: keep the instrument intact; use its external mounting provision / a suitable restraint.</li>
+<li>One existing CT: confirm the exact model, range and compatible output. The drawing&#39;s 29.4 × 41.7 × 26.4 mm CT is a DENT mini-hinged example, not an identification of the photographed sensor.</li>
+<li>Three blue pigtails and matching full voltage leads: A1 hot → L1, A2 neutral → L2, A3 neutral → N. They do not carry printer current or serve as PE.</li>
+<li>Existing AC/DC adapter, its two-pin plug and barrel lead: keep the factory cable intact; verify its label and center-positive polarity. The modeled body is a photo estimate, 65 mm high × 42 mm wide × 42 mm projection.</li>
+<li>Existing USB Type B cable, with a compatible split entry / strain relief.</li>
+</ul>
+<h2>Electrical arrangement</h2>
+<p>Q0 output feeds JL. JL branches to the printer hot through CT1, XA adapter outlet, and Fv → A1 → L1. JN supplies printer neutral, XA neutral, A2 → L2 and A3 → N. Protective earth bonds the printer output, XA, outlet box, steel backpanel and rail. JPE uses two bridged five-port connectors for six external connections plus the two bridge ends, leaving two spare ports. No N–PE bond is added.</p>
+<p>The adapter and voltage tap branch before CT1. Only printer hot passes through CT1 once. CT white/+ and black/− connect to the meter&#39;s current-input CH1. S is a shield input; the opposite analog block is not the CT input. Configure and verify ELOG recording before using the single-breaker routine.</p>
+<h2>Items to resolve before ordering the remaining parts or drilling</h2>
+<ol>
+<li>Read the printer nameplate and supply arrangement. Approve Q0 rating, inrush response, fault rating, operating duty and total shared load. The proposed 5-15 interfaces limit the assembly to at most 15 A; this is not approval to run a 15 A continuous load.</li>
+<li>Identify the blue pigtails and obtain their ratings. Select the Fv fuse value and confirm all terminal acceptance, including tinned ends. No guessed fuse value or assumption that the main breaker protects these small leads is used.</li>
+<li>Measure the actual logger, CT, adapter, mated voltage connectors and cable ODs. Store the complete lead lengths with their permitted bends. The model&#39;s coils show reserved routing space, not a verified length or bend-radius calculation.</li>
+<li>Dry-fit the 5261, 670RAC box, 84004-40 plate and insulating wall insert together. Check screw patterns, wall taper, thread engagement, rear terminations, box wire-entry fittings and all metal bonds. The illustrated insert envelopes are not fabrication dimensions.</li>
+<li>Finalize Q0 mounting insert and terminal guard, rail end stops, logger restraint, coil ties, terminal guards, gland / split-entry holes and sealing. Machining the box does not automatically retain its original enclosure rating.</li>
+<li>Have qualified electrical personnel verify PE continuity, polarity, insulation, protection and measurement behavior before release. Nothing here reports a built or energized assembly.</li>
+</ol>
+<p><a href="https://diyunz.github.io/printer-energy-monitor-wiring/">Interactive 3D layout and circuit</a> · <a href="layout_dimensions.json">Dimension schedule</a> · <a href="references.html">Primary references</a></p>
+</body></html>

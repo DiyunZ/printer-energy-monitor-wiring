@@ -1,5 +1,5 @@
 {
-  "revision": "Rev. 3 \u00b7 2026-09-17",
+  "revision": "Rev. 4 \u00b7 scaled 3D layout \u00b7 2026-09-19",
   "anchors": {
     "IN.L": [
       180,
@@ -77,6 +77,10 @@
       710,
       440
     ],
+    "JPE.6": [
+      750,
+      440
+    ],
     "OUT.L": [
       1390,
       260
@@ -118,8 +122,8 @@
       700
     ],
     "D.USB": [
-      1550,
-      1020
+      1360,
+      1045
     ],
     "D.DC+": [
       1130,
@@ -144,6 +148,10 @@
     "RAIL": [
       460,
       1110
+    ],
+    "OUTLETBOX": [
+      530,
+      1048
     ],
     "AUX.L": [
       340,
@@ -628,15 +636,15 @@
       "end": "PC",
       "points": [
         [
-          1550,
-          1020
+          1360,
+          1045
         ],
         [
-          1610,
-          1020
+          1385,
+          1045
         ],
         [
-          1610,
+          1385,
           1130
         ],
         [
@@ -645,8 +653,8 @@
         ]
       ],
       "badge": [
-        1610,
-        1080
+        1585,
+        1130
       ],
       "description": "USB Type B \u2192 protected exit \u2192 ELOG computer",
       "group": "signal"
@@ -876,6 +884,48 @@
       ],
       "description": "Factory barrel cable: negative sleeve path",
       "group": "aux"
+    },
+    {
+      "id": "24",
+      "kind": "PE",
+      "start": "JPE.6",
+      "end": "OUTLETBOX",
+      "points": [
+        [
+          750,
+          440
+        ],
+        [
+          750,
+          460
+        ],
+        [
+          765,
+          460
+        ],
+        [
+          765,
+          595
+        ],
+        [
+          595,
+          595
+        ],
+        [
+          595,
+          1048
+        ],
+        [
+          530,
+          1048
+        ]
+      ],
+      "badge": [
+        595,
+        995
+      ],
+      "description": "PE \u2192 dedicated outlet rear-box bond",
+      "group": "earth"
     }
   ]
 }

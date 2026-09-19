@@ -16,6 +16,12 @@ class RoutingChecks(unittest.TestCase):
     def test_current_design(self):
         self.assertEqual(drawing.validate()['circuit_breaker_count'], 1)
 
+    def test_outlet_box_cannot_be_bonded_to_neutral(self):
+        wire = self.wires[23]
+        wire['start'] = 'JN.5'
+        wire['points'][0] = drawing.A['JN.5']
+        self.assert_rejected()
+
     def test_l2_cannot_be_connected_to_pe(self):
         wire = self.wires[7]
         wire['start'] = 'JPE.3'

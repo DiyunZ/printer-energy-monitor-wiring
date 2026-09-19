@@ -1,0 +1,199 @@
+{
+  "units": "mm",
+  "revision": "2026-09-19",
+  "coordinates": "X across the panel; Y above the panel underside; Z along the panel. Geometry uses one scene unit per millimetre. Dimensions below are X × Y × Z unless noted.",
+  "parts": [
+    {
+      "id": "case",
+      "name": "Hammond PCJ16148CC",
+      "size": [
+        393.8016,
+        240.2078,
+        479.3996
+      ],
+      "status": "Manufacturer CAD",
+      "source": "https://www.hammfg.com/files/parts/stp/PCJ16148CC.zip",
+      "note": "Overall bounds of the supplied STEP assembly, including feet and moulded projections. The nominal 16 × 14 × 8 in catalog size is not its maximum outside envelope. Factory case geometry is retained; proposed openings are location markers, not machined holes."
+    },
+    {
+      "id": "panel",
+      "name": "14R1513 mounting panel",
+      "size": [
+        327.025,
+        1.89738,
+        374.65
+      ],
+      "status": "Manufacturer CAD",
+      "source": "https://www.hammfg.com/files/parts/pdf/PCJ16148CC.pdf",
+      "note": "Panel and fixing screws from the enclosure STEP assembly. The drawing gives 12.88 × 14.75 in and 0.075 in steel thickness. Electrical bonding is separate from the mounting screws."
+    },
+    {
+      "id": "meter",
+      "name": "DENT ELITEpro XC",
+      "size": [
+        63,
+        47,
+        216
+      ],
+      "position": [
+        91,
+        29.4,
+        -8
+      ],
+      "status": "Catalog dimensions; verify actual unit",
+      "source": "https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf",
+      "note": "Long blue body uses the current 216 × 63 × 47 mm specification. The older ELOG manual gives 203 × 69 × 58 mm. Measure the photographed instrument before finalizing. Ports, feet and grip details are visual approximations; plug space is additional."
+    },
+    {
+      "id": "ct",
+      "name": "CT1 · printer hot only",
+      "size": [
+        29.4,
+        41.7,
+        26.4
+      ],
+      "position": [
+        -55,
+        26.75,
+        -123
+      ],
+      "status": "Catalog example; actual CT unidentified",
+      "source": "https://www.dentinstruments.com/wp-content/uploads/2022/08/20A_Mini_Hinged_CT_Specs.pdf",
+      "note": "DENT HSC mini hinged example, Ø10.2 mm aperture. Its catalog envelope illustrates the white split-core style in the photos; this does not identify your CT model or range. One hot conductor passes through once; arrow points toward output."
+    },
+    {
+      "id": "q0",
+      "name": "Q0 · single operating breaker",
+      "size": [
+        19.18,
+        63.5,
+        49.28
+      ],
+      "position": [
+        -112,
+        120,
+        184.36
+      ],
+      "status": "Manufacturer body dimensions; candidate selected",
+      "source": "https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf",
+      "note": "Carling CA1-B0-24-615-121-DG candidate: one pole, 15 A, 50/60 Hz medium delay, panel mounting, 240 VAC application / UL 489 + CSA option. Body envelope excludes rear studs (about 13.6 mm) and front handle (13.72 mm). A supported insulating mounting insert and guarded terminals are required. Confirm the exact variant, supply, total load, inrush and switching duty before ordering. This replaces the earlier DIN-breaker mounting concept."
+    },
+    {
+      "id": "fuse",
+      "name": "Fv · voltage-tap fuse holder",
+      "size": [
+        17.5,
+        73.9,
+        83.2
+      ],
+      "position": [
+        -60,
+        46.6,
+        -28
+      ],
+      "status": "Manufacturer dimensional drawing; fuse pending",
+      "source": "https://www.eaton.com/content/dam/eaton/products/electrical-circuit-protection/bussmann-iec-low-voltage-fuses/eaton-bussmann-series-low-voltage-fuses-catalog-ca134002en-en-us.pdf",
+      "note": "Bussmann CHCC1DU single Class CC holder candidate; catalog drawing, p.145. Holder rating is not the fuse rating. Select a compatible Class CC fuse only after the voltage leads, fault level and inrush are checked. Verify conductor and tinned-end acceptance; adapt through an approved terminal if necessary."
+    },
+    {
+      "id": "terminals",
+      "name": "JL / JN / JPE distribution",
+      "size": [
+        29.8,
+        8.15,
+        18.3
+      ],
+      "status": "Catalog connector; carriers provisional",
+      "source": "https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415",
+      "note": "Each WAGO 221-415 body uses the manufacturer CAD dimensions, 29.80 × 8.15 × 18.30 mm. Three separate groups sit in illustrative carriers with guards. Final conductor acceptance, PE bonding suitability and capacity for extra metalwork bonds require review. A second PE connector is bridged to the first to provide the outlet-box bond and spare bonding capacity. Model carrier is 35 × 16.9 × 52.8 mm; confirm purchased carrier drawing."
+    },
+    {
+      "id": "outlet",
+      "name": "XA · dedicated adapter outlet",
+      "size": [
+        27,
+        103.2,
+        33.3
+      ],
+      "position": [
+        174,
+        121,
+        13
+      ],
+      "status": "Manufacturer dimensional drawing",
+      "source": "https://leviton.com/content/dam/leviton/commercial-industrial/product_documents/none/Document-32236-Dimensional%20Data.jpg",
+      "note": "Leviton 5261: 27 mm depth, 103.2 mm yoke height, 33.3 mm width. Side-mounted on a supported insulating insert with a RACO rear box and Leviton single-receptacle wallplate. Actual mounting stack, rear wiring and wall thickness still require a dry fit."
+    },
+    {
+      "id": "outletguard",
+      "name": "XA rear box / faceplate",
+      "size": [
+        55.58,
+        101.6,
+        53.975
+      ],
+      "position": [
+        158,
+        121,
+        13
+      ],
+      "status": "Manufacturer box dimensions; support provisional",
+      "source": "https://hubbellcdn.com/specsheet/RACO-670RAC-SPEC-EN.pdf",
+      "note": "RACO 670RAC / retail 8670 handy box. Uses 2.188 in actual depth × 4 in height × 2.125 in width. Leviton 84004-40 faceplate covers the single round receptacle. Metal box/cover need a dedicated PE bond. Wall support, opening and wire-entry fittings are proposed, not fabrication dimensions."
+    },
+    {
+      "id": "adapter",
+      "name": "Existing two-pin AC/DC adapter",
+      "size": [
+        42,
+        65,
+        42
+      ],
+      "position": [
+        218,
+        121,
+        13
+      ],
+      "status": "Photo-based estimate; measure",
+      "source": null,
+      "note": "Exterior black body is estimated as 65 mm tall × 42 mm wide × 42 mm projection; blades are inside XA. Existing factory cable re-enters via its own entry. Verify the adapter label, plug direction, actual dimensions and retention. No replacement adapter is specified."
+    },
+    {
+      "id": "rail",
+      "name": "Short DIN rail · Fv only",
+      "size": [
+        100,
+        7.5,
+        35
+      ],
+      "position": [
+        -55,
+        5.65,
+        -28
+      ],
+      "status": "Standard profile; proposed cut length",
+      "source": null,
+      "note": "35 × 7.5 mm DIN profile, proposed 100 mm cut length for Fv only, with end stops and a dedicated bond. Q0 now mounts on the front panel."
+    },
+    {
+      "id": "entries",
+      "name": "Mains / output / data entries",
+      "size": [
+        27,
+        37,
+        27
+      ],
+      "status": "Provisional gland envelope",
+      "source": "https://www.hammfg.com/electronics/small-case/accessories/1427ncg",
+      "note": "Mains cord entries use an approximate Ø27 × 37 mm M20-style envelope; the mains-entry candidate is 1427NCGM20B. Cable outside diameter, wall thickness, sealing and strain relief determine the actual part. USB/DC need an entry that accepts the existing terminated cable; coloured rings mark proposed penetration locations only."
+    },
+    {
+      "id": "leads",
+      "name": "Blue adapters & retained lead slack",
+      "size": null,
+      "status": "Illustrative routing; length not validated",
+      "source": "https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/",
+      "note": "Three blue pigtails feed L1 hot, L2 neutral and N neutral. The visible coils reserve space for the full leads; they do not certify storage of each 2 m lead or minimum bend radius. Cable diameters, plug bodies and path lengths are estimates, not a cut list. The separate green conductor is PE."
+    }
+  ]
+}
