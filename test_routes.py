@@ -9,54 +9,60 @@ class RoutingChecks(unittest.TestCase):
     def setUp(self):
         self.wires = copy.deepcopy(drawing.wires)
 
-    def assert_rejected(self):
-        with patch.object(drawing, 'wires', self.wires), self.assertRaises(AssertionError):
+    def assert_rejected(self, reason):
+        with patch.object(drawing, 'wires', self.wires), self.assertRaisesRegex(AssertionError, reason):
             drawing.validate()
+
+    def reconnect(self, index, start):
+        wire = self.wires[index]
+        wire['start'] = start
+        a, b = drawing.A[start], drawing.A[wire['end']]
+        wire['points'] = [a, (b[0], a[1]), b]
 
     def test_current_design(self):
         self.assertEqual(drawing.validate()['circuit_breaker_count'], 1)
 
     def test_outlet_box_cannot_be_bonded_to_neutral(self):
-        wire = self.wires[23]
-        wire['start'] = 'JN.5'
-        wire['points'][0] = drawing.A['JN.5']
-        self.assert_rejected()
+        self.reconnect(23, 'JN.5')
+        self.assert_rejected('OUTLETBOX must remain on protective earth')
 
     def test_l2_cannot_be_connected_to_pe(self):
-        wire = self.wires[7]
-        wire['start'] = 'JPE.3'
-        wire['points'][0] = drawing.A['JPE.3']
-        self.assert_rejected()
+        self.reconnect(7, 'JPE.3')
+        self.assert_rejected('D.L2 must remain on neutral')
 
     def test_printer_neutral_cannot_share_the_ct_aperture(self):
         wire = self.wires[6]
-        wire['points'] = [drawing.A['JN.2'], (800, 350), (800, 270),
-                          (1200, 270), (1200, 350), drawing.A['OUT.N']]
-        self.assert_rejected()
+        left, top, right, bottom = drawing.CT_WINDOW
+        a, b = drawing.A['JN.2'], drawing.A['OUT.N']
+        y = (top + bottom) / 2
+        wire['points'] = [a, (left-20,a[1]), (left-20,y), (right+20,y), (right+20,b[1]), b]
+        self.assert_rejected('Only printer hot may cross the CT aperture')
 
     def test_aux_hot_cannot_bypass_q0(self):
-        wire = self.wires[16]
-        wire['start'] = 'IN.L'
-        wire['points'] = [drawing.A['IN.L'], (180, 770), drawing.A['AUX.L']]
-        self.assert_rejected()
+        self.reconnect(16, 'IN.L')
+        self.assert_rejected('Hot branches must start at JL after Q0, before CT')
 
     def test_aux_tap_cannot_move_to_metered_output(self):
-        wire = self.wires[16]
-        wire['start'] = 'OUT.L'
-        wire['points'] = [drawing.A['OUT.L'], (1390, 600), (300, 600),
-                          (300, 770), drawing.A['AUX.L']]
-        self.assert_rejected()
+        self.reconnect(16, 'OUT.L')
+        self.assert_rejected('Hot branches must start at JL after Q0, before CT')
 
     def test_unrelated_terminal_dot_cannot_be_crossed(self):
         wire = self.wires[3]
-        wire['points'] = [drawing.A['JL.3'], (630, 540), drawing.A['Fv.IN']]
-        self.assert_rejected()
+        a, n, b = drawing.A['JL.3'], drawing.A['JN.3'], drawing.A['Fv.IN']
+        wire['points'] = [a, n, (b[0],n[1]), b]
+        self.assert_rejected('crosses an unrelated terminal dot: JN.3')
 
     def test_ct_plus_cannot_become_a_mains_input(self):
-        wire = self.wires[13]
-        wire['start'] = 'JL.1'
-        wire['points'] = [drawing.A['JL.1'], (550, 665), (1260, 665), drawing.A['D.+']]
-        self.assert_rejected()
+        self.reconnect(13, 'JL.1')
+        self.assert_rejected('Mains, PE, CT, DC and USB nets must remain separate')
+
+    def test_distinct_signal_wires_cannot_share_a_drawn_segment(self):
+        wire = self.wires[14]
+        a, b = drawing.A['CT.-'], drawing.A['D.-']
+        y = drawing.wires[13]['points'][1][1]
+        x = drawing.project((140,0))[0]
+        wire['points'] = [a, (a[0],y), (x,y), (x,b[1]), b]
+        self.assert_rejected('Wire segments overlap: 14 / 15')
 
 
 if __name__ == '__main__':

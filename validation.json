@@ -1,5 +1,5 @@
 {
-  "revision": "Rev. 4 \u00b7 scaled 3D layout \u00b7 2026-09-19",
+  "revision": "Rev. 5 \u00b7 aligned 3D + wiring layout \u00b7 2026-09-19",
   "connection_count": 24,
   "circuit_breaker_count": 1,
   "blue_adapters": {
@@ -9,6 +9,7 @@
   },
   "endpoints_and_orthogonal_routes": true,
   "no_unrelated_terminal_dot_crossings": true,
+  "no_overlapping_wire_segments": true,
   "only_printer_hot_through_CT": true,
   "mains_neutral_PE_CT_DC_nets_separate": true,
   "Q0_opens_all_downstream_hot_branches": true,

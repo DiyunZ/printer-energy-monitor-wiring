@@ -10,11 +10,12 @@ const V = a => new THREE.Vector3(...a);
 
 async function start() {
   const [dimensions, cad, buffer] = await Promise.all([
-    fetch('./layout_dimensions.json').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
+    fetch('./layout_dimensions.json?v=5').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
     fetch('./assets/enclosure.json').then(r => { if (!r.ok) throw Error('CAD manifest unavailable'); return r.json(); }),
     fetch('./assets/enclosure.bin').then(r => { if (!r.ok) throw Error('CAD geometry unavailable'); return r.arrayBuffer(); })
   ]);
   const parts = Object.fromEntries(dimensions.parts.map(p => [p.id, p]));
+  const instances = Object.fromEntries(dimensions.instances.map(p => [p.id, p]));
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, preserveDrawingBuffer: true });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.setClearColor(0xeef2f4);
@@ -45,7 +46,7 @@ async function start() {
   const physical = new THREE.Group(); scene.add(physical);
   const wires = new THREE.Group(); scene.add(wires);
   const dims = new THREE.Group(); scene.add(dims);
-  const groups = {}, labels = [], picking = [], shellObjects = [], lidObjects = [], hideWithCase = [], fitBodies = {};
+  const groups = {}, labels = [], picking = [], shellObjects = [], lidObjects = [], hideWithCase = [], fitBodies = {}, planBodies = {};
   const mats = new Map();
   const material = (color, metal = 0) => {
     const key = `${color}/${metal}`;
@@ -107,6 +108,8 @@ async function start() {
     let mat = entry.role === 'shell' ? shellMat : entry.role === 'lid' ? (index === 15 ? lidMat : material('#64747b', .4)) : entry.role === 'panel' ? material('#eef0ed', .18) : material('#9aa4a7', .55);
     const obj = mesh(geo, mat, [0,0,0], entry.role === 'panel' ? 'panel' : 'case');
     obj.name = entry.name; obj.castShadow = false;
+    if (index === 0) planBodies.case = [obj];
+    if (entry.role === 'panel' && !planBodies.panel) planBodies.panel = [obj];
     if (entry.role === 'shell') shellObjects.push(obj);
     if (entry.role === 'lid') lidObjects.push(obj);
     if (index > 0 && index < 15) hideWithCase.push(obj);
@@ -136,10 +139,11 @@ async function start() {
   tag('ELITEpro XC', [mx,64,mz-1], 'meter');
   // CT ring: the model aperture goes along X. Only the printer hot conductor crosses it.
   const [cx,cy,cz] = parts.ct.position;
-  const shape = new THREE.Shape(); const sw=26.4/2, sh=41.7/2;
+  const [ctw,cth,ctd] = parts.ct.size;
+  const shape = new THREE.Shape(); const sw=ctd/2, sh=cth/2;
   shape.moveTo(-sw,-sh); shape.lineTo(sw,-sh); shape.lineTo(sw,sh); shape.lineTo(-sw,sh); shape.closePath();
   const hole = new THREE.Path(); hole.absarc(0,0,5.1,0,Math.PI*2,true); shape.holes.push(hole);
-  const ctgeo = new THREE.ExtrudeGeometry(shape,{depth:29.4,bevelEnabled:false,curveSegments:24}); ctgeo.translate(0,0,-14.7); ctgeo.rotateY(Math.PI/2);
+  const ctgeo = new THREE.ExtrudeGeometry(shape,{depth:ctw,bevelEnabled:false,curveSegments:24}); ctgeo.translate(0,0,-ctw/2); ctgeo.rotateY(Math.PI/2);
   fitBodies.ct=[mesh(ctgeo,material('#e5e4d8'),[cx,cy,cz],'ct')];
   box([29.8,.8,26.6],[cx,cy+10,cz],'#aaa99f','ct');
   box([20,2,14],[cx,cy+21.5,cz],'#d8d7cc','ct',.8);
@@ -155,16 +159,17 @@ async function start() {
   decal('Q0\nMAIN',37,20,[qx,qy+57,214],'q0','front');
   tag('Q0 · external handle',[qx-9,qy+71,217],'q0');
   // Fuse holder and short, bonded DIN rail.
-  box([100,1.5,35],[-55,2.65,-28],material('#bdc6c9',.65),'rail');
-  for(const z of [-17,17]) box([100,7.5,1.5],[-55,5.65,-28+z],material('#aeb9be',.6),'rail');
+  const [rw,rh,rd] = parts.rail.size, [rx,ry,rz] = parts.rail.position;
+  planBodies.rail = [box([rw,1.5,rd],[rx,ry-rh/2+.75,rz],material('#bdc6c9',.65),'rail')];
+  for(const side of [-1,1]) planBodies.rail.push(box([rw,rh,1.5],[rx,ry,rz+side*(rd/2-.75)],material('#aeb9be',.6),'rail'));
   fitBodies.fuse=[box(parts.fuse.size,parts.fuse.position,'#d4d8d4','fuse',1.5)];
   box([14,4,35],[-60,85.6,-28],'#f2f0e3','fuse',1);
   decal('Fv',12,18,[-60,88,-28],'fuse');
   tag('Fv · fixed fuse',[-63,100,-31],'fuse');
   // Secured five-way connector groups. Two separate bridged PE connectors provide spare bond capacity.
-  const terminalPositions = [[-125,-128,'JL'],[-125,-58,'JN'],[-125,17,'PE'],[-75,52,'PE+']];
-  terminalPositions.forEach(([x,z,name]) => {
-    fitBodies[name]=[box([35,4,52.8],[x,4,z],'#e2e7e5','terminals',2),box([29.8,8.15,18.3],[x,10.075,z],'#a6b8b7','terminals',1)];
+  dimensions.instances.filter(p=>p.part==='terminals').forEach(p => {
+    const [x,,z] = p.position, name = p.id;
+    fitBodies[name]=[box([p.size[0],4,p.size[2]],[x,4,z],'#e2e7e5','terminals',2),box(parts.terminals.size,[x,10.075,z],'#a6b8b7','terminals',1)];
     for(let i=0;i<5;i++) box([4.3,2,12],[x-11.6+i*5.8,15.15,z],'#df762e','terminals',.6);
     decal(name,25,13,[x,6.2,z+18],'terminals');
   });
@@ -172,35 +177,37 @@ async function start() {
   // Side receptacle: actual Leviton yoke dimensions and a RACO handy-box envelope.
   const [ox,oy,oz] = parts.outletguard.position, [od,oh,ow] = parts.outletguard.size;
   const metal = material('#9ca9af',.5);
-  box([1.2,oh,ow],[ox-od/2,oy,oz],metal,'outletguard');
+  box([1.2,oh,ow],[ox-od/2+.6,oy,oz],metal,'outletguard');
   for(const y of [-1,1]) box([od,1.2,ow],[ox,oy+y*(oh/2-.6),oz],metal,'outletguard');
   for(const z of [-1,1]) box([od,oh,1.2],[ox,oy,oz+z*(ow/2-.6)],metal,'outletguard');
   fitBodies.outletguard=[...group('outletguard').children];
   box([4,124,78],[189,oy,oz],'#f1f0e6','outlet',2); // proposed insulating support insert
   box([2,114.3,69.85],[192,oy,oz],material('#d5dadd',.65),'outlet',1.5);
   box([2,103.2,33.3],[187,oy,oz],metal,'outlet');
-  box([27,37,33.3],[174,oy,oz],'#beafa0','outlet',2);
+  planBodies.outlet=[box([parts.outlet.size[0],37,parts.outlet.size[2]],parts.outlet.position,'#beafa0','outlet',2)];
   cylinder(16.65,5,[196,oy,oz],'#f0eee6','outlet','x');
   for(const z of [-6.35,6.35]) box([1.2,9,2.3],[199,oy+5,oz+z],'#303237','outlet');
   cylinder(3,1.2,[199,oy-7,oz],'#303237','outlet','x');
   for(const y of [-40,40]) cylinder(2,2,[193.5,oy+y,oz],'#75828a','outlet','x');
   decal('ELITEpro ADAPTER\nONLY · UNMETERED',65,18,[194,oy+76,oz],'outlet','right');
-  box(parts.adapter.size,parts.adapter.position,'#272b30','adapter',5);
+  planBodies.adapter=[box(parts.adapter.size,parts.adapter.position,'#272b30','adapter',5)];
   box([5,32,23],[195,oy,oz],'#15191d','adapter',1);
   decal('AC / DC',32,25,[218,154,oz],'adapter','up','#272b30','#d2d7dc');
   tag('XA + existing adapter',[246,171,oz],'adapter');
   // Entry fittings. Their centres mark proposed openings; source CAD is not a drilling template.
-  function gland(pos,axis,r=13.5,length=37) {
-    cylinder(r,length,pos,'#343e45','entries',axis,null,6);
+  function gland(id) {
+    const p=instances[id], pos=p.position, axis=p.axis;
+    const r=p.size[1]/2, length=p.size[axis==='x'?0:2];
+    planBodies[id]=[cylinder(r,length,pos,'#343e45','entries',axis)];
     const v=[...pos],axisN=axis==='x'?0:axis==='y'?1:2;v[axisN]+=length/2;
     cylinder(r*.68,4,v,'#171e23','entries',axis);
   }
-  gland([-185,43,128],'x'); gland([0,36,-211],'z'); gland([188,78,106],'x',10,28); gland([188,55,139],'x',12,28);
+  ['supply-entry','printer-entry','dc-entry','usb-entry'].forEach(gland);
   tag('SUPPLY IN',[-239,54,144],'entries'); tag('TO PRINTER',[3,44,-254],'entries');
   // Actual wire routes remain in the separately validated schematic. These curved paths show physical routing intent.
   const hot='#20262b', neutral='#c9d0d5', pe='#23945e', blue='#268bd4', signal='#a08bb5';
   cable([[-275,43,128],[-225,43,128],[-172,43,128]],'#293137',4.6,'entries');
-  box([48,33,30],[-299,43,128],'#e2b837','entries',6);
+  planBodies['supply-plug']=[box(instances['supply-plug'].size,instances['supply-plug'].position,'#e2b837','entries',6)];
   for (const z of [-6.35,6.35]) box([16,6.4,1.5],[-329,46,128+z],'#b6b9b3','entries');
   cylinder(2.4,18,[-330,34,128],'#b6b9b3','entries','x');
   cable([[-172,43,128],[-150,43,128],[-140,119,132],[qx,qy+23,qz-39]],hot,1.7,'q0');
@@ -211,7 +218,7 @@ async function start() {
   cable([[-168,43,128],[-158,19,108],[-139,13,27]],pe,1.7,'terminals');
   cable([[-128,13,9],[-147,13,-10],[-150,12,-180],[-8,13,-183],[-8,36,-233]],pe,1.7,'entries');
   cable([[0,36,-233],[0,36,-256],[18,36,-283]],'#2a333c',4.6,'entries');
-  box([30,33,50],[24,36,-300],'#e2b837','entries',6);
+  planBodies['printer-plug']=[box(instances['printer-plug'].size,instances['printer-plug'].position,'#e2b837','entries',6)];
   cylinder(12,3,[24,36,-326],'#e1d7ad','entries','z');
   cable([[-130,14,-120],[-97,20,-100],[-78,22,-80],[-60,27,-72]],hot,1.7,'fuse');
   cable([[-135,13,-120],[-146,21,-116],[-155,22,-160],[133,30,-160],[144,76,-20],[169,105,-5]],hot,1.7,'outlet');
@@ -225,12 +232,13 @@ async function start() {
   // Blue pigtails and three full voltage leads, including a visible retained-slack zone.
   const leadPorts = [3,2,0], leadColors = ['#283039','#ad4d4a','#dddcd1'];
   for(let i=0;i<3;i++) {
-    const z=60+i*13,x=-33+i*9;
+    const p=instances[`A${i+1}`], [x,,plugZ]=p.position, z=plugZ-9;
     const startPt = i===0?[-60,27,16]:[-124+i*6,14,-49];
     cable([startPt,[-44-i*8,30,29],[x,22,z]],blue,1.65);
-    cylinder(4.8,24,[x,22,z+9],blue,'leads','z');
+    planBodies[p.id]=[cylinder(p.size[0]/2,p.size[2],p.position,blue,'leads','z')];
     cylinder(4.4,26,[x,22,z+30],'#b8b5a4','leads','z');
-    const coil=[]; for(let j=0;j<=180;j++) {const a=j/180*Math.PI*2*4.5;coil.push([-35+44*Math.cos(a),18+i*9+j/180*6,101+37*Math.sin(a)]);}
+    const slack=instances['lead-slack'];
+    const coil=[]; for(let j=0;j<=180;j++) {const a=j/180*Math.PI*2*4.5;coil.push([slack.position[0]+slack.size[0]/2*Math.cos(a),18+i*9+j/180*6,slack.position[2]+slack.size[2]/2*Math.sin(a)]);}
     cable([[x,22,z+43],coil[0]],leadColors[i],1.5);
     cable(coil,leadColors[i],1.5);
     const ex=portX[leadPorts[i]];
@@ -297,10 +305,10 @@ async function start() {
     camera.updateProjectionMatrix();renderer.setSize(w,h);render();
   }
   function view(name) {
-    const presets={iso:[-650,760,850],top:[20,1050,.1],front:[20,115,1050],right:[1080,105,5]};
+    const presets={iso:[-650,760,850],top:[20,1050,0],front:[20,115,1050],right:[1080,105,5]};
     const raised=$('model-shell').value==='lifted';
     camera.position.copy(V(presets[name]||presets.iso));camera.position.y+=raised?80:0;
-    controls.target.set(20,raised?145:65,0);camera.up.set(0,1,0);camera.zoom=raised?.85:1;
+    controls.target.set(20,raised?145:65,0);camera.up.set(0,name==='top'?0:1,name==='top'?-1:0);camera.zoom=raised?.85:1;
     controls.update();camera.updateProjectionMatrix();render();
     document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===name)));
   }
@@ -325,6 +333,7 @@ async function start() {
   function zoom(factor){camera.zoom=THREE.MathUtils.clamp(camera.zoom*factor,.65,5);camera.updateProjectionMatrix();render();}
   $('model-zoom-in').onclick=()=>zoom(1.2);$('model-zoom-out').onclick=()=>zoom(1/1.2);
   $('model-reset').onclick=()=>{$('model-shell').value='xray';appearance();view('iso');};
+  $('compare-layout').onclick=()=>{$('model-shell').value='xray';appearance();view('top');$('layout').scrollIntoView({block:'start'});};
   $('model-save').onclick=()=>{render();const link=document.createElement('a');link.download='elitepro-enclosure-3d.png';link.href=renderer.domElement.toDataURL('image/png');link.click();};
   renderer.domElement.addEventListener('keydown',e=>{
     if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)) {
@@ -349,7 +358,13 @@ async function start() {
   $('model-loading').hidden=true;host.dataset.ready='true';
   status.textContent='Drag to rotate · Scroll / pinch to zoom · Click a component for its dimensions';
   // Expose read-only diagnostics so regression checks inspect the real rendered model.
-  window.enclosureDiagnostics=()=>({units:dimensions.units,camera:camera.position.toArray(),zoom:camera.zoom,mode:$('model-shell').value,selected:activePart,cadSize:cad.bounds.size,projectedMeter:V(parts.meter.position).project(camera).toArray(),meterSize:parts.meter.size,meshCount:picking.length,triangles:renderer.info.render.triangles,wiresVisible:wires.visible,lidOffset:lidObjects[0].position.y,shellVisible:shellObjects[0].visible,shellOpacity:shellMat.opacity,fitBodies:Object.fromEntries(Object.entries(fitBodies).map(([id,objects])=>{const b=new THREE.Box3();objects.forEach(m=>b.union(new THREE.Box3().setFromObject(m)));return [id,{min:b.min.toArray(),max:b.max.toArray(),size:b.getSize(new THREE.Vector3()).toArray()}];}))});
+  function boundsOf(bodies) {
+    return Object.fromEntries(Object.entries(bodies).map(([id,objects])=>{
+      const b=new THREE.Box3();objects.forEach(m=>b.union(new THREE.Box3().setFromObject(m)));
+      return [id,{min:b.min.toArray(),max:b.max.toArray(),size:b.getSize(new THREE.Vector3()).toArray()}];
+    }));
+  }
+  window.enclosureDiagnostics=()=>({units:dimensions.units,camera:camera.position.toArray(),zoom:camera.zoom,mode:$('model-shell').value,selected:activePart,cadSize:cad.bounds.size,projectedMeter:V(parts.meter.position).project(camera).toArray(),meterSize:parts.meter.size,meshCount:picking.length,triangles:renderer.info.render.triangles,wiresVisible:wires.visible,lidOffset:lidObjects[0].position.y,shellVisible:shellObjects[0].visible,shellOpacity:shellMat.opacity,fitBodies:boundsOf(fitBodies),planBodies:boundsOf({...planBodies,...fitBodies})});
 }
 start().catch(error=>{
   console.error(error);$('model-loading').hidden=true;

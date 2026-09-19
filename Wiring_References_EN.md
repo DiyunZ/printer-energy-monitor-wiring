@@ -1,4 +1,4 @@
-# Wiring and assembly references — Rev. 4
+# Wiring and assembly references — Rev. 5
 
 September 19, 2026. Applies to the interactive 3D layout, material schedule and wiring drawings.
 
@@ -52,7 +52,7 @@ Browser checks and visual review validate the published drawing and controls onl
 
 ## 3D scale and fit evidence
 
-Every body uses millimetres in one common coordinate frame. Orthographic orbit controls rotate the camera; component proportions do not change with UI sizing. ELITEpro's long case is no longer stretched into the available drawing space. The schematic retains enlarged port callouts and is explicitly not a physical scale drawing.
+Every body uses millimetres in one common coordinate frame. Orthographic orbit controls rotate the camera; component proportions do not change with UI sizing. ELITEpro's long case is no longer stretched into the available drawing space. The wiring plan projects the same component X/Z coordinates and body dimensions from `layout_dimensions.json`. Rear is above and front is below, matching the 3D Top view. Terminal symbols are spaced for electrical clarity and wire routes are rectilinear; neither drawing is a drilling template. The browser regression check compares actual rendered 3D body bounds to SVG footprints for 23 component and entry envelopes, including repeated terminal carriers, blue pigtails and cable entries.
 
 The manufacturer STEP is triangulated with occt-import-js 0.0.23 at 0.45 mm linear deflection, without dimensional rescaling. Source axes are transformed to put the backpanel underside at Y = 0. The manifest records mesh offsets and overall bounds. The interactive scene uses Three.js 0.186.0, stored locally with its MIT license. No CDN or third-party API is needed to view it.
 

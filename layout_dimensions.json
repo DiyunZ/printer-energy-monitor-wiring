@@ -1,7 +1,7 @@
 {
   "units": "mm",
   "revision": "2026-09-19",
-  "coordinates": "X across the panel; Y above the panel underside; Z along the panel. Geometry uses one scene unit per millimetre. Dimensions below are X × Y × Z unless noted.",
+  "coordinates": "X across the panel; Y above the panel underside; Z along the panel, negative toward the printer exit (rear), positive toward Q0 (front). One scene unit is one millimetre. The wiring plan projects the same X/Z positions with rear at the top. Dimensions below are X \u00d7 Y \u00d7 Z unless noted.",
   "parts": [
     {
       "id": "case",
@@ -13,7 +13,7 @@
       ],
       "status": "Manufacturer CAD",
       "source": "https://www.hammfg.com/files/parts/stp/PCJ16148CC.zip",
-      "note": "Overall bounds of the supplied STEP assembly, including feet and moulded projections. The nominal 16 × 14 × 8 in catalog size is not its maximum outside envelope. Factory case geometry is retained; proposed openings are location markers, not machined holes."
+      "note": "Overall bounds of the supplied STEP assembly, including feet and moulded projections. The nominal 16 \u00d7 14 \u00d7 8 in catalog size is not its maximum outside envelope. Factory case geometry is retained; proposed openings are location markers, not machined holes."
     },
     {
       "id": "panel",
@@ -25,7 +25,12 @@
       ],
       "status": "Manufacturer CAD",
       "source": "https://www.hammfg.com/files/parts/pdf/PCJ16148CC.pdf",
-      "note": "Panel and fixing screws from the enclosure STEP assembly. The drawing gives 12.88 × 14.75 in and 0.075 in steel thickness. Electrical bonding is separate from the mounting screws."
+      "note": "Panel and fixing screws from the enclosure STEP assembly. The drawing gives 12.88 \u00d7 14.75 in and 0.075 in steel thickness. Electrical bonding is separate from the mounting screws.",
+      "position": [
+        0,
+        0.94869,
+        0
+      ]
     },
     {
       "id": "meter",
@@ -42,11 +47,11 @@
       ],
       "status": "Catalog dimensions; verify actual unit",
       "source": "https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf",
-      "note": "Long blue body uses the current 216 × 63 × 47 mm specification. The older ELOG manual gives 203 × 69 × 58 mm. Measure the photographed instrument before finalizing. Ports, feet and grip details are visual approximations; plug space is additional."
+      "note": "Long blue body uses the current 216 \u00d7 63 \u00d7 47 mm specification. The older ELOG manual gives 203 \u00d7 69 \u00d7 58 mm. Measure the photographed instrument before finalizing. Ports, feet and grip details are visual approximations; plug space is additional."
     },
     {
       "id": "ct",
-      "name": "CT1 · printer hot only",
+      "name": "CT1 \u00b7 printer hot only",
       "size": [
         29.4,
         41.7,
@@ -59,11 +64,11 @@
       ],
       "status": "Catalog example; actual CT unidentified",
       "source": "https://www.dentinstruments.com/wp-content/uploads/2022/08/20A_Mini_Hinged_CT_Specs.pdf",
-      "note": "DENT HSC mini hinged example, Ø10.2 mm aperture. Its catalog envelope illustrates the white split-core style in the photos; this does not identify your CT model or range. One hot conductor passes through once; arrow points toward output."
+      "note": "DENT HSC mini hinged example, \u00d810.2 mm aperture. Its catalog envelope illustrates the white split-core style in the photos; this does not identify your CT model or range. One hot conductor passes through once; arrow points toward output."
     },
     {
       "id": "q0",
-      "name": "Q0 · single operating breaker",
+      "name": "Q0 \u00b7 single operating breaker",
       "size": [
         19.18,
         63.5,
@@ -80,7 +85,7 @@
     },
     {
       "id": "fuse",
-      "name": "Fv · voltage-tap fuse holder",
+      "name": "Fv \u00b7 voltage-tap fuse holder",
       "size": [
         17.5,
         73.9,
@@ -105,11 +110,11 @@
       ],
       "status": "Catalog connector; carriers provisional",
       "source": "https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415",
-      "note": "Each WAGO 221-415 body uses the manufacturer CAD dimensions, 29.80 × 8.15 × 18.30 mm. Three separate groups sit in illustrative carriers with guards. Final conductor acceptance, PE bonding suitability and capacity for extra metalwork bonds require review. A second PE connector is bridged to the first to provide the outlet-box bond and spare bonding capacity. Model carrier is 35 × 16.9 × 52.8 mm; confirm purchased carrier drawing."
+      "note": "Each WAGO 221-415 body uses the manufacturer CAD dimensions, 29.80 \u00d7 8.15 \u00d7 18.30 mm. Three separate groups sit in illustrative carriers with guards. Final conductor acceptance, PE bonding suitability and capacity for extra metalwork bonds require review. A second PE connector is bridged to the first to provide the outlet-box bond and spare bonding capacity. Model carrier is 35 \u00d7 16.9 \u00d7 52.8 mm; confirm purchased carrier drawing."
     },
     {
       "id": "outlet",
-      "name": "XA · dedicated adapter outlet",
+      "name": "XA \u00b7 dedicated adapter outlet",
       "size": [
         27,
         103.2,
@@ -139,7 +144,7 @@
       ],
       "status": "Manufacturer box dimensions; support provisional",
       "source": "https://hubbellcdn.com/specsheet/RACO-670RAC-SPEC-EN.pdf",
-      "note": "RACO 670RAC / retail 8670 handy box. Uses 2.188 in actual depth × 4 in height × 2.125 in width. Leviton 84004-40 faceplate covers the single round receptacle. Metal box/cover need a dedicated PE bond. Wall support, opening and wire-entry fittings are proposed, not fabrication dimensions."
+      "note": "RACO 670RAC / retail 8670 handy box. Uses 2.188 in actual depth \u00d7 4 in height \u00d7 2.125 in width. Leviton 84004-40 faceplate covers the single round receptacle. Metal box/cover need a dedicated PE bond. Wall support, opening and wire-entry fittings are proposed, not fabrication dimensions."
     },
     {
       "id": "adapter",
@@ -156,11 +161,11 @@
       ],
       "status": "Photo-based estimate; measure",
       "source": null,
-      "note": "Exterior black body is estimated as 65 mm tall × 42 mm wide × 42 mm projection; blades are inside XA. Existing factory cable re-enters via its own entry. Verify the adapter label, plug direction, actual dimensions and retention. No replacement adapter is specified."
+      "note": "Exterior black body is estimated as 65 mm tall \u00d7 42 mm wide \u00d7 42 mm projection; blades are inside XA. Existing factory cable re-enters via its own entry. Verify the adapter label, plug direction, actual dimensions and retention. No replacement adapter is specified."
     },
     {
       "id": "rail",
-      "name": "Short DIN rail · Fv only",
+      "name": "Short DIN rail \u00b7 Fv only",
       "size": [
         100,
         7.5,
@@ -173,7 +178,7 @@
       ],
       "status": "Standard profile; proposed cut length",
       "source": null,
-      "note": "35 × 7.5 mm DIN profile, proposed 100 mm cut length for Fv only, with end stops and a dedicated bond. Q0 now mounts on the front panel."
+      "note": "35 \u00d7 7.5 mm DIN profile, proposed 100 mm cut length for Fv only, with end stops and a dedicated bond. Q0 now mounts on the front panel."
     },
     {
       "id": "entries",
@@ -185,7 +190,7 @@
       ],
       "status": "Provisional gland envelope",
       "source": "https://www.hammfg.com/electronics/small-case/accessories/1427ncg",
-      "note": "Mains cord entries use an approximate Ø27 × 37 mm M20-style envelope; the mains-entry candidate is 1427NCGM20B. Cable outside diameter, wall thickness, sealing and strain relief determine the actual part. USB/DC need an entry that accepts the existing terminated cable; coloured rings mark proposed penetration locations only."
+      "note": "Mains cord entries use an approximate \u00d827 \u00d7 37 mm M20-style envelope; the mains-entry candidate is 1427NCGM20B. Cable outside diameter, wall thickness, sealing and strain relief determine the actual part. USB/DC need an entry that accepts the existing terminated cable; coloured rings mark proposed penetration locations only."
     },
     {
       "id": "leads",
@@ -194,6 +199,244 @@
       "status": "Illustrative routing; length not validated",
       "source": "https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/",
       "note": "Three blue pigtails feed L1 hot, L2 neutral and N neutral. The visible coils reserve space for the full leads; they do not certify storage of each 2 m lead or minimum bend radius. Cable diameters, plug bodies and path lengths are estimates, not a cut list. The separate green conductor is PE."
+    }
+  ],
+  "plan": {
+    "scale": 2.6,
+    "origin": [
+      1010,
+      950
+    ],
+    "width": 2000,
+    "height": 1790,
+    "shellBounds": {
+      "min": [
+        -201.03952,
+        -21.4376,
+        -216.61046
+      ],
+      "max": [
+        191.21046,
+        185.9534,
+        216.61046
+      ]
+    },
+    "note": "Shell bounds are the top-view envelope of enclosure.bin mesh 0; the mounting panel is mesh 33. The plan is a placement reference, not a fabrication template. Terminal symbols are separated for readable connectivity."
+  },
+  "instances": [
+    {
+      "id": "JL",
+      "part": "terminals",
+      "size": [
+        35,
+        16.9,
+        52.8
+      ],
+      "position": [
+        -125,
+        10.45,
+        -128
+      ],
+      "label": "JL \u00b7 HOT"
+    },
+    {
+      "id": "JN",
+      "part": "terminals",
+      "size": [
+        35,
+        16.9,
+        52.8
+      ],
+      "position": [
+        -125,
+        10.45,
+        -58
+      ],
+      "label": "JN \u00b7 NEUTRAL"
+    },
+    {
+      "id": "PE",
+      "part": "terminals",
+      "size": [
+        35,
+        16.9,
+        52.8
+      ],
+      "position": [
+        -125,
+        10.45,
+        17
+      ],
+      "label": "JPE \u00b7 1"
+    },
+    {
+      "id": "PE+",
+      "part": "terminals",
+      "size": [
+        35,
+        16.9,
+        52.8
+      ],
+      "position": [
+        -75,
+        10.45,
+        52
+      ],
+      "label": "JPE \u00b7 2"
+    },
+    {
+      "id": "supply-entry",
+      "part": "entries",
+      "size": [
+        37,
+        27,
+        27
+      ],
+      "position": [
+        -185,
+        43,
+        128
+      ],
+      "axis": "x",
+      "label": "Supply entry"
+    },
+    {
+      "id": "printer-entry",
+      "part": "entries",
+      "size": [
+        27,
+        27,
+        37
+      ],
+      "position": [
+        0,
+        36,
+        -211
+      ],
+      "axis": "z",
+      "label": "Printer exit"
+    },
+    {
+      "id": "dc-entry",
+      "part": "entries",
+      "size": [
+        28,
+        20,
+        20
+      ],
+      "position": [
+        188,
+        78,
+        106
+      ],
+      "axis": "x",
+      "label": "DC entry"
+    },
+    {
+      "id": "usb-entry",
+      "part": "entries",
+      "size": [
+        28,
+        24,
+        24
+      ],
+      "position": [
+        188,
+        55,
+        139
+      ],
+      "axis": "x",
+      "label": "USB exit"
+    },
+    {
+      "id": "supply-plug",
+      "part": "entries",
+      "size": [
+        48,
+        33,
+        30
+      ],
+      "position": [
+        -299,
+        43,
+        128
+      ],
+      "label": "Supply plug"
+    },
+    {
+      "id": "printer-plug",
+      "part": "entries",
+      "size": [
+        30,
+        33,
+        50
+      ],
+      "position": [
+        24,
+        36,
+        -300
+      ],
+      "label": "Printer connector"
+    },
+    {
+      "id": "A1",
+      "part": "leads",
+      "size": [
+        9.6,
+        9.6,
+        24
+      ],
+      "position": [
+        -33,
+        22,
+        69
+      ],
+      "label": "A1 \u00b7 L1 hot"
+    },
+    {
+      "id": "A2",
+      "part": "leads",
+      "size": [
+        9.6,
+        9.6,
+        24
+      ],
+      "position": [
+        -24,
+        22,
+        82
+      ],
+      "label": "A2 \u00b7 L2 neutral"
+    },
+    {
+      "id": "A3",
+      "part": "leads",
+      "size": [
+        9.6,
+        9.6,
+        24
+      ],
+      "position": [
+        -15,
+        22,
+        95
+      ],
+      "label": "A3 \u00b7 N neutral"
+    },
+    {
+      "id": "lead-slack",
+      "part": "leads",
+      "size": [
+        88,
+        30,
+        74
+      ],
+      "position": [
+        -35,
+        30,
+        101
+      ],
+      "label": "Retained lead slack"
     }
   ]
 }

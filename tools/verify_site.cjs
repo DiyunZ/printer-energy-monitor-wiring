@@ -21,6 +21,18 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  assert.match(await page.title(),/3D enclosure/);
  const diag=()=>page.evaluate(()=>window.enclosureDiagnostics());
  const initial=await diag();assert.equal(initial.units,'mm');assert.ok(initial.triangles>100000);
+ // Compare actual SVG geometry to actual WebGL meshes, not two copies of labels.
+ const plan=await page.locator('#main-stage svg').evaluate(svg=>({
+  scale:Number(svg.dataset.layoutScale),origin:[Number(svg.dataset.layoutOriginX),Number(svg.dataset.layoutOriginY)],
+  bodies:[...svg.querySelectorAll('.component-footprint')].map(e=>({id:e.dataset.layoutId,x:e.x.baseVal.value,y:e.y.baseVal.value,w:e.width.baseVal.value,h:e.height.baseVal.value}))
+ }));
+ assert.equal(plan.bodies.length,23,'Every placed body must appear in the wiring plan');
+ assert.deepEqual(plan.bodies.map(p=>p.id).sort(),Object.keys(initial.planBodies).sort());
+ for(const p of plan.bodies){
+  const actual=initial.planBodies[p.id],bounds=[actual.min[0],actual.min[2],actual.size[0],actual.size[2]];
+  const drawn=[(p.x-plan.origin[0])/plan.scale,(p.y-plan.origin[1])/plan.scale,p.w/plan.scale,p.h/plan.scale];
+  drawn.forEach((n,i)=>assert.ok(close(n,bounds[i]),`${p.id} plan/3D ${['X','Z','width','depth'][i]} mismatch: ${n} vs ${bounds[i]} mm`));
+ }
  assert.deepEqual(initial.meterSize,[63,47,216]);
  [63,47,216].forEach((n,i)=>assert.ok(close(initial.fitBodies.meter.size[i],n),'Rendered meter body dimension '+i));
  // Actual geometry, not just labels, must preserve the long meter silhouette.
@@ -33,6 +45,16 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  }
  assert.equal(initial.mode,'xray');assert.ok(initial.shellOpacity<.2);
  if(out)await page.locator('#layout').screenshot({path:path.join(out,'layout-desktop.png')});
+ await page.locator('#compare-layout').click();
+ assert.equal(await page.locator('[data-view="top"]').getAttribute('aria-pressed'),'true');
+ assert.ok(close((await diag()).camera[0],20));assert.ok(close((await diag()).camera[2],0));
+ assert.ok(await page.locator('#layout').evaluate(e=>Math.abs(e.getBoundingClientRect().top)<20),'Compare button should show the 3D top view');
+ if(out){
+  await page.locator('#model-view').screenshot({path:path.join(out,'aligned-3d-top.png')});
+  const drawing=await browser.newPage({viewport:{width:2000,height:1790}});
+  await drawing.goto(new URL('wiring_routes.svg',base).href);
+  await drawing.locator('svg').screenshot({path:path.join(out,'aligned-wiring-plan.png')});await drawing.close();
+ }
  for(const name of ['top','front','right','iso']){
   await page.locator(`[data-view="${name}"]`).click();
   assert.equal(await page.locator(`[data-view="${name}"]`).getAttribute('aria-pressed'),'true');
@@ -101,7 +123,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   const render=await browser.newPage({viewport:{width:1800,height:1300},deviceScaleFactor:2});
   for(const name of ['wiring_routes','connector_detail']){await render.goto(new URL(name+'.svg',base).href);await render.locator('svg').screenshot({path:path.join(root,name+'.png')});}
  }
- const report={date:new Date().toISOString(),base,connections:24,circuitGroups:7,renderedMeterBody:initial.fitBodies.meter.size,primaryBodyOverlaps:false,mouseOrbit:true,wheelZoom:true,keyboardOrbit:true,picking:true,shellModes:4,pngExport:true,viewportWidths:[1440,768,390],pageOverflow:false,internalLinks:true,materialsRows:16,jsErrors:errors,physicalBuildValidated:false};
+ const report={date:new Date().toISOString(),base,connections:24,circuitGroups:7,alignedComponentFootprints:plan.bodies.length,planTo3DMaximumToleranceMm:.05,compareTopView:true,renderedMeterBody:initial.fitBodies.meter.size,primaryBodyOverlaps:false,mouseOrbit:true,wheelZoom:true,keyboardOrbit:true,picking:true,shellModes:4,pngExport:true,viewportWidths:[1440,768,390],pageOverflow:false,internalLinks:true,materialsRows:16,jsErrors:errors,physicalBuildValidated:false};
  if(out)fs.writeFileSync(path.join(out,'browser-validation.json'),JSON.stringify(report,null,2)+'\n');
  console.log(JSON.stringify(report,null,2));
  }finally{await browser.close();}
