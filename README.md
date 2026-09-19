@@ -28,10 +28,10 @@ See [sources and design decisions](Wiring_References_EN.md). The enclosure is se
 - `index.html`: generated website; `wiring_routes.html` redirects here.
 - `layout3d.js` / `.css`: local WebGL model and camera/component controls.
 - `layout_dimensions.json`: shared component and repeated-part positions, plan projection, dimension provenance and evidence limits.
-- `procurement.json`: selected material candidates, quantities, purchase links and remaining decisions.
+- `procurement.json`: the inventory source for the website and downloadable BOM. Five equipment groups are confirmed on hand; all other enclosure materials, including USB, are to buy or fabricate. Rows distinguish direct purchase, size/rating selection, fabrication quotes and references.
 - `assets/enclosure.bin` / `.json`: triangulated manufacturer enclosure geometry and provenance.
 - `vendor/`: Three.js 0.186.0 browser modules and license.
-- `Procurement_BOM.md` / `materials.html`: generated shopping list and fit notes.
+- `Procurement_BOM.md` / `materials.html`: generated checklist with ownership ticks, quantities, shopping links and fit notes. “Owned” records inventory only; unresolved electrical and dimensional checks remain explicit.
 - `tools/render_documents.cjs`: generates the BOM and readable reference pages (requires `marked`).
 - `tools/convert_enclosure.cjs`: optional STEP-to-mesh regeneration (requires `occt-import-js` 0.0.23).
 - `tools/verify_site.cjs`: actual browser checks for 3D gestures, views, real 3D-to-SVG body placement/scale agreement, circuit traces and responsive layout (requires Playwright).

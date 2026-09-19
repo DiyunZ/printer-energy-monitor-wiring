@@ -8,6 +8,7 @@ const path=require('node:path');
 const base=process.env.CHECK_URL||'http://127.0.0.1:8770/';
 const out=process.env.QA_OUTPUT;
 const root=path.resolve(__dirname,'..');
+const bom=JSON.parse(fs.readFileSync(path.join(root,'procurement.json')));
 const close=(a,b,t=.05)=>Math.abs(a-b)<t;
 (async()=>{
  if(out)fs.mkdirSync(out,{recursive:true});
@@ -103,18 +104,51 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  await page.locator('#wire-24').focus();await page.keyboard.press('Enter');assert.match(await page.locator('#status').textContent(),/Connection 24/);
  await page.locator('[data-mode="all"]').click();await page.locator('#zoom-in').click();assert.equal(await page.locator('#zoom-level').textContent(),'125%');await page.locator('#zoom-reset').click();
  await page.locator('#connections summary').click();
+ // Ownership follows the user's confirmation, not whether an item appears in the model.
+ const ownedIds=['meter','ct','blue-leads','voltage-leads','adapter'];
+ assert.deepEqual(bom.items.filter(p=>p.availability==='owned').map(p=>p.id),ownedIds);
+ assert.equal(bom.items.find(p=>p.id==='usb').availability,'buy');
+ assert.equal(await page.locator('.materials tbody tr').count(),bom.items.length);
+ for(const p of bom.items){
+  const row=page.locator('#material-'+p.id);
+  assert.equal(await row.getAttribute('data-availability'),p.availability);
+  assert.match(await row.locator('.inventory-badge').textContent(),p.availability==='owned'?/✓.*Owned/:/□.*To buy/);
+  if(p.availability==='buy'){
+   assert.ok(p.links.some(l=>['buy','configure','quote'].includes(l.kind)),p.id+' must have a purchase or quote route, not just a PDF');
+   assert.ok(await row.locator('a[data-link-kind="buy"],a[data-link-kind="configure"],a[data-link-kind="quote"]').count()>0,p.id+' missing rendered purchase route');
+  }
+  for(const l of p.links)assert.equal(await row.locator('a').filter({hasText:l.label}).getAttribute('href'),l.url);
+ }
+ for(const state of ['owned','buy','all']){
+  await page.locator(`[data-inventory="${state}"]`).click();
+  const expected=bom.items.filter(p=>state==='all'||p.availability===state).map(p=>'material-'+p.id);
+  assert.deepEqual(await page.locator('.materials tbody tr:visible').evaluateAll(rows=>rows.map(r=>r.id)),expected);
+  assert.equal(await page.locator(`[data-inventory="${state}"]`).getAttribute('aria-pressed'),'true');
+  assert.match(await page.locator('#inventory-status').textContent(),new RegExp(`Showing ${expected.length} of ${bom.items.length}`));
+ }
+ if(out){await page.locator('#hardware').scrollIntoViewIfNeeded();await page.screenshot({path:path.join(out,'inventory-desktop.png')});}
  for(const [width,height] of [[1440,1100],[768,1024],[390,844]]){
   await page.setViewportSize({width,height});await page.evaluate(()=>window.scrollTo(0,0));
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Page overflow at '+width);
   await page.locator('#zoom-fit').click();assert.ok(await page.locator('#main-stage').evaluate(e=>e.scrollWidth<=e.clientWidth+2),'Circuit fit overflow at '+width);
   await page.locator('#zoom-reset').click();
   if(out){await page.locator('#layout').screenshot({path:path.join(out,`layout-${width}.png`)});}
+  assert.ok(await page.locator('.materials').evaluate(e=>e.scrollWidth<=e.clientWidth+2),'Materials overflow at '+width);
+  if(width===390){
+   await page.locator('[data-inventory="owned"]').click();assert.equal(await page.locator('.materials tbody tr:visible').count(),ownedIds.length);
+   if(out)await page.locator('#material-meter').screenshot({path:path.join(out,'inventory-mobile.png')});
+   await page.locator('[data-inventory="all"]').click();
+  }
  }
  const links=await page.locator('a[href]').evaluateAll(es=>es.map(e=>e.getAttribute('href')).filter(h=>!h.startsWith('http')&&!h.startsWith('#')));
  for(const href of [...new Set(links)]){const res=await page.request.get(new URL(href,base).href);assert.equal(res.status(),200,href);}
  for(const file of ['materials.html','references.html']){
   await page.goto(new URL(file,base).href);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),file+' mobile overflow');
-  if(file==='materials.html')assert.equal(await page.locator('tbody tr').count(),16);
+  if(file==='materials.html'){
+   assert.equal(await page.locator('tbody tr').count(),bom.items.length);
+   assert.equal(await page.locator('tbody tr').filter({hasText:'✓ 已有 / Owned'}).count(),ownedIds.length);
+   assert.equal(await page.locator('tbody tr').filter({hasText:'□ 待购 / To buy'}).count(),bom.items.length-ownedIds.length);
+  }
   else assert.equal(await page.locator('#r1').count(),1);
  }
  await page.goto(new URL('wiring_routes.html',base).href);await page.waitForURL(url=>url.href===base||url.href===base+'index.html');
@@ -123,7 +157,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   const render=await browser.newPage({viewport:{width:1800,height:1300},deviceScaleFactor:2});
   for(const name of ['wiring_routes','connector_detail']){await render.goto(new URL(name+'.svg',base).href);await render.locator('svg').screenshot({path:path.join(root,name+'.png')});}
  }
- const report={date:new Date().toISOString(),base,connections:24,circuitGroups:7,alignedComponentFootprints:plan.bodies.length,planTo3DMaximumToleranceMm:.05,compareTopView:true,renderedMeterBody:initial.fitBodies.meter.size,primaryBodyOverlaps:false,mouseOrbit:true,wheelZoom:true,keyboardOrbit:true,picking:true,shellModes:4,pngExport:true,viewportWidths:[1440,768,390],pageOverflow:false,internalLinks:true,materialsRows:16,jsErrors:errors,physicalBuildValidated:false};
+ const report={date:new Date().toISOString(),base,connections:24,circuitGroups:7,alignedComponentFootprints:plan.bodies.length,planTo3DMaximumToleranceMm:.05,compareTopView:true,renderedMeterBody:initial.fitBodies.meter.size,primaryBodyOverlaps:false,mouseOrbit:true,wheelZoom:true,keyboardOrbit:true,picking:true,shellModes:4,pngExport:true,viewportWidths:[1440,768,390],pageOverflow:false,internalLinks:true,materialsRows:bom.items.length,ownedGroups:ownedIds.length,purchaseGroups:bom.items.length-ownedIds.length,inventoryFilters:true,jsErrors:errors,physicalBuildValidated:false};
  if(out)fs.writeFileSync(path.join(out,'browser-validation.json'),JSON.stringify(report,null,2)+'\n');
  console.log(JSON.stringify(report,null,2));
  }finally{await browser.close();}
