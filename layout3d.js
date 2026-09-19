@@ -308,7 +308,7 @@ async function start() {
     const presets={iso:[-650,760,850],top:[20,1050,0],front:[20,115,1050],right:[1080,105,5]};
     const raised=$('model-shell').value==='lifted';
     camera.position.copy(V(presets[name]||presets.iso));camera.position.y+=raised?80:0;
-    controls.target.set(20,raised?145:65,0);camera.up.set(0,name==='top'?0:1,name==='top'?-1:0);camera.zoom=raised?.85:1;
+    controls.target.set(20,raised?145:65,0);camera.up.set(0,1,0);camera.zoom=raised?.85:1;
     controls.update();camera.updateProjectionMatrix();render();
     document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===name)));
   }
