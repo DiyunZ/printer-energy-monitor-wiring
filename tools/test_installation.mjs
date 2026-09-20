@@ -23,6 +23,15 @@ test('old split-entry locations fail real flange clearance even when small model
   usb.position[2] = 139;
   assert.ok(flangeGap(dc, usb) < 1);
 });
+test('DC and USB entries accept the selected round jackets, including DC tolerance', () => {
+  for(const id of ['dc-entry','usb-entry']) assert.equal(result.checks.find(c=>c.id===`${id} cable / insert`).result,'pass');
+  for(const change of [c=>c.profile='flat',c=>c.diameterRangeMm=[4.9,7.1],c=>c.insertRangeMm=[5,6]]) {
+    const wrong=structuredClone(d);change(wrong.instances.find(p=>p.id==='dc-entry').cable);
+    assert.equal(run(wrong).checks.find(c=>c.id==='dc-entry cable / insert').result,'fail');
+  }
+  const wrong=structuredClone(p);wrong.items.find(p=>p.id==='kt-inserts').model='icotek KT 41205';
+  assert.equal(run(d,wrong).checks.find(c=>c.id==='dc-entry cable / insert').result,'fail');
+});
 test('old breaker body depth and #8 ring option are rejected', () => {
   const old = structuredClone(d), wrong = structuredClone(p);
   old.parts.find(p => p.id === 'q0').size[2] = 49.28;

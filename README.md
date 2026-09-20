@@ -4,11 +4,11 @@
 
 Build package A, September 20, 2026: one grounded 120 V printer, one operating breaker, a dedicated outlet for the existing adapter, three sensing pigtails and one CT on printer hot. The user's printer alternatives are UltiMaker S5, Bambu P2S and Prusa CORE One+; only one is connected at a time.
 
-The English site provides a rotatable 3D model, matching 2D component positions, 25 traceable circuit paths, a 29-group illustrated checklist (5 owned / 24 to buy or fabricate), six installation stages and machining downloads. The meter retains its long 216 × 63 × 47 mm catalog proportions. Real component dimensions and estimates are distinguished.
+The English site provides a rotatable 3D model, matching 2D component positions, 25 traceable circuit paths, a 30-group illustrated checklist (5 owned / 25 to buy or fabricate), six installation stages and machining downloads. The meter retains its long 216 × 63 × 47 mm catalog proportions. Real component dimensions and estimates are distinguished.
 
 The revised design uses a directly mounted **Leviton 5279-C**, **Littelfuse LPSC0001Z**, a **JV** transition connector for the fuse-holder's 14 AWG output, long-thread glands, and adjustable **19.05 mm straps through 21 × 4 mm slots**. The build package includes exact fastener links and counts, wire blanks and assembly order. Install the panel before the side outlet.
 
-The original photo identifies the adapter as **CUI SMI6-9-V-P5, 9 V, 0.667 A, center positive**. CT digits remain obscured; blue-lead ratings and the flat DC cable entry remain unresolved. **This is an engineering review package, not complete-order, machining or energizing release.** No physical build or electrical acceptance is claimed.
+The original photo identifies the adapter as **CUI SMI6-9-V-P5, 9 V, 0.667 A, center positive**. The blue pigtail matches **DENT LD-SKTSP-BLU (254 mm)**; the CT matches **Mini HSC**, probably the legacy 50 A variant. Two **icotek 41380** split inserts accept the **4.8 mm USB2HAB6** and new **5.2 mm Tensility 10-02228** extension; the original flat cord stays outside. CT scaling and sensing-lead protection/termination still need acceptance. **This is an engineering review package, not complete-order, machining or energizing release.** No physical build or electrical acceptance is claimed.
 
 ## Source files
 

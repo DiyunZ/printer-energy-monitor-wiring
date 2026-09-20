@@ -2,7 +2,7 @@
 def draw_external(add,rect,text,line,circle,C):
     text(48,55,'Connector details | Match labels, not cable color',34,weight=700)
     text(48,91,'Based on the supplied ELITEpro XC photographs and DENT connector documentation. Not to scale.',20,color='#63768a')
-    text(48,148,'A. Three existing blue pigtails → three full voltage leads',25,weight=700)
+    text(48,148,'A. DENT LD-SKTSP-BLU · 254 mm pigtails → full voltage leads',25,weight=700)
     text(48,180,'Bare ends stay fixed inside guarded terminals. Disconnect mains and verify absence of voltage before unplugging these leads.',18,color='#63768a')
     for y,name,source,lead,port,color in [
         (245,'A1 · HOT','JV · Fv protected hot','Existing L1 lead','L1',C['L']),

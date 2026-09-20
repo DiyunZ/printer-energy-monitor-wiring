@@ -1,7 +1,7 @@
 {
-  "revision": "2026-09-20 · build package A",
+  "revision": "2026-09-20 · build package A, revision 8",
   "baseline_commit": "b542a4d777b8aef7f90fd000b35a3cca697e7c2b",
-  "scope": "One 120 V, grounded, single-printer assembly, confirmed by the user. Five equipment groups are owned. Build package A includes exact new-part selections, machining geometry and an assembly schedule. CT scaling, blue-lead protection/termination and cable-entry inserts remain physical-information holds; complete-order and energizing release is not claimed.",
+  "scope": "One grounded 120 V supply, one printer at a time. Five equipment groups are owned. Photo/product matching identifies the adapter, blue pigtail product and Mini HSC CT family. Round DC extension and USB sealing inserts are now specified. CT scaling and voltage-lead protection/termination still require the acceptance checks in the build package; no physical build or energizing release is claimed.",
   "result": "ENGINEERING PACKAGE A — RECEIVING AND ELECTRICAL RELEASE ITEMS OPEN",
   "sources": {
     "dent": "https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf",
@@ -20,7 +20,7 @@
     "gland": "https://www.hammfg.com/electronics/small-case/accessories/1427ncg",
     "kvt": "https://pim.icotek.com/Produkte/PG02%20Kabelverschraubungen/KVT/KVT%2032/Datenbl%C3%A4tter/45026_KVT%2032_bk.PDF",
     "kvt-product": "https://www.icotek.com/en-us/products/cable-glands/kvt-45026",
-    "kt": "https://www.icotek.com/en-us/products/cable-grommets/kt-gy",
+    "kt": "https://www.icotek.com/Produkte/PDFs/en_US/KTMBS%20gy.pdf",
     "usb": "https://www.startech.com/en-us/cables/usb2hab6",
     "wire": "https://www.southwire.com/wire-cable/building-wire/thhn-thwn-copper-silicone-free/p/22955984",
     "ring": "https://multimedia.3m.com/mws/media/61020O/ring-tongues-vinyl-insulated-brazed-seam-16-14-awg.pdf",
@@ -34,9 +34,15 @@
     "outlet-install": "https://leviton.com/content/dam/leviton/commercial-industrial/product_documents/instruction_sheet/PK-93763-10-02-0C-W.pdf",
     "lpsc": "https://www.littelfuse.com/de/assetdocs/powr-gard-catalog?assetguid=85d36235-a32b-4608-bfed-f9878aa43af0",
     "klkr": "https://www.littelfuse.com/assetdocs/klkr-classcc-fuse-datasheet-final?assetguid=4443e5f6-97ee-4206-9abe-9e155371a03e",
-    "cui": "https://in.ftcelectronics.com/datasheets-55/SMI6-12-V-P5.pdf",
+    "cui": "https://www.belfuse.com/media/datasheets/products/power-supplies/SMI6.pdf",
     "blue": "https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/",
-    "restraint": "https://www.velcro.com/products/organization/heavy-duty-one-wrap-roll/"
+    "restraint": "https://www.velcro.com/products/organization/heavy-duty-one-wrap-roll/",
+    "ct-family": "https://www.dentinstruments.com/shop/current-sensors/hinged-current-transformers-sensors-for-energy-metering/",
+    "ct-current": "https://www.dentinstruments.com/wp-content/uploads/CT-HSC-XXX-U_Datasheet_06132024.pdf",
+    "usb-drawing": "https://media.startech.com/cms/pdfs/usb2hab6_datasheet.pdf",
+    "dc-extension": "https://www.tensility.com/products/10-02228",
+    "dc-extension-drawing": "https://tensility.s3.us-west-2.amazonaws.com/imports/product_spec_sheets/10-02228.pdf",
+    "dent-fused-clip": "https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-fused-crocodile-clip/"
   },
   "materials": [
     {
@@ -55,26 +61,29 @@
     {
       "id": "ct",
       "item": "Current sensor",
-      "model": "Existing DENT split-core CT",
+      "model": "DENT Mini HSC · probable CTHSC-050-U/B",
       "availability": "owned",
-      "result": "Hold",
-      "checked": "Visible original label establishes the DENT CTHSC family and 600 V marking. The primary-current/model digits are covered by the black and white leads. Do not infer 20 A versus 50 A from case appearance. Read the uncovered label during receiving inspection before setting CH1.",
-      "remaining": "Uncover and record the model/range/output; check latch movement, polarity and ELOG scale.",
+      "result": "Conditional",
+      "checked": "The white hinged case, label layout and partially visible “DENT 50…” match the legacy Mini HSC 50 A / 333.3 mV product. This is a probable variant identification: wires obscure the complete model. DENT 20 A and 50 A Mini HSC versions share the body and 10 mm aperture; both accommodate one printer-hot conductor. Set ELOG from the uncovered label at commissioning, not from appearance.",
+      "remaining": "Uncover the existing label during assembly and enter its actual current/output in ELOG; validate positive watts against a reference load/meter.",
       "sources": [
         "ct",
+        "ct-family",
+        "ct-current",
         "dent"
       ]
     },
     {
       "id": "blue-leads",
       "item": "Blue voltage pigtails",
-      "model": "Existing detachable blue pigtails",
+      "model": "DENT LD-SKTSP-BLU · 10 in / 254 mm",
       "availability": "owned",
-      "result": "Hold",
-      "checked": "The photo shows a blue female safety adapter and factory-tinned bare end; no readable conductor rating. DENT sells a matching style, which does not prove this unit’s rating.",
-      "remaining": "Resolve conductor rating, terminal preparation and 0.5 A fuse selection before energizing.",
+      "result": "Conditional",
+      "checked": "Photo/product match: blue shrouded female connector, factory-tinned free end and ESIS lead-set card agree with DENT’s 10 in unterminated voltage accessory for the 2 m lead set. A1 is hot to L1; A2/A3 are neutral to L2/N. Use only for sensing, never printer power or PE. The product page does not publish AWG or ampacity.",
+      "remaining": "Manufacturer accessory is matched, but published AWG/ampacity is absent. Responsible electrical personnel must accept the tinned ends and Fv protection.",
       "sources": [
-        "blue"
+        "blue",
+        "dent-fused-clip"
       ]
     },
     {
@@ -95,8 +104,8 @@
       "model": "CUI SMI6-9-V-P5 · existing original adapter",
       "availability": "owned",
       "result": "Catalog match",
-      "checked": "Original photo label: 9 V DC, 0.667 A, center positive. This is within the ELITEpro 6–10 V / 500 mA input requirement. Keep the factory cable intact. SMI6 drawing: 64 × 40.5 × 30 mm, ±1 mm, excluding blades; P5 is 5.5 × 2.1 × 9.5 mm center positive. DC cable is UL2468 zip cord in the catalog: a round KT insert must not be assumed to fit.",
-      "remaining": "Verify body/blade seating and final cable-entry profile; no need to buy a replacement adapter.",
+      "checked": "Original label identifies CUI SMI6-9-V-P5: 9 V DC, 0.667 A, center positive; compatible with the meter’s 6–10 V / 500 mA input. Official SMI6 drawing: 64 × 40.5 × 30 mm ±1 mm, excluding blades; P5 plug 5.5/2.1 × 9.5 mm. Keep its flat UL2468 cord outside the enclosure and mate it to the specified round DC extension.",
+      "remaining": "Check condition, blade and barrel seating, 9 V polarity and external cord restraint; no replacement adapter is required.",
       "sources": [
         "dent",
         "cui"
@@ -270,11 +279,11 @@
       "model": "icotek KVT 32 black · 45026",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "KVT 32 45026: Ø32.3 opening, 14 mm threaded shank, Ø40 flange. DC/USB flange gap is about 25.2 mm.",
-      "remaining": "Verify connector passage through opening and nut, flat sealing seat and full nut engagement. No assembled IP rating is claimed.",
+      "checked": "Two KVT 32 frames for round, factory-terminated DC extension and USB cables. Each takes one KTMBS 4–7 gray insert, 41380, ordered separately. M32 × 1.5, 14 mm thread; Ø32.3 wall opening. Retain the included sealing rings and locknuts.",
+      "remaining": "Dry-fit plugs through empty opening and locknut; check full thread engagement and the seal against the drafted wall.",
       "sources": [
         "kvt",
-        "kvt-product"
+        "kt"
       ]
     },
     {
@@ -282,12 +291,14 @@
       "item": "USB data cable",
       "model": "StarTech USB2HAB6 · USB-A to USB-B, 6 ft / 1.8 m",
       "availability": "buy",
-      "result": "Measure",
-      "checked": "USB2HAB6 is a 1.8 m USB-A to USB-B data cable; Type B matches ELITEpro.",
-      "remaining": "Check host port, exact cable OD, molded connector clearance and final reach. A split entry still needs the connector to pass the bare wall opening / unsplit locknut.",
+      "result": "Catalog match",
+      "checked": "Factory USB-A to USB-B data cable, 1.8 m, published round jacket OD 4.8 mm. Fits one KTMBS 4–7 insert (41380) in the USB KVT 32 frame. Keep both plugs intact; reserve about 0.35 m inside and the remaining reach to the ELOG host.",
+      "remaining": "Check host port and cable reach; test plug passage through the empty wall bore/locknut before fitting the split insert.",
       "sources": [
         "usb",
-        "dent"
+        "usb-drawing",
+        "dent",
+        "kt"
       ]
     },
     {
@@ -303,16 +314,33 @@
       ]
     },
     {
+      "id": "dc-extension",
+      "item": "Round DC extension cable",
+      "model": "Tensility 10-02228 · 5.5/2.1 mm plug to jack",
+      "availability": "buy",
+      "result": "Catalog match",
+      "checked": "Factory round cable, 18 AWG, OD 5.2 ±0.3 mm, 7 A / 48 V; preserves center-to-center polarity. Adapter plugs into the female end outside; route the round cable through 41380/KVT 32 and plug the male end into the logger. Reserve 0.35 m inside and 0.565 m outside, adjusted at dry fit; retain slack with bends ≥35 mm radius (published minimum 31.2 mm). No cut or splice. Male barrel is 12 mm long; do not force its shoulder flush into the logger.",
+      "remaining": "Inspect factory continuity/polarity and contact engagement, secure the external joint without tension and retain both slack loops. Full flexible routing is not certified by the body model.",
+      "sources": [
+        "dc-extension",
+        "dc-extension-drawing",
+        "cui",
+        "dent",
+        "kt"
+      ]
+    },
+    {
       "id": "kt-inserts",
       "item": "DC / USB sealing inserts",
-      "model": "icotek KT gray: 39934 / 41203 / 41204 / 41205",
+      "model": "icotek KTMBS 4–7 gray · 41380",
       "availability": "buy",
-      "result": "Hold",
-      "checked": "USB: select 39934 (2–3 mm), 41203 (3–4 mm), 41204 (4–5 mm), or 41205 (5–6 mm) from measured round jacket OD. DC: CUI specifies flat UL2468 cable; obtain a matching split insert/profile from icotek before ordering or cutting the DC entry. Do not squeeze flat zip cord into a guessed round insert.",
-      "remaining": "Choose exact inserts from actual USB OD / DC profile. These values are not readable in the supplied photos.",
+      "result": "Catalog match",
+      "checked": "Split, small 21 × 21 × 19 mm insert for KVT; rated round-cable range 4–7 mm. One accepts Tensility DC OD 5.2 ±0.3 mm; one accepts StarTech USB OD 4.8 mm. Select KTMBS (split), not the unsplit KTMB. The original CUI flat cord remains outside.",
+      "remaining": "Verify received round jackets, split closure and KVT nut/seal seating; assembly IP rating is not claimed.",
       "sources": [
         "kt",
-        "cui"
+        "dc-extension",
+        "usb-drawing"
       ]
     },
     {
@@ -438,9 +466,10 @@
   ],
   "corrections": [
     "Identified the existing CUI SMI6-9-V-P5 adapter from the original photo: 9 V, 0.667 A, center positive.",
+    "Matched the blue pigtails to DENT LD-SKTSP-BLU, 10 in; identified the CT as Mini HSC, with the legacy 50 A variant probable but obscured digits not treated as confirmed.",
     "Replaced the outlet/metal box/support/cover assembly with directly mounted Leviton 5279-C. Removed seven obsolete material groups.",
     "Replaced conflicting Eaton fuse-holder data with Littelfuse LPSC0001Z; added the JV connector so its output terminal receives compatible 14 AWG wire.",
-    "Selected long-thread power glands and KVT 32 split entries; adapter flat-cord profile remains a separate insert-selection hold.",
+    "Resolved both KVT 32 inserts: two split KTMBS 4–7 gray 41380, matched to the 4.8 mm USB cable and a new 5.2 mm round DC extension. The original adapter flat cord stays outside; wall machining is unchanged.",
     "Added real CAD wall openings, panel tie/rail/bond holes and strap slots, five DXF setups, fastener schedule and detailed assembly procedure."
   ],
   "assembly": [
@@ -471,8 +500,8 @@
     {
       "stage": 5,
       "title": "Wire and retain",
-      "action": "Unplug all sources. Bond panel and rail first; complete 25 connection paths. Fv.OUT uses 14 AWG to JV; blue A1 starts at JV. Label all leads and keep the original adapter cable intact.",
-      "result": "Electrical topology checked. CT scaling, blue-lead protection and cable inserts remain release items."
+      "action": "Unplug all sources. Bond panel and rail first; complete 25 connection paths. Fv.OUT uses 14 AWG to JV; A1 starts at JV. Keep the original adapter cord outside, join the round extension there and pass only its round jacket through the DC insert. Retain all cable slack.",
+      "result": "Topology and the selected DC/USB jacket-to-insert ranges checked. CT scale and voltage-lead protection/termination remain commissioning items."
     },
     {
       "stage": 6,
@@ -482,9 +511,9 @@
     }
   ],
   "needed": [
-    "Existing CT: label digits are obscured by leads in the photo; uncover and record model/current/output before setting ELOG.",
-    "Existing blue pigtails: no readable AWG/current marking in photo; verify manufacturer identity, ratings and approved tinned-end termination to release Fv.",
-    "Cable entries: measure USB round jacket and adapter flat-cord profile; choose exact split inserts, then dry-fit locknuts and preterminated plugs.",
-    "Receiving and commissioning: verify fastener stacks, CT latch/fuse door/slack/strain relief, total load and Q0 fault/inrush selection with responsible electrical personnel before cutting/energizing."
+    "CT commissioning: Mini HSC family is matched; 50 A is probable. Read the unobscured label during assembly and set that exact range/output in ELOG.",
+    "Voltage-lead acceptance: LD-SKTSP-BLU is the matched accessory. Its online listing does not state AWG/ampacity. Accept terminal preparation and Fv coordination with responsible electrical personnel; do not infer lead protection from the 15 A main breaker.",
+    "Receiving: use two 41380 split inserts on the round USB and Tensility cables, check plugs, seals, locknuts and jacket retention. The original flat adapter cable stays outside.",
+    "Commissioning: verify fastener stacks, CT latch/fuse door/slack, supply conditions, PE/insulation/polarity, total load and restart/recording behavior before routine operation."
   ]
 }

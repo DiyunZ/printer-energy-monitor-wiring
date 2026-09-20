@@ -1,5 +1,5 @@
 {
-  "revision": "Rev. 7 \u00b7 build package A \u00b7 2026-09-20",
+  "revision": "Rev. 8 \u00b7 build package A \u00b7 2026-09-20",
   "anchors": {
     "IN.L": [
       571.9,
@@ -1042,7 +1042,7 @@
         1670.4,
         1137.2
       ],
-      "description": "Factory barrel cable: center-positive path",
+      "description": "Original adapter \u2192 external DC coupling \u2192 round extension: center-positive path",
       "group": "aux"
     },
     {
@@ -1084,7 +1084,7 @@
         1649.6,
         1173.6
       ],
-      "description": "Factory barrel cable: negative sleeve path",
+      "description": "Original adapter \u2192 external DC coupling \u2192 round extension: sleeve-negative path",
       "group": "aux"
     },
     {

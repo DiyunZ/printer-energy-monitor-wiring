@@ -56,6 +56,13 @@ export function audit(dimensions, manifest, buffer, procurement) {
     const p = instances[id];
     record(`${id} envelope`, p.size.every((v, i) => v === [37, 40, 40][i]) ? 'pass' : 'fail',
       `Model ${p.size.join(' × ')} mm; KVT 32 overall envelope 37 mm axial × Ø40 mm flange.`, 'Conservative cylinder; the threaded shank is M32, not Ø40.');
+    const c=p.cable, insert=procurement.items.find(item=>item.id==='kt-inserts');
+    const matches=c?.profile==='round' && c.insertPart==='41380' && insert.model.includes(c.insertPart)
+      && c.insertRangeMm[0]===4 && c.insertRangeMm[1]===7
+      && c.diameterRangeMm[0]>=c.insertRangeMm[0] && c.diameterRangeMm[1]<=c.insertRangeMm[1];
+    record(`${id} cable / insert`, matches ? 'pass' : 'fail',
+      c ? `${c.item}: ${c.profile} jacket ${c.diameterRangeMm.join('–')} mm; KTMBS ${c.insertPart} accepts ${c.insertRangeMm.join('–')} mm.` : 'Cable profile / insert not specified.',
+      'Catalog interface check only. Original flat adapter cord is excluded; verify received jackets, connector passage, seals and strain relief.');
   }
   const internal = ['meter', 'ct', 'fuse', 'rail'].map(id => parts[id]).concat(dimensions.instances.filter(p => p.part === 'terminals'));
   const collisions = [];
@@ -68,7 +75,7 @@ export function audit(dimensions, manifest, buffer, procurement) {
   }
   record('Panel component body separation', collisions.length ? 'fail' : 'pass',
     collisions.length ? collisions.join(', ') : `${internal.length} nominal body envelopes do not overlap (rail/holder mating excluded).`,
-    'CT is an unidentified example. No connectors, open levers, flexible wires, mounting tolerances or screw-tool envelopes are certified by this check.');
+    'CT uses the matched Mini HSC family envelope; exact scale remains unconfirmed. No connectors, open levers, flexible wires, mounting tolerances or screw-tool envelopes are certified by this check.');
   const sweeps = [];
   for (const p of [parts.panel, ...internal]) {
     const swept = sweptBox(p), contactHits = hits(swept, shell);

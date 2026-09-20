@@ -53,7 +53,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   scale:Number(svg.dataset.layoutScale),origin:[Number(svg.dataset.layoutOriginX),Number(svg.dataset.layoutOriginY)],
   bodies:[...svg.querySelectorAll('.component-footprint')].map(e=>({id:e.dataset.layoutId,x:e.x.baseVal.value,y:e.y.baseVal.value,w:e.width.baseVal.value,h:e.height.baseVal.value}))
  }));
- assert.equal(plan.bodies.length,23,'Every placed body must appear in the wiring plan');
+ assert.equal(plan.bodies.length,24,'Every placed body, including the external DC coupling, must appear in the wiring plan');
  assert.deepEqual(plan.bodies.map(p=>p.id).sort(),Object.keys(initial.planBodies).sort());
  for(const p of plan.bodies){
   const actual=initial.planBodies[p.id],bounds=[actual.min[0],actual.min[2],actual.size[0],actual.size[2]];
@@ -103,7 +103,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  await page.keyboard.press('Home');assert.ok(close((await diag()).camera[0],initial.camera[0]));
  await page.locator('#model-zoom-in').click();assert.ok(close((await diag()).zoom,1.2));
  await page.locator('#model-zoom-out').click();assert.ok(close((await diag()).zoom,1));
- await page.locator('#model-part').selectOption('ct');assert.match(await page.locator('#part-evidence').textContent(),/unidentified/);
+ await page.locator('#model-part').selectOption('ct');assert.match(await page.locator('#part-evidence').textContent(),/Mini HSC family matched.*probable/);
  await page.locator('[data-view="top"]').click();await page.locator('#model-shell').selectOption('cutaway');
  await page.locator('#model-wires').uncheck();await page.locator('#model-label-toggle').uncheck();
  assert.equal((await diag()).wiresVisible,false);

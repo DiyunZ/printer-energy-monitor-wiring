@@ -31,47 +31,58 @@
 <td>Electrical topology. These drawings are not machining templates.</td>
 </tr>
 </tbody></table></div>
-<h2>What is fixed, and what is still needed</h2>
+<h2>Photo identification and remaining checks</h2>
+<p>The existing photos were compared with manufacturer product pictures, original datasheets and a legacy CT product photo. No concealed label characters were reconstructed.</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
-<th>Interface</th>
-<th>Current decision</th>
-<th>Release evidence still needed</th>
+<th>Item</th>
+<th>Identification and design decision</th>
+<th>Evidence / remaining check</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>Existing black adapter</td>
-<td>Photo identifies <strong>CUI SMI6-9-V-P5</strong>, <strong>9 V DC, 0.667 A, center positive</strong>. Retain it and its original cable. The CUI P5 drawing specifies a 5.5/2.1 mm plug.</td>
-<td>Check condition and delivered voltage before connecting the logger; do not buy a replacement merely because the earlier label was unread.</td>
+<td>Black adapter</td>
+<td><strong>CUI SMI6-9-V-P5</strong>, 9 V DC, 0.667 A, center positive. Retain it. Body 64 × 40.5 × 30 mm ±1 mm; 5.5/2.1 mm P5 plug.</td>
+<td>Label readable in the original photo; <a href="https://www.belfuse.com/media/datasheets/products/power-supplies/SMI6.pdf">official CUI SMI6 datasheet</a>. Check condition, output and seating at assembly.</td>
 </tr>
 <tr>
-<td>Existing CT</td>
-<td>Use one split-core CT on printer hot only. The photograph shows the CTHSC family, but wires cover the current/output digits.</td>
-<td>Record the actual model, rated A and mV output. The illustrated 20 A body is an example; do not enter 20 A in ELOG from the model. If the original cannot be identified, <a href="https://www.dentinstruments.com/shop/current-sensors/hinged-current-transformers-sensors-for-energy-metering/">DENT CT-HSC-020-U</a> is a separately purchasable 20 A / 333 mV alternative; select the exact 20 A variant and retain its documentation. It is not included as a mandatory duplicate purchase.</td>
+<td>White CT</td>
+<td><strong>DENT Mini HSC</strong> family; <strong>CTHSC-050-U/B, 50 A / 333.3 mV is probable</strong> from the partial “DENT 50…” label and legacy appearance.</td>
+<td><a href="https://www.dentinstruments.com/shop/current-sensors/hinged-current-transformers-sensors-for-energy-metering/">DENT family specifications</a>, <a href="http://siscoinc.net/cthsc-050-ubdentcurrenttransformer.aspx">legacy label comparison</a>. 20 A and 50 A versions share the body. Wires conceal the full variant: read the label during assembly before setting ELOG. No duplicate CT is in the purchase list.</td>
 </tr>
 <tr>
-<td>Three existing blue pigtails</td>
-<td>Assign A1 = hot/L1; A2 = neutral/L2; A3 = neutral/N. They carry sensing current, not printer current or PE.</td>
-<td>The blue-wire photograph has no readable conductor/current specification. Establish identity, ratings and terminal preparation. <strong>Do not order the proposed 0.5 A fuse until this is resolved.</strong></td>
+<td>Three blue pigtails</td>
+<td>Product match: <strong>DENT LD-SKTSP-BLU</strong>, <strong>10 in / 254 mm</strong>, female safety connector to factory-tinned end. A1 = hot/L1; A2 = neutral/L2; A3 = neutral/N.</td>
+<td><a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/">DENT original accessory</a>. Photo connector, tinned end and ESIS card agree. Online data does not publish AWG/ampacity. Qualified acceptance of termination and Fv remains necessary.</td>
 </tr>
 <tr>
 <td>DC entry</td>
-<td>KVT 32 frame location is drawn. CUI&#39;s SMI6 cord specification is UL2468, a flat cord construction.</td>
-<td>A round KT insert is not established as suitable for this cord. Match its actual cross-section to a documented insert or revise this interface before drilling its opening. Do not cut the adapter cable or pack a gap with tape.</td>
+<td>Add <strong>Tensility 10-02228</strong>, 0.915 m round extension, OD <strong>5.2 ±0.3 mm</strong>. Use <strong>icotek KTMBS 4–7 gray, 41380</strong> in the KVT 32. Original flat CUI cord stays outside.</td>
+<td><a href="https://tensility.s3.us-west-2.amazonaws.com/imports/product_spec_sheets/10-02228.pdf">Cable drawing</a>, <a href="https://www.icotek.com/Produkte/PDFs/en_US/KTMBS%20gy.pdf">insert range</a>. The entire 4.9–5.5 mm interval is inside 4–7 mm. Connector bodies are under 12 mm OD and clear the Ø32.3 wall bore. Verify the locknut passage and seals on receipt.</td>
 </tr>
 <tr>
 <td>USB entry</td>
-<td>StarTech USB2HAB6; KVT 32 frame location is drawn.</td>
-<td>Select its KT insert from measured jacket OD; confirm the factory plug passes the empty opening. Frame and insert are separate purchases.</td>
+<td><strong>StarTech USB2HAB6</strong>, round OD <strong>4.8 mm</strong>, with a second <strong>41380</strong> insert in KVT 32.</td>
+<td><a href="https://media.startech.com/cms/pdfs/usb2hab6_datasheet.pdf">StarTech specification</a>. Round OD fits 4–7 mm. Check USB-B plug passage and USB-A host reach.</td>
 </tr>
 <tr>
 <td>Q0 / supply</td>
 <td>Carling CA1-B0-24-615-121-DG, 15 A, single pole; 5-15 power interfaces.</td>
-<td>Exact-SKU availability, available fault current, startup behavior and application acceptance by the responsible electrical professional. The 15 A component rating does not approve a 15 A continuous load.</td>
+<td>Exact-SKU availability, available fault current, startup behavior and application acceptance by responsible electrical personnel. A 15 A component rating does not approve a 15 A continuous load.</td>
 </tr>
 </tbody></table></div>
-<p>These are specific outstanding interfaces, not permission requests. The supplied photographs support the adapter identification but do not expose the hidden CT digits or establish the blue conductors&#39; ratings. <a href="https://in.ftcelectronics.com/datasheets-55/SMI6-12-V-P5.pdf">CUI original SMI6 datasheet</a>, <a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/">DENT accessory description</a>.</p>
+<p><strong>Protection evidence:</strong> <a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-fused-crocodile-clip/">DENT&#39;s fused clip</a> uses a 500 mA fuse. This supports the OEM accessory protection level, but does not prove the proposed KLKR.500T coordinates with the existing pigtail and installation. Keep that fuse selection conditional until the responsible electrical professional accepts it. The meter&#39;s internal fuse does not protect an external lead fault upstream of the instrument.</p>
+<p>These checks use the photos already supplied. The hidden CT characters and unpublished conductor ratings remain explicit limits, rather than requests for more images.</p>
+<h2>DC and USB installation</h2>
+<ol>
+<li>Keep Q0 OFF and unplug all sources. Insert the <strong>male end of 10-02228</strong> through the empty DC opening and locknut toward the logger. Do not cut either factory connector.</li>
+<li>Place <strong>41380</strong> around the round jacket, assemble the KVT 32 and its seals, and plug the 5.5/2.1 mm male into the logger. A 12 mm barrel may not seat its shoulder flush; never force it. Confirm firm electrical engagement without exposed contact access.</li>
+<li>Outside the case, plug the original adapter&#39;s P5 connector into the extension&#39;s female jack. Secure the joint and excess original cord to the adjacent bench support without tension on the adapter or gland. Keep the flat cord entirely outside the insert.</li>
+<li>Start with about <strong>0.35 m of extension inside / 0.565 m outside</strong>, adjusting at dry fit. Retain the full cord, with <strong>≥35 mm bend radius</strong> (Tensility minimum 31.2 mm). Use spare ties from the BOM, without crushing either cable. The 3D curves show the path and joint, not the complete slack length or bend-radius proof.</li>
+<li>Pass the USB-B plug through the other empty opening/locknut, fit the second 41380 around its 4.8 mm jacket, and connect the logger. Keep both low-voltage routes apart from mains terminals; inspect cover closure and strain relief.</li>
+</ol>
+<p>Both <strong>Ø32.30 mm</strong> KVT holes keep their existing coordinates. No new panel jack, new hole or original-cord splice is required. The <a href="materials.html">BOM</a> includes exact extension and insert links; the linked 41380 supplier currently lists backorder, so confirm lead time before committing to fabrication dates.</p>
 <h2>Selected construction</h2>
 <p>Hammond <strong>PCJ16148CC</strong> with <strong>14R1513</strong> steel panel. Q0 mounts directly through the front wall. <strong>Leviton 5279-C</strong> mounts through the right wall and provides an enclosed rear body, eliminating the separate metal outlet box, faceplate and custom wall supports. Its exterior socket is dedicated to the original adapter; label it <strong>LOGGER ADAPTER ONLY</strong>.</p>
 <p><strong>Littelfuse LPSC0001Z</strong> clips onto a 100 mm DIN rail. Its input and output use compatible <strong>14 AWG Class C copper</strong>. Output terminates at the added <strong>JV</strong> connector before the small A1 pigtail. Five WAGO 221-415 / 221-505 pairs provide JL, JN, PE, PE+ and JV. One wire per port. PE and PE+ are bridged; neutral and PE remain separate.</p>
@@ -109,7 +120,7 @@
 </tr>
 <tr>
 <td>DC / USB frames</td>
-<td>Ø32.30 mm, both conditional on entry acceptance above</td>
+<td>Ø32.30 mm; KVT 32 + split 41380 inserts</td>
 <td>Right wall; DC Y/Z = 78/106, USB = 55/167 mm</td>
 </tr>
 <tr>
@@ -249,7 +260,7 @@
 <li>Close the identification/entry/protection items above, obtain the exact parts and compare them with the machining setups. Keep the case and all cords disconnected while machining or wiring.</li>
 <li>Machine the <strong>empty</strong> case and removable panel. Transfer-drill carrier and rail fixings, deburr, clean, and inspect for cracks. Complete underside nuts, PE studs, carrier/anchor fixings and thread the straps before lowering the panel.</li>
 <li>Install and secure the panel <strong>before XA</strong>. The digital insertion sweep shows that the installed right-side outlet obstructs the straight panel path. Fit rail/end stops/Fv, carriers, meter and CT. Leave access to the CT latch, fuse door and WAGO levers.</li>
-<li>Install Q0, XA and the accepted cord entries. Route the supply and output jackets through their glands before fitting plug/connector ends. Fit the adapter and USB cables without cutting factory plugs. Do not force round inserts onto the flat DC cable.</li>
+<li>Install Q0, XA and the accepted cord entries. Route the supply and output jackets through their glands before fitting plug/connector ends. Fit the round DC extension and USB through two 41380 split inserts without cutting factory plugs. Keep the original flat adapter cord and DC mating joint outside.</li>
 <li>Bond panel, rail, output and XA; then complete neutral, protected hot, voltage sensing, CT and low-voltage wiring. Only the printer hot conductor goes through CT once, arrow toward the printer. Keep voltage taps and adapter consumption upstream of CT.</li>
 <li>Check every termination, strain relief, bend, clearance and fastener. Verify actual fuse-door travel and plug removal access. Confirm that all four cover screws close the lid without pressing on cables or components. This dry fit is still outstanding.</li>
 <li>Qualified personnel document PE continuity, polarity, insulation/isolation, protection and supply suitability using the applicable test procedure. Disconnect sensitive electronics where the manufacturer requires it for insulation testing. Q0 OFF leaves incoming terminals live while the supply is plugged in.</li>

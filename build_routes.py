@@ -5,7 +5,7 @@ import json
 from draw_external import draw_external
 
 OUT = Path(__file__).resolve().parent
-REV = 'Rev. 7 · build package A · 2026-09-20'
+REV = 'Rev. 8 · build package A · 2026-09-20'
 C = {'L':'#202d3a','N':'#65758a','PE':'#18814a','CT':'#8544a5','USB':'#23739d','DC':'#aa621e','V':'#1567c1'}
 # Shared physical placement. The SVG is an X/Z projection of the same millimetre
 # coordinates consumed by layout3d.js. Electrical port symbols are spaced for clarity.
@@ -46,7 +46,7 @@ M = {
  **{f'JPE.{i+2}':pin('PE+',i) for i in range(1,5)},
 }
 A = {name:project(point) for name,point in M.items()}
-# 01–19 and 24–25: installed conductors/cables; 20–23: existing factory plug/cable paths.
+# 01–19 and 24–25: installed conductors/cables; 20–23: factory plug/cable paths.
 # Routing waypoints are intentionally rectilinear. Component locations are not rearranged for routing.
 raw = [
  ('01','L','IN.L','Q0.IN',[(-137,116),(-137,144),(-117,144)],(-137,130),'Input hot → Q0 IN','main'),
@@ -70,8 +70,8 @@ raw = [
  ('19','PE','JPE.5','AUX.PE',[(-75,93),(137,93),(137,38),(M['AUX.PE'][0],38)],(115,93),'PE → XA ground contact','earth'),
  ('20','L','AUX.FACE.L','PSU.L',[],(207,6.65),'Existing adapter AC blade: hot contact','aux'),
  ('21','N','AUX.FACE.N','PSU.N',[],(207,19.35),'Existing adapter AC blade: neutral contact','aux'),
- ('22','DC','PSU.DC+','D.DC+',[(254,25),(254,106),(150,106),(150,118),(74,118)],(254,72),'Factory barrel cable: center-positive path','aux'),
- ('23','DC','PSU.DC-','D.DC-',[(246,31),(246,111),(154,111),(154,125),(81,125)],(246,86),'Factory barrel cable: negative sleeve path','aux'),
+ ('22','DC','PSU.DC+','D.DC+',[(254,25),(254,106),(150,106),(150,118),(74,118)],(254,72),'Original adapter → external DC coupling → round extension: center-positive path','aux'),
+ ('23','DC','PSU.DC-','D.DC-',[(246,31),(246,111),(154,111),(154,125),(81,125)],(246,86),'Original adapter → external DC coupling → round extension: sleeve-negative path','aux'),
  ('24','L','Fv.OUT','JV.1',[(-60,22),(-39.6,22)],(-60,18),'Fv OUT → JV: 14 AWG transition before blue A1','voltage'),
  ('25','PE','JPE.B1','JPE.B2',[(-113.4,33),(-63.4,33)],(-106,33),'PE port 5 → PE+ port 5: required green bridge','earth'),
 ]
@@ -202,6 +202,8 @@ def make_diagram():
     line([project(position('printer-entry')),project((0,-265)),project(position('printer-plug',0,25))],'#465563',18)
     for part in ['supply-plug','printer-plug']: footprint(part,'#e9c658','#b9972b',8)
     for part in ['supply-entry','printer-entry','dc-entry','usb-entry']: footprint(part,'#71808a','#46535b',5)
+    footprint('dc-coupling','#e4d5bf','#8c7352',7)
+    callout('dc-coupling','DC extension joint',1740,985,'right',detail='Outside · 5.5 / 2.1 mm')
     callout('supply-plug','FROM WALL',150,1215,'left',detail='Grounded plug')
     callout('printer-plug','TO PRINTER',1160,185,'right',detail='Grounded female connector')
     callout('dc-entry','DC cable entry',1740,1176,'right')

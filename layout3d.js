@@ -10,10 +10,10 @@ const V = a => new THREE.Vector3(...a);
 
 async function start() {
   const [dimensions, cad, buffer, review] = await Promise.all([
-    fetch('./layout_dimensions.json?v=10').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
-    fetch('./assets/enclosure.json?v=10').then(r => { if (!r.ok) throw Error('CAD manifest unavailable'); return r.json(); }),
-    fetch('./assets/enclosure.bin?v=10').then(r => { if (!r.ok) throw Error('CAD geometry unavailable'); return r.arrayBuffer(); }),
-    fetch('./installation_review.json?v=10').then(r => { if (!r.ok) throw Error('Installation review unavailable'); return r.json(); })
+    fetch('./layout_dimensions.json?v=11').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
+    fetch('./assets/enclosure.json?v=11').then(r => { if (!r.ok) throw Error('CAD manifest unavailable'); return r.json(); }),
+    fetch('./assets/enclosure.bin?v=11').then(r => { if (!r.ok) throw Error('CAD geometry unavailable'); return r.arrayBuffer(); }),
+    fetch('./installation_review.json?v=11').then(r => { if (!r.ok) throw Error('Installation review unavailable'); return r.json(); })
   ]);
   const parts = Object.fromEntries(dimensions.parts.map(p => [p.id, p]));
   const instances = Object.fromEntries(dimensions.instances.map(p => [p.id, p]));
@@ -258,11 +258,23 @@ async function start() {
   // CT pair reaches CH1, distinct from voltage sockets and AC/DC power.
   cable([[cx+6,cy+15,cz],[cx+23,53,cz-8],[44,61,-150],[102,59,-139],[mx+22,44,mz-ml/2-4]],'#bfc3c0',1,'ct');
   cable([[cx+3,cy+15,cz+2],[cx+20,55,cz-8],[42,63,-153],[104,61,-140],[mx+17,44,mz-ml/2-4]],'#30323a',1,'ct');
-  // Separate factory DC return and USB routes on the low-voltage end.
-  cable([[207,89,oz],[249,76,42],[234,78,106],[172,78,106],[153,62,118],[mx-17,18,mz+ml/2+17]],'#554534',1.8,'adapter');
-  cylinder(4.5,20,[mx-17,18,mz+ml/2+12],'#24282b','adapter','z');
+  // Original flat cord stays outside. Only the round factory extension crosses the DC insert.
+  // Flexible paths show routing intent; the assembly schedule retains the full cable lengths.
+  const coupling=instances['dc-coupling'], [dx,dy,dz]=coupling.position;
+  planBodies[coupling.id]=[
+    cylinder(coupling.size[0]/2,30,[dx,dy,dz-15],'#42484e','adapter','z'),
+    cylinder(5.7,30,[dx,dy,dz+15],'#252a30','adapter','z')
+  ];
+  tag('DC COUPLING',[dx,dy+18,dz],'adapter');
+  cable([[207,89,oz],[230,83,23],[dx,dy,dz-30]],'#554534',1.4,'adapter');
+  cable([[dx,dy,dz+30],[dx,dy,149],[290,dy,144],[276,dy,106],[224,dy,106]],'#393e44',2.6,'adapter');
+  cable([[224,78,106],[208,78,106],[185.5,78,106],[165,78,106],[146,78,106]],'#393e44',2.6,'adapter');
+  cable([[146,78,106],[145,50,142],[113,18,174],[mx-17,18,160],[mx-17,18,mz+ml/2+39]],'#393e44',2.6,'adapter');
+  cylinder(4.8,35,[mx-17,18,mz+ml/2+21.5],'#24282b','adapter','z');
   const usbZ = instances['usb-entry'].position[2];
-  cable([[mx+16,23,mz+ml/2+12],[117,31,125],[155,55,usbZ],[217,55,usbZ],[267,38,195]],'#516d86',2.2,'entries');
+  cable([[mx+16,23,mz+ml/2+12],[117,31,125],[143,55,usbZ]],'#516d86',2.4,'entries');
+  cable([[143,55,usbZ],[166,55,usbZ],[185.5,55,usbZ],[205,55,usbZ],[225,55,usbZ]],'#516d86',2.4,'entries');
+  cable([[225,55,usbZ],[245,48,175],[267,38,195]],'#516d86',2.4,'entries');
   box([10,11,20],[mx+16,23,mz+ml/2+11],'#43576a','entries',2);
   // World-space dimension lines retain the same millimetre scale as the solids.
   function dimension(a,b,text,pos) {

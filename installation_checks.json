@@ -35,16 +35,28 @@
       "limits": "Conservative cylinder; the threaded shank is M32, not Ø40."
     },
     {
+      "id": "dc-entry cable / insert",
+      "result": "pass",
+      "evidence": "dc-extension: round jacket 4.9–5.5 mm; KTMBS 41380 accepts 4–7 mm.",
+      "limits": "Catalog interface check only. Original flat adapter cord is excluded; verify received jackets, connector passage, seals and strain relief."
+    },
+    {
       "id": "usb-entry envelope",
       "result": "pass",
       "evidence": "Model 37 × 40 × 40 mm; KVT 32 overall envelope 37 mm axial × Ø40 mm flange.",
       "limits": "Conservative cylinder; the threaded shank is M32, not Ø40."
     },
     {
+      "id": "usb-entry cable / insert",
+      "result": "pass",
+      "evidence": "usb: round jacket 4.8–4.8 mm; KTMBS 41380 accepts 4–7 mm.",
+      "limits": "Catalog interface check only. Original flat adapter cord is excluded; verify received jackets, connector passage, seals and strain relief."
+    },
+    {
       "id": "Panel component body separation",
       "result": "pass",
       "evidence": "9 nominal body envelopes do not overlap (rail/holder mating excluded).",
-      "limits": "CT is an unidentified example. No connectors, open levers, flexible wires, mounting tolerances or screw-tool envelopes are certified by this check."
+      "limits": "CT uses the matched Mini HSC family envelope; exact scale remains unconfirmed. No connectors, open levers, flexible wires, mounting tolerances or screw-tool envelopes are certified by this check."
     },
     {
       "id": "Vertical insertion through open case",
@@ -211,6 +223,6 @@
       "local_wall_mm": null
     }
   ],
-  "material_groups": 29,
+  "material_groups": 30,
   "owned_groups": 5
 }

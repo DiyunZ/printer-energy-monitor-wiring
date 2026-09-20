@@ -1,6 +1,6 @@
 {
   "units": "mm",
-  "revision": "2026-09-20 · build package A",
+  "revision": "2026-09-20 · build package A, revision 8",
   "coordinates": "X across the panel; Y above the panel underside; Z along the panel, negative toward the printer exit (rear), positive toward Q0 (front). One scene unit is one millimetre. The wiring plan projects the same X/Z positions with rear at the top. Dimensions below are X × Y × Z unless noted.",
   "parts": [
     {
@@ -62,9 +62,9 @@
         26.75,
         -123
       ],
-      "status": "Catalog example; actual CT unidentified",
-      "source": "https://www.dentinstruments.com/wp-content/uploads/2022/08/20A_Mini_Hinged_CT_Specs.pdf",
-      "note": "DENT HSC mini hinged example, Ø10.2 mm aperture. Its catalog envelope illustrates the white split-core style in the photos; this does not identify your CT model or range. One hot conductor passes through once; arrow points toward output. Original full-resolution label shows CTHSC…U/B; range digits are physically obscured by leads, so the example remains unidentified."
+      "status": "Mini HSC family matched; 50 A variant probable",
+      "source": "https://www.dentinstruments.com/shop/current-sensors/hinged-current-transformers-sensors-for-energy-metering/",
+      "note": "White Mini HSC 20 A and 50 A versions use the same 29.4 × 41.7 × 26.4 mm body and nominal 10 mm window (legacy drawing 10.2 mm). The partially visible DENT 50… label resembles legacy CTHSC-050-U/B; complete model digits remain covered. This establishes the family envelope, not the final ELOG scale. White is + and black is −; arrow toward printer, one hot conductor only."
     },
     {
       "id": "q0",
@@ -101,7 +101,7 @@
       ],
       "status": "Manufacturer maximum envelope",
       "source": "https://www.littelfuse.com/de/assetdocs/powr-gard-catalog?assetguid=85d36235-a32b-4608-bfed-f9878aa43af0",
-      "note": "Non-indicating Class CC holder, 600 V AC/DC, 35 mm DIN rail. Catalog maximum 17.78 × 61 × 78.5 mm. Use 14 AWG Class C copper at both terminals (2.0 N·m); output runs to JV before the smaller blue pigtail. KLKR.500T (0.5 A) is a specific protection candidate, pending identification of the existing voltage leads. Reserve 120 mm above the holder for opening and replacement; actual door sweep to verify on receipt."
+      "note": "Non-indicating Class CC holder, 600 V AC/DC, 35 mm DIN rail. Catalog maximum 17.78 × 61 × 78.5 mm. Use 14 AWG Class C copper at both terminals (2.0 N·m); output runs to JV before the smaller blue pigtail. KLKR.500T (0.5 A) is a specific protection candidate, pending acceptance of LD-SKTSP-BLU termination and protection coordination. Reserve 120 mm above the holder for opening and replacement; actual door sweep to verify on receipt."
     },
     {
       "id": "terminals",
@@ -146,8 +146,8 @@
         13
       ],
       "status": "Photo-identified; manufacturer body dimensions",
-      "source": "https://in.ftcelectronics.com/datasheets-55/SMI6-12-V-P5.pdf",
-      "note": "Original label reads SMI6-9-V-P5: 9 V DC, 0.667 A, center positive. CUI SMI6 series drawing gives 64 ×40.5 ×30 mm, ±1 mm, excluding blades. P5: 5.5 ×2.1 ×9.5 mm barrel. Original cord retained; catalog UL2468 is flat, so round DC grommet fit remains open. Verify actual blade seating and do not suspend loads from the cord."
+      "source": "https://www.belfuse.com/media/datasheets/products/power-supplies/SMI6.pdf",
+      "note": "Original label identifies CUI SMI6-9-V-P5: 9 V DC, 0.667 A, center positive; compatible with the meter’s 6–10 V / 500 mA input. Official SMI6 drawing: 64 × 40.5 × 30 mm ±1 mm, excluding blades; P5 plug 5.5/2.1 × 9.5 mm. Keep its flat UL2468 cord outside the enclosure and mate it to the specified round DC extension. Keep the external cord and coupling supported, with no pull on the adapter blades."
     },
     {
       "id": "rail",
@@ -174,9 +174,9 @@
         37,
         27
       ],
-      "status": "Manufacturer entry envelopes; inserts conditional",
+      "status": "Catalog envelopes; 41380 inserts selected",
       "source": "https://www.hammfg.com/electronics/small-case/accessories/1427ncg",
-      "note": "Two Hammond 1427NCGPG13LB: PG13.5, 15 mm thread, clamp 6–12 mm; drill Ø21.0 mm. Two icotek KVT 32 45026: M32 × 1.5, 14 mm thread, Ø32.3 mm opening, Ø40 flange / ~41 mm locknut. Gaskets and locknuts included. Select split KT inserts only after measuring round cable ODs; no cutting factory USB/DC connectors."
+      "note": "Two KVT 32 frames for round, factory-terminated DC extension and USB cables. Each takes one KTMBS 4–7 gray insert, 41380, ordered separately. M32 × 1.5, 14 mm thread; Ø32.3 wall opening. Retain the included sealing rings and locknuts. Power entries use two Hammond 1427NCGPG13LB, PG13.5 long thread, 6–12 mm clamp, Ø21 mm holes. Do not cut factory DC/USB plugs."
     },
     {
       "id": "leads",
@@ -184,7 +184,7 @@
       "size": null,
       "status": "Illustrative routing; length not validated",
       "source": "https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/",
-      "note": "Three blue pigtails feed L1 hot, L2 neutral and N neutral. The visible coils reserve space for the full leads; they do not certify storage of each 2 m lead or minimum bend radius. Cable diameters, plug bodies and path lengths are estimates, not a cut list. The separate green conductor is PE. Coil scenario reserves 2 m flexible length per lead at an assumed 3 mm OD, with 4 mm pitch. This does not identify the actual lead length / OD or validate its bend radius, transitions or restraints."
+      "note": "Three matched DENT LD-SKTSP-BLU pigtails, catalog length 254 mm, feed L1 hot / L2 neutral / N neutral. Long-lead storage is an illustrative 2 m flexible length per lead at assumed 3 mm OD and 4 mm pitch. Full pigtail and CT slack is retained during assembly; displayed flexible routes do not establish exact bend radii or a cut list. PE is a separate green rated conductor."
     }
   ],
   "plan": {
@@ -316,7 +316,20 @@
         106
       ],
       "axis": "x",
-      "label": "DC entry"
+      "label": "DC entry",
+      "cable": {
+        "item": "dc-extension",
+        "profile": "round",
+        "diameterRangeMm": [
+          4.9,
+          5.5
+        ],
+        "insertPart": "41380",
+        "insertRangeMm": [
+          4,
+          7
+        ]
+      }
     },
     {
       "id": "usb-entry",
@@ -332,7 +345,20 @@
         167
       ],
       "axis": "x",
-      "label": "USB exit"
+      "label": "USB exit",
+      "cable": {
+        "item": "usb",
+        "profile": "round",
+        "diameterRangeMm": [
+          4.8,
+          4.8
+        ],
+        "insertPart": "41380",
+        "insertRangeMm": [
+          4,
+          7
+        ]
+      }
     },
     {
       "id": "supply-plug",
@@ -443,6 +469,22 @@
         28
       ],
       "label": "JV · FUSED HOT"
+    },
+    {
+      "id": "dc-coupling",
+      "part": "adapter",
+      "size": [
+        14,
+        14,
+        60
+      ],
+      "position": [
+        250,
+        78,
+        68
+      ],
+      "label": "DC coupling",
+      "note": "External original P5 plug mated to 10-02228 female jack; 60 mm service envelope, not exact molded geometry."
     }
   ]
 }
