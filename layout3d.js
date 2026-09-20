@@ -1,8 +1,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from './vendor/OrbitControls.js';
 import { RoundedBoxGeometry } from './vendor/RoundedBoxGeometry.js';
-import { installMaterialLocator } from './material-locator.js?v=12';
-import { addInstallationHardware } from './installation-hardware.js?v=12';
+import { installMaterialLocator } from './material-locator.js?v=13';
+import { addInstallationHardware } from './installation-hardware.js?v=13';
 
 // All geometry is in millimetres. Only the camera changes the screen scale.
 const host = document.querySelector('#model-view');
@@ -12,11 +12,11 @@ const V = a => new THREE.Vector3(...a);
 
 async function start() {
   const [dimensions, cad, buffer, review, procurement] = await Promise.all([
-    fetch('./layout_dimensions.json?v=12').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
-    fetch('./assets/enclosure.json?v=12').then(r => { if (!r.ok) throw Error('CAD manifest unavailable'); return r.json(); }),
-    fetch('./assets/enclosure.bin?v=12').then(r => { if (!r.ok) throw Error('CAD geometry unavailable'); return r.arrayBuffer(); }),
-    fetch('./installation_review.json?v=12').then(r => { if (!r.ok) throw Error('Installation review unavailable'); return r.json(); }),
-    fetch('./procurement.json?v=12').then(r => { if (!r.ok) throw Error('Materials unavailable'); return r.json(); })
+    fetch('./layout_dimensions.json?v=13').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
+    fetch('./assets/enclosure.json?v=13').then(r => { if (!r.ok) throw Error('CAD manifest unavailable'); return r.json(); }),
+    fetch('./assets/enclosure.bin?v=13').then(r => { if (!r.ok) throw Error('CAD geometry unavailable'); return r.arrayBuffer(); }),
+    fetch('./installation_review.json?v=13').then(r => { if (!r.ok) throw Error('Installation review unavailable'); return r.json(); }),
+    fetch('./procurement.json?v=13').then(r => { if (!r.ok) throw Error('Materials unavailable'); return r.json(); })
   ]);
   const parts = Object.fromEntries(dimensions.parts.map(p => [p.id, p]));
   const instances = Object.fromEntries(dimensions.instances.map(p => [p.id, p]));
@@ -342,8 +342,17 @@ async function start() {
   const grid = new THREE.GridHelper(1000,20,'#cbd5dc','#e0e6ea'); grid.position.y=-24.5; scene.add(grid);
   const selection = new THREE.Box3Helper(new THREE.Box3(), 0xb87921); scene.add(selection);selection.visible=false;
   let activePart = 'meter';
+  function materialCopy(p) {
+    $('model-more').open=false;
+    $('material-installation-note').textContent=p.location_summary;
+    $('part-installation').textContent=p.installation;
+    $('part-alert').hidden=!p.notice;
+    $('part-alert').textContent=p.notice||'';
+    document.querySelector('.part-details').open=false;
+  }
   function info(id) {
     locator?.clear(false); activePart = id; const p=parts[id]; if(!p)return;
+    materialCopy(procurement.items.find(item=>item.id===id));
     $('part-size').hidden=false;document.querySelector('.model-inspector .axes').hidden=false;
     $('model-part').value=id; $('part-name').textContent=p.name; $('part-evidence').textContent=p.status;
     $('part-size').textContent=p.size?p.size.map(n=>Number(n.toFixed(1))).join(' × ')+' mm':'Route geometry only';
@@ -437,6 +446,11 @@ async function start() {
   $('model-reset').onclick=()=>{setAssembly(0);$('model-shell').value='xray';appearance();info('meter');view('iso');};
   $('compare-layout').onclick=()=>{setAssembly(0);$('model-shell').value='xray';appearance();view('top');$('layout').scrollIntoView({block:'start'});};
   $('model-save').onclick=()=>{render();const link=document.createElement('a');link.download='elitepro-enclosure-3d.png';link.href=renderer.domElement.toDataURL('image/png');link.click();};
+  const more=$('model-more');
+  document.addEventListener('pointerdown',e=>{if(!more.contains(e.target))more.open=false;});
+  more.addEventListener('keydown',e=>{
+    if(e.key==='Escape') {more.open=false;more.querySelector('summary').focus();e.preventDefault();}
+  });
   renderer.domElement.addEventListener('keydown',e=>{
     if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)) {
       e.preventDefault();const offset=camera.position.clone().sub(controls.target),s=new THREE.Spherical().setFromVector3(offset);
@@ -460,6 +474,7 @@ async function start() {
     prepare:()=>{setAssembly(0,false);$('model-shell').value='xray';$('model-wires').checked=true;appearance();selection.visible=false;},
     describe:p=>{
       activePart=p.id;
+      materialCopy(p);
       const detail=parts[aliases[p.id]||p.id];
       // The BOM fuse is the cartridge; the original part named fuse is its holder.
       const size=p.id==='fuse'?[dimensions.installationHardware.fuseCartridge.diameter,dimensions.installationHardware.fuseCartridge.diameter,dimensions.installationHardware.fuseCartridge.length]:p.id==='carriers'?instances.JL.size:detail?.size;
@@ -476,7 +491,7 @@ async function start() {
   new ResizeObserver(resize).observe(host);
   view('iso');resize();appearance();info('meter');
   $('model-loading').hidden=true;host.dataset.ready='true';
-  status.textContent='Drag to rotate · Scroll / pinch to zoom · Use View in 3D in the materials list to locate a part';
+  status.textContent='Drag to rotate · Scroll / pinch to zoom';
   if(new URL(location.href).searchParams.has('material'))locator.fromUrl();
   // Expose read-only diagnostics so regression checks inspect the real rendered model.
   function boundsOf(bodies) {

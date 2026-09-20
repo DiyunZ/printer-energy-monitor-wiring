@@ -30,6 +30,8 @@ export function installMaterialLocator({ items, locations, scene, camera, contro
   function clear(updateUrl = true) {
     removeHighlights(); selected = null; occurrence = 'all';
     $('material-location-panel').hidden = true; $('material-focus').hidden = true;
+    $('material-location-count').textContent = '';
+    $('model-status').textContent = 'Drag to rotate · Scroll / pinch to zoom';
     if (updateUrl) writeUrl(null);
   }
   function frame(objects) {
@@ -76,8 +78,7 @@ export function installMaterialLocator({ items, locations, scene, camera, contro
     if (reframe) frame(objects);
     const count = selectedLocations.length;
     $('material-location-count').textContent = `${count} of ${locations[selected].length} installation locations highlighted`;
-    $('material-focus-name').textContent = `${byId.get(selected).item} · ${count} ${count === 1 ? 'location' : 'locations'}`;
-    $('model-status').textContent = `${byId.get(selected).item}: highlighted in amber. Drag to inspect; choose one location for a closer view.`;
+    $('model-status').textContent = 'Amber = selected material · Drag to rotate';
     render();
   }
   function select(id, { navigate = true, scroll = false } = {}) {
@@ -85,8 +86,7 @@ export function installMaterialLocator({ items, locations, scene, camera, contro
     clear(false); prepare(); selected = id; occurrence = 'all';
     const p = byId.get(id); describe(p);
     $('model-part').value = id;
-    $('material-location-panel').hidden = false; $('material-focus').hidden = false;
-    $('material-installation-note').textContent = p.installation;
+    $('material-location-panel').hidden = locations[id].length === 1; $('material-focus').hidden = false;
     $('material-location').replaceChildren(new Option('All locations', 'all'), ...locations[id].map((p, i) => new Option(`${i + 1}. ${p.label}`, p.key)));
     $('material-location').disabled = locations[id].length === 1;
     $('material-return').href = `#material-${id}`;

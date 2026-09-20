@@ -300,9 +300,9 @@ def material_photo(p):
         style = f' style="width:{100/w:.5f}%;left:{-100*x/w:.5f}%;top:{-100*y/h:.5f}%"'
     img = '<img src="'+E(photo['src'])+'" alt="'+E(photo['alt'])+'" width="'+str(photo['width'])+'" height="'+str(photo['height'])+'" loading="lazy" decoding="async"'+style+'>'
     if 'crop' in photo:
-        img = f'<span class="material-crop" style="max-width:{176*ratio:.5f}px;aspect-ratio:{ratio:.5f}">'+img+'</span>'
-    credit = '<a href="'+E(photo['source_url'])+'">Image: '+E(photo['source_label'])+' ↗</a>' if photo.get('source_url') else ''
-    return '<figure class="material-photo" data-image-kind="'+E(photo['kind'])+'"><a class="material-image" href="'+E(photo['src'])+'" target="_blank" rel="noopener" aria-label="View full image: '+E(p['item'])+'">'+img+'</a><figcaption>'+E(photo['caption'])+credit+'</figcaption></figure>'
+        img = f'<span class="material-crop" style="max-width:{140*ratio:.5f}px;aspect-ratio:{ratio:.5f}">'+img+'</span>'
+    caption = {'user':'Your equipment', 'product':'Product photo', 'reference':'Reference image', 'design':'Design concept'}[photo['kind']]
+    return '<figure class="material-photo" data-image-kind="'+E(photo['kind'])+'"><a class="material-image" href="'+E(photo['src'])+'" target="_blank" rel="noopener" aria-label="View full image: '+E(p['item'])+'">'+img+'</a><figcaption>'+caption+'</figcaption></figure>'
 
 def main():
     validation=validate();svg=make_diagram();(OUT/'wiring_routes.svg').write_text(svg)
@@ -321,8 +321,14 @@ def main():
         for link in p['links']:
             anchor='<a data-link-kind="'+E(link['kind'])+'" href="'+E(link['url'])+'">'+E(link['label'])+' ↗</a>'
             (reference_links if link['kind']=='reference' else purchase_links).append(anchor)
-        details='<details class="material-details"><summary>Specifications</summary><p>'+E(p['reason'])+'</p>'+''.join(reference_links)+'</details>'
-        material_rows.append('<tr id="material-'+E(p['id'])+'" data-availability="'+E(p['availability'])+'"><td data-label="Inventory"><span class="inventory-badge '+p['availability']+'">'+badge+'</span></td><td data-label="Material"><span class="material-name">'+E(p['item'])+'</span>'+material_photo(p)+'<a class="locate-material" data-material="'+E(p['id'])+'" href="?material='+E(p['id'])+'#layout" aria-label="View '+E(p['item'])+' in 3D">View in 3D ↑</a></td><td data-label="Quantity needed">'+E(p['quantity'])+'</td><td data-label="Part / details"><strong>'+E(p['model'])+'</strong><small class="material-note">'+E(p['status'])+'</small>'+details+'</td><td class="material-links" data-label="Purchase">'+(''.join(purchase_links) if purchase_links else '<span class="reuse-note">Reuse</span>')+'</td></tr>')
+        photo=p['image']
+        credit='<a href="'+E(photo['source_url'])+'">Image: '+E(photo['source_label'])+' ↗</a>' if photo.get('source_url') else ''
+        details='<details class="material-details"><summary>Details</summary><p class="material-reason">'+E(p['reason'])+'</p><p class="material-note">'+E(p['status'])+'</p>'
+        if p.get('quantity_summary'):
+            details+='<p class="material-quantity"><strong>Quantity &amp; pack size:</strong> '+E(p['quantity'])+'</p>'
+        details+=''.join(reference_links)+'<p class="material-image-note">'+E(photo['caption'])+'</p>'+credit+'</details>'
+        notice='<p class="material-notice">'+E(p['notice'])+'</p>' if p.get('notice') else ''
+        material_rows.append('<tr id="material-'+E(p['id'])+'" data-availability="'+E(p['availability'])+'"><td data-label="Inventory"><span class="inventory-badge '+p['availability']+'">'+badge+'</span></td><td data-label="Material"><span class="material-name">'+E(p['item'])+'</span>'+material_photo(p)+'<a class="locate-material" data-material="'+E(p['id'])+'" href="?material='+E(p['id'])+'#layout" aria-label="View '+E(p['item'])+' in 3D">View in 3D ↑</a></td><td data-label="Quantity needed">'+E(p.get('quantity_summary',p['quantity']))+'</td><td data-label="Part / details"><strong>'+E(p['model'])+'</strong>'+notice+details+'</td><td class="material-links" data-label="Purchase">'+(''.join(purchase_links) if purchase_links else '<span class="reuse-note">Reuse</span>')+'</td></tr>')
     counts={'all':len(materials['items']),**{state:sum(p['availability']==state for p in materials['items']) for state in ['owned','buy']}}
     filters=''.join('<button type="button" data-inventory="'+state+'" aria-pressed="'+('true' if state=='all' else 'false')+'"'+(' class="active"' if state=='all' else '')+'>'+label+' · '+str(counts[state])+'</button>' for state,label in [('all','All'),('owned','✓ Owned'),('buy','□ To buy')])
     setup=''.join('<li><strong>'+E(r['item'])+' · '+E(r['action'])+'</strong><br>'+E(r['reason'])+(' <a href="'+E(r['url'])+'">DENT download ↗</a>' if r.get('url') else '')+'</li>' for r in materials['setup_requirements'])

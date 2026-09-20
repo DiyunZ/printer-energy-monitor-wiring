@@ -31,6 +31,14 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  await page.locator('.part-details > summary').click();
  assert.equal(await page.locator('#part-note').isVisible(),true);
  await page.locator('.part-details > summary').click();
+ const openMore=async()=>{if(await page.locator('#model-more').getAttribute('open')===null)await page.locator('#model-more > summary').click();};
+ assert.equal(await page.locator('#part-size').isVisible(),false);
+ assert.equal(await page.locator('#model-save').isVisible(),false);
+ await page.locator('#model-more > summary').focus();await page.keyboard.press('Enter');
+ assert.equal(await page.locator('#model-save').isVisible(),true);
+ await page.keyboard.press('Escape');
+ assert.equal(await page.locator('#model-save').isVisible(),false);
+ assert.equal(await page.locator('#model-more > summary').evaluate(e=>e===document.activeElement),true);
  const diag=()=>page.evaluate(()=>window.enclosureDiagnostics());
  const initial=await diag();assert.equal(initial.units,'mm');assert.ok(initial.triangles>100000);
  assert.ok(close(initial.fitBodies.q0.size[2],47),'Q0 actual rendered body depth');
@@ -83,9 +91,15 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   await drawing.locator('svg').screenshot({path:path.join(out,'aligned-wiring-plan.png')});await drawing.close();
  }
  for(const name of ['top','front','right','iso']){
+  if(['front','right'].includes(name))await openMore();
   await page.locator(`[data-view="${name}"]`).click();
   assert.equal(await page.locator(`[data-view="${name}"]`).getAttribute('aria-pressed'),'true');
  }
+ await openMore();
+ await page.locator('#model-dimensions').check();
+ assert.ok(await page.locator('.model-tag.dimension:visible').count()>0);
+ await page.locator('#model-dimensions').uncheck();
+ assert.equal(await page.locator('.model-tag.dimension:visible').count(),0);
  for(const mode of ['closed','lifted','cutaway','xray']){
   await page.locator('#model-shell').selectOption(mode);const d=await diag();
   assert.equal(d.mode,mode);assert.equal(d.shellVisible,mode!=='cutaway');
@@ -104,13 +118,13 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  await page.locator('#model-zoom-in').click();assert.ok(close((await diag()).zoom,1.2));
  await page.locator('#model-zoom-out').click();assert.ok(close((await diag()).zoom,1));
  await page.locator('#model-part').selectOption('ct');assert.match(await page.locator('#part-evidence').textContent(),/Mini HSC family matched.*probable/);
- await page.locator('[data-view="top"]').click();await page.locator('#model-shell').selectOption('cutaway');
+ await page.locator('[data-view="top"]').click();await openMore();await page.locator('#model-shell').selectOption('cutaway');
  await page.locator('#model-wires').uncheck();await page.locator('#model-label-toggle').uncheck();
  assert.equal((await diag()).wiresVisible,false);
  const position=(await diag()).projectedMeter;box=await canvas.boundingBox();
  await page.mouse.click(box.x+(position[0]+1)/2*box.width,box.y+(1-position[1])/2*box.height);
  assert.equal((await diag()).selected,'meter','Clicking the visible meter should select it');
- await page.locator('#model-wires').check();await page.locator('#model-label-toggle').check();
+ await openMore();await page.locator('#model-wires').check();await page.locator('#model-label-toggle').check();
  if(out)await page.locator('#model-view').screenshot({path:path.join(out,'layout-top.png')});
  await page.locator('#model-reset').click();
  await page.locator('#assembly-preview > summary').click();
@@ -128,10 +142,12 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  }
  await page.locator('#model-reset').click();assert.equal((await diag()).assemblyStage,0);
  await page.locator('#assembly-preview > summary').click();
+ await openMore();
  const [download]=await Promise.all([page.waitForEvent('download'),page.locator('#model-save').click()]);
  assert.equal(download.suggestedFilename(),'elitepro-enclosure-3d.png');
  const downloaded=await download.path();assert.ok(fs.statSync(downloaded).size>50000);
  if(out)await download.saveAs(path.join(out,'exported-model.png'));
+ await page.locator('#model-more > summary').click();
  // Existing circuit controls remain functional.
  const ids=await page.locator('#main-stage .wire').evaluateAll(es=>[...new Set(es.map(e=>e.dataset.id))]);assert.equal(ids.length,25);
  const expected={all:null,main:['01','02','03'],voltage:['01','02','04','05','06','08','09','24'],neutral:['06','07','08','09','18','21'],earth:['10','11','12','13','19','25'],aux:['01','02','06','10','17','18','19','20','21','22','23','25'],signal:['14','15','16']};
@@ -154,10 +170,16 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   const row=page.locator('#material-'+p.id);
   assert.equal(await row.getAttribute('data-availability'),p.availability);
   assert.match(await row.locator('.inventory-badge').textContent(),p.availability==='owned'?/✓.*Owned/:/□.*To buy/);
-  assert.equal(await row.locator('.material-note').textContent(),p.status,'Pending checks must remain visible');
-  assert.equal(await row.locator('.material-note').isVisible(),true);
-  assert.equal(await row.locator('.material-details p').textContent(),p.reason,'Full specifications must be retained');
-  assert.equal(await row.locator('.material-details p').isVisible(),false);
+  assert.equal(await row.locator('.material-note').textContent(),p.status,'Full receiving and fit checks must be retained');
+  assert.equal(await row.locator('.material-note').isVisible(),false);
+  assert.equal(await row.locator('td[data-label="Quantity needed"]').textContent(),p.quantity_summary||p.quantity);
+  if(p.quantity_summary)assert.ok((await row.locator('.material-quantity').textContent()).includes(p.quantity));
+  if(p.notice){
+   assert.equal(await row.locator('.material-notice').textContent(),p.notice);
+   assert.equal(await row.locator('.material-notice').isVisible(),true,'Decision-critical notices stay visible');
+  }
+  assert.equal(await row.locator('.material-details .material-reason').textContent(),p.reason,'Full specifications must be retained');
+  assert.equal(await row.locator('.material-details .material-reason').isVisible(),false);
   if(p.availability==='buy'){
    assert.ok(p.links.some(l=>['buy','configure','quote'].includes(l.kind)),p.id+' must have a purchase or quote route, not just a PDF');
    assert.ok(await row.locator('a[data-link-kind="buy"],a[data-link-kind="configure"],a[data-link-kind="quote"]').count()>0,p.id+' missing rendered purchase route');
@@ -168,12 +190,13 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   assert.equal(await photo.count(),1,p.id+' needs an image below its name');
   assert.equal(await photo.locator('img').getAttribute('src'),p.image.src);
   assert.equal(await photo.locator('img').getAttribute('alt'),p.image.alt);
-  assert.ok((await photo.locator('figcaption').textContent()).includes(p.image.caption));
-  if(p.image.source_url)assert.equal(await photo.locator('figcaption a').getAttribute('href'),p.image.source_url);
+  assert.equal(await photo.locator('figcaption').textContent(),{user:'Your equipment',product:'Product photo',reference:'Reference image',design:'Design concept'}[p.image.kind]);
+  assert.equal(await row.locator('.material-image-note').textContent(),p.image.caption);
+  if(p.image.source_url)assert.equal(await row.locator('.material-details a').filter({hasText:'Image: '}).getAttribute('href'),p.image.source_url);
   assert.ok(await row.evaluate(e=>e.querySelector('.material-photo').getBoundingClientRect().top>=e.querySelector('.material-name').getBoundingClientRect().bottom),p.id+' photo must be below the material name');
  }
  await page.locator('#material-breaker .material-details summary').click();
- assert.equal(await page.locator('#material-breaker .material-details p').isVisible(),true);
+ assert.equal(await page.locator('#material-breaker .material-details .material-reason').isVisible(),true);
  await page.locator('#material-breaker .material-details summary').click();
  await page.locator('.material-photo img').evaluateAll(es=>Promise.all(es.map(async img=>{img.loading='eager';await img.decode();if(!img.naturalWidth||!img.naturalHeight)throw Error('Image did not load: '+img.src);})));
  for(const state of ['owned','buy','all']){
@@ -195,7 +218,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
    await page.locator('[data-inventory="owned"]').click();assert.equal(await page.locator('.materials tbody tr:visible').count(),ownedIds.length);
    if(out)await page.locator('#material-meter').screenshot({path:path.join(out,'inventory-mobile.png')});
    await page.locator('#material-meter .material-details summary').focus();await page.keyboard.press('Enter');
-   assert.equal(await page.locator('#material-meter .material-details p').isVisible(),true,'Material specifications must open by keyboard on mobile');
+   assert.equal(await page.locator('#material-meter .material-details .material-reason').isVisible(),true,'Material specifications must open by keyboard on mobile');
    await page.keyboard.press('Enter');
    await page.locator('[data-inventory="all"]').click();
   }
@@ -230,7 +253,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   const render=await browser.newPage({viewport:{width:1800,height:1300},deviceScaleFactor:2});
   for(const name of ['wiring_routes','connector_detail']){await render.goto(new URL(name+'.svg',base).href);await render.locator('svg').screenshot({path:path.join(root,name+'.png')});}
  }
- const report={date:new Date().toISOString(),base,connections:25,circuitGroups:7,alignedComponentFootprints:plan.bodies.length,planTo3DMaximumToleranceMm:.05,compareTopView:true,renderedMeterBody:initial.fitBodies.meter.size,primaryBodyOverlaps:false,mouseOrbit:true,wheelZoom:true,keyboardOrbit:true,picking:true,shellModes:4,pngExport:true,viewportWidths:[1440,768,390],pageOverflow:false,internalLinks:true,materialsRows:bom.items.length,materialImagesLoaded:bom.items.length,ownedGroups:ownedIds.length,purchaseGroups:bom.items.length-ownedIds.length,inventoryFilters:true,assemblyStages:6,panelInsertionSlider:true,coilScenarioLengthMm:2000,jsErrors:errors,physicalBuildValidated:false};
+ const report={date:new Date().toISOString(),base,connections:25,circuitGroups:7,alignedComponentFootprints:plan.bodies.length,planTo3DMaximumToleranceMm:.05,compareTopView:true,renderedMeterBody:initial.fitBodies.meter.size,primaryBodyOverlaps:false,mouseOrbit:true,wheelZoom:true,keyboardOrbit:true,picking:true,shellModes:4,pngExport:true,viewportWidths:[1440,768,390],pageOverflow:false,internalLinks:true,materialsRows:bom.items.length,materialImagesLoaded:bom.items.length,ownedGroups:ownedIds.length,purchaseGroups:bom.items.length-ownedIds.length,inventoryFilters:true,assemblyStages:6,panelInsertionSlider:true,progressiveDisclosure:true,criticalNoticesVisible:true,advancedControlsKeyboard:true,coilScenarioLengthMm:2000,jsErrors:errors,physicalBuildValidated:false};
  if(out)fs.writeFileSync(path.join(out,'browser-validation.json'),JSON.stringify(report,null,2)+'\n');
  console.log(JSON.stringify(report,null,2));
  }finally{await browser.close();}

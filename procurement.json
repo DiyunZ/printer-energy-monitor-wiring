@@ -26,7 +26,8 @@
         "width": 4284,
         "height": 5712
       },
-      "installation": "Strapped to the right side of the mounting panel."
+      "installation": "Strapped to the right side of the mounting panel.",
+      "location_summary": "Strapped to the right side of the mounting panel."
     },
     {
       "id": "ct",
@@ -63,7 +64,10 @@
         "width": 3024,
         "height": 4032
       },
-      "installation": "One CT surrounds only the printer hot conductor near the rear output. The remaining owned CTs stay outside this assembly."
+      "installation": "One CT surrounds only the printer hot conductor near the rear output. The remaining owned CTs stay outside this assembly.",
+      "location_summary": "Around the printer hot wire near the rear output.",
+      "quantity_summary": "1 from existing set",
+      "notice": "CT range unconfirmed — verify before configuring ELOG."
     },
     {
       "id": "blue-leads",
@@ -95,7 +99,9 @@
         "width": 1280,
         "height": 1707
       },
-      "installation": "Three short blue pigtails: A1 at JV, A2/A3 at neutral JN. The blue plug ends mate with the long leads inside the case."
+      "installation": "Three short blue pigtails: A1 at JV, A2/A3 at neutral JN. The blue plug ends mate with the long leads inside the case.",
+      "location_summary": "A1 connects at JV; A2 and A3 connect at neutral JN.",
+      "notice": "Termination and protection need acceptance before use."
     },
     {
       "id": "voltage-leads",
@@ -121,7 +127,9 @@
         "width": 4284,
         "height": 5712
       },
-      "installation": "Three retained long leads run from A1/A2/A3 to L1/L2/N; the illustrated slack is stored near the front of the panel."
+      "installation": "Three retained long leads run from A1/A2/A3 to L1/L2/N; the illustrated slack is stored near the front of the panel.",
+      "location_summary": "From A1/A2/A3 to L1/L2/N, with slack stored at the front.",
+      "quantity_summary": "3 leads"
     },
     {
       "id": "adapter",
@@ -153,7 +161,9 @@
         "width": 5712,
         "height": 4284
       },
-      "installation": "Plugs into XA on the outside right wall. Its original flat cord stays outside and mates with the round extension."
+      "installation": "Plugs into XA on the outside right wall. Its original flat cord stays outside and mates with the round extension.",
+      "location_summary": "Plugs into XA on the outside right wall.",
+      "quantity_summary": "1"
     },
     {
       "item": "Enclosure",
@@ -186,7 +196,8 @@
         "width": 400,
         "height": 400
       },
-      "installation": "The surrounding case and clear removable lid. Transparent walls are a viewing aid."
+      "installation": "The surrounding case and clear removable lid. Transparent walls are a viewing aid.",
+      "location_summary": "The surrounding case and removable clear lid."
     },
     {
       "item": "Mounting panel",
@@ -219,7 +230,8 @@
         "width": 1000,
         "height": 1000
       },
-      "installation": "The steel plate beneath the equipment. Its existing mounting points and added PE bond are below the components."
+      "installation": "The steel plate beneath the equipment. Its existing mounting points and added PE bond are below the components.",
+      "location_summary": "The steel plate beneath all internal components."
     },
     {
       "item": "Q0 operating breaker",
@@ -252,7 +264,9 @@
         "width": 150,
         "height": 150
       },
-      "installation": "Q0 mounts in the front wall: handle outside, supply and load studs inside."
+      "installation": "Q0 mounts in the front wall: handle outside, supply and load studs inside.",
+      "location_summary": "In the front wall, with its handle outside.",
+      "notice": "Confirm fault rating and printer inrush before ordering."
     },
     {
       "item": "XA adapter receptacle",
@@ -284,7 +298,8 @@
         "source_label": "Leviton",
         "kind": "product"
       },
-      "installation": "XA mounts through the right wall and receives the original adapter outside."
+      "installation": "XA mounts through the right wall and receives the original adapter outside.",
+      "location_summary": "Through the right wall, facing the external adapter."
     },
     {
       "item": "Fv fuse holder",
@@ -321,7 +336,8 @@
         "source_label": "DigiKey / Littelfuse",
         "kind": "reference"
       },
-      "installation": "Fv holder clips onto the short DIN rail. The cartridge is a separate material inside it."
+      "installation": "Fv holder clips onto the short DIN rail. The cartridge is a separate material inside it.",
+      "location_summary": "Clips onto the short DIN rail on the mounting panel."
     },
     {
       "item": "Fv fuse",
@@ -353,7 +369,10 @@
         "source_label": "DigiKey / Littelfuse",
         "kind": "reference"
       },
-      "installation": "One cartridge fits inside Fv. The holder is shown transparent when locating it. Keep the second cartridge as an external spare; the proposed rating still needs acceptance."
+      "installation": "One cartridge fits inside Fv. The holder is shown transparent when locating it. Keep the second cartridge as an external spare; the proposed rating still needs acceptance.",
+      "location_summary": "One cartridge inside Fv; the spare stays outside the enclosure.",
+      "quantity_summary": "1 + 1 spare",
+      "notice": "DO NOT ORDER YET — lead protection must be verified."
     },
     {
       "item": "Distribution connectors",
@@ -386,7 +405,8 @@
         "width": 200,
         "height": 200
       },
-      "installation": "Five WAGO connector groups: JL, JN, PE, PE+ and JV. Each clips into its own mounting carrier."
+      "installation": "Five WAGO connector groups: JL, JN, PE, PE+ and JV. Each clips into its own mounting carrier.",
+      "location_summary": "Five groups on the panel: JL, JN, PE, PE+ and JV."
     },
     {
       "item": "Connector carriers",
@@ -424,7 +444,8 @@
         "width": 200,
         "height": 200
       },
-      "installation": "Five carriers sit under JL, JN, PE, PE+ and JV and fasten to the panel. Carrier details are schematic; transfer-drill from received parts."
+      "installation": "Five carriers sit under JL, JN, PE, PE+ and JV and fasten to the panel. Carrier details are schematic; transfer-drill from received parts.",
+      "location_summary": "One beneath each of the five distribution connectors."
     },
     {
       "item": "Short DIN rail",
@@ -452,7 +473,9 @@
         "width": 1024,
         "height": 1024
       },
-      "installation": "A 100 mm rail is screwed to the panel below Fv; the holder and two end stops clip onto it."
+      "installation": "A 100 mm rail is screwed to the panel below Fv; the holder and two end stops clip onto it.",
+      "location_summary": "On the panel beneath Fv and its two end stops.",
+      "quantity_summary": "100 mm"
     },
     {
       "item": "Mains / printer cord",
@@ -480,7 +503,9 @@
         "width": 600,
         "height": 600
       },
-      "installation": "Two jacketed cord runs: supply through the left wall and printer output through the rear wall. Full external cord lengths are not drawn."
+      "installation": "Two jacketed cord runs: supply through the left wall and printer output through the rear wall. Full external cord lengths are not drawn.",
+      "location_summary": "Supply enters the left wall; printer output exits the rear wall.",
+      "quantity_summary": "10 ft / 3.048 m"
     },
     {
       "id": "supply-plug",
@@ -513,7 +538,8 @@
         "width": 325,
         "height": 325
       },
-      "installation": "The external male plug at the supply end of the left-wall cord."
+      "installation": "The external male plug at the supply end of the left-wall cord.",
+      "location_summary": "At the external end of the left-wall supply cord."
     },
     {
       "id": "printer-connector",
@@ -546,7 +572,8 @@
         "width": 325,
         "height": 325
       },
-      "installation": "The external female connector at the end of the rear-wall printer cord."
+      "installation": "The external female connector at the end of the rear-wall printer cord.",
+      "location_summary": "At the external end of the rear-wall printer cord."
     },
     {
       "item": "Mains / printer strain relief",
@@ -578,7 +605,8 @@
         "source_label": "Hammond",
         "kind": "product"
       },
-      "installation": "Two jacket clamps: supply at the left wall and printer output at the rear wall."
+      "installation": "Two jacket clamps: supply at the left wall and printer output at the rear wall.",
+      "location_summary": "One at each mains cord opening: left and rear walls."
     },
     {
       "item": "DC / USB split cable entry",
@@ -610,7 +638,8 @@
         "source_label": "icotek",
         "kind": "reference"
       },
-      "installation": "Two KVT 32 frames in the right wall: round DC extension and USB cable."
+      "installation": "Two KVT 32 frames in the right wall: round DC extension and USB cable.",
+      "location_summary": "Two frames in the right wall for DC and USB cables."
     },
     {
       "id": "usb",
@@ -648,7 +677,8 @@
         "width": 2000,
         "height": 2000
       },
-      "installation": "USB-B at the logger, through the forward right-wall entry, then to the ELOG computer. External cable length is abbreviated."
+      "installation": "USB-B at the logger, through the forward right-wall entry, then to the ELOG computer. External cable length is abbreviated.",
+      "location_summary": "From the logger USB-B port through the right wall to the computer."
     },
     {
       "id": "din-stops",
@@ -676,7 +706,9 @@
         "width": 175,
         "height": 175
       },
-      "installation": "Two stops immediately flank the Fv holder on the rail. Eight unused pieces from the pack remain outside."
+      "installation": "Two stops immediately flank the Fv holder on the rail. Eight unused pieces from the pack remain outside.",
+      "location_summary": "One on each side of the fuse holder on the DIN rail.",
+      "quantity_summary": "2"
     },
     {
       "id": "dc-extension",
@@ -709,7 +741,9 @@
         "width": 600,
         "height": 400
       },
-      "installation": "The female jack mates with the original adapter outside; its round cable passes through the DC entry to the logger."
+      "installation": "The female jack mates with the original adapter outside; its round cable passes through the DC entry to the logger.",
+      "location_summary": "From the adapter outside, through the DC entry, to the logger.",
+      "quantity_summary": "1 × 0.915 m"
     },
     {
       "id": "kt-inserts",
@@ -747,7 +781,9 @@
         "width": 530,
         "height": 333
       },
-      "installation": "One 41380 split insert inside each KVT 32 frame, around the round DC or USB jacket. Frames become transparent for this view."
+      "installation": "One 41380 split insert inside each KVT 32 frame, around the round DC or USB jacket. Frames become transparent for this view.",
+      "location_summary": "One inside each DC / USB entry frame, around the cable.",
+      "quantity_summary": "2"
     },
     {
       "id": "internal-wire",
@@ -790,7 +826,9 @@
         "width": 1200,
         "height": 240
       },
-      "installation": "Separate hot, neutral and protective-earth runs between distribution, breaker, outlet, fuse and bonds. These are routing illustrations, not cut lengths."
+      "installation": "Separate hot, neutral and protective-earth runs between distribution, breaker, outlet, fuse and bonds. These are routing illustrations, not cut lengths.",
+      "location_summary": "Between the terminals, breaker, outlet, fuse and PE bonds.",
+      "quantity_summary": "Black 3 m; white 2 m; green 3 m"
     },
     {
       "id": "ring-lugs",
@@ -822,7 +860,9 @@
         "source_label": "DigiKey / 3M",
         "kind": "reference"
       },
-      "installation": "Four installed: Q0 input, Q0 output, panel PE stud and rail PE stud. Two or more purchased spares stay outside."
+      "installation": "Four installed: Q0 input, Q0 output, panel PE stud and rail PE stud. Two or more purchased spares stay outside.",
+      "location_summary": "At both Q0 studs and the panel and rail PE bonds.",
+      "quantity_summary": "4 + 2 spares"
     },
     {
       "id": "tie-mounts",
@@ -850,7 +890,9 @@
         "width": 1024,
         "height": 1024
       },
-      "installation": "Twelve bases at the panel drawing’s cable-anchor holes. Final cable dressing is adjusted during dry fit."
+      "installation": "Twelve bases at the panel drawing’s cable-anchor holes. Final cable dressing is adjusted during dry fit.",
+      "location_summary": "At the twelve cable-anchor holes on the mounting panel.",
+      "quantity_summary": "12"
     },
     {
       "id": "cable-ties",
@@ -878,7 +920,9 @@
         "width": 420,
         "height": 420
       },
-      "installation": "Twelve illustrated loops at the anchor bases; the remaining allowance is for dressing leads during assembly. Spare pack contents are not installed."
+      "installation": "Twelve illustrated loops at the anchor bases; the remaining allowance is for dressing leads during assembly. Spare pack contents are not installed.",
+      "location_summary": "Through the cable-mount bases to secure the wire bundles.",
+      "quantity_summary": "24"
     },
     {
       "id": "labels",
@@ -916,7 +960,9 @@
         "width": 236,
         "height": 236
       },
-      "installation": "Identification on the component groups, pigtails, cable exits and external controls. Additional wire-end labels follow the connection schedule."
+      "installation": "Identification on the component groups, pigtails, cable exits and external controls. Additional wire-end labels follow the connection schedule.",
+      "location_summary": "On components, pigtails, cable exits and external controls.",
+      "quantity_summary": "1 SWD + 1 SLW"
     },
     {
       "id": "fasteners",
@@ -944,7 +990,9 @@
         "width": 175,
         "height": 58
       },
-      "installation": "Mounting screw/washer/nut sets for Q0, XA, five carriers, twelve cable bases, DIN rail and two PE bonds. Small hardware is schematic; use the build-package sizes and transfer-drilling instructions."
+      "installation": "Mounting screw/washer/nut sets for Q0, XA, five carriers, twelve cable bases, DIN rail and two PE bonds. Small hardware is schematic; use the build-package sizes and transfer-drilling instructions.",
+      "location_summary": "At component mounts, cable bases, the rail and PE bonds.",
+      "quantity_summary": "See fastener schedule"
     },
     {
       "id": "logger-restraint",
@@ -976,7 +1024,9 @@
         "source_url": "https://www.velcro.com/products/organization/heavy-duty-one-wrap-roll/",
         "source_label": "VELCRO"
       },
-      "installation": "Two straps wrap around the logger and pass through the four panel slots. Extra roll material stays outside."
+      "installation": "Two straps wrap around the logger and pass through the four panel slots. Extra roll material stays outside.",
+      "location_summary": "Two straps around the logger, through four panel slots.",
+      "quantity_summary": "2 × 400 mm"
     }
   ],
   "inventory_basis": "User confirmation on 2026-09-19: ELITEpro XC, existing CTs, three blue voltage pigtails, matching long voltage leads, and the original black two-pin AC/DC adapter only. USB cable and all other enclosure materials are not on hand.",
