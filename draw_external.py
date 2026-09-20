@@ -2,7 +2,7 @@
 def draw_external(add,rect,text,line,circle,C):
     text(48,55,'Connector details | Match labels, not cable color',34,weight=700)
     text(48,91,'Based on the supplied ELITEpro XC photographs and DENT connector documentation. Not to scale.',20,color='#63768a')
-    text(48,148,'A. DENT LD-SKTSP-BLU · 254 mm pigtails → full voltage leads',25,weight=700)
+    text(48,148,'A. Original DENT kit · 254 mm nominal pigtails → full voltage leads',25,weight=700)
     text(48,180,'Bare ends stay fixed inside guarded terminals. Disconnect mains and verify absence of voltage before unplugging these leads.',18,color='#63768a')
     for y,name,source,lead,port,color in [
         (245,'A1 · HOT','JV · Fv protected hot','Existing L1 lead','L1',C['L']),
@@ -18,7 +18,7 @@ def draw_external(add,rect,text,line,circle,C):
         rect(1290,y-20,250,40,'#e7f1fb','#99b5cc',5);text(1415,y+7,'ELITEpro '+port,21,weight=700,anchor='middle')
     text(340,474,'Tinned end → rated terminal',17,color='#63768a');text(716,474,'Shrouded mating pair',17,color='#63768a')
     text(1110,474,'Full voltage lead → meter socket',17,color='#63768a')
-    text(48,522,'All three short adapters are blue. Label BOTH ends A1/HOT, A2/NEUTRAL and A3/NEUTRAL.',21,C['V'],700)
+    text(48,522,'OEM pigtails have different colors; blue here is schematic. Label A1/HOT, A2/NEUTRAL, A3/NEUTRAL.',21,C['V'],700)
     text(48,553,'These are sensing accessories. Use rated power conductors for the printer and separate correctly identified PE bonding.',18,color='#63768a')
     text(48,620,'B. Meter end views',25,weight=700)
     rect(48,642,730,240,'#253642','#253642',12)

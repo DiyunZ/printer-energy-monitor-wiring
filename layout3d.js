@@ -286,7 +286,7 @@ async function start() {
   locatedCable('internal-wire','rail-pe','Rail bond',[[-78,13,62],[-52,23,78],[-4,23,72],[-3,23,7],[-9,14,-9],[-27+15.5/Math.sqrt(2),8.9,-28+15.5/Math.sqrt(2)]],pe,1.7,'rail');
   locatedCable('internal-wire','panel-pe','Panel bond',[[-82,13,62],[-99,13,78],[-119,8,83],[-125,7.4,75.5]],pe,1.7,'panel');
   locatedCable('internal-wire','fv-jv','Fv to JV',[[-60,26,11.25],[-60,25,22],[-39.6,18,22],[-39.6,14,37.15]],hot,1.45,'fuse');
-  // Blue pigtails and three full voltage leads, including a visible retained-slack zone.
+  // OEM voltage pigtails and three full voltage leads, including a visible retained-slack zone.
   const leadPorts = [3,2,0], leadColors = ['#283039','#ad4d4a','#dddcd1'];
   for(let i=0;i<3;i++) {
     const p=instances[`A${i+1}`], [x,,plugZ]=p.position, z=plugZ-9;
@@ -317,7 +317,7 @@ async function start() {
     mark('voltage-leads',p.id,`${p.id} to ${['L1','L2','N'][i]}`,[longPlug,...leadSegments,meterPlug]);
     decal(p.id,8,8,[x,28,plugZ],'leads');
   }
-  tag('3 blue voltage adapters',[-22,56,59],'leads');
+  tag('3 OEM voltage adapters',[-22,56,59],'leads');
   tag('Retained lead slack',[-35,49,148],'leads');
   // CT pair reaches CH1, distinct from voltage sockets and AC/DC power.
   locatedCable('ct','white','CT CH1 positive',[[cx+6,50,cz],[-27,47,-145],[8,11,-149],[22,11,-149],[30,11,-149],[40,11,-149],[73,16,-149],[mx+22,44,mz-ml/2-4]],'#bfc3c0',1,'ct');

@@ -1,5 +1,5 @@
 {
-  "revision": "September 20, 2026 · protection review and offline USB",
+  "revision": "September 20, 2026 · OEM lead-set confirmation",
   "baseline_commit": "b542a4d777b8aef7f90fd000b35a3cca697e7c2b",
   "scope": "One grounded 120 V supply, one printer at a time. Five equipment groups are confirmed on hand; the USB cable is kit supplied. Log independently during printing and download only with mains unplugged. Q0 application, Fv lead coordination, CT scaling and physical acceptance remain open; this is not a complete-order or energizing release.",
   "result": "ENGINEERING PACKAGE A — RECEIVING AND ELECTRICAL RELEASE ITEMS OPEN",
@@ -77,12 +77,12 @@
     },
     {
       "id": "blue-leads",
-      "item": "Blue voltage pigtails",
-      "model": "DENT LD-SKTSP-BLU · 10 in / 254 mm",
+      "item": "DENT voltage pigtails",
+      "model": "DENT LD-SKTSP series · 10 in / 254 mm nominal",
       "availability": "owned",
       "result": "Conditional",
-      "checked": "Photo/product match: blue shrouded female connector, factory-tinned free end and ESIS lead-set card agree with DENT’s 10 in unterminated voltage accessory for the 2 m lead set. A1 is hot to L1; A2/A3 are neutral to L2/N. Use only for sensing, never printer power or PE. The product page does not publish AWG or ampacity.",
-      "remaining": "Manufacturer accessory is matched, but published AWG/ampacity is absent. Responsible electrical personnel must accept the tinned ends and Fv protection.",
+      "checked": "User confirms three original DENT kit pigtails in different colors, all with the same voltage-sensing function. The connector, tinned end and ESIS card match the LD-SKTSP family. A1 feeds L1 hot; A2/A3 feed L2/N neutral. Colors identify connections; these leads do not carry printer load current or serve as PE.",
+      "remaining": "OEM kit identity is confirmed by the user. The product listing does not publish conductor size or short-circuit withstand; terminal preparation and Fv coordination remain separate acceptance items.",
       "sources": [
         "blue",
         "dent-fused-clip"
@@ -172,7 +172,7 @@
       "model": "Littelfuse LPSC0001Z",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "LPSC0001Z replaces conflicting CHCC1DU. Envelope 17.78 × 61 × 78.5 mm. 14 AWG Class C wires go to both terminals; JV transitions to blue A1.",
+      "checked": "LPSC0001Z replaces conflicting CHCC1DU. Envelope 17.78 × 61 × 78.5 mm. 14 AWG Class C wires go to both terminals; JV transitions to A1.",
       "remaining": "Confirm exact supplied holder, 2 N·m torque and actual open-door access during assembly.",
       "sources": [
         "lpsc"
@@ -185,7 +185,7 @@
       "availability": "buy",
       "result": "Hold",
       "checked": "KLKR.500T is 0.5 A fast-acting Class CC, 600 V AC, 10.3 × 38.1 mm, with 200 kA AC interrupting rating; it fits LPSC0001Z. DENT publishes 125 mA maximum line input and a 500 mA fused accessory, but neither establishes this fuse’s coordination with the existing external lead.",
-      "remaining": "Holder, cartridge size and voltage rating verified. Blue-pigtail conductor/short-circuit withstand and logger startup coordination remain undocumented. Component interrupting rating is not assembly SCCR.",
+      "remaining": "Holder, cartridge size and voltage rating verified. Voltage-pigtail conductor/short-circuit withstand and logger startup coordination remain undocumented. Component interrupting rating is not assembly SCCR.",
       "sources": [
         "klkr",
         "lpsc",
@@ -458,7 +458,7 @@
   ],
   "corrections": [
     "Identified the existing CUI SMI6-9-V-P5 adapter from the original photo: 9 V, 0.667 A, center positive.",
-    "Matched the blue pigtails to DENT LD-SKTSP-BLU, 10 in; identified the CT as Mini HSC, with the legacy 50 A variant probable but obscured digits not treated as confirmed.",
+    "User confirms three original DENT kit pigtails in different colors; LD-SKTSP is the matched family, with 10 in nominal length. The CT remains identified as Mini HSC, with the legacy 50 A variant probable but obscured digits not treated as confirmed.",
     "Replaced the outlet/metal box/support/cover assembly with directly mounted Leviton 5279-C. Removed seven obsolete material groups.",
     "Replaced conflicting Eaton fuse-holder data with Littelfuse LPSC0001Z; added the JV connector so its output terminal receives compatible 14 AWG wire.",
     "Use one KVT 32 frame and one 41380 insert for the round Tensility DC extension. Reuse the kit USB cable temporarily with mains unplugged; no USB penetration or energized USB routing remains.",
@@ -505,7 +505,7 @@
   ],
   "needed": [
     "CT commissioning: Mini HSC family is matched; 50 A is probable. Read the unobscured label during assembly and set that exact range/output in ELOG.",
-    "Voltage-lead acceptance: LD-SKTSP-BLU is the matched accessory. Its online listing does not state AWG/ampacity. Accept terminal preparation and Fv coordination with responsible electrical personnel; do not infer lead protection from the 15 A main breaker.",
+    "Voltage-lead acceptance: the user confirms the original DENT kit pigtails; do not re-request OEM identity. Accept terminal preparation and Fv coordination separately with responsible electrical personnel; original-kit status alone does not establish protection by the 15 A main breaker.",
     "Use one KVT 32 frame and one 41380 insert for the round Tensility DC extension. Reuse the kit USB cable temporarily with mains unplugged; no USB penetration or energized USB routing remains.",
     "Commissioning: verify fastener stacks, CT latch/fuse door/slack, supply conditions, PE/insulation/polarity, total load and restart/recording behavior before routine operation."
   ]

@@ -101,7 +101,7 @@
       ],
       "status": "Manufacturer maximum envelope",
       "source": "https://www.littelfuse.com/de/assetdocs/powr-gard-catalog?assetguid=85d36235-a32b-4608-bfed-f9878aa43af0",
-      "note": "Non-indicating Class CC holder, 600 V AC/DC, 35 mm DIN rail. Catalog maximum 17.78 × 61 × 78.5 mm. Use 14 AWG Class C copper at both terminals (2.0 N·m); output runs to JV before the smaller blue pigtail. KLKR.500T (0.5 A) is a specific protection candidate, pending acceptance of LD-SKTSP-BLU termination and protection coordination. Reserve 120 mm above the holder for opening and replacement; actual door sweep to verify on receipt."
+      "note": "Non-indicating Class CC holder, 600 V AC/DC, 35 mm DIN rail. Catalog maximum 17.78 × 61 × 78.5 mm. Use 14 AWG Class C copper at both terminals (2.0 N·m); output runs to JV before the smaller OEM voltage pigtail. KLKR.500T (0.5 A) is a specific protection candidate, pending acceptance of LD-SKTSP series termination and protection coordination. Reserve 120 mm above the holder for opening and replacement; actual door sweep to verify on receipt."
     },
     {
       "id": "terminals",
@@ -113,7 +113,7 @@
       ],
       "status": "Manufacturer connector and carrier dimensions",
       "source": "https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415",
-      "note": "Five WAGO 221-415 connectors in five 221-505 carriers: JL, JN, two bridged PE groups and JV (fuse-to-pigtail transition). Each carrier uses two M3 fasteners, lateral 20 mm spacing, at the front foot. Insert one conductor per port; strip 11 mm. Blue pigtail factory-tinned tips must not be assumed compatible without identification; use a manufacturer-approved preparation."
+      "note": "Five WAGO 221-415 connectors in five 221-505 carriers: JL, JN, two bridged PE groups and JV (fuse-to-pigtail transition). Each carrier uses two M3 fasteners, lateral 20 mm spacing, at the front foot. Insert one conductor per port; strip 11 mm. OEM voltage pigtail factory-tinned tips need a terminal-compatible preparation; OEM kit identity is confirmed by the user."
     },
     {
       "id": "outlet",
@@ -180,11 +180,11 @@
     },
     {
       "id": "leads",
-      "name": "Blue adapters & retained lead slack",
+      "name": "DENT adapters & retained lead slack",
       "size": null,
       "status": "Illustrative routing; length not validated",
       "source": "https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/",
-      "note": "Three matched DENT LD-SKTSP-BLU pigtails, catalog length 254 mm, feed L1 hot / L2 neutral / N neutral. Long-lead storage is an illustrative 2 m flexible length per lead at assumed 3 mm OD and 4 mm pitch. Full pigtail and CT slack is retained during assembly; displayed flexible routes do not establish exact bend radii or a cut list. PE is a separate green rated conductor."
+      "note": "Three user-confirmed DENT original kit pigtails in different colors, matched to the LD-SKTSP family (254 mm nominal), feed L1 hot / L2 neutral / N neutral. Long-lead storage is an illustrative 2 m flexible length per lead at assumed 3 mm OD and 4 mm pitch. Full pigtail and CT slack is retained during assembly; displayed flexible routes do not establish exact bend radii or a cut list. PE is a separate green rated conductor. Blue in the model denotes the sensing group, not the actual jacket colors."
     }
   ],
   "plan": {

@@ -1,13 +1,13 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Installation audit · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=15"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Installation_Audit.md" download>Download Markdown</a></nav><h1>Installation audit</h1>
-<p>September 20, 2026 · protection review and offline USB. <strong>ENGINEERING PACKAGE A — RECEIVING AND ELECTRICAL RELEASE ITEMS OPEN.</strong></p>
+<p>September 20, 2026 · OEM lead-set confirmation. <strong>ENGINEERING PACKAGE A — RECEIVING AND ELECTRICAL RELEASE ITEMS OPEN.</strong></p>
 <p>All <strong>29 material groups</strong> were reviewed: 10 catalog match · 16 conditional · 2 measure · 1 hold. A catalog match confirms the stated interface only; it is not approval of the complete item or assembly.</p>
 <p>One grounded 120 V supply, one printer at a time. Five equipment groups are confirmed on hand; the USB cable is kit supplied. Log independently during printing and download only with mains unplugged. Q0 application, Fv lead coordination, CT scaling and physical acceptance remain open; this is not a complete-order or energizing release.</p>
-<p>The box and major panel parts have nominal space, but the current design cannot be called a perfect or fully installable assembly. Machining geometry is supplied; Exact CT scaling, blue-lead protection and physical/electrical acceptance remain open. One DC entry insert is specified; USB is temporary with mains unplugged. Do not treat a purchase link or an inventory tick as a release.</p>
+<p>The box and major panel parts have nominal space, but the current design cannot be called a perfect or fully installable assembly. Machining geometry is supplied; Exact CT scaling, voltage-lead protection and physical/electrical acceptance remain open. One DC entry insert is specified; USB is temporary with mains unplugged. Do not treat a purchase link or an inventory tick as a release.</p>
 <p><a href="index.html#assembly-preview">Inspect the 3D installation stages</a> · <a href="materials.html">Materials and buying links</a> · <a href="installation_checks.json">Machine-readable checks</a></p>
 <h2>Corrections from the audit</h2>
 <ul>
 <li>Identified the existing CUI SMI6-9-V-P5 adapter from the original photo: 9 V, 0.667 A, center positive.</li>
-<li>Matched the blue pigtails to DENT LD-SKTSP-BLU, 10 in; identified the CT as Mini HSC, with the legacy 50 A variant probable but obscured digits not treated as confirmed.</li>
+<li>User confirms three original DENT kit pigtails in different colors; LD-SKTSP is the matched family, with 10 in nominal length. The CT remains identified as Mini HSC, with the legacy 50 A variant probable but obscured digits not treated as confirmed.</li>
 <li>Replaced the outlet/metal box/support/cover assembly with directly mounted Leviton 5279-C. Removed seven obsolete material groups.</li>
 <li>Replaced conflicting Eaton fuse-holder data with Littelfuse LPSC0001Z; added the JV connector so its output terminal receives compatible 14 AWG wire.</li>
 <li>Use one KVT 32 frame and one 41380 insert for the round Tensility DC extension. Reuse the kit USB cable temporarily with mains unplugged; no USB penetration or energized USB routing remains.</li>
@@ -181,10 +181,10 @@
 <td>Uncover the existing label during assembly and enter its actual current/output in ELOG; validate positive watts against a reference load/meter.</td>
 </tr>
 <tr>
-<td><a href="index.html#material-blue-leads">Blue voltage pigtails</a><br>DENT LD-SKTSP-BLU · 10 in / 254 mm<br>✓ Owned</td>
+<td><a href="index.html#material-blue-leads">DENT voltage pigtails</a><br>DENT LD-SKTSP series · 10 in / 254 mm nominal<br>✓ Owned</td>
 <td><strong>Conditional</strong></td>
-<td>Photo/product match: blue shrouded female connector, factory-tinned free end and ESIS lead-set card agree with DENT’s 10 in unterminated voltage accessory for the 2 m lead set. A1 is hot to L1; A2/A3 are neutral to L2/N. Use only for sensing, never printer power or PE. The product page does not publish AWG or ampacity. <a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/">blue</a>, <a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-fused-crocodile-clip/">dent-fused-clip</a></td>
-<td>Manufacturer accessory is matched, but published AWG/ampacity is absent. Responsible electrical personnel must accept the tinned ends and Fv protection.</td>
+<td>User confirms three original DENT kit pigtails in different colors, all with the same voltage-sensing function. The connector, tinned end and ESIS card match the LD-SKTSP family. A1 feeds L1 hot; A2/A3 feed L2/N neutral. Colors identify connections; these leads do not carry printer load current or serve as PE. <a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/">blue</a>, <a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-fused-crocodile-clip/">dent-fused-clip</a></td>
+<td>OEM kit identity is confirmed by the user. The product listing does not publish conductor size or short-circuit withstand; terminal preparation and Fv coordination remain separate acceptance items.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-voltage-leads">Full voltage leads</a><br>Existing matching voltage lead set<br>✓ Owned</td>
@@ -225,14 +225,14 @@
 <tr>
 <td><a href="index.html#material-fuse-holder">Fv fuse holder</a><br>Littelfuse LPSC0001Z<br>□ Buy / fabricate</td>
 <td><strong>Conditional</strong></td>
-<td>LPSC0001Z replaces conflicting CHCC1DU. Envelope 17.78 × 61 × 78.5 mm. 14 AWG Class C wires go to both terminals; JV transitions to blue A1. <a href="https://www.littelfuse.com/de/assetdocs/powr-gard-catalog?assetguid=85d36235-a32b-4608-bfed-f9878aa43af0">lpsc</a></td>
+<td>LPSC0001Z replaces conflicting CHCC1DU. Envelope 17.78 × 61 × 78.5 mm. 14 AWG Class C wires go to both terminals; JV transitions to A1. <a href="https://www.littelfuse.com/de/assetdocs/powr-gard-catalog?assetguid=85d36235-a32b-4608-bfed-f9878aa43af0">lpsc</a></td>
 <td>Confirm exact supplied holder, 2 N·m torque and actual open-door access during assembly.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-fuse">Fv fuse</a><br>Littelfuse KLKR.500T · 0.5 A Class CC<br>□ Buy / fabricate</td>
 <td><strong>Hold</strong></td>
 <td>KLKR.500T is 0.5 A fast-acting Class CC, 600 V AC, 10.3 × 38.1 mm, with 200 kA AC interrupting rating; it fits LPSC0001Z. DENT publishes 125 mA maximum line input and a 500 mA fused accessory, but neither establishes this fuse’s coordination with the existing external lead. <a href="https://www.littelfuse.com/assetdocs/klkr-classcc-fuse-datasheet-final?assetguid=4443e5f6-97ee-4206-9abe-9e155371a03e">klkr</a>, <a href="https://www.littelfuse.com/de/assetdocs/powr-gard-catalog?assetguid=85d36235-a32b-4608-bfed-f9878aa43af0">lpsc</a>, <a href="https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf">dent-size</a>, <a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/">blue</a>, <a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-fused-crocodile-clip/">dent-fused-clip</a></td>
-<td>Holder, cartridge size and voltage rating verified. Blue-pigtail conductor/short-circuit withstand and logger startup coordination remain undocumented. Component interrupting rating is not assembly SCCR.</td>
+<td>Holder, cartridge size and voltage rating verified. Voltage-pigtail conductor/short-circuit withstand and logger startup coordination remain undocumented. Component interrupting rating is not assembly SCCR.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-connectors">Distribution connectors</a><br>WAGO 221-415<br>□ Buy / fabricate</td>
@@ -346,7 +346,7 @@
 <h2>Receiving and commissioning items</h2>
 <ul>
 <li>CT commissioning: Mini HSC family is matched; 50 A is probable. Read the unobscured label during assembly and set that exact range/output in ELOG.</li>
-<li>Voltage-lead acceptance: LD-SKTSP-BLU is the matched accessory. Its online listing does not state AWG/ampacity. Accept terminal preparation and Fv coordination with responsible electrical personnel; do not infer lead protection from the 15 A main breaker.</li>
+<li>Voltage-lead acceptance: the user confirms the original DENT kit pigtails; do not re-request OEM identity. Accept terminal preparation and Fv coordination separately with responsible electrical personnel; original-kit status alone does not establish protection by the 15 A main breaker.</li>
 <li>Use one KVT 32 frame and one 41380 insert for the round Tensility DC extension. Reuse the kit USB cable temporarily with mains unplugged; no USB penetration or energized USB routing remains.</li>
 <li>Commissioning: verify fastener stacks, CT latch/fuse door/slack, supply conditions, PE/insulation/polarity, total load and restart/recording behavior before routine operation.</li>
 </ul>

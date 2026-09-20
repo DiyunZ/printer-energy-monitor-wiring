@@ -5,7 +5,7 @@ import json
 from draw_external import draw_external
 
 OUT = Path(__file__).resolve().parent
-REV = 'Rev. 9 · offline USB · 2026-09-20'
+REV = 'Rev. 10 · OEM kit leads · 2026-09-20'
 C = {'L':'#202d3a','N':'#65758a','PE':'#18814a','CT':'#8544a5','USB':'#23739d','DC':'#aa621e','V':'#1567c1'}
 # Shared physical placement. The SVG is an X/Z projection of the same millimetre
 # coordinates consumed by layout3d.js. Electrical port symbols are spaced for clarity.
@@ -53,11 +53,11 @@ raw = [
  ('02','L','Q0.OUT','JL.1',[(-100,M['Q0.OUT'][1]),(-100,148),(-154,148),(-154,-103),(-136.6,-103)],(-154,88),'Q0 OUT → hot distribution JL','main'),
  ('03','L','JL.2','OUT.L',[(-115,-118.85),(-115,-123),(-12,-123),(-12,-175),(0,-175)],(-25,-123),'JL → printer hot; one pass through CT','main'),
  ('04','L','JL.3','Fv.IN',[(-125,-104),(-83,-104),(-83,-78),(-60,-78)],(-83,-89),'JL → Fv voltage-tap fuse','voltage'),
- ('05','V','JV.2','D.L1',[(-33.8,58),(-33,58),(-33,165),(40,165),(40,-156),(114,-156)],(40,-15),'JV → blue A1 → full lead → L1 (HOT)','voltage'),
+ ('05','V','JV.2','D.L1',[(-33.8,58),(-33,58),(-33,165),(40,165),(40,-156),(114,-156)],(40,-15),'JV → A1 → full lead → L1 (HOT)','voltage'),
  ('06','N','IN.N','JN.1',[(-170,128),(-170,-33),(-136.6,-33)],(-170,-12),'Input neutral → neutral distribution JN','neutral'),
  ('07','N','JN.2','OUT.N',[(-130.8,-36),(-148,-36),(-148,-176),(-4,-176)],(-148,-80),'JN → printer neutral; outside CT','neutral'),
- ('08','V','JN.3','D.L2',[(-125,-10),(-97,-10),(-97,38),(-24,38),(-24,159),(46,159),(46,-149),(99,-149)],(46,60),'JN → blue A2 → full lead → L2 (NEUTRAL)','voltage'),
- ('09','V','JN.4','D.N',[(-119.2,-17),(-91,-17),(-91,44),(-15,44),(-15,153),(52,153),(52,-142),(68,-142)],(52,125),'JN → blue A3 → full lead → N (NEUTRAL)','voltage'),
+ ('08','V','JN.3','D.L2',[(-125,-10),(-97,-10),(-97,38),(-24,38),(-24,159),(46,159),(46,-149),(99,-149)],(46,60),'JN → A2 → full lead → L2 (NEUTRAL)','voltage'),
+ ('09','V','JN.4','D.N',[(-119.2,-17),(-91,-17),(-91,44),(-15,44),(-15,153),(52,153),(52,-142),(68,-142)],(52,125),'JN → A3 → full lead → N (NEUTRAL)','voltage'),
  ('10','PE','IN.PE','JPE.1',[(-145,140),(-145,35),(-136.6,35)],(-145,78),'Input PE → protective-earth distribution','earth'),
  ('11','PE','JPE.2','OUT.PE',[(-130.8,43),(-161,43),(-161,-185),(-8,-185)],(-161,-143),'PE → printer ground; outside CT','earth'),
  ('12','PE','JPE.3','PLATE',[(-86.6,77),(-125,77)],(-125,69),'PE → dedicated metal-plate bond','earth'),
@@ -72,7 +72,7 @@ raw = [
  ('21','N','AUX.FACE.N','PSU.N',[],(207,19.35),'Existing adapter AC blade: neutral contact','aux'),
  ('22','DC','PSU.DC+','D.DC+',[(254,25),(254,106),(150,106),(150,118),(74,118)],(254,72),'Original adapter → external DC coupling → round extension: center-positive path','aux'),
  ('23','DC','PSU.DC-','D.DC-',[(246,31),(246,111),(154,111),(154,125),(81,125)],(246,86),'Original adapter → external DC coupling → round extension: sleeve-negative path','aux'),
- ('24','L','Fv.OUT','JV.1',[(-60,22),(-39.6,22)],(-60,18),'Fv OUT → JV: 14 AWG transition before blue A1','voltage'),
+ ('24','L','Fv.OUT','JV.1',[(-60,22),(-39.6,22)],(-60,18),'Fv OUT → JV: 14 AWG transition before A1','voltage'),
  ('25','PE','JPE.B1','JPE.B2',[(-113.4,33),(-63.4,33)],(-106,33),'PE port 5 → PE+ port 5: required green bridge','earth'),
 ]
 wires = [dict(id=n,kind=k,start=a,end=b,points=[A[a],*[project(p) for p in m],A[b]],badge=project(lab),description=d,group=g) for n,k,a,b,m,lab,d,g in raw]
@@ -286,7 +286,7 @@ def material_photo(p):
 
 def main():
     validation=validate();svg=make_diagram();(OUT/'wiring_routes.svg').write_text(svg)
-    start_svg(1800,1200,'ELITEpro connectors, blue adapter chain and enclosure front-panel concept')
+    start_svg(1800,1200,'ELITEpro connectors, OEM adapter chain and enclosure front-panel concept')
     draw_external(add,rect,text,line,circle,C);add('</svg>');detail=''.join(parts)
     (OUT/'connector_detail.svg').write_text(detail)
     rows=''.join(f'<tr class="row" data-id="{w["id"]}"><td><button class="trace" data-id="{w["id"]}" aria-label="Trace connection {w["id"]}">{w["id"]}</button></td><td>{E(w["description"])}</td><td>{E(w["start"])} → {E(w["end"])}</td></tr>' for w in wires)

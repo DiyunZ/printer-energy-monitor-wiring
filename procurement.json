@@ -1,5 +1,5 @@
 {
-  "revision": "September 20, 2026 · protection review and offline USB",
+  "revision": "September 20, 2026 · OEM lead-set confirmation",
   "scope": "One grounded 120 V supply, one printer at a time. Five equipment groups are confirmed on hand; the USB cable is kit supplied. Log independently during printing and download only with mains unplugged. Q0 application, Fv lead coordination, CT scaling and physical acceptance remain open; this is not a complete-order or energizing release.",
   "items": [
     {
@@ -71,11 +71,11 @@
     },
     {
       "id": "blue-leads",
-      "item": "Blue voltage pigtails",
+      "item": "DENT voltage pigtails",
       "quantity": "3",
-      "model": "DENT LD-SKTSP-BLU · 10 in / 254 mm",
-      "reason": "Photo/product match: blue shrouded female connector, factory-tinned free end and ESIS lead-set card agree with DENT’s 10 in unterminated voltage accessory for the 2 m lead set. A1 is hot to L1; A2/A3 are neutral to L2/N. Use only for sensing, never printer power or PE. The product page does not publish AWG or ampacity.",
-      "status": "Owned · original accessory located; confirm tinned-end termination and protection before energizing.",
+      "model": "DENT LD-SKTSP series · 10 in / 254 mm nominal",
+      "reason": "User confirms three original DENT kit pigtails in different colors, all with the same voltage-sensing function. The connector, tinned end and ESIS card match the LD-SKTSP family. A1 feeds L1 hot; A2/A3 feed L2/N neutral. Colors identify connections; these leads do not carry printer load current or serve as PE.",
+      "status": "Owned · DENT original kit configuration confirmed by user; no replacement planned. Terminal preparation and protection still need acceptance.",
       "availability": "owned",
       "links": [
         {
@@ -87,8 +87,8 @@
       "image": {
         "src": "assets/materials/blue-leads.jpg",
         "kind": "user",
-        "alt": "User-supplied photograph of the existing blue voltage pigtails",
-        "caption": "Your equipment · supplied photo",
+        "alt": "User photograph of one blue DENT voltage pigtail from the existing multicolor set",
+        "caption": "Your equipment · one blue example; the three owned pigtails have different colors",
         "source_label": "User-supplied photo",
         "crop": [
           0.03,
@@ -99,7 +99,7 @@
         "width": 1280,
         "height": 1707
       },
-      "installation": "Three short blue pigtails: A1 at JV, A2/A3 at neutral JN. The blue plug ends mate with the long leads inside the case.",
+      "installation": "Three original DENT voltage pigtails: A1 at JV, A2/A3 at neutral JN. Shrouded ends mate with the long leads inside the case. Drawing colors are schematic; actual color assignments are not recorded.",
       "location_summary": "A1 connects at JV; A2 and A3 connect at neutral JN.",
       "notice": "Termination and protection need acceptance before use."
     },
@@ -108,7 +108,7 @@
       "item": "Full voltage leads",
       "quantity": "1 set; 3 leads used",
       "model": "Existing matching voltage lead set",
-      "reason": "Mate with the three blue pigtails and retain the full factory leads. Check connector compatibility, insulation and bend allowance.",
+      "reason": "Mate with the three OEM voltage pigtails and retain the full factory leads. Check connector compatibility, insulation and bend allowance.",
       "status": "On hand · confirmed by user; no replacement set planned",
       "availability": "owned",
       "links": [],
@@ -310,7 +310,7 @@
       "item": "Fv fuse holder",
       "quantity": "1",
       "model": "Littelfuse LPSC0001Z",
-      "reason": "1-pole, non-indicating Class CC, 600 V AC/DC holder. This replaces the conflicting Eaton revision. 14 AWG Class C copper in and out; the fused output goes to JV before the blue pigtail.",
+      "reason": "1-pole, non-indicating Class CC, 600 V AC/DC holder. This replaces the conflicting Eaton revision. 14 AWG Class C copper in and out; the fused output goes to JV before the OEM voltage pigtail.",
       "status": "Selected: 17.78 × 78.5 × 61 mm maximum; 35 mm DIN; terminal torque 2.0 N·m.",
       "links": [
         {
@@ -349,7 +349,7 @@
       "quantity": "2 (1 installed + 1 spare)",
       "model": "Littelfuse KLKR.500T · 0.5 A Class CC",
       "reason": "KLKR.500T is 0.5 A fast-acting Class CC, 600 V AC, 10.3 × 38.1 mm, with 200 kA AC interrupting rating; it fits LPSC0001Z. DENT publishes 125 mA maximum line input and a 500 mA fused accessory, but neither establishes this fuse’s coordination with the existing external lead.",
-      "status": "Holder, cartridge size and voltage rating verified. Blue-pigtail conductor/short-circuit withstand and logger startup coordination remain undocumented. Component interrupting rating is not assembly SCCR.",
+      "status": "Holder, cartridge size and voltage rating verified. Voltage-pigtail conductor/short-circuit withstand and logger startup coordination remain undocumented. Component interrupting rating is not assembly SCCR.",
       "links": [
         {
           "label": "Exact candidate · DigiKey",
@@ -383,7 +383,7 @@
       "item": "Distribution connectors",
       "quantity": "5",
       "model": "WAGO 221-415",
-      "reason": "One each for JL and JN; two bridged connectors for JPE and six external PE connections. Use only with permitted copper conductors, sizes and terminations; confirm tinned blue pigtail and protective-bonding suitability. All groups remain separate. Fifth group JV transitions from the holder’s 14 AWG output to the blue A1 sensing pigtail.",
+      "reason": "One each for JL and JN; two bridged connectors for JPE and six external PE connections. Use only with permitted copper conductors, sizes and terminations; confirm tinned OEM voltage pigtail and protective-bonding suitability. All groups remain separate. Fifth group JV transitions from the holder’s 14 AWG output to the A1 sensing pigtail.",
       "status": "Selected; five mounting positions in the panel drawing. Conductor acceptance is checked at assembly.",
       "links": [
         {
@@ -417,7 +417,7 @@
       "item": "Connector carriers",
       "quantity": "5",
       "model": "WAGO 221-505",
-      "reason": "Secure the connector groups to the backpanel using the carrier's permitted mounting method. 3D carrier envelope is provisional. Add guards as needed; loose connectors must not rely on the wire for support. Fifth group JV transitions from the holder’s 14 AWG output to the blue A1 sensing pigtail.",
+      "reason": "Secure the connector groups to the backpanel using the carrier's permitted mounting method. 3D carrier envelope is provisional. Add guards as needed; loose connectors must not rely on the wire for support. Fifth group JV transitions from the holder’s 14 AWG output to the A1 sensing pigtail.",
       "status": "Five carriers, two M3 fixings each; transfer-drill actual front-foot holes.",
       "links": [
         {
@@ -990,7 +990,7 @@
       "quantity_summary": "2 × 400 mm"
     }
   ],
-  "inventory_basis": "Five equipment groups confirmed by the user: ELITEpro XC, CTs, three blue voltage pigtails, matching long leads and original black adapter. DENT specifies an included 1.8 m USB-A to B cable; the photographed kit card places it in the lid pocket. Its present physical location has not been confirmed. Reuse it before buying a replacement.",
+  "inventory_basis": "Five equipment groups confirmed by the user: ELITEpro XC, CTs, three user-confirmed original DENT kit pigtails in different colors, matching long leads and original black adapter. DENT specifies an included 1.8 m USB-A to B cable; the photographed kit card places it in the lid pocket. Its present physical location has not been confirmed. Reuse it before buying a replacement.",
   "setup_requirements": [
     {
       "item": "ELOG software",

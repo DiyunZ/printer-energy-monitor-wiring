@@ -24,7 +24,7 @@ The existing photos were compared with manufacturer product pictures, original d
 |---|---|---|
 | Black adapter | **CUI SMI6-9-V-P5**, 9 V DC, 0.667 A, center positive. Retain it. Body 64 × 40.5 × 30 mm ±1 mm; 5.5/2.1 mm P5 plug. | Label readable in the original photo; [official CUI SMI6 datasheet](https://www.belfuse.com/media/datasheets/products/power-supplies/SMI6.pdf). Check condition, output and seating at assembly. |
 | White CT | **DENT Mini HSC** family; **CTHSC-050-U/B, 50 A / 333.3 mV is probable** from the partial “DENT 50…” label and legacy appearance. | [DENT family specifications](https://www.dentinstruments.com/shop/current-sensors/hinged-current-transformers-sensors-for-energy-metering/), [legacy label comparison](http://siscoinc.net/cthsc-050-ubdentcurrenttransformer.aspx). 20 A and 50 A versions share the body. Wires conceal the full variant: read the label during assembly before setting ELOG. No duplicate CT is in the purchase list. |
-| Three blue pigtails | Product match: **DENT LD-SKTSP-BLU**, **10 in / 254 mm**, female safety connector to factory-tinned end. A1 = hot/L1; A2 = neutral/L2; A3 = neutral/N. | [DENT original accessory](https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/). Photo connector, tinned end and ESIS card agree. Online data does not publish AWG/ampacity. Qualified acceptance of termination and Fv remains necessary. |
+| Three OEM voltage pigtails | User confirms three original DENT kit pigtails in different colors. Matched family: **DENT LD-SKTSP**, **10 in / 254 mm nominal**, female safety connector to factory-tinned end. A1 = hot/L1; A2 = neutral/L2; A3 = neutral/N. | [DENT original accessory](https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/). Photo connector, tinned end and ESIS card agree. Online data does not publish AWG/ampacity. Qualified acceptance of termination and Fv remains necessary. |
 | DC entry | Add **Tensility 10-02228**, 0.915 m round extension, OD **5.2 ±0.3 mm**. Use **icotek KTMBS 4–7 gray, 41380** in the KVT 32. Original flat CUI cord stays outside. | [Cable drawing](https://tensility.s3.us-west-2.amazonaws.com/imports/product_spec_sheets/10-02228.pdf), [insert range](https://www.icotek.com/Produkte/PDFs/en_US/KTMBS%20gy.pdf). The entire 4.9–5.5 mm interval is inside 4–7 mm. Connector bodies are under 12 mm OD and clear the Ø32.3 wall bore. Verify the locknut passage and seals on receipt. |
 | USB service connection | Reuse the DENT kit USB-A to B cable, 1.8 m. No permanent entry. | [DENT manual](https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf), printed pp. 16, 29, 119: included cable, USB power and insulation requirements. Connect only with mains unplugged and the lid open; remove before power-up. |
 | Q0 / supply | Carling CA1-B0-24-615-121-DG, 15 A, single pole; manufacturer confirms 10 kA at 120 V. | Actual JIS receptacle fault current and combined startup waveform remain unknown. [Detailed protection review](protection.html). |
@@ -118,7 +118,7 @@ Use the selected 14 AWG black / white / green internal wire. The following are c
 
 Connections 01/03/06/07/10/11 use the supply/output cord conductors. Connections 05/08/09 use the three existing pigtail + full-lead chains; retain their full factory length. Connections 14/15 use the CT pair; 16 is a temporary USB service connection with mains unplugged. Connections 20–23 illustrate factory adapter contacts and DC wiring, **not** instructions to open or modify the adapter. The site provides the full 25-path schedule.
 
-Label both ends of every conductor. A1 is hot, A2 and A3 are neutral despite all three jackets being blue. Grounding uses the separate green conductors. The full voltage-lead storage model assumes 2 m of flexible cable per lead and 3 mm OD; real cable lengths, connector bodies and minimum bends must fit without loading meter sockets.
+Label both ends of every conductor. A1 is hot; A2 and A3 are neutral. The three original pigtails have different colors; drawing colors are schematic, so follow connection IDs. Grounding uses the separate green conductors. The full voltage-lead storage model assumes 2 m of flexible cable per lead and 3 mm OD; real cable lengths, connector bodies and minimum bends must fit without loading meter sockets.
 
 ## Assembly and acceptance sequence
 
@@ -133,7 +133,7 @@ Label both ends of every conductor. A1 is hot, A2 and A3 are neutral despite all
 
 | Manufacturer termination | Published preparation / torque |
 |---|---|
-| WAGO 221-415 | Strip 11 mm; one accepted conductor per port, lever fully closed. Identify the factory-tinned blue ends before selecting preparation; do not add solder. |
+| WAGO 221-415 | Strip 11 mm; one accepted conductor per port, lever fully closed. Identify the factory-tinned pigtail ends before selecting preparation; do not add solder. |
 | LPSC0001Z | Selected 14 AWG Class C copper; terminal torque 2.0 N·m. Use the holder's strip gauge/instructions. |
 | Carling Q0 | Mounting screws 0.8–1.0 N·m; #10-32 terminal hardware 1.7–2.3 N·m. Check the received device's instructions. |
 | Leviton 5279-C | Strip 9/16 in (14.3 mm); terminal screws 10–14 in·lbf (1.13–1.58 N·m); do not tin conductors. |

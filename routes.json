@@ -1,5 +1,5 @@
 {
-  "revision": "Rev. 9 \u00b7 offline USB \u00b7 2026-09-20",
+  "revision": "Rev. 10 \u00b7 OEM kit leads \u00b7 2026-09-20",
   "anchors": {
     "IN.L": [
       571.9,
@@ -428,7 +428,7 @@
         1114.0,
         911.0
       ],
-      "description": "JV \u2192 blue A1 \u2192 full lead \u2192 L1 (HOT)",
+      "description": "JV \u2192 A1 \u2192 full lead \u2192 L1 (HOT)",
       "group": "voltage"
     },
     {
@@ -554,7 +554,7 @@
         1129.6,
         1106.0
       ],
-      "description": "JN \u2192 blue A2 \u2192 full lead \u2192 L2 (NEUTRAL)",
+      "description": "JN \u2192 A2 \u2192 full lead \u2192 L2 (NEUTRAL)",
       "group": "voltage"
     },
     {
@@ -608,7 +608,7 @@
         1145.2,
         1275.0
       ],
-      "description": "JN \u2192 blue A3 \u2192 full lead \u2192 N (NEUTRAL)",
+      "description": "JN \u2192 A3 \u2192 full lead \u2192 N (NEUTRAL)",
       "group": "voltage"
     },
     {
@@ -1114,7 +1114,7 @@
         854.0,
         996.8
       ],
-      "description": "Fv OUT \u2192 JV: 14 AWG transition before blue A1",
+      "description": "Fv OUT \u2192 JV: 14 AWG transition before A1",
       "group": "voltage"
     },
     {
