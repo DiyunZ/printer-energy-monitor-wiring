@@ -486,5 +486,107 @@
       "label": "DC coupling",
       "note": "External original P5 plug mated to 10-02228 female jack; 60 mm service envelope, not exact molded geometry."
     }
-  ]
+  ],
+  "installationHardware": {
+    "note": "Installation visualization only. Panel anchors, rail fixings and panel bond copy the machining source; carrier fastener centers are schematic, not drilling dimensions. Threads and small molded features are simplified.",
+    "source": "tools/cad/enclosure_model.py",
+    "cableMountsXZ": [
+      [
+        -150,
+        110
+      ],
+      [
+        -85,
+        105
+      ],
+      [
+        -80,
+        155
+      ],
+      [
+        -20,
+        155
+      ],
+      [
+        30,
+        120
+      ],
+      [
+        140,
+        112
+      ],
+      [
+        143,
+        -143
+      ],
+      [
+        42,
+        -150
+      ],
+      [
+        -77,
+        -155
+      ],
+      [
+        -83,
+        -100
+      ],
+      [
+        -155,
+        -18
+      ],
+      [
+        -40,
+        68
+      ]
+    ],
+    "railFixingsXZ": [
+      [
+        -95.0,
+        -28.0
+      ],
+      [
+        -15.0,
+        -28.0
+      ]
+    ],
+    "panelBondXZ": [
+      -125.0,
+      60.0
+    ],
+    "railBondXZ": [
+      -27,
+      -28
+    ],
+    "fuseCartridge": {
+      "diameter": 10.3,
+      "length": 38.1,
+      "position": [
+        -60,
+        42,
+        -28
+      ],
+      "source": "https://www.littelfuse.com/assetdocs/klkr-classcc-fuse-datasheet-final?assetguid=4443e5f6-97ee-4206-9abe-9e155371a03e"
+    },
+    "railStops": {
+      "size": [
+        6,
+        34,
+        55
+      ],
+      "positions": [
+        [
+          -72,
+          26.4,
+          -28
+        ],
+        [
+          -48,
+          26.4,
+          -28
+        ]
+      ],
+      "source": "https://cdn.automationdirect.com/static/specs/screwlessdinnectors.pdf"
+    }
+  }
 }

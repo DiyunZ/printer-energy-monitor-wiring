@@ -195,6 +195,9 @@ def make_diagram():
     text(48,124,'Body footprints use the 3D X/Z coordinates. Terminal symbols are spaced for clarity; wires use straight routes.',19,color='#63768a')
     footprint('case','#edf1f4','#9dabb8',20)
     footprint('panel','#fafbfc','#b6c3cb',3)
+    for i,(x,z) in enumerate(DIMENSIONS['installationHardware']['cableMountsXZ']):
+        px,py=project((x-5.4,z-12))
+        rect(px,py,10.8*SCALE,16*SCALE,'#edf0ea','#c3ccc4',2,extra=f'class="installation-detail" data-anchor="{i+1}"')
     text(1240,414,'REAR · PRINTER EXIT',19,'#63768a',600,'middle')
     text(1040,1490,'FRONT · Q0 HANDLE',19,'#63768a',600,'middle')
     # Existing molded cord ends and their entries, retained in the same locations as 3D.
@@ -210,6 +213,10 @@ def make_diagram():
     callout('usb-entry','USB exit',1600,1410,'right')
     footprint('rail','#dce2e4','#9ba8b0',2)
     for dz in [-14,14]: line([project(position('rail',-50,dz)),project(position('rail',50,dz))],'#adb8be',2)
+    stops=DIMENSIONS['installationHardware']['railStops']
+    for x,_,z in stops['positions']:
+        px,py=project((x-stops['size'][0]/2,z-stops['size'][2]/2))
+        rect(px,py,stops['size'][0]*SCALE,stops['size'][2]*SCALE,'#c8cecb','#9ba8a4',1,extra='class="installation-detail"')
     slack=BODIES['lead-slack']; sx,sy=project(position('lead-slack'))
     add(f'<ellipse cx="{sx}" cy="{sy}" rx="{slack["size"][0]*SCALE/2}" ry="{slack["size"][2]*SCALE/2}" fill="#eef2f6" stroke="#acb8c2" stroke-dasharray="6 6"/>')
     for part in ['JL','JN','PE','PE+','JV']:
@@ -315,7 +322,7 @@ def main():
             anchor='<a data-link-kind="'+E(link['kind'])+'" href="'+E(link['url'])+'">'+E(link['label'])+' ↗</a>'
             (reference_links if link['kind']=='reference' else purchase_links).append(anchor)
         details='<details class="material-details"><summary>Specifications</summary><p>'+E(p['reason'])+'</p>'+''.join(reference_links)+'</details>'
-        material_rows.append('<tr id="material-'+E(p['id'])+'" data-availability="'+E(p['availability'])+'"><td data-label="Inventory"><span class="inventory-badge '+p['availability']+'">'+badge+'</span></td><td data-label="Material"><span class="material-name">'+E(p['item'])+'</span>'+material_photo(p)+'</td><td data-label="Quantity needed">'+E(p['quantity'])+'</td><td data-label="Part / details"><strong>'+E(p['model'])+'</strong><small class="material-note">'+E(p['status'])+'</small>'+details+'</td><td class="material-links" data-label="Purchase">'+(''.join(purchase_links) if purchase_links else '<span class="reuse-note">Reuse</span>')+'</td></tr>')
+        material_rows.append('<tr id="material-'+E(p['id'])+'" data-availability="'+E(p['availability'])+'"><td data-label="Inventory"><span class="inventory-badge '+p['availability']+'">'+badge+'</span></td><td data-label="Material"><span class="material-name">'+E(p['item'])+'</span>'+material_photo(p)+'<a class="locate-material" data-material="'+E(p['id'])+'" href="?material='+E(p['id'])+'#layout" aria-label="View '+E(p['item'])+' in 3D">View in 3D ↑</a></td><td data-label="Quantity needed">'+E(p['quantity'])+'</td><td data-label="Part / details"><strong>'+E(p['model'])+'</strong><small class="material-note">'+E(p['status'])+'</small>'+details+'</td><td class="material-links" data-label="Purchase">'+(''.join(purchase_links) if purchase_links else '<span class="reuse-note">Reuse</span>')+'</td></tr>')
     counts={'all':len(materials['items']),**{state:sum(p['availability']==state for p in materials['items']) for state in ['owned','buy']}}
     filters=''.join('<button type="button" data-inventory="'+state+'" aria-pressed="'+('true' if state=='all' else 'false')+'"'+(' class="active"' if state=='all' else '')+'>'+label+' · '+str(counts[state])+'</button>' for state,label in [('all','All'),('owned','✓ Owned'),('buy','□ To buy')])
     setup=''.join('<li><strong>'+E(r['item'])+' · '+E(r['action'])+'</strong><br>'+E(r['reason'])+(' <a href="'+E(r['url'])+'">DENT download ↗</a>' if r.get('url') else '')+'</li>' for r in materials['setup_requirements'])
