@@ -5,7 +5,7 @@ import json
 from draw_external import draw_external
 
 OUT = Path(__file__).resolve().parent
-REV = 'Rev. 10 · OEM kit leads · 2026-09-20'
+REV = 'Rev. 11 · upstream protection review · 2026-09-20'
 C = {'L':'#202d3a','N':'#65758a','PE':'#18814a','CT':'#8544a5','USB':'#23739d','DC':'#aa621e','V':'#1567c1'}
 # Shared physical placement. The SVG is an X/Z projection of the same millimetre
 # coordinates consumed by layout3d.js. Electrical port symbols are spaced for clarity.
@@ -29,21 +29,18 @@ M = {
  'Q0.IN':position('q0',-5,-BODIES['q0']['size'][2]/2-BODIES['q0']['studProjection']),
  'Q0.OUT':position('q0',5,-BODIES['q0']['size'][2]/2-BODIES['q0']['studProjection']),
  'OUT.L':position('printer-entry',0,-18.5), 'OUT.N':position('printer-entry',-4,-18.5), 'OUT.PE':position('printer-entry',-8,-18.5),
- 'Fv.IN':position('fuse',0,-BODIES['fuse']['size'][2]/2), 'Fv.OUT':position('fuse',0,BODIES['fuse']['size'][2]/2),
  'D.L1':position('meter',23,-113), 'D.L2':position('meter',8,-113), 'D.N':position('meter',-23,-113),
  'D.+':position('meter',34.5,-93), 'D.-':position('meter',34.5,-75), 'D.USB':position('meter',16,118),
  'D.DC+':position('meter',-17,118), 'D.DC-':position('meter',-10,118),
  'CT.+':position('ct',-8,BODIES['ct']['size'][2]/2), 'CT.-':position('ct',8,BODIES['ct']['size'][2]/2),
- 'PLATE':(-125,60), 'RAIL':position('rail',28), 'JV.1':pin('JV',1), 'JV.2':pin('JV',2),
- 'JPE.B1':pin('PE',5), 'JPE.B2':pin('PE+',5),
+ 'PLATE':(-125,60),
  'AUX.L':position('outlet',-5,-10), 'AUX.N':position('outlet',-5), 'AUX.PE':position('outlet',-7,16),
  'AUX.FACE.L':position('outlet',22,-6.35), 'AUX.FACE.N':position('outlet',22,6.35),
  'PSU.L':position('adapter',0,-6.35), 'PSU.N':position('adapter',0,6.35),
  'PSU.DC+':position('adapter',21,12), 'PSU.DC-':position('adapter',21,18), 'PC':(280,180),
  **{f'JL.{i}':pin('JL',i) for i in range(1,5)},
  **{f'JN.{i}':pin('JN',i) for i in range(1,6)},
- **{f'JPE.{i}':pin('PE',i) for i in range(1,3)},
- **{f'JPE.{i+2}':pin('PE+',i) for i in range(1,5)},
+ **{f'JPE.{i}':pin('PE',i) for i in range(1,5)},
 }
 A = {name:project(point) for name,point in M.items()}
 # 16: temporary offline USB; 20–23: factory plug/cable paths; other paths are installed.
@@ -52,28 +49,24 @@ raw = [
  ('01','L','IN.L','Q0.IN',[(-137,116),(-137,144),(-117,144)],(-137,130),'Input hot → Q0 IN','main'),
  ('02','L','Q0.OUT','JL.1',[(-100,M['Q0.OUT'][1]),(-100,148),(-154,148),(-154,-103),(-136.6,-103)],(-154,88),'Q0 OUT → hot distribution JL','main'),
  ('03','L','JL.2','OUT.L',[(-115,-118.85),(-115,-123),(-12,-123),(-12,-175),(0,-175)],(-25,-123),'JL → printer hot; one pass through CT','main'),
- ('04','L','JL.3','Fv.IN',[(-125,-104),(-83,-104),(-83,-78),(-60,-78)],(-83,-89),'JL → Fv voltage-tap fuse','voltage'),
- ('05','V','JV.2','D.L1',[(-33.8,58),(-33,58),(-33,165),(40,165),(40,-156),(114,-156)],(40,-15),'JV → A1 → full lead → L1 (HOT)','voltage'),
+ ('05','V','JL.3','D.L1',[(-125,-104),(-83,-104),(-83,32),(-33,32),(-33,165),(40,165),(40,-156),(114,-156)],(40,-15),'JL → A1 → full lead → L1 (HOT); upstream protection review required','voltage'),
  ('06','N','IN.N','JN.1',[(-170,128),(-170,-33),(-136.6,-33)],(-170,-12),'Input neutral → neutral distribution JN','neutral'),
  ('07','N','JN.2','OUT.N',[(-130.8,-36),(-148,-36),(-148,-176),(-4,-176)],(-148,-80),'JN → printer neutral; outside CT','neutral'),
  ('08','V','JN.3','D.L2',[(-125,-10),(-97,-10),(-97,38),(-24,38),(-24,159),(46,159),(46,-149),(99,-149)],(46,60),'JN → A2 → full lead → L2 (NEUTRAL)','voltage'),
  ('09','V','JN.4','D.N',[(-119.2,-17),(-91,-17),(-91,44),(-15,44),(-15,153),(52,153),(52,-142),(68,-142)],(52,125),'JN → A3 → full lead → N (NEUTRAL)','voltage'),
  ('10','PE','IN.PE','JPE.1',[(-145,140),(-145,35),(-136.6,35)],(-145,78),'Input PE → protective-earth distribution','earth'),
  ('11','PE','JPE.2','OUT.PE',[(-130.8,43),(-161,43),(-161,-185),(-8,-185)],(-161,-143),'PE → printer ground; outside CT','earth'),
- ('12','PE','JPE.3','PLATE',[(-86.6,77),(-125,77)],(-125,69),'PE → dedicated metal-plate bond','earth'),
- ('13','PE','JPE.4','RAIL',[(-80.8,85),(-18,85),(-18,-28)],(-18,15),'PE → dedicated metal-rail bond','earth'),
+ ('12','PE','JPE.3','PLATE',[],(-125,49),'PE → dedicated metal-plate bond','earth'),
  ('14','CT','CT.+','D.+',[(-63,-102),(134,-102),(134,-101)],(35,-102),'CT white (+) → current-input CH1 +','signal'),
  ('15','CT','CT.-','D.-',[(-47,-95),(142,-95),(142,-83)],(16,-95),'CT black (−) → current-input CH1 −','signal'),
  ('16','USB','D.USB','PC',[(140,110),(140,180),(280,180)],(235,180),'Temporary USB → ELOG; open lid, mains unplugged','signal'),
  ('17','L','JL.4','AUX.L',[(-119.2,-163),(150,-163),(150,3)],(150,-128),'JL → AUX receptacle hot; before CT','aux'),
  ('18','N','JN.5','AUX.N',[(-105,-48.85),(-105,-154),(157,-154),(157,13)],(157,-50),'JN → AUX receptacle neutral','aux'),
- ('19','PE','JPE.5','AUX.PE',[(-75,93),(137,93),(137,38),(M['AUX.PE'][0],38)],(115,93),'PE → XA ground contact','earth'),
+ ('19','PE','JPE.4','AUX.PE',[(-119.2,93),(137,93),(137,38),(M['AUX.PE'][0],38)],(115,93),'PE → XA ground contact','earth'),
  ('20','L','AUX.FACE.L','PSU.L',[],(207,6.65),'Existing adapter AC blade: hot contact','aux'),
  ('21','N','AUX.FACE.N','PSU.N',[],(207,19.35),'Existing adapter AC blade: neutral contact','aux'),
  ('22','DC','PSU.DC+','D.DC+',[(254,25),(254,106),(150,106),(150,118),(74,118)],(254,72),'Original adapter → external DC coupling → round extension: center-positive path','aux'),
  ('23','DC','PSU.DC-','D.DC-',[(246,31),(246,111),(154,111),(154,125),(81,125)],(246,86),'Original adapter → external DC coupling → round extension: sleeve-negative path','aux'),
- ('24','L','Fv.OUT','JV.1',[(-60,22),(-39.6,22)],(-60,18),'Fv OUT → JV: 14 AWG transition before A1','voltage'),
- ('25','PE','JPE.B1','JPE.B2',[(-113.4,33),(-63.4,33)],(-106,33),'PE port 5 → PE+ port 5: required green bridge','earth'),
 ]
 wires = [dict(id=n,kind=k,start=a,end=b,points=[A[a],*[project(p) for p in m],A[b]],badge=project(lab),description=d,group=g) for n,k,a,b,m,lab,d,g in raw]
 CT_WINDOW = (*project(position('ct',-BODIES['ct']['size'][0]/2,-3)), *project(position('ct',BODIES['ct']['size'][0]/2,3)))
@@ -82,9 +75,10 @@ def validate():
     """Check connectivity, breaker-open behavior and CT geometry."""
     breakers={name.split('.')[0] for name in A if name.startswith('Q')}
     assert breakers=={'Q0'}
-    assert [w['id'] for w in wires] == [f'{i:02}' for i in range(1,26)]
+    # Retain surviving IDs so existing connection references do not change.
+    assert [w['id'] for w in wires] == [f'{i:02}' for i in range(1,24) if i not in (4,13)]
     for w in wires:
-        if w['id'] in ['03','04','17']: assert w['start'].startswith('JL.'), 'Hot branches must start at JL after Q0, before CT'
+        if w['id'] in ['03','05','17']: assert w['start'].startswith('JL.'), 'Hot branches must start at JL after Q0, before CT'
     left,top,right,bottom = CT_WINDOW
     for w in wires:
         assert w['points'][0] == A[w['start']] and w['points'][-1] == A[w['end']]
@@ -96,20 +90,17 @@ def validate():
             v=p[0]==q[0] and left<p[0]<right and max(p[1],q[1])>top and min(p[1],q[1])<bottom
             if h or v: hits.append(w['id'])
     assert hits == ['03'], f'Only printer hot may cross the CT aperture: {hits}'
-    def graph(closed, fuse_closed=True):
+    def graph(closed):
         parent={x:x for x in A}
         def root(x):
             while parent[x] != x: x=parent[x]
             return x
         def join(x,y): parent[root(y)]=root(x)
         for w in wires: join(w['start'],w['end'])
-        for prefix in ['JL.','JN.','JV.']:
+        for prefix in ['JL.','JN.','JPE.']:
             nodes=[x for x in A if x.startswith(prefix)]
             for node in nodes[1:]: join(nodes[0],node)
-        for nodes in [('JPE.1','JPE.2','JPE.B1'),('JPE.3','JPE.4','JPE.5','JPE.6','JPE.B2')]:
-            for node in nodes[1:]: join(nodes[0],node)
         for x,y in [('AUX.L','AUX.FACE.L'),('AUX.N','AUX.FACE.N')]: join(x,y)
-        if fuse_closed: join('Fv.IN','Fv.OUT')
         if closed: join('Q0.IN','Q0.OUT')
         return root
     closed=graph(True)
@@ -121,14 +112,11 @@ def validate():
                 assert not on_segment, f'Wire {w["id"]} crosses an unrelated terminal dot: {name}'
     for node in ['OUT.L','D.L1','AUX.L','PSU.L']: assert closed(node)==closed('IN.L'), f'{node} must be supplied by hot through Q0'
     for node in ['OUT.N','D.L2','D.N','AUX.N','PSU.N']: assert closed(node)==closed('IN.N'), f'{node} must remain on neutral'
-    for node in ['OUT.PE','AUX.PE','PLATE','RAIL']: assert closed(node)==closed('IN.PE'), f'{node} must remain on protective earth'
+    for node in ['OUT.PE','AUX.PE','PLATE']: assert closed(node)==closed('IN.PE'), f'{node} must remain on protective earth'
     assert len({closed(n) for n in ['IN.L','IN.N','IN.PE','D.+','D.-','D.DC+','D.DC-','PC']})==8, 'Mains, PE, CT, DC and USB nets must remain separate'
     opened=graph(False)
     for node in ['OUT.L','D.L1','AUX.L','PSU.L']: assert opened(node)!=opened('IN.L')
-    for node in ['OUT.PE','AUX.PE','PLATE','RAIL']: assert opened(node)==opened('IN.PE')
-    fuse_open=graph(True,False)
-    assert fuse_open('D.L1')!=fuse_open('IN.L'), 'L1 sensing must not bypass Fv'
-    for node in ['OUT.L','AUX.L']: assert fuse_open(node)==fuse_open('IN.L'), 'Fv must protect only the voltage tap'
+    for node in ['OUT.PE','AUX.PE','PLATE']: assert opened(node)==opened('IN.PE')
     for i,w in enumerate(wires):
         for other in wires[i+1:]:
             for p,q in zip(w['points'],w['points'][1:]):
@@ -142,8 +130,8 @@ def validate():
         endpoints_and_orthogonal_routes=True,no_unrelated_terminal_dot_crossings=True,no_overlapping_wire_segments=True,only_printer_hot_through_CT=True,
         mains_neutral_PE_CT_DC_nets_separate=True,Q0_opens_all_downstream_hot_branches=True,
         PE_continuity_independent_of_Q0=True,aux_and_voltage_taps_before_CT=True,
-        Fv_opens_only_L1_sensing=True,PE_bridge_explicit=True,
-        lead_fuse_rating='KLKR.500T 0.5 A candidate; existing lead ratings and coordination required',
+        dedicated_voltage_fuse_installed=False,
+        voltage_lead_protection='Upstream Q0 only; suitability for original DENT leads requires electrical acceptance',
         physical_build_validated=False,protection_coordination_validated=False)
 
 parts=[]
@@ -199,25 +187,17 @@ def make_diagram():
     text(1710,1134,'DC joint',22,weight=600)
     at('supply-plug','Supply',-20,22)
     text(1140,180,'Printer',22,weight=600)
-    footprint('rail','#dce2e4','#9ba8b0',2)
-    for dz in [-14,14]: line([project(position('rail',-50,dz)),project(position('rail',50,dz))],'#adb8be',2)
-    stops=DIMENSIONS['installationHardware']['railStops']
-    for x,_,z in stops['positions']:
-        px,py=project((x-stops['size'][0]/2,z-stops['size'][2]/2))
-        rect(px,py,stops['size'][0]*SCALE,stops['size'][2]*SCALE,'#c8cecb','#9ba8a4',1,extra='class="installation-detail"')
     slack=BODIES['lead-slack']; sx,sy=project(position('lead-slack'))
     add(f'<ellipse cx="{sx}" cy="{sy}" rx="{slack["size"][0]*SCALE/2}" ry="{slack["size"][2]*SCALE/2}" fill="#eef2f6" stroke="#acb8c2" stroke-dasharray="6 6"/>')
-    for part in ['JL','JN','PE','PE+','JV']:
+    for part in ['JL','JN','PE']:
         footprint(part,'#edf0e9','#b6c1b4',4)
         x,z=position(part); bw,_,bd=BODIES['terminals']['size']
         px,py=project((x-bw/2,z-bd/2));rect(px,py,bw*SCALE,bd*SCALE,'#bfcaca','#7f9195',3)
         for i in range(5):
             px,py=project((x-13.75+i*5.8,z-6));rect(px,py,4.3*SCALE,12*SCALE,'#e58b3c','#bb6728',2)
-        at(part,part if part in ['JL','JN','JV'] else 'PE 1' if part=='PE' else 'PE 2',-14,22)
-    # Connection 25 is the physical bridge between the two PE connectors.
-    for part in ['JL','JN','PE','PE+','JV']:
-        line([project(pin(part,1)),project(pin(part,5))],C['L'] if part in ['JL','JV'] else C['N'] if part=='JN' else C['PE'],4)
-    footprint('fuse','#eee5cf','#a48b50',3);at('fuse','Fv',3,22)
+        at(part,part,-14,22)
+    for part in ['JL','JN','PE']:
+        line([project(pin(part,1)),project(pin(part,5))],C['L'] if part=='JL' else C['N'] if part=='JN' else C['PE'],4)
     footprint('ct','#e8e6da','#9d9d8d',6)
     l,t,r,b=CT_WINDOW;rect(l,t,r-l,b-t,'#fff','#979e9f',0)
     at('ct','CT1',-6,22);at('ct','LOAD →',11,18)
@@ -255,10 +235,10 @@ def make_diagram():
         p=BODIES[part];px,py=project(position(part,-4.4,8))
         rect(px,py,8.8*SCALE,26*SCALE,'#d1d0c4','#929385',3)
         add('</g>')
-    for prefix in ['JL.','JN.','JPE.','JV.']:
+    for prefix in ['JL.','JN.','JPE.']:
         for name,xy in A.items():
-            if name.startswith(prefix):circle(*xy,3.7,C['L'] if prefix in ['JL.','JV.'] else C['N'] if prefix=='JN.' else C['PE'],'#fff')
-    for name in ['PLATE','RAIL']:circle(*A[name],7,'#e9d69d','#9b7f40')
+            if name.startswith(prefix):circle(*xy,3.7,C['L'] if prefix=='JL.' else C['N'] if prefix=='JN.' else C['PE'],'#fff')
+    circle(*A['PLATE'],7,'#e9d69d','#9b7f40')
     add('<g style="paint-order:stroke;stroke:#fff;stroke-width:4;stroke-linejoin:round">')
     for name,label,dx,dy in [('D.N','N',0,-11),('D.L2','L2',0,-11),('D.L1','L1',0,-11),('D.+','CH1 +',12,-8),('D.-','CH1 −',12,17),('D.DC+','DC',0,-63),('D.USB','USB',0,-63)]:
         x,y=A[name];text(x+dx,y+dy,label,22,C['CT'] if 'CH1' in label else '#203346',600,'start' if 'CH1' in label else 'middle',extra=f'data-endpoint="{E(name)}"')

@@ -13,7 +13,7 @@ test('current nominal checks pass while unresolved release gates stay visible', 
   assert.equal(result.checks.filter(c => c.result === 'fail').length, 0);
   assert.ok(result.checks.some(c => c.id === 'Machined wall geometry' && c.result === 'pass'));
   assert.match(result.release, /NOT RELEASED/);
-  assert.equal(result.insertion_sweeps.length, 10);
+  assert.equal(result.insertion_sweeps.length, 6);
   assert.ok(result.insertion_sweeps.every(s => s.shell_triangle_hits === 0));
 });
 test('offline USB has no permanent wall fitting and is kit supplied', () => {

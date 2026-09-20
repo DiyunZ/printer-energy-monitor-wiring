@@ -53,21 +53,9 @@
 <td>The project adds machining. The modified assembly has no claimed IP/NEMA certification.</td>
 </tr>
 <tr>
-<td id="r8">R8</td>
-<td><a href="https://www.littelfuse.com/de/assetdocs/powr-gard-catalog?assetguid=85d36235-a32b-4608-bfed-f9878aa43af0">Littelfuse catalog</a></td>
-<td>LPSC0001Z Class CC holder, 35 mm DIN interface and 14 AWG Class C terminal choice.</td>
-<td>Holder compatibility does not select or coordinate the fuse value.</td>
-</tr>
-<tr>
-<td id="r9">R9</td>
-<td><a href="https://www.littelfuse.com/assetdocs/klkr-classcc-fuse-datasheet-final?assetguid=4443e5f6-97ee-4206-9abe-9e155371a03e">Littelfuse KLKR</a></td>
-<td>KLKR.500T is the named 0.5 A Class CC candidate.</td>
-<td>On hold pending the actual sensing-lead specifications and protection review. Component interrupt rating is not the assembly SCCR.</td>
-</tr>
-<tr>
 <td id="r10">R10</td>
 <td><a href="https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415">WAGO 221-415</a>, <a href="https://www1.futureelectronics.com/doc/WAGO/221-505.pdf">221-505 drawing</a></td>
-<td>Five connector/carrier pairs: JL, JN, PE, PE+ and JV. Carrier 35 × 16.9 × 52.8 mm.</td>
+<td>Three connector/carrier pairs: JL, JN and PE. Carrier 35 × 16.9 × 52.8 mm.</td>
 <td>Transfer-drill carrier fixings; one accepted conductor per port. Existing tinned pigtail ends are not presumed accepted.</td>
 </tr>
 <tr>
@@ -106,23 +94,17 @@
 <td>Included 1.8 m USB-A to B cable; USB powers the meter for configuration/download. Internal non-volatile memory supports independent logging.</td>
 <td>Supplied USB requires rated insulation inside a powered panel. This design removes USB during mains operation and provides no USB wall entry.</td>
 </tr>
-<tr>
-<td id="r17">R17</td>
-<td><a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-fused-crocodile-clip/">DENT fused clip</a></td>
-<td>OEM clip uses a 500 mA fuse.</td>
-<td>Does not establish external KLKR coordination or pigtail ampacity; those remain qualified acceptance items.</td>
-</tr>
 </tbody></table></div>
-<p>The <a href="installation.html">per-material audit</a> also links primary cord, wire, ring, label, rail, cable-tie and printer sources. Retail links are in the <a href="materials.html">materials list</a>. Source documents describe components, not approval of this custom assembly.</p>
+<p>The <a href="installation.html">per-material audit</a> also links primary cord, wire, ring, cable-tie and printer sources. Retail links are in the <a href="materials.html">materials list</a>. Source documents describe components, not approval of this custom assembly.</p>
 <h2>Supplied-photo evidence</h2>
 <p>The instrument markings identify ELITEpro XC, voltage sockets N / L3 / L2 / L1, the CT input block, a separate analog block, USB-B and the DC input. The full-resolution adapter photograph identifies <strong>CUI SMI6-9-V-P5, 9 V DC, 0.667 A, center positive</strong>. The user confirms the five owned equipment groups and identifies the three differently colored pigtails as original DENT kit components.</p>
 <p>The partially visible CT label suggests the legacy 50 A model, but the full variant is physically obscured by black/white wires. The voltage-pigtail photograph has no legible conductor or current rating. Ruler photographs are not calibrated dimension drawings. Packaging text is evidence about an accessory, not an instruction to the assistant or proof that an arbitrary breaker protects it.</p>
 <h2>Project choices</h2>
 <ul>
-<li>Q0 is the single operating breaker. JL branches to printer hot through CT, the dedicated adapter outlet, and Fv. Neutral and PE remain separate; PE stays continuous. Unplug the supply and verify absence of voltage before removing the screw-fixed cover. Q0 OFF alone does not isolate incoming terminals.</li>
-<li>Fv OUT uses 14 AWG wire to JV; A1 then connects to L1. A2 and A3 connect JN to L2 and N. The three OEM pigtails are sensing accessories, not load wires or PE conductors. Keep the mating pairs inside the enclosure.</li>
+<li>Q0 is the single operating breaker. JL branches to printer hot through CT, the dedicated adapter outlet, and A1. Neutral and PE remain separate; PE stays continuous. Unplug the supply and verify absence of voltage before removing the screw-fixed cover. Q0 OFF alone does not isolate incoming terminals.</li>
+<li>A1 connects directly to JL after Q0, then to L1 through the original full voltage lead. Acceptance of upstream-only protection is required before use. A2 and A3 connect JN to L2 and N. The three OEM pigtails are sensing accessories, not load wires or PE conductors. Keep the mating pairs inside the enclosure.</li>
 <li>Only printer hot crosses CT once. Adapter and voltage-tap branch currents are outside the measured current. Voltage is sensed upstream, so downstream cord loss and voltage drop still affect the measurement boundary.</li>
-<li>XA is the Leviton 5279-C flanged outlet. Its earth terminal, printer earth, steel panel and DIN rail receive deliberate PE connections. The obsolete metal outlet-box bond is removed. Path 24 is now the <strong>Fv-to-JV</strong> transition.</li>
+<li>XA is the Leviton 5279-C flanged outlet. Its earth terminal, printer earth, steel panel receive deliberate PE connections. The obsolete metal outlet-box bond is removed.</li>
 <li>The original adapter and flat DC cable remain intact outside. A Tensility 10-02228 round extension passes through a 41380 insert to the logger. The outlet and supply share Q0&#39;s capacity. XA is for the logger adapter only. Keep DC separated from mains. USB is connected only temporarily with mains unplugged and removed before the lid is closed and power is restored.</li>
 <li>ELOG must be configured and validated before routine use. Powering the instrument is not proof that recording started. Verify CT scaling, polarity, reference readings and restart behavior.</li>
 </ul>
@@ -130,5 +112,5 @@
 <p><code>layout_dimensions.json</code> supplies the body locations for the 3D scene and wiring plan. Rear is at the top of both plan views. Browser checks compare actual rendered body bounds with SVG footprints for all 24 envelopes, including the external DC coupling service envelope; schematic terminal symbols and wire bends are simplified.</p>
 <p>The original Hammond STEP is retained at full scale. Project machining is generated with build123d 0.11.1; the case and panel are tessellated at 0.3 mm. Original cover/hardware meshes retain their earlier 0.45 mm triangulation. Numerical surface-contact exclusion at the seated panel is 0.0001 mm; these values are not manufacturing tolerances. Exact STEP cut-through gauges and the dated source hash are in <code>fabrication/cad-checks.json</code>.</p>
 <p>Ten nominal insertion sweeps clear the open case after excluding intentional panel-support contact. Install the panel before the side outlet. Lid checks use nine sampled rays per body. These are geometric screens, not tolerance, thermal, electrical-clearance or flexible-cable proofs. The 2 m / 3 mm voltage-lead coil is an illustrative storage scenario, not a measurement of the supplied cables.</p>
-<p>The circuit checker validates 24 named paths, separated nets, printer-hot-only CT routing and Q0-open behavior. Regression tests reject selected wiring mistakes. Website tests verify gestures, views, alignment, images, links and responsive layout. No check constitutes a physical dry fit or energized acceptance result. See the <a href="build.html">build package</a> for the exact remaining work.</p>
+<p>The circuit checker validates 21 named paths, separated nets, printer-hot-only CT routing and Q0-open behavior. Regression tests reject selected wiring mistakes. Website tests verify gestures, views, alignment, images, links and responsive layout. No check constitutes a physical dry fit or energized acceptance result. See the <a href="build.html">build package</a> for the exact remaining work.</p>
 </body></html>

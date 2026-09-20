@@ -26,7 +26,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  assert.equal(await page.locator('details[open]').count(),0,'Supporting details should be collapsed initially');
  assert.equal(await page.locator('#layout').isVisible(),true);
  assert.equal(await page.locator('#wiring').isVisible(),false);
- assert.equal(await page.locator('.materials tbody tr:visible').count(),23);
+ assert.equal(await page.locator('.materials tbody tr:visible').count(),19);
  assert.equal(await page.locator('#owned-materials').getAttribute('open'),null);
  assert.equal(await page.locator('#confirm .review-items li').count(),3);
  assert.equal(await page.locator('#assembly-preview').isVisible(),false);
@@ -73,7 +73,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   scale:Number(svg.dataset.layoutScale),origin:[Number(svg.dataset.layoutOriginX),Number(svg.dataset.layoutOriginY)],
   bodies:[...svg.querySelectorAll('.component-footprint')].map(e=>({id:e.dataset.layoutId,x:e.x.baseVal.value,y:e.y.baseVal.value,w:e.width.baseVal.value,h:e.height.baseVal.value}))
  }));
- assert.equal(plan.bodies.length,23,'Every placed body, including the external DC coupling, must appear in the wiring plan');
+ assert.equal(plan.bodies.length,19,'Every placed body, including the external DC coupling, must appear in the wiring plan');
  assert.deepEqual(plan.bodies.map(p=>p.id).sort(),Object.keys(initial.planBodies).sort());
  for(const p of plan.bodies){
   const actual=initial.planBodies[p.id],bounds=[actual.min[0],actual.min[2],actual.size[0],actual.size[2]];
@@ -171,8 +171,8 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  await page.locator('#model-more > summary').click();
  // Existing circuit controls remain functional.
  await page.locator('#tab-wiring').click();
- const ids=await page.locator('#main-stage .wire').evaluateAll(es=>[...new Set(es.map(e=>e.dataset.id))]);assert.equal(ids.length,25);
- const expected={all:null,main:['01','02','03'],voltage:['01','02','04','05','06','08','09','24'],neutral:['06','07','08','09','18','21'],earth:['10','11','12','13','19','25'],aux:['01','02','06','10','17','18','19','20','21','22','23','25'],signal:['14','15','16']};
+ const ids=await page.locator('#main-stage .wire').evaluateAll(es=>[...new Set(es.map(e=>e.dataset.id))]);assert.equal(ids.length,21);
+ const expected={all:null,main:['01','02','03'],voltage:['01','02','05','06','08','09'],neutral:['06','07','08','09','18','21'],earth:['10','11','12','19'],aux:['01','02','06','10','17','18','19','20','21','22','23'],signal:['14','15','16']};
  for(const [mode,want] of Object.entries(expected)){
   await page.locator(`[data-mode="${mode}"]`).click();
   const actual=await page.locator('#main-stage .wire:not(.muted)').evaluateAll(es=>[...new Set(es.map(e=>e.dataset.id))].sort());
@@ -180,7 +180,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  }
  await page.locator('#connections summary').click();
  for(const id of ids){await page.locator(`.trace[data-id="${id}"]`).click();assert.match(await page.locator('#status').textContent(),new RegExp('Connection '+id+' ·'));}
- await page.locator('#wire-25').focus();await page.keyboard.press('Enter');assert.match(await page.locator('#status').textContent(),/Connection 25/);
+ await page.locator('#wire-19').focus();await page.keyboard.press('Enter');assert.match(await page.locator('#status').textContent(),/Connection 19/);
  await page.locator('[data-mode="all"]').click();
  const wiringScale=Number(await page.locator('#main-stage').getAttribute('data-scale'));
  await page.locator('#zoom-in').click();assert.ok(close(Number(await page.locator('#main-stage').getAttribute('data-scale')),Math.min(2.5,wiringScale*1.25),.001));await page.locator('#zoom-reset').click();
@@ -273,7 +273,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
    for(const href of localLinks)assert.equal((await page.request.get(new URL(href,base).href)).status(),200,href);
   } else if(file==='protection.html') {
    const text=await page.locator('body').innerText();
-   assert.match(text,/Q0 and Fv are not fully released/);
+   assert.match(text,/Q0 and voltage-lead protection still need acceptance/);
    assert.match(text,/Room 0100/);
    assert.match(text,/draft, not sent/);
   } else {
@@ -298,7 +298,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   const render=await browser.newPage({viewport:{width:1800,height:1300},deviceScaleFactor:2});
   for(const name of ['wiring_routes','connector_detail']){await render.goto(new URL(name+'.svg',base).href);await render.locator('svg').screenshot({path:path.join(root,name+'.png')});}
  }
- const report={date:new Date().toISOString(),base,connections:25,circuitGroups:7,alignedComponentFootprints:plan.bodies.length,planTo3DMaximumToleranceMm:.05,compareTopView:true,renderedMeterBody:initial.fitBodies.meter.size,primaryBodyOverlaps:false,mouseOrbit:true,wheelZoom:true,keyboardOrbit:true,picking:true,shellModes:4,pngExport:true,viewportWidths:[1440,768,390],pageOverflow:false,internalLinks:true,materialsRows:bom.items.length,materialImagesLoaded:bom.items.length,ownedGroups:ownedIds.length,kitGroups:1,purchaseGroups:bom.items.length-ownedIds.length-1,ownedGroupCollapsedByDefault:true,designTabs:true,buildDocumentHub:true,assemblyStages:6,panelInsertionSlider:true,progressiveDisclosure:true,criticalNoticesVisible:true,advancedControlsKeyboard:true,coilScenarioLengthMm:2000,jsErrors:errors,physicalBuildValidated:false};
+ const report={date:new Date().toISOString(),base,connections:21,circuitGroups:7,alignedComponentFootprints:plan.bodies.length,planTo3DMaximumToleranceMm:.05,compareTopView:true,renderedMeterBody:initial.fitBodies.meter.size,primaryBodyOverlaps:false,mouseOrbit:true,wheelZoom:true,keyboardOrbit:true,picking:true,shellModes:4,pngExport:true,viewportWidths:[1440,768,390],pageOverflow:false,internalLinks:true,materialsRows:bom.items.length,materialImagesLoaded:bom.items.length,ownedGroups:ownedIds.length,kitGroups:1,purchaseGroups:bom.items.length-ownedIds.length-1,ownedGroupCollapsedByDefault:true,designTabs:true,buildDocumentHub:true,assemblyStages:6,panelInsertionSlider:true,progressiveDisclosure:true,criticalNoticesVisible:true,advancedControlsKeyboard:true,coilScenarioLengthMm:2000,jsErrors:errors,physicalBuildValidated:false};
  if(out)fs.writeFileSync(path.join(out,'browser-validation.json'),JSON.stringify(report,null,2)+'\n');
  console.log(JSON.stringify(report,null,2));
  }finally{await browser.close();}

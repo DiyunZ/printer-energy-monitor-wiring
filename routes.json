@@ -1,5 +1,5 @@
 {
-  "revision": "Rev. 10 \u00b7 OEM kit leads \u00b7 2026-09-20",
+  "revision": "Rev. 11 \u00b7 upstream protection review \u00b7 2026-09-20",
   "anchors": {
     "IN.L": [
       571.9,
@@ -32,14 +32,6 @@
     "OUT.PE": [
       989.2,
       348.1
-    ],
-    "Fv.IN": [
-      854.0,
-      775.15
-    ],
-    "Fv.OUT": [
-      854.0,
-      979.25
     ],
     "D.L1": [
       1306.4,
@@ -84,26 +76,6 @@
     "PLATE": [
       685.0,
       1106.0
-    ],
-    "RAIL": [
-      939.8,
-      877.2
-    ],
-    "JV.1": [
-      907.04,
-      1046.59
-    ],
-    "JV.2": [
-      922.12,
-      1046.59
-    ],
-    "JPE.B1": [
-      715.16,
-      1017.99
-    ],
-    "JPE.B2": [
-      845.16,
-      1108.99
     ],
     "AUX.L": [
       1419.864,
@@ -190,20 +162,12 @@
       1017.99
     ],
     "JPE.3": [
-      784.84,
-      1108.99
+      685.0,
+      1017.99
     ],
     "JPE.4": [
-      799.92,
-      1108.99
-    ],
-    "JPE.5": [
-      815.0,
-      1108.99
-    ],
-    "JPE.6": [
-      830.08,
-      1108.99
+      700.08,
+      1017.99
     ]
   },
   "projection": {
@@ -348,10 +312,10 @@
       "group": "main"
     },
     {
-      "id": "04",
-      "kind": "L",
+      "id": "05",
+      "kind": "V",
       "start": "JL.3",
-      "end": "Fv.IN",
+      "end": "D.L1",
       "points": [
         [
           685.0,
@@ -367,41 +331,11 @@
         ],
         [
           794.2,
-          747.2
-        ],
-        [
-          854.0,
-          747.2
-        ],
-        [
-          854.0,
-          775.15
-        ]
-      ],
-      "badge": [
-        794.2,
-        718.6
-      ],
-      "description": "JL \u2192 Fv voltage-tap fuse",
-      "group": "voltage"
-    },
-    {
-      "id": "05",
-      "kind": "V",
-      "start": "JV.2",
-      "end": "D.L1",
-      "points": [
-        [
-          922.12,
-          1046.59
-        ],
-        [
-          922.12,
-          1100.8
+          1033.2
         ],
         [
           924.2,
-          1100.8
+          1033.2
         ],
         [
           924.2,
@@ -428,7 +362,7 @@
         1114.0,
         911.0
       ],
-      "description": "JV \u2192 A1 \u2192 full lead \u2192 L1 (HOT)",
+      "description": "JL \u2192 A1 \u2192 full lead \u2192 L1 (HOT); upstream protection review required",
       "group": "voltage"
     },
     {
@@ -690,16 +624,8 @@
       "end": "PLATE",
       "points": [
         [
-          784.84,
-          1108.99
-        ],
-        [
-          784.84,
-          1150.2
-        ],
-        [
           685.0,
-          1150.2
+          1017.99
         ],
         [
           685.0,
@@ -708,43 +634,9 @@
       ],
       "badge": [
         685.0,
-        1129.4
+        1077.4
       ],
       "description": "PE \u2192 dedicated metal-plate bond",
-      "group": "earth"
-    },
-    {
-      "id": "13",
-      "kind": "PE",
-      "start": "JPE.4",
-      "end": "RAIL",
-      "points": [
-        [
-          799.92,
-          1108.99
-        ],
-        [
-          799.92,
-          1171.0
-        ],
-        [
-          963.2,
-          1171.0
-        ],
-        [
-          963.2,
-          877.2
-        ],
-        [
-          939.8,
-          877.2
-        ]
-      ],
-      "badge": [
-        963.2,
-        989.0
-      ],
-      "description": "PE \u2192 dedicated metal-rail bond",
       "group": "earth"
     },
     {
@@ -924,15 +816,15 @@
     {
       "id": "19",
       "kind": "PE",
-      "start": "JPE.5",
+      "start": "JPE.4",
       "end": "AUX.PE",
       "points": [
         [
-          815.0,
-          1108.99
+          700.08,
+          1017.99
         ],
         [
-          815.0,
+          700.08,
           1191.8
         ],
         [
@@ -1086,66 +978,6 @@
       ],
       "description": "Original adapter \u2192 external DC coupling \u2192 round extension: sleeve-negative path",
       "group": "aux"
-    },
-    {
-      "id": "24",
-      "kind": "L",
-      "start": "Fv.OUT",
-      "end": "JV.1",
-      "points": [
-        [
-          854.0,
-          979.25
-        ],
-        [
-          854.0,
-          1007.2
-        ],
-        [
-          907.04,
-          1007.2
-        ],
-        [
-          907.04,
-          1046.59
-        ]
-      ],
-      "badge": [
-        854.0,
-        996.8
-      ],
-      "description": "Fv OUT \u2192 JV: 14 AWG transition before A1",
-      "group": "voltage"
-    },
-    {
-      "id": "25",
-      "kind": "PE",
-      "start": "JPE.B1",
-      "end": "JPE.B2",
-      "points": [
-        [
-          715.16,
-          1017.99
-        ],
-        [
-          715.16,
-          1035.8
-        ],
-        [
-          845.16,
-          1035.8
-        ],
-        [
-          845.16,
-          1108.99
-        ]
-      ],
-      "badge": [
-        734.4,
-        1035.8
-      ],
-      "description": "PE port 5 \u2192 PE+ port 5: required green bridge",
-      "group": "earth"
     }
   ]
 }

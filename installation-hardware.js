@@ -1,9 +1,9 @@
 import * as THREE from 'three';
-import { fitSupport, auditSupport } from './cable-supports.js?v=15';
+import { fitSupport, auditSupport } from './cable-supports.js?v=19';
 
 // Secondary hardware is an installation illustration, not a machining template.
-// Panel/rail datums come from the same schedule as the existing CAD openings.
-export function addInstallationHardware({ dimensions, instances, parts, allMeshes, box, cylinder, mesh, material, decal, mark, capture, materialLocations, cableRoutes }) {
+// Panel datums come from the same schedule as the existing CAD openings.
+export function addInstallationHardware({ dimensions, instances, parts, box, cylinder, mesh, material, decal, mark, capture, materialLocations, cableRoutes }) {
   const h = dimensions.installationHardware;
   function annulus(outer, inner, depth, position, color, part, axis = 'y', sides=0) {
     const shape = new THREE.Shape();
@@ -14,16 +14,6 @@ export function addInstallationHardware({ dimensions, instances, parts, allMeshe
     if(axis==='y')geo.rotateX(-Math.PI/2); if(axis==='x')geo.rotateY(Math.PI/2);
     return mesh(geo,material(color,.45),position,part);
   }
-  const holder = allMeshes.filter(m => m.userData.part === 'fuse' && !m.userData.materialId);
-  const f = h.fuseCartridge;
-  capture('fuse','cartridge','Inside Fv holder',()=>{
-    cylinder(f.diameter/2,f.length-12,f.position,'#f0e7ce','fuse','z');
-    for(const sign of [-1,1]) cylinder(f.diameter/2,6,[f.position[0],f.position[1],f.position[2]+sign*(f.length/2-3)],'#b5b7ac','fuse','z');
-  },holder);
-  h.railStops.positions.forEach((pos,i)=>capture('din-stops',String(i),`${i ? 'Right' : 'Left'} of Fv`,()=>{
-    box(h.railStops.size,pos,'#a9afac','rail',.6);
-    cylinder(2,2,[pos[0],pos[1]+18,pos[2]],'#747f82','rail');
-  }));
   for(const id of ['dc-entry']) {
     const p=instances[id], shape=new THREE.Shape();
     shape.moveTo(-10.5,-10.5);shape.lineTo(10.5,-10.5);shape.lineTo(10.5,10.5);shape.lineTo(-10.5,10.5);shape.closePath();
@@ -48,7 +38,6 @@ export function addInstallationHardware({ dimensions, instances, parts, allMeshe
   dimensions.instances.filter(p=>p.part==='terminals').forEach(p=>{
     for(const x of [-10,10]) fixing(`${p.id}-${x}`,`${p.id} carrier fixing ${x<0?1:2}`,[p.position[0]+x,6.3,p.position[2]+17],'terminals',3,'y',16);
   });
-  h.railFixingsXZ.forEach(([x,z],i)=>fixing(`rail-${i}`,`DIN rail fixing ${i+1}`,[x,3.9,z],'rail'));
   const supportChecks=[];
   h.cableSupports.forEach((support,i)=>{
     const [x,z]=support.holeXZ, alongX=support.axis==='x';
@@ -90,21 +79,18 @@ export function addInstallationHardware({ dimensions, instances, parts, allMeshe
   const lugPlaces=[
     ['q0-in','Q0 input stud',[q.position[0],q.position[1]+q.terminalPitch/2,terminalZ+8],'q0','z'],
     ['q0-out','Q0 output stud',[q.position[0],q.position[1]-q.terminalPitch/2,terminalZ+8],'q0','z'],
-    ['panel-pe','Panel PE bond',[h.panelBondXZ[0],6.4,h.panelBondXZ[1]],'panel','y'],
-    ['rail-pe','DIN rail PE bond',[h.railBondXZ[0],7.9,h.railBondXZ[1]],'rail','y']
+    ['panel-pe','Panel PE bond',[h.panelBondXZ[0],6.4,h.panelBondXZ[1]],'panel','y']
   ];
   for(const [key,label,[x,y,z],part,axis] of lugPlaces) {
     capture('ring-lugs',key,label,()=>{
       annulus(5.7,2.65,1,[x,y,z],'#b6b6a6',part,axis);
-      const angle=key==='rail-pe'?Math.PI/4:0,dx=Math.sin(angle),dz=Math.cos(angle);
-      const sleeve=axis==='y'?[x+11*dx,y+1,z+11*dz]:[x,y-11,z];
-      const neck=box(axis==='y'?[4,1,8]:[4,8,1],axis==='y'?[x+6*dx,y,z+6*dz]:[x,y-6,z],'#babbb0',part);
-      const barrel=annulus(3,1.9,9,sleeve,'#3387bf',part,axis==='y'?'z':'y');
-      neck.rotation.y=angle;barrel.rotation.y=angle;
+      const sleeve=axis==='y'?[x,y+1,z+11]:[x,y-11,z];
+      box(axis==='y'?[4,1,8]:[4,8,1],axis==='y'?[x,y,z+6]:[x,y-6,z],'#babbb0',part);
+      annulus(3,1.9,9,sleeve,'#3387bf',part,axis==='y'?'z':'y');
     });
     if(key.endsWith('pe'))capture('fasteners',key,label+' hardware',()=>{
-      // Both dedicated studs start beneath the panel; the rail stud also passes
-      // through the rail web. Thread and tooth details remain simplified.
+      // The dedicated PE stud starts beneath the panel. Thread and tooth details
+      // remain simplified.
       cylinder(2.413,19.05,[x,8.725,z],'#8c969a',part);
       cylinder(4.6,3.2,[x,-2.4,z],'#89979c',part,'y',null,24);
       annulus(5.3,2.65,.8,[x,-.4,z],'#acb5b7',part);

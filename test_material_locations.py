@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parent
 
 
 class InstallationDatums(unittest.TestCase):
-    def test_panel_and_rail_datums_match_machining_source(self):
+    def test_panel_datums_match_machining_source(self):
         source = ast.parse((ROOT / 'tools/cad/enclosure_model.py').read_text())
         constants = {}
         for node in source.body:
@@ -21,8 +21,6 @@ class InstallationDatums(unittest.TestCase):
         self.assertEqual(hardware['cableMountsXZ'], [s['holeXZ'] for s in hardware['cableSupports']])
         self.assertEqual(len(hardware['cableSupports']), 6)
         for modeled, machined in [('cableMountsXZ', 'anchor_holes_xz_mm'),
-                                   ('railFixingsXZ', 'rail_holes_xz_mm'),
-                                   ('railBondXZ', 'rail_bond_xz_mm'),
                                    ('panelBondXZ', 'panel_bond_xz_mm')]:
             # JSON normalizes CAD tuples to arrays, retaining every coordinate.
             self.assertEqual(hardware[modeled], json.loads(json.dumps(constants[machined])), modeled)

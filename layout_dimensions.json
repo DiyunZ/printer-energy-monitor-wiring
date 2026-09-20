@@ -1,6 +1,6 @@
 {
   "units": "mm",
-  "revision": "Build package A · offline USB · 2026-09-20",
+  "revision": "Build package A · upstream protection review · 2026-09-20",
   "coordinates": "X across the panel; Y above the panel underside; Z along the panel, negative toward the printer exit (rear), positive toward Q0 (front). One scene unit is one millimetre. The wiring plan projects the same X/Z positions with rear at the top. Dimensions below are X × Y × Z unless noted.",
   "parts": [
     {
@@ -87,23 +87,6 @@
       "studProjection": 15.87
     },
     {
-      "id": "fuse",
-      "name": "Fv · Littelfuse LPSC0001Z",
-      "size": [
-        17.78,
-        61,
-        78.5
-      ],
-      "position": [
-        -60,
-        39.9,
-        -28
-      ],
-      "status": "Manufacturer maximum envelope",
-      "source": "https://www.littelfuse.com/de/assetdocs/powr-gard-catalog?assetguid=85d36235-a32b-4608-bfed-f9878aa43af0",
-      "note": "Non-indicating Class CC holder, 600 V AC/DC, 35 mm DIN rail. Catalog maximum 17.78 × 61 × 78.5 mm. Use 14 AWG Class C copper at both terminals (2.0 N·m); output runs to JV before the smaller OEM voltage pigtail. KLKR.500T (0.5 A) is a specific protection candidate, pending acceptance of LD-SKTSP series termination and protection coordination. Reserve 120 mm above the holder for opening and replacement; actual door sweep to verify on receipt."
-    },
-    {
       "id": "terminals",
       "name": "JL / JN / JPE distribution",
       "size": [
@@ -113,7 +96,7 @@
       ],
       "status": "Manufacturer connector and carrier dimensions",
       "source": "https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415",
-      "note": "Five WAGO 221-415 connectors in five 221-505 carriers: JL, JN, two bridged PE groups and JV (fuse-to-pigtail transition). Each carrier uses two M3 fasteners, lateral 20 mm spacing, at the front foot. Insert one conductor per port; strip 11 mm. OEM voltage pigtail factory-tinned tips need a terminal-compatible preparation; OEM kit identity is confirmed by the user."
+      "note": "Three WAGO 221-415 connectors in three 221-505 carriers: JL, JN and PE. Each carrier uses two M3 fasteners, lateral 20 mm spacing, at the front foot. Insert one conductor per port; strip 11 mm. A1 connects at JL downstream of Q0; acceptance of the original DENT lead termination and upstream-only protection is required before use."
     },
     {
       "id": "outlet",
@@ -148,23 +131,6 @@
       "status": "Photo-identified; manufacturer body dimensions",
       "source": "https://www.belfuse.com/media/datasheets/products/power-supplies/SMI6.pdf",
       "note": "Original label identifies CUI SMI6-9-V-P5: 9 V DC, 0.667 A, center positive; compatible with the meter’s 6–10 V / 500 mA input. Official SMI6 drawing: 64 × 40.5 × 30 mm ±1 mm, excluding blades; P5 plug 5.5/2.1 × 9.5 mm. Keep its flat UL2468 cord outside the enclosure and mate it to the specified round DC extension. Keep the external cord and coupling supported, with no pull on the adapter blades."
-    },
-    {
-      "id": "rail",
-      "name": "Short DIN rail · Fv only",
-      "size": [
-        100,
-        7.5,
-        35
-      ],
-      "position": [
-        -55,
-        5.65,
-        -28
-      ],
-      "status": "Standard profile; proposed cut length",
-      "source": null,
-      "note": "DINnector DN-R35S1-2 cut to 100 mm, deburred. Two end stops. Drill two rail/backpanel fixing holes at X=-95 and -15, Z=-28. A dedicated #10 bond hole at X=-27, Z=-28 is transfer-drilled in the rail web only. Separate panel/rail PE hardware is specified in the fastener schedule."
     },
     {
       "id": "entries",
@@ -253,22 +219,7 @@
         10.45,
         17
       ],
-      "label": "JPE · 1"
-    },
-    {
-      "id": "PE+",
-      "part": "terminals",
-      "size": [
-        35,
-        16.9,
-        52.8
-      ],
-      "position": [
-        -75,
-        10.45,
-        52
-      ],
-      "label": "JPE · 2"
+      "label": "JPE · EARTH"
     },
     {
       "id": "supply-entry",
@@ -427,21 +378,6 @@
       "radialSpacingMm": 4
     },
     {
-      "id": "JV",
-      "part": "terminals",
-      "size": [
-        35,
-        16.9,
-        52.8
-      ],
-      "position": [
-        -28,
-        10.45,
-        28
-      ],
-      "label": "JV · FUSED HOT"
-    },
-    {
       "id": "dc-coupling",
       "part": "adapter",
       "size": [
@@ -459,7 +395,7 @@
     }
   ],
   "installationHardware": {
-    "note": "Six support datums are shared with the machining source. Tie openings follow actual rendered cable cross-sections. TM2S8 outer size and PLT2S band width are catalog values; saddle/lock molding and 1 mm band thickness are illustrative. Carrier fastener centers remain transfer-drill references, not machining datums. The rail PE bolt passes through a dedicated hole in both the rail web and panel; both PE heads are beneath the panel.",
+    "note": "Six support datums and the panel PE bond are shared with the machining source. Tie openings follow actual rendered cable cross-sections. TM2S8 outer size and PLT2S band width are catalog values; saddle/lock molding and 1 mm band thickness are illustrative. Carrier fastener centers remain transfer-drill references. The dedicated panel PE bolt head is beneath the panel.",
     "source": "tools/cad/enclosure_model.py",
     "cableMountsXZ": [
       [
@@ -487,54 +423,10 @@
         158
       ]
     ],
-    "railFixingsXZ": [
-      [
-        -95.0,
-        -28.0
-      ],
-      [
-        -15.0,
-        -28.0
-      ]
-    ],
     "panelBondXZ": [
       -125.0,
       60.0
     ],
-    "railBondXZ": [
-      -27,
-      -28
-    ],
-    "fuseCartridge": {
-      "diameter": 10.3,
-      "length": 38.1,
-      "position": [
-        -60,
-        42,
-        -28
-      ],
-      "source": "https://www.littelfuse.com/assetdocs/klkr-classcc-fuse-datasheet-final?assetguid=4443e5f6-97ee-4206-9abe-9e155371a03e"
-    },
-    "railStops": {
-      "size": [
-        6,
-        34,
-        55
-      ],
-      "positions": [
-        [
-          -72,
-          26.4,
-          -28
-        ],
-        [
-          -48,
-          26.4,
-          -28
-        ]
-      ],
-      "source": "https://cdn.automationdirect.com/static/specs/screwlessdinnectors.pdf"
-    },
     "cableSupports": [
       {
         "id": "mains",

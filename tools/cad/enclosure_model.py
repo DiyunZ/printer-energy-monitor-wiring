@@ -40,9 +40,7 @@ xa_yz_mm = (121.0, 13.0)
 supply_yz_mm = (43.0, 128.0)
 printer_xy_mm = (0.0, 36.0)
 dc_yz_mm = (78.0, 106.0)
-rail_holes_xz_mm = [(-95.0, -28.0), (-15.0, -28.0)]
 panel_bond_xz_mm = (-125.0, 60.0)
-rail_bond_xz_mm = (-27.0, -28.0)
 anchor_holes_xz_mm = [(-153,80),(8,-175),(38,-151),(-79,130),(9,130),(145,158)]
 strap_slots_xz_mm = [(50,-70),(132,-70),(50,50),(132,50)]
 strap_slot_mm = (21.0, 4.0)
@@ -94,12 +92,9 @@ def wall_features():
 
 def panel_features():
     p = Plane((0,0,0),x_dir=(1,0,0),z_dir=(0,-1,0))
-    result = [dict(id=f'Rail fixing {i+1}',plane=p,at=pt,diameter=m4_clear_d_mm)
-              for i,pt in enumerate(rail_holes_xz_mm)]
-    result += [dict(id=f'Tie anchor {i+1}',plane=p,at=pt,diameter=m4_clear_d_mm)
+    result = [dict(id=f'Tie anchor {i+1}',plane=p,at=pt,diameter=m4_clear_d_mm)
                for i,pt in enumerate(anchor_holes_xz_mm)]
     result += [dict(id='Panel PE bond',plane=p,at=panel_bond_xz_mm,diameter=bond_clear_d_mm)]
-    result += [dict(id='Rail PE through panel',plane=p,at=rail_bond_xz_mm,diameter=bond_clear_d_mm)]
     result += [dict(id=f'Strap slot {i+1}',plane=p,at=pt,slot=strap_slot_mm)
                for i,pt in enumerate(strap_slots_xz_mm)]
     return result
@@ -150,7 +145,8 @@ def checks():
       {'feature':'XA 42.9 mm body clears bore', 'clear':{'cylinder':42.9,'axis':'x','at':[(121,13)],'span':(170,190)}},
       {'feature':'KVT M32 shanks clear', 'clear':{'cylinder':32.0,'axis':'x','at':[(78,106)],'span':(168,190)}},
       {'feature':'19.05 mm strap passes slots', 'clear':{'box':(2.0,6.0,19.3),'at':[(x,0,z) for x,z in strap_slots_xz_mm]}},
-      {'feature':'M4 rail screws clear', 'clear':{'cylinder':4,'axis':'y','at':[(-95,-28),(-15,-28)],'span':(-2,4)}},
+      {'feature':'M4 cable anchor screws clear', 'clear':{'cylinder':4,'axis':'y','at':anchor_holes_xz_mm,'span':(-2,4)}},
+      {'feature':'Removed rail holes remain solid', 'material':{'cylinder':3,'axis':'y','at':[(-95,-28),(-15,-28),(-27,-28)],'span':(.2,1.6)}},
     ]
 
 
@@ -216,11 +212,9 @@ def main():
     for name,at,rect,diameter in (
         [(f'Strap {i+1} 19.3 x 2.0 mm gauge',p,(2.0,19.3),None)
          for i,p in enumerate(strap_slots_xz_mm)] +
-        [(f'Rail {i+1} M4 gauge',p,None,4.0)
-         for i,p in enumerate(rail_holes_xz_mm)] +
         [(f'Anchor {i+1} M4 gauge',p,None,4.0)
          for i,p in enumerate(anchor_holes_xz_mm)] +
-        [('Rail PE #10 shaft gauge',(-27,-28),None,4.83)]):
+        [('Panel PE #10 shaft gauge',panel_bond_xz_mm,None,4.83)]):
         with BuildPart() as gauge:
             with BuildSketch(panel_plane):
                 with Locations(at):
@@ -231,6 +225,17 @@ def main():
         volume=0 if interference is None else interference.volume
         if volume>1e-4: raise ValueError(name+' blocked')
         report.append(dict(id=name,intrusion_mm3=volume,result='pass'))
+    # Removed rail fixings must be restored stock, not abandoned holes in the panel.
+    for at in [(-95,-28),(-15,-28),(-27,-28)]:
+        with BuildPart() as gauge:
+            with BuildSketch(Plane((0,.2,0),x_dir=(1,0,0),z_dir=(0,1,0))):
+                with Locations((at[0],-at[1])): Circle(1.5)
+            extrude(amount=1.4)
+        remaining=parts[1].intersect(gauge.part)
+        retained=0 if remaining is None else sum(s.volume for s in remaining)
+        missing=gauge.part.volume-retained
+        if missing>1e-4: raise ValueError('Removed rail opening remains at '+str(at))
+        report.append(dict(id='Restored panel stock '+str(at),missing_mm3=missing,result='pass'))
     (target/'cad-checks.json').write_text(json.dumps({'units':'mm','status':'Digital geometry checks only; open release conditions in build.html',
         'source_step_sha256': hashlib.sha256(Path(source_step).read_bytes()).hexdigest() if source_step else None,
         'unchecked_standard_interfaces':'Vendor interfaces outside bundled standards database; dimensions from linked drawings, no physical qualification.',

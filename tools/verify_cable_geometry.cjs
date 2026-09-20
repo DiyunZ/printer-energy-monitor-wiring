@@ -48,7 +48,7 @@ const distance=(a,b)=>Math.hypot(...a.map((v,i)=>v-b[i]));
   const report={scope:'Digital routing checks; not physical retention, bend-radius or electrical acceptance.',supports:g.supports,
    coilSeparation:separation,componentBodyIntrusions:g.bodyIntrusions,ctAperture:'One straight printer-hot conductor',
    entries:'Outer jackets extend through both power glands; bare conductor breakouts stay inside',
-   limitations:'Sampled curves with assumed wire diameters. Named WAGO/fuse terminations exclude a 20 mm endpoint region because port cavities are simplified. Does not certify every wire-to-wire clearance, cable stiffness, torque, pull retention or manufactured fit.'};
+   limitations:'Sampled curves with assumed wire diameters. Named WAGO terminations exclude a 20 mm endpoint region because port cavities are simplified. Does not certify every wire-to-wire clearance, cable stiffness, torque, pull retention or manufactured fit.'};
   if(process.env.EXPORT_AUDIT==='1'){
    assert.ok(['127.0.0.1','localhost'].includes(new URL(base).hostname));
    fs.writeFileSync(path.join(root,'installation_supports.json'),JSON.stringify(report,null,2)+'\n');

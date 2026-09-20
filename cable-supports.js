@@ -61,11 +61,9 @@ export function screenCableBodies(routes,bodies,ct) {
     'internal-wire:q0-jl':['JL'], 'cord:printer-hot-in':['JL'],
     'cord:supply-neutral':['JN'], 'cord:printer-neutral':['JN'],
     'cord:supply-pe':['PE'], 'cord:printer-pe':['PE'],
-    'internal-wire:jl-fv':['JL','fuse'], 'internal-wire:xa-hot':['JL'],
-    'internal-wire:xa-neutral':['JN'], 'internal-wire:pe-bridge':['PE','PE+'],
-    'internal-wire:xa-pe':['PE+'], 'internal-wire:rail-pe':['PE+'],
-    'internal-wire:panel-pe':['PE+'], 'internal-wire:fv-jv':['fuse','JV'],
-    'blue:A1':['JV'], 'blue:A2':['JN'], 'blue:A3':['JN']
+    'internal-wire:xa-hot':['JL'], 'internal-wire:xa-neutral':['JN'],
+    'internal-wire:xa-pe':['PE'], 'internal-wire:panel-pe':['PE'],
+    'blue:A1':['JL'], 'blue:A2':['JN'], 'blue:A3':['JN']
   };
   const distance=(a,b)=>Math.hypot(...a.map((v,i)=>v-b[i]));
   const hits=[];
@@ -75,7 +73,7 @@ export function screenCableBodies(routes,bodies,ct) {
       if(surface>=r.radius-.1)return false;
       // The CT's through aperture is empty, unlike its outer bounding box.
       if(id==='ct'&&Math.hypot(p[1]-ct.position[1],p[2]-ct.position[2])+r.radius<=5.1)return false;
-      // WAGO/fuse electrical terminations lack molded port cavities. Exempt only
+      // WAGO electrical terminations lack molded port cavities. Exempt only
       // the endpoint neighborhood of a named electrical connection (20 mm).
       if(contacts[r.id]?.includes(id)&&[r.samples[0],r.samples.at(-1)].some(e=>distance(p,e)<=20))return false;
       return true;

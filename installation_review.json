@@ -1,7 +1,7 @@
 {
-  "revision": "September 20, 2026 · OEM lead-set confirmation",
-  "baseline_commit": "b542a4d777b8aef7f90fd000b35a3cca697e7c2b",
-  "scope": "One grounded 120 V supply, one printer at a time. Five equipment groups are confirmed on hand; the USB cable is kit supplied. Log independently during printing and download only with mains unplugged. Q0 application, Fv lead coordination, CT scaling and physical acceptance remain open; this is not a complete-order or energizing release.",
+  "revision": "September 20, 2026 · upstream protection review",
+  "baseline_commit": "89f5c811a81187cd4debc71646a4d5dacc7d6591",
+  "scope": "One grounded 120 V supply, one printer at a time. Five equipment groups are confirmed on hand; the USB cable is kit supplied. Log independently during printing and download only with mains unplugged. The voltage tap uses upstream Q0 protection only. Its suitability for the original DENT leads, Q0 site/startup suitability, CT scaling and physical acceptance remain open; this is not an energizing release.",
   "result": "ENGINEERING PACKAGE A — RECEIVING AND ELECTRICAL RELEASE ITEMS OPEN",
   "sources": {
     "dent": "https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf",
@@ -14,7 +14,6 @@
     "outlet-drawing": "https://leviton.com/content/dam/leviton/commercial-industrial/product_documents/dimensional_drawing/CATSTD-05279-00C-M01.pdf",
     "wago": "https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415",
     "carrier": "https://www1.futureelectronics.com/doc/WAGO/221-505.pdf",
-    "din": "https://cdn.automationdirect.com/static/specs/screwlessdinnectors.pdf",
     "cord": "https://cabletechsupport.southwire.com/cablespec/download_spec/?country=US&spec=70126",
     "plug": "https://leviton.com/content/dam/leviton/residential/product_documents/instruction_sheet/515_Instruction_Sheet.pdf",
     "gland": "https://www.hammfg.com/electronics/small-case/accessories/1427ncg",
@@ -31,8 +30,6 @@
     "prusa": "https://www.prusa3d.com/product/prusa-core-one/",
     "prusa-psu": "https://help.prusa3d.com/wp-content/uploads/generated/prusa-core-one-kit-assembly_2321_en_2026-05-18.pdf",
     "outlet-install": "https://leviton.com/content/dam/leviton/commercial-industrial/product_documents/instruction_sheet/PK-93763-10-02-0C-W.pdf",
-    "lpsc": "https://www.littelfuse.com/de/assetdocs/powr-gard-catalog?assetguid=85d36235-a32b-4608-bfed-f9878aa43af0",
-    "klkr": "https://www.littelfuse.com/assetdocs/klkr-classcc-fuse-datasheet-final?assetguid=4443e5f6-97ee-4206-9abe-9e155371a03e",
     "cui": "https://www.belfuse.com/media/datasheets/products/power-supplies/SMI6.pdf",
     "blue": "https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/",
     "restraint": "https://www.velcro.com/products/organization/heavy-duty-one-wrap-roll/",
@@ -82,10 +79,9 @@
       "availability": "owned",
       "result": "Conditional",
       "checked": "User confirms three original DENT kit pigtails in different colors, all with the same voltage-sensing function. The connector, tinned end and ESIS card match the LD-SKTSP family. A1 feeds L1 hot; A2/A3 feed L2/N neutral. Colors identify connections; these leads do not carry printer load current or serve as PE.",
-      "remaining": "OEM kit identity is confirmed by the user. The product listing does not publish conductor size or short-circuit withstand; terminal preparation and Fv coordination remain separate acceptance items.",
+      "remaining": "OEM kit identity is confirmed. Accept original pigtail termination and protection by the upstream 15 A Q0 before use; original-kit status alone does not establish suitability.",
       "sources": [
-        "blue",
-        "dent-fused-clip"
+        "blue"
       ]
     },
     {
@@ -131,8 +127,8 @@
       "model": "Hammond 14R1513",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "Factory panel plus 19 cut features (rail, ties, PE bond, strap slots) and carrier locator envelopes.",
-      "remaining": "Transfer-drill 10 carrier holes; inspect underside hardware clearance before mounting panel.",
+      "checked": "Factory panel plus 11 cut features: six tie-anchor holes, one PE bond and four strap slots; three carrier locator envelopes.",
+      "remaining": "Transfer-drill six carrier holes; inspect underside hardware clearance before mounting the panel.",
       "sources": [
         "panel",
         "carrier"
@@ -167,41 +163,13 @@
       ]
     },
     {
-      "id": "fuse-holder",
-      "item": "Fv fuse holder",
-      "model": "Littelfuse LPSC0001Z",
-      "availability": "buy",
-      "result": "Conditional",
-      "checked": "LPSC0001Z replaces conflicting CHCC1DU. Envelope 17.78 × 61 × 78.5 mm. 14 AWG Class C wires go to both terminals; JV transitions to A1.",
-      "remaining": "Confirm exact supplied holder, 2 N·m torque and actual open-door access during assembly.",
-      "sources": [
-        "lpsc"
-      ]
-    },
-    {
-      "id": "fuse",
-      "item": "Fv fuse",
-      "model": "Littelfuse KLKR.500T · 0.5 A Class CC",
-      "availability": "buy",
-      "result": "Hold",
-      "checked": "KLKR.500T is 0.5 A fast-acting Class CC, 600 V AC, 10.3 × 38.1 mm, with 200 kA AC interrupting rating; it fits LPSC0001Z. DENT publishes 125 mA maximum line input and a 500 mA fused accessory, but neither establishes this fuse’s coordination with the existing external lead.",
-      "remaining": "Holder, cartridge size and voltage rating verified. Voltage-pigtail conductor/short-circuit withstand and logger startup coordination remain undocumented. Component interrupting rating is not assembly SCCR.",
-      "sources": [
-        "klkr",
-        "lpsc",
-        "dent-size",
-        "blue",
-        "dent-fused-clip"
-      ]
-    },
-    {
       "id": "connectors",
       "item": "Distribution connectors",
       "model": "WAGO 221-415",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "Five 5-port 221-415 groups: JL, JN, JV and two bridged PE groups; one conductor per port. PE uses 7 ports including bridge ends, leaving 3 spare.",
-      "remaining": "Confirm actual stranded-wire preparation, pigtail tinned ends and use as a secured PE distribution arrangement. A spare port is not spare current capacity.",
+      "checked": "One five-port connector each for JL, JN and PE. JL accepts Q0 output, printer hot, A1 and adapter hot; JN accepts supply, printer, A2, A3 and adapter neutrals; PE accepts supply, printer, panel and outlet earth. One accepted conductor per port. Confirm original DENT pigtail preparation and protective-bonding suitability.",
+      "remaining": "Verify allowed conductor preparation, one wire per port and protective-bonding use.",
       "sources": [
         "wago"
       ]
@@ -212,23 +180,10 @@
       "model": "WAGO 221-505",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "Five 221-505 carriers for JL/JN/PE/PE+/JV; two M3 fasteners each. Published transverse pitch is 20 mm.",
-      "remaining": "Use actual carrier as drilling jig for longitudinal hole placement; M3 × 16 hardware and underside clearance to check.",
+      "checked": "Three 221-505 carriers, each with two M3 fasteners.",
+      "remaining": "Transfer-drill actual fixing holes and verify underside fastener clearance.",
       "sources": [
         "carrier"
-      ]
-    },
-    {
-      "id": "din-rail",
-      "item": "Short DIN rail",
-      "model": "DINnector DN-R35S1-2",
-      "availability": "buy",
-      "result": "Catalog match",
-      "checked": "100 mm of 35 × 7.5 rail holds one 17.78 mm holder and two 6 mm stops; two defined fixing positions.",
-      "remaining": "Transfer-drill rail-web PE hole at(-27,-28); protect underside screw ends and verify clip/door access.",
-      "sources": [
-        "din",
-        "lpsc"
       ]
     },
     {
@@ -307,18 +262,6 @@
       ]
     },
     {
-      "id": "din-stops",
-      "item": "DIN rail end stops",
-      "model": "DINnector DN-EB35-A-10",
-      "availability": "buy",
-      "result": "Catalog match",
-      "checked": "Two DN-EB35-A-10 end brackets, 6 mm wide each, plus a 17.78 mm holder occupy 29.78 mm of the 100 mm rail.",
-      "remaining": "Mount stops on both sides, leave release / fastener access; the pack contains more than the two required.",
-      "sources": [
-        "din"
-      ]
-    },
-    {
       "id": "dc-extension",
       "item": "Round DC extension cable",
       "model": "Tensility 10-02228 · 5.5/2.1 mm plug to jack",
@@ -353,11 +296,10 @@
       "model": "Southwire 14 AWG, 19-strand Class C, THHN/THWN/MTW, 600 V",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "Selected Southwire 14 AWG 19-strand Class C THHN/THWN/MTW, nominal OD 2.87 mm. Matches LPSC stranded-class requirement and connector/lug ranges.",
+      "checked": "Selected Southwire 14 AWG 19-strand Class C THHN/THWN/MTW, nominal OD 2.87 mm. Matches connector and ring-terminal ranges.",
       "remaining": "Qualified assembler verifies wiring method, ampacity, routing, bends and strip/torque; no AWM-only assumption.",
       "sources": [
         "wire",
-        "lpsc",
         "wago",
         "ring"
       ]
@@ -407,7 +349,7 @@
       "model": "Screw / nut / washer schedule in Build_Package.md",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "Six assembly groups specify purchase links, quantities, diameters, lengths and stack limits in build.html. Six anchors use M4 × 16 mm screws with underside washers/locknuts. Both PE bolt heads are below the panel; the rail bond has a dedicated through-hole in the panel and rail web.",
+      "checked": "Five assembly groups specify purchase links and counts. Three carriers use six M3 fixings; six anchors use M4 × 16 mm fixings. One dedicated panel PE bolt has its head beneath the panel.",
       "remaining": "Measure actual washers/carrier feet/anchor recesses before tightening; qualified PE bond inspection remains required.",
       "sources": [
         "carling",
@@ -460,10 +402,10 @@
     "Identified the existing CUI SMI6-9-V-P5 adapter from the original photo: 9 V, 0.667 A, center positive.",
     "User confirms three original DENT kit pigtails in different colors; LD-SKTSP is the matched family, with 10 in nominal length. The CT remains identified as Mini HSC, with the legacy 50 A variant probable but obscured digits not treated as confirmed.",
     "Replaced the outlet/metal box/support/cover assembly with directly mounted Leviton 5279-C. Removed seven obsolete material groups.",
-    "Replaced conflicting Eaton fuse-holder data with Littelfuse LPSC0001Z; added the JV connector so its output terminal receives compatible 14 AWG wire.",
     "Use one KVT 32 frame and one 41380 insert for the round Tensility DC extension. Reuse the kit USB cable temporarily with mains unplugged; no USB penetration or energized USB routing remains.",
-    "Added real CAD wall openings, panel tie/rail/bond holes and strap slots, five DXF setups, fastener schedule and detailed assembly procedure.",
-    "Protection review: Q0 120 V interrupting rating and Fv holder/cartridge compatibility are verified. Public JIS information does not identify the actual receptacle fault current; printer inrush and external-lead coordination remain unverified. See protection.html."
+    "Removed the dedicated voltage fuse, holder, DIN rail, end stops and JV transition. A1 now connects to JL after Q0. Upstream-only lead protection requires acceptance before energizing.",
+    "Consolidated PE into one five-port connector after removing the rail bond. Three connectors/carriers, three installed ring lugs and one panel PE stud remain.",
+    "Removed two rail mounting holes and the rail PE hole from the panel CAD. Eleven panel cut features and six carrier transfer-drill holes remain."
   ],
   "assembly": [
     {
@@ -481,8 +423,8 @@
     {
       "stage": 3,
       "title": "Fit panel components",
-      "action": "Fit DIN rail/stops/Fv, five WAGO carriers, two meter straps, CT and six cable anchors. Place CT on printer hot only; set the arrow toward output.",
-      "result": "Nominal body separation and shell access checked. Verify actual CT latch and holder door sweep."
+      "action": "Fit three WAGO carriers, two meter straps, CT and six cable anchors. Place CT on printer hot only; set the arrow toward output.",
+      "result": "Nominal body separation and shell access checked. Verify the actual CT latch and retained cable slack."
     },
     {
       "stage": 4,
@@ -493,8 +435,8 @@
     {
       "stage": 5,
       "title": "Wire and retain",
-      "action": "Unplug all sources. Bond panel and rail first; complete permanent wiring; path 16 is temporary offline USB. Fv.OUT uses 14 AWG to JV; A1 starts at JV. Keep the original adapter cord outside, join the round extension there and pass only its round jacket through the DC insert. Retain all cable slack.",
-      "result": "Topology and the selected DC jacket-to-insert range checked. CT scale and voltage-lead protection/termination remain commissioning items."
+      "action": "Unplug all sources. Bond the panel, printer and outlet; complete permanent wiring. A1 starts at switched hot JL; A2/A3 start at neutral JN. Path 16 is temporary offline USB. Keep the original adapter cord outside and pass only the round DC extension through its insert. Retain cable slack.",
+      "result": "Topology and the DC jacket-to-insert range checked. Upstream-only voltage-lead protection, terminations and CT scale remain acceptance items."
     },
     {
       "stage": 6,
@@ -505,8 +447,8 @@
   ],
   "needed": [
     "CT commissioning: Mini HSC family is matched; 50 A is probable. Read the unobscured label during assembly and set that exact range/output in ELOG.",
-    "Voltage-lead acceptance: the user confirms the original DENT kit pigtails; do not re-request OEM identity. Accept terminal preparation and Fv coordination separately with responsible electrical personnel; original-kit status alone does not establish protection by the 15 A main breaker.",
+    "Voltage-lead acceptance: the user confirms the original DENT kit pigtails; do not re-request OEM identity. Accept terminal preparation and upstream-only protection with responsible electrical personnel; original-kit status alone does not establish protection by the 15 A main breaker.",
     "Use one KVT 32 frame and one 41380 insert for the round Tensility DC extension. Reuse the kit USB cable temporarily with mains unplugged; no USB penetration or energized USB routing remains.",
-    "Commissioning: verify fastener stacks, CT latch/fuse door/slack, supply conditions, PE/insulation/polarity, total load and restart/recording behavior before routine operation."
+    "Commissioning: verify fastener stacks, CT latch and cable slack, supply conditions, PE/insulation/polarity, total load and restart/recording behavior before routine operation."
   ]
 }

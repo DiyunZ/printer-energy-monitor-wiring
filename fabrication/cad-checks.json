@@ -8,7 +8,7 @@
       "id": "case-machined",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 2231242.4698601244,
+      "volume_mm3": 2231242.4698613845,
       "bounds_mm": [
         392.2499770979982,
         207.39100020000006,
@@ -19,7 +19,7 @@
       "id": "panel-machined",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 231289.89288710503,
+      "volume_mm3": 231392.10562055177,
       "bounds_mm": [
         327.0250000000001,
         1.8973800000000831,
@@ -28,67 +28,57 @@
     },
     {
       "id": "Q0 toggle",
-      "removed_mm3": 1926.610974370502,
+      "removed_mm3": 1926.6109744068235,
       "result": "pass"
     },
     {
       "id": "Q0 fixing -1",
-      "removed_mm3": 58.74299835041165,
+      "removed_mm3": 58.74299837136641,
       "result": "pass"
     },
     {
       "id": "Q0 fixing +1",
-      "removed_mm3": 58.742988041602075,
+      "removed_mm3": 58.742988066747785,
       "result": "pass"
     },
     {
       "id": "XA outlet",
-      "removed_mm3": 7260.769089806825,
+      "removed_mm3": 7260.769089837093,
       "result": "pass"
     },
     {
       "id": "XA fixing -1",
-      "removed_mm3": 59.93710877234116,
+      "removed_mm3": 59.93710879795253,
       "result": "pass"
     },
     {
       "id": "XA fixing +1",
-      "removed_mm3": 59.937098561786115,
+      "removed_mm3": 59.937098576687276,
       "result": "pass"
     },
     {
       "id": "SUPPLY",
-      "removed_mm3": 1653.8714826586656,
+      "removed_mm3": 1653.8714826796204,
       "result": "pass"
     },
     {
       "id": "OUTPUT",
-      "removed_mm3": 1653.8718264144845,
+      "removed_mm3": 1653.8718264363706,
       "result": "pass"
     },
     {
       "id": "DC",
-      "removed_mm3": 3912.7196236872114,
-      "result": "pass"
-    },
-    {
-      "id": "Rail fixing 1",
-      "removed_mm3": 30.176525037182728,
-      "result": "pass"
-    },
-    {
-      "id": "Rail fixing 2",
-      "removed_mm3": 30.176525037182728,
+      "removed_mm3": 3912.719623708166,
       "result": "pass"
     },
     {
       "id": "Tie anchor 1",
-      "removed_mm3": 30.176525037182728,
+      "removed_mm3": 30.176525037153624,
       "result": "pass"
     },
     {
       "id": "Tie anchor 2",
-      "removed_mm3": 30.176525037153624,
+      "removed_mm3": 30.176525037182728,
       "result": "pass"
     },
     {
@@ -103,32 +93,27 @@
     },
     {
       "id": "Tie anchor 5",
-      "removed_mm3": 30.176525037153624,
-      "result": "pass"
-    },
-    {
-      "id": "Tie anchor 6",
       "removed_mm3": 30.176525037182728,
       "result": "pass"
     },
     {
-      "id": "Panel PE bond",
-      "removed_mm3": 41.85968337251688,
+      "id": "Tie anchor 6",
+      "removed_mm3": 30.176525037153624,
       "result": "pass"
     },
     {
-      "id": "Rail PE through panel",
-      "removed_mm3": 41.85968337257509,
+      "id": "Panel PE bond",
+      "removed_mm3": 41.85968337254599,
       "result": "pass"
     },
     {
       "id": "Strap slot 1",
-      "removed_mm3": 152.86502027628012,
+      "removed_mm3": 152.86502027633833,
       "result": "pass"
     },
     {
       "id": "Strap slot 2",
-      "removed_mm3": 152.86502027628012,
+      "removed_mm3": 152.86502027630922,
       "result": "pass"
     },
     {
@@ -138,7 +123,7 @@
     },
     {
       "id": "Strap slot 4",
-      "removed_mm3": 152.86502027628012,
+      "removed_mm3": 152.86502027630922,
       "result": "pass"
     },
     {
@@ -207,16 +192,6 @@
       "result": "pass"
     },
     {
-      "id": "Rail 1 M4 gauge",
-      "intrusion_mm3": 0,
-      "result": "pass"
-    },
-    {
-      "id": "Rail 2 M4 gauge",
-      "intrusion_mm3": 0,
-      "result": "pass"
-    },
-    {
       "id": "Anchor 1 M4 gauge",
       "intrusion_mm3": 0,
       "result": "pass"
@@ -247,8 +222,23 @@
       "result": "pass"
     },
     {
-      "id": "Rail PE #10 shaft gauge",
+      "id": "Panel PE #10 shaft gauge",
       "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Restored panel stock (-95, -28)",
+      "missing_mm3": 0.0,
+      "result": "pass"
+    },
+    {
+      "id": "Restored panel stock (-15, -28)",
+      "missing_mm3": 0.0,
+      "result": "pass"
+    },
+    {
+      "id": "Restored panel stock (-27, -28)",
+      "missing_mm3": 0.0,
       "result": "pass"
     }
   ]

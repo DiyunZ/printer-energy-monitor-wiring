@@ -5,16 +5,16 @@ const viewerHome = viewer.parentNode, viewerNext = viewer.nextSibling;
 const wires = [...diagram.querySelectorAll('.wire')];
 const routes = [...diagram.querySelectorAll('.wire-route')];
 const groups = {
-  all: null, main: ['01','02','03'], voltage: ['01','02','04','05','06','08','09','24'],
-  neutral: ['06','07','08','09','18','21'], earth: ['10','11','12','13','19','25'],
-  aux: ['01','02','06','10','17','18','19','20','21','22','23','25'], signal: ['14','15','16'],
+  all: null, main: ['01','02','03'], voltage: ['01','02','05','06','08','09'],
+  neutral: ['06','07','08','09','18','21'], earth: ['10','11','12','19'],
+  aux: ['01','02','06','10','17','18','19','20','21','22','23'], signal: ['14','15','16'],
 };
 const hints = {
   all: 'Drag to pan · Select a wire for endpoints.',
   main: 'CT1 measures printer hot only.',
   voltage: 'A1 → L1 (hot) · A2 → L2 (neutral) · A3 → N (neutral)',
   neutral: 'Neutral remains separate from protective earth.',
-  earth: 'PE bonds the printer, outlet, panel and rail.',
+  earth: 'PE bonds the printer, outlet and panel.',
   aux: 'Adapter power branches before CT1; DC returns through the round extension.',
   signal: 'CT → CH1. USB is temporary: unplug mains and open the lid before connecting the computer.',
 };
@@ -46,12 +46,11 @@ function endpoint(name) {
     'D.DC+': 'ELITEpro DC center (+)', 'D.DC-': 'ELITEpro DC sleeve (−)',
     'CT.+': 'CT1 white (+)', 'CT.-': 'CT1 black (−)',
     'AUX.FACE.L': 'XA hot contact', 'AUX.FACE.N': 'XA neutral contact',
-    'JPE.B1': 'PE 1 port 5', 'JPE.B2': 'PE 2 port 5',
   };
   if (exact[name]) return exact[name];
   const [part, ...rest] = name.split('.'), port = rest.join(' ');
-  if (part === 'JPE') return Number(port) <= 2 ? 'PE 1 port ' + port : 'PE 2 port ' + (Number(port) - 2);
-  const names = { IN: 'Supply', OUT: 'Printer', D: 'ELITEpro', AUX: 'XA', PSU: 'Adapter', CT: 'CT1', PLATE: 'Panel PE', RAIL: 'Rail PE', PC: 'ELOG computer' };
+  if (part === 'JPE') return 'PE port ' + port;
+  const names = { IN: 'Supply', OUT: 'Printer', D: 'ELITEpro', AUX: 'XA', PSU: 'Adapter', CT: 'CT1', PLATE: 'Panel PE', PC: 'ELOG computer' };
   return (names[part] || part) + (port ? (/^\d+$/.test(port) ? ' port ' : ' ') + port : '');
 }
 function trace(id) {

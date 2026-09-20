@@ -37,13 +37,13 @@
     {
       "id": "Panel component body separation",
       "result": "pass",
-      "evidence": "9 nominal body envelopes do not overlap (rail/holder mating excluded).",
+      "evidence": "5 nominal body envelopes do not overlap.",
       "limits": "CT uses the matched Mini HSC family envelope; exact scale remains unconfirmed. No connectors, open levers, flexible wires, mounting tolerances or screw-tool envelopes are certified by this check."
     },
     {
       "id": "Vertical insertion through open case",
       "result": "pass",
-      "evidence": "10/10 swept bounding boxes clear the manufacturer shell.",
+      "evidence": "6/6 swept bounding boxes clear the manufacturer shell.",
       "limits": "300 mm vertical translation, fixed orientation, wall fittings absent. Panel/support contact at Y=0 is excluded with a 0.0001 mm numerical offset. This tests shell access, not brackets, wires or tool motions."
     },
     {
@@ -61,8 +61,8 @@
     {
       "id": "Closed lid screen",
       "result": "screen only",
-      "evidence": "meter: 159.012 mm (9/9 rays); ct: 168.315 mm (9/9 rays); fuse: 141.512 mm (9/9 rays); outlet: 33.747 mm (9/9 rays); q0: 32.992 mm (9/9 rays)",
-      "limits": "Nine upward rays per body against lid mesh 15. Not a minimum-distance proof; excludes lid hardware, guards, open fuse door, wire bundles and tolerances."
+      "evidence": "meter: 159.012 mm (9/9 rays); ct: 168.315 mm (9/9 rays); outlet: 33.747 mm (9/9 rays); q0: 32.992 mm (9/9 rays)",
+      "limits": "Nine upward rays per body against lid mesh 15. Not a minimum-distance proof; excludes lid hardware, guards, wire bundles and tolerances."
     },
     {
       "id": "No permanent USB wall opening",
@@ -81,12 +81,6 @@
       "result": "pass",
       "evidence": "Southwire nominal 2.87 mm insulation OD < 3M 4.318 mm ring maximum; 14 AWG is within 16–14 AWG ring range.",
       "limits": "Does not qualify the crimp or approve the wiring method for this assembly."
-    },
-    {
-      "id": "DIN rail capacity",
-      "result": "pass",
-      "evidence": "100 − 17.78 − 2 × 6 = 70.22 mm remains after holder and two end stops.",
-      "limits": "Fasteners, PE bond and fuse-door service motion still need final placement."
     },
     {
       "id": "Physical and electrical release",
@@ -118,20 +112,6 @@
       "result": "pass"
     },
     {
-      "id": "fuse",
-      "travel_mm": 300,
-      "shell_triangle_hits": 0,
-      "seated_contact_triangles": 0,
-      "result": "pass"
-    },
-    {
-      "id": "rail",
-      "travel_mm": 300,
-      "shell_triangle_hits": 0,
-      "seated_contact_triangles": 0,
-      "result": "pass"
-    },
-    {
       "id": "JL",
       "travel_mm": 300,
       "shell_triangle_hits": 0,
@@ -151,20 +131,6 @@
       "shell_triangle_hits": 0,
       "seated_contact_triangles": 0,
       "result": "pass"
-    },
-    {
-      "id": "PE+",
-      "travel_mm": 300,
-      "shell_triangle_hits": 0,
-      "seated_contact_triangles": 0,
-      "result": "pass"
-    },
-    {
-      "id": "JV",
-      "travel_mm": 300,
-      "shell_triangle_hits": 0,
-      "seated_contact_triangles": 0,
-      "result": "pass"
     }
   ],
   "body_screen": [
@@ -179,12 +145,6 @@
       "shell_triangle_hits": 0,
       "lid_samples": 9,
       "minimum_sampled_lid_gap_mm": 168.315
-    },
-    {
-      "id": "fuse",
-      "shell_triangle_hits": 0,
-      "lid_samples": 9,
-      "minimum_sampled_lid_gap_mm": 141.512
     },
     {
       "id": "outlet",
@@ -206,6 +166,6 @@
       "local_wall_mm": null
     }
   ],
-  "material_groups": 29,
+  "material_groups": 25,
   "owned_groups": 5
 }

@@ -5,7 +5,7 @@ def draw_external(add,rect,text,line,circle,C):
     text(48,148,'A. Original DENT kit · 254 mm nominal pigtails → full voltage leads',25,weight=700)
     text(48,180,'Bare ends stay fixed inside guarded terminals. Disconnect mains and verify absence of voltage before unplugging these leads.',18,color='#63768a')
     for y,name,source,lead,port,color in [
-        (245,'A1 · HOT','JV · Fv protected hot','Existing L1 lead','L1',C['L']),
+        (245,'A1 · HOT','JL · hot after Q0','Existing L1 lead','L1',C['L']),
         (330,'A2 · NEUTRAL','Neutral terminal JN','Existing L2 lead','L2','#b8343e'),
         (415,'A3 · NEUTRAL','Neutral terminal JN','Existing N lead','N',C['N'])]:
         rect(48,y-28,280,55,'#f3f6f9','#c6d0db',6);text(67,y+7,source,20,weight=600)

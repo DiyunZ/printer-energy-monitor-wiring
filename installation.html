@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Installation audit · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=15"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Installation_Audit.md" download>Download Markdown</a></nav><h1>Installation audit</h1>
-<p>September 20, 2026 · OEM lead-set confirmation. <strong>ENGINEERING PACKAGE A — RECEIVING AND ELECTRICAL RELEASE ITEMS OPEN.</strong></p>
-<p>All <strong>29 material groups</strong> were reviewed: 10 catalog match · 16 conditional · 2 measure · 1 hold. A catalog match confirms the stated interface only; it is not approval of the complete item or assembly.</p>
-<p>One grounded 120 V supply, one printer at a time. Five equipment groups are confirmed on hand; the USB cable is kit supplied. Log independently during printing and download only with mains unplugged. Q0 application, Fv lead coordination, CT scaling and physical acceptance remain open; this is not a complete-order or energizing release.</p>
+<p>September 20, 2026 · upstream protection review. <strong>ENGINEERING PACKAGE A — RECEIVING AND ELECTRICAL RELEASE ITEMS OPEN.</strong></p>
+<p>All <strong>25 material groups</strong> were reviewed: 8 catalog match · 15 conditional · 2 measure · 0 hold. A catalog match confirms the stated interface only; it is not approval of the complete item or assembly.</p>
+<p>One grounded 120 V supply, one printer at a time. Five equipment groups are confirmed on hand; the USB cable is kit supplied. Log independently during printing and download only with mains unplugged. The voltage tap uses upstream Q0 protection only. Its suitability for the original DENT leads, Q0 site/startup suitability, CT scaling and physical acceptance remain open; this is not an energizing release.</p>
 <p>The box and major panel parts have nominal space, but the current design cannot be called a perfect or fully installable assembly. Machining geometry is supplied; Exact CT scaling, voltage-lead protection and physical/electrical acceptance remain open. One DC entry insert is specified; USB is temporary with mains unplugged. Do not treat a purchase link or an inventory tick as a release.</p>
 <p><a href="index.html#assembly-preview">Inspect the 3D installation stages</a> · <a href="materials.html">Materials and buying links</a> · <a href="installation_checks.json">Machine-readable checks</a></p>
 <h2>Corrections from the audit</h2>
@@ -9,10 +9,10 @@
 <li>Identified the existing CUI SMI6-9-V-P5 adapter from the original photo: 9 V, 0.667 A, center positive.</li>
 <li>User confirms three original DENT kit pigtails in different colors; LD-SKTSP is the matched family, with 10 in nominal length. The CT remains identified as Mini HSC, with the legacy 50 A variant probable but obscured digits not treated as confirmed.</li>
 <li>Replaced the outlet/metal box/support/cover assembly with directly mounted Leviton 5279-C. Removed seven obsolete material groups.</li>
-<li>Replaced conflicting Eaton fuse-holder data with Littelfuse LPSC0001Z; added the JV connector so its output terminal receives compatible 14 AWG wire.</li>
 <li>Use one KVT 32 frame and one 41380 insert for the round Tensility DC extension. Reuse the kit USB cable temporarily with mains unplugged; no USB penetration or energized USB routing remains.</li>
-<li>Added real CAD wall openings, panel tie/rail/bond holes and strap slots, five DXF setups, fastener schedule and detailed assembly procedure.</li>
-<li>Protection review: Q0 120 V interrupting rating and Fv holder/cartridge compatibility are verified. Public JIS information does not identify the actual receptacle fault current; printer inrush and external-lead coordination remain unverified. See protection.html.</li>
+<li>Removed the dedicated voltage fuse, holder, DIN rail, end stops and JV transition. A1 now connects to JL after Q0. Upstream-only lead protection requires acceptance before energizing.</li>
+<li>Consolidated PE into one five-port connector after removing the rail bond. Three connectors/carriers, three installed ring lugs and one panel PE stud remain.</li>
+<li>Removed two rail mounting holes and the rail PE hole from the panel CAD. Eleven panel cut features and six carrier transfer-drill holes remain.</li>
 </ul>
 <h2>Printer compatibility</h2>
 <div class="table-wrap"><table>
@@ -51,14 +51,14 @@
 <p>Complete underside hardware on the removable panel, then lower it into the case. Keep the side outlet absent until the panel is secured with Hammond fasteners.</p>
 <p><strong>Result:</strong> Vertical insertion is tested digitally; side outlet must follow the panel.</p>
 <h3>3. Fit panel components</h3>
-<p>Fit DIN rail/stops/Fv, five WAGO carriers, two meter straps, CT and six cable anchors. Place CT on printer hot only; set the arrow toward output.</p>
-<p><strong>Result:</strong> Nominal body separation and shell access checked. Verify actual CT latch and holder door sweep.</p>
+<p>Fit three WAGO carriers, two meter straps, CT and six cable anchors. Place CT on printer hot only; set the arrow toward output.</p>
+<p><strong>Result:</strong> Nominal body separation and shell access checked. Verify the actual CT latch and retained cable slack.</p>
 <h3>4. Install wall fittings</h3>
 <p>Install Q0 directly in its front-wall pattern; install 5279-C, two long-thread glands and one DC split entry. Use the fastener/torque schedule.</p>
 <p><strong>Result:</strong> Machined shell openings modeled. Actual threads, wall draft, seal seating and plug retention need receiving checks.</p>
 <h3>5. Wire and retain</h3>
-<p>Unplug all sources. Bond panel and rail first; complete permanent wiring; path 16 is temporary offline USB. Fv.OUT uses 14 AWG to JV; A1 starts at JV. Keep the original adapter cord outside, join the round extension there and pass only its round jacket through the DC insert. Retain all cable slack.</p>
-<p><strong>Result:</strong> Topology and the selected DC jacket-to-insert range checked. CT scale and voltage-lead protection/termination remain commissioning items.</p>
+<p>Unplug all sources. Bond the panel, printer and outlet; complete permanent wiring. A1 starts at switched hot JL; A2/A3 start at neutral JN. Path 16 is temporary offline USB. Keep the original adapter cord outside and pass only the round DC extension through its insert. Retain cable slack.</p>
+<p><strong>Result:</strong> Topology and the DC jacket-to-insert range checked. Upstream-only voltage-lead protection, terminations and CT scale remain acceptance items.</p>
 <h3>6. Inspect and close</h3>
 <p>Perform documented qualified polarity/PE/insulation/protection checks, verify lid closure with all four screws, then validate logging with a reference meter.</p>
 <p><strong>Result:</strong> No physical assembly, energizing or thermal qualification has been performed.</p>
@@ -99,12 +99,12 @@
 <tr>
 <td>Panel component body separation</td>
 <td><strong>PASS</strong></td>
-<td>9 nominal body envelopes do not overlap (rail/holder mating excluded). CT uses the matched Mini HSC family envelope; exact scale remains unconfirmed. No connectors, open levers, flexible wires, mounting tolerances or screw-tool envelopes are certified by this check.</td>
+<td>5 nominal body envelopes do not overlap. CT uses the matched Mini HSC family envelope; exact scale remains unconfirmed. No connectors, open levers, flexible wires, mounting tolerances or screw-tool envelopes are certified by this check.</td>
 </tr>
 <tr>
 <td>Vertical insertion through open case</td>
 <td><strong>PASS</strong></td>
-<td>10/10 swept bounding boxes clear the manufacturer shell. 300 mm vertical translation, fixed orientation, wall fittings absent. Panel/support contact at Y=0 is excluded with a 0.0001 mm numerical offset. This tests shell access, not brackets, wires or tool motions.</td>
+<td>6/6 swept bounding boxes clear the manufacturer shell. 300 mm vertical translation, fixed orientation, wall fittings absent. Panel/support contact at Y=0 is excluded with a 0.0001 mm numerical offset. This tests shell access, not brackets, wires or tool motions.</td>
 </tr>
 <tr>
 <td>Panel before flanged outlet</td>
@@ -119,7 +119,7 @@
 <tr>
 <td>Closed lid screen</td>
 <td><strong>SCREEN ONLY</strong></td>
-<td>meter: 159.012 mm (9/9 rays); ct: 168.315 mm (9/9 rays); fuse: 141.512 mm (9/9 rays); outlet: 33.747 mm (9/9 rays); q0: 32.992 mm (9/9 rays) Nine upward rays per body against lid mesh 15. Not a minimum-distance proof; excludes lid hardware, guards, open fuse door, wire bundles and tolerances.</td>
+<td>meter: 159.012 mm (9/9 rays); ct: 168.315 mm (9/9 rays); outlet: 33.747 mm (9/9 rays); q0: 32.992 mm (9/9 rays) Nine upward rays per body against lid mesh 15. Not a minimum-distance proof; excludes lid hardware, guards, wire bundles and tolerances.</td>
 </tr>
 <tr>
 <td>No permanent USB wall opening</td>
@@ -135,11 +135,6 @@
 <td>Ring barrel and internal wire</td>
 <td><strong>PASS</strong></td>
 <td>Southwire nominal 2.87 mm insulation OD &lt; 3M 4.318 mm ring maximum; 14 AWG is within 16–14 AWG ring range. Does not qualify the crimp or approve the wiring method for this assembly.</td>
-</tr>
-<tr>
-<td>DIN rail capacity</td>
-<td><strong>PASS</strong></td>
-<td>100 − 17.78 − 2 × 6 = 70.22 mm remains after holder and two end stops. Fasteners, PE bond and fuse-door service motion still need final placement.</td>
 </tr>
 <tr>
 <td>Physical and electrical release</td>
@@ -183,8 +178,8 @@
 <tr>
 <td><a href="index.html#material-blue-leads">DENT voltage pigtails</a><br>DENT LD-SKTSP series · 10 in / 254 mm nominal<br>✓ Owned</td>
 <td><strong>Conditional</strong></td>
-<td>User confirms three original DENT kit pigtails in different colors, all with the same voltage-sensing function. The connector, tinned end and ESIS card match the LD-SKTSP family. A1 feeds L1 hot; A2/A3 feed L2/N neutral. Colors identify connections; these leads do not carry printer load current or serve as PE. <a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/">blue</a>, <a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-fused-crocodile-clip/">dent-fused-clip</a></td>
-<td>OEM kit identity is confirmed by the user. The product listing does not publish conductor size or short-circuit withstand; terminal preparation and Fv coordination remain separate acceptance items.</td>
+<td>User confirms three original DENT kit pigtails in different colors, all with the same voltage-sensing function. The connector, tinned end and ESIS card match the LD-SKTSP family. A1 feeds L1 hot; A2/A3 feed L2/N neutral. Colors identify connections; these leads do not carry printer load current or serve as PE. <a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/">blue</a></td>
+<td>OEM kit identity is confirmed. Accept original pigtail termination and protection by the upstream 15 A Q0 before use; original-kit status alone does not establish suitability.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-voltage-leads">Full voltage leads</a><br>Existing matching voltage lead set<br>✓ Owned</td>
@@ -207,8 +202,8 @@
 <tr>
 <td><a href="index.html#material-panel">Mounting panel</a><br>Hammond 14R1513<br>□ Buy / fabricate</td>
 <td><strong>Conditional</strong></td>
-<td>Factory panel plus 19 cut features (rail, ties, PE bond, strap slots) and carrier locator envelopes. <a href="https://www.hammfg.com/electrical/products/accessories/pcjp">panel</a>, <a href="https://www1.futureelectronics.com/doc/WAGO/221-505.pdf">carrier</a></td>
-<td>Transfer-drill 10 carrier holes; inspect underside hardware clearance before mounting panel.</td>
+<td>Factory panel plus 11 cut features: six tie-anchor holes, one PE bond and four strap slots; three carrier locator envelopes. <a href="https://www.hammfg.com/electrical/products/accessories/pcjp">panel</a>, <a href="https://www1.futureelectronics.com/doc/WAGO/221-505.pdf">carrier</a></td>
+<td>Transfer-drill six carrier holes; inspect underside hardware clearance before mounting the panel.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-breaker">Q0 operating breaker</a><br>Carling CA1-B0-24-615-121-DG<br>□ Buy / fabricate</td>
@@ -223,34 +218,16 @@
 <td>Verify rear terminal clearance and screw/washer stack. Use the specified conductor torque and keep XA ground connected.</td>
 </tr>
 <tr>
-<td><a href="index.html#material-fuse-holder">Fv fuse holder</a><br>Littelfuse LPSC0001Z<br>□ Buy / fabricate</td>
-<td><strong>Conditional</strong></td>
-<td>LPSC0001Z replaces conflicting CHCC1DU. Envelope 17.78 × 61 × 78.5 mm. 14 AWG Class C wires go to both terminals; JV transitions to A1. <a href="https://www.littelfuse.com/de/assetdocs/powr-gard-catalog?assetguid=85d36235-a32b-4608-bfed-f9878aa43af0">lpsc</a></td>
-<td>Confirm exact supplied holder, 2 N·m torque and actual open-door access during assembly.</td>
-</tr>
-<tr>
-<td><a href="index.html#material-fuse">Fv fuse</a><br>Littelfuse KLKR.500T · 0.5 A Class CC<br>□ Buy / fabricate</td>
-<td><strong>Hold</strong></td>
-<td>KLKR.500T is 0.5 A fast-acting Class CC, 600 V AC, 10.3 × 38.1 mm, with 200 kA AC interrupting rating; it fits LPSC0001Z. DENT publishes 125 mA maximum line input and a 500 mA fused accessory, but neither establishes this fuse’s coordination with the existing external lead. <a href="https://www.littelfuse.com/assetdocs/klkr-classcc-fuse-datasheet-final?assetguid=4443e5f6-97ee-4206-9abe-9e155371a03e">klkr</a>, <a href="https://www.littelfuse.com/de/assetdocs/powr-gard-catalog?assetguid=85d36235-a32b-4608-bfed-f9878aa43af0">lpsc</a>, <a href="https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf">dent-size</a>, <a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/">blue</a>, <a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-fused-crocodile-clip/">dent-fused-clip</a></td>
-<td>Holder, cartridge size and voltage rating verified. Voltage-pigtail conductor/short-circuit withstand and logger startup coordination remain undocumented. Component interrupting rating is not assembly SCCR.</td>
-</tr>
-<tr>
 <td><a href="index.html#material-connectors">Distribution connectors</a><br>WAGO 221-415<br>□ Buy / fabricate</td>
 <td><strong>Conditional</strong></td>
-<td>Five 5-port 221-415 groups: JL, JN, JV and two bridged PE groups; one conductor per port. PE uses 7 ports including bridge ends, leaving 3 spare. <a href="https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415">wago</a></td>
-<td>Confirm actual stranded-wire preparation, pigtail tinned ends and use as a secured PE distribution arrangement. A spare port is not spare current capacity.</td>
+<td>One five-port connector each for JL, JN and PE. JL accepts Q0 output, printer hot, A1 and adapter hot; JN accepts supply, printer, A2, A3 and adapter neutrals; PE accepts supply, printer, panel and outlet earth. One accepted conductor per port. Confirm original DENT pigtail preparation and protective-bonding suitability. <a href="https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415">wago</a></td>
+<td>Verify allowed conductor preparation, one wire per port and protective-bonding use.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-carriers">Connector carriers</a><br>WAGO 221-505<br>□ Buy / fabricate</td>
 <td><strong>Conditional</strong></td>
-<td>Five 221-505 carriers for JL/JN/PE/PE+/JV; two M3 fasteners each. Published transverse pitch is 20 mm. <a href="https://www1.futureelectronics.com/doc/WAGO/221-505.pdf">carrier</a></td>
-<td>Use actual carrier as drilling jig for longitudinal hole placement; M3 × 16 hardware and underside clearance to check.</td>
-</tr>
-<tr>
-<td><a href="index.html#material-din-rail">Short DIN rail</a><br>DINnector DN-R35S1-2<br>□ Buy / fabricate</td>
-<td><strong>Catalog match</strong></td>
-<td>100 mm of 35 × 7.5 rail holds one 17.78 mm holder and two 6 mm stops; two defined fixing positions. <a href="https://cdn.automationdirect.com/static/specs/screwlessdinnectors.pdf">din</a>, <a href="https://www.littelfuse.com/de/assetdocs/powr-gard-catalog?assetguid=85d36235-a32b-4608-bfed-f9878aa43af0">lpsc</a></td>
-<td>Transfer-drill rail-web PE hole at(-27,-28); protect underside screw ends and verify clip/door access.</td>
+<td>Three 221-505 carriers, each with two M3 fasteners. <a href="https://www1.futureelectronics.com/doc/WAGO/221-505.pdf">carrier</a></td>
+<td>Transfer-drill actual fixing holes and verify underside fastener clearance.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-cord">Mains / printer cord</a><br>Southwire 55808699 · 14/3 SJOOW<br>□ Buy / fabricate</td>
@@ -289,12 +266,6 @@
 <td>Locate the kit cable, check host USB compatibility and prove a sample export before the experiment. No permanent energized USB connection is provided.</td>
 </tr>
 <tr>
-<td><a href="index.html#material-din-stops">DIN rail end stops</a><br>DINnector DN-EB35-A-10<br>□ Buy / fabricate</td>
-<td><strong>Catalog match</strong></td>
-<td>Two DN-EB35-A-10 end brackets, 6 mm wide each, plus a 17.78 mm holder occupy 29.78 mm of the 100 mm rail. <a href="https://cdn.automationdirect.com/static/specs/screwlessdinnectors.pdf">din</a></td>
-<td>Mount stops on both sides, leave release / fastener access; the pack contains more than the two required.</td>
-</tr>
-<tr>
 <td><a href="index.html#material-dc-extension">Round DC extension cable</a><br>Tensility 10-02228 · 5.5/2.1 mm plug to jack<br>□ Buy / fabricate</td>
 <td><strong>Catalog match</strong></td>
 <td>Factory round cable, 18 AWG, OD 5.2 ±0.3 mm, 7 A / 48 V; preserves center-to-center polarity. Adapter plugs into the female end outside; route the round cable through 41380/KVT 32 and plug the male end into the logger. Reserve 0.35 m inside and 0.565 m outside, adjusted at dry fit; retain slack with bends ≥35 mm radius (published minimum 31.2 mm). No cut or splice. Male barrel is 12 mm long; do not force its shoulder flush into the logger. <a href="https://www.tensility.com/products/10-02228">dc-extension</a>, <a href="https://tensility.s3.us-west-2.amazonaws.com/imports/product_spec_sheets/10-02228.pdf">dc-extension-drawing</a>, <a href="https://www.belfuse.com/media/datasheets/products/power-supplies/SMI6.pdf">cui</a>, <a href="https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf">dent</a>, <a href="https://www.icotek.com/Produkte/PDFs/en_US/KTMBS%20gy.pdf">kt</a></td>
@@ -309,7 +280,7 @@
 <tr>
 <td><a href="index.html#material-internal-wire">Internal L / N / PE wire</a><br>Southwire 14 AWG, 19-strand Class C, THHN/THWN/MTW, 600 V<br>□ Buy / fabricate</td>
 <td><strong>Conditional</strong></td>
-<td>Selected Southwire 14 AWG 19-strand Class C THHN/THWN/MTW, nominal OD 2.87 mm. Matches LPSC stranded-class requirement and connector/lug ranges. <a href="https://www.southwire.com/wire-cable/building-wire/thhn-thwn-copper-silicone-free/p/22955984">wire</a>, <a href="https://www.littelfuse.com/de/assetdocs/powr-gard-catalog?assetguid=85d36235-a32b-4608-bfed-f9878aa43af0">lpsc</a>, <a href="https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415">wago</a>, <a href="https://multimedia.3m.com/mws/media/61020O/ring-tongues-vinyl-insulated-brazed-seam-16-14-awg.pdf">ring</a></td>
+<td>Selected Southwire 14 AWG 19-strand Class C THHN/THWN/MTW, nominal OD 2.87 mm. Matches connector and ring-terminal ranges. <a href="https://www.southwire.com/wire-cable/building-wire/thhn-thwn-copper-silicone-free/p/22955984">wire</a>, <a href="https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415">wago</a>, <a href="https://multimedia.3m.com/mws/media/61020O/ring-tongues-vinyl-insulated-brazed-seam-16-14-awg.pdf">ring</a></td>
 <td>Qualified assembler verifies wiring method, ampacity, routing, bends and strip/torque; no AWM-only assumption.</td>
 </tr>
 <tr>
@@ -333,7 +304,7 @@
 <tr>
 <td><a href="index.html#material-fasteners">Mounting and bonding hardware</a><br>Screw / nut / washer schedule in Build_Package.md<br>□ Buy / fabricate</td>
 <td><strong>Conditional</strong></td>
-<td>Six assembly groups specify purchase links, quantities, diameters, lengths and stack limits in build.html. Six anchors use M4 × 16 mm screws with underside washers/locknuts. Both PE bolt heads are below the panel; the rail bond has a dedicated through-hole in the panel and rail web. <a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">carling</a>, <a href="https://www1.futureelectronics.com/doc/WAGO/221-505.pdf">carrier</a>, <a href="https://leviton.com/content/dam/leviton/commercial-industrial/product_documents/instruction_sheet/PK-93763-10-02-0C-W.pdf">outlet-install</a></td>
+<td>Five assembly groups specify purchase links and counts. Three carriers use six M3 fixings; six anchors use M4 × 16 mm fixings. One dedicated panel PE bolt has its head beneath the panel. <a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">carling</a>, <a href="https://www1.futureelectronics.com/doc/WAGO/221-505.pdf">carrier</a>, <a href="https://leviton.com/content/dam/leviton/commercial-industrial/product_documents/instruction_sheet/PK-93763-10-02-0C-W.pdf">outlet-install</a></td>
 <td>Measure actual washers/carrier feet/anchor recesses before tightening; qualified PE bond inspection remains required.</td>
 </tr>
 <tr>
@@ -346,9 +317,9 @@
 <h2>Receiving and commissioning items</h2>
 <ul>
 <li>CT commissioning: Mini HSC family is matched; 50 A is probable. Read the unobscured label during assembly and set that exact range/output in ELOG.</li>
-<li>Voltage-lead acceptance: the user confirms the original DENT kit pigtails; do not re-request OEM identity. Accept terminal preparation and Fv coordination separately with responsible electrical personnel; original-kit status alone does not establish protection by the 15 A main breaker.</li>
+<li>Voltage-lead acceptance: the user confirms the original DENT kit pigtails; do not re-request OEM identity. Accept terminal preparation and upstream-only protection with responsible electrical personnel; original-kit status alone does not establish protection by the 15 A main breaker.</li>
 <li>Use one KVT 32 frame and one 41380 insert for the round Tensility DC extension. Reuse the kit USB cable temporarily with mains unplugged; no USB penetration or energized USB routing remains.</li>
-<li>Commissioning: verify fastener stacks, CT latch/fuse door/slack, supply conditions, PE/insulation/polarity, total load and restart/recording behavior before routine operation.</li>
+<li>Commissioning: verify fastener stacks, CT latch and cable slack, supply conditions, PE/insulation/polarity, total load and restart/recording behavior before routine operation.</li>
 </ul>
 <p>Record receiving checks, update any affected drawings if substitutions are needed, then conduct a documented dry fit and qualified electrical acceptance. There is no hardware test result or energizing approval in this audit.</p>
 <h2>Reproduce the checks</h2>

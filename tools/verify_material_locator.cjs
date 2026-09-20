@@ -31,10 +31,8 @@ const close = (a,b) => Math.abs(a-b) < .05;
     assert.equal(await page.evaluate(()=>enclosureDiagnostics().usbPreviewVisible),false,'USB is absent from normal operation');
     const allMeshes = Object.values(initial.locations).flatMap(ps => ps.flatMap(p => p.meshes));
     assert.equal(new Set(allMeshes).size, allMeshes.length, 'Each physical mesh belongs to exactly one material');
-    const counts = { fuse: 1, connectors: 5, carriers: 5, 'blue-leads': 3, 'voltage-leads': 3, 'ring-lugs': 4, 'tie-mounts': 6, 'cable-ties': 6, 'kt-inserts': 1, 'din-stops': 2, 'logger-restraint': 2, fasteners: 24 };
+    const counts = { connectors: 3, carriers: 3, 'blue-leads': 3, 'voltage-leads': 3, 'ring-lugs': 3, 'tie-mounts': 6, 'cable-ties': 6, 'kt-inserts': 1, 'logger-restraint': 2, fasteners: 17 };
     for (const [id,count] of Object.entries(counts)) assert.equal(initial.locations[id].length, count, id);
-    const fuse = initial.locations.fuse[0], holder = initial.locations['fuse-holder'][0];
-    for (let i=0;i<3;i++) assert.ok(fuse.min[i] >= holder.min[i] && fuse.max[i] <= holder.max[i], 'Cartridge belongs inside the holder');
     // Rendered fasteners retain the actual machining datums; avoid importing the CAD runtime.
     for (const [i,point] of dimensions.installationHardware.cableMountsXZ.entries()) {
       const p = initial.locations.fasteners.find(p => p.key === `anchor-${i}`);
@@ -67,7 +65,7 @@ const close = (a,b) => Math.abs(a-b) < .05;
     await page.locator('#model-part').selectOption('meter');
     assert.equal(await page.locator('#part-installation').isVisible(),false,'Changing materials collapses old details');
     let inspectedOccurrences = 0;
-    for (const id of ['carriers','ring-lugs','din-stops','tie-mounts','fasteners']) {
+    for (const id of ['carriers','ring-lugs','tie-mounts','fasteners']) {
       await page.locator('#model-part').selectOption(id);
       for (const p of initial.locations[id]) {
         await page.locator('#material-location').selectOption(p.key);
@@ -77,15 +75,15 @@ const close = (a,b) => Math.abs(a-b) < .05;
         d.target.forEach((n,i)=>assert.ok(close(n,(p.min[i]+p.max[i])/2),`${id}/${p.key} camera must frame this occurrence`));
       }
     }
-    for (const [id,shot] of [['carriers','carriers'],['fuse','fuse'],['kt-inserts','inserts'],['ring-lugs','ring-terminals']]) {
+    for (const [id,shot] of [['carriers','carriers'],['kt-inserts','inserts'],['ring-lugs','ring-terminals']]) {
       await page.locator('#model-part').selectOption(id);
       if(id==='carriers')await page.locator('#material-location').selectOption(initial.locations[id][0].key);
       const d=await diag(); if(id!=='ring-lugs')assert.ok(d.ghostCount>0,id+' surrounding housing must become transparent');
       if(out)await page.locator('#design').screenshot({path:path.join(out,`locator-${shot}.png`)});
     }
-    await page.locator('#model-part').selectOption('fuse');
+    await page.locator('#model-part').selectOption('breaker');
     await page.locator('#model-part').selectOption('ct');
-    await page.goBack(); assert.equal((await diag()).selected,'fuse');
+    await page.goBack(); assert.equal((await diag()).selected,'breaker');
     await page.goForward(); assert.equal((await diag()).selected,'ct');
     // Direct wiring bookmarks and tab history retain the selected material and camera.
     await page.goto(new URL('?material=ct#wiring',base).href);await ready();
@@ -115,7 +113,7 @@ const close = (a,b) => Math.abs(a-b) < .05;
     assert.ok((await diag()).visibleHighlightCount < (await diag()).highlightMeshCount,'Hidden cable routes must hide their overlay');
     await page.locator('#model-label-toggle').uncheck();assert.equal((await diag()).visibleMarkers,0);
     await page.locator('#model-label-toggle').check();
-    await page.locator('#model-part').selectOption('fuse');
+    await page.locator('#model-part').selectOption('breaker');
     assert.equal(await page.locator('#model-more').getAttribute('open'),null,'Selecting a material closes controls that would cover its inspector');
     await page.locator('#material-show-all').click();
     assert.equal((await diag()).selected,null);assert.equal((await diag()).ghostCount,0);assert.equal((await diag()).highlightMeshCount,0);
@@ -132,7 +130,7 @@ const close = (a,b) => Math.abs(a-b) < .05;
     await page.locator('#owned-materials > summary').click();
     await page.locator('#confirm a[href="#material-ct"]').click();
     assert.equal(await page.locator('#material-ct').isVisible(),true,'Review links reopen the group even at the same anchor');
-    await page.locator('#material-fuse .locate-material').focus();await page.keyboard.press('Enter');assert.equal((await diag()).selected,'fuse');
+    await page.locator('#material-breaker .locate-material').focus();await page.keyboard.press('Enter');assert.equal((await diag()).selected,'breaker');
     // The standalone BOM navigates to the correct material on a fresh page load.
     await page.goto(new URL('materials.html',base).href);
     assert.equal(await page.locator('.locate-material').count(),bom.items.length);
@@ -140,8 +138,8 @@ const close = (a,b) => Math.abs(a-b) < .05;
     assert.equal((await diag()).selected,'ring-lugs');
     await page.reload();await ready();assert.equal((await diag()).selected,'ring-lugs');
     for(const width of [768,390]) {
-      await page.setViewportSize({width,height:844});await clickMaterial('fuse');
-      assert.equal((await diag()).selected,'fuse');assert.ok((await diag()).visibleMarkers>0);
+      await page.setViewportSize({width,height:844});await clickMaterial('breaker');
+      assert.equal((await diag()).selected,'breaker');assert.ok((await diag()).visibleMarkers>0);
       assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
       if(out)await page.locator('#design').screenshot({path:path.join(out,`locator-${width}.png`)});
     }

@@ -2,7 +2,7 @@
 
 - [Machining files and assembly guide](build.html) — drawings, fasteners and assembly order.
 - [Interactive installation sequence](index.html#assembly-preview) — inspect the six stages in 3D.
-- [Protection review](protection.html) — Q0 / Fv findings and the remaining evidence.
+- [Protection review](protection.html) — Q0, upstream voltage-lead protection and the remaining evidence.
 - [Installation audit](installation.html) — checks completed and remaining acceptance items.
 - [Full materials list](materials.html) · [Download BOM](Procurement_BOM.md)
 - [Manufacturer sources and design limits](references.html)
@@ -25,7 +25,7 @@ The logger stores time-series data in non-volatile memory and can be powered by 
 
 ### Initial setup and electrical checks
 
-Qualified electrical personnel verify terminations, polarity, PE continuity, insulation, protection and enclosure fit before releasing the assembly. Q0 opens hot only; PE stays continuous. Fv selection and breaker coordination must be resolved before energizing.
+Qualified electrical personnel verify terminations, polarity, PE continuity, insulation, protection and enclosure fit before releasing the assembly. Q0 opens hot only; PE stays continuous. Upstream Q0 protection for the original voltage leads and supply suitability must be accepted before energizing.
 
 Configure ELOG for single phase / two wire, CH1 voltage high L1 and low N, the actual CT type/range and logging interval. Disable unused channels. Verify sensible readings and positive real power against an independent reference meter; prove recording and restart behavior with a supervised power cycle.
 
@@ -56,11 +56,9 @@ Amber marks the selected material; hidden housings become transparent. Top view 
 | DENT ELITEpro XC | 63.0 × 47.0 × 216.0 | Catalog dimensions; verify actual unit · [Source](https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf) |
 | CT1 · printer hot only | 29.4 × 41.7 × 26.4 | Mini HSC family matched; 50 A variant probable · [Source](https://www.dentinstruments.com/shop/current-sensors/hinged-current-transformers-sensors-for-energy-metering/) |
 | Q0 · single operating breaker | 19.2 × 63.5 × 47.0 | Catalog body; direct wall mount · [Source](https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf) |
-| Fv · Littelfuse LPSC0001Z | 17.8 × 61.0 × 78.5 | Manufacturer maximum envelope · [Source](https://www.littelfuse.com/de/assetdocs/powr-gard-catalog?assetguid=85d36235-a32b-4608-bfed-f9878aa43af0) |
 | JL / JN / JPE distribution | 29.8 × 8.2 × 18.3 | Manufacturer connector and carrier dimensions · [Source](https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415) |
 | XA · Leviton 5279-C flanged outlet | 48.4 × 63.5 × 63.5 | Manufacturer drawing and mounting instructions · [Source](https://leviton.com/products/5279-c) |
 | CUI SMI6-9-V-P5 · existing adapter | 30.0 × 64.0 × 40.5 | Photo-identified; manufacturer body dimensions · [Source](https://www.belfuse.com/media/datasheets/products/power-supplies/SMI6.pdf) |
-| Short DIN rail · Fv only | 100.0 × 7.5 × 35.0 | Standard profile; proposed cut length |
 | Power glands / DC KVT 32 entry | 27.0 × 37.0 × 27.0 | Catalog envelopes; 41380 inserts selected · [Source](https://www.hammfg.com/electronics/small-case/accessories/1427ncg) |
 | DENT adapters & retained lead slack | Routing only | Illustrative routing; length not validated · [Source](https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/) |
 

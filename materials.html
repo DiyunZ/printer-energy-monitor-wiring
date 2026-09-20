@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Materials and purchase links · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=15"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Procurement_BOM.md" download>Download Markdown</a></nav><h1>Materials checklist</h1>
-<p>September 20, 2026 · OEM lead-set confirmation. <strong>✓ 5 confirmed owned groups · ✓ 1 kit supplied · □ 23 groups to buy or fabricate</strong></p>
-<p>One grounded 120 V supply, one printer at a time. Five equipment groups are confirmed on hand; the USB cable is kit supplied. Log independently during printing and download only with mains unplugged. Q0 application, Fv lead coordination, CT scaling and physical acceptance remain open; this is not a complete-order or energizing release.</p>
+<p>September 20, 2026 · upstream protection review. <strong>✓ 5 confirmed owned groups · ✓ 1 kit supplied · □ 19 groups to buy or fabricate</strong></p>
+<p>One grounded 120 V supply, one printer at a time. Five equipment groups are confirmed on hand; the USB cable is kit supplied. Log independently during printing and download only with mains unplugged. The voltage tap uses upstream Q0 protection only. Its suitability for the original DENT leads, Q0 site/startup suitability, CT scaling and physical acceptance remain open; this is not an energizing release.</p>
 <p><strong>Inventory basis:</strong> Five equipment groups confirmed by the user: ELITEpro XC, CTs, three user-confirmed original DENT kit pigtails in different colors, matching long leads and original black adapter. DENT specifies an included 1.8 m USB-A to B cable; the photographed kit card places it in the lid pocket. Its present physical location has not been confirmed. Reuse it before buying a replacement.</p>
 <p>A check means on hand, not electrically approved. Counts refer to material groups, not individual pieces. Needed quantities and vendor pack sizes differ. The USB cable is <strong>kit supplied</strong>; locate it before purchasing a replacement. Kit inclusion does not confirm its current physical presence.</p>
 <p>Buy links go to specific products; Select / Configure links need a size or rating first; Quote / Fabrication links require a supplier quote or a final custom drawing. Check current stock, minimum orders and lead times with each supplier. No orders have been placed.</p>
@@ -112,43 +112,19 @@
 </tr>
 <tr>
 <td>□ To buy</td>
-<td><span class="material-name">Fv fuse holder</span><figure class="material-photo" data-image-kind="reference"><a class="material-image" href="assets/materials/fuse-holder.jpg" target="_blank" rel="noopener" aria-label="View full image: Fv fuse holder"><img src="assets/materials/fuse-holder.jpg" alt="Littelfuse LPSC0001Z supplier photo" width="180" height="180" loading="lazy" decoding="async"></a><figcaption>Littelfuse LPSC0001Z supplier photo<a href="https://www.digikey.com/en/products/detail/littelfuse-inc/LPSC0001Z/2516312">Image: DigiKey / Littelfuse ↗</a></figcaption></figure><a class="locate-material" data-material="fuse-holder" href="index.html?material=fuse-holder#layout" aria-label="View Fv fuse holder in 3D">View in 3D ↑</a></td>
-<td>1</td>
-<td><strong>Littelfuse LPSC0001Z</strong> — 1-pole, non-indicating Class CC, 600 V AC/DC holder. This replaces the conflicting Eaton revision. 14 AWG Class C copper in and out; the fused output goes to JV before the OEM voltage pigtail.</td>
-<td><a href="https://www.digikey.com/en/products/detail/littelfuse-inc/LPSC0001Z/2516312">Buy · DigiKey</a><br><a href="https://www.mouser.com/en/ProductDetail/Littelfuse/LPSC0001Z?qs=gu7KAQ731UTaa%2FsFry13Yw%3D%3D">Buy · Mouser</a><br><a href="https://www.littelfuse.com/de/assetdocs/powr-gard-catalog?assetguid=85d36235-a32b-4608-bfed-f9878aa43af0">Littelfuse catalog</a></td>
-<td>Selected: 17.78 × 78.5 × 61 mm maximum; 35 mm DIN; terminal torque 2.0 N·m.</td>
-</tr>
-<tr>
-<td>□ To buy</td>
-<td><span class="material-name">Fv fuse</span><figure class="material-photo" data-image-kind="reference"><a class="material-image" href="assets/materials/fuse.jpg" target="_blank" rel="noopener" aria-label="View full image: Fv fuse"><img src="assets/materials/fuse.jpg" alt="KLKR family reference; selected 0.5 A value remains on hold" width="180" height="180" loading="lazy" decoding="async"></a><figcaption>KLKR family reference; selected 0.5 A value remains on hold<a href="https://www.digikey.com/en/products/detail/littelfuse-ibu/KLKR-500T/2518128">Image: DigiKey / Littelfuse ↗</a></figcaption></figure><a class="locate-material" data-material="fuse" href="index.html?material=fuse#layout" aria-label="View Fv fuse in 3D">View in 3D ↑</a></td>
-<td>2 (1 installed + 1 spare)</td>
-<td><strong>Littelfuse KLKR.500T · 0.5 A Class CC</strong> — KLKR.500T is 0.5 A fast-acting Class CC, 600 V AC, 10.3 × 38.1 mm, with 200 kA AC interrupting rating; it fits LPSC0001Z. DENT publishes 125 mA maximum line input and a 500 mA fused accessory, but neither establishes this fuse’s coordination with the existing external lead.</td>
-<td><a href="https://www.digikey.com/en/products/detail/littelfuse-ibu/KLKR-500T/2518128">Exact candidate · DigiKey</a><br><a href="https://www.littelfuse.com/assetdocs/klkr-classcc-fuse-datasheet-final?assetguid=4443e5f6-97ee-4206-9abe-9e155371a03e">Littelfuse KLKR data</a></td>
-<td>Holder, cartridge size and voltage rating verified. Voltage-pigtail conductor/short-circuit withstand and logger startup coordination remain undocumented. Component interrupting rating is not assembly SCCR.</td>
-</tr>
-<tr>
-<td>□ To buy</td>
 <td><span class="material-name">Distribution connectors</span><figure class="material-photo" data-image-kind="product"><a class="material-image" href="assets/materials/connectors.jpg" target="_blank" rel="noopener" aria-label="View full image: Distribution connectors"><img src="assets/materials/connectors.jpg" alt="WAGO 221-415 — product image" width="180" height="180" loading="lazy" decoding="async"></a><figcaption>Product image<a href="https://www.digikey.com/en/products/detail/wago-corporation/221-415/13549457">Image: DigiKey ↗</a></figcaption></figure><a class="locate-material" data-material="connectors" href="index.html?material=connectors#layout" aria-label="View Distribution connectors in 3D">View in 3D ↑</a></td>
-<td>5</td>
-<td><strong>WAGO 221-415</strong> — One each for JL and JN; two bridged connectors for JPE and six external PE connections. Use only with permitted copper conductors, sizes and terminations; confirm tinned OEM voltage pigtail and protective-bonding suitability. All groups remain separate. Fifth group JV transitions from the holder’s 14 AWG output to the A1 sensing pigtail.</td>
+<td>3</td>
+<td><strong>WAGO 221-415</strong> — One five-port connector each for JL, JN and PE. JL accepts Q0 output, printer hot, A1 and adapter hot; JN accepts supply, printer, A2, A3 and adapter neutrals; PE accepts supply, printer, panel and outlet earth. One accepted conductor per port. Confirm original DENT pigtail preparation and protective-bonding suitability.</td>
 <td><a href="https://www.digikey.com/en/products/detail/wago-corporation/221-415/13549457">Buy · DigiKey</a><br><a href="https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415">WAGO</a></td>
-<td>Selected; five mounting positions in the panel drawing. Conductor acceptance is checked at assembly.</td>
+<td>Three mounting positions in the panel drawing. Conductor acceptance is checked at assembly.</td>
 </tr>
 <tr>
 <td>□ To buy</td>
 <td><span class="material-name">Connector carriers</span><figure class="material-photo" data-image-kind="reference"><a class="material-image" href="assets/materials/carriers.jpg" target="_blank" rel="noopener" aria-label="View full image: Connector carriers"><img src="assets/materials/carriers.jpg" alt="WAGO 221-505 — reference image" width="180" height="180" loading="lazy" decoding="async"></a><figcaption>221-505 product image.<a href="https://www.digikey.com/en/products/detail/wago-corporation/221-505/15568477">Image: DigiKey ↗</a></figcaption></figure><a class="locate-material" data-material="carriers" href="index.html?material=carriers#layout" aria-label="View Connector carriers in 3D">View in 3D ↑</a></td>
-<td>5</td>
-<td><strong>WAGO 221-505</strong> — Secure the connector groups to the backpanel using the carrier&#39;s permitted mounting method. 3D carrier envelope is provisional. Add guards as needed; loose connectors must not rely on the wire for support. Fifth group JV transitions from the holder’s 14 AWG output to the A1 sensing pigtail.</td>
+<td>3</td>
+<td><strong>WAGO 221-505</strong> — Secure each connector to the backpanel with its carrier. Carrier details are schematic; transfer-drill from received parts. Connectors must not rely on wires for support.</td>
 <td><a href="https://www.digikey.com/en/products/detail/wago-corporation/221-505/15568477">Buy · DigiKey</a><br><a href="https://www.wago.com/us/wire-splicing-connectors/mounting-carrier-221-series-24-12-awg/p/221-505">WAGO</a><br><a href="https://www1.futureelectronics.com/doc/WAGO/221-505.pdf">WAGO carrier drawing</a></td>
-<td>Five carriers, two M3 fixings each; transfer-drill actual front-foot holes.</td>
-</tr>
-<tr>
-<td>□ To buy</td>
-<td><span class="material-name">Short DIN rail</span><figure class="material-photo" data-image-kind="reference"><a class="material-image" href="assets/materials/din-rail.jpg" target="_blank" rel="noopener" aria-label="View full image: Short DIN rail"><img src="assets/materials/din-rail.jpg" alt="DINnector DN-R35S1-2 — reference image" width="180" height="180" loading="lazy" decoding="async"></a><figcaption>35 × 7.5 mm rail shown before cutting to length.<a href="https://www.automationdirect.com/adc/shopping/catalog/wire_-a-_cable_management/din_rail/din_rail/dn-r35s1-2">Image: AutomationDirect ↗</a></figcaption></figure><a class="locate-material" data-material="din-rail" href="index.html?material=din-rail#layout" aria-label="View Short DIN rail in 3D">View in 3D ↑</a></td>
-<td>100 mm cut length; buy 1 pack only if no suitable offcut</td>
-<td><strong>DINnector DN-R35S1-2</strong> — 35 × 7.5 mm steel profile for Fv only; the linked pack contains two 1 m lengths. End stops and fasteners are separate rows below. Deburr, secure and bond the rail. Q0 is panel mounted.</td>
-<td><a href="https://www.automationdirect.com/adc/shopping/catalog/wire_-a-_cable_management/din_rail/din_rail/dn-r35s1-2">Buy · AutomationDirect</a></td>
-<td>Cut length to final fit; pack quantity exceeds one-box need</td>
+<td>Three carriers, two M3 fixings each; transfer-drill actual front-foot holes.</td>
 </tr>
 <tr>
 <td>□ To buy</td>
@@ -192,14 +168,6 @@
 </tr>
 <tr>
 <td>□ To buy</td>
-<td><span class="material-name">DIN rail end stops</span><figure class="material-photo" data-image-kind="reference"><a class="material-image" href="assets/materials/din-stops.jpg" target="_blank" rel="noopener" aria-label="View full image: DIN rail end stops"><img src="assets/materials/din-stops.jpg" alt="DINnector DN-EB35-A-10 — reference image" width="180" height="180" loading="lazy" decoding="async"></a><figcaption>DN-EB35-A-10 supplier image; sold in packs of 10.<a href="https://www.automationdirect.com/adc/shopping/catalog/wiring_solutions/terminal_blocks/end_brackets/dn-eb35-a-10">Image: AutomationDirect ↗</a></figcaption></figure><a class="locate-material" data-material="din-stops" href="index.html?material=din-stops#layout" aria-label="View DIN rail end stops in 3D">View in 3D ↑</a></td>
-<td>2 used; linked pack contains 10</td>
-<td><strong>DINnector DN-EB35-A-10</strong> — Secure both sides of the fuse holder on the 35 mm DIN rail. Check remaining rail length with the purchased holder.</td>
-<td><a href="https://www.automationdirect.com/adc/shopping/catalog/wiring_solutions/terminal_blocks/end_brackets/dn-eb35-a-10">Buy · AutomationDirect</a></td>
-<td>To buy · one pack supplies more than needed</td>
-</tr>
-<tr>
-<td>□ To buy</td>
 <td><span class="material-name">Round DC extension cable</span><figure class="material-photo" data-image-kind="product"><a class="material-image" href="assets/materials/dc-extension.jpg" target="_blank" rel="noopener" aria-label="View full image: Round DC extension cable"><img src="assets/materials/dc-extension.jpg" alt="Tensility 10-02228 male and female 5.5/2.1 mm DC connectors" width="180" height="120" loading="lazy" decoding="async"></a><figcaption>10-02228 product photo<a href="https://www.tensility.com/products/10-02228">Image: Tensility ↗</a></figcaption></figure><a class="locate-material" data-material="dc-extension" href="index.html?material=dc-extension#layout" aria-label="View Round DC extension cable in 3D">View in 3D ↑</a></td>
 <td>1; keep the full 0.915 m</td>
 <td><strong>Tensility 10-02228 · 5.5/2.1 mm plug to jack</strong> — Factory round cable, 18 AWG, OD 5.2 ±0.3 mm, 7 A / 48 V; preserves center-to-center polarity. Adapter plugs into the female end outside; route the round cable through 41380/KVT 32 and plug the male end into the logger. Reserve 0.35 m inside and 0.565 m outside, adjusted at dry fit; retain slack with bends ≥35 mm radius (published minimum 31.2 mm). No cut or splice. Male barrel is 12 mm long; do not force its shoulder flush into the logger.</td>
@@ -218,14 +186,14 @@
 <td>□ To buy</td>
 <td><span class="material-name">Internal L / N / PE wire</span><figure class="material-photo" data-image-kind="reference"><a class="material-image" href="assets/materials/internal-wire.jpg" target="_blank" rel="noopener" aria-label="View full image: Internal L / N / PE wire"><img src="assets/materials/internal-wire.jpg" alt="Southwire 14 AWG stranded THHN wire" width="180" height="36" loading="lazy" decoding="async"></a><figcaption>Southwire 14 AWG stranded THHN family reference<a href="https://www.southwire.com/wire-cable/building-wire/thhn-thwn-copper-silicone-free/p/22955984">Image: Southwire ↗</a></figcaption></figure><a class="locate-material" data-material="internal-wire" href="index.html?material=internal-wire#layout" aria-label="View Internal L / N / PE wire in 3D">View in 3D ↑</a></td>
 <td>Black 3 m; white 2 m; green 3 m minimum. Linked rolls: 100 ft each.</td>
-<td><strong>Southwire 14 AWG, 19-strand Class C, THHN/THWN/MTW, 600 V</strong> — Specified stranded class matches LPSC0001Z pressure terminals. Buy black 22955984, white 22956784 and green 22959184; linked rolls leave substantial spare stock. Do not substitute a finer flex class at the fuse holder without its approval. Wire blanks and terminal preparation are in the build package.</td>
+<td><strong>Southwire 14 AWG, 19-strand Class C, THHN/THWN/MTW, 600 V</strong> — Buy black 22955984, white 22956784 and green 22959184. The selected 14 AWG copper fits the connector and ring-terminal ranges; verify the accepted wiring method. Linked rolls leave spare stock. Wire blanks and preparation are in the build package.</td>
 <td><a href="https://www.homedepot.com/p/204834035">Black 22955984 · Home Depot</a><br><a href="https://www.homedepot.com/p/204834037">White 22956784 · Home Depot</a><br><a href="https://www.homedepot.com/p/204834032">Green 22959184 · Home Depot</a><br><a href="https://www.southwire.com/wire-cable/building-wire/thhn-thwn-copper-silicone-free/p/22955984">Southwire construction</a></td>
 <td>Selected: manufacturer nominal OD 0.113 in (2.87 mm); 14 AWG fits WAGO and #10 rings.</td>
 </tr>
 <tr>
 <td>□ To buy</td>
 <td><span class="material-name">Ring terminals</span><figure class="material-photo" data-image-kind="reference"><a class="material-image" href="assets/materials/ring-lugs.jpg" target="_blank" rel="noopener" aria-label="View full image: Ring terminals"><img src="assets/materials/ring-lugs.jpg" alt="3M MV14-10R/LX-BOTTLE supplier photo; #10 stud" width="180" height="180" loading="lazy" decoding="async"></a><figcaption>3M MV14-10R/LX-BOTTLE supplier photo; #10 stud<a href="https://www.digikey.com/en/products/detail/3m/MV14-10R-LX-BOTTLE/2670218">Image: DigiKey / 3M ↗</a></figcaption></figure><a class="locate-material" data-material="ring-lugs" href="index.html?material=ring-lugs#layout" aria-label="View Ring terminals in 3D">View in 3D ↑</a></td>
-<td>6 minimum: 2 Q0, 2 panel/rail bonds + 2 spares</td>
+<td>5 minimum: 2 Q0, 1 panel bond + 2 spares</td>
 <td><strong>3M MV14-10R/LX-BOTTLE · #10 stud, 16–14 AWG</strong> — Two Q0 terminals are #10-32 studs. The former #8 alternative has been removed. Other PE terminations must match their own studs.</td>
 <td><a href="https://www.digikey.com/en/products/detail/3m/MV14-10R-LX-BOTTLE/2670218">Buy #10 option · DigiKey</a><br><a href="https://multimedia.3m.com/mws/media/61020O/ring-tongues-vinyl-insulated-brazed-seam-16-14-awg.pdf">3M dimensional data</a></td>
 <td>Selected #10 hole, 16–14 AWG. Dedicated #10-32 bond bolts in fastener schedule; terminal-matched crimper required.</td>
@@ -249,8 +217,8 @@
 <tr>
 <td>□ To buy</td>
 <td><span class="material-name">Mounting and bonding hardware</span><figure class="material-photo" data-image-kind="reference"><a class="material-image" href="assets/materials/fasteners.png" target="_blank" rel="noopener" aria-label="View full image: Mounting and bonding hardware"><img src="assets/materials/fasteners.png" alt="Machine screws, nuts, flat/locking washers and approved bonding hardware — reference image" width="180" height="60" loading="lazy" decoding="async"></a><figcaption>Machine-screw reference illustration. Nuts, washers and final sizes are selected separately.<a href="https://boltdepot.com/Machine_screws">Image: Bolt Depot ↗</a></figcaption></figure><a class="locate-material" data-material="fasteners" href="index.html?material=fasteners#layout" aria-label="View Mounting and bonding hardware in 3D">View in 3D ↑</a></td>
-<td>Six assembly groups with exact fastener links and counts</td>
-<td><strong>Screw / nut / washer schedule in Build_Package.md</strong> — The package names thread, length, quantity, mating material and engagement. M3 for WAGO; M4 for rail and tie bases; #6-32 for Q0 and XA; #10-32 for dedicated PE bolts. Factory enclosure fasteners are reused.</td>
+<td>Five assembly groups with exact fastener links and counts</td>
+<td><strong>Screw / nut / washer schedule in Build_Package.md</strong> — The package names thread, length, quantity, mating material and engagement. M3 for WAGO; M4 for cable bases; #6-32 for Q0 and XA; #10-32 for the dedicated panel PE bolt. Factory enclosure fasteners are reused.</td>
 <td><a href="build.html#fasteners">Fastener sizes and purchase links</a></td>
 <td>Specific purchase links provided; receiving checks cover washer thickness and actual stacks.</td>
 </tr>
@@ -271,7 +239,7 @@
 <li><strong>Assembly and acceptance equipment — Arrange qualified assembly / lab tools.</strong> Calipers, wire stripper, terminal-matched crimper, torque tools, machining/deburring tools, PE/polarity/insulation test equipment and an independent power reference. Arrange access before assembly; tool ratings and procedures belong to the approved build process.</li>
 </ul>
 <h2>Build details</h2>
-<p>The <a href="build.html">build package</a> contains the machining files, exact fastener sizes and links, wire allowances, assembly order and the outstanding release items. The wall outlet is now Leviton 5279-C, the fuse holder is Littelfuse LPSC0001Z, and JV connects its 14 AWG output to A1. The five owned groups remain unchanged.</p>
+<p>The <a href="build.html">build package</a> contains the machining files, exact fastener sizes and links, wire allowances, assembly order and the outstanding release items. The wall outlet is Leviton 5279-C. Three WAGO groups provide JL, JN and PE; A1 connects directly to JL after Q0. Upstream-only voltage-lead protection remains subject to electrical acceptance. The five owned groups remain unchanged.</p>
 <p>The adapter photo confirms CUI SMI6-9-V-P5: 9 V DC, 0.667 A, center positive. The three multicolor pigtails are user-confirmed original DENT kit components, matched to the LD-SKTSP family; the CT matches Mini HSC. One round Tensility extension and one 41380 insert provide the DC entry. No permanent USB entry remains. CT scale and voltage-lead protection/termination remain acceptance items. Purchase status must not be inferred from an ownership tick.</p>
 <p><a href="installation.html">Installation audit</a> · <a href="index.html">Interactive layout and circuit</a> · <a href="layout_dimensions.json">Dimension schedule</a> · <a href="references.html">Primary references</a></p>
 </body></html>

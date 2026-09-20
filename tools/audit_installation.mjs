@@ -57,17 +57,15 @@ export function audit(dimensions, manifest, buffer, procurement) {
       c ? `${c.item}: ${c.profile} jacket ${c.diameterRangeMm.join('–')} mm; KTMBS ${c.insertPart} accepts ${c.insertRangeMm.join('–')} mm.` : 'Cable profile / insert not specified.',
       'Catalog interface check only. Original flat adapter cord is excluded; verify received jackets, connector passage, seals and strain relief.');
   }
-  const internal = ['meter', 'ct', 'fuse', 'rail'].map(id => parts[id]).concat(dimensions.instances.filter(p => p.part === 'terminals'));
+  const internal = ['meter', 'ct'].map(id => parts[id]).concat(dimensions.instances.filter(p => p.part === 'terminals'));
   const collisions = [];
   for (let i = 0; i < internal.length; i++) for (let j = i + 1; j < internal.length; j++) {
-    // The fuse holder clips to the rail; this is an intended contact.
-    if ([internal[i].id, internal[j].id].every(id => ['rail', 'fuse'].includes(id))) continue;
     const a = bounds(internal[i]), b = bounds(internal[j]);
     const overlap = a.intersect(b).getSize(new T.Vector3());
     if (Math.min(overlap.x, overlap.y, overlap.z) > .1) collisions.push(`${internal[i].id}/${internal[j].id}`);
   }
   record('Panel component body separation', collisions.length ? 'fail' : 'pass',
-    collisions.length ? collisions.join(', ') : `${internal.length} nominal body envelopes do not overlap (rail/holder mating excluded).`,
+    collisions.length ? collisions.join(', ') : `${internal.length} nominal body envelopes do not overlap.`,
     'CT uses the matched Mini HSC family envelope; exact scale remains unconfirmed. No connectors, open levers, flexible wires, mounting tolerances or screw-tool envelopes are certified by this check.');
   const sweeps = [];
   for (const p of [parts.panel, ...internal]) {
@@ -86,7 +84,7 @@ export function audit(dimensions, manifest, buffer, procurement) {
   record('Panel before flanged outlet', blocked ? 'sequence required' : 'pass',
     blocked ? 'The panel insertion sweep intersects the flanged-outlet envelope. Install the panel first; removal requires removing the outlet or a separately verified tilted path.' : 'No interference in this tested translation.');
   const bodyChecks = [];
-  for (const p of [parts.meter, parts.ct, parts.fuse, parts.outlet, parts.q0]) {
+  for (const p of [parts.meter, parts.ct, parts.outlet, parts.q0]) {
     const b = bounds(p), distances = [];
     for (const x of [b.min.x, b.max.x, p.position[0]]) for (const z of [b.min.z, b.max.z, p.position[2]]) {
       const ys = rayHits([x, b.max.y, z], [0, 1, 0], lid).map(v => v.y - b.max.y);
@@ -100,7 +98,7 @@ export function audit(dimensions, manifest, buffer, procurement) {
     'Exact cut-through gauges are in fabrication/cad-checks.json. Axis-aligned wall-device illustrations do not model the 0.937 degree draft; body/shell triangle contacts here are not mounting proofs. Received-part fit and fastening remain physical checks.');
   record('Closed lid screen', 'screen only',
     bodyChecks.map(p => `${p.id}: ${p.minimum_sampled_lid_gap_mm} mm (${p.lid_samples}/9 rays)`).join('; '),
-    'Nine upward rays per body against lid mesh 15. Not a minimum-distance proof; excludes lid hardware, guards, open fuse door, wire bundles and tolerances.');
+    'Nine upward rays per body against lid mesh 15. Not a minimum-distance proof; excludes lid hardware, guards, wire bundles and tolerances.');
   const wallEntries = ['dc-entry'].map(id => {
     const p = instances[id], xs = rayHits([130, p.position[1], p.position[2]], [1, 0, 0], shell).map(v => v.x).sort((a, b) => a - b);
     return { id, wall_intersections_x_mm: xs.map(round), local_wall_mm: xs.length >= 2 ? round(xs.at(-1) - xs[0]) : null };
@@ -112,7 +110,6 @@ export function audit(dimensions, manifest, buffer, procurement) {
   record('Cord diameter interfaces', 'pass', 'Southwire published nominal OD 9.17–9.27 mm lies within Hammond 6–12 mm gland and Leviton 0.245–0.655 in cord ranges.',
     'Published variants are not a manufacturing tolerance. Measure purchased cord; clamping, jacket preparation and pull resistance remain physical checks.');
   record('Ring barrel and internal wire', 'pass', 'Southwire nominal 2.87 mm insulation OD < 3M 4.318 mm ring maximum; 14 AWG is within 16–14 AWG ring range.', 'Does not qualify the crimp or approve the wiring method for this assembly.');
-  record('DIN rail capacity', 'pass', '100 − 17.78 − 2 × 6 = 70.22 mm remains after holder and two end stops.', 'Fasteners, PE bond and fuse-door service motion still need final placement.');
   record('Physical and electrical release', 'hold', 'No built assembly, nameplate verification, qualified acceptance or energized test has been recorded.');
   return { revision: 'Build package A, 2026-09-20', release: 'NOT RELEASED: close the receiving and electrical items in Build_Package.md', units: 'mm',
     method: 'Axis-aligned body envelopes, continuous vertical swept volumes against the machined Hammond shell, nine lid rays per body and sourced interface arithmetic. Shell triangulation deflection is 0.3 mm; numerical seating-contact exclusion is 0.0001 mm. Neither is a manufacturing tolerance.',

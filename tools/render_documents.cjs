@@ -31,7 +31,7 @@ for (const [title, items] of [['✓ Equipment to reuse', [...owned,...kit]], ['�
 }
 text += '\n## Software and lab equipment\n\nArrange access separately from the enclosure purchases. These resources are not marked as owned.\n\n';
 for (const r of bom.setup_requirements) text += `- **${r.item} — ${r.action}.** ${r.reason}${r.url ? ` [DENT download](${r.url})` : ''}\n`;
-text += `\n\n## Build details\n\nThe [build package](build.html) contains the machining files, exact fastener sizes and links, wire allowances, assembly order and the outstanding release items. The wall outlet is now Leviton 5279-C, the fuse holder is Littelfuse LPSC0001Z, and JV connects its 14 AWG output to A1. The five owned groups remain unchanged.\n\nThe adapter photo confirms CUI SMI6-9-V-P5: 9 V DC, 0.667 A, center positive. The three multicolor pigtails are user-confirmed original DENT kit components, matched to the LD-SKTSP family; the CT matches Mini HSC. One round Tensility extension and one 41380 insert provide the DC entry. No permanent USB entry remains. CT scale and voltage-lead protection/termination remain acceptance items. Purchase status must not be inferred from an ownership tick.\n\n[Installation audit](installation.html) · [Interactive layout and circuit](index.html) · [Dimension schedule](layout_dimensions.json) · [Primary references](references.html)\n`;
+text += `\n\n## Build details\n\nThe [build package](build.html) contains the machining files, exact fastener sizes and links, wire allowances, assembly order and the outstanding release items. The wall outlet is Leviton 5279-C. Three WAGO groups provide JL, JN and PE; A1 connects directly to JL after Q0. Upstream-only voltage-lead protection remains subject to electrical acceptance. The five owned groups remain unchanged.\n\nThe adapter photo confirms CUI SMI6-9-V-P5: 9 V DC, 0.667 A, center positive. The three multicolor pigtails are user-confirmed original DENT kit components, matched to the LD-SKTSP family; the CT matches Mini HSC. One round Tensility extension and one 41380 insert provide the DC entry. No permanent USB entry remains. CT scale and voltage-lead protection/termination remain acceptance items. Purchase status must not be inferred from an ownership tick.\n\n[Installation audit](installation.html) · [Interactive layout and circuit](index.html) · [Dimension schedule](layout_dimensions.json) · [Primary references](references.html)\n`;
 fs.writeFileSync(path.join(root, 'Procurement_BOM.md'), text);
 // The audit and per-material review are separate from ownership and purchase links.
 const review=JSON.parse(fs.readFileSync(path.join(root,'installation_review.json')));
@@ -62,7 +62,7 @@ let documents=`# Build documents
 
 - [Machining files and assembly guide](build.html) — drawings, fasteners and assembly order.
 - [Interactive installation sequence](index.html#assembly-preview) — inspect the six stages in 3D.
-- [Protection review](protection.html) — Q0 / Fv findings and the remaining evidence.
+- [Protection review](protection.html) — Q0, upstream voltage-lead protection and the remaining evidence.
 - [Installation audit](installation.html) — checks completed and remaining acceptance items.
 - [Full materials list](materials.html) · [Download BOM](Procurement_BOM.md)
 - [Manufacturer sources and design limits](references.html)
@@ -85,7 +85,7 @@ The logger stores time-series data in non-volatile memory and can be powered by 
 
 ### Initial setup and electrical checks
 
-Qualified electrical personnel verify terminations, polarity, PE continuity, insulation, protection and enclosure fit before releasing the assembly. Q0 opens hot only; PE stays continuous. Fv selection and breaker coordination must be resolved before energizing.
+Qualified electrical personnel verify terminations, polarity, PE continuity, insulation, protection and enclosure fit before releasing the assembly. Q0 opens hot only; PE stays continuous. Upstream Q0 protection for the original voltage leads and supply suitability must be accepted before energizing.
 
 Configure ELOG for single phase / two wire, CH1 voltage high L1 and low N, the actual CT type/range and logging interval. Disable unused channels. Verify sensible readings and positive real power against an independent reference meter; prove recording and restart behavior with a supervised power cycle.
 

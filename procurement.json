@@ -1,6 +1,6 @@
 {
-  "revision": "September 20, 2026 · OEM lead-set confirmation",
-  "scope": "One grounded 120 V supply, one printer at a time. Five equipment groups are confirmed on hand; the USB cable is kit supplied. Log independently during printing and download only with mains unplugged. Q0 application, Fv lead coordination, CT scaling and physical acceptance remain open; this is not a complete-order or energizing release.",
+  "revision": "September 20, 2026 · upstream protection review",
+  "scope": "One grounded 120 V supply, one printer at a time. Five equipment groups are confirmed on hand; the USB cable is kit supplied. Log independently during printing and download only with mains unplugged. The voltage tap uses upstream Q0 protection only. Its suitability for the original DENT leads, Q0 site/startup suitability, CT scaling and physical acceptance remain open; this is not an energizing release.",
   "items": [
     {
       "id": "meter",
@@ -99,9 +99,9 @@
         "width": 1280,
         "height": 1707
       },
-      "installation": "Three original DENT voltage pigtails: A1 at JV, A2/A3 at neutral JN. Shrouded ends mate with the long leads inside the case. Drawing colors are schematic; actual color assignments are not recorded.",
-      "location_summary": "A1 connects at JV; A2 and A3 connect at neutral JN.",
-      "notice": "Termination and protection need acceptance before use."
+      "installation": "Three original DENT voltage pigtails: A1 at switched hot JL, A2/A3 at neutral JN. Shrouded ends mate with the long leads inside the case. Drawing colors are schematic; actual color assignments are not recorded.",
+      "location_summary": "A1 connects at switched hot JL; A2 and A3 connect at neutral JN.",
+      "notice": "Upstream Q0 protection and lead termination need acceptance before use."
     },
     {
       "id": "voltage-leads",
@@ -307,84 +307,11 @@
       "location_summary": "Through the right wall, facing the external adapter."
     },
     {
-      "item": "Fv fuse holder",
-      "quantity": "1",
-      "model": "Littelfuse LPSC0001Z",
-      "reason": "1-pole, non-indicating Class CC, 600 V AC/DC holder. This replaces the conflicting Eaton revision. 14 AWG Class C copper in and out; the fused output goes to JV before the OEM voltage pigtail.",
-      "status": "Selected: 17.78 × 78.5 × 61 mm maximum; 35 mm DIN; terminal torque 2.0 N·m.",
-      "links": [
-        {
-          "label": "Buy · DigiKey",
-          "url": "https://www.digikey.com/en/products/detail/littelfuse-inc/LPSC0001Z/2516312",
-          "kind": "buy"
-        },
-        {
-          "label": "Buy · Mouser",
-          "url": "https://www.mouser.com/en/ProductDetail/Littelfuse/LPSC0001Z?qs=gu7KAQ731UTaa%2FsFry13Yw%3D%3D",
-          "kind": "buy"
-        },
-        {
-          "label": "Littelfuse catalog",
-          "url": "https://www.littelfuse.com/de/assetdocs/powr-gard-catalog?assetguid=85d36235-a32b-4608-bfed-f9878aa43af0",
-          "kind": "reference"
-        }
-      ],
-      "id": "fuse-holder",
-      "availability": "buy",
-      "image": {
-        "src": "assets/materials/fuse-holder.jpg",
-        "alt": "Littelfuse LPSC0001Z supplier photo",
-        "caption": "Littelfuse LPSC0001Z supplier photo",
-        "width": 200,
-        "height": 200,
-        "source_url": "https://www.digikey.com/en/products/detail/littelfuse-inc/LPSC0001Z/2516312",
-        "source_label": "DigiKey / Littelfuse",
-        "kind": "reference"
-      },
-      "installation": "Fv holder clips onto the short DIN rail. The cartridge is a separate material inside it.",
-      "location_summary": "Clips onto the short DIN rail on the mounting panel."
-    },
-    {
-      "item": "Fv fuse",
-      "quantity": "2 (1 installed + 1 spare)",
-      "model": "Littelfuse KLKR.500T · 0.5 A Class CC",
-      "reason": "KLKR.500T is 0.5 A fast-acting Class CC, 600 V AC, 10.3 × 38.1 mm, with 200 kA AC interrupting rating; it fits LPSC0001Z. DENT publishes 125 mA maximum line input and a 500 mA fused accessory, but neither establishes this fuse’s coordination with the existing external lead.",
-      "status": "Holder, cartridge size and voltage rating verified. Voltage-pigtail conductor/short-circuit withstand and logger startup coordination remain undocumented. Component interrupting rating is not assembly SCCR.",
-      "links": [
-        {
-          "label": "Exact candidate · DigiKey",
-          "url": "https://www.digikey.com/en/products/detail/littelfuse-ibu/KLKR-500T/2518128",
-          "kind": "buy"
-        },
-        {
-          "label": "Littelfuse KLKR data",
-          "url": "https://www.littelfuse.com/assetdocs/klkr-classcc-fuse-datasheet-final?assetguid=4443e5f6-97ee-4206-9abe-9e155371a03e",
-          "kind": "reference"
-        }
-      ],
-      "id": "fuse",
-      "availability": "buy",
-      "image": {
-        "src": "assets/materials/fuse.jpg",
-        "alt": "KLKR family reference; selected 0.5 A value remains on hold",
-        "caption": "KLKR family reference; selected 0.5 A value remains on hold",
-        "width": 200,
-        "height": 200,
-        "source_url": "https://www.digikey.com/en/products/detail/littelfuse-ibu/KLKR-500T/2518128",
-        "source_label": "DigiKey / Littelfuse",
-        "kind": "reference"
-      },
-      "installation": "One cartridge fits inside Fv. The holder is shown transparent when locating it. Keep the second cartridge as an external spare; the proposed rating still needs acceptance.",
-      "location_summary": "One cartridge inside Fv; the spare stays outside the enclosure.",
-      "quantity_summary": "1 + 1 spare",
-      "notice": "Holder fit verified; lead protection remains on hold."
-    },
-    {
       "item": "Distribution connectors",
-      "quantity": "5",
+      "quantity": "3",
       "model": "WAGO 221-415",
-      "reason": "One each for JL and JN; two bridged connectors for JPE and six external PE connections. Use only with permitted copper conductors, sizes and terminations; confirm tinned OEM voltage pigtail and protective-bonding suitability. All groups remain separate. Fifth group JV transitions from the holder’s 14 AWG output to the A1 sensing pigtail.",
-      "status": "Selected; five mounting positions in the panel drawing. Conductor acceptance is checked at assembly.",
+      "reason": "One five-port connector each for JL, JN and PE. JL accepts Q0 output, printer hot, A1 and adapter hot; JN accepts supply, printer, A2, A3 and adapter neutrals; PE accepts supply, printer, panel and outlet earth. One accepted conductor per port. Confirm original DENT pigtail preparation and protective-bonding suitability.",
+      "status": "Three mounting positions in the panel drawing. Conductor acceptance is checked at assembly.",
       "links": [
         {
           "label": "Buy · DigiKey",
@@ -410,15 +337,15 @@
         "width": 200,
         "height": 200
       },
-      "installation": "Five WAGO connector groups: JL, JN, PE, PE+ and JV. Each clips into its own mounting carrier.",
-      "location_summary": "Five groups on the panel: JL, JN, PE, PE+ and JV."
+      "installation": "Three WAGO connector groups: JL, JN and PE. Each clips into its own mounting carrier.",
+      "location_summary": "Three groups on the panel: JL, JN and PE."
     },
     {
       "item": "Connector carriers",
-      "quantity": "5",
+      "quantity": "3",
       "model": "WAGO 221-505",
-      "reason": "Secure the connector groups to the backpanel using the carrier's permitted mounting method. 3D carrier envelope is provisional. Add guards as needed; loose connectors must not rely on the wire for support. Fifth group JV transitions from the holder’s 14 AWG output to the A1 sensing pigtail.",
-      "status": "Five carriers, two M3 fixings each; transfer-drill actual front-foot holes.",
+      "reason": "Secure each connector to the backpanel with its carrier. Carrier details are schematic; transfer-drill from received parts. Connectors must not rely on wires for support.",
+      "status": "Three carriers, two M3 fixings each; transfer-drill actual front-foot holes.",
       "links": [
         {
           "label": "Buy · DigiKey",
@@ -449,38 +376,8 @@
         "width": 200,
         "height": 200
       },
-      "installation": "Five carriers sit under JL, JN, PE, PE+ and JV and fasten to the panel. Carrier details are schematic; transfer-drill from received parts.",
-      "location_summary": "One beneath each of the five distribution connectors."
-    },
-    {
-      "item": "Short DIN rail",
-      "quantity": "100 mm cut length; buy 1 pack only if no suitable offcut",
-      "model": "DINnector DN-R35S1-2",
-      "reason": "35 × 7.5 mm steel profile for Fv only; the linked pack contains two 1 m lengths. End stops and fasteners are separate rows below. Deburr, secure and bond the rail. Q0 is panel mounted.",
-      "status": "Cut length to final fit; pack quantity exceeds one-box need",
-      "links": [
-        {
-          "label": "Buy · AutomationDirect",
-          "url": "https://www.automationdirect.com/adc/shopping/catalog/wire_-a-_cable_management/din_rail/din_rail/dn-r35s1-2",
-          "kind": "buy"
-        }
-      ],
-      "id": "din-rail",
-      "availability": "buy",
-      "image": {
-        "src": "assets/materials/din-rail.jpg",
-        "source_image": "https://cdn.automationdirect.com/images/products/large/l_dnr35s1.jpg",
-        "kind": "reference",
-        "alt": "DINnector DN-R35S1-2 — reference image",
-        "caption": "35 × 7.5 mm rail shown before cutting to length.",
-        "source_label": "AutomationDirect",
-        "source_url": "https://www.automationdirect.com/adc/shopping/catalog/wire_-a-_cable_management/din_rail/din_rail/dn-r35s1-2",
-        "width": 1024,
-        "height": 1024
-      },
-      "installation": "A 100 mm rail is screwed to the panel below Fv; the holder and two end stops clip onto it.",
-      "location_summary": "On the panel beneath Fv and its two end stops.",
-      "quantity_summary": "100 mm"
+      "installation": "Three carriers sit under JL, JN and PE and fasten to the panel.",
+      "location_summary": "One beneath each of the three distribution connectors."
     },
     {
       "item": "Mains / printer cord",
@@ -682,36 +579,6 @@
       "notice": "Setup / download only — unplug mains first."
     },
     {
-      "id": "din-stops",
-      "item": "DIN rail end stops",
-      "quantity": "2 used; linked pack contains 10",
-      "model": "DINnector DN-EB35-A-10",
-      "reason": "Secure both sides of the fuse holder on the 35 mm DIN rail. Check remaining rail length with the purchased holder.",
-      "status": "To buy · one pack supplies more than needed",
-      "availability": "buy",
-      "links": [
-        {
-          "label": "Buy · AutomationDirect",
-          "url": "https://www.automationdirect.com/adc/shopping/catalog/wiring_solutions/terminal_blocks/end_brackets/dn-eb35-a-10",
-          "kind": "buy"
-        }
-      ],
-      "image": {
-        "src": "assets/materials/din-stops.jpg",
-        "source_image": "https://cdn.automationdirect.com/images/products/large/l_dneb35a10.jpg",
-        "kind": "reference",
-        "alt": "DINnector DN-EB35-A-10 — reference image",
-        "caption": "DN-EB35-A-10 supplier image; sold in packs of 10.",
-        "source_label": "AutomationDirect",
-        "source_url": "https://www.automationdirect.com/adc/shopping/catalog/wiring_solutions/terminal_blocks/end_brackets/dn-eb35-a-10",
-        "width": 175,
-        "height": 175
-      },
-      "installation": "Two stops immediately flank the Fv holder on the rail. Eight unused pieces from the pack remain outside.",
-      "location_summary": "One on each side of the fuse holder on the DIN rail.",
-      "quantity_summary": "2"
-    },
-    {
       "id": "dc-extension",
       "item": "Round DC extension cable",
       "quantity": "1; keep the full 0.915 m",
@@ -791,7 +658,7 @@
       "item": "Internal L / N / PE wire",
       "quantity": "Black 3 m; white 2 m; green 3 m minimum. Linked rolls: 100 ft each.",
       "model": "Southwire 14 AWG, 19-strand Class C, THHN/THWN/MTW, 600 V",
-      "reason": "Specified stranded class matches LPSC0001Z pressure terminals. Buy black 22955984, white 22956784 and green 22959184; linked rolls leave substantial spare stock. Do not substitute a finer flex class at the fuse holder without its approval. Wire blanks and terminal preparation are in the build package.",
+      "reason": "Buy black 22955984, white 22956784 and green 22959184. The selected 14 AWG copper fits the connector and ring-terminal ranges; verify the accepted wiring method. Linked rolls leave spare stock. Wire blanks and preparation are in the build package.",
       "status": "Selected: manufacturer nominal OD 0.113 in (2.87 mm); 14 AWG fits WAGO and #10 rings.",
       "availability": "buy",
       "links": [
@@ -827,14 +694,14 @@
         "width": 1200,
         "height": 240
       },
-      "installation": "Separate hot, neutral and protective-earth runs between distribution, breaker, outlet, fuse and bonds. These are routing illustrations, not cut lengths.",
-      "location_summary": "Between the terminals, breaker, outlet, fuse and PE bonds.",
+      "installation": "Separate hot, neutral and protective-earth runs between distribution, breaker, outlet and panel bond. These are routing illustrations, not cut lengths.",
+      "location_summary": "Between the terminals, breaker, outlet and panel PE bond.",
       "quantity_summary": "Black 3 m; white 2 m; green 3 m"
     },
     {
       "id": "ring-lugs",
       "item": "Ring terminals",
-      "quantity": "6 minimum: 2 Q0, 2 panel/rail bonds + 2 spares",
+      "quantity": "5 minimum: 2 Q0, 1 panel bond + 2 spares",
       "model": "3M MV14-10R/LX-BOTTLE · #10 stud, 16–14 AWG",
       "reason": "Two Q0 terminals are #10-32 studs. The former #8 alternative has been removed. Other PE terminations must match their own studs.",
       "status": "Selected #10 hole, 16–14 AWG. Dedicated #10-32 bond bolts in fastener schedule; terminal-matched crimper required.",
@@ -861,9 +728,9 @@
         "source_label": "DigiKey / 3M",
         "kind": "reference"
       },
-      "installation": "Four installed: Q0 input, Q0 output, panel PE stud and rail PE stud. Two or more purchased spares stay outside.",
-      "location_summary": "At both Q0 studs and the panel and rail PE bonds.",
-      "quantity_summary": "4 + 2 spares"
+      "installation": "Three installed: Q0 input, Q0 output and panel PE stud. Two or more purchased spares stay outside.",
+      "location_summary": "At both Q0 studs and the panel PE bond.",
+      "quantity_summary": "3 + 2 spares"
     },
     {
       "id": "tie-mounts",
@@ -928,9 +795,9 @@
     {
       "id": "fasteners",
       "item": "Mounting and bonding hardware",
-      "quantity": "Six assembly groups with exact fastener links and counts",
+      "quantity": "Five assembly groups with exact fastener links and counts",
       "model": "Screw / nut / washer schedule in Build_Package.md",
-      "reason": "The package names thread, length, quantity, mating material and engagement. M3 for WAGO; M4 for rail and tie bases; #6-32 for Q0 and XA; #10-32 for dedicated PE bolts. Factory enclosure fasteners are reused.",
+      "reason": "The package names thread, length, quantity, mating material and engagement. M3 for WAGO; M4 for cable bases; #6-32 for Q0 and XA; #10-32 for the dedicated panel PE bolt. Factory enclosure fasteners are reused.",
       "status": "Specific purchase links provided; receiving checks cover washer thickness and actual stacks.",
       "availability": "buy",
       "links": [
@@ -951,8 +818,8 @@
         "width": 175,
         "height": 58
       },
-      "installation": "Mounting screw/washer/nut sets for Q0, XA, five carriers, six cable bases, DIN rail and two PE bonds. Small hardware is schematic; use the build-package sizes and transfer-drilling instructions.",
-      "location_summary": "At component mounts, cable bases, the rail and PE bonds.",
+      "installation": "Mounting screw/washer/nut sets for Q0, XA, three carriers, six cable bases and the panel PE bond. Small hardware is schematic; use the build-package sizes and transfer-drilling instructions.",
+      "location_summary": "At component mounts, cable bases and the panel PE bond.",
       "quantity_summary": "See fastener schedule"
     },
     {

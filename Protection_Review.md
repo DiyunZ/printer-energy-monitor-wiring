@@ -2,12 +2,12 @@
 
 September 20, 2026 · 120 V grounded supply · one printer at a time.
 
-**Q0 and Fv are not fully released for ordering.** The checks below resolve published component ratings and fit. Actual outlet fault current, combined startup duty and protection of the existing voltage leads remain unverified. No hardware test or qualified acceptance has been recorded.
+**Q0 and voltage-lead protection still need acceptance.** The checks below resolve published component ratings and fit. Actual outlet fault current, combined startup duty and protection of the existing voltage leads remain unverified. No hardware test or qualified acceptance has been recorded.
 
 | Item | Verified | Decision |
 |---|---|---|
 | Q0, CA1-B0-24-615-121-DG | 15 A, delay 24, UL489 option; 10 kA interrupting rating at 120 V AC | Keep selected model on hold for site and startup confirmation; exact-SKU stock needs a quote. |
-| Fv, KLKR.500T / LPSC0001Z | 0.5 A, Class CC, 600 V AC; cartridge/holder match | Keep the fuse on hold for external-lead protection and startup coordination. |
+| Voltage tap | A1 connects to JL after Q0; no dedicated fuse | Confirm that upstream Q0 protection is suitable for the original DENT leads before energizing. |
 | USB cable | Included in DENT kit; use the lid-pocket cable | No routine purchase. Confirm it is present; use only for offline service. |
 | DC entry | Tensility round extension with KVT 32 / 41380 | Quantity reduced to one frame and one insert; USB opening removed. |
 
@@ -37,19 +37,19 @@ The public pages and renovation summaries inspected do not supply the chosen out
 
 Manufacturer data for startup amplitude, duration, repetitions, input voltage and temperature—or a suitably captured waveform reviewed against the breaker curve—is needed to close the startup comparison. Ordinary logged averages and a single successful power-on do not establish that comparison. Request the actual printer/PSU startup specification; do not increase the breaker rating merely to avoid trips.
 
-## Fv: fit is verified, lead protection is still open
+## Voltage tap: upstream protection review
 
-KLKR.500T is a **0.5 A fast-acting Class CC** fuse, **600 V AC**, nominal **10.3 × 38.1 mm**, with **200 kA AC interrupting rating**. Littelfuse lists LPSC as a compatible holder family. This confirms the selected cartridge/holder interface; it does not rate the whole enclosure for 200 kA. The datasheet's tabulated clearing-energy values do not include the 0.5 A version, so no smaller-lead withstand calculation has been inferred from a different rating. [Littelfuse KLKR datasheet](https://www.littelfuse.com/assetdocs/klkr-classcc-fuse-datasheet-final?assetguid=4443e5f6-97ee-4206-9abe-9e155371a03e).
+The revised design omits Fv, its holder, DIN rail, stops and JV. The hot sensing path is **Q0 → JL → original DENT A1 pigtail → full voltage lead → ELITEpro L1**. L2 and N remain connected to neutral. The adapter and voltage tap branch off before CT; only printer hot passes through CT. The sensing leads do not carry printer load current.
 
-DENT specifies up to **125 mA line input** and an internal 0.5 A fuse. The separate OEM fused crocodile accessory uses a 500 mA fuse. That supports an OEM protected measurement connection, but matching the ampere number does not establish equivalent protection for an external KLKR fuse with LD-SKTSP series pigtails. The internal meter fuse cannot protect a lead fault upstream of the meter. [DENT XC specification](https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf), [DENT fused accessory](https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-fused-crocodile-clip/).
+The user confirms the three differently colored pigtails as original DENT kit components, matched to the LD-SKTSP family. DENT lists these leads for hard-wiring and also offers standard non-fused and optional fused clips. That does not establish that this custom enclosure and its 15 A breaker adequately protect the original lead set. [DENT pigtails](https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/), [DENT clip options](https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-fused-crocodile-clip/).
 
-The user confirms the three differently colored pigtails as original DENT kit components, matched to the LD-SKTSP family. OEM identity is no longer an open item. The listing does not state conductor size, short-circuit withstand or an approved external protective device; those separate protection questions are not resolved by the kit confirmation. [DENT LD-SKTSP series](https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/).
+**Before energizing:** the responsible electrical reviewer must accept the upstream-only protection scheme, original lead terminations and installation conditions. No such acceptance or physical test is recorded. The ELITEpro's internal fuse cannot clear a short in an external lead that bypasses the instrument. Removing Fv does not validate Q0 or establish the assembly's short-circuit rating.
 
-**Manufacturer confirmation request — draft, not sent:**
+**Manufacturer question — draft, not sent:**
 
-> Can DENT approve a Littelfuse KLKR.500T (0.5 A fast-acting Class CC) in LPSC0001Z ahead of an original DENT kit pigtail from the LD-SKTSP family plus the original voltage lead feeding ELITEpro XC L1 at 120 V? L2 and N connect to neutral; the supplied 9 V adapter is also powered from the switched circuit. Please provide the supported lead conductor/termination data, short-circuit protection requirements and logger energization/inrush compatibility, or specify an approved protective accessory and installation method. The proposed hot path is Q0 → JL → Fv → 14 AWG → JV → pigtail → original lead → L1.
+> For our proposed 120 V measurement enclosure, may original DENT LD-SKTSP pigtails and voltage leads connect to a circuit protected by a Carling CA1-B0-24-615-121-DG 15 A breaker without a dedicated voltage-tap fuse? A1 feeds L1 from switched hot; L2 and N connect to neutral. Please confirm the permitted upstream protection and terminal preparation, or identify any additional protection required. The original 9 V adapter is also powered from the switched circuit.
 
-The existing buy links identify exact products; they are not approval to bypass these checks. [Q0 supplier / quote](https://www.mouser.com/ProductDetail/Carling-Technologies/CA1-B0-24-615-121-DG?qs=vln4JGBFwFoweMB2W4WfRg%3D%3D), [Fv supplier](https://www.digikey.com/en/products/detail/littelfuse-ibu/KLKR-500T/2518128). Verify live stock and lead time at checkout.
+The [Q0 purchase link](https://www.mouser.com/ProductDetail/Carling-Technologies/CA1-B0-24-615-121-DG?qs=vln4JGBFwFoweMB2W4WfRg%3D%3D) identifies the selected product. Exact-SKU stock, site fault-current suitability and startup behavior remain to be confirmed.
 
 ## Experiment data workflow
 

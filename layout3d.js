@@ -2,8 +2,8 @@ import * as THREE from 'three';
 import { OrbitControls } from './vendor/OrbitControls.js';
 import { RoundedBoxGeometry } from './vendor/RoundedBoxGeometry.js';
 import { installMaterialLocator } from './material-locator.js?v=17';
-import { addInstallationHardware } from './installation-hardware.js?v=17';
-import { screenCableBodies } from './cable-supports.js?v=15';
+import { addInstallationHardware } from './installation-hardware.js?v=19';
+import { screenCableBodies } from './cable-supports.js?v=19';
 import { showDesignPanel } from './site-navigation.js?v=15';
 
 // All geometry is in millimetres. Only the camera changes the screen scale.
@@ -14,11 +14,11 @@ const V = a => new THREE.Vector3(...a);
 
 async function start() {
   const [dimensions, cad, buffer, review, procurement] = await Promise.all([
-    fetch('./layout_dimensions.json?v=17').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
-    fetch('./assets/enclosure.json?v=17').then(r => { if (!r.ok) throw Error('CAD manifest unavailable'); return r.json(); }),
-    fetch('./assets/enclosure.bin?v=17').then(r => { if (!r.ok) throw Error('CAD geometry unavailable'); return r.arrayBuffer(); }),
-    fetch('./installation_review.json?v=17').then(r => { if (!r.ok) throw Error('Installation review unavailable'); return r.json(); }),
-    fetch('./procurement.json?v=17').then(r => { if (!r.ok) throw Error('Materials unavailable'); return r.json(); })
+    fetch('./layout_dimensions.json?v=19').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
+    fetch('./assets/enclosure.json?v=19').then(r => { if (!r.ok) throw Error('CAD manifest unavailable'); return r.json(); }),
+    fetch('./assets/enclosure.bin?v=19').then(r => { if (!r.ok) throw Error('CAD geometry unavailable'); return r.arrayBuffer(); }),
+    fetch('./installation_review.json?v=19').then(r => { if (!r.ok) throw Error('Installation review unavailable'); return r.json(); }),
+    fetch('./procurement.json?v=19').then(r => { if (!r.ok) throw Error('Materials unavailable'); return r.json(); })
   ]);
   const parts = Object.fromEntries(dimensions.parts.map(p => [p.id, p]));
   const instances = Object.fromEntries(dimensions.instances.map(p => [p.id, p]));
@@ -194,20 +194,7 @@ async function start() {
   }
   decal('Q0\nMAIN',37,20,[qx,qy+57,214],'q0','front');
   tag('Q0 · external handle',[qx-9,qy+71,217],'q0');
-  // Fuse holder and short, bonded DIN rail.
-  const [rw,rh,rd] = parts.rail.size, [rx,ry,rz] = parts.rail.position;
-  const railWeb=new THREE.Shape();railWeb.moveTo(-rw/2,-rd/2);railWeb.lineTo(rw/2,-rd/2);railWeb.lineTo(rw/2,rd/2);railWeb.lineTo(-rw/2,rd/2);railWeb.closePath();
-  for(const [x,z,r] of [...dimensions.installationHardware.railFixingsXZ.map(([x,z])=>[x,z,2.25]),[...dimensions.installationHardware.railBondXZ,2.65]]){
-    const hole=new THREE.Path();hole.absarc(x-rx,z-rz,r,0,Math.PI*2,true);railWeb.holes.push(hole);
-  }
-  const railGeo=new THREE.ExtrudeGeometry(railWeb,{depth:1.5,bevelEnabled:false,curveSegments:24});railGeo.rotateX(Math.PI/2);railGeo.translate(0,.75,0);
-  planBodies.rail = [mesh(railGeo,material('#bdc6c9',.65),[rx,ry-rh/2+.75,rz],'rail')];
-  for(const side of [-1,1]) planBodies.rail.push(box([rw,rh,1.5],[rx,ry,rz+side*(rd/2-.75)],material('#aeb9be',.6),'rail'));
-  fitBodies.fuse=[box(parts.fuse.size,parts.fuse.position,'#d4d8d4','fuse',1.5)];
-  box([14,4,35],[-60,70.4,-28],'#f2f0e3','fuse',1);
-  decal('Fv',12,18,[-60,72.8,-28],'fuse');
-  tag('Fv · fixed fuse',[-63,89,-31],'fuse');
-  // Secured five-way connector groups. Two separate bridged PE connectors provide spare bond capacity.
+  // Three secured five-port connectors keep hot, neutral and PE separate.
   dimensions.instances.filter(p=>p.part==='terminals').forEach(p => {
     const [x,,z] = p.position, name = p.id;
     const carrier=box([p.size[0],4,p.size[2]],[x,4,z],'#e2e7e5','terminals',2);
@@ -278,20 +265,16 @@ async function start() {
   locatedCable('cord','printer','Printer cord outside enclosure',[[0,36,-240],[0,36,-258],[18,36,-283]],'#2a333c',4.6,'entries');
   planBodies['printer-plug']=[box(instances['printer-plug'].size,instances['printer-plug'].position,'#e2b837','entries',6)];
   mark('printer-connector','connector','Printer output connector',[...planBodies['printer-plug'],cylinder(12,3,[24,36,-326],'#e1d7ad','entries','z')]);
-  locatedCable('internal-wire','jl-fv','JL to Fv',[[-130,14,-120],[-97,20,-100],[-78,22,-80],[-60,27,-72]],hot,1.7,'fuse');
   locatedCable('internal-wire','xa-hot','XA hot',[[-135,13,-138],[-146,17,-154],[-132,12,-175],[-35,12,-175],[0,12,-175],[40,12,-175],[132,22,-175],[143,76,-20],[141,113,4]],hot,1.7,'outlet');
   locatedCable('internal-wire','xa-neutral','XA neutral',[[-127,13,-48],[-148,21,-65],[-143,21,-153],[-117,12,-167],[-35,12,-167],[0,12,-167],[40,12,-167],[133,26,-167],[140,72,-16],[141,121,4]],neutral,1.7,'outlet');
-  locatedCable('internal-wire','pe-bridge','PE bridge',[[-118,13,25],[-100,12,32],[-83,12,44]],pe,1.7,'terminals');
-  locatedCable('internal-wire','xa-pe','XA protective earth',[[-71,13,62],[-91,18,78],[-97,19,22],[-92,19,-80],[-92,12,-183],[-35,12,-183],[0,12,-183],[40,12,-183],[140,24,-183],[148,67,36],[141,128,25]],pe,1.7,'outlet');
-  locatedCable('internal-wire','rail-pe','Rail bond',[[-78,13,62],[-52,23,78],[-4,23,72],[-3,23,7],[-9,14,-9],[-27+15.5/Math.sqrt(2),8.9,-28+15.5/Math.sqrt(2)]],pe,1.7,'rail');
-  locatedCable('internal-wire','panel-pe','Panel bond',[[-82,13,62],[-99,13,78],[-119,8,83],[-125,7.4,75.5]],pe,1.7,'panel');
-  locatedCable('internal-wire','fv-jv','Fv to JV',[[-60,26,11.25],[-60,25,22],[-39.6,18,22],[-39.6,14,37.15]],hot,1.45,'fuse');
+  locatedCable('internal-wire','xa-pe','XA protective earth',[[-119.2,13,26.15],[-104,18,42],[-97,19,22],[-92,19,-80],[-92,12,-183],[-35,12,-183],[0,12,-183],[40,12,-183],[140,24,-183],[148,67,36],[141,128,25]],pe,1.7,'outlet');
+  locatedCable('internal-wire','panel-pe','Panel bond',[[-125,13,26.15],[-125,24,36],[-108,25,49],[-109,13,78],[-125,7.4,75.5]],pe,1.7,'panel');
   // OEM voltage pigtails and three full voltage leads, including a visible retained-slack zone.
   const leadPorts = [3,2,0], leadColors = ['#283039','#ad4d4a','#dddcd1'];
   for(let i=0;i<3;i++) {
     const p=instances[`A${i+1}`], [x,,plugZ]=p.position, z=plugZ-9;
-    const startPt = i===0?[-33.8,14,37.15]:[-124+i*6,14,-49];
-    const shortLead=cable(i===0?[startPt,[-44,29,49],[x,22,z]]:[startPt,[-99,24,-30],[-86-i*4,31,-5],[-80-i*4,32,21],[-53,31,40],[x,22,z]],blue,1.65);
+    const startPt = i===0?[-125,14,-118.85]:[-124+i*6,14,-49];
+    const shortLead=cable(i===0?[startPt,[-101,22,-103],[-83,22,-77],[-65,23,-30],[-47,23,14],[x,22,z]]:[startPt,[-99,24,-30],[-86-i*4,31,-5],[-80-i*4,32,21],[-53,31,40],[x,22,z]],blue,1.65);
     shortLead.userData.route.id=`blue:A${i+1}`;
     planBodies[p.id]=[cylinder(p.size[0]/2,p.size[2],p.position,blue,'leads','z')];
     mark('blue-leads',p.id,p.label,[shortLead,...planBodies[p.id]]);
@@ -343,9 +326,9 @@ async function start() {
   locatedCable('usb','usb','Temporary USB — mains unplugged',[[mx+16,23,mz+ml/2+21],[132,30,132],[148,92,150],[151,160,160],[169,205,180],[215,215,180],[255,205,180]],'#516d86',2.4,'entries');
   mark('usb','usb','Temporary USB — mains unplugged',[box([10,11,20],[mx+16,23,mz+ml/2+11],'#43576a','entries',2)]);
   const usbPreview = allMeshes.slice(usbPreviewStart);
-  const supportChecks=addInstallationHardware({ dimensions, instances, parts, allMeshes, box, cylinder, mesh, material, decal, mark, capture, materialLocations, cableRoutes });
+  const supportChecks=addInstallationHardware({ dimensions, instances, parts, box, cylinder, mesh, material, decal, mark, capture, materialLocations, cableRoutes });
   // Remaining integral features belong to their purchased assembly, not a new BOM item.
-  const assemblyMaterials={case:'enclosure',panel:'panel',meter:'meter',ct:'ct',q0:'breaker',outlet:'receptacle',adapter:'adapter',rail:'din-rail',fuse:'fuse-holder'};
+  const assemblyMaterials={case:'enclosure',panel:'panel',meter:'meter',ct:'ct',q0:'breaker',outlet:'receptacle',adapter:'adapter'};
   for(const [part,id] of Object.entries(assemblyMaterials)) {
     const objects=allMeshes.filter(m=>m.userData.part===part&&!m.userData.materialId&&!m.userData.annotation);
     if(id==='enclosure') {
@@ -396,7 +379,7 @@ async function start() {
     labels.forEach(({el,position,id,kind})=>{
       if(locator?.active){el.hidden=true;return;}
       const p=position.clone().project(camera);
-      const concealed=(assemblyStage>0&&((kind==='dimension')||(id&&groups[id]&&!groups[id].visible)))||($('model-shell').value==='closed'&&(['meter','ct','fuse','terminals','leads'].includes(id)||(kind==='dimension'&&el.textContent!=='100 mm')));
+      const concealed=(assemblyStage>0&&((kind==='dimension')||(id&&groups[id]&&!groups[id].visible)))||($('model-shell').value==='closed'&&(['meter','ct','terminals','leads'].includes(id)||(kind==='dimension'&&el.textContent!=='100 mm')));
       const show=!concealed&&(kind==='dimension'?$('model-dimensions').checked:$('model-label-toggle').checked)&&p.z>-1&&p.z<1&&Math.abs(p.x)<.93&&Math.abs(p.y)<.93;
       el.hidden=!show;el.classList.toggle('chosen',id===activePart);
       if(!show)return;
@@ -445,7 +428,7 @@ async function start() {
   function applyAssembly() {
     const stage=assemblyStage;
     for(const [id,g] of Object.entries(groups)) {
-      const first=id==='case'?1:id==='panel'?2:['rail','terminals','meter','ct','fuse'].includes(id)?3:['q0','outlet','entries'].includes(id)?4:5;
+      const first=id==='case'?1:id==='panel'?2:['terminals','meter','ct'].includes(id)?3:['q0','outlet','entries'].includes(id)?4:5;
       g.visible=stage===0||stage>=first;
     }
     groups.panel.position.y=stage===2?300*(1-Number($('assembly-progress').value)/100):0;
@@ -498,21 +481,20 @@ async function start() {
   renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();status.textContent='3D graphics context lost. Reload the page to restore; the dimension schedule remains available.';});
   controls.addEventListener('change',render);
   controls.addEventListener('start',()=>document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed','false')));
-  const aliases={enclosure:'case',breaker:'q0',receptacle:'outlet','fuse-holder':'fuse',connectors:'terminals',carriers:'terminals','din-rail':'rail','blue-leads':'leads','voltage-leads':'leads'};
+  const aliases={enclosure:'case',breaker:'q0',receptacle:'outlet',connectors:'terminals',carriers:'terminals','blue-leads':'leads','voltage-leads':'leads'};
   locator=installMaterialLocator({items:procurement.items,locations:materialLocations,scene,camera,controls,host,render,
     prepare:id=>{showDesignPanel('layout');resize();setAssembly(0,false);$('assembly-preview').hidden=true;$('assembly-preview').open=false;$('model-shell').value=id==='usb'?'cutaway':'xray';$('model-wires').checked=true;appearance();selection.visible=false;},
     describe:p=>{
       activePart=p.id;
       materialCopy(p);
       const detail=parts[aliases[p.id]||p.id];
-      // The BOM fuse is the cartridge; the original part named fuse is its holder.
-      const size=p.id==='fuse'?[dimensions.installationHardware.fuseCartridge.diameter,dimensions.installationHardware.fuseCartridge.diameter,dimensions.installationHardware.fuseCartridge.length]:p.id==='carriers'?instances.JL.size:detail?.size;
+      const size=p.id==='carriers'?instances.JL.size:detail?.size;
       $('part-name').textContent=p.model;$('part-size').hidden=!size;
       $('part-size').textContent=size?size.map(n=>Number(n.toFixed(1))).join(' × ')+' mm':'';
       document.querySelector('.model-inspector .axes').hidden=!size;
-      $('part-evidence').textContent=p.id==='fuse'?'Catalog cartridge envelope; holder is see-through':detail?.status||'Installation detail · simplified geometry';
+      $('part-evidence').textContent=detail?.status||'Installation detail · simplified geometry';
       $('part-note').textContent=p.reason;
-      const source=p.id==='fuse'?dimensions.installationHardware.fuseCartridge.source:detail?.source||p.links.find(l=>l.kind==='reference')?.url;
+      const source=detail?.source||p.links.find(l=>l.kind==='reference')?.url;
       $('part-source').hidden=!source;if(source){$('part-source').href=source;$('part-source').textContent='Manufacturer source ↗';}
     },
     resetView:()=>{info('meter');view('iso');}
