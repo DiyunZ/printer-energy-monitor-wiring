@@ -181,7 +181,9 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  await page.locator('#connections summary').click();
  for(const id of ids){await page.locator(`.trace[data-id="${id}"]`).click();assert.match(await page.locator('#status').textContent(),new RegExp('Connection '+id+' ·'));}
  await page.locator('#wire-25').focus();await page.keyboard.press('Enter');assert.match(await page.locator('#status').textContent(),/Connection 25/);
- await page.locator('[data-mode="all"]').click();await page.locator('#zoom-in').click();assert.equal(await page.locator('#zoom-level').textContent(),'125%');await page.locator('#zoom-reset').click();
+ await page.locator('[data-mode="all"]').click();
+ const wiringScale=Number(await page.locator('#main-stage').getAttribute('data-scale'));
+ await page.locator('#zoom-in').click();assert.ok(close(Number(await page.locator('#main-stage').getAttribute('data-scale')),Math.min(2.5,wiringScale*1.25),.001));await page.locator('#zoom-reset').click();
  await page.locator('#connections summary').click();
  // Ownership follows the user's confirmation, not whether an item appears in the model.
  const ownedIds=['meter','ct','blue-leads','voltage-leads','adapter'];

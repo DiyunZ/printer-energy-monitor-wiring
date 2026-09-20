@@ -150,19 +150,20 @@ parts=[]
 def add(s): parts.append(s)
 def rect(x,y,w,h,fill='#fff',stroke='#c7d1db',r=8,extra=''):
     add(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{r}" fill="{fill}" stroke="{stroke}" {extra}/>')
-def text(x,y,s,size=20,color='#203346',weight=400,anchor='start'):
-    add(f'<text x="{x}" y="{y}" font-size="{size}" fill="{color}" font-weight="{weight}" text-anchor="{anchor}">{E(s)}</text>')
+def text(x,y,s,size=20,color='#203346',weight=400,anchor='start',extra=''):
+    add(f'<text x="{x}" y="{y}" font-size="{size}" fill="{color}" font-weight="{weight}" text-anchor="{anchor}"{(" "+extra) if extra else ""}>{E(s)}</text>')
 def line(points,color='#718096',width=2,extra=''):
     add('<polyline points="'+' '.join(f'{x},{y}' for x,y in points)+f'" fill="none" stroke="{color}" stroke-width="{width}" stroke-linecap="round" stroke-linejoin="round" {extra}/>')
 def circle(x,y,r=6,fill='#fff',stroke='#718096',extra=''):
     add(f'<circle cx="{x}" cy="{y}" r="{r}" fill="{fill}" stroke="{stroke}" stroke-width="2" {extra}/>')
 def badge(x,y,num,k):
-    rect(x-17,y-12,34,24,'#fff',C[k],5);text(x,y+6,num,16,C[k],700,'middle')
-def start_svg(w,h,label,extra=''):
+    rect(x-20,y-16,40,32,'#fff',C[k],5);text(x,y+8,num,22,C[k],700,'middle')
+def start_svg(w,h,label,extra='',viewbox=None):
     parts.clear()
-    add(f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" role="img" aria-label="{label}" {extra}>')
+    box=' '.join(map(str,viewbox or (0,0,w,h)))
+    add(f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="{box}" role="img" aria-label="{label}" {extra}>')
     add('<style>text{font-family:Arial,Helvetica,sans-serif}.wire{cursor:pointer;transition:opacity .15s}.muted{opacity:.09}.selected .core{stroke-width:9}.wire:focus{outline:none}.wire:focus .core{stroke-width:9}</style>')
-    rect(0,0,w,h,'#fff','#fff',0)
+    rect(*(viewbox or (0,0,w,h)),'#fff','#fff',0)
 
 def footprint(part, fill='#fff', stroke='#9eacb7', radius=4):
     """A component envelope, projected without any per-part stretching or relocation."""
@@ -178,39 +179,26 @@ def footprint(part, fill='#fff', stroke='#9eacb7', radius=4):
 def at(part, label, dz=0, size=18, color='#203346', weight=600):
     x,y=project(position(part,0,dz)); text(x,y,label,size,color,weight,'middle')
 
-def callout(part, label, x, y, edge='left', detail=None):
-    px,py=project(position(part)); width=BODIES[part]['size'][0]*SCALE
-    px += (-1 if edge=='left' else 1)*width/2
-    end=x+8 if edge=='right' else x-8
-    line([(px,py),(end,py),(end,y-7)],'#94a4b1',1.5,extra='stroke-dasharray="3 5"')
-    anchor='end' if edge=='left' else 'start'
-    text(x,y,label,21,weight=600,anchor=anchor)
-    if detail: text(x,y+25,detail,16,'#63768a',anchor=anchor)
-
 def make_diagram():
-    start_svg(PLAN['width'],PLAN['height'],'ELITEpro enclosure wiring plan, aligned with the 3D top view',
-        f'data-layout-scale="{SCALE}" data-layout-origin-x="{PLAN["origin"][0]}" data-layout-origin-y="{PLAN["origin"][1]}"')
-    text(48,55,'Same enclosure. Same component positions.',34,weight=700)
-    text(48,92,'TOP VIEW · Rear / printer exit above · Front / Q0 below · '+REV,20,color='#63768a')
-    text(48,124,'Body footprints use the 3D X/Z coordinates. Terminal symbols are spaced for clarity; wires use straight routes.',19,color='#63768a')
+    # Crop annotation margins without moving any physical footprint or wire endpoint.
+    start_svg(1760,1500,'ELITEpro enclosure wiring plan, aligned with the 3D top view',
+        f'data-layout-scale="{SCALE}" data-layout-origin-x="{PLAN["origin"][0]}" data-layout-origin-y="{PLAN["origin"][1]}"',
+        viewbox=(130,80,1760,1500))
+    add('<desc>'+E(REV+'; 120 V, one printer. Body footprints match the 3D top view; terminal symbols and wire bends are simplified. Physical fit and electrical acceptance remain pending.')+'</desc>')
     footprint('case','#edf1f4','#9dabb8',20)
     footprint('panel','#fafbfc','#b6c3cb',3)
     for i,(x,z) in enumerate(DIMENSIONS['installationHardware']['cableMountsXZ']):
         px,py=project((x-5.4,z-12))
         rect(px,py,10.8*SCALE,16*SCALE,'#edf0ea','#c3ccc4',2,extra=f'class="installation-detail" data-anchor="{i+1}"')
-    text(1240,414,'REAR · PRINTER EXIT',19,'#63768a',600,'middle')
-    text(1040,1490,'FRONT · Q0 HANDLE',19,'#63768a',600,'middle')
     # Existing molded cord ends and their entries, retained in the same locations as 3D.
     line([project(position('supply-plug',24)),project(position('supply-entry'))],'#465563',18)
     line([project(position('printer-entry')),project((0,-265)),project(position('printer-plug',0,25))],'#465563',18)
     for part in ['supply-plug','printer-plug']: footprint(part,'#e9c658','#b9972b',8)
     for part in ['supply-entry','printer-entry','dc-entry','usb-entry']: footprint(part,'#71808a','#46535b',5)
     footprint('dc-coupling','#e4d5bf','#8c7352',7)
-    callout('dc-coupling','DC extension joint',1740,985,'right',detail='Outside · 5.5 / 2.1 mm')
-    callout('supply-plug','FROM WALL',150,1215,'left',detail='Grounded plug')
-    callout('printer-plug','TO PRINTER',1160,185,'right',detail='Grounded female connector')
-    callout('dc-entry','DC cable entry',1740,1176,'right')
-    callout('usb-entry','USB exit',1600,1410,'right')
+    text(1710,1134,'DC joint',22,weight=600)
+    at('supply-plug','Supply',-20,22)
+    text(1140,180,'Printer',22,weight=600)
     footprint('rail','#dce2e4','#9ba8b0',2)
     for dz in [-14,14]: line([project(position('rail',-50,dz)),project(position('rail',50,dz))],'#adb8be',2)
     stops=DIMENSIONS['installationHardware']['railStops']
@@ -225,29 +213,33 @@ def make_diagram():
         px,py=project((x-bw/2,z-bd/2));rect(px,py,bw*SCALE,bd*SCALE,'#bfcaca','#7f9195',3)
         for i in range(5):
             px,py=project((x-13.75+i*5.8,z-6));rect(px,py,4.3*SCALE,12*SCALE,'#e58b3c','#bb6728',2)
-        at(part,part if part in ['JL','JN','JV'] else 'PE 1' if part=='PE' else 'PE 2',21,16)
+        at(part,part if part in ['JL','JN','JV'] else 'PE 1' if part=='PE' else 'PE 2',-14,22)
     # Connection 25 is the physical bridge between the two PE connectors.
     for part in ['JL','JN','PE','PE+','JV']:
         line([project(pin(part,1)),project(pin(part,5))],C['L'] if part in ['JL','JV'] else C['N'] if part=='JN' else C['PE'],4)
-    footprint('fuse','#eee5cf','#a48b50',3);at('fuse','Fv',3,20)
+    footprint('fuse','#eee5cf','#a48b50',3);at('fuse','Fv',3,22)
     footprint('ct','#e8e6da','#9d9d8d',6)
     l,t,r,b=CT_WINDOW;rect(l,t,r-l,b-t,'#fff','#979e9f',0)
-    at('ct','CT1',-6,17);at('ct','LOAD →',11,14)
-    footprint('q0','#3c4a56','#273542',4);at('q0','Q0',3,20,'#fff')
+    at('ct','CT1',-6,22);at('ct','LOAD →',11,18)
+    footprint('q0','#3c4a56','#273542',4);at('q0','Q0',3,22,'#fff')
     # Direct-mounted Q0 handle; its mounting pattern is in the fabrication package.
     px,py=project(position('q0',-6,32.14));rect(px,py,12*SCALE,15*SCALE,'#e9eeea','#63717a',2)
     footprint('outlet','#c9bbae','#a39284',2)
+    at('outlet','XA',-38,22)
     px,py=project((182.04,13-31.75));rect(px,py,2.4*SCALE,63.5*SCALE,'#e7e5d9','#8397a5',2)
     footprint('adapter','#293744','#293744',6)
-    at('adapter','AC/DC',-11,18,'#fff');at('adapter','ADAPTER',16,14,'#fff')
+    at('adapter','AC/DC',-BODIES['adapter']['size'][2]/2-9,22)
     bx,by,bw,bh=footprint('meter','#263748','#1c2b3a',11)
     rect(bx+4,by+20*SCALE,bw-8,bh-40*SCALE,'#126ab8','#0c589c',6,extra='id="elitepro-body"')
-    at('meter','DENT',-31,31,'#fff',700);at('meter','ELITEpro XC',-12,18,'#fff')
-    at('meter','216 × 63 mm',6,17,'#dbedff');at('meter','LOGGING',65,15,'#fff')
+    at('meter','ELITEpro',-12,26,'#fff',700);at('meter','XC',2,22,'#fff')
+    # Paint names after routes so a crossing cannot erase a short component label.
+    component_labels = [fragment for fragment in parts if fragment.startswith('<text ')]
+    parts[:] = [fragment for fragment in parts if not fragment.startswith('<text ')]
     # All terminal routes retain their validated electrical endpoints.
     for w in wires:
         n,k,p=w['id'],w['kind'],w['points']
-        add(f'<g class="wire" id="wire-{n}" data-id="{n}" data-kind="{k}" tabindex="0" role="button" aria-label="{E(n+": "+w["description"])}"><title>{E(w["description"])}</title>')
+        add(f'<g class="wire wire-route" id="wire-{n}" data-id="{n}" data-kind="{k}" data-start="{E(w["start"])}" data-end="{E(w["end"])}" tabindex="0" role="button" aria-label="{E(n+": "+w["description"])}"><title>{E(w["description"])}</title>')
+        line(p,'transparent',10,extra='class="wire-hit" vector-effect="non-scaling-stroke" pointer-events="stroke"')
         line(p,'#fff',10);line(p,C[k],4,extra='class="core" '+('stroke-dasharray="9 6"' if k in ('CT','USB') else ''))
         if k=='N': line(p,'#fff',1.6)
         if n=='23': line(p,'#fff',1.6,extra='stroke-dasharray="5 4"')
@@ -255,40 +247,28 @@ def make_diagram():
         add('</g>')
     # Draw numbered badges after all paths so crossings cannot erase a number.
     for w in wires:
-        add(f'<g class="wire" data-id="{w["id"]}" data-kind="{w["kind"]}">')
+        add(f'<g class="wire wire-badge" data-id="{w["id"]}" data-kind="{w["kind"]}">')
         badge(*w['badge'],w['id'],w['kind']);add('</g>')
     for i,n in enumerate(['05','08','09']):
         part=f'A{i+1}';add(f'<g class="wire" data-id="{n}" data-kind="V">')
         footprint(part,'#2382ca','#125387',3)
         p=BODIES[part];px,py=project(position(part,-4.4,8))
         rect(px,py,8.8*SCALE,26*SCALE,'#d1d0c4','#929385',3)
-        at(part,part,1,13,'#fff',700);add('</g>')
+        add('</g>')
     for prefix in ['JL.','JN.','JPE.','JV.']:
         for name,xy in A.items():
             if name.startswith(prefix):circle(*xy,3.7,C['L'] if prefix in ['JL.','JV.'] else C['N'] if prefix=='JN.' else C['PE'],'#fff')
     for name in ['PLATE','RAIL']:circle(*A[name],7,'#e9d69d','#9b7f40')
     add('<g style="paint-order:stroke;stroke:#fff;stroke-width:4;stroke-linejoin:round">')
     for name,label,dx,dy in [('D.N','N',0,-11),('D.L2','L2',0,-11),('D.L1','L1',0,-11),('D.+','CH1 +',12,-8),('D.-','CH1 −',12,17),('D.DC+','DC',0,-63),('D.USB','USB',0,-63)]:
-        x,y=A[name];text(x+dx,y+dy,label,16,C['CT'] if 'CH1' in label else '#203346',600,'start' if 'CH1' in label else 'middle')
+        x,y=A[name];text(x+dx,y+dy,label,22,C['CT'] if 'CH1' in label else '#203346',600,'start' if 'CH1' in label else 'middle',extra=f'data-endpoint="{E(name)}"')
     add('</g>')
-    callout('JL','JL · hot distribution',430,579,detail='Printer + Fv + adapter branches')
-    callout('JN','JN · neutral',430,760)
-    callout('PE','JPE · protective earth',430,956,detail='Two bridged PE connectors')
-    callout('fuse','Fv · voltage-tap fuse',430,875,detail='On the bonded DIN rail')
-    callout('outlet','XA · flanged outlet',1628,838,'right',detail='Dedicated outlet in right wall')
-    callout('adapter','EXISTING ADAPTER',1670,927,'right',detail='Outside enclosure · plugs into XA')
-    callout('q0','Q0 · ONE BREAKER',630,1585,'left',detail='Front wall · handle outside')
-    callout('A2','A1 / A2 / A3',430,1085,detail='Blue voltage pigtails')
-    text(880,1420,'Retained lead slack',17,'#63768a',500,'middle')
-    text(1460,659,'CH1 symbols spaced',14,'#63768a');text(1460,681,'Actual socket ends: detail below',14,'#63768a')
-    x,y=A['PC'];rect(x,y,106,76,'#edf4f8','#8d9eac',6);text(x+53,y+30,'PC',22,weight=700,anchor='middle');text(x+53,y+58,'ELOG',17,anchor='middle')
-    # A real millimetre reference, plus panel extents from the same data source.
-    x,y=project((-10,243));line([(x,y),(x+100*SCALE,y)],'#657b8e',3)
-    for xx in [x,x+100*SCALE]:line([(xx,y-7),(xx,y+7)],'#657b8e',2)
-    text(x+50*SCALE,y+29,'100 mm · all body footprints',17,'#63768a',anchor='middle')
-    text(48,1665,'White gaps = insulated crossings. Filled bus dots = joins. Factory plug / cable paths: 20–23.',20)
-    text(48,1700,'One shared component layout; simplified terminals and wire bends. Use the 3D Top view to compare.',20)
-    text(48,1735,'Component estimates and electrical selection limits still apply. This is a design reference, not a fabrication or energization release.',18,color='#8b651e')
+    x,y=A['PC'];rect(x,y,106,76,'#edf4f8','#8d9eac',6);text(x+53,y+45,'PC',24,weight=700,anchor='middle')
+    add('<g style="paint-order:stroke;stroke:#fff;stroke-width:4;stroke-linejoin:round">')
+    for label in component_labels:
+        add(label.replace('<text ', '<text style="stroke:none" ', 1) if 'fill="#fff"' in label else label)
+    add('</g>')
+    text(1010,1563,'Design reference · See build package for ratings and acceptance limits.',18,'#63768a',anchor='middle',extra='class="drawing-note"')
     add('</svg>');return ''.join(parts)
 
 def material_photo(p):

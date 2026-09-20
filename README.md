@@ -12,6 +12,8 @@ The revised layout uses **six cable mounts and six ties**, with matching panel m
 
 The main page is organized for project review and purchasing. **Design** switches between 3D and wiring while retaining the camera and circuit selection. **Materials** shows the 24 purchase groups first, with the 5 owned groups expandable below; material links open that group when needed. **To confirm** lists the remaining CT, sensing-lead protection and breaker decisions. **Details** retains full specifications, receiving checks, pack quantities and image credits; purchasing holds remain visible. **More** contains additional views, enclosure modes, display toggles and PNG export.
 
+**Wiring** opens at a readable scale centered on the enclosure. Drag or use arrow keys to pan; **Reset** restores this view. **Fit all** is an overview including external connectors, while **Fullscreen** uses the browser viewport (Escape returns). Color-coded circuit buttons replace the separate legend. Wire numbers appear only on the selected connection, alongside its endpoints; **Focus selection** frames a wire or circuit group. Explanations remain under **Wiring details**, and all 25 paths remain in the expandable connection schedule. Only annotations and the viewport changed; the shared component coordinates and electrical routes are unchanged. Standalone SVG/PNG drawings retain every wire number.
+
 **Build documents** collects the machining package, six-stage interactive installation sequence, operation and setup instructions, dimensions, sources, audit and full BOM. Existing material, wiring and operation bookmarks remain supported. The main page omits routine photo captions but still identifies reference images and design concepts.
 
 The revised design uses a directly mounted **Leviton 5279-C**, **Littelfuse LPSC0001Z**, a **JV** transition connector for the fuse-holder's 14 AWG output, long-thread glands, and adjustable **19.05 mm straps through 21 × 4 mm slots**. The build package includes exact fastener links and counts, wire blanks and assembly order. Install the panel before the side outlet.
@@ -25,6 +27,7 @@ The original photo identifies the adapter as **CUI SMI6-9-V-P5, 9 V, 0.667 A, ce
 - `material-locator.js`, `installation-hardware.js`: material navigation/highlighting and secondary installation geometry. `installationHardware` in the shared dimension schedule retains the CAD anchor and bond datums.
 - `site-navigation.js`: design tabs, bookmark routing and automatic expansion of owned materials.
 - `build_routes.py`, `draw_external.py`, `page_template.html`: netlist, drawings and main-page generator.
+- `wiring.js`, `wiring.css`: circuit tracing, readable SVG viewport, pan/zoom and fullscreen dialog.
 - `procurement.json`: ownership, quantities, exact parts, pictures and buying links.
 - `Build_Package.md`, `Wiring_References_EN.md`: build details and evidence.
 - `installation_review.json`, `installation_checks.json`, `installation_cables.json`, `installation_supports.json`: material review and bounded digital checks.
@@ -48,6 +51,8 @@ python3 -m http.server 8770
 With the local server running, use `CHECK_URL=http://127.0.0.1:8770/ node tools/verify_site.cjs`. `EXPORT_AUDIT=1` refreshes the illustrative cable report; `EXPORT_DRAWINGS=1` refreshes PNG drawings. After updating audit data, rerun the document generator. The checks require Node with Playwright and `marked`; the public static site does not.
 
 Run `node tools/verify_material_locator.cjs` for the material-to-model behavior and `python3 -m unittest -v test_material_locations.py` for installation-datum consistency with the machining source. `QA_OUTPUT=/path/out` saves screenshots and browser check reports outside the source tree.
+
+Run `node tools/verify_wiring.cjs` for default label readability, selected-wire endpoints, panning, fit/focus, fullscreen restoration and 320–1440 px viewport coverage.
 
 Run `node --test tools/test_cable_supports.mjs` for negative controls (empty, misplaced, too-small and too-long ties), then `node tools/verify_cable_geometry.cjs` for all six rendered supports, coil separation, CT passage and cord breakouts. `EXPORT_AUDIT=1` refreshes `installation_supports.json`. These are geometry checks with assumed cable diameters and simplified terminal regions, not physical retention or electrical acceptance.
 
