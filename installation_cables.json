@@ -1,0 +1,61 @@
+{
+  "scope": "Illustrative 2 m flexible length per lead at assumed 3 mm OD; actual hardware not measured",
+  "leads": [
+    {
+      "id": "A1",
+      "modeledFlexibleLengthMm": 2000.000000197624,
+      "turns": 5.736999410204589,
+      "pitchMm": 4,
+      "assumedDiameterMm": 3,
+      "coilMin": [
+        -80.49810028076172,
+        22.500221252441406,
+        62.50423049926758
+      ],
+      "coilMax": [
+        10.494304656982422,
+        48.413124084472656,
+        139.49940490722656
+      ]
+    },
+    {
+      "id": "A2",
+      "modeledFlexibleLengthMm": 2000.0000001861736,
+      "turns": 5.783701735548675,
+      "pitchMm": 4,
+      "assumedDiameterMm": 3,
+      "coilMin": [
+        -80.49766540527344,
+        50.500221252441406,
+        62.505828857421875
+      ],
+      "coilMax": [
+        10.494211196899414,
+        76.60106658935547,
+        139.4971160888672
+      ]
+    },
+    {
+      "id": "A3",
+      "modeledFlexibleLengthMm": 2000.0000001019434,
+      "turns": 5.750908079557121,
+      "pitchMm": 4,
+      "assumedDiameterMm": 3,
+      "coilMin": [
+        -80.49677276611328,
+        78.5002212524414,
+        62.506019592285156
+      ],
+      "coilMax": [
+        10.494277000427246,
+        104.46910095214844,
+        139.4992218017578
+      ]
+    }
+  ],
+  "meterRouteScreen": {
+    "samplesPerCurve": 301,
+    "intrusions": [],
+    "limit": "Sampled route centerlines tested against the meter body enlarged by each assumed wire radius. Does not establish clearances to other objects or between wires."
+  }
+}

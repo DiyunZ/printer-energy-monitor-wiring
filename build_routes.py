@@ -5,7 +5,7 @@ import json
 from draw_external import draw_external
 
 OUT = Path(__file__).resolve().parent
-REV = 'Rev. 5 · aligned 3D + wiring layout · 2026-09-19'
+REV = 'Rev. 6 · installation audit corrections · 2026-09-19'
 C = {'L':'#202d3a','N':'#65758a','PE':'#18814a','CT':'#8544a5','USB':'#23739d','DC':'#aa621e','V':'#1567c1'}
 # Shared physical placement. The SVG is an X/Z projection of the same millimetre
 # coordinates consumed by layout3d.js. Electrical port symbols are spaced for clarity.
@@ -26,7 +26,8 @@ def pin(part, index):
 
 M = {
  'IN.L':position('supply-entry',18.5,-12), 'IN.N':position('supply-entry',18.5), 'IN.PE':position('supply-entry',18.5,12),
- 'Q0.IN':position('q0',-5,-31.44), 'Q0.OUT':position('q0',5,-31.44),
+ 'Q0.IN':position('q0',-5,-BODIES['q0']['size'][2]/2-BODIES['q0']['studProjection']),
+ 'Q0.OUT':position('q0',5,-BODIES['q0']['size'][2]/2-BODIES['q0']['studProjection']),
  'OUT.L':position('printer-entry',0,-18.5), 'OUT.N':position('printer-entry',-4,-18.5), 'OUT.PE':position('printer-entry',-8,-18.5),
  'Fv.IN':position('fuse',0,-BODIES['fuse']['size'][2]/2), 'Fv.OUT':position('fuse',0,BODIES['fuse']['size'][2]/2),
  'D.L1':position('meter',23,-113), 'D.L2':position('meter',8,-113), 'D.N':position('meter',-23,-113),
@@ -48,7 +49,7 @@ A = {name:project(point) for name,point in M.items()}
 # Routing waypoints are intentionally rectilinear. Component locations are not rearranged for routing.
 raw = [
  ('01','L','IN.L','Q0.IN',[(-137,116),(-137,144),(-117,144)],(-137,130),'Input hot → Q0 IN','main'),
- ('02','L','Q0.OUT','JL.1',[(-100,152.92),(-100,148),(-154,148),(-154,-103),(-136.6,-103)],(-154,88),'Q0 OUT → hot distribution JL','main'),
+ ('02','L','Q0.OUT','JL.1',[(-100,M['Q0.OUT'][1]),(-100,148),(-154,148),(-154,-103),(-136.6,-103)],(-154,88),'Q0 OUT → hot distribution JL','main'),
  ('03','L','JL.2','OUT.L',[(-115,-118.85),(-115,-123),(-12,-123),(-12,-175),(0,-175)],(-25,-123),'JL → printer hot; one pass through CT','main'),
  ('04','L','JL.3','Fv.IN',[(-125,-104),(-83,-104),(-83,-78),(-60,-78)],(-83,-89),'JL → Fv voltage-tap fuse','voltage'),
  ('05','V','Fv.OUT','D.L1',[(-60,34),(-33,34),(-33,165),(40,165),(40,-156),(114,-156)],(40,-15),'Fv → blue A1 → full lead → L1 (HOT)','voltage'),
@@ -62,7 +63,7 @@ raw = [
  ('13','PE','JPE.4','RAIL',[(-80.8,85),(-18,85),(-18,-28)],(-18,15),'PE → dedicated metal-rail bond','earth'),
  ('14','CT','CT.+','D.+',[(-63,-102),(134,-102),(134,-101)],(35,-102),'CT white (+) → current-input CH1 +','signal'),
  ('15','CT','CT.-','D.-',[(-47,-95),(142,-95),(142,-83)],(16,-95),'CT black (−) → current-input CH1 −','signal'),
- ('16','USB','D.USB','PC',[(140,110),(140,139),(280,139)],(235,139),'USB Type B → protected exit → ELOG computer','signal'),
+ ('16','USB','D.USB','PC',[(140,110),(140,BODIES['usb-entry']['position'][2]),(280,BODIES['usb-entry']['position'][2])],(235,BODIES['usb-entry']['position'][2]),'USB Type B → protected exit → ELOG computer','signal'),
  ('17','L','JL.4','AUX.L',[(-119.2,-163),(150,-163),(150,3)],(150,-128),'JL → AUX receptacle hot; before CT','aux'),
  ('18','N','JN.5','AUX.N',[(-105,-48.85),(-105,-154),(157,-154),(157,13)],(157,-50),'JN → AUX receptacle neutral','aux'),
  ('19','PE','JPE.5','AUX.PE',[(-75,93),(137,93),(137,38),(167,38)],(115,93),'PE → AUX ground and bonded mounting hardware','earth'),

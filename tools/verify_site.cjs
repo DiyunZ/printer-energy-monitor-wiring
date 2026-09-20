@@ -33,6 +33,21 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  await page.locator('.part-details > summary').click();
  const diag=()=>page.evaluate(()=>window.enclosureDiagnostics());
  const initial=await diag();assert.equal(initial.units,'mm');assert.ok(initial.triangles>100000);
+ assert.ok(close(initial.fitBodies.q0.size[2],47),'Q0 actual rendered body depth');
+ assert.ok(close(initial.breakerTerminals[1][1]-initial.breakerTerminals[0][1],49.28),'Actual terminal pitch');
+ assert.ok(close(initial.breakerMounts[1][1]-initial.breakerMounts[0][1],52.37),'Actual mounting pitch');
+ assert.deepEqual(initial.meterRouteIntrusions,[],'Illustrated cable routes must not cut through the meter body');
+ const lengths=initial.voltageLeadLengths;
+ assert.equal(lengths.length,3);
+ for(let i=0;i<lengths.length;i++){
+  assert.ok(close(lengths[i].modeledFlexibleLengthMm,2000,.1),'Full 2 m flexible-length scenario');
+  assert.ok(lengths[i].pitchMm>lengths[i].assumedDiameterMm,'Coil turns need space at assumed diameter');
+  if(i)assert.ok(lengths[i].coilMin[1]>lengths[i-1].coilMax[1],'Coil-layer envelopes must not overlap');
+ }
+ if(process.env.EXPORT_AUDIT==='1'){
+  assert.ok(['127.0.0.1','localhost'].includes(new URL(base).hostname),'Export audit from local model only');
+  fs.writeFileSync(path.join(root,'installation_cables.json'),JSON.stringify({scope:'Illustrative 2 m flexible length per lead at assumed 3 mm OD; actual hardware not measured',leads:lengths,meterRouteScreen:{samplesPerCurve:301,intrusions:initial.meterRouteIntrusions,limit:'Sampled route centerlines tested against the meter body enlarged by each assumed wire radius. Does not establish clearances to other objects or between wires.'}},null,2)+'\n');
+ }
  // Compare actual SVG geometry to actual WebGL meshes, not two copies of labels.
  const plan=await page.locator('#main-stage svg').evaluate(svg=>({
   scale:Number(svg.dataset.layoutScale),origin:[Number(svg.dataset.layoutOriginX),Number(svg.dataset.layoutOriginY)],
@@ -98,6 +113,21 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  await page.locator('#model-wires').check();await page.locator('#model-label-toggle').check();
  if(out)await page.locator('#model-view').screenshot({path:path.join(out,'layout-top.png')});
  await page.locator('#model-reset').click();
+ await page.locator('#assembly-preview > summary').click();
+ for(let step=1;step<=6;step++){
+  await page.locator('#assembly-stage').selectOption(String(step));const a=await diag();
+  assert.equal(a.assemblyStage,step);assert.equal(a.wiresVisible,step>=5);
+  assert.equal(a.visibleGroups.includes('outletguard'),step>=4);
+  assert.equal(a.lidVisible,step===6);
+  if(step===2){
+   await page.locator('#assembly-progress').fill('0');assert.equal((await diag()).panelInsertionOffset,300);
+   await page.locator('#assembly-progress').fill('50');assert.equal((await diag()).panelInsertionOffset,150);
+   if(out)await page.locator('#layout').screenshot({path:path.join(out,'panel-insertion.png')});
+   await page.locator('#assembly-progress').fill('100');assert.equal((await diag()).panelInsertionOffset,0);
+  }
+ }
+ await page.locator('#model-reset').click();assert.equal((await diag()).assemblyStage,0);
+ await page.locator('#assembly-preview > summary').click();
  const [download]=await Promise.all([page.waitForEvent('download'),page.locator('#model-save').click()]);
  assert.equal(download.suggestedFilename(),'elitepro-enclosure-3d.png');
  const downloaded=await download.path();assert.ok(fs.statSync(downloaded).size>50000);
@@ -133,7 +163,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
    assert.ok(await row.locator('a[data-link-kind="buy"],a[data-link-kind="configure"],a[data-link-kind="quote"]').count()>0,p.id+' missing rendered purchase route');
    assert.equal(await row.locator('.material-links a').first().isVisible(),true,p.id+' purchase route must not be collapsed');
   }
-  for(const l of p.links)assert.equal(await row.locator('a[data-link-kind]').filter({hasText:l.label}).getAttribute('href'),l.url);
+  for(const l of p.links)assert.equal(await row.locator('a[data-link-kind]').evaluateAll((es,label)=>es.find(e=>e.textContent.trim()===label+' ↗')?.getAttribute('href'),l.label),l.url);
   const photo=row.locator('td[data-label="Material"] .material-photo');
   assert.equal(await photo.count(),1,p.id+' needs an image below its name');
   assert.equal(await photo.locator('img').getAttribute('src'),p.image.src);
@@ -172,7 +202,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  }
  const links=await page.locator('a[href]').evaluateAll(es=>es.map(e=>e.getAttribute('href')).filter(h=>!h.startsWith('http')&&!h.startsWith('#')));
  for(const href of [...new Set(links)]){const res=await page.request.get(new URL(href,base).href);assert.equal(res.status(),200,href);}
- for(const file of ['materials.html','references.html']){
+ for(const file of ['materials.html','references.html','installation.html']){
   await page.goto(new URL(file,base).href);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),file+' mobile overflow');
   if(file==='materials.html'){
    assert.equal(await page.locator('tbody tr').count(),bom.items.length);
@@ -182,7 +212,12 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
    assert.ok(await page.locator('.material-image').evaluateAll(es=>es.every(e=>e.clientWidth>=150)),'Document image columns must remain readable');
    await page.locator('.material-photo img').evaluateAll(es=>Promise.all(es.map(async img=>{img.loading='eager';await img.decode();})));
   }
-  else assert.equal(await page.locator('#r1').count(),1);
+  else if(file==='references.html')assert.equal(await page.locator('#r1').count(),1);
+  else {
+   assert.match(await page.locator('body').innerText(),/NOT RELEASED FOR FABRICATION OR ENERGIZING/);
+   assert.equal(await page.locator('a[href^="index.html#material-"]').count(),bom.items.length);
+   assert.equal(await page.locator('#simulation').count(),1);
+  }
  }
  await page.goto(new URL('wiring_routes.html',base).href);await page.waitForURL(url=>url.href===base||url.href===base+'index.html');
  assert.deepEqual(errors,[]);assert.deepEqual(failedRequests,[]);
@@ -190,7 +225,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   const render=await browser.newPage({viewport:{width:1800,height:1300},deviceScaleFactor:2});
   for(const name of ['wiring_routes','connector_detail']){await render.goto(new URL(name+'.svg',base).href);await render.locator('svg').screenshot({path:path.join(root,name+'.png')});}
  }
- const report={date:new Date().toISOString(),base,connections:24,circuitGroups:7,alignedComponentFootprints:plan.bodies.length,planTo3DMaximumToleranceMm:.05,compareTopView:true,renderedMeterBody:initial.fitBodies.meter.size,primaryBodyOverlaps:false,mouseOrbit:true,wheelZoom:true,keyboardOrbit:true,picking:true,shellModes:4,pngExport:true,viewportWidths:[1440,768,390],pageOverflow:false,internalLinks:true,materialsRows:bom.items.length,materialImagesLoaded:bom.items.length,ownedGroups:ownedIds.length,purchaseGroups:bom.items.length-ownedIds.length,inventoryFilters:true,jsErrors:errors,physicalBuildValidated:false};
+ const report={date:new Date().toISOString(),base,connections:24,circuitGroups:7,alignedComponentFootprints:plan.bodies.length,planTo3DMaximumToleranceMm:.05,compareTopView:true,renderedMeterBody:initial.fitBodies.meter.size,primaryBodyOverlaps:false,mouseOrbit:true,wheelZoom:true,keyboardOrbit:true,picking:true,shellModes:4,pngExport:true,viewportWidths:[1440,768,390],pageOverflow:false,internalLinks:true,materialsRows:bom.items.length,materialImagesLoaded:bom.items.length,ownedGroups:ownedIds.length,purchaseGroups:bom.items.length-ownedIds.length,inventoryFilters:true,assemblyStages:6,panelInsertionSlider:true,coilScenarioLengthMm:2000,jsErrors:errors,physicalBuildValidated:false};
  if(out)fs.writeFileSync(path.join(out,'browser-validation.json'),JSON.stringify(report,null,2)+'\n');
  console.log(JSON.stringify(report,null,2));
  }finally{await browser.close();}

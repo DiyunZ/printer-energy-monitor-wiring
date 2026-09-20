@@ -1,5 +1,5 @@
 {
-  "revision": "2026-09-19 · inventory 1",
+  "revision": "2026-09-19 · installation audit",
   "scope": "One 120 V L/N/PE printer enclosure. User confirmed only the five checked equipment groups are on hand; all other enclosure materials are to buy or fabricate. Quantities are per assembly, not vendor pack quantities. Purchase candidates are not a released construction BOM; no orders placed.",
   "items": [
     {
@@ -132,7 +132,7 @@
       "quantity": "1",
       "model": "Hammond PCJ16148CC",
       "reason": "Gray polycarbonate body with a clear lift-off lid. Selected for connector clearance and lead storage around the long meter. Nominal 16 × 14 × 8 in; use the manufacturer drawing/CAD for real outside dimensions.",
-      "status": "Selected size; physical dry fit pending",
+      "status": "Panel compatible; nominal insertion checked. Wall openings / hardware and physical dry fit remain unresolved.",
       "links": [
         {
           "label": "Buy · Solutions Direct",
@@ -324,7 +324,7 @@
       "quantity": "1",
       "model": "Eaton Bussmann CHCC1DU",
       "reason": "Single Class CC DIN fuse-holder candidate for the hot voltage tap before A1. Body approximately 17.5 × 73.9 × 83.2 mm. Holder rating does not specify the required fuse ampere rating. Confirm lead size and termination acceptance.",
-      "status": "Confirm protection / lead acceptance; check distributor lead time before ordering",
+      "status": "Hold purchase: Eaton SKU page and technical sheet disagree on dimensions / voltage. Obtain exact-revision confirmation; fuse value remains pending.",
       "links": [
         {
           "label": "Buy · DigiKey",
@@ -335,6 +335,16 @@
           "label": "Bussmann catalog · p.145",
           "url": "https://www.eaton.com/content/dam/eaton/products/electrical-circuit-protection/bussmann-iec-low-voltage-fuses/eaton-bussmann-series-low-voltage-fuses-catalog-ca134002en-en-us.pdf",
           "kind": "reference"
+        },
+        {
+          "kind": "reference",
+          "label": "Eaton technical data 10430",
+          "url": "https://www.eaton.com/content/dam/eaton/products/electrical-circuit-protection/fuses/data-sheets/bus-ele-ds-10430-chcc-chm-chpv.pdf"
+        },
+        {
+          "kind": "reference",
+          "label": "Eaton SKU page (conflicting data)",
+          "url": "https://www.eaton.com/us/en-us/skuPage.CHCC1DU.html"
         }
       ],
       "id": "fuse-holder",
@@ -420,7 +430,7 @@
       "quantity": "4",
       "model": "WAGO 221-505",
       "reason": "Secure the connector groups to the backpanel using the carrier's permitted mounting method. 3D carrier envelope is provisional. Add guards as needed; loose connectors must not rely on the wire for support.",
-      "status": "Confirm purchased carrier drawing",
+      "status": "Catalog fit confirmed for 221-415; use M3 or ST2.9 fixing per WAGO drawing, with final screw length to suit panel.",
       "links": [
         {
           "label": "Buy · DigiKey",
@@ -431,6 +441,11 @@
           "label": "WAGO",
           "url": "https://www.wago.com/us/wire-splicing-connectors/mounting-carrier-221-series-24-12-awg/p/221-505",
           "kind": "reference"
+        },
+        {
+          "kind": "reference",
+          "label": "WAGO carrier drawing",
+          "url": "https://www1.futureelectronics.com/doc/WAGO/221-505.pdf"
         }
       ],
       "id": "carriers",
@@ -602,12 +617,17 @@
       "quantity": "2 bodies; 1 for DC + 1 for USB",
       "model": "icotek KVT 20 · 45024",
       "reason": "Split entries retain the factory barrel and USB connectors. KT inserts are listed separately below. Confirm supplied locknut/seal, connector transit, wall thickness and strain relief. The 3D shapes are placeholders, not drilling templates.",
-      "status": "Request two individual bodies and matching inserts; verify package contents",
+      "status": "Ø40 mm flange, 37 mm overall; USB spacing corrected. Cable inserts, plug passage and wall stack remain pending.",
       "links": [
         {
           "label": "Part / quote · icotek",
           "url": "https://www.icotek.com/en-us/products/cable-glands/kvt-45024",
           "kind": "quote"
+        },
+        {
+          "kind": "reference",
+          "label": "KVT 20 dimension drawing",
+          "url": "https://pim.icotek.com/Produkte/PG02%20Kabelverschraubungen/KVT/KVT%2020/Datenbl%C3%A4tter/45024_KVT%2020_bk.PDF"
         }
       ],
       "id": "split-entries",
@@ -746,28 +766,28 @@
       "id": "ring-lugs",
       "item": "Ring terminals",
       "quantity": "2 for Q0 + required PE lug ends; allow spares",
-      "model": "3M MV14-8R/LX-BOTTLE or MV14-10R/LX-BOTTLE",
-      "reason": "16–14 AWG insulated ring terminals; select the #8 or #10 stud hole only after checking the actual breaker and bonding studs. Buy the matching size, not both by default. Linked bottles contain 100. Use the specified crimp tool; do not tin stripped ends with solder.",
-      "status": "Size first · verify stud, conductor, barrel and tool compatibility",
+      "model": "3M MV14-10R/LX-BOTTLE · #10 stud, 16–14 AWG",
+      "reason": "Two Q0 terminals are #10-32 studs. The former #8 alternative has been removed. Other PE terminations must match their own studs.",
+      "status": "Q0 requires #10 rings; use separate #6-32 mounting screws. Confirm each PE stud, insulation OD and crimp tool.",
       "availability": "buy",
       "links": [
-        {
-          "label": "Buy #8 option · DigiKey",
-          "url": "https://www.digikey.com/en/products/detail/3m/MV14-8R-LX-BOTTLE/2666579",
-          "kind": "buy"
-        },
         {
           "label": "Buy #10 option · DigiKey",
           "url": "https://www.digikey.com/en/products/detail/3m/MV14-10R-LX-BOTTLE/2670218",
           "kind": "buy"
+        },
+        {
+          "kind": "reference",
+          "label": "3M dimensional data",
+          "url": "https://multimedia.3m.com/mws/media/61020O/ring-tongues-vinyl-insulated-brazed-seam-16-14-awg.pdf"
         }
       ],
       "image": {
         "src": "assets/materials/ring-lugs.jpg",
         "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/002/689/538/Schotchlok%20MV14-8R_sml%28200x200%29.jpg",
         "kind": "reference",
-        "alt": "3M MV14-8R/LX-BOTTLE or MV14-10R/LX-BOTTLE — reference image",
-        "caption": "MV14-8R example; final stud size is pending.",
+        "alt": "3M insulated ring terminal family reference; specified Q0 ring uses a #10 stud hole",
+        "caption": "Family reference (#8 pictured); order the specified #10 version.",
         "source_label": "DigiKey",
         "source_url": "https://www.digikey.com/en/products/detail/3m/MV14-8R-LX-BOTTLE/2666579",
         "width": 200,
@@ -789,8 +809,8 @@
           "kind": "buy"
         },
         {
-          "label": "IDEAL grounding hardware",
-          "url": "https://www.idealind.com/content/dam/ideal-electrical-dotcom/product-assets/wire-connectors/grounding/resources/P-2102%20Grounding%20Products%20SS.pdf",
+          "label": "IDEAL grounding catalog",
+          "url": "https://www.idealind.com/content/dam/electrical/support/P-070%20FullLineCatalog2018.pdf",
           "kind": "reference"
         }
       ],
@@ -812,7 +832,7 @@
       "quantity": "1 entry; final fitting subject to approval",
       "model": "Heyco G1508 / TG 875 · internal-entry candidate",
       "reason": "Candidate edge protection for a 22.2 mm opening in the rear metal box, inside the outer enclosure. Check actual sheet thickness, conductor bundle and retention; this grommet is not strain relief or a substitute for any required listed wiring fitting.",
-      "status": "Fit / wiring-method review first · replace candidate if the approved entry needs a clamp",
+      "status": "0.8–2.0 mm metal panel range; not for the 4.8 mm enclosure wall. Grommet provides edge protection, not strain relief; wiring-method acceptance pending.",
       "availability": "buy",
       "links": [
         {
@@ -930,7 +950,7 @@
       "quantity": "1 SWD dispenser + 1 SLW dispenser; pens included",
       "model": "3M ScotchCode SWD + SLW",
       "reason": "SWD for smaller wire IDs; SLW for larger cables and longer identification. Match actual cable OD to the 3M size table. Mark both wire ends and Q0, JL, JN, PE, Fv, CT1 and A1/A2/A3. Add durable SUPPLY, PRINTER OUTPUT, Q0 ON/OFF and ELITEpro ADAPTER ONLY — UNMETERED legends.",
-      "status": "To buy · confirm label size and adhesion on each surface",
+      "status": "SWD fits 3.58 mm internal wire; SLW fits approximately 9.2 mm cord. Measure pigtails and verify adhesion.",
       "availability": "buy",
       "links": [
         {
@@ -967,7 +987,7 @@
       "quantity": "1 matched set; count from final mounting schedule",
       "model": "Machine screws, nuts, flat/locking washers and approved bonding hardware",
       "reason": "Cover the DIN rail, four carriers, tie bases, logger restraint, Q0 support, XA box and faceplate stack. Include separate panel and rail PE bolt/lug connections. Check hardware included with each part before ordering duplicates.",
-      "status": "Size first · final thread, length, count and bonding method depend on actual parts",
+      "status": "Q0 mount: #6-32, max 4.95 mm insert depth; Q0 studs: #10-32; WAGO carriers: M3 or ST2.9; tie mounts: #8/M4. Lengths, counts and bonding stacks pending.",
       "availability": "buy",
       "links": [
         {
@@ -999,7 +1019,7 @@
       "quantity": "2 custom mounting inserts / supports",
       "model": "Fabricate to approved measurements",
       "reason": "Support Q0 on the front wall and XA / rear box on the right wall. Confirm wall taper, thickness, load and electrical insulation requirements. The illustrated inserts are envelopes, not fabrication drawings.",
-      "status": "Custom fabrication · final drawing and material must precede a quote",
+      "status": "Hold fabrication: wall taper and CAD intersections require resolved Q0 / outlet support and aperture drawings.",
       "availability": "buy",
       "links": [
         {
@@ -1024,7 +1044,7 @@
       "quantity": "1 guard over both live studs",
       "model": "Custom guard or manufacturer-approved terminal covers",
       "reason": "Prevent contact with Q0 studs and keep the mains terminals separated from signal cables. Use an approved insulating material and fastening scheme; ordinary hobby-print plastic has not been specified. Include any further covers required by the termination review.",
-      "status": "Custom fabrication · geometry, material and clearances still to be released",
+      "status": "Hold fabrication: stud, ring, insulation, tool access and clearance envelope not yet defined.",
       "availability": "buy",
       "links": [
         {

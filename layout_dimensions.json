@@ -72,16 +72,19 @@
       "size": [
         19.18,
         63.5,
-        49.28
+        47
       ],
       "position": [
         -112,
         120,
-        184.36
+        185.5
       ],
       "status": "Manufacturer body dimensions; candidate selected",
       "source": "https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf",
-      "note": "Carling CA1-B0-24-615-121-DG candidate: one pole, 15 A, 50/60 Hz medium delay, panel mounting, 240 VAC application / UL 489 + CSA option. Body envelope excludes rear studs (about 13.6 mm) and front handle (13.72 mm). A supported insulating mounting insert and guarded terminals are required. Confirm the exact variant, supply, total load, inrush and switching duty before ordering. This replaces the earlier DIN-breaker mounting concept."
+      "note": "Carling CA1-B0-24-615-121-DG: 47.00 mm body depth; 49.28 mm is terminal pitch, not depth. Mounting pitch 52.37 mm; #6-32 inserts, 4.95 mm deep; #10-32 terminal studs. Stud projection is 62.87 minus 47.00 = 15.87 mm from the catalog envelope. One pole, 15 A, 50/60 Hz medium delay. The wall insert, stepped body interface, terminal guard, fault rating and operating duty remain unresolved. See installation audit before ordering or cutting.",
+      "terminalPitch": 49.28,
+      "mountPitch": 52.37,
+      "studProjection": 15.87
     },
     {
       "id": "fuse",
@@ -96,9 +99,9 @@
         46.6,
         -28
       ],
-      "status": "Manufacturer dimensional drawing; fuse pending",
+      "status": "Catalog dimensions; conflicting SKU data to resolve",
       "source": "https://www.eaton.com/content/dam/eaton/products/electrical-circuit-protection/bussmann-iec-low-voltage-fuses/eaton-bussmann-series-low-voltage-fuses-catalog-ca134002en-en-us.pdf",
-      "note": "Bussmann CHCC1DU single Class CC holder candidate; catalog drawing, p.145. Holder rating is not the fuse rating. Select a compatible Class CC fuse only after the voltage leads, fault level and inrush are checked. Verify conductor and tinned-end acceptance; adapt through an approved terminal if necessary."
+      "note": "Bussmann CHCC1DU single Class CC holder candidate; catalog drawing, p.145. Holder rating is not the fuse rating. Select a compatible Class CC fuse only after the voltage leads, fault level and inrush are checked. Verify conductor and tinned-end acceptance; adapt through an approved terminal if necessary. The current Eaton SKU page lists 87 \u00d7 73 \u00d7 17.5 mm and 48 Vdc, while technical data 10430 lists CHCC1DU at 600 V and a different drawing envelope. Resolve the exact supplied revision with Eaton; the current model is not a purchase release. Fuse-door opening is not modeled."
     },
     {
       "id": "terminals",
@@ -108,9 +111,9 @@
         8.15,
         18.3
       ],
-      "status": "Catalog connector; carriers provisional",
+      "status": "Manufacturer connector and carrier dimensions",
       "source": "https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415",
-      "note": "Each WAGO 221-415 body uses the manufacturer CAD dimensions, 29.80 \u00d7 8.15 \u00d7 18.30 mm. Three separate groups sit in illustrative carriers with guards. Final conductor acceptance, PE bonding suitability and capacity for extra metalwork bonds require review. A second PE connector is bridged to the first to provide the outlet-box bond and spare bonding capacity. Model carrier is 35 \u00d7 16.9 \u00d7 52.8 mm; confirm purchased carrier drawing."
+      "note": "Each WAGO 221-415 body uses the manufacturer CAD dimensions, 29.80 \u00d7 8.15 \u00d7 18.30 mm. Four carriers provide JL, JN and two bridged PE groups. Final conductor acceptance, PE bonding suitability and capacity for extra metalwork bonds require review. A second PE connector is bridged to the first to provide the outlet-box bond and spare bonding capacity. WAGO 221-505 carrier: 35 \u00d7 16.9 \u00d7 52.8 mm; M3 DIN 1207 or ST2.9 DIN 7049 fixing, not M4."
     },
     {
       "id": "outlet",
@@ -190,7 +193,7 @@
       ],
       "status": "Provisional gland envelope",
       "source": "https://www.hammfg.com/electronics/small-case/accessories/1427ncg",
-      "note": "Mains cord entries use an approximate \u00d827 \u00d7 37 mm M20-style envelope; the mains-entry candidate is 1427NCGM20B. Cable outside diameter, wall thickness, sealing and strain relief determine the actual part. USB/DC need an entry that accepts the existing terminated cable; coloured rings mark proposed penetration locations only."
+      "note": "Mains cord entries use an approximate \u00d827 \u00d7 37 mm M20-style envelope; the mains-entry candidate is 1427NCGM20B. Cable outside diameter, wall thickness, sealing and strain relief determine the actual part. USB/DC need an entry that accepts the existing terminated cable; coloured rings mark proposed penetration locations only. KVT 20 split fittings use a conservative 37 mm axial \u00d7 \u00d840 mm flange envelope. USB entry moved to Z=167 mm, leaving about 25.2 mm between split-entry flange edges. Final bore sizes, connector passage, wall thread engagement and tool access remain pending."
     },
     {
       "id": "leads",
@@ -198,7 +201,7 @@
       "size": null,
       "status": "Illustrative routing; length not validated",
       "source": "https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/",
-      "note": "Three blue pigtails feed L1 hot, L2 neutral and N neutral. The visible coils reserve space for the full leads; they do not certify storage of each 2 m lead or minimum bend radius. Cable diameters, plug bodies and path lengths are estimates, not a cut list. The separate green conductor is PE."
+      "note": "Three blue pigtails feed L1 hot, L2 neutral and N neutral. The visible coils reserve space for the full leads; they do not certify storage of each 2 m lead or minimum bend radius. Cable diameters, plug bodies and path lengths are estimates, not a cut list. The separate green conductor is PE. Coil scenario reserves 2 m flexible length per lead at an assumed 3 mm OD, with 4 mm pitch. This does not identify the actual lead length / OD or validate its bend radius, transitions or restraints."
     }
   ],
   "plan": {
@@ -320,9 +323,9 @@
       "id": "dc-entry",
       "part": "entries",
       "size": [
-        28,
-        20,
-        20
+        37,
+        40,
+        40
       ],
       "position": [
         188,
@@ -336,14 +339,14 @@
       "id": "usb-entry",
       "part": "entries",
       "size": [
-        28,
-        24,
-        24
+        37,
+        40,
+        40
       ],
       "position": [
         188,
         55,
-        139
+        167
       ],
       "axis": "x",
       "label": "USB exit"
@@ -427,16 +430,21 @@
       "id": "lead-slack",
       "part": "leads",
       "size": [
-        88,
-        30,
-        74
+        91,
+        84,
+        77
       ],
       "position": [
         -35,
-        30,
+        64.5,
         101
       ],
-      "label": "Retained lead slack"
+      "label": "Retained lead slack",
+      "flexibleLengthMm": 2000,
+      "assumedCableDiameterMm": 3,
+      "pitchMm": 4,
+      "layerSpacingMm": 28,
+      "note": "Scenario only: each full lead reserves 2000 mm of flexible cable, 3 mm assumed OD, 4 mm helix pitch and 28 mm between lead-layer starts. Actual lengths, diameters, bend limits and transitions must be measured."
     }
   ]
 }

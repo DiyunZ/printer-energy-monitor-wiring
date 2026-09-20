@@ -9,10 +9,11 @@ const $ = id => document.getElementById(id);
 const V = a => new THREE.Vector3(...a);
 
 async function start() {
-  const [dimensions, cad, buffer] = await Promise.all([
-    fetch('./layout_dimensions.json?v=5').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
+  const [dimensions, cad, buffer, review] = await Promise.all([
+    fetch('./layout_dimensions.json?v=9').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
     fetch('./assets/enclosure.json').then(r => { if (!r.ok) throw Error('CAD manifest unavailable'); return r.json(); }),
-    fetch('./assets/enclosure.bin').then(r => { if (!r.ok) throw Error('CAD geometry unavailable'); return r.arrayBuffer(); })
+    fetch('./assets/enclosure.bin').then(r => { if (!r.ok) throw Error('CAD geometry unavailable'); return r.arrayBuffer(); }),
+    fetch('./installation_review.json?v=9').then(r => { if (!r.ok) throw Error('Installation review unavailable'); return r.json(); })
   ]);
   const parts = Object.fromEntries(dimensions.parts.map(p => [p.id, p]));
   const instances = Object.fromEntries(dimensions.instances.map(p => [p.id, p]));
@@ -47,6 +48,8 @@ async function start() {
   const wires = new THREE.Group(); scene.add(wires);
   const dims = new THREE.Group(); scene.add(dims);
   const groups = {}, labels = [], picking = [], shellObjects = [], lidObjects = [], hideWithCase = [], fitBodies = {}, planBodies = {};
+  const voltageLeadLengths = [], breakerTerminals = [], breakerMounts = [], cableRoutes = [];
+  let assemblyStage = 0;
   const mats = new Map();
   const material = (color, metal = 0) => {
     const key = `${color}/${metal}`;
@@ -79,6 +82,9 @@ async function start() {
     const curve = smooth ? new THREE.CatmullRomCurve3(points.map(V), false, 'centripetal') : new THREE.CurvePath();
     if (!smooth) for (let i = 1; i < points.length; i++) curve.add(new THREE.LineCurve3(V(points[i - 1]), V(points[i])));
     const m = mesh(new THREE.TubeGeometry(curve, Math.max(24, points.length * 6), radius, 8, false), material(color), [0,0,0], id, parent);
+    curve.arcLengthDivisions = Math.max(200, points.length * 10);
+    m.userData.lengthMm = curve.getLength();
+    cableRoutes.push({part:id,samples:curve.getSpacedPoints(300),radius});
     return m;
   }
   function tag(text, position, id, kind = '') {
@@ -154,8 +160,9 @@ async function start() {
   box([48,87,4],[qx,qy,211],'#f2f1e8','q0',3); // insulating support insert; exact stack pending
   box([17,47,5],[qx,qy,216],'#232b32','q0',2);
   const toggle = box([12,7,15],[qx,qy+3,224],'#edf1ee','q0',1); toggle.rotation.x=-.35;
-  for (const y of [-23,23]) cylinder(3.1,13.6,[qx,qy+y,qz-31.44],'#b8a77a','q0','z');
-  for (const y of [-24.64,24.64]) cylinder(2.2,2,[qx,qy+y,218.9],'#b8c0c1','q0','z');
+  const terminalZ = qz - parts.q0.size[2]/2 - parts.q0.studProjection;
+  for (const y of [-1,1]) breakerTerminals.push(cylinder(2.413,parts.q0.studProjection,[qx,qy+y*parts.q0.terminalPitch/2,terminalZ+parts.q0.studProjection/2],'#b8a77a','q0','z'));
+  for (const y of [-1,1]) breakerMounts.push(cylinder(1.753,2,[qx,qy+y*parts.q0.mountPitch/2,218.9],'#b8c0c1','q0','z'));
   decal('Q0\nMAIN',37,20,[qx,qy+57,214],'q0','front');
   tag('Q0 · external handle',[qx-9,qy+71,217],'q0');
   // Fuse holder and short, bonded DIN rail.
@@ -210,8 +217,8 @@ async function start() {
   planBodies['supply-plug']=[box(instances['supply-plug'].size,instances['supply-plug'].position,'#e2b837','entries',6)];
   for (const z of [-6.35,6.35]) box([16,6.4,1.5],[-329,46,128+z],'#b6b9b3','entries');
   cylinder(2.4,18,[-330,34,128],'#b6b9b3','entries','x');
-  cable([[-172,43,128],[-150,43,128],[-140,119,132],[qx,qy+23,qz-39]],hot,1.7,'q0');
-  cable([[qx,qy-23,qz-39],[-141,60,123],[-149,22,77],[-151,23,-98],[-134,15,-120]],hot,1.7,'terminals');
+  cable([[-172,43,128],[-150,43,128],[-140,119,132],[qx,qy+parts.q0.terminalPitch/2,terminalZ]],hot,1.7,'q0');
+  cable([[qx,qy-parts.q0.terminalPitch/2,terminalZ],[-141,60,123],[-149,22,77],[-151,23,-98],[-134,15,-120]],hot,1.7,'terminals');
   cable([[-120,14,-137],[-100,cy,-135],[-88,cy,cz],[-20,cy,cz],[0,cy,-150],[0,36,-233]],hot,1.7,'ct');
   cable([[-170,42,128],[-157,24,112],[-159,21,-33],[-134,14,-51]],neutral,1.7,'terminals');
   cable([[-121,13,-67],[-113,15,-95],[-113,15,-161],[-11,15,-172],[-4,36,-233]],neutral,1.7,'entries');
@@ -224,10 +231,10 @@ async function start() {
   cable([[-135,13,-120],[-146,21,-116],[-155,22,-160],[133,30,-160],[144,76,-20],[169,105,-5]],hot,1.7,'outlet');
   cable([[-127,13,-52],[-140,21,-32],[-145,20,-151],[131,26,-151],[139,72,-16],[169,115,-5]],neutral,1.7,'outlet');
   cable([[-118,13,25],[-100,12,32],[-83,12,44]],pe,1.7,'terminals');
-  cable([[-71,13,60],[-40,12,29],[-13,12,67],[136,16,67],[142,67,36],[167,117,29]],pe,1.7,'outlet');
+  cable([[-71,13,60],[-97,22,96],[-87,24,151],[134,25,151],[143,67,36],[167,117,29]],pe,1.7,'outlet');
   cable([[-78,13,60],[-39,14,17],[-24,13,-19],[-27,7,-28]],pe,1.7,'rail');
   cable([[-82,13,60],[-85,14,49],[-106,7,51]],pe,1.7,'panel');
-  cable([[-67,13,60],[-35,13,36],[140,20,44],[131,86,25]],pe,1.7,'outletguard');
+  cable([[-67,13,60],[-91,17,88],[-86,18,145],[137,19,145],[139,86,25],[131,86,25]],pe,1.7,'outletguard');
   cylinder(3,3,[-106,4,51],'#b1a66c','panel');
   // Blue pigtails and three full voltage leads, including a visible retained-slack zone.
   const leadPorts = [3,2,0], leadColors = ['#283039','#ad4d4a','#dddcd1'];
@@ -238,11 +245,19 @@ async function start() {
     planBodies[p.id]=[cylinder(p.size[0]/2,p.size[2],p.position,blue,'leads','z')];
     cylinder(4.4,26,[x,22,z+30],'#b8b5a4','leads','z');
     const slack=instances['lead-slack'];
-    const coil=[]; for(let j=0;j<=180;j++) {const a=j/180*Math.PI*2*4.5;coil.push([slack.position[0]+slack.size[0]/2*Math.cos(a),18+i*9+j/180*6,slack.position[2]+slack.size[2]/2*Math.sin(a)]);}
-    cable([[x,22,z+43],coil[0]],leadColors[i],1.5);
-    cable(coil,leadColors[i],1.5);
     const ex=portX[leadPorts[i]];
-    cable([coil.at(-1),[24+i*6,28+i*5,133],[41+i*4,37,-94],[48+i*5,30,-151],[ex,18,-153],[ex,18,mz-ml/2-16]],leadColors[i],1.5);
+    const pathsFor = turns => {
+      const coil=[];
+      for(let j=0;j<=240;j++) {const t=j/240, a=t*Math.PI*2*turns;coil.push([slack.position[0]+44*Math.cos(a),24+i*slack.layerSpacingMm+t*turns*slack.pitchMm,slack.position[2]+37*Math.sin(a)]);}
+      return [[[x,22,z+43],coil[0]],coil,[coil.at(-1),[24+i*6,28+i*5,143],[41+i*4,37,-94],[48+i*5,30,-151],[ex,18,-153],[ex,18,mz-ml/2-16]]];
+    };
+    const lengthOf = points => {const c=new THREE.CatmullRomCurve3(points.map(V),false,'centripetal');c.arcLengthDivisions=Math.max(200,points.length*10);return c.getLength();};
+    let lo=4,hi=6.5;
+    for(let j=0;j<28;j++){const n=(lo+hi)/2,len=pathsFor(n).reduce((s,p)=>s+lengthOf(p),0);if(len<slack.flexibleLengthMm)lo=n;else hi=n;}
+    const turns=(lo+hi)/2, paths=pathsFor(turns);
+    const leadSegments=paths.map(p=>cable(p,leadColors[i],slack.assumedCableDiameterMm/2));
+    const coilBounds=new THREE.Box3().setFromObject(leadSegments[1]);
+    voltageLeadLengths.push({id:`A${i+1}`,modeledFlexibleLengthMm:leadSegments.reduce((n,m)=>n+m.userData.lengthMm,0),turns,pitchMm:slack.pitchMm,assumedDiameterMm:slack.assumedCableDiameterMm,coilMin:coilBounds.min.toArray(),coilMax:coilBounds.max.toArray()});
     cylinder(4.7,30,[ex,18,mz-ml/2-16],'#b6b4a5','leads','z');
   }
   tag('3 blue voltage adapters',[-22,56,59],'leads');
@@ -253,7 +268,8 @@ async function start() {
   // Separate factory DC return and USB routes on the low-voltage end.
   cable([[236,96,oz],[249,76,42],[234,78,106],[172,78,106],[153,62,118],[mx-17,18,mz+ml/2+17]],'#554534',1.8,'adapter');
   cylinder(4.5,20,[mx-17,18,mz+ml/2+12],'#24282b','adapter','z');
-  cable([[mx+16,23,mz+ml/2+12],[117,31,125],[155,55,139],[217,55,139],[267,38,175]],'#516d86',2.2,'entries');
+  const usbZ = instances['usb-entry'].position[2];
+  cable([[mx+16,23,mz+ml/2+12],[117,31,125],[155,55,usbZ],[217,55,usbZ],[267,38,195]],'#516d86',2.2,'entries');
   box([10,11,20],[mx+16,23,mz+ml/2+11],'#43576a','entries',2);
   // World-space dimension lines retain the same millimetre scale as the solids.
   function dimension(a,b,text,pos) {
@@ -285,7 +301,7 @@ async function start() {
     const occupied=[];
     labels.forEach(({el,position,id,kind})=>{
       const p=position.clone().project(camera);
-      const concealed=$('model-shell').value==='closed'&&(['meter','ct','fuse','terminals','leads'].includes(id)||(kind==='dimension'&&el.textContent!=='100 mm'));
+      const concealed=(assemblyStage>0&&((kind==='dimension')||(id&&groups[id]&&!groups[id].visible)))||($('model-shell').value==='closed'&&(['meter','ct','fuse','terminals','leads'].includes(id)||(kind==='dimension'&&el.textContent!=='100 mm')));
       const show=!concealed&&(kind==='dimension'?$('model-dimensions').checked:$('model-label-toggle').checked)&&p.z>-1&&p.z<1&&Math.abs(p.x)<.93&&Math.abs(p.y)<.93;
       el.hidden=!show;el.classList.toggle('chosen',id===activePart);
       if(!show)return;
@@ -326,14 +342,40 @@ async function start() {
     lidObjects.forEach(m=>{m.visible=mode!=='cutaway';m.position.y=mode==='lifted'?230:0;});
     shellMat.opacity=mode==='closed'?1:.12;shellMat.depthWrite=mode==='closed';shellMat.transparent=mode!=='closed';shellMat.needsUpdate=true;
     lidMat.opacity=mode==='closed'?.22:.08;wires.visible=$('model-wires').checked;dims.visible=$('model-dimensions').checked;
+    applyAssembly();
     render();
   }
+  function applyAssembly() {
+    const stage=assemblyStage;
+    for(const [id,g] of Object.entries(groups)) {
+      const first=id==='case'?1:id==='panel'?2:['rail','terminals','meter','ct','fuse'].includes(id)?3:['q0','outlet','outletguard','entries'].includes(id)?4:5;
+      g.visible=stage===0||stage>=first;
+    }
+    groups.panel.position.y=stage===2?300*(1-Number($('assembly-progress').value)/100):0;
+    if(stage>0&&stage<6)lidObjects.forEach(m=>m.visible=false);
+    wires.visible=$('model-wires').checked&&(stage===0||stage>=5);
+    dims.visible=$('model-dimensions').checked&&stage===0;
+    if(stage>0)selection.visible=false;
+    $('assembly-distance').textContent=`${Math.round(groups.panel.position.y)} mm above final position`;
+  }
+  review.assembly.forEach(s=>{const opt=document.createElement('option');opt.value=s.stage;opt.textContent=`${s.stage}. ${s.title}`;$('assembly-stage').append(opt);});
+  function setAssembly(stage) {
+    assemblyStage=stage;$('assembly-stage').value=String(stage);
+    $('assembly-motion').hidden=stage!==2;$('assembly-previous').disabled=stage===0;$('assembly-next').disabled=stage===6;
+    const step=review.assembly.find(s=>s.stage===stage);
+    $('assembly-note').textContent=step?`${step.action} ${step.result}`:'Complete design overview. Unresolved interfaces remain listed in the installation audit.';
+    appearance();
+  }
+  $('assembly-stage').addEventListener('change',e=>setAssembly(Number(e.target.value)));
+  $('assembly-previous').onclick=()=>setAssembly(Math.max(0,assemblyStage-1));
+  $('assembly-next').onclick=()=>setAssembly(Math.min(6,assemblyStage+1));
+  $('assembly-progress').addEventListener('input',()=>{applyAssembly();render();});
   document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>view(b.dataset.view)));
   ['model-shell','model-wires','model-dimensions','model-label-toggle'].forEach(id=>$(id).addEventListener('change',appearance));
   function zoom(factor){camera.zoom=THREE.MathUtils.clamp(camera.zoom*factor,.65,5);camera.updateProjectionMatrix();render();}
   $('model-zoom-in').onclick=()=>zoom(1.2);$('model-zoom-out').onclick=()=>zoom(1/1.2);
-  $('model-reset').onclick=()=>{$('model-shell').value='xray';appearance();view('iso');};
-  $('compare-layout').onclick=()=>{$('model-shell').value='xray';appearance();view('top');$('layout').scrollIntoView({block:'start'});};
+  $('model-reset').onclick=()=>{setAssembly(0);$('model-shell').value='xray';appearance();view('iso');};
+  $('compare-layout').onclick=()=>{setAssembly(0);$('model-shell').value='xray';appearance();view('top');$('layout').scrollIntoView({block:'start'});};
   $('model-save').onclick=()=>{render();const link=document.createElement('a');link.download='elitepro-enclosure-3d.png';link.href=renderer.domElement.toDataURL('image/png');link.click();};
   renderer.domElement.addEventListener('keydown',e=>{
     if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)) {
@@ -348,7 +390,7 @@ async function start() {
   renderer.domElement.addEventListener('pointerup',e=>{
     if(!pointerStart||Math.hypot(e.clientX-pointerStart[0],e.clientY-pointerStart[1])>5)return;
     const r=renderer.domElement.getBoundingClientRect();ray.setFromCamera(new THREE.Vector2((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1),camera);
-    const hit=ray.intersectObjects(picking).find(h=>h.object.visible&&(h.object.parent!==wires||wires.visible));if(hit)info(hit.object.userData.part);
+    const hit=ray.intersectObjects(picking).find(h=>{for(let p=h.object;p;p=p.parent)if(!p.visible)return false;return true;});if(hit)info(hit.object.userData.part);
   });
   renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();status.textContent='3D graphics context lost. Reload the page to restore; the dimension schedule remains available.';});
   controls.addEventListener('change',render);
@@ -364,7 +406,12 @@ async function start() {
       return [id,{min:b.min.toArray(),max:b.max.toArray(),size:b.getSize(new THREE.Vector3()).toArray()}];
     }));
   }
-  window.enclosureDiagnostics=()=>({units:dimensions.units,camera:camera.position.toArray(),zoom:camera.zoom,mode:$('model-shell').value,selected:activePart,cadSize:cad.bounds.size,projectedMeter:V(parts.meter.position).project(camera).toArray(),meterSize:parts.meter.size,meshCount:picking.length,triangles:renderer.info.render.triangles,wiresVisible:wires.visible,lidOffset:lidObjects[0].position.y,shellVisible:shellObjects[0].visible,shellOpacity:shellMat.opacity,fitBodies:boundsOf(fitBodies),planBodies:boundsOf({...planBodies,...fitBodies})});
+  function meterRouteIntrusions(){
+    const b=new THREE.Box3(V(parts.meter.position).sub(V(parts.meter.size).multiplyScalar(.5)),V(parts.meter.position).add(V(parts.meter.size).multiplyScalar(.5)));
+    // Screen the insulated route against the meter body; actual port terminations are modeled outside it.
+    return cableRoutes.flatMap((r,index)=>{const envelope=b.clone().expandByScalar(r.radius);const hits=r.samples.filter(p=>envelope.containsPoint(p)).length;return hits?[{index,part:r.part,samplesInside:hits}]:[]});
+  }
+  window.enclosureDiagnostics=()=>({units:dimensions.units,camera:camera.position.toArray(),zoom:camera.zoom,mode:$('model-shell').value,selected:activePart,cadSize:cad.bounds.size,projectedMeter:V(parts.meter.position).project(camera).toArray(),meterSize:parts.meter.size,meshCount:picking.length,triangles:renderer.info.render.triangles,wiresVisible:wires.visible,lidOffset:lidObjects[0].position.y,shellVisible:shellObjects[0].visible,shellOpacity:shellMat.opacity,fitBodies:boundsOf(fitBodies),planBodies:boundsOf({...planBodies,...fitBodies}),voltageLeadLengths,breakerTerminals:breakerTerminals.map(m=>m.position.toArray()),breakerMounts:breakerMounts.map(m=>m.position.toArray()),assemblyStage,panelInsertionOffset:groups.panel.position.y,visibleGroups:Object.entries(groups).filter(([,g])=>g.visible).map(([id])=>id),lidVisible:lidObjects[0].visible,meterRouteIntrusions:meterRouteIntrusions()});
 }
 start().catch(error=>{
   console.error(error);$('model-loading').hidden=true;

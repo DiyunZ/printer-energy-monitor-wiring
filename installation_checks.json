@@ -1,0 +1,206 @@
+{
+  "revision": "Installation audit, 2026-09-19",
+  "release": "NOT RELEASED FOR FABRICATION OR ENERGIZING",
+  "units": "mm",
+  "method": "Axis-aligned body envelopes, continuous vertical swept volumes against triangulated Hammond shell, nine lid rays per body and sourced interface arithmetic. The shell uses 0.45 mm triangulation deflection, not manufacturing tolerances.",
+  "checks": [
+    {
+      "id": "Q0 catalog body",
+      "result": "pass",
+      "evidence": "Model 19.18 × 63.5 × 47 mm; Carling p.11 body envelope 19.18 × 63.50 × 47.00 mm.",
+      "limits": "Body includes the front step; studs, handle and terminal guard are separate."
+    },
+    {
+      "id": "Q0 terminal and mounting pitches",
+      "result": "pass",
+      "evidence": "Stud pitch 49.28 mm; mounting pitch 52.37 mm. Carling: 49.28 / 52.37 mm.",
+      "limits": ""
+    },
+    {
+      "id": "Q0 ring size",
+      "result": "pass",
+      "evidence": "Selected Q0 terminal code 1 is #10-32; its two ring lugs must have #10 holes. Crimp tool and pull test remain required.",
+      "limits": ""
+    },
+    {
+      "id": "Split-entry flange spacing",
+      "result": "pass",
+      "evidence": "Two actual Ø40 mm flanges: 25.192 mm edge gap.",
+      "limits": "10 mm is a project layout allowance, not a code or manufacturer requirement. Wrench access, tolerance, bore and wall stack still need checking."
+    },
+    {
+      "id": "dc-entry envelope",
+      "result": "pass",
+      "evidence": "Model 37 × 40 × 40 mm; KVT 20 overall envelope 37 mm axial × Ø40 mm flange.",
+      "limits": "Conservative cylinder; the threaded shank is M20, not Ø40."
+    },
+    {
+      "id": "usb-entry envelope",
+      "result": "pass",
+      "evidence": "Model 37 × 40 × 40 mm; KVT 20 overall envelope 37 mm axial × Ø40 mm flange.",
+      "limits": "Conservative cylinder; the threaded shank is M20, not Ø40."
+    },
+    {
+      "id": "Panel component body separation",
+      "result": "pass",
+      "evidence": "8 nominal body envelopes do not overlap (rail/holder mating excluded).",
+      "limits": "CT is an unidentified example. No connectors, open levers, flexible wires, mounting tolerances or screw-tool envelopes are certified by this check."
+    },
+    {
+      "id": "Vertical insertion through open case",
+      "result": "pass",
+      "evidence": "9/9 swept bounding boxes clear the manufacturer shell.",
+      "limits": "300 mm vertical translation, fixed orientation, wall fittings absent. This tests shell access, not the full sequence of brackets, wires or tool motions."
+    },
+    {
+      "id": "Panel before side outlet box",
+      "result": "sequence required",
+      "evidence": "The panel insertion sweep intersects the side outlet-box envelope. Install the panel first; removal requires removing the box or a separately verified tilted path.",
+      "limits": ""
+    },
+    {
+      "id": "Wall hardware mounting interfaces",
+      "result": "hold",
+      "evidence": "outletguard: 6 intersecting shell triangles; q0: 4 intersecting shell triangles",
+      "limits": "Uncut factory CAD intersects proposed wall fittings. The support inserts, apertures, wall taper and body-front offsets are not fabrication drawings. Do not interpret overlap as an approved cutout."
+    },
+    {
+      "id": "Closed lid screen",
+      "result": "screen only",
+      "evidence": "meter: 159.012 mm (9/9 rays); ct: 164.312 mm (9/9 rays); fuse: 128.362 mm (9/9 rays); outletguard: 9.962 mm (9/9 rays); q0: 34.788 mm (9/9 rays)",
+      "limits": "Nine upward rays per body against lid mesh 15. Not a minimum-distance proof; excludes lid hardware, guards, open fuse door, wire bundles and tolerances."
+    },
+    {
+      "id": "Cord diameter interfaces",
+      "result": "pass",
+      "evidence": "Southwire published nominal OD 9.17–9.27 mm lies within Hammond 6–12 mm gland and Leviton 0.245–0.655 in cord ranges.",
+      "limits": "Published variants are not a manufacturing tolerance. Measure purchased cord; clamping, jacket preparation and pull resistance remain physical checks."
+    },
+    {
+      "id": "Ring barrel and internal wire",
+      "result": "pass",
+      "evidence": "3.581 mm wire insulation OD < 4.318 mm ring maximum; 14 AWG is within 16–14 AWG ring range.",
+      "limits": "Does not qualify the crimp or approve the AWM wire for this assembly."
+    },
+    {
+      "id": "DIN rail capacity",
+      "result": "pass",
+      "evidence": "100 − 17.5 − 2 × 6 = 70.5 mm remains after holder and two end stops.",
+      "limits": "Fasteners, PE bond and fuse-door service motion still need final placement."
+    },
+    {
+      "id": "Physical and electrical release",
+      "result": "hold",
+      "evidence": "No built assembly, nameplate verification, qualified acceptance or energized test has been recorded.",
+      "limits": ""
+    }
+  ],
+  "insertion_sweeps": [
+    {
+      "id": "panel",
+      "travel_mm": 300,
+      "shell_triangle_hits": 0,
+      "result": "pass"
+    },
+    {
+      "id": "meter",
+      "travel_mm": 300,
+      "shell_triangle_hits": 0,
+      "result": "pass"
+    },
+    {
+      "id": "ct",
+      "travel_mm": 300,
+      "shell_triangle_hits": 0,
+      "result": "pass"
+    },
+    {
+      "id": "fuse",
+      "travel_mm": 300,
+      "shell_triangle_hits": 0,
+      "result": "pass"
+    },
+    {
+      "id": "rail",
+      "travel_mm": 300,
+      "shell_triangle_hits": 0,
+      "result": "pass"
+    },
+    {
+      "id": "JL",
+      "travel_mm": 300,
+      "shell_triangle_hits": 0,
+      "result": "pass"
+    },
+    {
+      "id": "JN",
+      "travel_mm": 300,
+      "shell_triangle_hits": 0,
+      "result": "pass"
+    },
+    {
+      "id": "PE",
+      "travel_mm": 300,
+      "shell_triangle_hits": 0,
+      "result": "pass"
+    },
+    {
+      "id": "PE+",
+      "travel_mm": 300,
+      "shell_triangle_hits": 0,
+      "result": "pass"
+    }
+  ],
+  "body_screen": [
+    {
+      "id": "meter",
+      "shell_triangle_hits": 0,
+      "lid_samples": 9,
+      "minimum_sampled_lid_gap_mm": 159.012
+    },
+    {
+      "id": "ct",
+      "shell_triangle_hits": 0,
+      "lid_samples": 9,
+      "minimum_sampled_lid_gap_mm": 164.312
+    },
+    {
+      "id": "fuse",
+      "shell_triangle_hits": 0,
+      "lid_samples": 9,
+      "minimum_sampled_lid_gap_mm": 128.362
+    },
+    {
+      "id": "outletguard",
+      "shell_triangle_hits": 6,
+      "lid_samples": 9,
+      "minimum_sampled_lid_gap_mm": 9.962
+    },
+    {
+      "id": "q0",
+      "shell_triangle_hits": 4,
+      "lid_samples": 9,
+      "minimum_sampled_lid_gap_mm": 34.788
+    }
+  ],
+  "wall_entries": [
+    {
+      "id": "dc-entry",
+      "wall_intersections_x_mm": [
+        176.555,
+        181.331
+      ],
+      "local_wall_mm": 4.776
+    },
+    {
+      "id": "usb-entry",
+      "wall_intersections_x_mm": [
+        176.179,
+        180.955
+      ],
+      "local_wall_mm": 4.776
+    }
+  ],
+  "material_groups": 36,
+  "owned_groups": 5
+}
