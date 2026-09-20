@@ -2,6 +2,7 @@
 <ul>
 <li><a href="build.html">Machining files and assembly guide</a> — drawings, fasteners and assembly order.</li>
 <li><a href="index.html#assembly-preview">Interactive installation sequence</a> — inspect the six stages in 3D.</li>
+<li><a href="protection.html">Protection review</a> — Q0 / Fv findings and the remaining evidence.</li>
 <li><a href="installation.html">Installation audit</a> — checks completed and remaining acceptance items.</li>
 <li><a href="materials.html">Full materials list</a> · <a href="Procurement_BOM.md">Download BOM</a></li>
 <li><a href="references.html">Manufacturer sources and design limits</a></li>
@@ -12,11 +13,12 @@
 
 <p>Daily use begins only after qualified electrical inspection and setup.</p>
 <ol>
-<li><strong>Connect with Q0 OFF.</strong> Printer → measured output. Verified adapter → XA, with its DC cable connected. Connect the box supply.</li>
-<li><strong>Switch Q0 ON.</strong> The printer, adapter outlet and voltage tap receive power together.</li>
-<li><strong>Confirm logging.</strong> Check readings and the recording indicator. Run the print and record start/stop times.</li>
+<li><strong>Configure offline.</strong> With mains unplugged and the lid open, use the kit USB cable and ELOG to set the clock, actual CT range and interval. Confirm logging is enabled and sufficient memory remains. Remove USB, then close the lid.</li>
+<li><strong>Run independently.</strong> With Q0 OFF, connect one printer and the adapter, then connect the supply. Switch Q0 ON and check the logging indicator. Record each job&#39;s start, phase changes and finish times against the synchronized clock.</li>
+<li><strong>Download in batches.</strong> After the printer finishes its shutdown/cooldown, switch Q0 OFF, unplug mains and verify absence of mains voltage. Open the lid, connect USB and export the records. Preserve raw data before clearing memory. Remove USB before the next powered run.</li>
 </ol>
-<p><strong>Keep the lid closed. Q0 OFF is not isolation: unplug mains and USB, then verify absence of voltage before opening or changing sensing leads.</strong></p>
+<p><strong>Q0 OFF is not isolation; its input remains live. Always unplug mains before opening. USB is not installed during printing.</strong></p>
+<p>The logger stores time-series data in non-volatile memory and can be powered by USB for readout (<a href="https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf">DENT manual</a>, printed pp. 7, 18, 119). This design avoids the permanent powered-panel USB connection that would require additional rated insulation. Validate one complete offline run and export before collecting the experiment series.</p>
 <h3>Initial setup and electrical checks</h3>
 <p>Qualified electrical personnel verify terminations, polarity, PE continuity, insulation, protection and enclosure fit before releasing the assembly. Q0 opens hot only; PE stays continuous. Fv selection and breaker coordination must be resolved before energizing.</p>
 <p>Configure ELOG for single phase / two wire, CH1 voltage high L1 and low N, the actual CT type/range and logging interval. Disable unused channels. Verify sensible readings and positive real power against an independent reference meter; prove recording and restart behavior with a supervised power cycle.</p>
@@ -93,7 +95,7 @@
 <td>Standard profile; proposed cut length</td>
 </tr>
 <tr>
-<td>Long-thread power glands / KVT 32 split entries</td>
+<td>Power glands / DC KVT 32 entry</td>
 <td>27.0 × 37.0 × 27.0</td>
 <td>Catalog envelopes; 41380 inserts selected · <a href="https://www.hammfg.com/electronics/small-case/accessories/1427ncg">Source</a></td>
 </tr>

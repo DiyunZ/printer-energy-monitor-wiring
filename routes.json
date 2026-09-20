@@ -1,5 +1,5 @@
 {
-  "revision": "Rev. 8 \u00b7 build package A \u00b7 2026-09-20",
+  "revision": "Rev. 9 \u00b7 offline USB \u00b7 2026-09-20",
   "anchors": {
     "IN.L": [
       571.9,
@@ -831,11 +831,11 @@
         ],
         [
           1374.0,
-          1384.2
+          1418.0
         ],
         [
           1738.0,
-          1384.2
+          1418.0
         ],
         [
           1738.0,
@@ -844,9 +844,9 @@
       ],
       "badge": [
         1621.0,
-        1384.2
+        1418.0
       ],
-      "description": "USB Type B \u2192 protected exit \u2192 ELOG computer",
+      "description": "Temporary USB \u2192 ELOG; open lid, mains unplugged",
       "group": "signal"
     },
     {

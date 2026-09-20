@@ -23,12 +23,6 @@
       "limits": ""
     },
     {
-      "id": "Split-entry flange spacing",
-      "result": "pass",
-      "evidence": "Two actual Ø40 mm flanges: 25.192 mm edge gap.",
-      "limits": "10 mm is a project layout allowance, not a code or manufacturer requirement. Wrench access, tolerance, bore and wall stack still need checking."
-    },
-    {
       "id": "dc-entry envelope",
       "result": "pass",
       "evidence": "Model 37 × 40 × 40 mm; KVT 32 overall envelope 37 mm axial × Ø40 mm flange.",
@@ -38,18 +32,6 @@
       "id": "dc-entry cable / insert",
       "result": "pass",
       "evidence": "dc-extension: round jacket 4.9–5.5 mm; KTMBS 41380 accepts 4–7 mm.",
-      "limits": "Catalog interface check only. Original flat adapter cord is excluded; verify received jackets, connector passage, seals and strain relief."
-    },
-    {
-      "id": "usb-entry envelope",
-      "result": "pass",
-      "evidence": "Model 37 × 40 × 40 mm; KVT 32 overall envelope 37 mm axial × Ø40 mm flange.",
-      "limits": "Conservative cylinder; the threaded shank is M32, not Ø40."
-    },
-    {
-      "id": "usb-entry cable / insert",
-      "result": "pass",
-      "evidence": "usb: round jacket 4.8–4.8 mm; KTMBS 41380 accepts 4–7 mm.",
       "limits": "Catalog interface check only. Original flat adapter cord is excluded; verify received jackets, connector passage, seals and strain relief."
     },
     {
@@ -81,6 +63,12 @@
       "result": "screen only",
       "evidence": "meter: 159.012 mm (9/9 rays); ct: 168.315 mm (9/9 rays); fuse: 141.512 mm (9/9 rays); outlet: 33.747 mm (9/9 rays); q0: 32.992 mm (9/9 rays)",
       "limits": "Nine upward rays per body against lid mesh 15. Not a minimum-distance proof; excludes lid hardware, guards, open fuse door, wire bundles and tolerances."
+    },
+    {
+      "id": "No permanent USB wall opening",
+      "result": "pass",
+      "evidence": "At the former USB center Y/Z = 55/167 mm, the shell has 2 wall-surface intersections; no USB fitting is installed.",
+      "limits": "Mesh cross-section check at the former opening center. USB is temporary with mains unplugged and the lid open."
     },
     {
       "id": "Cord diameter interfaces",
@@ -214,11 +202,6 @@
   "wall_entries": [
     {
       "id": "dc-entry",
-      "wall_intersections_x_mm": [],
-      "local_wall_mm": null
-    },
-    {
-      "id": "usb-entry",
       "wall_intersections_x_mm": [],
       "local_wall_mm": null
     }

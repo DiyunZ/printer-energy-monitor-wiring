@@ -26,7 +26,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  assert.equal(await page.locator('details[open]').count(),0,'Supporting details should be collapsed initially');
  assert.equal(await page.locator('#layout').isVisible(),true);
  assert.equal(await page.locator('#wiring').isVisible(),false);
- assert.equal(await page.locator('.materials tbody tr:visible').count(),24);
+ assert.equal(await page.locator('.materials tbody tr:visible').count(),23);
  assert.equal(await page.locator('#owned-materials').getAttribute('open'),null);
  assert.equal(await page.locator('#confirm .review-items li').count(),3);
  assert.equal(await page.locator('#assembly-preview').isVisible(),false);
@@ -73,7 +73,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   scale:Number(svg.dataset.layoutScale),origin:[Number(svg.dataset.layoutOriginX),Number(svg.dataset.layoutOriginY)],
   bodies:[...svg.querySelectorAll('.component-footprint')].map(e=>({id:e.dataset.layoutId,x:e.x.baseVal.value,y:e.y.baseVal.value,w:e.width.baseVal.value,h:e.height.baseVal.value}))
  }));
- assert.equal(plan.bodies.length,24,'Every placed body, including the external DC coupling, must appear in the wiring plan');
+ assert.equal(plan.bodies.length,23,'Every placed body, including the external DC coupling, must appear in the wiring plan');
  assert.deepEqual(plan.bodies.map(p=>p.id).sort(),Object.keys(initial.planBodies).sort());
  for(const p of plan.bodies){
   const actual=initial.planBodies[p.id],bounds=[actual.min[0],actual.min[2],actual.size[0],actual.size[2]];
@@ -188,13 +188,13 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  // Ownership follows the user's confirmation, not whether an item appears in the model.
  const ownedIds=['meter','ct','blue-leads','voltage-leads','adapter'];
  assert.deepEqual(bom.items.filter(p=>p.availability==='owned').map(p=>p.id),ownedIds);
- assert.equal(bom.items.find(p=>p.id==='usb').availability,'buy');
+ assert.equal(bom.items.find(p=>p.id==='usb').availability,'kit');
  assert.equal(await page.locator('.materials tbody tr').count(),bom.items.length);
  await openOwned();
  for(const p of bom.items){
   const row=page.locator('#material-'+p.id);
   assert.equal(await row.getAttribute('data-availability'),p.availability);
-  assert.match(await row.locator('.inventory-badge').textContent(),p.availability==='owned'?/✓.*Owned/:/□.*To buy/);
+  assert.match(await row.locator('.inventory-badge').textContent(),p.availability==='owned'?/✓.*Owned/:p.availability==='kit'?/✓.*Kit included/:/□.*To buy/);
   assert.equal(await row.locator('.material-note').textContent(),p.status,'Full receiving and fit checks must be retained');
   assert.equal(await row.locator('.material-note').isVisible(),false);
   assert.equal(await row.locator('td[data-label="Quantity needed"]').textContent(),p.quantity_summary||p.quantity);
@@ -229,7 +229,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  await page.locator('#owned-materials > summary').click();
  assert.deepEqual(await page.locator('.materials tbody tr:visible').evaluateAll(rows=>rows.map(r=>r.id)),bom.items.filter(p=>p.availability==='buy').map(p=>'material-'+p.id));
  await openOwned();
- assert.equal(await page.locator('#owned-materials tbody tr:visible').count(),ownedIds.length);
+ assert.equal(await page.locator('#owned-materials tbody tr:visible').count(),ownedIds.length+1);
  await page.locator('#owned-materials > summary').click();
  if(out){await page.locator('#hardware').scrollIntoViewIfNeeded();await page.screenshot({path:path.join(out,'inventory-desktop.png')});}
  for(const [width,height] of [[1440,1100],[768,1024],[390,844]]){
@@ -241,7 +241,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   if(out){await page.locator('#design').screenshot({path:path.join(out,`layout-${width}.png`)});}
   assert.ok(await page.locator('.materials').evaluateAll(es=>es.every(e=>e.scrollWidth<=e.clientWidth+2)),'Materials overflow at '+width);
   if(width===390){
-   await openOwned();assert.equal(await page.locator('#owned-materials tbody tr:visible').count(),ownedIds.length);
+   await openOwned();assert.equal(await page.locator('#owned-materials tbody tr:visible').count(),ownedIds.length+1);
    if(out)await page.locator('#material-meter').screenshot({path:path.join(out,'inventory-mobile.png')});
    await page.locator('#material-meter .material-details summary').focus();await page.keyboard.press('Enter');
    assert.equal(await page.locator('#material-meter .material-details .material-reason').isVisible(),true,'Material specifications must open by keyboard on mobile');
@@ -251,12 +251,12 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  }
  const links=await page.locator('a[href]').evaluateAll(es=>es.map(e=>e.getAttribute('href')).filter(h=>!h.startsWith('http')&&!h.startsWith('#')));
  for(const href of [...new Set(links)]){const res=await page.request.get(new URL(href,base).href);assert.equal(res.status(),200,href);}
- for(const file of ['materials.html','references.html','installation.html','build.html','documents.html']){
+ for(const file of ['materials.html','references.html','installation.html','build.html','documents.html','protection.html']){
   await page.goto(new URL(file,base).href);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),file+' mobile overflow');
   if(file==='materials.html'){
    assert.equal(await page.locator('tbody tr').count(),bom.items.length);
    assert.equal(await page.locator('tbody tr').filter({hasText:'✓ Owned'}).count(),ownedIds.length);
-   assert.equal(await page.locator('tbody tr').filter({hasText:'□ To buy'}).count(),bom.items.length-ownedIds.length);
+   assert.equal(await page.locator('tbody tr').filter({hasText:'□ To buy'}).count(),bom.items.length-ownedIds.length-1);
    assert.equal(await page.locator('.material-photo img').count(),bom.items.length);
    assert.ok(await page.locator('.material-image').evaluateAll(es=>es.every(e=>e.clientWidth>=150)),'Document image columns must remain readable');
    await page.locator('.material-photo img').evaluateAll(es=>Promise.all(es.map(async img=>{img.loading='eager';await img.decode();})));
@@ -271,6 +271,11 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
    const localLinks=await page.locator('a[href^=\"fabrication/\"]').evaluateAll(es=>es.map(e=>e.getAttribute('href')));
    assert.ok(localLinks.length>=10);
    for(const href of localLinks)assert.equal((await page.request.get(new URL(href,base).href)).status(),200,href);
+  } else if(file==='protection.html') {
+   const text=await page.locator('body').innerText();
+   assert.match(text,/Q0 and Fv are not fully released/);
+   assert.match(text,/Room 0100/);
+   assert.match(text,/draft, not sent/);
   } else {
    assert.equal(await page.locator('#operation').count(),1);
    assert.equal(await page.locator('#dimensions').count(),1);
@@ -293,7 +298,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   const render=await browser.newPage({viewport:{width:1800,height:1300},deviceScaleFactor:2});
   for(const name of ['wiring_routes','connector_detail']){await render.goto(new URL(name+'.svg',base).href);await render.locator('svg').screenshot({path:path.join(root,name+'.png')});}
  }
- const report={date:new Date().toISOString(),base,connections:25,circuitGroups:7,alignedComponentFootprints:plan.bodies.length,planTo3DMaximumToleranceMm:.05,compareTopView:true,renderedMeterBody:initial.fitBodies.meter.size,primaryBodyOverlaps:false,mouseOrbit:true,wheelZoom:true,keyboardOrbit:true,picking:true,shellModes:4,pngExport:true,viewportWidths:[1440,768,390],pageOverflow:false,internalLinks:true,materialsRows:bom.items.length,materialImagesLoaded:bom.items.length,ownedGroups:ownedIds.length,purchaseGroups:bom.items.length-ownedIds.length,ownedGroupCollapsedByDefault:true,designTabs:true,buildDocumentHub:true,assemblyStages:6,panelInsertionSlider:true,progressiveDisclosure:true,criticalNoticesVisible:true,advancedControlsKeyboard:true,coilScenarioLengthMm:2000,jsErrors:errors,physicalBuildValidated:false};
+ const report={date:new Date().toISOString(),base,connections:25,circuitGroups:7,alignedComponentFootprints:plan.bodies.length,planTo3DMaximumToleranceMm:.05,compareTopView:true,renderedMeterBody:initial.fitBodies.meter.size,primaryBodyOverlaps:false,mouseOrbit:true,wheelZoom:true,keyboardOrbit:true,picking:true,shellModes:4,pngExport:true,viewportWidths:[1440,768,390],pageOverflow:false,internalLinks:true,materialsRows:bom.items.length,materialImagesLoaded:bom.items.length,ownedGroups:ownedIds.length,kitGroups:1,purchaseGroups:bom.items.length-ownedIds.length-1,ownedGroupCollapsedByDefault:true,designTabs:true,buildDocumentHub:true,assemblyStages:6,panelInsertionSlider:true,progressiveDisclosure:true,criticalNoticesVisible:true,advancedControlsKeyboard:true,coilScenarioLengthMm:2000,jsErrors:errors,physicalBuildValidated:false};
  if(out)fs.writeFileSync(path.join(out,'browser-validation.json'),JSON.stringify(report,null,2)+'\n');
  console.log(JSON.stringify(report,null,2));
  }finally{await browser.close();}

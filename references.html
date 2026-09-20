@@ -79,8 +79,8 @@
 <tr>
 <td id="r12">R12</td>
 <td><a href="https://www.hammfg.com/part/1427NCGPG13LB">Hammond 1427NCGPG13LB</a>, <a href="https://pim.icotek.com/Produkte/PG02%20Kabelverschraubungen/KVT/KVT%2032/Datenbl%C3%A4tter/45026_KVT%2032_bk.PDF">icotek KVT 32</a>, <a href="https://www.icotek.com/Produkte/PDFs/en_US/KTMBS%20gy.pdf">KTMBS 41380</a></td>
-<td>Long-thread power glands; M32 split frames; two 41380 split round-cable inserts, 4–7 mm.</td>
-<td>Use the new round DC extension and round USB cable. Original flat CUI cord stays outside; verify seals and wall stack.</td>
+<td>Long-thread power glands; one M32 DC split frame and one 41380 split round-cable insert, 4–7 mm.</td>
+<td>Use the round DC extension. USB is temporary with mains unplugged. Original flat CUI cord stays outside; verify seals and wall stack.</td>
 </tr>
 <tr>
 <td id="r13">R13</td>
@@ -102,9 +102,9 @@
 </tr>
 <tr>
 <td id="r16">R16</td>
-<td><a href="https://media.startech.com/cms/pdfs/usb2hab6_datasheet.pdf">StarTech USB2HAB6 datasheet</a></td>
-<td>USB-A to B, 1.8 m, OD 4.8 mm; fits 41380 range.</td>
-<td>Published nominal OD is not a supplied-part tolerance; verify host and plug passage.</td>
+<td><a href="https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf">DENT XC manual</a></td>
+<td>Included 1.8 m USB-A to B cable; USB powers the meter for configuration/download. Internal non-volatile memory supports independent logging.</td>
+<td>Supplied USB requires rated insulation inside a powered panel. This design removes USB during mains operation and provides no USB wall entry.</td>
 </tr>
 <tr>
 <td id="r17">R17</td>
@@ -123,7 +123,7 @@
 <li>Fv OUT uses 14 AWG wire to JV; A1 then connects to L1. A2 and A3 connect JN to L2 and N. The three blue wires are sensing accessories, not load wires or PE conductors. Keep the mating pairs inside the enclosure.</li>
 <li>Only printer hot crosses CT once. Adapter and voltage-tap branch currents are outside the measured current. Voltage is sensed upstream, so downstream cord loss and voltage drop still affect the measurement boundary.</li>
 <li>XA is the Leviton 5279-C flanged outlet. Its earth terminal, printer earth, steel panel and DIN rail receive deliberate PE connections. The obsolete metal outlet-box bond is removed. Path 24 is now the <strong>Fv-to-JV</strong> transition.</li>
-<li>The original adapter and flat DC cable remain intact outside. A Tensility 10-02228 round extension passes through a 41380 insert to the logger. The outlet and supply share Q0&#39;s capacity. XA is for the logger adapter only. Low-voltage routing and USB insulation require appropriate segregation from mains; separate holes alone do not prove electrical insulation.</li>
+<li>The original adapter and flat DC cable remain intact outside. A Tensility 10-02228 round extension passes through a 41380 insert to the logger. The outlet and supply share Q0&#39;s capacity. XA is for the logger adapter only. Keep DC separated from mains. USB is connected only temporarily with mains unplugged and removed before the lid is closed and power is restored.</li>
 <li>ELOG must be configured and validated before routine use. Powering the instrument is not proof that recording started. Verify CT scaling, polarity, reference readings and restart behavior.</li>
 </ul>
 <h2>Digital checks and limits</h2>

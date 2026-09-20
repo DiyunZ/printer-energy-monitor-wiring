@@ -1,8 +1,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from './vendor/OrbitControls.js';
 import { RoundedBoxGeometry } from './vendor/RoundedBoxGeometry.js';
-import { installMaterialLocator } from './material-locator.js?v=15';
-import { addInstallationHardware } from './installation-hardware.js?v=15';
+import { installMaterialLocator } from './material-locator.js?v=17';
+import { addInstallationHardware } from './installation-hardware.js?v=17';
 import { screenCableBodies } from './cable-supports.js?v=15';
 import { showDesignPanel } from './site-navigation.js?v=15';
 
@@ -14,11 +14,11 @@ const V = a => new THREE.Vector3(...a);
 
 async function start() {
   const [dimensions, cad, buffer, review, procurement] = await Promise.all([
-    fetch('./layout_dimensions.json?v=15').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
-    fetch('./assets/enclosure.json?v=15').then(r => { if (!r.ok) throw Error('CAD manifest unavailable'); return r.json(); }),
-    fetch('./assets/enclosure.bin?v=15').then(r => { if (!r.ok) throw Error('CAD geometry unavailable'); return r.arrayBuffer(); }),
-    fetch('./installation_review.json?v=15').then(r => { if (!r.ok) throw Error('Installation review unavailable'); return r.json(); }),
-    fetch('./procurement.json?v=15').then(r => { if (!r.ok) throw Error('Materials unavailable'); return r.json(); })
+    fetch('./layout_dimensions.json?v=17').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
+    fetch('./assets/enclosure.json?v=17').then(r => { if (!r.ok) throw Error('CAD manifest unavailable'); return r.json(); }),
+    fetch('./assets/enclosure.bin?v=17').then(r => { if (!r.ok) throw Error('CAD geometry unavailable'); return r.arrayBuffer(); }),
+    fetch('./installation_review.json?v=17').then(r => { if (!r.ok) throw Error('Installation review unavailable'); return r.json(); }),
+    fetch('./procurement.json?v=17').then(r => { if (!r.ok) throw Error('Materials unavailable'); return r.json(); })
   ]);
   const parts = Object.fromEntries(dimensions.parts.map(p => [p.id, p]));
   const instances = Object.fromEntries(dimensions.instances.map(p => [p.id, p]));
@@ -239,7 +239,7 @@ async function start() {
   function gland(id) {
     const p=instances[id], pos=p.position, axis=p.axis;
     const r=p.size[1]/2, length=p.size[axis==='x'?0:2];
-    const split=['dc-entry','usb-entry'].includes(id);
+    const split=id==='dc-entry';
     function hollow(outer,depth,at,color) {
       const shape=new THREE.Shape();shape.absarc(0,0,outer,0,Math.PI*2,false);
       const hole=new THREE.Path();
@@ -253,9 +253,9 @@ async function start() {
     planBodies[id]=[hollow(r,length,pos,'#343e45')];
     const v=[...pos],axisN=axis==='x'?0:axis==='y'?1:2;v[axisN]+=length/2;
     const trim=hollow(split?r:r*.68,4,v,'#171e23');
-    mark(['dc-entry','usb-entry'].includes(id) ? 'split-entries' : 'cord-glands', id, p.label, [...planBodies[id],trim]);
+    mark(split ? 'split-entries' : 'cord-glands', id, p.label, [...planBodies[id],trim]);
   }
-  ['supply-entry','printer-entry','dc-entry','usb-entry'].forEach(gland);
+  ['supply-entry','printer-entry','dc-entry'].forEach(gland);
   tag('SUPPLY IN',[-239,54,144],'entries'); tag('TO PRINTER',[3,44,-254],'entries');
   // Actual wire routes remain in the separately validated schematic. These curved paths show physical routing intent.
   const hot='#20262b', neutral='#c9d0d5', pe='#23945e', blue='#268bd4', signal='#a08bb5';
@@ -338,12 +338,11 @@ async function start() {
   const dcInside=locatedCable('dc-extension','extension','External coupling to logger DC input',[[146,78,106],[142,32,134],[142,12,143],[142,12,150],[142,12,158],[124,16,175],[84,18,174],[mx-17,18,mz+ml/2+39]],'#393e44',2.6,'adapter');
   dcInside.userData.route.id='dc-extension:internal';
   mark('dc-extension','extension','External coupling to logger DC input',[cylinder(4.8,35,[mx-17,18,mz+ml/2+21.5],'#24282b','adapter','z')]);
-  const usbZ = instances['usb-entry'].position[2];
-  const usbInside=locatedCable('usb','usb','Logger USB-B to computer',[[mx+16,23,mz+ml/2+21],[122,18,127],[149,12,140],[149,12,150],[149,12,158],[161,42,usbZ],[169,55,usbZ]],'#516d86',2.4,'entries');
-  usbInside.userData.route.id='usb:internal';
-  locatedCable('usb','usb','Logger USB-B to computer',[[169,55,usbZ],[185.5,55,usbZ],[205,55,usbZ],[225,55,usbZ]],'#516d86',2.4,'entries');
-  locatedCable('usb','usb','Logger USB-B to computer',[[225,55,usbZ],[245,48,175],[267,38,195]],'#516d86',2.4,'entries');
-  mark('usb','usb','Logger USB-B to computer',[box([10,11,20],[mx+16,23,mz+ml/2+11],'#43576a','entries',2)]);
+  // Kit USB is removable service equipment. It is absent during energized operation.
+  const usbPreviewStart = allMeshes.length;
+  locatedCable('usb','usb','Temporary USB — mains unplugged',[[mx+16,23,mz+ml/2+21],[132,30,132],[148,92,150],[151,160,160],[169,205,180],[215,215,180],[255,205,180]],'#516d86',2.4,'entries');
+  mark('usb','usb','Temporary USB — mains unplugged',[box([10,11,20],[mx+16,23,mz+ml/2+11],'#43576a','entries',2)]);
+  const usbPreview = allMeshes.slice(usbPreviewStart);
   const supportChecks=addInstallationHardware({ dimensions, instances, parts, allMeshes, box, cylinder, mesh, material, decal, mark, capture, materialLocations, cableRoutes });
   // Remaining integral features belong to their purchased assembly, not a new BOM item.
   const assemblyMaterials={case:'enclosure',panel:'panel',meter:'meter',ct:'ct',q0:'breaker',outlet:'receptacle',adapter:'adapter',rail:'din-rail',fuse:'fuse-holder'};
@@ -410,7 +409,7 @@ async function start() {
       el.style.left=x+'px';el.style.top=y+'px';
     });
   }
-  function render(){locator?.sync();renderer.render(scene,camera);updateLabels();locator?.updateLabels();}
+  function render(){usbPreview.forEach(m=>m.visible=locator?.active==='usb'&&['cutaway','lifted'].includes($('model-shell').value)&&assemblyStage===0&&$('model-wires').checked);locator?.sync();renderer.render(scene,camera);updateLabels();locator?.updateLabels();}
   function resize() {
     const w=host.clientWidth,h=host.clientHeight;
     if(!w||!h)return; // Hidden tabs retain the last valid projection and canvas size.
@@ -501,7 +500,7 @@ async function start() {
   controls.addEventListener('start',()=>document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed','false')));
   const aliases={enclosure:'case',breaker:'q0',receptacle:'outlet','fuse-holder':'fuse',connectors:'terminals',carriers:'terminals','din-rail':'rail','blue-leads':'leads','voltage-leads':'leads'};
   locator=installMaterialLocator({items:procurement.items,locations:materialLocations,scene,camera,controls,host,render,
-    prepare:()=>{showDesignPanel('layout');resize();setAssembly(0,false);$('assembly-preview').hidden=true;$('assembly-preview').open=false;$('model-shell').value='xray';$('model-wires').checked=true;appearance();selection.visible=false;},
+    prepare:id=>{showDesignPanel('layout');resize();setAssembly(0,false);$('assembly-preview').hidden=true;$('assembly-preview').open=false;$('model-shell').value=id==='usb'?'cutaway':'xray';$('model-wires').checked=true;appearance();selection.visible=false;},
     describe:p=>{
       activePart=p.id;
       materialCopy(p);
@@ -536,7 +535,7 @@ async function start() {
     // Screen the insulated route against the meter body; actual port terminations are modeled outside it.
     return cableRoutes.flatMap((r,index)=>{const envelope=b.clone().expandByScalar(r.radius);const hits=r.samples.filter(p=>envelope.containsPoint(V(p))).length;return hits?[{index,part:r.part,samplesInside:hits}]:[]});
   }
-  window.enclosureDiagnostics=()=>({supportChecks,materialLocator:locator.diagnostics(),units:dimensions.units,camera:camera.position.toArray(),zoom:camera.zoom,mode:$('model-shell').value,selected:activePart,cadSize:cad.bounds.size,projectedMeter:V(parts.meter.position).project(camera).toArray(),meterSize:parts.meter.size,meshCount:picking.length,triangles:renderer.info.render.triangles,wiresVisible:wires.visible,lidOffset:lidObjects[0].position.y,shellVisible:shellObjects[0].visible,shellOpacity:shellMat.opacity,fitBodies:boundsOf(fitBodies),planBodies:boundsOf({...planBodies,...fitBodies}),voltageLeadLengths,breakerTerminals:breakerTerminals.map(m=>m.position.toArray()),breakerMounts:breakerMounts.map(m=>m.position.toArray()),assemblyStage,panelInsertionOffset:groups.panel.position.y,visibleGroups:Object.entries(groups).filter(([,g])=>g.visible).map(([id])=>id),lidVisible:lidObjects[0].visible,meterRouteIntrusions:meterRouteIntrusions()});
+  window.enclosureDiagnostics=()=>({supportChecks,usbPreviewVisible:usbPreview.some(m=>m.visible),materialLocator:locator.diagnostics(),units:dimensions.units,camera:camera.position.toArray(),zoom:camera.zoom,mode:$('model-shell').value,selected:activePart,cadSize:cad.bounds.size,projectedMeter:V(parts.meter.position).project(camera).toArray(),meterSize:parts.meter.size,meshCount:picking.length,triangles:renderer.info.render.triangles,wiresVisible:wires.visible,lidOffset:lidObjects[0].position.y,shellVisible:shellObjects[0].visible,shellOpacity:shellMat.opacity,fitBodies:boundsOf(fitBodies),planBodies:boundsOf({...planBodies,...fitBodies}),voltageLeadLengths,breakerTerminals:breakerTerminals.map(m=>m.position.toArray()),breakerMounts:breakerMounts.map(m=>m.position.toArray()),assemblyStage,panelInsertionOffset:groups.panel.position.y,visibleGroups:Object.entries(groups).filter(([,g])=>g.visible).map(([id])=>id),lidVisible:lidObjects[0].visible,meterRouteIntrusions:meterRouteIntrusions()});
   window.cableGeometryDiagnostics=()=>({supports:supportChecks,routes:cableRoutes,
     bodyIntrusions:screenCableBodies(cableRoutes,boundsOf(fitBodies),parts.ct)});
 }

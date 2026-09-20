@@ -28,9 +28,6 @@ function rayHits(origin, direction, triangles) {
     return p ? [p] : [];
   });
 }
-export function flangeGap(a, b) {
-  return Math.hypot(a.position[1] - b.position[1], a.position[2] - b.position[2]) - 40;
-}
 export function sweptBox(part) {
   const b = bounds(part); b.max.y += 300; return b;
 }
@@ -48,11 +45,7 @@ export function audit(dimensions, manifest, buffer, procurement) {
   const lugs = procurement.items.find(p => p.id === 'ring-lugs');
   record('Q0 ring size', lugs.model.includes('MV14-10R') && !lugs.model.includes('MV14-8R') ? 'pass' : 'fail',
     'Selected Q0 terminal code 1 is #10-32; its two ring lugs must have #10 holes. Crimp tool and pull test remain required.');
-  const gap = flangeGap(instances['dc-entry'], instances['usb-entry']);
-  record('Split-entry flange spacing', gap >= 10 ? 'pass' : 'fail',
-    `Two actual Ø40 mm flanges: ${round(gap)} mm edge gap.`,
-    '10 mm is a project layout allowance, not a code or manufacturer requirement. Wrench access, tolerance, bore and wall stack still need checking.');
-  for (const id of ['dc-entry', 'usb-entry']) {
+  for (const id of ['dc-entry']) {
     const p = instances[id];
     record(`${id} envelope`, p.size.every((v, i) => v === [37, 40, 40][i]) ? 'pass' : 'fail',
       `Model ${p.size.join(' × ')} mm; KVT 32 overall envelope 37 mm axial × Ø40 mm flange.`, 'Conservative cylinder; the threaded shank is M32, not Ø40.');
@@ -108,10 +101,14 @@ export function audit(dimensions, manifest, buffer, procurement) {
   record('Closed lid screen', 'screen only',
     bodyChecks.map(p => `${p.id}: ${p.minimum_sampled_lid_gap_mm} mm (${p.lid_samples}/9 rays)`).join('; '),
     'Nine upward rays per body against lid mesh 15. Not a minimum-distance proof; excludes lid hardware, guards, open fuse door, wire bundles and tolerances.');
-  const wallEntries = ['dc-entry', 'usb-entry'].map(id => {
+  const wallEntries = ['dc-entry'].map(id => {
     const p = instances[id], xs = rayHits([130, p.position[1], p.position[2]], [1, 0, 0], shell).map(v => v.x).sort((a, b) => a - b);
     return { id, wall_intersections_x_mm: xs.map(round), local_wall_mm: xs.length >= 2 ? round(xs.at(-1) - xs[0]) : null };
   });
+  const usbWallHits = rayHits([130,55,167],[1,0,0],shell).map(v=>v.x).filter(x=>x>170&&x<195);
+  record('No permanent USB wall opening', !instances['usb-entry'] && usbWallHits.length>=2 ? 'pass':'fail',
+    `At the former USB center Y/Z = 55/167 mm, the shell has ${usbWallHits.length} wall-surface intersections; no USB fitting is installed.`,
+    'Mesh cross-section check at the former opening center. USB is temporary with mains unplugged and the lid open.');
   record('Cord diameter interfaces', 'pass', 'Southwire published nominal OD 9.17–9.27 mm lies within Hammond 6–12 mm gland and Leviton 0.245–0.655 in cord ranges.',
     'Published variants are not a manufacturing tolerance. Measure purchased cord; clamping, jacket preparation and pull resistance remain physical checks.');
   record('Ring barrel and internal wire', 'pass', 'Southwire nominal 2.87 mm insulation OD < 3M 4.318 mm ring maximum; 14 AWG is within 16–14 AWG ring range.', 'Does not qualify the crimp or approve the wiring method for this assembly.');

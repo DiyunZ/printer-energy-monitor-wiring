@@ -1,8 +1,8 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Installation audit · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=15"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Installation_Audit.md" download>Download Markdown</a></nav><h1>Installation audit</h1>
-<p>2026-09-20 · build package A, revision 8. <strong>ENGINEERING PACKAGE A — RECEIVING AND ELECTRICAL RELEASE ITEMS OPEN.</strong></p>
+<p>September 20, 2026 · protection review and offline USB. <strong>ENGINEERING PACKAGE A — RECEIVING AND ELECTRICAL RELEASE ITEMS OPEN.</strong></p>
 <p>All <strong>29 material groups</strong> were reviewed: 10 catalog match · 16 conditional · 2 measure · 1 hold. A catalog match confirms the stated interface only; it is not approval of the complete item or assembly.</p>
-<p>One grounded 120 V supply, one printer at a time. Five equipment groups are owned. Photo/product matching identifies the adapter, blue pigtail product and Mini HSC CT family. Round DC extension and USB sealing inserts are now specified. CT scaling and voltage-lead protection/termination still require the acceptance checks in the build package; no physical build or energizing release is claimed.</p>
-<p>The box and major panel parts have nominal space, but the current design cannot be called a perfect or fully installable assembly. Machining geometry is supplied; Exact CT scaling, blue-lead protection and physical/electrical acceptance remain open. Both cable-entry inserts are now specified. Do not treat a purchase link or an inventory tick as a release.</p>
+<p>One grounded 120 V supply, one printer at a time. Five equipment groups are confirmed on hand; the USB cable is kit supplied. Log independently during printing and download only with mains unplugged. Q0 application, Fv lead coordination, CT scaling and physical acceptance remain open; this is not a complete-order or energizing release.</p>
+<p>The box and major panel parts have nominal space, but the current design cannot be called a perfect or fully installable assembly. Machining geometry is supplied; Exact CT scaling, blue-lead protection and physical/electrical acceptance remain open. One DC entry insert is specified; USB is temporary with mains unplugged. Do not treat a purchase link or an inventory tick as a release.</p>
 <p><a href="index.html#assembly-preview">Inspect the 3D installation stages</a> · <a href="materials.html">Materials and buying links</a> · <a href="installation_checks.json">Machine-readable checks</a></p>
 <h2>Corrections from the audit</h2>
 <ul>
@@ -10,8 +10,9 @@
 <li>Matched the blue pigtails to DENT LD-SKTSP-BLU, 10 in; identified the CT as Mini HSC, with the legacy 50 A variant probable but obscured digits not treated as confirmed.</li>
 <li>Replaced the outlet/metal box/support/cover assembly with directly mounted Leviton 5279-C. Removed seven obsolete material groups.</li>
 <li>Replaced conflicting Eaton fuse-holder data with Littelfuse LPSC0001Z; added the JV connector so its output terminal receives compatible 14 AWG wire.</li>
-<li>Resolved both KVT 32 inserts: two split KTMBS 4–7 gray 41380, matched to the 4.8 mm USB cable and a new 5.2 mm round DC extension. The original adapter flat cord stays outside; wall machining is unchanged.</li>
+<li>Use one KVT 32 frame and one 41380 insert for the round Tensility DC extension. Reuse the kit USB cable temporarily with mains unplugged; no USB penetration or energized USB routing remains.</li>
 <li>Added real CAD wall openings, panel tie/rail/bond holes and strap slots, five DXF setups, fastener schedule and detailed assembly procedure.</li>
+<li>Protection review: Q0 120 V interrupting rating and Fv holder/cartridge compatibility are verified. Public JIS information does not identify the actual receptacle fault current; printer inrush and external-lead coordination remain unverified. See protection.html.</li>
 </ul>
 <h2>Printer compatibility</h2>
 <div class="table-wrap"><table>
@@ -53,11 +54,11 @@
 <p>Fit DIN rail/stops/Fv, five WAGO carriers, two meter straps, CT and six cable anchors. Place CT on printer hot only; set the arrow toward output.</p>
 <p><strong>Result:</strong> Nominal body separation and shell access checked. Verify actual CT latch and holder door sweep.</p>
 <h3>4. Install wall fittings</h3>
-<p>Install Q0 directly in its front-wall pattern; install 5279-C, two long-thread glands and split entries. Use the fastener/torque schedule.</p>
+<p>Install Q0 directly in its front-wall pattern; install 5279-C, two long-thread glands and one DC split entry. Use the fastener/torque schedule.</p>
 <p><strong>Result:</strong> Machined shell openings modeled. Actual threads, wall draft, seal seating and plug retention need receiving checks.</p>
 <h3>5. Wire and retain</h3>
-<p>Unplug all sources. Bond panel and rail first; complete 25 connection paths. Fv.OUT uses 14 AWG to JV; A1 starts at JV. Keep the original adapter cord outside, join the round extension there and pass only its round jacket through the DC insert. Retain all cable slack.</p>
-<p><strong>Result:</strong> Topology and the selected DC/USB jacket-to-insert ranges checked. CT scale and voltage-lead protection/termination remain commissioning items.</p>
+<p>Unplug all sources. Bond panel and rail first; complete permanent wiring; path 16 is temporary offline USB. Fv.OUT uses 14 AWG to JV; A1 starts at JV. Keep the original adapter cord outside, join the round extension there and pass only its round jacket through the DC insert. Retain all cable slack.</p>
+<p><strong>Result:</strong> Topology and the selected DC jacket-to-insert range checked. CT scale and voltage-lead protection/termination remain commissioning items.</p>
 <h3>6. Inspect and close</h3>
 <p>Perform documented qualified polarity/PE/insulation/protection checks, verify lid closure with all four screws, then validate logging with a reference meter.</p>
 <p><strong>Result:</strong> No physical assembly, energizing or thermal qualification has been performed.</p>
@@ -86,11 +87,6 @@
 <td>Selected Q0 terminal code 1 is #10-32; its two ring lugs must have #10 holes. Crimp tool and pull test remain required.</td>
 </tr>
 <tr>
-<td>Split-entry flange spacing</td>
-<td><strong>PASS</strong></td>
-<td>Two actual Ø40 mm flanges: 25.192 mm edge gap. 10 mm is a project layout allowance, not a code or manufacturer requirement. Wrench access, tolerance, bore and wall stack still need checking.</td>
-</tr>
-<tr>
 <td>dc-entry envelope</td>
 <td><strong>PASS</strong></td>
 <td>Model 37 × 40 × 40 mm; KVT 32 overall envelope 37 mm axial × Ø40 mm flange. Conservative cylinder; the threaded shank is M32, not Ø40.</td>
@@ -99,16 +95,6 @@
 <td>dc-entry cable / insert</td>
 <td><strong>PASS</strong></td>
 <td>dc-extension: round jacket 4.9–5.5 mm; KTMBS 41380 accepts 4–7 mm. Catalog interface check only. Original flat adapter cord is excluded; verify received jackets, connector passage, seals and strain relief.</td>
-</tr>
-<tr>
-<td>usb-entry envelope</td>
-<td><strong>PASS</strong></td>
-<td>Model 37 × 40 × 40 mm; KVT 32 overall envelope 37 mm axial × Ø40 mm flange. Conservative cylinder; the threaded shank is M32, not Ø40.</td>
-</tr>
-<tr>
-<td>usb-entry cable / insert</td>
-<td><strong>PASS</strong></td>
-<td>usb: round jacket 4.8–4.8 mm; KTMBS 41380 accepts 4–7 mm. Catalog interface check only. Original flat adapter cord is excluded; verify received jackets, connector passage, seals and strain relief.</td>
 </tr>
 <tr>
 <td>Panel component body separation</td>
@@ -136,6 +122,11 @@
 <td>meter: 159.012 mm (9/9 rays); ct: 168.315 mm (9/9 rays); fuse: 141.512 mm (9/9 rays); outlet: 33.747 mm (9/9 rays); q0: 32.992 mm (9/9 rays) Nine upward rays per body against lid mesh 15. Not a minimum-distance proof; excludes lid hardware, guards, open fuse door, wire bundles and tolerances.</td>
 </tr>
 <tr>
+<td>No permanent USB wall opening</td>
+<td><strong>PASS</strong></td>
+<td>At the former USB center Y/Z = 55/167 mm, the shell has 2 wall-surface intersections; no USB fitting is installed. Mesh cross-section check at the former opening center. USB is temporary with mains unplugged and the lid open.</td>
+</tr>
+<tr>
 <td>Cord diameter interfaces</td>
 <td><strong>PASS</strong></td>
 <td>Southwire published nominal OD 9.17–9.27 mm lies within Hammond 6–12 mm gland and Leviton 0.245–0.655 in cord ranges. Published variants are not a manufacturing tolerance. Measure purchased cord; clamping, jacket preparation and pull resistance remain physical checks.</td>
@@ -156,7 +147,7 @@
 <td>No built assembly, nameplate verification, qualified acceptance or energized test has been recorded.</td>
 </tr>
 </tbody></table></div>
-<p>The flange check uses a <strong>10 mm project layout allowance</strong>, not a mandated clearance. The new nominal 25.2 mm gap leaves more room, but actual tool / sealing / tolerance acceptance remains outstanding. Exact CAD booleans now provide the specified openings. Axis-aligned wall-device illustrations still do not model wall draft and cannot prove the mounted interface.</p>
+<p>Only one DC KVT frame remains; the former two-frame spacing check no longer applies. Exact CAD booleans now provide the specified openings. Axis-aligned wall-device illustrations still do not model wall draft and cannot prove the mounted interface.</p>
 <h2>Voltage-lead storage scenario</h2>
 <p>The old illustration had 4.5 turns rising only 6 mm, giving 1.33 mm pitch against its assumed 3 mm cable diameter. The new illustration separates turns and lead layers and adjusts turns for 2 m of flexible cable per lead. Connector body lengths are outside that flexible-length target. Actual leads have not been measured.</p>
 <p>| Lead | Modeled flexible length | Turns | Pitch / assumed OD |
@@ -222,8 +213,8 @@
 <tr>
 <td><a href="index.html#material-breaker">Q0 operating breaker</a><br>Carling CA1-B0-24-615-121-DG<br>□ Buy / fabricate</td>
 <td><strong>Conditional</strong></td>
-<td>19.18 × 63.5 × 47 mm body; #10 studs; #6-32 mount. Direct wall rectangle and 52.37 mm fixing pitch supplied. <a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">carling</a></td>
-<td>Exact DG SKU stock/lead time requires quote. Check washer thickness, body shoulder fit, approved inrush/fault duty and terminal spacing. Q0 OFF leaves its input live.</td>
+<td>19.18 × 63.5 × 47 mm body; #10 studs; #6-32 mount. Direct wall rectangle and 52.37 mm fixing pitch supplied. Manufacturer UL489 table: 10 kA at 120 V AC. Delay 24: 12 × rated current for a 60 Hz half-cycle pulse (180 A, 8.33 ms at 15 A), under the stated test conditions. <a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">carling</a>, <a href="https://www.carlingtech.com/sites/default/files/documents/Carling-HM-CB-Time-Delays.pdf">carling-delay</a>, <a href="https://mechse.illinois.edu/undergraduate/makerworks">jis</a></td>
+<td>Manufacturer table confirms 10 kA interruption at 120 V AC for the selected UL489 configuration; delay 24 has specified half-cycle inrush tolerance. Actual JIS outlet fault current and combined startup waveform are not published. Exact-SKU stock/lead time still needs a supplier quote. Check washer stack, body shoulder and terminal spacing on receipt.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-receptacle">XA adapter receptacle</a><br>Leviton 5279-C · NEMA 5-15R flanged outlet<br>□ Buy / fabricate</td>
@@ -240,8 +231,8 @@
 <tr>
 <td><a href="index.html#material-fuse">Fv fuse</a><br>Littelfuse KLKR.500T · 0.5 A Class CC<br>□ Buy / fabricate</td>
 <td><strong>Hold</strong></td>
-<td>KLKR.500T is a specific 0.5 A Class CC / 600 VAC candidate with matching 10.3 × 38.1 mm body. <a href="https://www.littelfuse.com/assetdocs/klkr-classcc-fuse-datasheet-final?assetguid=4443e5f6-97ee-4206-9abe-9e155371a03e">klkr</a>, <a href="https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf">dent</a></td>
-<td>Do not release fuse selection until existing voltage-lead rating and logger startup coordination are accepted.</td>
+<td>KLKR.500T is 0.5 A fast-acting Class CC, 600 V AC, 10.3 × 38.1 mm, with 200 kA AC interrupting rating; it fits LPSC0001Z. DENT publishes 125 mA maximum line input and a 500 mA fused accessory, but neither establishes this fuse’s coordination with the existing external lead. <a href="https://www.littelfuse.com/assetdocs/klkr-classcc-fuse-datasheet-final?assetguid=4443e5f6-97ee-4206-9abe-9e155371a03e">klkr</a>, <a href="https://www.littelfuse.com/de/assetdocs/powr-gard-catalog?assetguid=85d36235-a32b-4608-bfed-f9878aa43af0">lpsc</a>, <a href="https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf">dent-size</a>, <a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/">blue</a>, <a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-fused-crocodile-clip/">dent-fused-clip</a></td>
+<td>Holder, cartridge size and voltage rating verified. Blue-pigtail conductor/short-circuit withstand and logger startup coordination remain undocumented. Component interrupting rating is not assembly SCCR.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-connectors">Distribution connectors</a><br>WAGO 221-415<br>□ Buy / fabricate</td>
@@ -286,16 +277,16 @@
 <td>Inspect locknut and seal seating on the ~4.775 mm drafted wall; pull-test each complete cord grip.</td>
 </tr>
 <tr>
-<td><a href="index.html#material-split-entries">DC / USB split cable entry</a><br>icotek KVT 32 black · 45026<br>□ Buy / fabricate</td>
+<td><a href="index.html#material-split-entries">DC split cable entry</a><br>icotek KVT 32 black · 45026<br>□ Buy / fabricate</td>
 <td><strong>Conditional</strong></td>
-<td>Two KVT 32 frames for round, factory-terminated DC extension and USB cables. Each takes one KTMBS 4–7 gray insert, 41380, ordered separately. M32 × 1.5, 14 mm thread; Ø32.3 wall opening. Retain the included sealing rings and locknuts. <a href="https://pim.icotek.com/Produkte/PG02%20Kabelverschraubungen/KVT/KVT%2032/Datenbl%C3%A4tter/45026_KVT%2032_bk.PDF">kvt</a>, <a href="https://www.icotek.com/Produkte/PDFs/en_US/KTMBS%20gy.pdf">kt</a></td>
+<td>One KVT 32 frame for the round factory-terminated Tensility DC extension. Takes one separately ordered KTMBS 4–7 gray insert, 41380. M32 × 1.5, 14 mm thread; Ø32.3 wall opening. Retain the included sealing ring and locknut. <a href="https://pim.icotek.com/Produkte/PG02%20Kabelverschraubungen/KVT/KVT%2032/Datenbl%C3%A4tter/45026_KVT%2032_bk.PDF">kvt</a>, <a href="https://www.icotek.com/Produkte/PDFs/en_US/KTMBS%20gy.pdf">kt</a></td>
 <td>Dry-fit plugs through empty opening and locknut; check full thread engagement and the seal against the drafted wall.</td>
 </tr>
 <tr>
-<td><a href="index.html#material-usb">USB data cable</a><br>StarTech USB2HAB6 · USB-A to USB-B, 6 ft / 1.8 m<br>□ Buy / fabricate</td>
+<td><a href="index.html#material-usb">USB data cable</a><br>DENT kit USB-A to USB-B cable · 1.8 m<br>✓ Kit included</td>
 <td><strong>Catalog match</strong></td>
-<td>Factory USB-A to USB-B data cable, 1.8 m, published round jacket OD 4.8 mm. Fits one KTMBS 4–7 insert (41380) in the USB KVT 32 frame. Keep both plugs intact; reserve about 0.35 m inside and the remaining reach to the ELOG host. <a href="https://www.startech.com/en-us/cables/usb2hab6">usb</a>, <a href="https://media.startech.com/cms/pdfs/usb2hab6_datasheet.pdf">usb-drawing</a>, <a href="https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf">dent</a>, <a href="https://www.icotek.com/Produkte/PDFs/en_US/KTMBS%20gy.pdf">kt</a></td>
-<td>Check host port and cable reach; test plug passage through the empty wall bore/locknut before fitting the split insert.</td>
+<td>Supplied with ELITEpro XC. Use temporarily for setup and batch downloads with the box mains unplugged and absence of mains voltage verified. Remove USB before closing and powering the enclosure. No USB wall opening, insert or permanent cable is required. <a href="https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf">dent</a>, <a href="https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf">dent-size</a></td>
+<td>Locate the kit cable, check host USB compatibility and prove a sample export before the experiment. No permanent energized USB connection is provided.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-din-stops">DIN rail end stops</a><br>DINnector DN-EB35-A-10<br>□ Buy / fabricate</td>
@@ -310,10 +301,10 @@
 <td>Inspect factory continuity/polarity and contact engagement, secure the external joint without tension and retain both slack loops. Full flexible routing is not certified by the body model.</td>
 </tr>
 <tr>
-<td><a href="index.html#material-kt-inserts">DC / USB sealing inserts</a><br>icotek KTMBS 4–7 gray · 41380<br>□ Buy / fabricate</td>
+<td><a href="index.html#material-kt-inserts">DC sealing insert</a><br>icotek KTMBS 4–7 gray · 41380<br>□ Buy / fabricate</td>
 <td><strong>Catalog match</strong></td>
-<td>Split, small 21 × 21 × 19 mm insert for KVT; rated round-cable range 4–7 mm. One accepts Tensility DC OD 5.2 ±0.3 mm; one accepts StarTech USB OD 4.8 mm. Select KTMBS (split), not the unsplit KTMB. The original CUI flat cord remains outside. <a href="https://www.icotek.com/Produkte/PDFs/en_US/KTMBS%20gy.pdf">kt</a>, <a href="https://www.tensility.com/products/10-02228">dc-extension</a>, <a href="https://media.startech.com/cms/pdfs/usb2hab6_datasheet.pdf">usb-drawing</a></td>
-<td>Verify received round jackets, split closure and KVT nut/seal seating; assembly IP rating is not claimed.</td>
+<td>Split 21 × 21 × 19 mm insert for KVT, rated for round cables 4–7 mm. Accepts Tensility DC OD 5.2 ±0.3 mm. Select KTMBS (split), not unsplit KTMB. The original CUI flat cord stays outside. <a href="https://www.icotek.com/Produkte/PDFs/en_US/KTMBS%20gy.pdf">kt</a>, <a href="https://www.tensility.com/products/10-02228">dc-extension</a></td>
+<td>Check the received round DC jacket and KVT nut/seal seating; assembly IP rating is not claimed.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-internal-wire">Internal L / N / PE wire</a><br>Southwire 14 AWG, 19-strand Class C, THHN/THWN/MTW, 600 V<br>□ Buy / fabricate</td>
@@ -330,13 +321,13 @@
 <tr>
 <td><a href="index.html#material-tie-mounts">Screw-fixed cable mounts</a><br>Panduit TM2S8-C<br>□ Buy / fabricate</td>
 <td><strong>Catalog match</strong></td>
-<td>TM2S8 nominal 16 × 10.8 × 7 mm, #8/M4 fixing; six revised panel datums also drive the 3D hardware. Six holes replace the former twelve. <a href="https://www.panduit.com/content/dam/panduit/en/website/support/catalogs/pdf/iei-catalog-2023-web-cpcb294-sa-eng.pdf">mount</a></td>
+<td>Six screw-fixed bases retain the mains bundle, outlet supply, CT pair, two sides of the voltage-lead coils, and DC extension. The linked package contains 100; only six are installed. <a href="https://www.panduit.com/content/dam/panduit/en/website/support/catalogs/pdf/iei-catalog-2023-web-cpcb294-sa-eng.pdf">mount</a></td>
 <td>Verify received saddle/slot dimensions and dry-fit each bundle before fastening. Six mounting screws use underside washers and locknuts.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-cable-ties">Cable ties</a><br>Panduit PLT2S-C · 188 × 4.8 mm<br>□ Buy / fabricate</td>
 <td><strong>Catalog match</strong></td>
-<td>PLT2S-C length 188 mm, width 4.8 mm. Six rendered bands pass through the saddle slots and around sampled wire cross-sections; coil routes share two restraints. <a href="https://www.panduit.com/content/dam/panduit/en/products/media/2/92/492/0492/30492.pdf">ties</a>, <a href="https://www.panduit.com/content/dam/panduit/en/website/support/catalogs/pdf/iei-catalog-2023-web-cpcb294-sa-eng.pdf">mount</a></td>
+<td>For small wire bundles and the screw-fixed bases. Keep allowed bend radii and avoid crushing insulation. This length is for cables, not a strap around the meter. <a href="https://www.panduit.com/content/dam/panduit/en/products/media/2/92/492/0492/30492.pdf">ties</a>, <a href="https://www.panduit.com/content/dam/panduit/en/website/support/catalogs/pdf/iei-catalog-2023-web-cpcb294-sa-eng.pdf">mount</a></td>
 <td>Six ties installed, six spares allowed. Confirm actual lead length, diameter, bend radius and retention; modeled band thickness/lock are illustrative.</td>
 </tr>
 <tr>
@@ -356,7 +347,7 @@
 <ul>
 <li>CT commissioning: Mini HSC family is matched; 50 A is probable. Read the unobscured label during assembly and set that exact range/output in ELOG.</li>
 <li>Voltage-lead acceptance: LD-SKTSP-BLU is the matched accessory. Its online listing does not state AWG/ampacity. Accept terminal preparation and Fv coordination with responsible electrical personnel; do not infer lead protection from the 15 A main breaker.</li>
-<li>Receiving: use two 41380 split inserts on the round USB and Tensility cables, check plugs, seals, locknuts and jacket retention. The original flat adapter cable stays outside.</li>
+<li>Use one KVT 32 frame and one 41380 insert for the round Tensility DC extension. Reuse the kit USB cable temporarily with mains unplugged; no USB penetration or energized USB routing remains.</li>
 <li>Commissioning: verify fastener stacks, CT latch/fuse door/slack, supply conditions, PE/insulation/polarity, total load and restart/recording behavior before routine operation.</li>
 </ul>
 <p>Record receiving checks, update any affected drawings if substitutions are needed, then conduct a documented dry fit and qualified electrical acceptance. There is no hardware test result or energizing approval in this audit.</p>

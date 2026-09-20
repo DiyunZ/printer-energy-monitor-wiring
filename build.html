@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Machining and assembly package · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=15"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Build_Package.md" download>Download Markdown</a></nav><h1>Build package A</h1>
 <p>September 20, 2026 · one grounded 120 V supply · one printer at a time.</p>
 <p><strong>Engineering review package. Complete-order, machining and energizing release remain open.</strong> The drawings and part selections below replace the earlier outlet-box concept. They do not represent a physically assembled or certified product.</p>
-<p><a href="materials.html">Materials with pictures and purchase links</a> · <a href="index.html#assembly-preview">3D installation sequence</a> · <a href="installation.html">Installation audit</a></p>
+<p><a href="materials.html">Materials with pictures and purchase links</a> · <a href="index.html#assembly-preview">3D installation sequence</a> · <a href="installation.html">Installation audit</a> · <a href="protection.html">Protection review</a></p>
 <h2>Downloads</h2>
 <div class="table-wrap"><table>
 <thead>
@@ -62,27 +62,27 @@
 <td><a href="https://tensility.s3.us-west-2.amazonaws.com/imports/product_spec_sheets/10-02228.pdf">Cable drawing</a>, <a href="https://www.icotek.com/Produkte/PDFs/en_US/KTMBS%20gy.pdf">insert range</a>. The entire 4.9–5.5 mm interval is inside 4–7 mm. Connector bodies are under 12 mm OD and clear the Ø32.3 wall bore. Verify the locknut passage and seals on receipt.</td>
 </tr>
 <tr>
-<td>USB entry</td>
-<td><strong>StarTech USB2HAB6</strong>, round OD <strong>4.8 mm</strong>, with a second <strong>41380</strong> insert in KVT 32.</td>
-<td><a href="https://media.startech.com/cms/pdfs/usb2hab6_datasheet.pdf">StarTech specification</a>. Round OD fits 4–7 mm. Check USB-B plug passage and USB-A host reach.</td>
+<td>USB service connection</td>
+<td>Reuse the DENT kit USB-A to B cable, 1.8 m. No permanent entry.</td>
+<td><a href="https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf">DENT manual</a>, printed pp. 16, 29, 119: included cable, USB power and insulation requirements. Connect only with mains unplugged and the lid open; remove before power-up.</td>
 </tr>
 <tr>
 <td>Q0 / supply</td>
-<td>Carling CA1-B0-24-615-121-DG, 15 A, single pole; 5-15 power interfaces.</td>
-<td>Exact-SKU availability, available fault current, startup behavior and application acceptance by responsible electrical personnel. A 15 A component rating does not approve a 15 A continuous load.</td>
+<td>Carling CA1-B0-24-615-121-DG, 15 A, single pole; manufacturer confirms 10 kA at 120 V.</td>
+<td>Actual JIS receptacle fault current and combined startup waveform remain unknown. <a href="protection.html">Detailed protection review</a>.</td>
 </tr>
 </tbody></table></div>
 <p><strong>Protection evidence:</strong> <a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-fused-crocodile-clip/">DENT&#39;s fused clip</a> uses a 500 mA fuse. This supports the OEM accessory protection level, but does not prove the proposed KLKR.500T coordinates with the existing pigtail and installation. Keep that fuse selection conditional until the responsible electrical professional accepts it. The meter&#39;s internal fuse does not protect an external lead fault upstream of the instrument.</p>
 <p>These checks use the photos already supplied. The hidden CT characters and unpublished conductor ratings remain explicit limits, rather than requests for more images.</p>
-<h2>DC and USB installation</h2>
+<h2>DC installation and offline USB</h2>
 <ol>
 <li>Keep Q0 OFF and unplug all sources. Insert the <strong>male end of 10-02228</strong> through the empty DC opening and locknut toward the logger. Do not cut either factory connector.</li>
 <li>Place <strong>41380</strong> around the round jacket, assemble the KVT 32 and its seals, and plug the 5.5/2.1 mm male into the logger. A 12 mm barrel may not seat its shoulder flush; never force it. Confirm firm electrical engagement without exposed contact access.</li>
 <li>Outside the case, plug the original adapter&#39;s P5 connector into the extension&#39;s female jack. Secure the joint and excess original cord to the adjacent bench support without tension on the adapter or gland. Keep the flat cord entirely outside the insert.</li>
 <li>Start with about <strong>0.35 m of extension inside / 0.565 m outside</strong>, adjusting at dry fit. Retain the full cord, with <strong>≥35 mm bend radius</strong> (Tensility minimum 31.2 mm). Use spare ties from the BOM, without crushing either cable. The 3D curves show the path and joint, not the complete slack length or bend-radius proof.</li>
-<li>Pass the USB-B plug through the other empty opening/locknut, fit the second 41380 around its 4.8 mm jacket, and connect the logger. Keep both low-voltage routes apart from mains terminals; inspect cover closure and strain relief.</li>
+<li>For configuration or downloads, unplug the box mains, verify absence of mains voltage and remove the lid. Connect the kit USB cable directly to the logger and ELOG host. Disconnect USB before closing and energizing. The cable is absent during printing; no permanent energized USB route is provided.</li>
 </ol>
-<p>Both <strong>Ø32.30 mm</strong> KVT holes keep their existing coordinates. No new panel jack, new hole or original-cord splice is required. The <a href="materials.html">BOM</a> includes exact extension and insert links; the linked 41380 supplier currently lists backorder, so confirm lead time before committing to fabrication dates.</p>
+<p>Only the <strong>DC Ø32.30 mm</strong> opening remains, at Y/Z = 78/106 mm. The former USB opening at 55/167 mm is removed from STEP, mesh, DXF and drawings. Buy <strong>one KVT 32 and one 41380 insert</strong>, subject to seller pack quantities. Confirm supplier lead time.</p>
 <h2>Selected construction</h2>
 <p>Hammond <strong>PCJ16148CC</strong> with <strong>14R1513</strong> steel panel. Q0 mounts directly through the front wall. <strong>Leviton 5279-C</strong> mounts through the right wall and provides an enclosed rear body, eliminating the separate metal outlet box, faceplate and custom wall supports. Its exterior socket is dedicated to the original adapter; label it <strong>LOGGER ADAPTER ONLY</strong>.</p>
 <p><strong>Littelfuse LPSC0001Z</strong> clips onto a 100 mm DIN rail. Its input and output use compatible <strong>14 AWG Class C copper</strong>. Output terminates at the added <strong>JV</strong> connector before the small A1 pigtail. Five WAGO 221-415 / 221-505 pairs provide JL, JN, PE, PE+ and JV. One wire per port. PE and PE+ are bridged; neutral and PE remain separate.</p>
@@ -119,9 +119,9 @@
 <td>Rear wall; X = 0, Y = 36 mm</td>
 </tr>
 <tr>
-<td>DC / USB frames</td>
-<td>Ø32.30 mm; KVT 32 + split 41380 inserts</td>
-<td>Right wall; DC Y/Z = 78/106, USB = 55/167 mm</td>
+<td>DC frame</td>
+<td>One Ø32.30 mm hole; KVT 32 + split 41380 insert</td>
+<td>Right wall; Y/Z = 78/106 mm. No USB hole.</td>
 </tr>
 <tr>
 <td>Rail</td>
@@ -154,7 +154,7 @@
 <td>Place within the dashed locator envelope, orient the carrier as shown, then transfer-drill from the actual part. The unlocated longitudinal fixing datum is not invented.</td>
 </tr>
 </tbody></table></div>
-<p>The six anchor positions support the mains bundle, outlet supply, CT pair, two sides of the voltage-lead coils and DC/USB cables. Each tie passes through its mounting-base slot and encloses that bundle. The same coordinates drive the panel CAD and 3D view.</p>
+<p>The six anchor positions support the mains bundle, outlet supply, CT pair, two sides of the voltage-lead coils and the DC extension. Each tie passes through its mounting-base slot and encloses that bundle. The same coordinates drive the panel CAD and 3D view.</p>
 <p>Retain all factory panel and lid features. Transfer-drill the rail&#39;s two fixing holes to match the panel; align its separate Ø5.30 mm PE hole with the new panel hole at X/Z = −27/−28 mm, clear of the holder and end stops. The rail PE bolt passes through both parts: its head/washer belongs beneath the panel, not trapped between the rail and panel. The revision removes six anchor holes and adds this bond hole, reducing the total panel machining features by five. Deburr every cut, remove chips and protect the gasket. Smooth strap slots on both faces without enlarging their functional opening. Machining does not preserve or confer an IP/NEMA certification on the completed assembly.</p>
 <h2 id="fasteners">Fasteners and purchase quantities</h2>
 
@@ -260,14 +260,14 @@
 <td>WAGO to green ground terminal</td>
 </tr>
 </tbody></table></div>
-<p>Connections 01/03/06/07/10/11 use the supply/output cord conductors. Connections 05/08/09 use the three existing pigtail + full-lead chains; retain their full factory length. Connections 14/15 use the CT pair; 16 is the factory USB cable. Connections 20–23 illustrate factory adapter contacts and DC wiring, <strong>not</strong> instructions to open or modify the adapter. The site provides the full 25-path schedule.</p>
+<p>Connections 01/03/06/07/10/11 use the supply/output cord conductors. Connections 05/08/09 use the three existing pigtail + full-lead chains; retain their full factory length. Connections 14/15 use the CT pair; 16 is a temporary USB service connection with mains unplugged. Connections 20–23 illustrate factory adapter contacts and DC wiring, <strong>not</strong> instructions to open or modify the adapter. The site provides the full 25-path schedule.</p>
 <p>Label both ends of every conductor. A1 is hot, A2 and A3 are neutral despite all three jackets being blue. Grounding uses the separate green conductors. The full voltage-lead storage model assumes 2 m of flexible cable per lead and 3 mm OD; real cable lengths, connector bodies and minimum bends must fit without loading meter sockets.</p>
 <h2>Assembly and acceptance sequence</h2>
 <ol>
 <li>Close the identification/entry/protection items above, obtain the exact parts and compare them with the machining setups. Keep the case and all cords disconnected while machining or wiring.</li>
 <li>Machine the <strong>empty</strong> case and removable panel. Transfer-drill carrier and rail fixings, deburr, clean, and inspect for cracks. Complete underside nuts, PE studs, carrier/anchor fixings and thread the straps before lowering the panel.</li>
 <li>Install and secure the panel <strong>before XA</strong>. The digital insertion sweep shows that the installed right-side outlet obstructs the straight panel path. Fit rail/end stops/Fv, carriers, meter and CT. Leave access to the CT latch, fuse door and WAGO levers.</li>
-<li>Install Q0, XA and the accepted cord entries. Route the supply and output jackets through their glands before fitting plug/connector ends. Fit the round DC extension and USB through two 41380 split inserts without cutting factory plugs. Keep the original flat adapter cord and DC mating joint outside.</li>
+<li>Install Q0, XA and the accepted cord entries. Route the supply and output jackets through their glands before fitting plug/connector ends. Fit the round DC extension through one 41380 split insert without cutting factory plugs. Keep USB disconnected during operation. Keep the original flat adapter cord and DC mating joint outside.</li>
 <li>Bond panel, rail, output and XA; then complete neutral, protected hot, voltage sensing, CT and low-voltage wiring. Only the printer hot conductor goes through CT once, arrow toward the printer. Keep voltage taps and adapter consumption upstream of CT.</li>
 <li>Check every termination, strain relief, bend, clearance and fastener. Verify actual fuse-door travel and plug removal access. Confirm that all four cover screws close the lid without pressing on cables or components. This dry fit is still outstanding.</li>
 <li>Qualified personnel document PE continuity, polarity, insulation/isolation, protection and supply suitability using the applicable test procedure. Disconnect sensitive electronics where the manufacturer requires it for insulation testing. Q0 OFF leaves incoming terminals live while the supply is plugged in.</li>

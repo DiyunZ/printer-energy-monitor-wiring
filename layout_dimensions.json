@@ -1,6 +1,6 @@
 {
   "units": "mm",
-  "revision": "2026-09-20 / six cable supports and wire-through-tie geometry",
+  "revision": "Build package A · offline USB · 2026-09-20",
   "coordinates": "X across the panel; Y above the panel underside; Z along the panel, negative toward the printer exit (rear), positive toward Q0 (front). One scene unit is one millimetre. The wiring plan projects the same X/Z positions with rear at the top. Dimensions below are X × Y × Z unless noted.",
   "parts": [
     {
@@ -168,7 +168,7 @@
     },
     {
       "id": "entries",
-      "name": "Long-thread power glands / KVT 32 split entries",
+      "name": "Power glands / DC KVT 32 entry",
       "size": [
         27,
         37,
@@ -176,7 +176,7 @@
       ],
       "status": "Catalog envelopes; 41380 inserts selected",
       "source": "https://www.hammfg.com/electronics/small-case/accessories/1427ncg",
-      "note": "Two KVT 32 frames for round, factory-terminated DC extension and USB cables. Each takes one KTMBS 4–7 gray insert, 41380, ordered separately. M32 × 1.5, 14 mm thread; Ø32.3 wall opening. Retain the included sealing rings and locknuts. Power entries use two Hammond 1427NCGPG13LB, PG13.5 long thread, 6–12 mm clamp, Ø21 mm holes. Do not cut factory DC/USB plugs."
+      "note": "Two long-thread power glands and one KVT 32 DC entry. USB is a temporary open-lid service connection, with mains unplugged."
     },
     {
       "id": "leads",
@@ -323,35 +323,6 @@
         "diameterRangeMm": [
           4.9,
           5.5
-        ],
-        "insertPart": "41380",
-        "insertRangeMm": [
-          4,
-          7
-        ]
-      }
-    },
-    {
-      "id": "usb-entry",
-      "part": "entries",
-      "size": [
-        37,
-        40,
-        40
-      ],
-      "position": [
-        185.5,
-        55,
-        167
-      ],
-      "axis": "x",
-      "label": "USB exit",
-      "cable": {
-        "item": "usb",
-        "profile": "round",
-        "diameterRangeMm": [
-          4.8,
-          4.8
         ],
         "insertPart": "41380",
         "insertRangeMm": [
@@ -640,16 +611,15 @@
         "captureHalfWidthMm": 12
       },
       {
-        "id": "dc-usb",
-        "label": "DC and USB inside entries",
+        "id": "dc",
+        "label": "DC extension inside entry",
         "holeXZ": [
           145,
           158
         ],
         "axis": "z",
         "routes": [
-          "dc-extension:internal",
-          "usb:internal"
+          "dc-extension:internal"
         ],
         "captureHalfWidthMm": 12
       }

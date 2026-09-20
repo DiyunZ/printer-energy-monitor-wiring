@@ -32,7 +32,7 @@ def draw_external(add,rect,text,line,circle,C):
         text(x,830,label,25,'#fff',700,'middle');text(x,861,note,14,'#e3edf7',500,'middle')
     text(48,911,'CT input ≠ mains. S is a shield terminal, not an enclosure earth terminal.',17,color='#63768a')
     rect(824,642,480,240,'#edf3f8','#afbecb',12)
-    for y,label,size in [(678,'Other end: power / USB / analog',20),(721,'POWER IN: 6–10 V DC, 500 mA',19),(755,'CUI SMI6-9-V-P5 · 9 V · center positive.',17),(792,'USB Type B → ELOG computer',19),(829,'Analog CH1–CH4 ≠ CT CH1–CH4',19),(862,'No mains into DC, USB, analog or CT ports.',17)]:text(848,y,label,size)
+    for y,label,size in [(678,'Other end: power / USB / analog',20),(721,'POWER IN: 6–10 V DC, 500 mA',19),(755,'CUI SMI6-9-V-P5 · 9 V · center positive.',17),(792,'USB → ELOG only with mains unplugged',19),(829,'Analog CH1–CH4 ≠ CT CH1–CH4',19),(862,'No mains into DC, USB, analog or CT ports.',17)]:text(848,y,label,size)
     rect(1350,642,400,240,'#f3f6f8','#aebdca',12);text(1374,678,'Exterior controls · separate faces',19,weight=700)
     rect(1380,710,80,95,'#fff','#8c9ba8',6);rect(1400,735,40,45,'#273440','#273440',3);text(1420,832,'FRONT · Q0',15,weight=700,anchor='middle')
     rect(1510,710,200,135,'#fff','#8c9ba8',7)

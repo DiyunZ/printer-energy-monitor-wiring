@@ -24,13 +24,13 @@ export function addInstallationHardware({ dimensions, instances, parts, allMeshe
     box(h.railStops.size,pos,'#a9afac','rail',.6);
     cylinder(2,2,[pos[0],pos[1]+18,pos[2]],'#747f82','rail');
   }));
-  for(const id of ['dc-entry','usb-entry']) {
+  for(const id of ['dc-entry']) {
     const p=instances[id], shape=new THREE.Shape();
     shape.moveTo(-10.5,-10.5);shape.lineTo(10.5,-10.5);shape.lineTo(10.5,10.5);shape.lineTo(-10.5,10.5);shape.closePath();
-    const hole=new THREE.Path();hole.absarc(0,0,id==='dc-entry'?2.6:2.4,0,Math.PI*2,true);shape.holes.push(hole);
+    const hole=new THREE.Path();hole.absarc(0,0,2.6,0,Math.PI*2,true);shape.holes.push(hole);
     const geo=new THREE.ExtrudeGeometry(shape,{depth:19,bevelEnabled:false,curveSegments:24});geo.translate(0,0,-9.5);geo.rotateY(Math.PI/2);
     const frame=materialLocations['split-entries'].find(p=>p.key===id).objects;
-    mark('kt-inserts',id,`${id==='dc-entry'?'DC':'USB'} insert inside KVT 32`,[mesh(geo,material('#babdb8'),p.position,'entries')],frame);
+    mark('kt-inserts',id,'DC insert inside KVT 32',[mesh(geo,material('#babdb8'),p.position,'entries')],frame);
   }
   // Representative washer/head/shank stacks; use the build package for threads,
   // lengths and torque. Carrier longitudinal hole datums require transfer drilling.
@@ -117,7 +117,7 @@ export function addInstallationHardware({ dimensions, instances, parts, allMeshe
   }
   for(const [id,text,pos,facing] of [
     ['supply','SUPPLY IN',[-186.2,66,128],'right'],['printer','TO PRINTER',[0,62,-211.4],'front'],
-    ['dc','DC',[186.85,107,106],'right'],['usb','USB',[186.5,84,167],'right'],
+    ['dc','DC',[186.85,107,106],'right'],
     ['panel-pe','PE',[-125,2.1,77],'up']
   ]) decal(text,22,8,pos,'entries',facing);
   return supportChecks;

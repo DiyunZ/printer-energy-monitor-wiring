@@ -40,7 +40,6 @@ xa_yz_mm = (121.0, 13.0)
 supply_yz_mm = (43.0, 128.0)
 printer_xy_mm = (0.0, 36.0)
 dc_yz_mm = (78.0, 106.0)
-usb_yz_mm = (55.0, 167.0)
 rail_holes_xz_mm = [(-95.0, -28.0), (-15.0, -28.0)]
 panel_bond_xz_mm = (-125.0, 60.0)
 rail_bond_xz_mm = (-27.0, -28.0)
@@ -88,8 +87,7 @@ def wall_features():
         result.append(dict(id=f'XA fixing {sign:+}',wall='right',plane=f('right',xa_yz_mm),
                            at=(0,sign*xa_pitch_mm/2),diameter=xa_fixing_d_mm,tolerance_mm=.1))
     for name,wall,p,d in [('SUPPLY','left',supply_yz_mm,power_entry_d_mm),
-        ('OUTPUT','rear',printer_xy_mm,power_entry_d_mm),('DC','right',dc_yz_mm,split_entry_d_mm),
-        ('USB','right',usb_yz_mm,split_entry_d_mm)]:
+        ('OUTPUT','rear',printer_xy_mm,power_entry_d_mm),('DC','right',dc_yz_mm,split_entry_d_mm)]:
         result.append(dict(id=name,wall=wall,plane=f(wall,p),diameter=d,tolerance_mm=.1))
     return result
 
@@ -150,7 +148,7 @@ def checks():
     # Absolute independent go-gauges, not a restatement of the hole parameters.
     return [
       {'feature':'XA 42.9 mm body clears bore', 'clear':{'cylinder':42.9,'axis':'x','at':[(121,13)],'span':(170,190)}},
-      {'feature':'KVT M32 shanks clear', 'clear':{'cylinder':32.0,'axis':'x','at':[(78,106),(55,167)],'span':(168,190)}},
+      {'feature':'KVT M32 shanks clear', 'clear':{'cylinder':32.0,'axis':'x','at':[(78,106)],'span':(168,190)}},
       {'feature':'19.05 mm strap passes slots', 'clear':{'box':(2.0,6.0,19.3),'at':[(x,0,z) for x,z in strap_slots_xz_mm]}},
       {'feature':'M4 rail screws clear', 'clear':{'cylinder':4,'axis':'y','at':[(-95,-28),(-15,-28)],'span':(-2,4)}},
     ]

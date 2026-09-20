@@ -20,7 +20,7 @@ const close = (a,b) => Math.abs(a-b) < .05;
     const openMore=async()=>{if(await page.locator('#model-more').getAttribute('open')===null)await page.locator('#model-more > summary').click();};
     const diag = () => page.evaluate(() => window.enclosureDiagnostics().materialLocator);
     const clickMaterial = async id => {
-      if(bom.items.find(p=>p.id===id).availability==='owned' && await page.locator('#owned-materials').getAttribute('open')===null)await page.locator('#owned-materials > summary').click();
+      if(bom.items.find(p=>p.id===id).availability!=='buy' && await page.locator('#owned-materials').getAttribute('open')===null)await page.locator('#owned-materials > summary').click();
       await page.locator(`#material-${id} .locate-material`).click();
     };
     await page.goto(base); await ready();
@@ -28,9 +28,10 @@ const close = (a,b) => Math.abs(a-b) < .05;
     const initial = await diag(), ids = bom.items.map(p => p.id).sort();
     assert.deepEqual(Object.keys(initial.locations).sort(), ids, 'Every BOM group needs rendered geometry');
     assert.equal(initial.selected, null);
+    assert.equal(await page.evaluate(()=>enclosureDiagnostics().usbPreviewVisible),false,'USB is absent from normal operation');
     const allMeshes = Object.values(initial.locations).flatMap(ps => ps.flatMap(p => p.meshes));
     assert.equal(new Set(allMeshes).size, allMeshes.length, 'Each physical mesh belongs to exactly one material');
-    const counts = { fuse: 1, connectors: 5, carriers: 5, 'blue-leads': 3, 'voltage-leads': 3, 'ring-lugs': 4, 'tie-mounts': 6, 'cable-ties': 6, 'kt-inserts': 2, 'din-stops': 2, 'logger-restraint': 2, fasteners: 24 };
+    const counts = { fuse: 1, connectors: 5, carriers: 5, 'blue-leads': 3, 'voltage-leads': 3, 'ring-lugs': 4, 'tie-mounts': 6, 'cable-ties': 6, 'kt-inserts': 1, 'din-stops': 2, 'logger-restraint': 2, fasteners: 24 };
     for (const [id,count] of Object.entries(counts)) assert.equal(initial.locations[id].length, count, id);
     const fuse = initial.locations.fuse[0], holder = initial.locations['fuse-holder'][0];
     for (let i=0;i<3;i++) assert.ok(fuse.min[i] >= holder.min[i] && fuse.max[i] <= holder.max[i], 'Cartridge belongs inside the holder');
@@ -66,7 +67,7 @@ const close = (a,b) => Math.abs(a-b) < .05;
     await page.locator('#model-part').selectOption('meter');
     assert.equal(await page.locator('#part-installation').isVisible(),false,'Changing materials collapses old details');
     let inspectedOccurrences = 0;
-    for (const id of ['carriers','ring-lugs','kt-inserts','din-stops','tie-mounts','fasteners']) {
+    for (const id of ['carriers','ring-lugs','din-stops','tie-mounts','fasteners']) {
       await page.locator('#model-part').selectOption(id);
       for (const p of initial.locations[id]) {
         await page.locator('#material-location').selectOption(p.key);
@@ -78,7 +79,7 @@ const close = (a,b) => Math.abs(a-b) < .05;
     }
     for (const [id,shot] of [['carriers','carriers'],['fuse','fuse'],['kt-inserts','inserts'],['ring-lugs','ring-terminals']]) {
       await page.locator('#model-part').selectOption(id);
-      if(['carriers','kt-inserts'].includes(id))await page.locator('#material-location').selectOption(initial.locations[id][0].key);
+      if(id==='carriers')await page.locator('#material-location').selectOption(initial.locations[id][0].key);
       const d=await diag(); if(id!=='ring-lugs')assert.ok(d.ghostCount>0,id+' surrounding housing must become transparent');
       if(out)await page.locator('#design').screenshot({path:path.join(out,`locator-${shot}.png`)});
     }
@@ -104,6 +105,12 @@ const close = (a,b) => Math.abs(a-b) < .05;
     await openMore();await page.locator('#model-shell').selectOption('lifted');
     assert.ok((await diag()).overlaysAligned,'Lid highlight must move with the lid');
     await page.locator('#model-part').selectOption('usb');
+    assert.equal(await page.evaluate(()=>enclosureDiagnostics().mode),'cutaway');
+    assert.equal(await page.evaluate(()=>enclosureDiagnostics().usbPreviewVisible),true);
+    await openMore();await page.locator('#model-shell').selectOption('closed');
+    assert.equal(await page.evaluate(()=>enclosureDiagnostics().usbPreviewVisible),false,'Temporary USB must disappear with the lid closed');
+    await page.locator('#model-shell').selectOption('cutaway');
+    assert.equal(await page.evaluate(()=>enclosureDiagnostics().usbPreviewVisible),true);
     await openMore();await page.locator('#model-wires').uncheck();
     assert.ok((await diag()).visibleHighlightCount < (await diag()).highlightMeshCount,'Hidden cable routes must hide their overlay');
     await page.locator('#model-label-toggle').uncheck();assert.equal((await diag()).visibleMarkers,0);

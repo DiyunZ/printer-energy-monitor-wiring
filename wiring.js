@@ -16,7 +16,7 @@ const hints = {
   neutral: 'Neutral remains separate from protective earth.',
   earth: 'PE bonds the printer, outlet, panel and rail.',
   aux: 'Adapter power branches before CT1; DC returns through the round extension.',
-  signal: 'CT → CH1 · USB → ELOG computer. Dashed lines represent signal cables.',
+  signal: 'CT → CH1. USB is temporary: unplug mains and open the lid before connecting the computer.',
 };
 let activeIds = null;
 function activate(mode) {

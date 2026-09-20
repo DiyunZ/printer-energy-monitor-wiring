@@ -4,7 +4,7 @@ September 20, 2026 · one grounded 120 V supply · one printer at a time.
 
 **Engineering review package. Complete-order, machining and energizing release remain open.** The drawings and part selections below replace the earlier outlet-box concept. They do not represent a physically assembled or certified product.
 
-[Materials with pictures and purchase links](materials.html) · [3D installation sequence](index.html#assembly-preview) · [Installation audit](installation.html)
+[Materials with pictures and purchase links](materials.html) · [3D installation sequence](index.html#assembly-preview) · [Installation audit](installation.html) · [Protection review](protection.html)
 
 ## Downloads
 
@@ -26,22 +26,22 @@ The existing photos were compared with manufacturer product pictures, original d
 | White CT | **DENT Mini HSC** family; **CTHSC-050-U/B, 50 A / 333.3 mV is probable** from the partial “DENT 50…” label and legacy appearance. | [DENT family specifications](https://www.dentinstruments.com/shop/current-sensors/hinged-current-transformers-sensors-for-energy-metering/), [legacy label comparison](http://siscoinc.net/cthsc-050-ubdentcurrenttransformer.aspx). 20 A and 50 A versions share the body. Wires conceal the full variant: read the label during assembly before setting ELOG. No duplicate CT is in the purchase list. |
 | Three blue pigtails | Product match: **DENT LD-SKTSP-BLU**, **10 in / 254 mm**, female safety connector to factory-tinned end. A1 = hot/L1; A2 = neutral/L2; A3 = neutral/N. | [DENT original accessory](https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/). Photo connector, tinned end and ESIS card agree. Online data does not publish AWG/ampacity. Qualified acceptance of termination and Fv remains necessary. |
 | DC entry | Add **Tensility 10-02228**, 0.915 m round extension, OD **5.2 ±0.3 mm**. Use **icotek KTMBS 4–7 gray, 41380** in the KVT 32. Original flat CUI cord stays outside. | [Cable drawing](https://tensility.s3.us-west-2.amazonaws.com/imports/product_spec_sheets/10-02228.pdf), [insert range](https://www.icotek.com/Produkte/PDFs/en_US/KTMBS%20gy.pdf). The entire 4.9–5.5 mm interval is inside 4–7 mm. Connector bodies are under 12 mm OD and clear the Ø32.3 wall bore. Verify the locknut passage and seals on receipt. |
-| USB entry | **StarTech USB2HAB6**, round OD **4.8 mm**, with a second **41380** insert in KVT 32. | [StarTech specification](https://media.startech.com/cms/pdfs/usb2hab6_datasheet.pdf). Round OD fits 4–7 mm. Check USB-B plug passage and USB-A host reach. |
-| Q0 / supply | Carling CA1-B0-24-615-121-DG, 15 A, single pole; 5-15 power interfaces. | Exact-SKU availability, available fault current, startup behavior and application acceptance by responsible electrical personnel. A 15 A component rating does not approve a 15 A continuous load. |
+| USB service connection | Reuse the DENT kit USB-A to B cable, 1.8 m. No permanent entry. | [DENT manual](https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf), printed pp. 16, 29, 119: included cable, USB power and insulation requirements. Connect only with mains unplugged and the lid open; remove before power-up. |
+| Q0 / supply | Carling CA1-B0-24-615-121-DG, 15 A, single pole; manufacturer confirms 10 kA at 120 V. | Actual JIS receptacle fault current and combined startup waveform remain unknown. [Detailed protection review](protection.html). |
 
 **Protection evidence:** [DENT's fused clip](https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-fused-crocodile-clip/) uses a 500 mA fuse. This supports the OEM accessory protection level, but does not prove the proposed KLKR.500T coordinates with the existing pigtail and installation. Keep that fuse selection conditional until the responsible electrical professional accepts it. The meter's internal fuse does not protect an external lead fault upstream of the instrument.
 
 These checks use the photos already supplied. The hidden CT characters and unpublished conductor ratings remain explicit limits, rather than requests for more images.
 
-## DC and USB installation
+## DC installation and offline USB
 
 1. Keep Q0 OFF and unplug all sources. Insert the **male end of 10-02228** through the empty DC opening and locknut toward the logger. Do not cut either factory connector.
 2. Place **41380** around the round jacket, assemble the KVT 32 and its seals, and plug the 5.5/2.1 mm male into the logger. A 12 mm barrel may not seat its shoulder flush; never force it. Confirm firm electrical engagement without exposed contact access.
 3. Outside the case, plug the original adapter's P5 connector into the extension's female jack. Secure the joint and excess original cord to the adjacent bench support without tension on the adapter or gland. Keep the flat cord entirely outside the insert.
 4. Start with about **0.35 m of extension inside / 0.565 m outside**, adjusting at dry fit. Retain the full cord, with **≥35 mm bend radius** (Tensility minimum 31.2 mm). Use spare ties from the BOM, without crushing either cable. The 3D curves show the path and joint, not the complete slack length or bend-radius proof.
-5. Pass the USB-B plug through the other empty opening/locknut, fit the second 41380 around its 4.8 mm jacket, and connect the logger. Keep both low-voltage routes apart from mains terminals; inspect cover closure and strain relief.
+5. For configuration or downloads, unplug the box mains, verify absence of mains voltage and remove the lid. Connect the kit USB cable directly to the logger and ELOG host. Disconnect USB before closing and energizing. The cable is absent during printing; no permanent energized USB route is provided.
 
-Both **Ø32.30 mm** KVT holes keep their existing coordinates. No new panel jack, new hole or original-cord splice is required. The [BOM](materials.html) includes exact extension and insert links; the linked 41380 supplier currently lists backorder, so confirm lead time before committing to fabrication dates.
+Only the **DC Ø32.30 mm** opening remains, at Y/Z = 78/106 mm. The former USB opening at 55/167 mm is removed from STEP, mesh, DXF and drawings. Buy **one KVT 32 and one 41380 insert**, subject to seller pack quantities. Confirm supplier lead time.
 
 ## Selected construction
 
@@ -63,7 +63,7 @@ For outside views: front U = X; rear U = −X; right U = −Z; left U = Z. V run
 | XA | Ø44.00 ±0.15 mm; two Ø4.00 mm fixings at 53.57 mm vertical pitch | Right wall; Y = 121, Z = 13 mm |
 | Supply gland | Ø21.00 mm | Left wall; Y = 43, Z = 128 mm |
 | Printer gland | Ø21.00 mm | Rear wall; X = 0, Y = 36 mm |
-| DC / USB frames | Ø32.30 mm; KVT 32 + split 41380 inserts | Right wall; DC Y/Z = 78/106, USB = 55/167 mm |
+| DC frame | One Ø32.30 mm hole; KVT 32 + split 41380 insert | Right wall; Y/Z = 78/106 mm. No USB hole. |
 | Rail | Two Ø4.50 mm panel holes, 80 mm apart | X/Z = −95/−28 and −15/−28 mm |
 | Panel bond | Ø5.30 mm, dedicated to PE | X/Z = −125/60 mm |
 | Rail bond through panel | Ø5.30 mm through panel and rail web, dedicated to PE | X/Z = −27/−28 mm; bolt head and washer beneath panel |
@@ -71,7 +71,7 @@ For outside views: front U = X; rear U = −X; right U = −Z; left U = Z. V run
 | Cable mounts | Six Ø4.50 mm holes | Individual coordinates in the panel drawing |
 | Five WAGO carriers | Two Ø3.30 mm fixing holes per carrier | Place within the dashed locator envelope, orient the carrier as shown, then transfer-drill from the actual part. The unlocated longitudinal fixing datum is not invented. |
 
-The six anchor positions support the mains bundle, outlet supply, CT pair, two sides of the voltage-lead coils and DC/USB cables. Each tie passes through its mounting-base slot and encloses that bundle. The same coordinates drive the panel CAD and 3D view.
+The six anchor positions support the mains bundle, outlet supply, CT pair, two sides of the voltage-lead coils and the DC extension. Each tie passes through its mounting-base slot and encloses that bundle. The same coordinates drive the panel CAD and 3D view.
 
 Retain all factory panel and lid features. Transfer-drill the rail's two fixing holes to match the panel; align its separate Ø5.30 mm PE hole with the new panel hole at X/Z = −27/−28 mm, clear of the holder and end stops. The rail PE bolt passes through both parts: its head/washer belongs beneath the panel, not trapped between the rail and panel. The revision removes six anchor holes and adds this bond hole, reducing the total panel machining features by five. Deburr every cut, remove chips and protect the gasket. Smooth strap slots on both faces without enlarging their functional opening. Machining does not preserve or confer an IP/NEMA certification on the completed assembly.
 
@@ -116,7 +116,7 @@ Use the selected 14 AWG black / white / green internal wire. The following are c
 | 13 PE+ → rail bond | Green, 250 mm | WAGO to #10 ring |
 | 19 PE+ → XA ground | Green, 700 mm | WAGO to green ground terminal |
 
-Connections 01/03/06/07/10/11 use the supply/output cord conductors. Connections 05/08/09 use the three existing pigtail + full-lead chains; retain their full factory length. Connections 14/15 use the CT pair; 16 is the factory USB cable. Connections 20–23 illustrate factory adapter contacts and DC wiring, **not** instructions to open or modify the adapter. The site provides the full 25-path schedule.
+Connections 01/03/06/07/10/11 use the supply/output cord conductors. Connections 05/08/09 use the three existing pigtail + full-lead chains; retain their full factory length. Connections 14/15 use the CT pair; 16 is a temporary USB service connection with mains unplugged. Connections 20–23 illustrate factory adapter contacts and DC wiring, **not** instructions to open or modify the adapter. The site provides the full 25-path schedule.
 
 Label both ends of every conductor. A1 is hot, A2 and A3 are neutral despite all three jackets being blue. Grounding uses the separate green conductors. The full voltage-lead storage model assumes 2 m of flexible cable per lead and 3 mm OD; real cable lengths, connector bodies and minimum bends must fit without loading meter sockets.
 
@@ -125,7 +125,7 @@ Label both ends of every conductor. A1 is hot, A2 and A3 are neutral despite all
 1. Close the identification/entry/protection items above, obtain the exact parts and compare them with the machining setups. Keep the case and all cords disconnected while machining or wiring.
 2. Machine the **empty** case and removable panel. Transfer-drill carrier and rail fixings, deburr, clean, and inspect for cracks. Complete underside nuts, PE studs, carrier/anchor fixings and thread the straps before lowering the panel.
 3. Install and secure the panel **before XA**. The digital insertion sweep shows that the installed right-side outlet obstructs the straight panel path. Fit rail/end stops/Fv, carriers, meter and CT. Leave access to the CT latch, fuse door and WAGO levers.
-4. Install Q0, XA and the accepted cord entries. Route the supply and output jackets through their glands before fitting plug/connector ends. Fit the round DC extension and USB through two 41380 split inserts without cutting factory plugs. Keep the original flat adapter cord and DC mating joint outside.
+4. Install Q0, XA and the accepted cord entries. Route the supply and output jackets through their glands before fitting plug/connector ends. Fit the round DC extension through one 41380 split insert without cutting factory plugs. Keep USB disconnected during operation. Keep the original flat adapter cord and DC mating joint outside.
 5. Bond panel, rail, output and XA; then complete neutral, protected hot, voltage sensing, CT and low-voltage wiring. Only the printer hot conductor goes through CT once, arrow toward the printer. Keep voltage taps and adapter consumption upstream of CT.
 6. Check every termination, strain relief, bend, clearance and fastener. Verify actual fuse-door travel and plug removal access. Confirm that all four cover screws close the lid without pressing on cables or components. This dry fit is still outstanding.
 7. Qualified personnel document PE continuity, polarity, insulation/isolation, protection and supply suitability using the applicable test procedure. Disconnect sensitive electronics where the manufacturer requires it for insulation testing. Q0 OFF leaves incoming terminals live while the supply is plugged in.

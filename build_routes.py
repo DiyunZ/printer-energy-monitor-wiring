@@ -5,7 +5,7 @@ import json
 from draw_external import draw_external
 
 OUT = Path(__file__).resolve().parent
-REV = 'Rev. 8 · build package A · 2026-09-20'
+REV = 'Rev. 9 · offline USB · 2026-09-20'
 C = {'L':'#202d3a','N':'#65758a','PE':'#18814a','CT':'#8544a5','USB':'#23739d','DC':'#aa621e','V':'#1567c1'}
 # Shared physical placement. The SVG is an X/Z projection of the same millimetre
 # coordinates consumed by layout3d.js. Electrical port symbols are spaced for clarity.
@@ -46,7 +46,7 @@ M = {
  **{f'JPE.{i+2}':pin('PE+',i) for i in range(1,5)},
 }
 A = {name:project(point) for name,point in M.items()}
-# 01–19 and 24–25: installed conductors/cables; 20–23: factory plug/cable paths.
+# 16: temporary offline USB; 20–23: factory plug/cable paths; other paths are installed.
 # Routing waypoints are intentionally rectilinear. Component locations are not rearranged for routing.
 raw = [
  ('01','L','IN.L','Q0.IN',[(-137,116),(-137,144),(-117,144)],(-137,130),'Input hot → Q0 IN','main'),
@@ -64,7 +64,7 @@ raw = [
  ('13','PE','JPE.4','RAIL',[(-80.8,85),(-18,85),(-18,-28)],(-18,15),'PE → dedicated metal-rail bond','earth'),
  ('14','CT','CT.+','D.+',[(-63,-102),(134,-102),(134,-101)],(35,-102),'CT white (+) → current-input CH1 +','signal'),
  ('15','CT','CT.-','D.-',[(-47,-95),(142,-95),(142,-83)],(16,-95),'CT black (−) → current-input CH1 −','signal'),
- ('16','USB','D.USB','PC',[(140,110),(140,BODIES['usb-entry']['position'][2]),(280,BODIES['usb-entry']['position'][2])],(235,BODIES['usb-entry']['position'][2]),'USB Type B → protected exit → ELOG computer','signal'),
+ ('16','USB','D.USB','PC',[(140,110),(140,180),(280,180)],(235,180),'Temporary USB → ELOG; open lid, mains unplugged','signal'),
  ('17','L','JL.4','AUX.L',[(-119.2,-163),(150,-163),(150,3)],(150,-128),'JL → AUX receptacle hot; before CT','aux'),
  ('18','N','JN.5','AUX.N',[(-105,-48.85),(-105,-154),(157,-154),(157,13)],(157,-50),'JN → AUX receptacle neutral','aux'),
  ('19','PE','JPE.5','AUX.PE',[(-75,93),(137,93),(137,38),(M['AUX.PE'][0],38)],(115,93),'PE → XA ground contact','earth'),
@@ -194,7 +194,7 @@ def make_diagram():
     line([project(position('supply-plug',24)),project(position('supply-entry'))],'#465563',18)
     line([project(position('printer-entry')),project((0,-265)),project(position('printer-plug',0,25))],'#465563',18)
     for part in ['supply-plug','printer-plug']: footprint(part,'#e9c658','#b9972b',8)
-    for part in ['supply-entry','printer-entry','dc-entry','usb-entry']: footprint(part,'#71808a','#46535b',5)
+    for part in ['supply-entry','printer-entry','dc-entry']: footprint(part,'#71808a','#46535b',5)
     footprint('dc-coupling','#e4d5bf','#8c7352',7)
     text(1710,1134,'DC joint',22,weight=600)
     at('supply-plug','Supply',-20,22)
@@ -263,7 +263,7 @@ def make_diagram():
     for name,label,dx,dy in [('D.N','N',0,-11),('D.L2','L2',0,-11),('D.L1','L1',0,-11),('D.+','CH1 +',12,-8),('D.-','CH1 −',12,17),('D.DC+','DC',0,-63),('D.USB','USB',0,-63)]:
         x,y=A[name];text(x+dx,y+dy,label,22,C['CT'] if 'CH1' in label else '#203346',600,'start' if 'CH1' in label else 'middle',extra=f'data-endpoint="{E(name)}"')
     add('</g>')
-    x,y=A['PC'];rect(x,y,106,76,'#edf4f8','#8d9eac',6);text(x+53,y+45,'PC',24,weight=700,anchor='middle')
+    x,y=A['PC'];rect(x,y,170,76,'#edf4f8','#8d9eac',6);text(x+85,y+45,'PC · offline',24,weight=700,anchor='middle')
     add('<g style="paint-order:stroke;stroke:#fff;stroke-width:4;stroke-linejoin:round">')
     for label in component_labels:
         add(label.replace('<text ', '<text style="stroke:none" ', 1) if 'fill="#fff"' in label else label)
@@ -294,7 +294,7 @@ def main():
     material_rows={'owned':[], 'buy':[]}
     for p in materials['items']:
         owned=p['availability']=='owned'
-        badge='✓ Owned' if owned else '□ To buy'
+        badge='✓ Owned' if owned else '✓ Kit included' if p['availability']=='kit' else '□ To buy'
         purchase_links=[];reference_links=[]
         for link in p['links']:
             anchor='<a data-link-kind="'+E(link['kind'])+'" href="'+E(link['url'])+'">'+E(link['label'])+' ↗</a>'
@@ -306,7 +306,7 @@ def main():
             details+='<p class="material-quantity"><strong>Quantity &amp; pack size:</strong> '+E(p['quantity'])+'</p>'
         details+=''.join(reference_links)+'<p class="material-image-note">'+E(photo['caption'])+'</p>'+credit+'</details>'
         notice='<p class="material-notice">'+E(p['notice'])+'</p>' if p.get('notice') else ''
-        material_rows[p['availability']].append('<tr id="material-'+E(p['id'])+'" data-availability="'+E(p['availability'])+'"><td data-label="Inventory"><span class="inventory-badge '+p['availability']+'">'+badge+'</span></td><td data-label="Material"><span class="material-name">'+E(p['item'])+'</span>'+material_photo(p)+'<a class="locate-material" data-material="'+E(p['id'])+'" href="?material='+E(p['id'])+'#layout" aria-label="View '+E(p['item'])+' in 3D">View in 3D ↑</a></td><td data-label="Quantity needed">'+E(p.get('quantity_summary',p['quantity']))+'</td><td data-label="Part / details"><strong>'+E(p['model'])+'</strong>'+notice+details+'</td><td class="material-links" data-label="Purchase">'+(''.join(purchase_links) if purchase_links else '<span class="reuse-note">Reuse</span>')+'</td></tr>')
+        material_rows['buy' if p['availability']=='buy' else 'owned'].append('<tr id="material-'+E(p['id'])+'" data-availability="'+E(p['availability'])+'"><td data-label="Inventory"><span class="inventory-badge '+p['availability']+'">'+badge+'</span></td><td data-label="Material"><span class="material-name">'+E(p['item'])+'</span>'+material_photo(p)+'<a class="locate-material" data-material="'+E(p['id'])+'" href="?material='+E(p['id'])+'#layout" aria-label="View '+E(p['item'])+' in 3D">View in 3D ↑</a></td><td data-label="Quantity needed">'+E(p.get('quantity_summary',p['quantity']))+'</td><td data-label="Part / details"><strong>'+E(p['model'])+'</strong>'+notice+details+'</td><td class="material-links" data-label="Purchase">'+(''.join(purchase_links) if purchase_links else '<span class="reuse-note">Reuse</span>')+'</td></tr>')
     html=(OUT/'page_template.html').read_text().replace('<!-- MAIN_DIAGRAM -->',svg).replace('<!-- DETAIL_DIAGRAM -->',detail).replace('<!-- CONNECTION_ROWS -->',rows).replace('<!-- BUY_ROWS -->',''.join(material_rows['buy'])).replace('<!-- OWNED_ROWS -->',''.join(material_rows['owned'])).replace('{{BUY_COUNT}}',str(len(material_rows['buy']))).replace('{{OWNED_COUNT}}',str(len(material_rows['owned']))).replace('{{REV}}',REV)
     (OUT/'index.html').write_text(html)
     (OUT/'routes.json').write_text(json.dumps({'revision':REV,'anchors':A,'projection':PLAN,'wires':wires},indent=2)+'\n')

@@ -86,19 +86,18 @@
       "pass": true
     },
     {
-      "id": "dc-usb",
-      "label": "DC and USB inside entries",
-      "crossings": 2,
+      "id": "dc",
+      "label": "DC extension inside entry",
+      "crossings": 1,
       "routeIds": [
-        "dc-extension:internal",
-        "usb:internal"
+        "dc-extension:internal"
       ],
       "missingRoutes": [],
       "minimumOpeningClearanceMm": 0.899999999999999,
       "bandWidthMm": 4.8,
-      "loopWidthMm": 14.052282012257496,
+      "loopWidthMm": 12.5,
       "loopHeightMm": 10.499744555414148,
-      "lengthWithLockAllowanceMm": 70.18546815754858,
+      "lengthWithLockAllowanceMm": 67.08090413303358,
       "pass": true
     }
   ],

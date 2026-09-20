@@ -84,7 +84,7 @@ export function installMaterialLocator({ items, locations, scene, camera, contro
   }
   function select(id, { navigate = true, scroll = false } = {}) {
     if (!byId.has(id) || !locations[id]?.length) return false;
-    clear(false); prepare(); selected = id; occurrence = 'all';
+    clear(false); prepare(id); selected = id; occurrence = 'all';
     const p = byId.get(id); describe(p);
     $('model-part').value = id;
     $('material-location-panel').hidden = locations[id].length === 1; $('material-focus').hidden = false;

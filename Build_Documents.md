@@ -2,6 +2,7 @@
 
 - [Machining files and assembly guide](build.html) — drawings, fasteners and assembly order.
 - [Interactive installation sequence](index.html#assembly-preview) — inspect the six stages in 3D.
+- [Protection review](protection.html) — Q0 / Fv findings and the remaining evidence.
 - [Installation audit](installation.html) — checks completed and remaining acceptance items.
 - [Full materials list](materials.html) · [Download BOM](Procurement_BOM.md)
 - [Manufacturer sources and design limits](references.html)
@@ -14,11 +15,13 @@
 
 Daily use begins only after qualified electrical inspection and setup.
 
-1. **Connect with Q0 OFF.** Printer → measured output. Verified adapter → XA, with its DC cable connected. Connect the box supply.
-2. **Switch Q0 ON.** The printer, adapter outlet and voltage tap receive power together.
-3. **Confirm logging.** Check readings and the recording indicator. Run the print and record start/stop times.
+1. **Configure offline.** With mains unplugged and the lid open, use the kit USB cable and ELOG to set the clock, actual CT range and interval. Confirm logging is enabled and sufficient memory remains. Remove USB, then close the lid.
+2. **Run independently.** With Q0 OFF, connect one printer and the adapter, then connect the supply. Switch Q0 ON and check the logging indicator. Record each job's start, phase changes and finish times against the synchronized clock.
+3. **Download in batches.** After the printer finishes its shutdown/cooldown, switch Q0 OFF, unplug mains and verify absence of mains voltage. Open the lid, connect USB and export the records. Preserve raw data before clearing memory. Remove USB before the next powered run.
 
-**Keep the lid closed. Q0 OFF is not isolation: unplug mains and USB, then verify absence of voltage before opening or changing sensing leads.**
+**Q0 OFF is not isolation; its input remains live. Always unplug mains before opening. USB is not installed during printing.**
+
+The logger stores time-series data in non-volatile memory and can be powered by USB for readout ([DENT manual](https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf), printed pp. 7, 18, 119). This design avoids the permanent powered-panel USB connection that would require additional rated insulation. Validate one complete offline run and export before collecting the experiment series.
 
 ### Initial setup and electrical checks
 
@@ -58,7 +61,7 @@ Amber marks the selected material; hidden housings become transparent. Top view 
 | XA · Leviton 5279-C flanged outlet | 48.4 × 63.5 × 63.5 | Manufacturer drawing and mounting instructions · [Source](https://leviton.com/products/5279-c) |
 | CUI SMI6-9-V-P5 · existing adapter | 30.0 × 64.0 × 40.5 | Photo-identified; manufacturer body dimensions · [Source](https://www.belfuse.com/media/datasheets/products/power-supplies/SMI6.pdf) |
 | Short DIN rail · Fv only | 100.0 × 7.5 × 35.0 | Standard profile; proposed cut length |
-| Long-thread power glands / KVT 32 split entries | 27.0 × 37.0 × 27.0 | Catalog envelopes; 41380 inserts selected · [Source](https://www.hammfg.com/electronics/small-case/accessories/1427ncg) |
+| Power glands / DC KVT 32 entry | 27.0 × 37.0 × 27.0 | Catalog envelopes; 41380 inserts selected · [Source](https://www.hammfg.com/electronics/small-case/accessories/1427ncg) |
 | Blue adapters & retained lead slack | Routing only | Illustrative routing; length not validated · [Source](https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/) |
 
 [Dimensions JSON](layout_dimensions.json) · [Enclosure CAD provenance](assets/enclosure.json) · [Materials JSON](procurement.json) · [Cable-support checks](installation_supports.json)

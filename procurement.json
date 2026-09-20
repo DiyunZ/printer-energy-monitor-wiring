@@ -1,6 +1,6 @@
 {
-  "revision": "2026-09-20 / six cable supports; label dispensers removed",
-  "scope": "One grounded 120 V supply, one printer at a time. Five equipment groups are owned. Photo/product matching identifies the adapter, blue pigtail product and Mini HSC CT family. Round DC extension and USB sealing inserts are now specified. CT scaling and voltage-lead protection/termination still require the acceptance checks in the build package; no physical build or energizing release is claimed.",
+  "revision": "September 20, 2026 · protection review and offline USB",
+  "scope": "One grounded 120 V supply, one printer at a time. Five equipment groups are confirmed on hand; the USB cable is kit supplied. Log independently during printing and download only with mains unplugged. Q0 application, Fv lead coordination, CT scaling and physical acceptance remain open; this is not a complete-order or energizing release.",
   "items": [
     {
       "id": "meter",
@@ -238,16 +238,21 @@
       "quantity": "1",
       "model": "Carling CA1-B0-24-615-121-DG",
       "reason": "Single 15 A operating breaker, 50/60 Hz medium-delay, UL489/CSA option DG. Mount directly on the front wall using the manufacturer pattern. No custom wall insert. Keep all four cover screws installed; Q0 OFF leaves its supply terminal live.",
-      "status": "Exact SKU selected; supplier quote/lead time, supply fault rating and printer inrush acceptance remain open.",
+      "status": "Manufacturer table confirms 10 kA interruption at 120 V AC for the selected UL489 configuration; delay 24 has specified half-cycle inrush tolerance. Actual JIS outlet fault current and combined startup waveform are not published. Exact-SKU stock/lead time still needs a supplier quote.",
       "links": [
         {
-          "label": "Quote exact SKU · Mouser US",
+          "label": "Quote / availability · Mouser",
           "url": "https://www.mouser.com/ProductDetail/Carling-Technologies/CA1-B0-24-615-121-DG?qs=vln4JGBFwFoweMB2W4WfRg%3D%3D",
           "kind": "quote"
         },
         {
           "label": "Carling specification",
           "url": "https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf",
+          "kind": "reference"
+        },
+        {
+          "label": "Carling delay curves",
+          "url": "https://www.carlingtech.com/sites/default/files/documents/Carling-HM-CB-Time-Delays.pdf",
           "kind": "reference"
         }
       ],
@@ -266,7 +271,7 @@
       },
       "installation": "Q0 mounts in the front wall: handle outside, supply and load studs inside.",
       "location_summary": "In the front wall, with its handle outside.",
-      "notice": "Confirm fault rating and printer inrush before ordering."
+      "notice": "10 kA at 120 V verified; site fault current and startup duty remain open."
     },
     {
       "item": "XA adapter receptacle",
@@ -343,8 +348,8 @@
       "item": "Fv fuse",
       "quantity": "2 (1 installed + 1 spare)",
       "model": "Littelfuse KLKR.500T · 0.5 A Class CC",
-      "reason": "Specific fast-acting 600 V AC Class CC candidate for the voltage-tap branch. Correct cartridge family for LPSC0001Z. Final release requires existing lead ratings and meter energization/inrush review; 0.5 A alone does not prove fault protection of leads whose conductor ratings are unpublished.",
-      "status": "DO NOT ORDER YET: verify existing lead specification and protection coordination.",
+      "reason": "KLKR.500T is 0.5 A fast-acting Class CC, 600 V AC, 10.3 × 38.1 mm, with 200 kA AC interrupting rating; it fits LPSC0001Z. DENT publishes 125 mA maximum line input and a 500 mA fused accessory, but neither establishes this fuse’s coordination with the existing external lead.",
+      "status": "Holder, cartridge size and voltage rating verified. Blue-pigtail conductor/short-circuit withstand and logger startup coordination remain undocumented. Component interrupting rating is not assembly SCCR.",
       "links": [
         {
           "label": "Exact candidate · DigiKey",
@@ -372,7 +377,7 @@
       "installation": "One cartridge fits inside Fv. The holder is shown transparent when locating it. Keep the second cartridge as an external spare; the proposed rating still needs acceptance.",
       "location_summary": "One cartridge inside Fv; the spare stays outside the enclosure.",
       "quantity_summary": "1 + 1 spare",
-      "notice": "DO NOT ORDER YET — lead protection must be verified."
+      "notice": "Holder fit verified; lead protection remains on hold."
     },
     {
       "item": "Distribution connectors",
@@ -609,11 +614,11 @@
       "location_summary": "One at each mains cord opening: left and rear walls."
     },
     {
-      "item": "DC / USB split cable entry",
-      "quantity": "2",
+      "item": "DC split cable entry",
+      "quantity": "1",
       "model": "icotek KVT 32 black · 45026",
-      "reason": "Two KVT 32 frames for round, factory-terminated DC extension and USB cables. Each takes one KTMBS 4–7 gray insert, 41380, ordered separately. M32 × 1.5, 14 mm thread; Ø32.3 wall opening. Retain the included sealing rings and locknuts.",
-      "status": "Selected · existing wall coordinates retained; use with two 41380 inserts.",
+      "reason": "One KVT 32 frame for the round factory-terminated Tensility DC extension. Takes one separately ordered KTMBS 4–7 gray insert, 41380. M32 × 1.5, 14 mm thread; Ø32.3 wall opening. Retain the included sealing ring and locknut.",
+      "status": "Selected · DC coordinates retained; one 41380 insert required. No USB wall entry.",
       "links": [
         {
           "label": "Buy · RS",
@@ -638,47 +643,43 @@
         "source_label": "icotek",
         "kind": "reference"
       },
-      "installation": "Two KVT 32 frames in the right wall: round DC extension and USB cable.",
-      "location_summary": "Two frames in the right wall for DC and USB cables."
+      "installation": "One KVT 32 frame in the right wall for the round DC extension. USB uses the open lid temporarily with mains disconnected.",
+      "location_summary": "One frame in the right wall, around the DC extension."
     },
     {
       "id": "usb",
       "item": "USB data cable",
       "quantity": "1",
-      "model": "StarTech USB2HAB6 · USB-A to USB-B, 6 ft / 1.8 m",
-      "reason": "Factory USB-A to USB-B data cable, 1.8 m, published round jacket OD 4.8 mm. Fits one KTMBS 4–7 insert (41380) in the USB KVT 32 frame. Keep both plugs intact; reserve about 0.35 m inside and the remaining reach to the ELOG host.",
-      "status": "To buy · 4.8 mm jacket matches 41380; check USB-A host port and final reach.",
-      "availability": "buy",
+      "model": "DENT kit USB-A to USB-B cable · 1.8 m",
+      "reason": "Supplied with ELITEpro XC. Use temporarily for setup and batch downloads with the box mains unplugged and absence of mains voltage verified. Remove USB before closing and powering the enclosure. No USB wall opening, insert or permanent cable is required.",
+      "status": "Kit included · locate in the lid pocket; check the computer port and cable condition. Physical presence is not yet confirmed.",
+      "availability": "kit",
       "links": [
         {
-          "label": "Buy · StarTech USB2HAB6",
-          "url": "https://www.startech.com/en-us/cables/usb2hab6",
-          "kind": "buy"
+          "label": "DENT kit contents",
+          "url": "https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf",
+          "kind": "reference"
         },
         {
-          "label": "Buy · Connection",
-          "url": "https://www.connection.com/product/startech.com-usb-2.0-certified-cable-usb-type-a-to-usb-type-b-m-m-black-6ft/usb2hab6/12287011",
-          "kind": "buy"
-        },
-        {
-          "label": "StarTech cable datasheet",
-          "url": "https://media.startech.com/cms/pdfs/usb2hab6_datasheet.pdf",
+          "label": "DENT USB instructions",
+          "url": "https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf",
           "kind": "reference"
         }
       ],
       "image": {
         "src": "assets/materials/usb.jpg",
         "source_image": "https://media.startech.com/cms/products/gallery_large/usb2habx.main.jpg",
-        "kind": "product",
-        "alt": "StarTech USB2HAB6 · USB-A to USB-B, 6 ft / 1.8 m — product image",
-        "caption": "Product image",
+        "kind": "reference",
+        "alt": "USB-A to USB-B connector reference; not a photo of the supplied DENT cable",
+        "caption": "Connector reference (StarTech image). Reuse the supplied DENT cable; jacket dimensions are not inferred from this image.",
         "source_label": "StarTech",
         "source_url": "https://www.startech.com/en-us/cables/usb2hab6",
         "width": 2000,
         "height": 2000
       },
-      "installation": "USB-B at the logger, through the forward right-wall entry, then to the ELOG computer. External cable length is abbreviated.",
-      "location_summary": "From the logger USB-B port through the right wall to the computer."
+      "installation": "With mains unplugged and the lid removed, connect USB-B to the logger and USB-A to the ELOG computer. The 3D view shows this temporary service connection only when USB is selected. Remove the cable before powering the closed box.",
+      "location_summary": "Temporary connection at the logger USB-B port; lid open and mains unplugged.",
+      "notice": "Setup / download only — unplug mains first."
     },
     {
       "id": "din-stops",
@@ -747,10 +748,10 @@
     },
     {
       "id": "kt-inserts",
-      "item": "DC / USB sealing inserts",
-      "quantity": "2 used; manufacturer pack is 10, confirm seller unit",
+      "item": "DC sealing insert",
+      "quantity": "1 used; manufacturer pack is 10, confirm seller unit",
       "model": "icotek KTMBS 4–7 gray · 41380",
-      "reason": "Split, small 21 × 21 × 19 mm insert for KVT; rated round-cable range 4–7 mm. One accepts Tensility DC OD 5.2 ±0.3 mm; one accepts StarTech USB OD 4.8 mm. Select KTMBS (split), not the unsplit KTMB. The original CUI flat cord remains outside.",
+      "reason": "Split 21 × 21 × 19 mm insert for KVT, rated for round cables 4–7 mm. Accepts Tensility DC OD 5.2 ±0.3 mm. Select KTMBS (split), not unsplit KTMB. The original CUI flat cord stays outside.",
       "status": "Selected · both cable diameters fit; seller lists backorder, confirm lead time.",
       "availability": "buy",
       "links": [
@@ -781,9 +782,9 @@
         "width": 530,
         "height": 333
       },
-      "installation": "One 41380 split insert inside each KVT 32 frame, around the round DC or USB jacket. Frames become transparent for this view.",
-      "location_summary": "One inside each DC / USB entry frame, around the cable.",
-      "quantity_summary": "2"
+      "installation": "One 41380 split insert inside the DC KVT 32 frame, around the round extension jacket. The frame becomes transparent for this view.",
+      "location_summary": "Inside the DC entry frame, around the round extension.",
+      "quantity_summary": "1"
     },
     {
       "id": "internal-wire",
@@ -869,7 +870,7 @@
       "item": "Screw-fixed cable mounts",
       "quantity": "6 installed; pack of 100",
       "model": "Panduit TM2S8-C",
-      "reason": "Six screw-fixed bases retain the mains bundle, outlet supply, CT pair, two sides of the voltage-lead coils, and DC/USB cables. The linked package contains 100; only six are installed.",
+      "reason": "Six screw-fixed bases retain the mains bundle, outlet supply, CT pair, two sides of the voltage-lead coils, and DC extension. The linked package contains 100; only six are installed.",
       "status": "Six panel locations; M4 × 16 mm screws, underside washers and locknuts in the fastener schedule.",
       "availability": "buy",
       "links": [
@@ -890,8 +891,8 @@
         "width": 1024,
         "height": 1024
       },
-      "installation": "Six bases at the revised panel anchor holes. The 3D locator shows each bundle and its restraint. Set final slack during dry fit; keep CT/DC/USB separate from mains bundles.",
-      "location_summary": "Six panel supports: two AC bundles, CT pair, two coil supports and DC/USB.",
+      "installation": "Six bases at the revised panel anchor holes. The 3D locator shows each bundle and its restraint. Set final slack during dry fit; keep CT/DC separate from mains bundles.",
+      "location_summary": "Six panel supports: two AC bundles, CT pair, two coil supports and DC.",
       "quantity_summary": "6"
     },
     {
@@ -989,7 +990,7 @@
       "quantity_summary": "2 × 400 mm"
     }
   ],
-  "inventory_basis": "User confirmation on 2026-09-19: ELITEpro XC, existing CTs, three blue voltage pigtails, matching long voltage leads, and the original black two-pin AC/DC adapter only. USB cable and all other enclosure materials are not on hand.",
+  "inventory_basis": "Five equipment groups confirmed by the user: ELITEpro XC, CTs, three blue voltage pigtails, matching long leads and original black adapter. DENT specifies an included 1.8 m USB-A to B cable; the photographed kit card places it in the lid pocket. Its present physical location has not been confirmed. Reuse it before buying a replacement.",
   "setup_requirements": [
     {
       "item": "ELOG software",

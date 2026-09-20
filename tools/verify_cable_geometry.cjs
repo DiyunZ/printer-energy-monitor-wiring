@@ -11,7 +11,7 @@ const distance=(a,b)=>Math.hypot(...a.map((v,i)=>v-b[i]));
   await page.goto(base);await page.waitForFunction(()=>window.cableGeometryDiagnostics);
   const g=await page.evaluate(()=>cableGeometryDiagnostics());
   assert.equal(g.supports.length,6);
-  for(const s of g.supports){assert.equal(s.pass,true,s.id);assert.ok(s.crossings>=2,s.id);}
+  for(const s of g.supports){assert.equal(s.pass,true,s.id);assert.ok(s.crossings>=d.installationHardware.cableSupports.find(p=>p.id===s.id).routes.length,s.id);}
   assert.deepEqual(g.bodyIntrusions,[],'Routes avoid component bodies away from their electrical terminations');
   const coils=g.routes.filter(r=>/^voltage:A/.test(r.id));
   const separation=[];

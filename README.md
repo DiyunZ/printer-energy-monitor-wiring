@@ -18,7 +18,7 @@ The main page is organized for project review and purchasing. **Design** switche
 
 The revised design uses a directly mounted **Leviton 5279-C**, **Littelfuse LPSC0001Z**, a **JV** transition connector for the fuse-holder's 14 AWG output, long-thread glands, and adjustable **19.05 mm straps through 21 × 4 mm slots**. The build package includes exact fastener links and counts, wire blanks and assembly order. Install the panel before the side outlet.
 
-The original photo identifies the adapter as **CUI SMI6-9-V-P5, 9 V, 0.667 A, center positive**. The blue pigtail matches **DENT LD-SKTSP-BLU (254 mm)**; the CT matches **Mini HSC**, probably the legacy 50 A variant. Two **icotek 41380** split inserts accept the **4.8 mm USB2HAB6** and new **5.2 mm Tensility 10-02228** extension; the original flat cord stays outside. CT scaling and sensing-lead protection/termination still need acceptance. **This is an engineering review package, not complete-order, machining or energizing release.** No physical build or electrical acceptance is claimed.
+The original photo identifies the adapter as **CUI SMI6-9-V-P5, 9 V, 0.667 A, center positive**. The blue pigtail matches **DENT LD-SKTSP-BLU (254 mm)**; the CT matches **Mini HSC**, probably the legacy 50 A variant. One **icotek 41380** insert accepts the **5.2 mm Tensility 10-02228** DC extension; the original flat cord stays outside. Reuse the DENT kit USB cable only with mains unplugged and the lid open. USB has no wall opening and is absent during printing. CT scaling and sensing-lead protection/termination still need acceptance. **This is an engineering review package, not complete-order, machining or energizing release.** No physical build or electrical acceptance is claimed.
 
 ## Source files
 
@@ -66,3 +66,5 @@ python tools/cad/draw_fabrication.py
 `tools/convert_enclosure.cjs` imports the original 38-part factory assembly; it overwrites the shell/panel meshes, so run the machining generator afterward. Numerically check and visually inspect regenerated artifacts before publication.
 
 GitHub Pages publishes the repository root on `main`. The [installation audit](https://diyunz.github.io/printer-energy-monitor-wiring/installation.html) distinguishes software checks from physical acceptance.
+
+[Protection review](Protection_Review.md) records the Q0 / Fv evidence, the JIS information gap and the offline data workflow.

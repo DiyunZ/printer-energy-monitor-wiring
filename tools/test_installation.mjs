@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { audit, bounds, sweptBox, flangeGap } from './audit_installation.mjs';
+import { audit, bounds, sweptBox } from './audit_installation.mjs';
 import * as T from '../vendor/three.module.js';
 const read = name => JSON.parse(fs.readFileSync(new URL('../' + name, import.meta.url)));
 const d = read('layout_dimensions.json'), p = read('procurement.json'), m = read('assets/enclosure.json');
@@ -16,15 +16,18 @@ test('current nominal checks pass while unresolved release gates stay visible', 
   assert.equal(result.insertion_sweeps.length, 10);
   assert.ok(result.insertion_sweeps.every(s => s.shell_triangle_hits === 0));
 });
-test('old split-entry locations fail real flange clearance even when small model bodies fit', () => {
-  const dc = d.instances.find(p => p.id === 'dc-entry');
-  const usb = structuredClone(d.instances.find(p => p.id === 'usb-entry'));
-  assert.ok(flangeGap(dc, usb) > 25);
-  usb.position[2] = 139;
-  assert.ok(flangeGap(dc, usb) < 1);
+test('offline USB has no permanent wall fitting and is kit supplied', () => {
+  assert.equal(d.instances.some(p => p.id === 'usb-entry'), false);
+  assert.equal(p.items.find(p => p.id === 'usb').availability, 'kit');
+  assert.equal(p.items.find(p => p.id === 'split-entries').quantity, '1');
+  const openings = read('fabrication/wall-openings.json');
+  assert.ok(!JSON.stringify(openings).includes('USB'));
+  assert.equal(result.checks.find(c=>c.id==='No permanent USB wall opening').result,'pass');
+  const wrong=structuredClone(d);wrong.instances.push({id:'usb-entry'});
+  assert.equal(run(wrong).checks.find(c=>c.id==='No permanent USB wall opening').result,'fail');
 });
-test('DC and USB entries accept the selected round jackets, including DC tolerance', () => {
-  for(const id of ['dc-entry','usb-entry']) assert.equal(result.checks.find(c=>c.id===`${id} cable / insert`).result,'pass');
+test('DC entry accepts the selected round jackets, including DC tolerance', () => {
+  for(const id of ['dc-entry']) assert.equal(result.checks.find(c=>c.id===`${id} cable / insert`).result,'pass');
   for(const change of [c=>c.profile='flat',c=>c.diameterRangeMm=[4.9,7.1],c=>c.insertRangeMm=[5,6]]) {
     const wrong=structuredClone(d);change(wrong.instances.find(p=>p.id==='dc-entry').cable);
     assert.equal(run(wrong).checks.find(c=>c.id==='dc-entry cable / insert').result,'fail');
