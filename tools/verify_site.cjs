@@ -20,6 +20,17 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  await page.goto(base,{waitUntil:'networkidle'});
  await page.waitForFunction(()=>document.querySelector('#model-view').dataset.ready==='true',{timeout:45000});
  assert.match(await page.title(),/3D enclosure/);
+ // Keep the main page focused while preserving access to supporting information.
+ assert.deepEqual(await page.locator('main > section').evaluateAll(es=>es.map(e=>e.id)),['layout','wiring','hardware','operation']);
+ assert.deepEqual(await page.locator('header nav a').evaluateAll(es=>es.map(e=>e.getAttribute('href'))),['#layout','#wiring','#hardware','#operation']);
+ assert.equal(await page.locator('details[open]').count(),0,'Supporting details should be collapsed initially');
+ assert.equal(await page.locator('#connectors .detail-stage').isVisible(),false);
+ await page.locator('#connectors > summary').click();
+ assert.equal(await page.locator('#connectors .detail-stage').isVisible(),true);
+ await page.locator('#connectors > summary').click();
+ await page.locator('.part-details > summary').click();
+ assert.equal(await page.locator('#part-note').isVisible(),true);
+ await page.locator('.part-details > summary').click();
  const diag=()=>page.evaluate(()=>window.enclosureDiagnostics());
  const initial=await diag();assert.equal(initial.units,'mm');assert.ok(initial.triangles>100000);
  // Compare actual SVG geometry to actual WebGL meshes, not two copies of labels.
@@ -113,9 +124,14 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   const row=page.locator('#material-'+p.id);
   assert.equal(await row.getAttribute('data-availability'),p.availability);
   assert.match(await row.locator('.inventory-badge').textContent(),p.availability==='owned'?/✓.*Owned/:/□.*To buy/);
+  assert.equal(await row.locator('.material-note').textContent(),p.status,'Pending checks must remain visible');
+  assert.equal(await row.locator('.material-note').isVisible(),true);
+  assert.equal(await row.locator('.material-details p').textContent(),p.reason,'Full specifications must be retained');
+  assert.equal(await row.locator('.material-details p').isVisible(),false);
   if(p.availability==='buy'){
    assert.ok(p.links.some(l=>['buy','configure','quote'].includes(l.kind)),p.id+' must have a purchase or quote route, not just a PDF');
    assert.ok(await row.locator('a[data-link-kind="buy"],a[data-link-kind="configure"],a[data-link-kind="quote"]').count()>0,p.id+' missing rendered purchase route');
+   assert.equal(await row.locator('.material-links a').first().isVisible(),true,p.id+' purchase route must not be collapsed');
   }
   for(const l of p.links)assert.equal(await row.locator('a[data-link-kind]').filter({hasText:l.label}).getAttribute('href'),l.url);
   const photo=row.locator('td[data-label="Material"] .material-photo');
@@ -126,6 +142,9 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   if(p.image.source_url)assert.equal(await photo.locator('figcaption a').getAttribute('href'),p.image.source_url);
   assert.ok(await row.evaluate(e=>e.querySelector('.material-photo').getBoundingClientRect().top>=e.querySelector('.material-name').getBoundingClientRect().bottom),p.id+' photo must be below the material name');
  }
+ await page.locator('#material-breaker .material-details summary').click();
+ assert.equal(await page.locator('#material-breaker .material-details p').isVisible(),true);
+ await page.locator('#material-breaker .material-details summary').click();
  await page.locator('.material-photo img').evaluateAll(es=>Promise.all(es.map(async img=>{img.loading='eager';await img.decode();if(!img.naturalWidth||!img.naturalHeight)throw Error('Image did not load: '+img.src);})));
  for(const state of ['owned','buy','all']){
   await page.locator(`[data-inventory="${state}"]`).click();
@@ -145,6 +164,9 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   if(width===390){
    await page.locator('[data-inventory="owned"]').click();assert.equal(await page.locator('.materials tbody tr:visible').count(),ownedIds.length);
    if(out)await page.locator('#material-meter').screenshot({path:path.join(out,'inventory-mobile.png')});
+   await page.locator('#material-meter .material-details summary').focus();await page.keyboard.press('Enter');
+   assert.equal(await page.locator('#material-meter .material-details p').isVisible(),true,'Material specifications must open by keyboard on mobile');
+   await page.keyboard.press('Enter');
    await page.locator('[data-inventory="all"]').click();
   }
  }

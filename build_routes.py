@@ -301,8 +301,12 @@ def main():
     for p in materials['items']:
         owned=p['availability']=='owned'
         badge='✓ Owned' if owned else '□ To buy'
-        links=''.join('<a data-link-kind="'+E(l['kind'])+'" href="'+E(l['url'])+'">'+E(l['label'])+' ↗</a>' for l in p['links'])
-        material_rows.append('<tr id="material-'+E(p['id'])+'" data-availability="'+E(p['availability'])+'"><td data-label="Inventory"><span class="inventory-badge '+p['availability']+'">'+badge+'</span></td><td data-label="Material"><span class="material-name">'+E(p['item'])+'</span>'+material_photo(p)+'</td><td data-label="Quantity needed">'+E(p['quantity'])+'</td><td data-label="Part / purpose"><strong>'+E(p['model'])+'</strong><p>'+E(p['reason'])+'</p><small class="material-note">'+E(p['status'])+'</small></td><td class="material-links" data-label="Purchase / source">'+(links if links else '<span class="reuse-note">Reuse · No purchase needed</span>')+'</td></tr>')
+        purchase_links=[];reference_links=[]
+        for link in p['links']:
+            anchor='<a data-link-kind="'+E(link['kind'])+'" href="'+E(link['url'])+'">'+E(link['label'])+' ↗</a>'
+            (reference_links if link['kind']=='reference' else purchase_links).append(anchor)
+        details='<details class="material-details"><summary>Specifications</summary><p>'+E(p['reason'])+'</p>'+''.join(reference_links)+'</details>'
+        material_rows.append('<tr id="material-'+E(p['id'])+'" data-availability="'+E(p['availability'])+'"><td data-label="Inventory"><span class="inventory-badge '+p['availability']+'">'+badge+'</span></td><td data-label="Material"><span class="material-name">'+E(p['item'])+'</span>'+material_photo(p)+'</td><td data-label="Quantity needed">'+E(p['quantity'])+'</td><td data-label="Part / details"><strong>'+E(p['model'])+'</strong><small class="material-note">'+E(p['status'])+'</small>'+details+'</td><td class="material-links" data-label="Purchase">'+(''.join(purchase_links) if purchase_links else '<span class="reuse-note">Reuse</span>')+'</td></tr>')
     counts={'all':len(materials['items']),**{state:sum(p['availability']==state for p in materials['items']) for state in ['owned','buy']}}
     filters=''.join('<button type="button" data-inventory="'+state+'" aria-pressed="'+('true' if state=='all' else 'false')+'"'+(' class="active"' if state=='all' else '')+'>'+label+' · '+str(counts[state])+'</button>' for state,label in [('all','All'),('owned','✓ Owned'),('buy','□ To buy')])
     setup=''.join('<li><strong>'+E(r['item'])+' · '+E(r['action'])+'</strong><br>'+E(r['reason'])+(' <a href="'+E(r['url'])+'">DENT download ↗</a>' if r.get('url') else '')+'</li>' for r in materials['setup_requirements'])

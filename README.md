@@ -10,9 +10,11 @@ The Hammond PCJ16148CC enclosure comes from manufacturer CAD. The meter has the 
 
 The blue pigtails are **L1 / hot, L2 / neutral, and N / neutral**. Protective earth has its own rated wiring, including the added metal outlet-box bond. A passive voltage-tap fuse Fv is proposed; final protection ratings require qualified review. Adapter and voltage-tap branches are before CT.
 
-The wiring plan uses the **same X/Z component positions and body proportions as the 3D model**, with the rear printer exit at the top and the front breaker at the bottom. Use “Compare with 3D top view” to match the orientation. `layout_dimensions.json` supplies both views; wire bends and terminal symbols are simplified for legibility.
+The wiring plan uses the **same X/Z component positions and body proportions as the 3D model**, with the rear printer exit at the top and the front breaker at the bottom. Use “Compare 3D” to match the orientation. `layout_dimensions.json` supplies both views; wire bends and terminal symbols are simplified for legibility.
 
 The circuit has **24 individually traceable paths**, group highlighting, keyboard selection, zoom and SVG / PNG downloads. Paths 20–23 describe the existing adapter's factory contacts and cable; they are not parts to rewire.
+
+The main page has four sections: 3D layout, wiring, materials and operation. Connector details, dimension sources, connection schedules and full specifications expand on demand. All 36 material groups retain their images, inventory status, quantities and purchase links; pending checks remain visible before expanding specifications.
 
 ## Design status
 
