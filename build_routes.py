@@ -301,8 +301,8 @@ def material_photo(p):
     img = '<img src="'+E(photo['src'])+'" alt="'+E(photo['alt'])+'" width="'+str(photo['width'])+'" height="'+str(photo['height'])+'" loading="lazy" decoding="async"'+style+'>'
     if 'crop' in photo:
         img = f'<span class="material-crop" style="max-width:{140*ratio:.5f}px;aspect-ratio:{ratio:.5f}">'+img+'</span>'
-    caption = {'user':'Your equipment', 'product':'Product photo', 'reference':'Reference image', 'design':'Design concept'}[photo['kind']]
-    return '<figure class="material-photo" data-image-kind="'+E(photo['kind'])+'"><a class="material-image" href="'+E(photo['src'])+'" target="_blank" rel="noopener" aria-label="View full image: '+E(p['item'])+'">'+img+'</a><figcaption>'+caption+'</figcaption></figure>'
+    caption = {'reference':'Reference image', 'design':'Design concept'}.get(photo['kind'])
+    return '<figure class="material-photo" data-image-kind="'+E(photo['kind'])+'"><a class="material-image" href="'+E(photo['src'])+'" target="_blank" rel="noopener" aria-label="View full image: '+E(p['item'])+'">'+img+'</a>'+('<figcaption>'+caption+'</figcaption>' if caption else '')+'</figure>'
 
 def main():
     validation=validate();svg=make_diagram();(OUT/'wiring_routes.svg').write_text(svg)
@@ -310,10 +310,8 @@ def main():
     draw_external(add,rect,text,line,circle,C);add('</svg>');detail=''.join(parts)
     (OUT/'connector_detail.svg').write_text(detail)
     rows=''.join(f'<tr class="row" data-id="{w["id"]}"><td><button class="trace" data-id="{w["id"]}" aria-label="Trace connection {w["id"]}">{w["id"]}</button></td><td>{E(w["description"])}</td><td>{E(w["start"])} → {E(w["end"])}</td></tr>' for w in wires)
-    dimensions=json.loads((OUT/'layout_dimensions.json').read_text())
-    dimension_rows=''.join('<tr><td>'+E(p['name'])+'</td><td>'+(' × '.join(f'{v:.1f}' for v in p['size']) if p['size'] else 'Routing only')+'</td><td>'+E(p['status'])+(' · <a href="'+E(p['source'])+'">Source</a>' if p['source'] else '')+'</td></tr>' for p in dimensions['parts'])
     materials=json.loads((OUT/'procurement.json').read_text())
-    material_rows=[]
+    material_rows={'owned':[], 'buy':[]}
     for p in materials['items']:
         owned=p['availability']=='owned'
         badge='✓ Owned' if owned else '□ To buy'
@@ -328,11 +326,8 @@ def main():
             details+='<p class="material-quantity"><strong>Quantity &amp; pack size:</strong> '+E(p['quantity'])+'</p>'
         details+=''.join(reference_links)+'<p class="material-image-note">'+E(photo['caption'])+'</p>'+credit+'</details>'
         notice='<p class="material-notice">'+E(p['notice'])+'</p>' if p.get('notice') else ''
-        material_rows.append('<tr id="material-'+E(p['id'])+'" data-availability="'+E(p['availability'])+'"><td data-label="Inventory"><span class="inventory-badge '+p['availability']+'">'+badge+'</span></td><td data-label="Material"><span class="material-name">'+E(p['item'])+'</span>'+material_photo(p)+'<a class="locate-material" data-material="'+E(p['id'])+'" href="?material='+E(p['id'])+'#layout" aria-label="View '+E(p['item'])+' in 3D">View in 3D ↑</a></td><td data-label="Quantity needed">'+E(p.get('quantity_summary',p['quantity']))+'</td><td data-label="Part / details"><strong>'+E(p['model'])+'</strong>'+notice+details+'</td><td class="material-links" data-label="Purchase">'+(''.join(purchase_links) if purchase_links else '<span class="reuse-note">Reuse</span>')+'</td></tr>')
-    counts={'all':len(materials['items']),**{state:sum(p['availability']==state for p in materials['items']) for state in ['owned','buy']}}
-    filters=''.join('<button type="button" data-inventory="'+state+'" aria-pressed="'+('true' if state=='all' else 'false')+'"'+(' class="active"' if state=='all' else '')+'>'+label+' · '+str(counts[state])+'</button>' for state,label in [('all','All'),('owned','✓ Owned'),('buy','□ To buy')])
-    setup=''.join('<li><strong>'+E(r['item'])+' · '+E(r['action'])+'</strong><br>'+E(r['reason'])+(' <a href="'+E(r['url'])+'">DENT download ↗</a>' if r.get('url') else '')+'</li>' for r in materials['setup_requirements'])
-    html=(OUT/'page_template.html').read_text().replace('<!-- MAIN_DIAGRAM -->',svg).replace('<!-- DETAIL_DIAGRAM -->',detail).replace('<!-- CONNECTION_ROWS -->',rows).replace('<!-- DIMENSION_ROWS -->',dimension_rows).replace('<!-- MATERIAL_ROWS -->',''.join(material_rows)).replace('<!-- INVENTORY_FILTERS -->',filters).replace('<!-- SETUP_REQUIREMENTS -->',setup).replace('{{MATERIAL_COUNT}}',str(counts['all'])).replace('{{REV}}',REV)
+        material_rows[p['availability']].append('<tr id="material-'+E(p['id'])+'" data-availability="'+E(p['availability'])+'"><td data-label="Inventory"><span class="inventory-badge '+p['availability']+'">'+badge+'</span></td><td data-label="Material"><span class="material-name">'+E(p['item'])+'</span>'+material_photo(p)+'<a class="locate-material" data-material="'+E(p['id'])+'" href="?material='+E(p['id'])+'#layout" aria-label="View '+E(p['item'])+' in 3D">View in 3D ↑</a></td><td data-label="Quantity needed">'+E(p.get('quantity_summary',p['quantity']))+'</td><td data-label="Part / details"><strong>'+E(p['model'])+'</strong>'+notice+details+'</td><td class="material-links" data-label="Purchase">'+(''.join(purchase_links) if purchase_links else '<span class="reuse-note">Reuse</span>')+'</td></tr>')
+    html=(OUT/'page_template.html').read_text().replace('<!-- MAIN_DIAGRAM -->',svg).replace('<!-- DETAIL_DIAGRAM -->',detail).replace('<!-- CONNECTION_ROWS -->',rows).replace('<!-- BUY_ROWS -->',''.join(material_rows['buy'])).replace('<!-- OWNED_ROWS -->',''.join(material_rows['owned'])).replace('{{BUY_COUNT}}',str(len(material_rows['buy']))).replace('{{OWNED_COUNT}}',str(len(material_rows['owned']))).replace('{{REV}}',REV)
     (OUT/'index.html').write_text(html)
     (OUT/'routes.json').write_text(json.dumps({'revision':REV,'anchors':A,'projection':PLAN,'wires':wires},indent=2)+'\n')
     (OUT/'validation.json').write_text(json.dumps(validation,indent=2)+'\n')

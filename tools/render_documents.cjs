@@ -55,10 +55,65 @@ for(const p of review.materials)audit+=`| [${p.item}](index.html#material-${p.id
 audit+='\n## Receiving and commissioning items\n\n'+review.needed.map(t=>`- ${t}`).join('\n');
 audit+='\n\nRecord receiving checks, update any affected drawings if substitutions are needed, then conduct a documented dry fit and qualified electrical acceptance. There is no hardware test result or energizing approval in this audit.\n\n## Reproduce the checks\n\nRun `node tools/audit_installation.mjs` and `node --test tools/test_installation.mjs`. Run the browser checks after regenerating drawings; `EXPORT_AUDIT=1` refreshes the rendered cable measurements from the local model. Then run `node tools/render_documents.cjs`. Software passes describe only the tested geometry / website behavior.\n\n[Review data and primary links](installation_review.json) · [Geometry check results](installation_checks.json) · [3D layout](index.html#layout)\n';
 fs.writeFileSync(path.join(root,'Installation_Audit.md'),audit);
+// Supporting material lives here so the main page stays focused on review and purchasing.
+const dimensions=JSON.parse(fs.readFileSync(path.join(root,'layout_dimensions.json')));
+let documents=`# Build documents
+
+- [Machining files and assembly guide](build.html) — drawings, fasteners and assembly order.
+- [Interactive installation sequence](index.html#assembly-preview) — inspect the six stages in 3D.
+- [Installation audit](installation.html) — checks completed and remaining acceptance items.
+- [Full materials list](materials.html) · [Download BOM](Procurement_BOM.md)
+- [Manufacturer sources and design limits](references.html)
+
+## Drawings
+
+[Wiring SVG](wiring_routes.svg) · [Wiring PNG](wiring_routes.png) · [Connector SVG](connector_detail.svg) · [Connector PNG](connector_detail.png)
+
+<h2 id="operation">Operation</h2>
+
+Daily use begins only after qualified electrical inspection and setup.
+
+1. **Connect with Q0 OFF.** Printer → measured output. Verified adapter → XA, with its DC cable connected. Connect the box supply.
+2. **Switch Q0 ON.** The printer, adapter outlet and voltage tap receive power together.
+3. **Confirm logging.** Check readings and the recording indicator. Run the print and record start/stop times.
+
+**Keep the lid closed. Q0 OFF is not isolation: unplug mains and USB, then verify absence of voltage before opening or changing sensing leads.**
+
+### Initial setup and electrical checks
+
+Qualified electrical personnel verify terminations, polarity, PE continuity, insulation, protection and enclosure fit before releasing the assembly. Q0 opens hot only; PE stays continuous. Fv selection and breaker coordination must be resolved before energizing.
+
+Configure ELOG for single phase / two wire, CH1 voltage high L1 and low N, the actual CT type/range and logging interval. Disable unused channels. Verify sensible readings and positive real power against an independent reference meter; prove recording and restart behavior with a supervised power cycle.
+
+## Software and lab equipment
+
+Arrange access separately; these resources are not marked as owned.
+
+`;
+for(const r of bom.setup_requirements)documents+=`- **${r.item} — ${r.action}.** ${r.reason}${r.url?` [DENT download](${r.url})`:''}\n`;
+documents+=`
+## Purchasing notes
+
+Quantities are for one enclosure; supplier pack sizes may be larger. Check stock and lead times. “Select / Configure” needs a size or rating choice; “Quote / Fabrication” needs supplier follow-up. Owned means on hand, not approved for use. Purchase holds remain marked beside the relevant materials.
+
+Click photos to enlarge them. Reference images and design concepts are labeled; photos are not to scale. Image credits are in each material's Details and the full BOM.
+
+<h2 id="dimensions">Dimensions and model notes</h2>
+
+**Concept layout; use the build package for machining.** Manufacturer CAD, published sizes and estimates share one scale. Small hardware and cable dressing are simplified; spare stock is excluded. Received parts still need a physical fit check.
+
+Amber marks the selected material; hidden housings become transparent. Top view matches the wiring plan. The real case has gray walls and a clear lid. Drag to rotate, scroll or pinch to zoom; keyboard controls are arrow keys, + / − and Home.
+
+| Component | Model envelope (mm) | Evidence / limit |
+|---|---|---|
+`;
+for(const p of dimensions.parts)documents+=`| ${p.name} | ${p.size?p.size.map(n=>n.toFixed(1)).join(' × '):'Routing only'} | ${p.status}${p.source?` · [Source](${p.source})`:''} |\n`;
+documents+='\n[Dimensions JSON](layout_dimensions.json) · [Enclosure CAD provenance](assets/enclosure.json) · [Materials JSON](procurement.json)\n';
+fs.writeFileSync(path.join(root,'Build_Documents.md'),documents);
 const styles=`:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}`;
-for(const [input, output, title] of [['Procurement_BOM.md','materials.html','Materials and purchase links'],['Wiring_References_EN.md','references.html','Sources and design limits'],['Installation_Audit.md','installation.html','Installation audit'],['Build_Package.md','build.html','Machining and assembly package']]) {
+for(const [input, output, title] of [['Procurement_BOM.md','materials.html','Materials and purchase links'],['Wiring_References_EN.md','references.html','Sources and design limits'],['Installation_Audit.md','installation.html','Installation audit'],['Build_Package.md','build.html','Machining and assembly package'],['Build_Documents.md','documents.html','Build documents']]) {
  const raw=fs.readFileSync(path.join(root,input),'utf8');
  const rendered=marked.parse(raw).replace(/<table>/g,'<div class="table-wrap"><table>').replace(/<\/table>/g,'</table></div>').replace(/<td>(R\d+)<\/td>/g,(_,id)=>`<td id="${id.toLowerCase()}">${id}</td>`);
- fs.writeFileSync(path.join(root,output),`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title} · ELITEpro XC</title><link rel="stylesheet" href="material-images.css${output==='materials.html'?'?v=13':''}"><style>${styles}</style></head><body><nav><a href="index.html#layout">← Interactive 3D layout</a><a href="index.html#wiring">Circuit</a><a href="materials.html">Materials</a><a href="references.html">Sources</a><a href="installation.html">Installation audit</a><a href="build.html">Build package</a><a href="${input}" download>Download Markdown</a></nav>${rendered}</body></html>\n`);
+ fs.writeFileSync(path.join(root,output),`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title} · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=14"><style>${styles}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="${input}" download>Download Markdown</a></nav>${rendered}</body></html>\n`);
 }
-console.log('Generated BOM, reference pages and installation audit');
+console.log('Generated BOM, build document hub, reference pages and installation audit');

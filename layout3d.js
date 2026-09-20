@@ -1,8 +1,9 @@
 import * as THREE from 'three';
 import { OrbitControls } from './vendor/OrbitControls.js';
 import { RoundedBoxGeometry } from './vendor/RoundedBoxGeometry.js';
-import { installMaterialLocator } from './material-locator.js?v=13';
-import { addInstallationHardware } from './installation-hardware.js?v=13';
+import { installMaterialLocator } from './material-locator.js?v=14';
+import { addInstallationHardware } from './installation-hardware.js?v=14';
+import { showDesignPanel } from './site-navigation.js?v=14';
 
 // All geometry is in millimetres. Only the camera changes the screen scale.
 const host = document.querySelector('#model-view');
@@ -12,11 +13,11 @@ const V = a => new THREE.Vector3(...a);
 
 async function start() {
   const [dimensions, cad, buffer, review, procurement] = await Promise.all([
-    fetch('./layout_dimensions.json?v=13').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
-    fetch('./assets/enclosure.json?v=13').then(r => { if (!r.ok) throw Error('CAD manifest unavailable'); return r.json(); }),
-    fetch('./assets/enclosure.bin?v=13').then(r => { if (!r.ok) throw Error('CAD geometry unavailable'); return r.arrayBuffer(); }),
-    fetch('./installation_review.json?v=13').then(r => { if (!r.ok) throw Error('Installation review unavailable'); return r.json(); }),
-    fetch('./procurement.json?v=13').then(r => { if (!r.ok) throw Error('Materials unavailable'); return r.json(); })
+    fetch('./layout_dimensions.json?v=14').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
+    fetch('./assets/enclosure.json?v=14').then(r => { if (!r.ok) throw Error('CAD manifest unavailable'); return r.json(); }),
+    fetch('./assets/enclosure.bin?v=14').then(r => { if (!r.ok) throw Error('CAD geometry unavailable'); return r.arrayBuffer(); }),
+    fetch('./installation_review.json?v=14').then(r => { if (!r.ok) throw Error('Installation review unavailable'); return r.json(); }),
+    fetch('./procurement.json?v=14').then(r => { if (!r.ok) throw Error('Materials unavailable'); return r.json(); })
   ]);
   const parts = Object.fromEntries(dimensions.parts.map(p => [p.id, p]));
   const instances = Object.fromEntries(dimensions.instances.map(p => [p.id, p]));
@@ -384,7 +385,9 @@ async function start() {
   }
   function render(){locator?.sync();renderer.render(scene,camera);updateLabels();locator?.updateLabels();}
   function resize() {
-    const w=host.clientWidth,h=host.clientHeight,aspect=w/h,half=Math.max(325,350/aspect);
+    const w=host.clientWidth,h=host.clientHeight;
+    if(!w||!h)return; // Hidden tabs retain the last valid projection and canvas size.
+    const aspect=w/h,half=Math.max(325,350/aspect);
     camera.left=-half*aspect;camera.right=half*aspect;camera.top=half;camera.bottom=-half;
     camera.updateProjectionMatrix();renderer.setSize(w,h);render();
   }
@@ -444,7 +447,7 @@ async function start() {
   function zoom(factor){camera.zoom=THREE.MathUtils.clamp(camera.zoom*factor,.65,10);camera.updateProjectionMatrix();render();}
   $('model-zoom-in').onclick=()=>zoom(1.2);$('model-zoom-out').onclick=()=>zoom(1/1.2);
   $('model-reset').onclick=()=>{setAssembly(0);$('model-shell').value='xray';appearance();info('meter');view('iso');};
-  $('compare-layout').onclick=()=>{setAssembly(0);$('model-shell').value='xray';appearance();view('top');$('layout').scrollIntoView({block:'start'});};
+  $('compare-layout').onclick=()=>{document.getElementById('tab-layout').click();setAssembly(0);$('model-shell').value='xray';appearance();view('top');$('design').scrollIntoView({block:'start'});};
   $('model-save').onclick=()=>{render();const link=document.createElement('a');link.download='elitepro-enclosure-3d.png';link.href=renderer.domElement.toDataURL('image/png');link.click();};
   const more=$('model-more');
   document.addEventListener('pointerdown',e=>{if(!more.contains(e.target))more.open=false;});
@@ -471,7 +474,7 @@ async function start() {
   controls.addEventListener('start',()=>document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed','false')));
   const aliases={enclosure:'case',breaker:'q0',receptacle:'outlet','fuse-holder':'fuse',connectors:'terminals',carriers:'terminals','din-rail':'rail','blue-leads':'leads','voltage-leads':'leads'};
   locator=installMaterialLocator({items:procurement.items,locations:materialLocations,scene,camera,controls,host,render,
-    prepare:()=>{setAssembly(0,false);$('model-shell').value='xray';$('model-wires').checked=true;appearance();selection.visible=false;},
+    prepare:()=>{showDesignPanel('layout');resize();setAssembly(0,false);$('assembly-preview').hidden=true;$('assembly-preview').open=false;$('model-shell').value='xray';$('model-wires').checked=true;appearance();selection.visible=false;},
     describe:p=>{
       activePart=p.id;
       materialCopy(p);
@@ -489,10 +492,11 @@ async function start() {
     resetView:()=>{info('meter');view('iso');}
   });
   new ResizeObserver(resize).observe(host);
+  window.addEventListener('design-viewchange',resize);
   view('iso');resize();appearance();info('meter');
   $('model-loading').hidden=true;host.dataset.ready='true';
   status.textContent='Drag to rotate · Scroll / pinch to zoom';
-  if(new URL(location.href).searchParams.has('material'))locator.fromUrl();
+  if(new URL(location.href).searchParams.has('material'))locator.fromUrl(location.hash==='#layout');
   // Expose read-only diagnostics so regression checks inspect the real rendered model.
   function boundsOf(bodies) {
     return Object.fromEntries(Object.entries(bodies).map(([id,objects])=>{

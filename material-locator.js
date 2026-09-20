@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { showDesignPanel, revealMaterial } from './site-navigation.js?v=14';
 
 // Installation locations reference the meshes used to draw the assembly.
 // A material can have several installed occurrences; spare stock has no mesh.
@@ -125,8 +126,7 @@ export function installMaterialLocator({ items, locations, scene, camera, contro
   $('material-location').addEventListener('change', e => { occurrence = e.target.value; highlight(); });
   $('material-show-all').onclick = () => { clear(); resetView(); render(); };
   $('material-return').onclick = () => {
-    // A filter may have hidden the row that owns the currently selected material.
-    document.querySelector('[data-inventory="all"]')?.click();
+    revealMaterial(selected);
   };
   document.addEventListener('click', e => {
     const link = e.target.closest('a.locate-material');
@@ -135,9 +135,13 @@ export function installMaterialLocator({ items, locations, scene, camera, contro
   });
   function fromUrl(scroll = true) {
     const id = new URL(location.href).searchParams.get('material');
-    if (!select(id, { navigate: false, scroll })) { clear(false); resetView(); render(); }
+    const wiring = !document.getElementById('wiring').hidden;
+    if (!select(id, { navigate: false, scroll: scroll && !wiring })) { clear(false); resetView(); render(); }
+    if (wiring) showDesignPanel('wiring');
   }
-  window.addEventListener('popstate', () => fromUrl(location.hash === '#layout'));
+  window.addEventListener('popstate', () => {
+    if (new URL(location.href).searchParams.get('material') !== selected) fromUrl(location.hash === '#layout');
+  });
   return {
     select, clear, fromUrl, updateLabels, sync,
     get active() { return selected; },

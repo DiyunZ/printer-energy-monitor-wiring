@@ -1,6 +1,6 @@
 # Printer energy monitor wiring guide
 
-[Interactive website](https://diyunz.github.io/printer-energy-monitor-wiring/) · [Materials](https://diyunz.github.io/printer-energy-monitor-wiring/materials.html) · [Build package](https://diyunz.github.io/printer-energy-monitor-wiring/build.html)
+[Interactive website](https://diyunz.github.io/printer-energy-monitor-wiring/) · [Materials](https://diyunz.github.io/printer-energy-monitor-wiring/#hardware) · [Build documents](https://diyunz.github.io/printer-energy-monitor-wiring/documents.html)
 
 Build package A, September 20, 2026: one grounded 120 V printer, one operating breaker, a dedicated outlet for the existing adapter, three sensing pigtails and one CT on printer hot. The user's printer alternatives are UltiMaker S5, Bambu P2S and Prusa CORE One+; only one is connected at a time.
 
@@ -8,7 +8,9 @@ The English site provides a rotatable 3D model, matching 2D component positions,
 
 Each material has a **View in 3D** link on both checklist pages. It frames and highlights the installed parts, with an occurrence selector for materials used in several places. Hidden cartridges and sealing inserts can be seen through their housings. Direct links such as `?material=ring-lugs#layout` survive reloads; **Back to material** returns to the relevant checklist row. Spares and leftover stock are excluded. Small fittings and cable dressing are illustrative; this feature does not add physical assembly validation or new drilling dimensions.
 
-The main page shows short installation descriptions and a compact illustrated checklist. **Details** retains full specifications, receiving checks, pack quantities and image credits; unresolved purchasing and setup notices remain visible. **More** contains additional views, enclosure modes, display toggles and PNG export. The full BOM and build documents retain the detailed engineering information.
+The main page is organized for project review and purchasing. **Design** switches between 3D and wiring while retaining the camera and circuit selection. **Materials** shows the 25 purchase groups first, with the 5 owned groups expandable below; material links open that group when needed. **To confirm** lists the remaining CT, sensing-lead protection and breaker decisions. **Details** retains full specifications, receiving checks, pack quantities and image credits; purchasing holds remain visible. **More** contains additional views, enclosure modes, display toggles and PNG export.
+
+**Build documents** collects the machining package, six-stage interactive installation sequence, operation and setup instructions, dimensions, sources, audit and full BOM. Existing material, wiring and operation bookmarks remain supported. The main page omits routine photo captions but still identifies reference images and design concepts.
 
 The revised design uses a directly mounted **Leviton 5279-C**, **Littelfuse LPSC0001Z**, a **JV** transition connector for the fuse-holder's 14 AWG output, long-thread glands, and adjustable **19.05 mm straps through 21 × 4 mm slots**. The build package includes exact fastener links and counts, wire blanks and assembly order. Install the panel before the side outlet.
 
@@ -19,12 +21,13 @@ The original photo identifies the adapter as **CUI SMI6-9-V-P5, 9 V, 0.667 A, ce
 - `layout_dimensions.json`: shared placement, dimensions and provenance for 3D and 2D.
 - `layout3d.js`, `layout3d.css`, `assets/enclosure.*`: WebGL scene and machined manufacturer shell/panel.
 - `material-locator.js`, `installation-hardware.js`: material navigation/highlighting and secondary installation geometry. `installationHardware` in the shared dimension schedule retains the CAD anchor and bond datums.
+- `site-navigation.js`: design tabs, bookmark routing and automatic expansion of owned materials.
 - `build_routes.py`, `draw_external.py`, `page_template.html`: netlist, drawings and main-page generator.
 - `procurement.json`: ownership, quantities, exact parts, pictures and buying links.
 - `Build_Package.md`, `Wiring_References_EN.md`: build details and evidence.
 - `installation_review.json`, `installation_checks.json`, `installation_cables.json`: material review and bounded digital checks.
 - `tools/cad/`: parametric machining and drawing generators; `fabrication/`: STEP, STL, DXF, PDF and exact cut checks. These modify purchased parts, not a 3D-printed replacement mains enclosure.
-- `tools/render_documents.cjs`: generates materials, references, audit and build HTML using `marked`.
+- `tools/render_documents.cjs`: generates materials, references, audit, build HTML and the `Build_Documents.md` / `documents.html` hub using `marked`.
 - `tools/verify_site.cjs`: Playwright behavior/alignment/asset checks. Three.js is vendored with its license; the deployed site needs no CDN.
 - `tools/verify_material_locator.cjs`: every BOM link, distinct mesh ownership, installed counts, individual positions, direct links, history, keyboard and mobile behavior.
 

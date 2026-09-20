@@ -21,13 +21,24 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  await page.waitForFunction(()=>document.querySelector('#model-view').dataset.ready==='true',{timeout:45000});
  assert.match(await page.title(),/3D enclosure/);
  // Keep the main page focused while preserving access to supporting information.
- assert.deepEqual(await page.locator('main > section').evaluateAll(es=>es.map(e=>e.id)),['layout','wiring','hardware','operation']);
- assert.deepEqual(await page.locator('header nav a').evaluateAll(es=>es.map(e=>e.getAttribute('href'))),['#layout','#wiring','#hardware','#operation']);
+ assert.deepEqual(await page.locator('main > section').evaluateAll(es=>es.map(e=>e.id)),['design','confirm','hardware']);
+ assert.deepEqual(await page.locator('header nav a').evaluateAll(es=>es.map(e=>e.getAttribute('href'))),['#design','#hardware','#confirm','documents.html']);
  assert.equal(await page.locator('details[open]').count(),0,'Supporting details should be collapsed initially');
+ assert.equal(await page.locator('#layout').isVisible(),true);
+ assert.equal(await page.locator('#wiring').isVisible(),false);
+ assert.equal(await page.locator('.materials tbody tr:visible').count(),25);
+ assert.equal(await page.locator('#owned-materials').getAttribute('open'),null);
+ assert.equal(await page.locator('#confirm .review-items li').count(),3);
+ assert.equal(await page.locator('#assembly-preview').isVisible(),false);
+ await page.locator('#tab-layout').focus();await page.keyboard.press('ArrowRight');
+ assert.equal(await page.locator('#wiring').isVisible(),true);
+ assert.equal(await page.locator('#layout').isVisible(),false);
+ assert.equal(await page.locator('#tab-wiring').getAttribute('aria-selected'),'true');
  assert.equal(await page.locator('#connectors .detail-stage').isVisible(),false);
  await page.locator('#connectors > summary').click();
  assert.equal(await page.locator('#connectors .detail-stage').isVisible(),true);
  await page.locator('#connectors > summary').click();
+ await page.locator('#tab-layout').click();
  await page.locator('.part-details > summary').click();
  assert.equal(await page.locator('#part-note').isVisible(),true);
  await page.locator('.part-details > summary').click();
@@ -39,6 +50,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  await page.keyboard.press('Escape');
  assert.equal(await page.locator('#model-save').isVisible(),false);
  assert.equal(await page.locator('#model-more > summary').evaluate(e=>e===document.activeElement),true);
+ const openOwned=async()=>{if(await page.locator('#owned-materials').getAttribute('open')===null)await page.locator('#owned-materials > summary').click();};
  const diag=()=>page.evaluate(()=>window.enclosureDiagnostics());
  const initial=await diag();assert.equal(initial.units,'mm');assert.ok(initial.triangles>100000);
  assert.ok(close(initial.fitBodies.q0.size[2],47),'Q0 actual rendered body depth');
@@ -79,11 +91,11 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   assert.ok(!overlaps,`Modeled primary body overlap: ${a} / ${b}`);
  }
  assert.equal(initial.mode,'xray');assert.ok(initial.shellOpacity<.2);
- if(out)await page.locator('#layout').screenshot({path:path.join(out,'layout-desktop.png')});
- await page.locator('#compare-layout').click();
+ if(out)await page.locator('#design').screenshot({path:path.join(out,'layout-desktop.png')});
+ await page.locator('#tab-wiring').click();await page.locator('#compare-layout').click();
  assert.equal(await page.locator('[data-view="top"]').getAttribute('aria-pressed'),'true');
  assert.ok(close((await diag()).camera[0],20));assert.ok(close((await diag()).camera[2],0));
- assert.ok(await page.locator('#layout').evaluate(e=>Math.abs(e.getBoundingClientRect().top)<20),'Compare button should show the 3D top view');
+ assert.ok(await page.locator('#design').evaluate(e=>Math.abs(e.getBoundingClientRect().top)<20),'Compare button should show the 3D top view');
  if(out){
   await page.locator('#model-view').screenshot({path:path.join(out,'aligned-3d-top.png')});
   const drawing=await browser.newPage({viewport:{width:2000,height:1790}});
@@ -117,6 +129,14 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  await page.keyboard.press('Home');assert.ok(close((await diag()).camera[0],initial.camera[0]));
  await page.locator('#model-zoom-in').click();assert.ok(close((await diag()).zoom,1.2));
  await page.locator('#model-zoom-out').click();assert.ok(close((await diag()).zoom,1));
+ before=await diag();
+ await page.locator('#tab-wiring').click();await page.locator('[data-mode="earth"]').click();
+ await page.locator('#tab-layout').click();
+ assert.deepEqual((await diag()).camera,before.camera,'Tab changes preserve camera orientation');
+ assert.equal((await diag()).zoom,before.zoom,'Tab changes preserve zoom');
+ await page.locator('#tab-wiring').click();
+ assert.equal(await page.locator('[data-mode="earth"]').getAttribute('aria-pressed'),'true','Tab changes preserve circuit selection');
+ await page.locator('#tab-layout').click();
  await page.locator('#model-part').selectOption('ct');assert.match(await page.locator('#part-evidence').textContent(),/Mini HSC family matched.*probable/);
  await page.locator('[data-view="top"]').click();await openMore();await page.locator('#model-shell').selectOption('cutaway');
  await page.locator('#model-wires').uncheck();await page.locator('#model-label-toggle').uncheck();
@@ -127,7 +147,8 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  await openMore();await page.locator('#model-wires').check();await page.locator('#model-label-toggle').check();
  if(out)await page.locator('#model-view').screenshot({path:path.join(out,'layout-top.png')});
  await page.locator('#model-reset').click();
- await page.locator('#assembly-preview > summary').click();
+ await page.goto(new URL('#assembly-preview',base).href);
+ assert.equal(await page.locator('#assembly-preview').getAttribute('open'),'');
  for(let step=1;step<=6;step++){
   await page.locator('#assembly-stage').selectOption(String(step));const a=await diag();
   assert.equal(a.assemblyStage,step);assert.equal(a.wiresVisible,step>=5);
@@ -136,7 +157,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   if(step===2){
    await page.locator('#assembly-progress').fill('0');assert.equal((await diag()).panelInsertionOffset,300);
    await page.locator('#assembly-progress').fill('50');assert.equal((await diag()).panelInsertionOffset,150);
-   if(out)await page.locator('#layout').screenshot({path:path.join(out,'panel-insertion.png')});
+   if(out)await page.locator('#design').screenshot({path:path.join(out,'panel-insertion.png')});
    await page.locator('#assembly-progress').fill('100');assert.equal((await diag()).panelInsertionOffset,0);
   }
  }
@@ -149,6 +170,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  if(out)await download.saveAs(path.join(out,'exported-model.png'));
  await page.locator('#model-more > summary').click();
  // Existing circuit controls remain functional.
+ await page.locator('#tab-wiring').click();
  const ids=await page.locator('#main-stage .wire').evaluateAll(es=>[...new Set(es.map(e=>e.dataset.id))]);assert.equal(ids.length,25);
  const expected={all:null,main:['01','02','03'],voltage:['01','02','04','05','06','08','09','24'],neutral:['06','07','08','09','18','21'],earth:['10','11','12','13','19','25'],aux:['01','02','06','10','17','18','19','20','21','22','23','25'],signal:['14','15','16']};
  for(const [mode,want] of Object.entries(expected)){
@@ -166,6 +188,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  assert.deepEqual(bom.items.filter(p=>p.availability==='owned').map(p=>p.id),ownedIds);
  assert.equal(bom.items.find(p=>p.id==='usb').availability,'buy');
  assert.equal(await page.locator('.materials tbody tr').count(),bom.items.length);
+ await openOwned();
  for(const p of bom.items){
   const row=page.locator('#material-'+p.id);
   assert.equal(await row.getAttribute('data-availability'),p.availability);
@@ -190,7 +213,9 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   assert.equal(await photo.count(),1,p.id+' needs an image below its name');
   assert.equal(await photo.locator('img').getAttribute('src'),p.image.src);
   assert.equal(await photo.locator('img').getAttribute('alt'),p.image.alt);
-  assert.equal(await photo.locator('figcaption').textContent(),{user:'Your equipment',product:'Product photo',reference:'Reference image',design:'Design concept'}[p.image.kind]);
+  const caption={reference:'Reference image',design:'Design concept'}[p.image.kind];
+  if(caption)assert.equal(await photo.locator('figcaption').textContent(),caption);
+  else assert.equal(await photo.locator('figcaption').count(),0,'Routine photo captions are omitted');
   assert.equal(await row.locator('.material-image-note').textContent(),p.image.caption);
   if(p.image.source_url)assert.equal(await row.locator('.material-details a').filter({hasText:'Image: '}).getAttribute('href'),p.image.source_url);
   assert.ok(await row.evaluate(e=>e.querySelector('.material-photo').getBoundingClientRect().top>=e.querySelector('.material-name').getBoundingClientRect().bottom),p.id+' photo must be below the material name');
@@ -199,33 +224,32 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  assert.equal(await page.locator('#material-breaker .material-details .material-reason').isVisible(),true);
  await page.locator('#material-breaker .material-details summary').click();
  await page.locator('.material-photo img').evaluateAll(es=>Promise.all(es.map(async img=>{img.loading='eager';await img.decode();if(!img.naturalWidth||!img.naturalHeight)throw Error('Image did not load: '+img.src);})));
- for(const state of ['owned','buy','all']){
-  await page.locator(`[data-inventory="${state}"]`).click();
-  const expected=bom.items.filter(p=>state==='all'||p.availability===state).map(p=>'material-'+p.id);
-  assert.deepEqual(await page.locator('.materials tbody tr:visible').evaluateAll(rows=>rows.map(r=>r.id)),expected);
-  assert.equal(await page.locator(`[data-inventory="${state}"]`).getAttribute('aria-pressed'),'true');
-  assert.match(await page.locator('#inventory-status').textContent(),new RegExp(`Showing ${expected.length} of ${bom.items.length}`));
- }
+ await page.locator('#owned-materials > summary').click();
+ assert.deepEqual(await page.locator('.materials tbody tr:visible').evaluateAll(rows=>rows.map(r=>r.id)),bom.items.filter(p=>p.availability==='buy').map(p=>'material-'+p.id));
+ await openOwned();
+ assert.equal(await page.locator('#owned-materials tbody tr:visible').count(),ownedIds.length);
+ await page.locator('#owned-materials > summary').click();
  if(out){await page.locator('#hardware').scrollIntoViewIfNeeded();await page.screenshot({path:path.join(out,'inventory-desktop.png')});}
  for(const [width,height] of [[1440,1100],[768,1024],[390,844]]){
   await page.setViewportSize({width,height});await page.evaluate(()=>window.scrollTo(0,0));
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Page overflow at '+width);
-  await page.locator('#zoom-fit').click();assert.ok(await page.locator('#main-stage').evaluate(e=>e.scrollWidth<=e.clientWidth+2),'Circuit fit overflow at '+width);
+  await page.locator('#tab-wiring').click();await page.locator('#zoom-fit').click();assert.ok(await page.locator('#main-stage').evaluate(e=>e.scrollWidth<=e.clientWidth+2),'Circuit fit overflow at '+width);
   await page.locator('#zoom-reset').click();
-  if(out){await page.locator('#layout').screenshot({path:path.join(out,`layout-${width}.png`)});}
-  assert.ok(await page.locator('.materials').evaluate(e=>e.scrollWidth<=e.clientWidth+2),'Materials overflow at '+width);
+  await page.locator('#tab-layout').click();
+  if(out){await page.locator('#design').screenshot({path:path.join(out,`layout-${width}.png`)});}
+  assert.ok(await page.locator('.materials').evaluateAll(es=>es.every(e=>e.scrollWidth<=e.clientWidth+2)),'Materials overflow at '+width);
   if(width===390){
-   await page.locator('[data-inventory="owned"]').click();assert.equal(await page.locator('.materials tbody tr:visible').count(),ownedIds.length);
+   await openOwned();assert.equal(await page.locator('#owned-materials tbody tr:visible').count(),ownedIds.length);
    if(out)await page.locator('#material-meter').screenshot({path:path.join(out,'inventory-mobile.png')});
    await page.locator('#material-meter .material-details summary').focus();await page.keyboard.press('Enter');
    assert.equal(await page.locator('#material-meter .material-details .material-reason').isVisible(),true,'Material specifications must open by keyboard on mobile');
    await page.keyboard.press('Enter');
-   await page.locator('[data-inventory="all"]').click();
+   await page.locator('#owned-materials > summary').click();
   }
  }
  const links=await page.locator('a[href]').evaluateAll(es=>es.map(e=>e.getAttribute('href')).filter(h=>!h.startsWith('http')&&!h.startsWith('#')));
  for(const href of [...new Set(links)]){const res=await page.request.get(new URL(href,base).href);assert.equal(res.status(),200,href);}
- for(const file of ['materials.html','references.html','installation.html','build.html']){
+ for(const file of ['materials.html','references.html','installation.html','build.html','documents.html']){
   await page.goto(new URL(file,base).href);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),file+' mobile overflow');
   if(file==='materials.html'){
    assert.equal(await page.locator('tbody tr').count(),bom.items.length);
@@ -240,20 +264,34 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
    assert.match(await page.locator('body').innerText(),/RECEIVING AND ELECTRICAL RELEASE ITEMS OPEN/);
    assert.equal(await page.locator('a[href^="index.html#material-"]').count(),bom.items.length);
    assert.equal(await page.locator('#simulation').count(),1);
-  } else {
+  } else if(file==='build.html') {
    assert.equal(await page.locator('#fasteners').count(),1);
    const localLinks=await page.locator('a[href^=\"fabrication/\"]').evaluateAll(es=>es.map(e=>e.getAttribute('href')));
    assert.ok(localLinks.length>=10);
    for(const href of localLinks)assert.equal((await page.request.get(new URL(href,base).href)).status(),200,href);
+  } else {
+   assert.equal(await page.locator('#operation').count(),1);
+   assert.equal(await page.locator('#dimensions').count(),1);
+   assert.match(await page.locator('body').innerText(),/Q0 OFF is not isolation/);
+   for(const href of ['build.html','installation.html','materials.html','references.html','index.html#assembly-preview'])assert.ok(await page.locator(`a[href="${href}"]`).count()>0);
+   const local=await page.locator('a[href]').evaluateAll(es=>es.map(e=>e.getAttribute('href')).filter(h=>!h.startsWith('http')&&!h.startsWith('#')));
+   for(const href of [...new Set(local)])assert.equal((await page.request.get(new URL(href,base).href)).status(),200,href);
+   await page.locator('a[href="index.html#assembly-preview"]').click();
+   await page.waitForFunction(()=>document.querySelector('#model-view').dataset.ready==='true');
+   assert.equal(await page.locator('#assembly-preview').isVisible(),true,'Document hub opens interactive assembly');
+   assert.equal(await page.locator('#assembly-preview').getAttribute('open'),'');
   }
  }
+ await page.goto(new URL('#operation',base).href);
+ await page.waitForURL(new URL('documents.html#operation',base).href);
+ assert.equal(await page.locator('#operation').isVisible(),true,'Existing operation bookmarks reach the document hub');
  await page.goto(new URL('wiring_routes.html',base).href);await page.waitForURL(url=>url.href===base||url.href===base+'index.html');
  assert.deepEqual(errors,[]);assert.deepEqual(failedRequests,[]);
  if(process.env.EXPORT_DRAWINGS==='1'){
   const render=await browser.newPage({viewport:{width:1800,height:1300},deviceScaleFactor:2});
   for(const name of ['wiring_routes','connector_detail']){await render.goto(new URL(name+'.svg',base).href);await render.locator('svg').screenshot({path:path.join(root,name+'.png')});}
  }
- const report={date:new Date().toISOString(),base,connections:25,circuitGroups:7,alignedComponentFootprints:plan.bodies.length,planTo3DMaximumToleranceMm:.05,compareTopView:true,renderedMeterBody:initial.fitBodies.meter.size,primaryBodyOverlaps:false,mouseOrbit:true,wheelZoom:true,keyboardOrbit:true,picking:true,shellModes:4,pngExport:true,viewportWidths:[1440,768,390],pageOverflow:false,internalLinks:true,materialsRows:bom.items.length,materialImagesLoaded:bom.items.length,ownedGroups:ownedIds.length,purchaseGroups:bom.items.length-ownedIds.length,inventoryFilters:true,assemblyStages:6,panelInsertionSlider:true,progressiveDisclosure:true,criticalNoticesVisible:true,advancedControlsKeyboard:true,coilScenarioLengthMm:2000,jsErrors:errors,physicalBuildValidated:false};
+ const report={date:new Date().toISOString(),base,connections:25,circuitGroups:7,alignedComponentFootprints:plan.bodies.length,planTo3DMaximumToleranceMm:.05,compareTopView:true,renderedMeterBody:initial.fitBodies.meter.size,primaryBodyOverlaps:false,mouseOrbit:true,wheelZoom:true,keyboardOrbit:true,picking:true,shellModes:4,pngExport:true,viewportWidths:[1440,768,390],pageOverflow:false,internalLinks:true,materialsRows:bom.items.length,materialImagesLoaded:bom.items.length,ownedGroups:ownedIds.length,purchaseGroups:bom.items.length-ownedIds.length,ownedGroupCollapsedByDefault:true,designTabs:true,buildDocumentHub:true,assemblyStages:6,panelInsertionSlider:true,progressiveDisclosure:true,criticalNoticesVisible:true,advancedControlsKeyboard:true,coilScenarioLengthMm:2000,jsErrors:errors,physicalBuildValidated:false};
  if(out)fs.writeFileSync(path.join(out,'browser-validation.json'),JSON.stringify(report,null,2)+'\n');
  console.log(JSON.stringify(report,null,2));
  }finally{await browser.close();}

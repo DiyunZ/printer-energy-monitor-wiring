@@ -19,7 +19,10 @@ const close = (a,b) => Math.abs(a-b) < .05;
     const ready = () => page.waitForFunction(() => document.querySelector('#model-view')?.dataset.ready === 'true', { timeout: 45000 });
     const openMore=async()=>{if(await page.locator('#model-more').getAttribute('open')===null)await page.locator('#model-more > summary').click();};
     const diag = () => page.evaluate(() => window.enclosureDiagnostics().materialLocator);
-    const clickMaterial = id => page.locator(`#material-${id} .locate-material`).click();
+    const clickMaterial = async id => {
+      if(bom.items.find(p=>p.id===id).availability==='owned' && await page.locator('#owned-materials').getAttribute('open')===null)await page.locator('#owned-materials > summary').click();
+      await page.locator(`#material-${id} .locate-material`).click();
+    };
     await page.goto(base); await ready();
     assert.equal(await page.locator('#model-part option').count(), bom.items.length);
     const initial = await diag(), ids = bom.items.map(p => p.id).sort();
@@ -36,11 +39,13 @@ const close = (a,b) => Math.abs(a-b) < .05;
       const p = initial.locations.fasteners.find(p => p.key === `anchor-${i}`);
       assert.ok(close((p.min[0]+p.max[0])/2,point[0]) && close((p.min[2]+p.max[2])/2,point[1]));
     }
+    await page.locator('#tab-wiring').click();
     for (const p of bom.items) {
       const link = page.locator(`#material-${p.id} .locate-material`);
       assert.equal(new URL(await link.getAttribute('href'),base).searchParams.get('material'), p.id);
       await clickMaterial(p.id);
       const d = await diag();
+      assert.equal(await page.locator('#layout').isVisible(),true);
       assert.equal(d.selected,p.id); assert.equal(d.occurrence,'all');
       assert.equal(new URL(page.url()).searchParams.get('material'),p.id);
       assert.equal(new URL(page.url()).hash,'#layout');
@@ -75,12 +80,26 @@ const close = (a,b) => Math.abs(a-b) < .05;
       await page.locator('#model-part').selectOption(id);
       if(['carriers','kt-inserts'].includes(id))await page.locator('#material-location').selectOption(initial.locations[id][0].key);
       const d=await diag(); if(id!=='ring-lugs')assert.ok(d.ghostCount>0,id+' surrounding housing must become transparent');
-      if(out)await page.locator('#layout').screenshot({path:path.join(out,`locator-${shot}.png`)});
+      if(out)await page.locator('#design').screenshot({path:path.join(out,`locator-${shot}.png`)});
     }
     await page.locator('#model-part').selectOption('fuse');
     await page.locator('#model-part').selectOption('ct');
     await page.goBack(); assert.equal((await diag()).selected,'fuse');
     await page.goForward(); assert.equal((await diag()).selected,'ct');
+    // Direct wiring bookmarks and tab history retain the selected material and camera.
+    await page.goto(new URL('?material=ct#wiring',base).href);await ready();
+    assert.equal(await page.locator('#wiring').isVisible(),true);
+    assert.equal((await diag()).selected,'ct');
+    await page.locator('#tab-layout').click();
+    assert.equal(await page.locator('#model-view canvas').isVisible(),true);
+    await page.locator('[data-view="top"]').click();
+    const tabView=await page.evaluate(()=>({camera:enclosureDiagnostics().camera,zoom:enclosureDiagnostics().zoom}));
+    assert.ok(tabView.camera.every(Number.isFinite)&&Number.isFinite(tabView.zoom));
+    await page.locator('#tab-wiring').click();await page.goBack();
+    assert.equal(await page.locator('#layout').isVisible(),true);
+    assert.deepEqual(await page.evaluate(()=>({camera:enclosureDiagnostics().camera,zoom:enclosureDiagnostics().zoom})),tabView);
+    await page.goForward();assert.equal(await page.locator('#wiring').isVisible(),true);
+    await page.locator('#tab-layout').click();
     await page.locator('#model-part').selectOption('enclosure');
     await openMore();await page.locator('#model-shell').selectOption('lifted');
     assert.ok((await diag()).overlaysAligned,'Lid highlight must move with the lid');
@@ -95,10 +114,17 @@ const close = (a,b) => Math.abs(a-b) < .05;
     assert.equal((await diag()).selected,null);assert.equal((await diag()).ghostCount,0);assert.equal((await diag()).highlightMeshCount,0);
     assert.equal(new URL(page.url()).searchParams.has('material'),false);
     // Starting from a partially assembled view must still locate all hardware.
-    await page.locator('#assembly-preview > summary').click();await page.locator('#assembly-stage').selectOption('2');
+    await page.goto(new URL('#assembly-preview',base).href);await ready();await page.locator('#assembly-stage').selectOption('2');
     await clickMaterial('ring-lugs');assert.equal(await page.evaluate(()=>enclosureDiagnostics().assemblyStage),0);
-    await page.locator('[data-inventory="owned"]').click();await page.locator('#material-return').click();
-    assert.equal(await page.locator('#material-ring-lugs').isVisible(),true,'Return link must reveal a filtered-out material');
+    await page.locator('#model-part').selectOption('meter');
+    if(await page.locator('#owned-materials').getAttribute('open')!==null)await page.locator('#owned-materials > summary').click();
+    await page.locator('#material-return').click();
+    assert.equal(await page.locator('#material-meter').isVisible(),true,'Return link opens a collapsed owned group');
+    await page.goto(new URL('#material-ct',base).href);await ready();
+    assert.equal(await page.locator('#material-ct').isVisible(),true,'Owned material bookmarks open their group');
+    await page.locator('#owned-materials > summary').click();
+    await page.locator('#confirm a[href="#material-ct"]').click();
+    assert.equal(await page.locator('#material-ct').isVisible(),true,'Review links reopen the group even at the same anchor');
     await page.locator('#material-fuse .locate-material').focus();await page.keyboard.press('Enter');assert.equal((await diag()).selected,'fuse');
     // The standalone BOM navigates to the correct material on a fresh page load.
     await page.goto(new URL('materials.html',base).href);
@@ -110,7 +136,7 @@ const close = (a,b) => Math.abs(a-b) < .05;
       await page.setViewportSize({width,height:844});await clickMaterial('fuse');
       assert.equal((await diag()).selected,'fuse');assert.ok((await diag()).visibleMarkers>0);
       assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
-      if(out)await page.locator('#layout').screenshot({path:path.join(out,`locator-${width}.png`)});
+      if(out)await page.locator('#design').screenshot({path:path.join(out,`locator-${width}.png`)});
     }
     assert.equal(await page.locator('body').evaluate(el=>/[\u3400-\u9fff]/.test(el.innerText)),false,'Website remains English');
     // Unknown material links remain a usable assembly view rather than crashing.

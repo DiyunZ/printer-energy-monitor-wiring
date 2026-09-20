@@ -1,0 +1,107 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Build documents · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=14"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Build_Documents.md" download>Download Markdown</a></nav><h1>Build documents</h1>
+<ul>
+<li><a href="build.html">Machining files and assembly guide</a> — drawings, fasteners and assembly order.</li>
+<li><a href="index.html#assembly-preview">Interactive installation sequence</a> — inspect the six stages in 3D.</li>
+<li><a href="installation.html">Installation audit</a> — checks completed and remaining acceptance items.</li>
+<li><a href="materials.html">Full materials list</a> · <a href="Procurement_BOM.md">Download BOM</a></li>
+<li><a href="references.html">Manufacturer sources and design limits</a></li>
+</ul>
+<h2>Drawings</h2>
+<p><a href="wiring_routes.svg">Wiring SVG</a> · <a href="wiring_routes.png">Wiring PNG</a> · <a href="connector_detail.svg">Connector SVG</a> · <a href="connector_detail.png">Connector PNG</a></p>
+<h2 id="operation">Operation</h2>
+
+<p>Daily use begins only after qualified electrical inspection and setup.</p>
+<ol>
+<li><strong>Connect with Q0 OFF.</strong> Printer → measured output. Verified adapter → XA, with its DC cable connected. Connect the box supply.</li>
+<li><strong>Switch Q0 ON.</strong> The printer, adapter outlet and voltage tap receive power together.</li>
+<li><strong>Confirm logging.</strong> Check readings and the recording indicator. Run the print and record start/stop times.</li>
+</ol>
+<p><strong>Keep the lid closed. Q0 OFF is not isolation: unplug mains and USB, then verify absence of voltage before opening or changing sensing leads.</strong></p>
+<h3>Initial setup and electrical checks</h3>
+<p>Qualified electrical personnel verify terminations, polarity, PE continuity, insulation, protection and enclosure fit before releasing the assembly. Q0 opens hot only; PE stays continuous. Fv selection and breaker coordination must be resolved before energizing.</p>
+<p>Configure ELOG for single phase / two wire, CH1 voltage high L1 and low N, the actual CT type/range and logging interval. Disable unused channels. Verify sensible readings and positive real power against an independent reference meter; prove recording and restart behavior with a supervised power cycle.</p>
+<h2>Software and lab equipment</h2>
+<p>Arrange access separately; these resources are not marked as owned.</p>
+<ul>
+<li><strong>ELOG software — Download / install; no separate software purchase.</strong> Use DENT ELOG for configuration, recording and data retrieval. Installation on the lab computer has not been verified. <a href="https://www.dentinstruments.com/software-downloads/elog-software-elitepro-xc-sp-power-meters/">DENT download</a></li>
+<li><strong>ELOG computer and printer under test — Arrange lab equipment.</strong> Need a supported Windows computer with a matching USB port and the printer with its original grounded cord. These are setup resources, not checked as owned or counted as enclosure purchases; no replacement printer or computer has been selected.</li>
+<li><strong>Assembly and acceptance equipment — Arrange qualified assembly / lab tools.</strong> Calipers, wire stripper, terminal-matched crimper, torque tools, machining/deburring tools, PE/polarity/insulation test equipment and an independent power reference. Arrange access before assembly; tool ratings and procedures belong to the approved build process.</li>
+</ul>
+<h2>Purchasing notes</h2>
+<p>Quantities are for one enclosure; supplier pack sizes may be larger. Check stock and lead times. “Select / Configure” needs a size or rating choice; “Quote / Fabrication” needs supplier follow-up. Owned means on hand, not approved for use. Purchase holds remain marked beside the relevant materials.</p>
+<p>Click photos to enlarge them. Reference images and design concepts are labeled; photos are not to scale. Image credits are in each material&#39;s Details and the full BOM.</p>
+<h2 id="dimensions">Dimensions and model notes</h2>
+
+<p><strong>Concept layout; use the build package for machining.</strong> Manufacturer CAD, published sizes and estimates share one scale. Small hardware and cable dressing are simplified; spare stock is excluded. Received parts still need a physical fit check.</p>
+<p>Amber marks the selected material; hidden housings become transparent. Top view matches the wiring plan. The real case has gray walls and a clear lid. Drag to rotate, scroll or pinch to zoom; keyboard controls are arrow keys, + / − and Home.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Model envelope (mm)</th>
+<th>Evidence / limit</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Hammond PCJ16148CC</td>
+<td>393.8 × 240.2 × 479.4</td>
+<td>Manufacturer CAD · <a href="https://www.hammfg.com/files/parts/stp/PCJ16148CC.zip">Source</a></td>
+</tr>
+<tr>
+<td>14R1513 mounting panel</td>
+<td>327.0 × 1.9 × 374.6</td>
+<td>Manufacturer CAD · <a href="https://www.hammfg.com/files/parts/pdf/PCJ16148CC.pdf">Source</a></td>
+</tr>
+<tr>
+<td>DENT ELITEpro XC</td>
+<td>63.0 × 47.0 × 216.0</td>
+<td>Catalog dimensions; verify actual unit · <a href="https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf">Source</a></td>
+</tr>
+<tr>
+<td>CT1 · printer hot only</td>
+<td>29.4 × 41.7 × 26.4</td>
+<td>Mini HSC family matched; 50 A variant probable · <a href="https://www.dentinstruments.com/shop/current-sensors/hinged-current-transformers-sensors-for-energy-metering/">Source</a></td>
+</tr>
+<tr>
+<td>Q0 · single operating breaker</td>
+<td>19.2 × 63.5 × 47.0</td>
+<td>Catalog body; direct wall mount · <a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">Source</a></td>
+</tr>
+<tr>
+<td>Fv · Littelfuse LPSC0001Z</td>
+<td>17.8 × 61.0 × 78.5</td>
+<td>Manufacturer maximum envelope · <a href="https://www.littelfuse.com/de/assetdocs/powr-gard-catalog?assetguid=85d36235-a32b-4608-bfed-f9878aa43af0">Source</a></td>
+</tr>
+<tr>
+<td>JL / JN / JPE distribution</td>
+<td>29.8 × 8.2 × 18.3</td>
+<td>Manufacturer connector and carrier dimensions · <a href="https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415">Source</a></td>
+</tr>
+<tr>
+<td>XA · Leviton 5279-C flanged outlet</td>
+<td>48.4 × 63.5 × 63.5</td>
+<td>Manufacturer drawing and mounting instructions · <a href="https://leviton.com/products/5279-c">Source</a></td>
+</tr>
+<tr>
+<td>CUI SMI6-9-V-P5 · existing adapter</td>
+<td>30.0 × 64.0 × 40.5</td>
+<td>Photo-identified; manufacturer body dimensions · <a href="https://www.belfuse.com/media/datasheets/products/power-supplies/SMI6.pdf">Source</a></td>
+</tr>
+<tr>
+<td>Short DIN rail · Fv only</td>
+<td>100.0 × 7.5 × 35.0</td>
+<td>Standard profile; proposed cut length</td>
+</tr>
+<tr>
+<td>Long-thread power glands / KVT 32 split entries</td>
+<td>27.0 × 37.0 × 27.0</td>
+<td>Catalog envelopes; 41380 inserts selected · <a href="https://www.hammfg.com/electronics/small-case/accessories/1427ncg">Source</a></td>
+</tr>
+<tr>
+<td>Blue adapters &amp; retained lead slack</td>
+<td>Routing only</td>
+<td>Illustrative routing; length not validated · <a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/">Source</a></td>
+</tr>
+</tbody></table></div>
+<p><a href="layout_dimensions.json">Dimensions JSON</a> · <a href="assets/enclosure.json">Enclosure CAD provenance</a> · <a href="procurement.json">Materials JSON</a></p>
+</body></html>
