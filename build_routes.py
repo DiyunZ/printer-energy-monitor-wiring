@@ -5,7 +5,7 @@ import json
 from draw_external import draw_external
 
 OUT = Path(__file__).resolve().parent
-REV = 'Rev. 6 · installation audit corrections · 2026-09-19'
+REV = 'Rev. 7 · build package A · 2026-09-20'
 C = {'L':'#202d3a','N':'#65758a','PE':'#18814a','CT':'#8544a5','USB':'#23739d','DC':'#aa621e','V':'#1567c1'}
 # Shared physical placement. The SVG is an X/Z projection of the same millimetre
 # coordinates consumed by layout3d.js. Electrical port symbols are spaced for clarity.
@@ -34,7 +34,8 @@ M = {
  'D.+':position('meter',34.5,-93), 'D.-':position('meter',34.5,-75), 'D.USB':position('meter',16,118),
  'D.DC+':position('meter',-17,118), 'D.DC-':position('meter',-10,118),
  'CT.+':position('ct',-8,BODIES['ct']['size'][2]/2), 'CT.-':position('ct',8,BODIES['ct']['size'][2]/2),
- 'PLATE':(-106,51), 'RAIL':position('rail',28), 'OUTLETBOX':position('outletguard',-27,12),
+ 'PLATE':(-125,60), 'RAIL':position('rail',28), 'JV.1':pin('JV',1), 'JV.2':pin('JV',2),
+ 'JPE.B1':pin('PE',5), 'JPE.B2':pin('PE+',5),
  'AUX.L':position('outlet',-5,-10), 'AUX.N':position('outlet',-5), 'AUX.PE':position('outlet',-7,16),
  'AUX.FACE.L':position('outlet',22,-6.35), 'AUX.FACE.N':position('outlet',22,6.35),
  'PSU.L':position('adapter',0,-6.35), 'PSU.N':position('adapter',0,6.35),
@@ -45,33 +46,34 @@ M = {
  **{f'JPE.{i+2}':pin('PE+',i) for i in range(1,5)},
 }
 A = {name:project(point) for name,point in M.items()}
-# 01–19 and 24: installed conductors/cables; 20–23: existing factory plug/cable paths.
+# 01–19 and 24–25: installed conductors/cables; 20–23: existing factory plug/cable paths.
 # Routing waypoints are intentionally rectilinear. Component locations are not rearranged for routing.
 raw = [
  ('01','L','IN.L','Q0.IN',[(-137,116),(-137,144),(-117,144)],(-137,130),'Input hot → Q0 IN','main'),
  ('02','L','Q0.OUT','JL.1',[(-100,M['Q0.OUT'][1]),(-100,148),(-154,148),(-154,-103),(-136.6,-103)],(-154,88),'Q0 OUT → hot distribution JL','main'),
  ('03','L','JL.2','OUT.L',[(-115,-118.85),(-115,-123),(-12,-123),(-12,-175),(0,-175)],(-25,-123),'JL → printer hot; one pass through CT','main'),
  ('04','L','JL.3','Fv.IN',[(-125,-104),(-83,-104),(-83,-78),(-60,-78)],(-83,-89),'JL → Fv voltage-tap fuse','voltage'),
- ('05','V','Fv.OUT','D.L1',[(-60,34),(-33,34),(-33,165),(40,165),(40,-156),(114,-156)],(40,-15),'Fv → blue A1 → full lead → L1 (HOT)','voltage'),
+ ('05','V','JV.2','D.L1',[(-33.8,58),(-33,58),(-33,165),(40,165),(40,-156),(114,-156)],(40,-15),'JV → blue A1 → full lead → L1 (HOT)','voltage'),
  ('06','N','IN.N','JN.1',[(-170,128),(-170,-33),(-136.6,-33)],(-170,-12),'Input neutral → neutral distribution JN','neutral'),
  ('07','N','JN.2','OUT.N',[(-130.8,-36),(-148,-36),(-148,-176),(-4,-176)],(-148,-80),'JN → printer neutral; outside CT','neutral'),
  ('08','V','JN.3','D.L2',[(-125,-10),(-97,-10),(-97,38),(-24,38),(-24,159),(46,159),(46,-149),(99,-149)],(46,60),'JN → blue A2 → full lead → L2 (NEUTRAL)','voltage'),
  ('09','V','JN.4','D.N',[(-119.2,-17),(-91,-17),(-91,44),(-15,44),(-15,153),(52,153),(52,-142),(68,-142)],(52,125),'JN → blue A3 → full lead → N (NEUTRAL)','voltage'),
  ('10','PE','IN.PE','JPE.1',[(-145,140),(-145,35),(-136.6,35)],(-145,78),'Input PE → protective-earth distribution','earth'),
  ('11','PE','JPE.2','OUT.PE',[(-130.8,43),(-161,43),(-161,-185),(-8,-185)],(-161,-143),'PE → printer ground; outside CT','earth'),
- ('12','PE','JPE.3','PLATE',[(-86.6,77),(-106,77)],(-106,69),'PE → dedicated metal-plate bond','earth'),
+ ('12','PE','JPE.3','PLATE',[(-86.6,77),(-125,77)],(-125,69),'PE → dedicated metal-plate bond','earth'),
  ('13','PE','JPE.4','RAIL',[(-80.8,85),(-18,85),(-18,-28)],(-18,15),'PE → dedicated metal-rail bond','earth'),
  ('14','CT','CT.+','D.+',[(-63,-102),(134,-102),(134,-101)],(35,-102),'CT white (+) → current-input CH1 +','signal'),
  ('15','CT','CT.-','D.-',[(-47,-95),(142,-95),(142,-83)],(16,-95),'CT black (−) → current-input CH1 −','signal'),
  ('16','USB','D.USB','PC',[(140,110),(140,BODIES['usb-entry']['position'][2]),(280,BODIES['usb-entry']['position'][2])],(235,BODIES['usb-entry']['position'][2]),'USB Type B → protected exit → ELOG computer','signal'),
  ('17','L','JL.4','AUX.L',[(-119.2,-163),(150,-163),(150,3)],(150,-128),'JL → AUX receptacle hot; before CT','aux'),
  ('18','N','JN.5','AUX.N',[(-105,-48.85),(-105,-154),(157,-154),(157,13)],(157,-50),'JN → AUX receptacle neutral','aux'),
- ('19','PE','JPE.5','AUX.PE',[(-75,93),(137,93),(137,38),(167,38)],(115,93),'PE → AUX ground and bonded mounting hardware','earth'),
+ ('19','PE','JPE.5','AUX.PE',[(-75,93),(137,93),(137,38),(M['AUX.PE'][0],38)],(115,93),'PE → XA ground contact','earth'),
  ('20','L','AUX.FACE.L','PSU.L',[],(207,6.65),'Existing adapter AC blade: hot contact','aux'),
  ('21','N','AUX.FACE.N','PSU.N',[],(207,19.35),'Existing adapter AC blade: neutral contact','aux'),
  ('22','DC','PSU.DC+','D.DC+',[(254,25),(254,106),(150,106),(150,118),(74,118)],(254,72),'Factory barrel cable: center-positive path','aux'),
  ('23','DC','PSU.DC-','D.DC-',[(246,31),(246,111),(154,111),(154,125),(81,125)],(246,86),'Factory barrel cable: negative sleeve path','aux'),
- ('24','PE','JPE.6','OUTLETBOX',[(-69.2,101),(131,101)],(100,101),'PE → dedicated outlet rear-box bond','earth'),
+ ('24','L','Fv.OUT','JV.1',[(-60,22),(-39.6,22)],(-60,18),'Fv OUT → JV: 14 AWG transition before blue A1','voltage'),
+ ('25','PE','JPE.B1','JPE.B2',[(-113.4,33),(-63.4,33)],(-106,33),'PE port 5 → PE+ port 5: required green bridge','earth'),
 ]
 wires = [dict(id=n,kind=k,start=a,end=b,points=[A[a],*[project(p) for p in m],A[b]],badge=project(lab),description=d,group=g) for n,k,a,b,m,lab,d,g in raw]
 CT_WINDOW = (*project(position('ct',-BODIES['ct']['size'][0]/2,-3)), *project(position('ct',BODIES['ct']['size'][0]/2,3)))
@@ -80,7 +82,7 @@ def validate():
     """Check connectivity, breaker-open behavior and CT geometry."""
     breakers={name.split('.')[0] for name in A if name.startswith('Q')}
     assert breakers=={'Q0'}
-    assert [w['id'] for w in wires] == [f'{i:02}' for i in range(1,25)]
+    assert [w['id'] for w in wires] == [f'{i:02}' for i in range(1,26)]
     for w in wires:
         if w['id'] in ['03','04','17']: assert w['start'].startswith('JL.'), 'Hot branches must start at JL after Q0, before CT'
     left,top,right,bottom = CT_WINDOW
@@ -94,17 +96,20 @@ def validate():
             v=p[0]==q[0] and left<p[0]<right and max(p[1],q[1])>top and min(p[1],q[1])<bottom
             if h or v: hits.append(w['id'])
     assert hits == ['03'], f'Only printer hot may cross the CT aperture: {hits}'
-    def graph(closed):
+    def graph(closed, fuse_closed=True):
         parent={x:x for x in A}
         def root(x):
             while parent[x] != x: x=parent[x]
             return x
         def join(x,y): parent[root(y)]=root(x)
         for w in wires: join(w['start'],w['end'])
-        for prefix in ['JL.','JN.','JPE.']:
+        for prefix in ['JL.','JN.','JV.']:
             nodes=[x for x in A if x.startswith(prefix)]
             for node in nodes[1:]: join(nodes[0],node)
-        for x,y in [('Fv.IN','Fv.OUT'),('AUX.L','AUX.FACE.L'),('AUX.N','AUX.FACE.N')]: join(x,y)
+        for nodes in [('JPE.1','JPE.2','JPE.B1'),('JPE.3','JPE.4','JPE.5','JPE.6','JPE.B2')]:
+            for node in nodes[1:]: join(nodes[0],node)
+        for x,y in [('AUX.L','AUX.FACE.L'),('AUX.N','AUX.FACE.N')]: join(x,y)
+        if fuse_closed: join('Fv.IN','Fv.OUT')
         if closed: join('Q0.IN','Q0.OUT')
         return root
     closed=graph(True)
@@ -114,13 +119,16 @@ def validate():
             for p,q in zip(w['points'],w['points'][1:]):
                 on_segment=(p[0]==q[0]==point[0] and min(p[1],q[1])<=point[1]<=max(p[1],q[1])) or (p[1]==q[1]==point[1] and min(p[0],q[0])<=point[0]<=max(p[0],q[0]))
                 assert not on_segment, f'Wire {w["id"]} crosses an unrelated terminal dot: {name}'
-    for node in ['OUT.L','D.L1','AUX.L','PSU.L']: assert closed(node)==closed('IN.L')
+    for node in ['OUT.L','D.L1','AUX.L','PSU.L']: assert closed(node)==closed('IN.L'), f'{node} must be supplied by hot through Q0'
     for node in ['OUT.N','D.L2','D.N','AUX.N','PSU.N']: assert closed(node)==closed('IN.N'), f'{node} must remain on neutral'
-    for node in ['OUT.PE','AUX.PE','PLATE','RAIL','OUTLETBOX']: assert closed(node)==closed('IN.PE'), f'{node} must remain on protective earth'
+    for node in ['OUT.PE','AUX.PE','PLATE','RAIL']: assert closed(node)==closed('IN.PE'), f'{node} must remain on protective earth'
     assert len({closed(n) for n in ['IN.L','IN.N','IN.PE','D.+','D.-','D.DC+','D.DC-','PC']})==8, 'Mains, PE, CT, DC and USB nets must remain separate'
     opened=graph(False)
     for node in ['OUT.L','D.L1','AUX.L','PSU.L']: assert opened(node)!=opened('IN.L')
-    for node in ['OUT.PE','AUX.PE','PLATE','RAIL','OUTLETBOX']: assert opened(node)==opened('IN.PE')
+    for node in ['OUT.PE','AUX.PE','PLATE','RAIL']: assert opened(node)==opened('IN.PE')
+    fuse_open=graph(True,False)
+    assert fuse_open('D.L1')!=fuse_open('IN.L'), 'L1 sensing must not bypass Fv'
+    for node in ['OUT.L','AUX.L']: assert fuse_open(node)==fuse_open('IN.L'), 'Fv must protect only the voltage tap'
     for i,w in enumerate(wires):
         for other in wires[i+1:]:
             for p,q in zip(w['points'],w['points'][1:]):
@@ -134,7 +142,8 @@ def validate():
         endpoints_and_orthogonal_routes=True,no_unrelated_terminal_dot_crossings=True,no_overlapping_wire_segments=True,only_printer_hot_through_CT=True,
         mains_neutral_PE_CT_DC_nets_separate=True,Q0_opens_all_downstream_hot_branches=True,
         PE_continuity_independent_of_Q0=True,aux_and_voltage_taps_before_CT=True,
-        lead_fuse_rating='TBD by qualified electrical personnel',
+        Fv_opens_only_L1_sensing=True,PE_bridge_explicit=True,
+        lead_fuse_rating='KLKR.500T 0.5 A candidate; existing lead ratings and coordination required',
         physical_build_validated=False,protection_coordination_validated=False)
 
 parts=[]
@@ -201,28 +210,25 @@ def make_diagram():
     for dz in [-14,14]: line([project(position('rail',-50,dz)),project(position('rail',50,dz))],'#adb8be',2)
     slack=BODIES['lead-slack']; sx,sy=project(position('lead-slack'))
     add(f'<ellipse cx="{sx}" cy="{sy}" rx="{slack["size"][0]*SCALE/2}" ry="{slack["size"][2]*SCALE/2}" fill="#eef2f6" stroke="#acb8c2" stroke-dasharray="6 6"/>')
-    for part in ['JL','JN','PE','PE+']:
+    for part in ['JL','JN','PE','PE+','JV']:
         footprint(part,'#edf0e9','#b6c1b4',4)
         x,z=position(part); bw,_,bd=BODIES['terminals']['size']
         px,py=project((x-bw/2,z-bd/2));rect(px,py,bw*SCALE,bd*SCALE,'#bfcaca','#7f9195',3)
         for i in range(5):
             px,py=project((x-13.75+i*5.8,z-6));rect(px,py,4.3*SCALE,12*SCALE,'#e58b3c','#bb6728',2)
-        at(part,part if part in ['JL','JN'] else 'PE 1' if part=='PE' else 'PE 2',21,16)
-    # Two PE connectors form the same protective-earth bus, just as in the 3D harness.
-    line([project(pin('PE',5)),project((-113.4,33)),project((-63.4,33)),project(pin('PE+',5))],C['PE'],5)
-    for part in ['JL','JN','PE','PE+']:
-        line([project(pin(part,1)),project(pin(part,5))],C['L'] if part=='JL' else C['N'] if part=='JN' else C['PE'],4)
+        at(part,part if part in ['JL','JN','JV'] else 'PE 1' if part=='PE' else 'PE 2',21,16)
+    # Connection 25 is the physical bridge between the two PE connectors.
+    for part in ['JL','JN','PE','PE+','JV']:
+        line([project(pin(part,1)),project(pin(part,5))],C['L'] if part in ['JL','JV'] else C['N'] if part=='JN' else C['PE'],4)
     footprint('fuse','#eee5cf','#a48b50',3);at('fuse','Fv',3,20)
     footprint('ct','#e8e6da','#9d9d8d',6)
     l,t,r,b=CT_WINDOW;rect(l,t,r-l,b-t,'#fff','#979e9f',0)
     at('ct','CT1',-6,17);at('ct','LOAD →',11,14)
     footprint('q0','#3c4a56','#273542',4);at('q0','Q0',3,20,'#fff')
-    # Q0 support insert / external handle, shown on the front wall.
-    px,py=project(position('q0',-24,24.64));rect(px,py,48*SCALE,4*SCALE,'#e7e5d9','#afb1a7',2)
+    # Direct-mounted Q0 handle; its mounting pattern is in the fabrication package.
     px,py=project(position('q0',-6,32.14));rect(px,py,12*SCALE,15*SCALE,'#e9eeea','#63717a',2)
-    footprint('outletguard','#e0e6ea','#8a9aa7',3)
     footprint('outlet','#c9bbae','#a39284',2)
-    px,py=project((190,13-34.925));rect(px,py,4*SCALE,69.85*SCALE,'#cbd3d9','#8397a5',2)
+    px,py=project((182.04,13-31.75));rect(px,py,2.4*SCALE,63.5*SCALE,'#e7e5d9','#8397a5',2)
     footprint('adapter','#293744','#293744',6)
     at('adapter','AC/DC',-11,18,'#fff');at('adapter','ADAPTER',16,14,'#fff')
     bx,by,bw,bh=footprint('meter','#263748','#1c2b3a',11)
@@ -248,10 +254,10 @@ def make_diagram():
         p=BODIES[part];px,py=project(position(part,-4.4,8))
         rect(px,py,8.8*SCALE,26*SCALE,'#d1d0c4','#929385',3)
         at(part,part,1,13,'#fff',700);add('</g>')
-    for prefix in ['JL.','JN.','JPE.']:
+    for prefix in ['JL.','JN.','JPE.','JV.']:
         for name,xy in A.items():
-            if name.startswith(prefix):circle(*xy,3.7,C['L'] if prefix=='JL.' else C['N'] if prefix=='JN.' else C['PE'],'#fff')
-    for name in ['PLATE','RAIL','OUTLETBOX']:circle(*A[name],7,'#e9d69d','#9b7f40')
+            if name.startswith(prefix):circle(*xy,3.7,C['L'] if prefix in ['JL.','JV.'] else C['N'] if prefix=='JN.' else C['PE'],'#fff')
+    for name in ['PLATE','RAIL']:circle(*A[name],7,'#e9d69d','#9b7f40')
     add('<g style="paint-order:stroke;stroke:#fff;stroke-width:4;stroke-linejoin:round">')
     for name,label,dx,dy in [('D.N','N',0,-11),('D.L2','L2',0,-11),('D.L1','L1',0,-11),('D.+','CH1 +',12,-8),('D.-','CH1 −',12,17),('D.DC+','DC',0,-63),('D.USB','USB',0,-63)]:
         x,y=A[name];text(x+dx,y+dy,label,16,C['CT'] if 'CH1' in label else '#203346',600,'start' if 'CH1' in label else 'middle')
@@ -260,7 +266,7 @@ def make_diagram():
     callout('JN','JN · neutral',430,760)
     callout('PE','JPE · protective earth',430,956,detail='Two bridged PE connectors')
     callout('fuse','Fv · voltage-tap fuse',430,875,detail='On the bonded DIN rail')
-    callout('outletguard','XA · guarded rear box',1628,838,'right',detail='Dedicated outlet in right wall')
+    callout('outlet','XA · flanged outlet',1628,838,'right',detail='Dedicated outlet in right wall')
     callout('adapter','EXISTING ADAPTER',1670,927,'right',detail='Outside enclosure · plugs into XA')
     callout('q0','Q0 · ONE BREAKER',630,1585,'left',detail='Front wall · handle outside')
     callout('A2','A1 / A2 / A3',430,1085,detail='Blue voltage pigtails')

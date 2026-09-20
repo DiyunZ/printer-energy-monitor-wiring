@@ -117,7 +117,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  for(let step=1;step<=6;step++){
   await page.locator('#assembly-stage').selectOption(String(step));const a=await diag();
   assert.equal(a.assemblyStage,step);assert.equal(a.wiresVisible,step>=5);
-  assert.equal(a.visibleGroups.includes('outletguard'),step>=4);
+  assert.equal(a.visibleGroups.includes('outlet'),step>=4);
   assert.equal(a.lidVisible,step===6);
   if(step===2){
    await page.locator('#assembly-progress').fill('0');assert.equal((await diag()).panelInsertionOffset,300);
@@ -133,8 +133,8 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  const downloaded=await download.path();assert.ok(fs.statSync(downloaded).size>50000);
  if(out)await download.saveAs(path.join(out,'exported-model.png'));
  // Existing circuit controls remain functional.
- const ids=await page.locator('#main-stage .wire').evaluateAll(es=>[...new Set(es.map(e=>e.dataset.id))]);assert.equal(ids.length,24);
- const expected={all:null,main:['01','02','03'],voltage:['01','02','04','05','06','08','09'],neutral:['06','07','08','09','18','21'],earth:['10','11','12','13','19','24'],aux:['01','02','06','10','17','18','19','20','21','22','23'],signal:['14','15','16']};
+ const ids=await page.locator('#main-stage .wire').evaluateAll(es=>[...new Set(es.map(e=>e.dataset.id))]);assert.equal(ids.length,25);
+ const expected={all:null,main:['01','02','03'],voltage:['01','02','04','05','06','08','09','24'],neutral:['06','07','08','09','18','21'],earth:['10','11','12','13','19','25'],aux:['01','02','06','10','17','18','19','20','21','22','23','25'],signal:['14','15','16']};
  for(const [mode,want] of Object.entries(expected)){
   await page.locator(`[data-mode="${mode}"]`).click();
   const actual=await page.locator('#main-stage .wire:not(.muted)').evaluateAll(es=>[...new Set(es.map(e=>e.dataset.id))].sort());
@@ -142,7 +142,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  }
  await page.locator('#connections summary').click();
  for(const id of ids){await page.locator(`.trace[data-id="${id}"]`).click();assert.match(await page.locator('#status').textContent(),new RegExp('Connection '+id+' ·'));}
- await page.locator('#wire-24').focus();await page.keyboard.press('Enter');assert.match(await page.locator('#status').textContent(),/Connection 24/);
+ await page.locator('#wire-25').focus();await page.keyboard.press('Enter');assert.match(await page.locator('#status').textContent(),/Connection 25/);
  await page.locator('[data-mode="all"]').click();await page.locator('#zoom-in').click();assert.equal(await page.locator('#zoom-level').textContent(),'125%');await page.locator('#zoom-reset').click();
  await page.locator('#connections summary').click();
  // Ownership follows the user's confirmation, not whether an item appears in the model.
@@ -202,7 +202,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  }
  const links=await page.locator('a[href]').evaluateAll(es=>es.map(e=>e.getAttribute('href')).filter(h=>!h.startsWith('http')&&!h.startsWith('#')));
  for(const href of [...new Set(links)]){const res=await page.request.get(new URL(href,base).href);assert.equal(res.status(),200,href);}
- for(const file of ['materials.html','references.html','installation.html']){
+ for(const file of ['materials.html','references.html','installation.html','build.html']){
   await page.goto(new URL(file,base).href);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),file+' mobile overflow');
   if(file==='materials.html'){
    assert.equal(await page.locator('tbody tr').count(),bom.items.length);
@@ -213,10 +213,15 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
    await page.locator('.material-photo img').evaluateAll(es=>Promise.all(es.map(async img=>{img.loading='eager';await img.decode();})));
   }
   else if(file==='references.html')assert.equal(await page.locator('#r1').count(),1);
-  else {
-   assert.match(await page.locator('body').innerText(),/NOT RELEASED FOR FABRICATION OR ENERGIZING/);
+  else if(file==='installation.html') {
+   assert.match(await page.locator('body').innerText(),/RECEIVING AND ELECTRICAL RELEASE ITEMS OPEN/);
    assert.equal(await page.locator('a[href^="index.html#material-"]').count(),bom.items.length);
    assert.equal(await page.locator('#simulation').count(),1);
+  } else {
+   assert.equal(await page.locator('#fasteners').count(),1);
+   const localLinks=await page.locator('a[href^=\"fabrication/\"]').evaluateAll(es=>es.map(e=>e.getAttribute('href')));
+   assert.ok(localLinks.length>=10);
+   for(const href of localLinks)assert.equal((await page.request.get(new URL(href,base).href)).status(),200,href);
   }
  }
  await page.goto(new URL('wiring_routes.html',base).href);await page.waitForURL(url=>url.href===base||url.href===base+'index.html');
@@ -225,7 +230,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   const render=await browser.newPage({viewport:{width:1800,height:1300},deviceScaleFactor:2});
   for(const name of ['wiring_routes','connector_detail']){await render.goto(new URL(name+'.svg',base).href);await render.locator('svg').screenshot({path:path.join(root,name+'.png')});}
  }
- const report={date:new Date().toISOString(),base,connections:24,circuitGroups:7,alignedComponentFootprints:plan.bodies.length,planTo3DMaximumToleranceMm:.05,compareTopView:true,renderedMeterBody:initial.fitBodies.meter.size,primaryBodyOverlaps:false,mouseOrbit:true,wheelZoom:true,keyboardOrbit:true,picking:true,shellModes:4,pngExport:true,viewportWidths:[1440,768,390],pageOverflow:false,internalLinks:true,materialsRows:bom.items.length,materialImagesLoaded:bom.items.length,ownedGroups:ownedIds.length,purchaseGroups:bom.items.length-ownedIds.length,inventoryFilters:true,assemblyStages:6,panelInsertionSlider:true,coilScenarioLengthMm:2000,jsErrors:errors,physicalBuildValidated:false};
+ const report={date:new Date().toISOString(),base,connections:25,circuitGroups:7,alignedComponentFootprints:plan.bodies.length,planTo3DMaximumToleranceMm:.05,compareTopView:true,renderedMeterBody:initial.fitBodies.meter.size,primaryBodyOverlaps:false,mouseOrbit:true,wheelZoom:true,keyboardOrbit:true,picking:true,shellModes:4,pngExport:true,viewportWidths:[1440,768,390],pageOverflow:false,internalLinks:true,materialsRows:bom.items.length,materialImagesLoaded:bom.items.length,ownedGroups:ownedIds.length,purchaseGroups:bom.items.length-ownedIds.length,inventoryFilters:true,assemblyStages:6,panelInsertionSlider:true,coilScenarioLengthMm:2000,jsErrors:errors,physicalBuildValidated:false};
  if(out)fs.writeFileSync(path.join(out,'browser-validation.json'),JSON.stringify(report,null,2)+'\n');
  console.log(JSON.stringify(report,null,2));
  }finally{await browser.close();}

@@ -1,18 +1,16 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Installation audit · ELITEpro XC</title><link rel="stylesheet" href="material-images.css"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#layout">← Interactive 3D layout</a><a href="index.html#wiring">Circuit</a><a href="materials.html">Materials</a><a href="references.html">Sources</a><a href="installation.html">Installation audit</a><a href="Installation_Audit.md" download>Download Markdown</a></nav><h1>Installation audit</h1>
-<p>2026-09-19 installation audit. <strong>NOT RELEASED FOR FABRICATION OR ENERGIZING.</strong></p>
-<p>All <strong>36 material groups</strong> were reviewed: 10 catalog match · 10 conditional · 4 measure · 12 hold. A catalog match confirms the stated interface only; it is not approval of the complete item or assembly.</p>
-<p>One 120 V grounded US supply and one printer at a time. S5, Bambu Lab P2S and Prusa CORE One+ are alternatives, not concurrent loads.</p>
-<p>The box and major panel parts have nominal space, but the current design cannot be called a perfect or fully installable assembly. Wall supports/cutouts, several actual part measurements and electrical coordination are unresolved. Do not treat a purchase link or an inventory tick as a release.</p>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Installation audit · ELITEpro XC</title><link rel="stylesheet" href="material-images.css"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#layout">← Interactive 3D layout</a><a href="index.html#wiring">Circuit</a><a href="materials.html">Materials</a><a href="references.html">Sources</a><a href="installation.html">Installation audit</a><a href="build.html">Build package</a><a href="Installation_Audit.md" download>Download Markdown</a></nav><h1>Installation audit</h1>
+<p>2026-09-20 · build package A. <strong>ENGINEERING PACKAGE A — RECEIVING AND ELECTRICAL RELEASE ITEMS OPEN.</strong></p>
+<p>All <strong>29 material groups</strong> were reviewed: 8 catalog match · 14 conditional · 3 measure · 4 hold. A catalog match confirms the stated interface only; it is not approval of the complete item or assembly.</p>
+<p>One 120 V, grounded, single-printer assembly, confirmed by the user. Five equipment groups are owned. Build package A includes exact new-part selections, machining geometry and an assembly schedule. CT scaling, blue-lead protection/termination and cable-entry inserts remain physical-information holds; complete-order and energizing release is not claimed.</p>
+<p>The box and major panel parts have nominal space, but the current design cannot be called a perfect or fully installable assembly. Machining geometry is supplied; CT identification, blue-lead protection, cable inserts and physical/electrical acceptance remain unresolved. Do not treat a purchase link or an inventory tick as a release.</p>
 <p><a href="index.html#assembly-preview">Inspect the 3D installation stages</a> · <a href="materials.html">Materials and buying links</a> · <a href="installation_checks.json">Machine-readable checks</a></p>
 <h2>Corrections from the audit</h2>
 <ul>
-<li>Q0 body depth: 49.28 → 47.00 mm. 49.28 mm is the terminal pitch; mounting pitch is 52.37 mm.</li>
-<li>Q0 ring terminals: removed the #8 option and selected #10. Mounting screws are separately #6-32.</li>
-<li>KVT 20 envelopes: Ø20/24 × 28 mm → Ø40 × 37 mm. USB moved from Z=139 to Z=167 mm; flange edge gap increased from 0.224 to 25.192 mm.</li>
-<li>WAGO carrier fixing clarified as M3 or ST2.9; generic M4 is not the carrier screw.</li>
-<li>Eaton holder purchase placed on hold because manufacturer sources conflict. Custom wall supports, terminal guards and cable inserts remain unreleased.</li>
-<li>Cable audit found only about 1.64–1.68 m of flexible path in each old lead illustration, with helix pitch 1.33 mm below its assumed 3 mm diameter. Rebuilt the coil illustration for a 2 m flexible-length scenario, with 4 mm pitch and separated layers; actual lead dimensions remain to measure.</li>
-<li>Two illustrated PE routes crossed the logger body. They now pass around its power/USB end; the electrical endpoints are unchanged.</li>
+<li>Identified the existing CUI SMI6-9-V-P5 adapter from the original photo: 9 V, 0.667 A, center positive.</li>
+<li>Replaced the outlet/metal box/support/cover assembly with directly mounted Leviton 5279-C. Removed seven obsolete material groups.</li>
+<li>Replaced conflicting Eaton fuse-holder data with Littelfuse LPSC0001Z; added the JV connector so its output terminal receives compatible 14 AWG wire.</li>
+<li>Selected long-thread power glands and KVT 32 split entries; adapter flat-cord profile remains a separate insert-selection hold.</li>
+<li>Added real CAD wall openings, panel tie/rail/bond holes and strap slots, five DXF setups, fastener schedule and detailed assembly procedure.</li>
 </ul>
 <h2>Printer compatibility</h2>
 <div class="table-wrap"><table>
@@ -42,26 +40,26 @@
 <p>These watts-to-amps values assume unity power factor and are not current ratings. Q0 supplies the selected printer plus the logger adapter and voltage tap. A 15 A breaker / connector proposal is not approval for a 15 A continuous load. No simultaneous three-printer load or separately powered accessory is included.</p>
 <h2 id="simulation">Installation simulation</h2>
 
-<p>Axis-aligned body envelopes, continuous vertical swept volumes against triangulated Hammond shell, nine lid rays per body and sourced interface arithmetic. The shell uses 0.45 mm triangulation deflection, not manufacturing tolerances.</p>
+<p>Axis-aligned body envelopes, continuous vertical swept volumes against the machined Hammond shell, nine lid rays per body and sourced interface arithmetic. Shell triangulation deflection is 0.3 mm; numerical seating-contact exclusion is 0.0001 mm. Neither is a manufacturing tolerance.</p>
 <p>The analysis uses the checked-in component coordinates and actual shell triangles. It is not an FEA, tolerance study, collision-free cable-routing proof, thermal test, electrical clearance assessment or physical dry fit. The closed-lid check samples nine rays against the lid skin; it does not establish the smallest clearance to every lid fastener or operating part.</p>
-<h3>1. Prepare the empty enclosure</h3>
-<p>With all supplies disconnected, establish approved opening and fastener drawings, remove equipment, machine and deburr, then clean. No cutting dimensions are released by the current layout.</p>
-<p><strong>Result:</strong> Hold: wall interfaces, glands and custom hardware are unfinished.</p>
-<h3>2. Insert and secure the backpanel</h3>
-<p>Lower the panel into the open case before installing the side outlet box. The audit checks a continuous 300 mm vertical insertion of its bounding box against the factory shell.</p>
-<p><strong>Result:</strong> Nominal path passes with wall fittings absent. Installing the outlet box first blocks this path.</p>
-<h3>3. Fit the panel equipment</h3>
-<p>Mount rail, stops and carriers; install the measured logger restraint and CT. Route nothing through a live or connected supply.</p>
-<p><strong>Result:</strong> Nominal body / shell envelopes clear. Final screw lengths, CT latch motion, restraint and fuse-door service motion remain unverified.</p>
-<h3>4. Fit wall hardware</h3>
-<p>Install the coordinated Q0 support, outlet / rear box / cover and cable-entry assemblies using the final drawings. Maintain the corrected split-entry spacing.</p>
-<p><strong>Result:</strong> Hold: manufacturer shell is still uncut; Q0 and outlet-box envelopes intersect it. The modeled locations are not approved wall assemblies.</p>
-<h3>5. Terminate and retain the cables</h3>
-<p>Qualified personnel complete PE bonds and the circuit schedule; only printer hot goes through CT. Fit the original adapter and USB cables without cutting factory ends, and retain the full measured voltage-lead lengths.</p>
-<p><strong>Result:</strong> Hold: KT sizes, plug transit, small-lead protection, tinned-end acceptance, cable slack and terminal guard are unresolved.</p>
-<h3>6. Close, inspect and release</h3>
-<p>Check closure without trapping wires, strain relief, all bonds, polarity, insulation and protection under the responsible lab procedure; then validate logging and measured energy against a reference.</p>
-<p><strong>Result:</strong> No hardware has been built or energized. The lid ray screen is not a closure / insulation / thermal qualification.</p>
+<h3>1. Machine and clean empty parts</h3>
+<p>Receive the exact parts and close release items in build.html. Machine the empty shell and panel from the PDF/STEP/DXF; transfer-drill carriers from actual parts. Deburr and remove all chips.</p>
+<p><strong>Result:</strong> Exact CAD cut/through gauges checked; no physical machining has occurred.</p>
+<h3>2. Install the backpanel first</h3>
+<p>Complete underside hardware on the removable panel, then lower it into the case. Keep the side outlet absent until the panel is secured with Hammond fasteners.</p>
+<p><strong>Result:</strong> Vertical insertion is tested digitally; side outlet must follow the panel.</p>
+<h3>3. Fit panel components</h3>
+<p>Fit DIN rail/stops/Fv, five WAGO carriers, two meter straps, CT and twelve cable anchors. Place CT on printer hot only; set the arrow toward output.</p>
+<p><strong>Result:</strong> Nominal body separation and shell access checked. Verify actual CT latch and holder door sweep.</p>
+<h3>4. Install wall fittings</h3>
+<p>Install Q0 directly in its front-wall pattern; install 5279-C, two long-thread glands and split entries. Use the fastener/torque schedule.</p>
+<p><strong>Result:</strong> Machined shell openings modeled. Actual threads, wall draft, seal seating and plug retention need receiving checks.</p>
+<h3>5. Wire and retain</h3>
+<p>Unplug all sources. Bond panel and rail first; complete 25 connection paths. Fv.OUT uses 14 AWG to JV; blue A1 starts at JV. Label all leads and keep the original adapter cable intact.</p>
+<p><strong>Result:</strong> Electrical topology checked. CT scaling, blue-lead protection and cable inserts remain release items.</p>
+<h3>6. Inspect and close</h3>
+<p>Perform documented qualified polarity/PE/insulation/protection checks, verify lid closure with all four screws, then validate logging with a reference meter.</p>
+<p><strong>Result:</strong> No physical assembly, energizing or thermal qualification has been performed.</p>
 <h2>Numerical checks</h2>
 <div class="table-wrap"><table>
 <thead>
@@ -74,7 +72,7 @@
 <tbody><tr>
 <td>Q0 catalog body</td>
 <td><strong>PASS</strong></td>
-<td>Model 19.18 × 63.5 × 47 mm; Carling p.11 body envelope 19.18 × 63.50 × 47.00 mm. Body includes the front step; studs, handle and terminal guard are separate.</td>
+<td>Model 19.18 × 63.5 × 47 mm; Carling p.11 body envelope 19.18 × 63.50 × 47.00 mm. Body includes the front step; studs, handle and terminal protection is supplied by the screw-fixed outer enclosure.</td>
 </tr>
 <tr>
 <td>Q0 terminal and mounting pitches</td>
@@ -94,37 +92,37 @@
 <tr>
 <td>dc-entry envelope</td>
 <td><strong>PASS</strong></td>
-<td>Model 37 × 40 × 40 mm; KVT 20 overall envelope 37 mm axial × Ø40 mm flange. Conservative cylinder; the threaded shank is M20, not Ø40.</td>
+<td>Model 37 × 40 × 40 mm; KVT 32 overall envelope 37 mm axial × Ø40 mm flange. Conservative cylinder; the threaded shank is M32, not Ø40.</td>
 </tr>
 <tr>
 <td>usb-entry envelope</td>
 <td><strong>PASS</strong></td>
-<td>Model 37 × 40 × 40 mm; KVT 20 overall envelope 37 mm axial × Ø40 mm flange. Conservative cylinder; the threaded shank is M20, not Ø40.</td>
+<td>Model 37 × 40 × 40 mm; KVT 32 overall envelope 37 mm axial × Ø40 mm flange. Conservative cylinder; the threaded shank is M32, not Ø40.</td>
 </tr>
 <tr>
 <td>Panel component body separation</td>
 <td><strong>PASS</strong></td>
-<td>8 nominal body envelopes do not overlap (rail/holder mating excluded). CT is an unidentified example. No connectors, open levers, flexible wires, mounting tolerances or screw-tool envelopes are certified by this check.</td>
+<td>9 nominal body envelopes do not overlap (rail/holder mating excluded). CT is an unidentified example. No connectors, open levers, flexible wires, mounting tolerances or screw-tool envelopes are certified by this check.</td>
 </tr>
 <tr>
 <td>Vertical insertion through open case</td>
 <td><strong>PASS</strong></td>
-<td>9/9 swept bounding boxes clear the manufacturer shell. 300 mm vertical translation, fixed orientation, wall fittings absent. This tests shell access, not the full sequence of brackets, wires or tool motions.</td>
+<td>10/10 swept bounding boxes clear the manufacturer shell. 300 mm vertical translation, fixed orientation, wall fittings absent. Panel/support contact at Y=0 is excluded with a 0.0001 mm numerical offset. This tests shell access, not brackets, wires or tool motions.</td>
 </tr>
 <tr>
-<td>Panel before side outlet box</td>
+<td>Panel before flanged outlet</td>
 <td><strong>SEQUENCE REQUIRED</strong></td>
-<td>The panel insertion sweep intersects the side outlet-box envelope. Install the panel first; removal requires removing the box or a separately verified tilted path.</td>
+<td>The panel insertion sweep intersects the flanged-outlet envelope. Install the panel first; removal requires removing the outlet or a separately verified tilted path.</td>
 </tr>
 <tr>
-<td>Wall hardware mounting interfaces</td>
-<td><strong>HOLD</strong></td>
-<td>outletguard: 6 intersecting shell triangles; q0: 4 intersecting shell triangles Uncut factory CAD intersects proposed wall fittings. The support inserts, apertures, wall taper and body-front offsets are not fabrication drawings. Do not interpret overlap as an approved cutout.</td>
+<td>Machined wall geometry</td>
+<td><strong>PASS</strong></td>
+<td>Project openings in shell 0 and panel 33; build123d 0.11.1, 0.3 mm tessellation; other meshes retained. Carrier fixing holes transfer-drilled, not in mesh. Exact cut-through gauges are in fabrication/cad-checks.json. Axis-aligned wall-device illustrations do not model the 0.937 degree draft; body/shell triangle contacts here are not mounting proofs. Received-part fit and fastening remain physical checks.</td>
 </tr>
 <tr>
 <td>Closed lid screen</td>
 <td><strong>SCREEN ONLY</strong></td>
-<td>meter: 159.012 mm (9/9 rays); ct: 164.312 mm (9/9 rays); fuse: 128.362 mm (9/9 rays); outletguard: 9.962 mm (9/9 rays); q0: 34.788 mm (9/9 rays) Nine upward rays per body against lid mesh 15. Not a minimum-distance proof; excludes lid hardware, guards, open fuse door, wire bundles and tolerances.</td>
+<td>meter: 159.012 mm (9/9 rays); ct: 164.312 mm (9/9 rays); fuse: 141.512 mm (9/9 rays); outlet: 33.747 mm (9/9 rays); q0: 32.992 mm (9/9 rays) Nine upward rays per body against lid mesh 15. Not a minimum-distance proof; excludes lid hardware, guards, open fuse door, wire bundles and tolerances.</td>
 </tr>
 <tr>
 <td>Cord diameter interfaces</td>
@@ -134,12 +132,12 @@
 <tr>
 <td>Ring barrel and internal wire</td>
 <td><strong>PASS</strong></td>
-<td>3.581 mm wire insulation OD &lt; 4.318 mm ring maximum; 14 AWG is within 16–14 AWG ring range. Does not qualify the crimp or approve the AWM wire for this assembly.</td>
+<td>Southwire nominal 2.87 mm insulation OD &lt; 3M 4.318 mm ring maximum; 14 AWG is within 16–14 AWG ring range. Does not qualify the crimp or approve the wiring method for this assembly.</td>
 </tr>
 <tr>
 <td>DIN rail capacity</td>
 <td><strong>PASS</strong></td>
-<td>100 − 17.5 − 2 × 6 = 70.5 mm remains after holder and two end stops. Fasteners, PE bond and fuse-door service motion still need final placement.</td>
+<td>100 − 17.78 − 2 × 6 = 70.22 mm remains after holder and two end stops. Fasteners, PE bond and fuse-door service motion still need final placement.</td>
 </tr>
 <tr>
 <td>Physical and electrical release</td>
@@ -147,7 +145,7 @@
 <td>No built assembly, nameplate verification, qualified acceptance or energized test has been recorded.</td>
 </tr>
 </tbody></table></div>
-<p>The flange check uses a <strong>10 mm project layout allowance</strong>, not a mandated clearance. The new nominal 25.2 mm gap leaves more room, but actual tool / sealing / tolerance acceptance remains outstanding. Wall hardware intersections are intentionally unresolved findings, not successful openings.</p>
+<p>The flange check uses a <strong>10 mm project layout allowance</strong>, not a mandated clearance. The new nominal 25.2 mm gap leaves more room, but actual tool / sealing / tolerance acceptance remains outstanding. Exact CAD booleans now provide the specified openings. Axis-aligned wall-device illustrations still do not model wall draft and cannot prove the mounted interface.</p>
 <h2>Voltage-lead storage scenario</h2>
 <p>The old illustration had 4.5 turns rising only 6 mm, giving 1.33 mm pitch against its assumed 3 mm cable diameter. The new illustration separates turns and lead layers and adjusts turns for 2 m of flexible cable per lead. Connector body lengths are outside that flexible-length target. Actual leads have not been measured.</p>
 <p>| Lead | Modeled flexible length | Turns | Pitch / assumed OD |
@@ -177,14 +175,14 @@
 <tr>
 <td><a href="index.html#material-ct">Current sensor</a><br>Existing DENT split-core CT<br>✓ Owned</td>
 <td><strong>Hold</strong></td>
-<td>The model uses a 29.4 × 41.7 × 26.4 mm example with a 10.2 mm bore, not an identification of the photographed CT. <a href="https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf">dent</a>, <a href="https://www.dentinstruments.com/wp-content/uploads/2022/08/20A_Mini_Hinged_CT_Specs.pdf">ct</a></td>
-<td>Record exact model, rated primary current, mV output, polarity, closed size, latch travel and lead length. Select ELOG scaling from that CT. Never substitute a 1 A / 5 A CT output.</td>
+<td>Visible original label establishes the DENT CTHSC family and 600 V marking. The primary-current/model digits are covered by the black and white leads. Do not infer 20 A versus 50 A from case appearance. Read the uncovered label during receiving inspection before setting CH1. <a href="https://www.dentinstruments.com/wp-content/uploads/2022/08/20A_Mini_Hinged_CT_Specs.pdf">ct</a>, <a href="https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf">dent</a></td>
+<td>Uncover and record the model/range/output; check latch movement, polarity and ELOG scale.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-blue-leads">Blue voltage pigtails</a><br>Existing detachable blue pigtails<br>✓ Owned</td>
 <td><strong>Hold</strong></td>
-<td>Three existing pigtails are voltage-tap adapters. Their shrouded mating style is separate from load wiring. <a href="https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf">dent</a></td>
-<td>Confirm exact part number, voltage / current rating, cross section, tinned-end acceptance, insertion length and Fv protection. Do not use any as printer power or PE.</td>
+<td>The photo shows a blue female safety adapter and factory-tinned bare end; no readable conductor rating. DENT sells a matching style, which does not prove this unit’s rating. <a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/">blue</a></td>
+<td>Resolve conductor rating, terminal preparation and 0.5 A fuse selection before energizing.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-voltage-leads">Full voltage leads</a><br>Existing matching voltage lead set<br>✓ Owned</td>
@@ -193,76 +191,64 @@
 <td>Measure actual complete and flexible lengths, mating engagement, cable OD and minimum bend radius. The revised 2 m / 3 mm coil scenario is an assumption, not evidence that the supplied leads fit.</td>
 </tr>
 <tr>
-<td><a href="index.html#material-adapter">AC/DC adapter</a><br>Existing two-pin AC/DC adapter<br>✓ Owned</td>
-<td><strong>Hold</strong></td>
-<td>The meter input label calls for 6–10 V DC, 500 mA, center positive; the existing two-pin adapter remains intact and outside. <a href="https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf">dent-size</a></td>
-<td>Read the adapter Output label, verify voltage/polarity/current and barrel size. Measure its housing, strain relief and molded plug; define an exterior restraint if needed.</td>
+<td><a href="index.html#material-adapter">AC/DC adapter</a><br>CUI SMI6-9-V-P5 · existing original adapter<br>✓ Owned</td>
+<td><strong>Catalog match</strong></td>
+<td>Original photo label: 9 V DC, 0.667 A, center positive. This is within the ELITEpro 6–10 V / 500 mA input requirement. Keep the factory cable intact. SMI6 drawing: 64 × 40.5 × 30 mm, ±1 mm, excluding blades; P5 is 5.5 × 2.1 × 9.5 mm center positive. DC cable is UL2468 zip cord in the catalog: a round KT insert must not be assumed to fit. <a href="https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf">dent</a>, <a href="https://in.ftcelectronics.com/datasheets-55/SMI6-12-V-P5.pdf">cui</a></td>
+<td>Verify body/blade seating and final cable-entry profile; no need to buy a replacement adapter.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-enclosure">Enclosure</a><br>Hammond PCJ16148CC<br>□ Buy / fabricate</td>
 <td><strong>Conditional</strong></td>
-<td>Hammond PCJ16148CC factory CAD and matching panel were checked. Nominal wall thickness is 4.8 mm. <a href="https://www.hammfg.com/files/parts/pdf/PCJ16148CC.pdf">case</a></td>
-<td>Resolve custom wall interfaces and cutouts, sealing, field-modification acceptance and working temperature. Factory enclosure rating is not automatically retained.</td>
+<td>Factory STEP has now been Boolean-cut with the coordinated wall openings; four screw-fixed cover fasteners isolate normal use from terminals. <a href="https://www.hammfg.com/files/parts/pdf/PCJ16148CC.pdf">case</a></td>
+<td>Compare received parts with drawings; obtain qualified approval of the modified dry-indoor assembly.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-panel">Mounting panel</a><br>Hammond 14R1513<br>□ Buy / fabricate</td>
-<td><strong>Catalog match</strong></td>
-<td>14R1513 is the specified panel for this enclosure. CAD body 327.025 × 374.65 × 1.897 mm; drawing rounded dimensions agree. Vertical insertion into the empty case clears the CAD shell. <a href="https://www.hammfg.com/electrical/products/accessories/pcjp">panel</a>, <a href="https://www.hammfg.com/files/parts/pdf/PCJ16148CC.pdf">case</a></td>
-<td>Install before the side outlet box. Lay out all fasteners / bonds, account for under-panel screw ends and deburr before installing equipment.</td>
+<td><strong>Conditional</strong></td>
+<td>Factory panel plus 19 cut features (rail, ties, PE bond, strap slots) and carrier locator envelopes. <a href="https://www.hammfg.com/electrical/products/accessories/pcjp">panel</a>, <a href="https://www1.futureelectronics.com/doc/WAGO/221-505.pdf">carrier</a></td>
+<td>Transfer-drill 10 carrier holes; inspect underside hardware clearance before mounting panel.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-breaker">Q0 operating breaker</a><br>Carling CA1-B0-24-615-121-DG<br>□ Buy / fabricate</td>
-<td><strong>Hold</strong></td>
-<td>Carling ordering code resolves to one pole, 15 A, #10-32 studs and #6-32 mounting inserts. Body depth and pitches corrected in both views. <a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">carling</a></td>
-<td>Approve inrush, fault interruption and repeated switching duty for the actual supply / printer. Finalize stepped-body wall interface, screw engagement and guarded line/load terminations.</td>
-</tr>
-<tr>
-<td><a href="index.html#material-receptacle">XA adapter receptacle</a><br>Leviton 5261 / 5261-W<br>□ Buy / fabricate</td>
 <td><strong>Conditional</strong></td>
-<td>5261 is 15 A / 125 V NEMA 5-15R; 14 AWG is within its terminal range. Published yoke is 103.2 × 33.3 mm with 27 mm device depth. <a href="https://leviton.com/products/5261">outlet</a>, <a href="https://leviton.com/content/dam/leviton/commercial-industrial/product_documents/none/Document-32236-Dimensional%20Data.jpg">outlet-drawing</a></td>
-<td>Verify yoke-to-box and cover screw centers, terminal clearance, supported mounting stack and adapter plug retention. Do not rely on polycarbonate alone to clamp the device.</td>
+<td>19.18 × 63.5 × 47 mm body; #10 studs; #6-32 mount. Direct wall rectangle and 52.37 mm fixing pitch supplied. <a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">carling</a></td>
+<td>Exact DG SKU stock/lead time requires quote. Check washer thickness, body shoulder fit, approved inrush/fault duty and terminal spacing. Q0 OFF leaves its input live.</td>
 </tr>
 <tr>
-<td><a href="index.html#material-outlet-box">XA rear device box</a><br>RACO 670RAC / retail 8670<br>□ Buy / fabricate</td>
-<td><strong>Hold</strong></td>
-<td>670RAC: 101.6 × 53.975 × 55.575 mm and 16.5 in³; 1/2 in trade knockouts. Dedicated PE bond is present in the circuit. <a href="https://hubbellcdn.com/specsheet/RACO-670RAC-SPEC-EN.pdf">box</a></td>
-<td>Proposed box intersects the uncut tapered shell; supply a coordinated aperture / support drawing. Confirm grounding thread, terminal space, entry method, fill and installation access.</td>
-</tr>
-<tr>
-<td><a href="index.html#material-faceplate">XA faceplate</a><br>Leviton 84004-40<br>□ Buy / fabricate</td>
+<td><a href="index.html#material-receptacle">XA adapter receptacle</a><br>Leviton 5279-C · NEMA 5-15R flanged outlet<br>□ Buy / fabricate</td>
 <td><strong>Conditional</strong></td>
-<td>84004-40 is a single-receptacle plate with a 1.406 in / 35.712 mm opening; device-mount family matches the intended outlet style. <a href="https://leviton.com/products/84004-40">plate</a></td>
-<td>This is a cover, not a structural bracket. Dry-fit the actual device face, screws, rear box and insulating support together.</td>
+<td>5279-C replaces the metal-box assembly. Ø44.00±0.15 bore falls inside Leviton 43.66–44.45 range; fixing pitch 53.57 mm. <a href="https://leviton.com/products/5279-c">outlet</a>, <a href="https://leviton.com/content/dam/leviton/commercial-industrial/product_documents/dimensional_drawing/CATSTD-05279-00C-M01.pdf">outlet-drawing</a>, <a href="https://leviton.com/content/dam/leviton/commercial-industrial/product_documents/instruction_sheet/PK-93763-10-02-0C-W.pdf">outlet-install</a></td>
+<td>Verify rear terminal clearance and screw/washer stack. Use the specified conductor torque and keep XA ground connected.</td>
 </tr>
 <tr>
-<td><a href="index.html#material-fuse-holder">Fv fuse holder</a><br>Eaton Bussmann CHCC1DU<br>□ Buy / fabricate</td>
-<td><strong>Hold</strong></td>
-<td>Technical data 10430 lists CHCC1DU as a 600 V / 30 A Class CC holder on 35 mm DIN rail. Its rating is not the selected fuse value. <a href="https://www.eaton.com/content/dam/eaton/products/electrical-circuit-protection/fuses/data-sheets/bus-ele-ds-10430-chcc-chm-chpv.pdf">eaton</a>, <a href="https://www.eaton.com/us/en-us/skuPage.CHCC1DU.html">eaton-conflict</a></td>
-<td>Eaton SKU page instead lists 48 Vdc and 87 × 73 × 17.5 mm; technical drawing differs. Resolve the supplied revision and obtain the closed/open-door envelope. Confirm pigtail terminal acceptance.</td>
+<td><a href="index.html#material-fuse-holder">Fv fuse holder</a><br>Littelfuse LPSC0001Z<br>□ Buy / fabricate</td>
+<td><strong>Conditional</strong></td>
+<td>LPSC0001Z replaces conflicting CHCC1DU. Envelope 17.78 × 61 × 78.5 mm. 14 AWG Class C wires go to both terminals; JV transitions to blue A1. <a href="https://www.littelfuse.com/de/assetdocs/powr-gard-catalog?assetguid=85d36235-a32b-4608-bfed-f9878aa43af0">lpsc</a></td>
+<td>Confirm exact supplied holder, 2 N·m torque and actual open-door access during assembly.</td>
 </tr>
 <tr>
-<td><a href="index.html#material-fuse">Fv fuse</a><br>Compatible Class CC fuse · value pending<br>□ Buy / fabricate</td>
+<td><a href="index.html#material-fuse">Fv fuse</a><br>Littelfuse KLKR.500T · 0.5 A Class CC<br>□ Buy / fabricate</td>
 <td><strong>Hold</strong></td>
-<td>The holder takes Class CC rejection fuses; compatible series are listed in Eaton technical data. <a href="https://www.eaton.com/content/dam/eaton/products/electrical-circuit-protection/fuses/data-sheets/bus-ele-ds-10430-chcc-chm-chpv.pdf">eaton</a></td>
-<td>No ampere value or SKU can be released without actual lead ampacity, fault level and coordination. A generic 10 × 38 mm fuse is not automatically a Class CC substitute.</td>
+<td>KLKR.500T is a specific 0.5 A Class CC / 600 VAC candidate with matching 10.3 × 38.1 mm body. <a href="https://www.littelfuse.com/assetdocs/klkr-classcc-fuse-datasheet-final?assetguid=4443e5f6-97ee-4206-9abe-9e155371a03e">klkr</a>, <a href="https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf">dent</a></td>
+<td>Do not release fuse selection until existing voltage-lead rating and logger startup coordination are accepted.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-connectors">Distribution connectors</a><br>WAGO 221-415<br>□ Buy / fabricate</td>
 <td><strong>Conditional</strong></td>
-<td>Four 221-415 five-port connectors supply 20 ports: JL 4, JN 5 and two bridged PE groups using 8 combined ports. 14 AWG fits the catalog conductor range. <a href="https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415">wago</a></td>
+<td>Five 5-port 221-415 groups: JL, JN, JV and two bridged PE groups; one conductor per port. PE uses 7 ports including bridge ends, leaving 3 spare. <a href="https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415">wago</a></td>
 <td>Confirm actual stranded-wire preparation, pigtail tinned ends and use as a secured PE distribution arrangement. A spare port is not spare current capacity.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-carriers">Connector carriers</a><br>WAGO 221-505<br>□ Buy / fabricate</td>
-<td><strong>Catalog match</strong></td>
-<td>221-505 is the five-port 4 mm² carrier for 221-415: 35 × 16.9 × 52.8 mm. WAGO specifies M3 DIN 1207 or ST2.9 DIN 7049 mounting. <a href="https://www1.futureelectronics.com/doc/WAGO/221-505.pdf">carrier</a></td>
-<td>Use four carriers. Choose screw length for the 1.9 mm plate and access beneath it; check lever and screwdriver access with wires installed.</td>
+<td><strong>Conditional</strong></td>
+<td>Five 221-505 carriers for JL/JN/PE/PE+/JV; two M3 fasteners each. Published transverse pitch is 20 mm. <a href="https://www1.futureelectronics.com/doc/WAGO/221-505.pdf">carrier</a></td>
+<td>Use actual carrier as drilling jig for longitudinal hole placement; M3 × 16 hardware and underside clearance to check.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-din-rail">Short DIN rail</a><br>DINnector DN-R35S1-2<br>□ Buy / fabricate</td>
 <td><strong>Catalog match</strong></td>
-<td>DN-R35S1-2 has the 35 × 7.5 mm rail profile for the CH holder. Proposed cut length is 100 mm. <a href="https://cdn.automationdirect.com/static/specs/screwlessdinnectors.pdf">din</a>, <a href="https://www.eaton.com/content/dam/eaton/products/electrical-circuit-protection/fuses/data-sheets/bus-ele-ds-10430-chcc-chm-chpv.pdf">eaton</a></td>
-<td>Deburr the cut ends, define fixing holes and a deliberate bond; verify holder release-tab and tool access.</td>
+<td>100 mm of 35 × 7.5 rail holds one 17.78 mm holder and two 6 mm stops; two defined fixing positions. <a href="https://cdn.automationdirect.com/static/specs/screwlessdinnectors.pdf">din</a>, <a href="https://www.littelfuse.com/de/assetdocs/powr-gard-catalog?assetguid=85d36235-a32b-4608-bfed-f9878aa43af0">lpsc</a></td>
+<td>Transfer-drill rail-web PE hole at(-27,-28); protect underside screw ends and verify clip/door access.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-cord">Mains / printer cord</a><br>Southwire 55808699 · 14/3 SJOOW<br>□ Buy / fabricate</td>
@@ -283,16 +269,16 @@
 <td>Verify all three actual printer cords have the matching grounded US plug. No voltage-conversion adapters or simultaneous multi-printer outlet strip are assumed.</td>
 </tr>
 <tr>
-<td><a href="index.html#material-cord-glands">Mains / printer strain relief</a><br>Hammond 1427NCGM20B<br>□ Buy / fabricate</td>
-<td><strong>Measure</strong></td>
-<td>1427NCGM20B clamp range is 6–12 mm, matching the selected cord OD. M20 thread length is 9 mm. <a href="https://www.hammfg.com/electronics/small-case/accessories/1427ncg">gland</a>, <a href="https://www.hammfg.com/files/parts/pdf/PCJ16148CC.pdf">case</a></td>
-<td>At a nominal 4.8 mm wall, only 4.2 mm remains for the inner nut plus any seal allowance. Obtain nut/washer dimensions and required engagement; do not approve by cable OD alone.</td>
+<td><a href="index.html#material-cord-glands">Mains / printer strain relief</a><br>Hammond 1427NCGPG13LB · long PG13.5 thread<br>□ Buy / fabricate</td>
+<td><strong>Conditional</strong></td>
+<td>Long-thread 1427NCGPG13LB has 15 mm thread, 6–12 mm clamp and Ø21 mm hole. This removes the earlier short-thread limitation. <a href="https://www.hammfg.com/electronics/small-case/accessories/1427ncg">gland</a>, <a href="https://cabletechsupport.southwire.com/cablespec/download_spec/?country=US&spec=70126">cord</a></td>
+<td>Inspect locknut and seal seating on the ~4.775 mm drafted wall; pull-test each complete cord grip.</td>
 </tr>
 <tr>
-<td><a href="index.html#material-split-entries">DC / USB split cable entry</a><br>icotek KVT 20 · 45024<br>□ Buy / fabricate</td>
+<td><a href="index.html#material-split-entries">DC / USB split cable entry</a><br>icotek KVT 32 black · 45026<br>□ Buy / fabricate</td>
 <td><strong>Conditional</strong></td>
-<td>KVT 20 / 45024 drawing: Ø40 flange, 37 mm overall, M20 × 1.5, 14 mm thread and 7 mm nut. Corrected spacing leaves 25.2 mm nominal flange gap. <a href="https://pim.icotek.com/Produkte/PG02%20Kabelverschraubungen/KVT/KVT%2020/Datenbl%C3%A4tter/45024_KVT%2020_bk.PDF">kvt</a>, <a href="https://www.icotek.com/en-us/products/cable-glands/kvt-45024">kvt-product</a></td>
-<td>Confirm flat sealing seat, thread engagement, tool access and preterminated-connector passage. The KVT product rating is IP54 / UL Type 12, not the factory case’s higher rating.</td>
+<td>KVT 32 45026: Ø32.3 opening, 14 mm threaded shank, Ø40 flange. DC/USB flange gap is about 25.2 mm. <a href="https://pim.icotek.com/Produkte/PG02%20Kabelverschraubungen/KVT/KVT%2032/Datenbl%C3%A4tter/45026_KVT%2032_bk.PDF">kvt</a>, <a href="https://www.icotek.com/en-us/products/cable-glands/kvt-45026">kvt-product</a></td>
+<td>Verify connector passage through opening and nut, flat sealing seat and full nut engagement. No assembled IP rating is claimed.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-usb">USB data cable</a><br>StarTech USB2HAB6 · USB-A to USB-B, 6 ft / 1.8 m<br>□ Buy / fabricate</td>
@@ -303,95 +289,64 @@
 <tr>
 <td><a href="index.html#material-din-stops">DIN rail end stops</a><br>DINnector DN-EB35-A-10<br>□ Buy / fabricate</td>
 <td><strong>Catalog match</strong></td>
-<td>Two DN-EB35-A-10 end brackets, 6 mm wide each, plus a 17.5 mm holder occupy 29.5 mm of the 100 mm rail. <a href="https://cdn.automationdirect.com/static/specs/screwlessdinnectors.pdf">din</a></td>
+<td>Two DN-EB35-A-10 end brackets, 6 mm wide each, plus a 17.78 mm holder occupy 29.78 mm of the 100 mm rail. <a href="https://cdn.automationdirect.com/static/specs/screwlessdinnectors.pdf">din</a></td>
 <td>Mount stops on both sides, leave release / fastener access; the pack contains more than the two required.</td>
 </tr>
 <tr>
-<td><a href="index.html#material-kt-inserts">DC / USB sealing inserts</a><br>icotek KT small · bore sizes pending<br>□ Buy / fabricate</td>
+<td><a href="index.html#material-kt-inserts">DC / USB sealing inserts</a><br>icotek KT gray: 39934 / 41203 / 41204 / 41205<br>□ Buy / fabricate</td>
 <td><strong>Hold</strong></td>
-<td>KT small inserts mate with KVT 20; one sealed cable bore is needed per entry. <a href="https://www.icotek.com/en-us/products/cable-grommets/kt-gy">kt</a>, <a href="https://pim.icotek.com/Produkte/PG02%20Kabelverschraubungen/KVT/KVT%2020/Datenbl%C3%A4tter/45024_KVT%2020_bk.PDF">kvt</a></td>
-<td>Measure DC and USB cable ODs and select the exact two KT bore SKUs. No guessed universal bore is released.</td>
+<td>USB: select 39934 (2–3 mm), 41203 (3–4 mm), 41204 (4–5 mm), or 41205 (5–6 mm) from measured round jacket OD. DC: CUI specifies flat UL2468 cable; obtain a matching split insert/profile from icotek before ordering or cutting the DC entry. Do not squeeze flat zip cord into a guessed round insert. <a href="https://www.icotek.com/en-us/products/cable-grommets/kt-gy">kt</a>, <a href="https://in.ftcelectronics.com/datasheets-55/SMI6-12-V-P5.pdf">cui</a></td>
+<td>Choose exact inserts from actual USB OD / DC profile. These values are not readable in the supplied photos.</td>
 </tr>
 <tr>
-<td><a href="index.html#material-internal-wire">Internal L / N / PE wire</a><br>Remington 14UL1015STRKITS · 14 AWG stranded, 600 V UL1015<br>□ Buy / fabricate</td>
+<td><a href="index.html#material-internal-wire">Internal L / N / PE wire</a><br>Southwire 14 AWG, 19-strand Class C, THHN/THWN/MTW, 600 V<br>□ Buy / fabricate</td>
 <td><strong>Conditional</strong></td>
-<td>14 AWG UL1015 stranded wire has a published 0.141 in / 3.581 mm insulation OD. Its conductor size fits the proposed power terminals. <a href="https://www.remingtonindustries.com/content/UL1015%20Hook%20Up%20Wire%20Data%20Sheet.pdf">wire</a>, <a href="https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415">wago</a>, <a href="https://leviton.com/content/dam/leviton/residential/product_documents/instruction_sheet/515_Instruction_Sheet.pdf">plug</a></td>
-<td>AWM style and voltage rating alone do not approve this assembly’s wiring method. Confirm required insulation, routing, ampacity, bend radii and each terminal’s preparation.</td>
+<td>Selected Southwire 14 AWG 19-strand Class C THHN/THWN/MTW, nominal OD 2.87 mm. Matches LPSC stranded-class requirement and connector/lug ranges. <a href="https://www.southwire.com/wire-cable/building-wire/thhn-thwn-copper-silicone-free/p/22955984">wire</a>, <a href="https://www.littelfuse.com/de/assetdocs/powr-gard-catalog?assetguid=85d36235-a32b-4608-bfed-f9878aa43af0">lpsc</a>, <a href="https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415">wago</a>, <a href="https://multimedia.3m.com/mws/media/61020O/ring-tongues-vinyl-insulated-brazed-seam-16-14-awg.pdf">ring</a></td>
+<td>Qualified assembler verifies wiring method, ampacity, routing, bends and strip/torque; no AWM-only assumption.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-ring-lugs">Ring terminals</a><br>3M MV14-10R/LX-BOTTLE · #10 stud, 16–14 AWG<br>□ Buy / fabricate</td>
 <td><strong>Catalog match</strong></td>
-<td>Corrected Q0 selection to MV14-10R (#10 hole, 16–14 AWG). Wire OD 3.581 mm is below the ring’s 4.318 mm maximum insulation OD. <a href="https://multimedia.3m.com/mws/media/61020O/ring-tongues-vinyl-insulated-brazed-seam-16-14-awg.pdf">ring</a>, <a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">carling</a>, <a href="https://www.remingtonindustries.com/content/UL1015%20Hook%20Up%20Wire%20Data%20Sheet.pdf">wire</a></td>
+<td>Corrected Q0 selection to MV14-10R (#10 hole, 16–14 AWG). Wire OD 2.87 mm is below the ring’s 4.318 mm maximum insulation OD. <a href="https://multimedia.3m.com/mws/media/61020O/ring-tongues-vinyl-insulated-brazed-seam-16-14-awg.pdf">ring</a>, <a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">carling</a>, <a href="https://www.southwire.com/wire-cable/building-wire/thhn-thwn-copper-silicone-free/p/22955984">wire</a></td>
 <td>Use the specified crimp tool and inspection / pull procedure. Select other PE lugs by their own stud; do not use #10 rings indiscriminately.</td>
-</tr>
-<tr>
-<td><a href="index.html#material-box-ground-screw">Device-box grounding screw</a><br>IDEAL 30-3194<br>□ Buy / fabricate</td>
-<td><strong>Conditional</strong></td>
-<td>IDEAL 30-3194 is #10-32 × 3/8 in. <a href="https://www.idealind.com/content/dam/electrical/support/P-070%20FullLineCatalog2018.pdf">ground</a>, <a href="https://hubbellcdn.com/specsheet/RACO-670RAC-SPEC-EN.pdf">box</a></td>
-<td>Confirm the 670RAC dedicated ground-hole thread, metal engagement and any projecting tip clearance. Do not substitute an ordinary mounting screw for a verified bonding joint.</td>
-</tr>
-<tr>
-<td><a href="index.html#material-box-entry">Rear-box wire-entry protection</a><br>Heyco G1508 / TG 875 · internal-entry candidate<br>□ Buy / fabricate</td>
-<td><strong>Conditional</strong></td>
-<td>G1508 / TG875: 22.2 mm hole, 19.6 mm ID, 30.2 mm head; accepts 0.8–2.0 mm sheet. It is a thin-metal-box grommet candidate. <a href="https://www.heyco.com/pdf/Heyco_Cat_115.pdf">grommet</a></td>
-<td>It does not fit a 4.8 mm enclosure wall and does not provide cable strain relief. Approve the internal box wiring-entry method, or replace it with the required clamp/fitting.</td>
-</tr>
-<tr>
-<td><a href="index.html#material-knockout-seals">Unused-opening closures</a><br>RACO 1042<br>□ Buy / fabricate</td>
-<td><strong>Catalog match</strong></td>
-<td>RACO 1042 seals opened, unused 1/2 in trade knockouts; 670RAC uses that trade size. <a href="https://hubbellcdn.com/specsheet/RACO_CA-1042-SPEC-EN.pdf">seal</a>, <a href="https://hubbellcdn.com/specsheet/RACO-670RAC-SPEC-EN.pdf">box</a></td>
-<td>Do not confuse trade size with a 12.7 mm physical hole. Buy only the number required; retain unopened knockouts.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-tie-mounts">Screw-fixed cable mounts</a><br>Panduit TM2S8-C<br>□ Buy / fabricate</td>
 <td><strong>Catalog match</strong></td>
-<td>TM2S8-C is 16 × 10.8 × 7 mm with #8/M4 screw attachment and supports standard cable ties. <a href="https://www.panduit.com/content/dam/panduit/en/products/media/9/29/929/8929/98528929.pdf">mount</a></td>
-<td>Final hole pattern, screw projection and tie positions must clear the panel and avoid crushing voltage / CT leads.</td>
+<td>TM2S8-C is 16 × 10.8 × 7 mm with #8/M4 screw attachment and supports standard cable ties. <a href="https://www.panduit.com/content/dam/panduit/en/website/support/catalogs/pdf/iei-catalog-2023-web-cpcb294-sa-eng.pdf">mount</a></td>
+<td>M4 × 20 mm fasteners with underside washers and locking nuts; verify full nut engagement and underside clearance.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-cable-ties">Cable ties</a><br>Panduit PLT2S-C · 188 × 4.8 mm<br>□ Buy / fabricate</td>
 <td><strong>Catalog match</strong></td>
-<td>PLT2S-C standard ties are 188 × 4.8 mm; their width fits the selected mount family. <a href="https://www.panduit.com/content/dam/panduit/en/products/media/2/92/492/0492/30492.pdf">ties</a>, <a href="https://www.panduit.com/content/dam/panduit/en/products/media/9/29/929/8929/98528929.pdf">mount</a></td>
-<td>12–20 is a routing allowance, not an installed count. Confirm material temperature and maintain permitted cable bend radius.</td>
+<td>PLT2S-C standard ties are 188 × 4.8 mm; their width fits the selected mount family. <a href="https://www.panduit.com/content/dam/panduit/en/products/media/2/92/492/0492/30492.pdf">ties</a>, <a href="https://www.panduit.com/content/dam/panduit/en/website/support/catalogs/pdf/iei-catalog-2023-web-cpcb294-sa-eng.pdf">mount</a></td>
+<td>24 is a routing allowance. Fit to the 12 specified anchors; leave slack at ports and do not crush cables.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-labels">Wire and component labels</a><br>3M ScotchCode SWD + SLW<br>□ Buy / fabricate</td>
 <td><strong>Catalog match</strong></td>
-<td>SWD recommended OD 2.3–7.9 mm covers the 3.58 mm internal wire; SLW 5.8–33.5 mm covers the roughly 9.2 mm cords. <a href="https://multimedia.3m.com/mws/media/1854486O/ft-scotchcode-slw-us-pdf.pdf">labels</a></td>
+<td>SWD recommended OD 2.3–7.9 mm covers the 2.87 mm internal wire; SLW 5.8–33.5 mm covers the roughly 9.2 mm cords. <a href="https://multimedia.3m.com/mws/media/1854486O/ft-scotchcode-slw-us-pdf.pdf">labels</a></td>
 <td>Measure blue leads before choosing wrap size. Confirm adhesion and use durable exterior legends sized for the finished device.</td>
 </tr>
 <tr>
-<td><a href="index.html#material-fasteners">Mounting and bonding hardware</a><br>Machine screws, nuts, flat/locking washers and approved bonding hardware<br>□ Buy / fabricate</td>
-<td><strong>Hold</strong></td>
-<td>Different joints need different threads: Q0 #6-32 mount / #10-32 terminals; carriers M3 or ST2.9; tie mounts #8/M4. <a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">carling</a>, <a href="https://www1.futureelectronics.com/doc/WAGO/221-505.pdf">carrier</a>, <a href="https://www.panduit.com/content/dam/panduit/en/products/media/9/29/929/8929/98528929.pdf">mount</a></td>
-<td>No complete fastener schedule exists. Define each material, hole, screw length, washer/nut, thread engagement, underside clearance and torque from the final stack.</td>
+<td><a href="index.html#material-fasteners">Mounting and bonding hardware</a><br>Screw / nut / washer schedule in Build_Package.md<br>□ Buy / fabricate</td>
+<td><strong>Conditional</strong></td>
+<td>Six assembly groups specify purchase links, quantities, diameters, lengths and stack limits in build.html. <a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">carling</a>, <a href="https://www1.futureelectronics.com/doc/WAGO/221-505.pdf">carrier</a>, <a href="https://leviton.com/content/dam/leviton/commercial-industrial/product_documents/instruction_sheet/PK-93763-10-02-0C-W.pdf">outlet-install</a></td>
+<td>Measure actual washers/carrier feet/anchor recesses before tightening; qualified PE bond inspection remains required.</td>
 </tr>
 <tr>
-<td><a href="index.html#material-wall-inserts">Q0 / XA wall supports</a><br>Fabricate to approved measurements<br>□ Buy / fabricate</td>
-<td><strong>Hold</strong></td>
-<td>Two support concepts are allocated for Q0 and the outlet. <a href="https://www.hammfg.com/files/parts/pdf/PCJ16148CC.pdf">case</a>, <a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">carling</a>, <a href="https://leviton.com/content/dam/leviton/commercial-industrial/product_documents/none/Document-32236-Dimensional%20Data.jpg">outlet-drawing</a>, <a href="https://hubbellcdn.com/specsheet/RACO-670RAC-SPEC-EN.pdf">box</a></td>
-<td>No released material, thickness, section, aperture, screw pattern or tolerance drawing. Resolve both CAD wall intersections and mechanical loading before fabrication.</td>
-</tr>
-<tr>
-<td><a href="index.html#material-terminal-guard">Q0 terminal guard</a><br>Custom guard or manufacturer-approved terminal covers<br>□ Buy / fabricate</td>
-<td><strong>Hold</strong></td>
-<td>Both Q0 studs remain inside the enclosure. <a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">carling</a></td>
-<td>No approved guard geometry or material has been defined. Cover the incoming live stud as well as outgoing stud and account for rings, insulation, tools and required spacings.</td>
-</tr>
-<tr>
-<td><a href="index.html#material-logger-restraint">Logger cradle and straps</a><br>Custom cradle + VELCRO ONE-WRAP 91808 roll candidate<br>□ Buy / fabricate</td>
-<td><strong>Hold</strong></td>
-<td>One custom cradle and two straps are listed. The meter body has space on the nominal panel.</td>
-<td>Cradle and strap fit are not drawn. Measure actual meter, feet, port exits and strap path; restrain without blocking connectors, venting or removable plugs. No load or drop test has been performed.</td>
+<td><a href="index.html#material-logger-restraint">Adjustable logger straps</a><br>VELCRO ONE-WRAP 90340 · 19.05 mm (3/4 in) wide roll<br>□ Buy / fabricate</td>
+<td><strong>Conditional</strong></td>
+<td>Selected 19.05 mm wide roll fits the 21 × 4 mm rounded slot design; slot pairs are 82 mm apart. Adjustable restraint reserves the larger meter envelope. <a href="https://www.velcro.com/products/organization/heavy-duty-one-wrap-roll/">restraint</a>, <a href="https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf">dent-size</a></td>
+<td>Dry-fit strap overlap, slot edge smoothness and instrument retention.</td>
 </tr>
 </tbody></table></div>
 <h2>Inputs needed to finish the build design</h2>
 <ul>
-<li>Actual ELITEpro body and feet; CT model, current/output rating, aperture, latch opening and cable length; adapter Output voltage/current/polarity and connector size.</li>
-<li>Actual printer AC labels and plugs (including P2S regional voltage and the CORE One+ generation); lab supply / available fault current and accessory load boundary.</li>
-<li>Blue pigtail part number, cross section and ratings; all voltage-lead lengths and bend limits; DC/USB cable ODs and largest plug cross sections.</li>
-<li>Eaton exact holder revision / drawing, final fuse SKU and approved wire / terminal preparation.</li>
-<li>Coordinated wall cutout, insert, outlet-box and guard drawings; gland wall/nut/seal stacks, complete fastener schedule, bonds, restraint and cable-routing dry fit.</li>
+<li>Existing CT: label digits are obscured by leads in the photo; uncover and record model/current/output before setting ELOG.</li>
+<li>Existing blue pigtails: no readable AWG/current marking in photo; verify manufacturer identity, ratings and approved tinned-end termination to release Fv.</li>
+<li>Cable entries: measure USB round jacket and adapter flat-cord profile; choose exact split inserts, then dry-fit locknuts and preterminated plugs.</li>
+<li>Receiving and commissioning: verify fastener stacks, CT latch/fuse door/slack/strain relief, total load and Q0 fault/inrush selection with responsible electrical personnel before cutting/energizing.</li>
 </ul>
 <p>After those inputs are resolved, update the fabrication drawings and repeat the affected checks, then conduct a documented dry fit and qualified electrical acceptance. There is no hardware test result or energizing approval in this audit.</p>
 <h2>Reproduce the checks</h2>

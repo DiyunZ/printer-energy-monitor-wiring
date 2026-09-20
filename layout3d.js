@@ -10,10 +10,10 @@ const V = a => new THREE.Vector3(...a);
 
 async function start() {
   const [dimensions, cad, buffer, review] = await Promise.all([
-    fetch('./layout_dimensions.json?v=9').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
-    fetch('./assets/enclosure.json').then(r => { if (!r.ok) throw Error('CAD manifest unavailable'); return r.json(); }),
-    fetch('./assets/enclosure.bin').then(r => { if (!r.ok) throw Error('CAD geometry unavailable'); return r.arrayBuffer(); }),
-    fetch('./installation_review.json?v=9').then(r => { if (!r.ok) throw Error('Installation review unavailable'); return r.json(); })
+    fetch('./layout_dimensions.json?v=10').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
+    fetch('./assets/enclosure.json?v=10').then(r => { if (!r.ok) throw Error('CAD manifest unavailable'); return r.json(); }),
+    fetch('./assets/enclosure.bin?v=10').then(r => { if (!r.ok) throw Error('CAD geometry unavailable'); return r.arrayBuffer(); }),
+    fetch('./installation_review.json?v=10').then(r => { if (!r.ok) throw Error('Installation review unavailable'); return r.json(); })
   ]);
   const parts = Object.fromEntries(dimensions.parts.map(p => [p.id, p]));
   const instances = Object.fromEntries(dimensions.instances.map(p => [p.id, p]));
@@ -143,6 +143,7 @@ async function start() {
   box([12,13,3],[mx+16,23,mz+ml/2+1],'#c3c8c9','meter',1);
   box([8,8,3.5],[mx+16,23,mz+ml/2+2],'#2a3138','meter');
   tag('ELITEpro XC', [mx,64,mz-1], 'meter');
+  for(const z of [-70,50]) { box([82,1.2,19.05],[91,54.1,z],'#404a50','meter',.3); for(const x of [50,132]) box([1.2,51,19.05],[x,28.6,z],'#404a50','meter',.3); }
   // CT ring: the model aperture goes along X. Only the printer hot conductor crosses it.
   const [cx,cy,cz] = parts.ct.position;
   const [ctw,cth,ctd] = parts.ct.size;
@@ -157,12 +158,11 @@ async function start() {
   // One panel-mounted breaker, with its two terminals inside and handle outside the front wall.
   const [qx,qy,qz] = parts.q0.position;
   fitBodies.q0=[box(parts.q0.size,[qx,qy,qz],'#313b43','q0',2)];
-  box([48,87,4],[qx,qy,211],'#f2f1e8','q0',3); // insulating support insert; exact stack pending
-  box([17,47,5],[qx,qy,216],'#232b32','q0',2);
-  const toggle = box([12,7,15],[qx,qy+3,224],'#edf1ee','q0',1); toggle.rotation.x=-.35;
+  box([17,47,5],[qx,qy,qz+25.4],'#232b32','q0',2);
+  const toggle = box([12,7,15],[qx,qy+3,qz+36],'#edf1ee','q0',1); toggle.rotation.x=-.35;
   const terminalZ = qz - parts.q0.size[2]/2 - parts.q0.studProjection;
   for (const y of [-1,1]) breakerTerminals.push(cylinder(2.413,parts.q0.studProjection,[qx,qy+y*parts.q0.terminalPitch/2,terminalZ+parts.q0.studProjection/2],'#b8a77a','q0','z'));
-  for (const y of [-1,1]) breakerMounts.push(cylinder(1.753,2,[qx,qy+y*parts.q0.mountPitch/2,218.9],'#b8c0c1','q0','z'));
+  for (const y of [-1,1]) breakerMounts.push(cylinder(1.753,2,[qx,qy+y*parts.q0.mountPitch/2,208.5],'#b8c0c1','q0','z'));
   decal('Q0\nMAIN',37,20,[qx,qy+57,214],'q0','front');
   tag('Q0 · external handle',[qx-9,qy+71,217],'q0');
   // Fuse holder and short, bonded DIN rail.
@@ -170,9 +170,9 @@ async function start() {
   planBodies.rail = [box([rw,1.5,rd],[rx,ry-rh/2+.75,rz],material('#bdc6c9',.65),'rail')];
   for(const side of [-1,1]) planBodies.rail.push(box([rw,rh,1.5],[rx,ry,rz+side*(rd/2-.75)],material('#aeb9be',.6),'rail'));
   fitBodies.fuse=[box(parts.fuse.size,parts.fuse.position,'#d4d8d4','fuse',1.5)];
-  box([14,4,35],[-60,85.6,-28],'#f2f0e3','fuse',1);
-  decal('Fv',12,18,[-60,88,-28],'fuse');
-  tag('Fv · fixed fuse',[-63,100,-31],'fuse');
+  box([14,4,35],[-60,70.4,-28],'#f2f0e3','fuse',1);
+  decal('Fv',12,18,[-60,72.8,-28],'fuse');
+  tag('Fv · fixed fuse',[-63,89,-31],'fuse');
   // Secured five-way connector groups. Two separate bridged PE connectors provide spare bond capacity.
   dimensions.instances.filter(p=>p.part==='terminals').forEach(p => {
     const [x,,z] = p.position, name = p.id;
@@ -181,27 +181,20 @@ async function start() {
     decal(name,25,13,[x,6.2,z+18],'terminals');
   });
   tag('JL / JN / PE',[-142,35,-45],'terminals');
-  // Side receptacle: actual Leviton yoke dimensions and a RACO handy-box envelope.
-  const [ox,oy,oz] = parts.outletguard.position, [od,oh,ow] = parts.outletguard.size;
-  const metal = material('#9ca9af',.5);
-  box([1.2,oh,ow],[ox-od/2+.6,oy,oz],metal,'outletguard');
-  for(const y of [-1,1]) box([od,1.2,ow],[ox,oy+y*(oh/2-.6),oz],metal,'outletguard');
-  for(const z of [-1,1]) box([od,oh,1.2],[ox,oy,oz+z*(ow/2-.6)],metal,'outletguard');
-  fitBodies.outletguard=[...group('outletguard').children];
-  box([4,124,78],[189,oy,oz],'#f1f0e6','outlet',2); // proposed insulating support insert
-  box([2,114.3,69.85],[192,oy,oz],material('#d5dadd',.65),'outlet',1.5);
-  box([2,103.2,33.3],[187,oy,oz],metal,'outlet');
-  planBodies.outlet=[box([parts.outlet.size[0],37,parts.outlet.size[2]],parts.outlet.position,'#beafa0','outlet',2)];
-  cylinder(16.65,5,[196,oy,oz],'#f0eee6','outlet','x');
-  for(const z of [-6.35,6.35]) box([1.2,9,2.3],[199,oy+5,oz+z],'#303237','outlet');
-  cylinder(3,1.2,[199,oy-7,oz],'#303237','outlet','x');
-  for(const y of [-40,40]) cylinder(2,2,[193.5,oy+y,oz],'#75828a','outlet','x');
-  decal('ELITEpro ADAPTER\nONLY · UNMETERED',65,18,[194,oy+76,oz],'outlet','right');
+  // Direct-mounted flanged receptacle: no separate rear box or wall support.
+  const [ox,oy,oz] = parts.outlet.position;
+  const faceX=182.04;
+  planBodies.outlet=[cylinder(21.4,43.6,[faceX-21.8,oy,oz],'#d8d8cd','outlet','x'),
+    cylinder(31.75,2.4,[faceX+1.2,oy,oz],'#f0eee6','outlet','x'),
+    cylinder(17.65,2.4,[faceX+3.6,oy,oz],'#f0eee6','outlet','x')];
+  for(const z of [-6.35,6.35])box([.6,9,2.3],[faceX+5,oy+5,oz+z],'#303237','outlet');
+  cylinder(3,.6,[faceX+5,oy-7,oz],'#303237','outlet','x');
+  for(const y of [-26.785,26.785])cylinder(2,1,[faceX+2.9,oy+y,oz],'#75828a','outlet','x');
+  decal('ELITEpro ADAPTER\nONLY · UNMETERED',65,18,[faceX+3,oy+51,oz],'outlet','right');
   planBodies.adapter=[box(parts.adapter.size,parts.adapter.position,'#272b30','adapter',5)];
-  box([5,32,23],[195,oy,oz],'#15191d','adapter',1);
-  decal('AC / DC',32,25,[218,154,oz],'adapter','up','#272b30','#d2d7dc');
-  tag('XA + existing adapter',[246,171,oz],'adapter');
-  // Entry fittings. Their centres mark proposed openings; source CAD is not a drilling template.
+  decal('9 V DC',32,25,[201.84,153.3,oz],'adapter','up','#272b30','#d2d7dc');
+  tag('XA + existing adapter',[233,174,oz],'adapter');
+  // Entry fittings use drawing locations; bore geometry is in the machined shell mesh.
   function gland(id) {
     const p=instances[id], pos=p.position, axis=p.axis;
     const r=p.size[1]/2, length=p.size[axis==='x'?0:2];
@@ -228,19 +221,19 @@ async function start() {
   planBodies['printer-plug']=[box(instances['printer-plug'].size,instances['printer-plug'].position,'#e2b837','entries',6)];
   cylinder(12,3,[24,36,-326],'#e1d7ad','entries','z');
   cable([[-130,14,-120],[-97,20,-100],[-78,22,-80],[-60,27,-72]],hot,1.7,'fuse');
-  cable([[-135,13,-120],[-146,21,-116],[-155,22,-160],[133,30,-160],[144,76,-20],[169,105,-5]],hot,1.7,'outlet');
-  cable([[-127,13,-52],[-140,21,-32],[-145,20,-151],[131,26,-151],[139,72,-16],[169,115,-5]],neutral,1.7,'outlet');
+  cable([[-135,13,-120],[-146,21,-116],[-155,22,-160],[133,30,-160],[144,76,-20],[141,113,4]],hot,1.7,'outlet');
+  cable([[-127,13,-52],[-140,21,-32],[-145,20,-151],[131,26,-151],[139,72,-16],[141,121,4]],neutral,1.7,'outlet');
   cable([[-118,13,25],[-100,12,32],[-83,12,44]],pe,1.7,'terminals');
-  cable([[-71,13,60],[-97,22,96],[-87,24,151],[134,25,151],[143,67,36],[167,117,29]],pe,1.7,'outlet');
+  cable([[-71,13,60],[-97,22,96],[-87,24,151],[134,25,151],[143,67,36],[141,128,25]],pe,1.7,'outlet');
   cable([[-78,13,60],[-39,14,17],[-24,13,-19],[-27,7,-28]],pe,1.7,'rail');
-  cable([[-82,13,60],[-85,14,49],[-106,7,51]],pe,1.7,'panel');
-  cable([[-67,13,60],[-91,17,88],[-86,18,145],[137,19,145],[139,86,25],[131,86,25]],pe,1.7,'outletguard');
-  cylinder(3,3,[-106,4,51],'#b1a66c','panel');
+  cable([[-82,13,60],[-85,14,49],[-125,7,60]],pe,1.7,'panel');
+  cable([[-60,26,11.25],[-60,25,22],[-39.6,18,22],[-39.6,14,37.15]],hot,1.45,'fuse');
+  cylinder(3,3,[-125,4,60],'#b1a66c','panel');
   // Blue pigtails and three full voltage leads, including a visible retained-slack zone.
   const leadPorts = [3,2,0], leadColors = ['#283039','#ad4d4a','#dddcd1'];
   for(let i=0;i<3;i++) {
     const p=instances[`A${i+1}`], [x,,plugZ]=p.position, z=plugZ-9;
-    const startPt = i===0?[-60,27,16]:[-124+i*6,14,-49];
+    const startPt = i===0?[-33.8,14,37.15]:[-124+i*6,14,-49];
     cable([startPt,[-44-i*8,30,29],[x,22,z]],blue,1.65);
     planBodies[p.id]=[cylinder(p.size[0]/2,p.size[2],p.position,blue,'leads','z')];
     cylinder(4.4,26,[x,22,z+30],'#b8b5a4','leads','z');
@@ -266,7 +259,7 @@ async function start() {
   cable([[cx+6,cy+15,cz],[cx+23,53,cz-8],[44,61,-150],[102,59,-139],[mx+22,44,mz-ml/2-4]],'#bfc3c0',1,'ct');
   cable([[cx+3,cy+15,cz+2],[cx+20,55,cz-8],[42,63,-153],[104,61,-140],[mx+17,44,mz-ml/2-4]],'#30323a',1,'ct');
   // Separate factory DC return and USB routes on the low-voltage end.
-  cable([[236,96,oz],[249,76,42],[234,78,106],[172,78,106],[153,62,118],[mx-17,18,mz+ml/2+17]],'#554534',1.8,'adapter');
+  cable([[207,89,oz],[249,76,42],[234,78,106],[172,78,106],[153,62,118],[mx-17,18,mz+ml/2+17]],'#554534',1.8,'adapter');
   cylinder(4.5,20,[mx-17,18,mz+ml/2+12],'#24282b','adapter','z');
   const usbZ = instances['usb-entry'].position[2];
   cable([[mx+16,23,mz+ml/2+12],[117,31,125],[155,55,usbZ],[217,55,usbZ],[267,38,195]],'#516d86',2.2,'entries');
@@ -348,7 +341,7 @@ async function start() {
   function applyAssembly() {
     const stage=assemblyStage;
     for(const [id,g] of Object.entries(groups)) {
-      const first=id==='case'?1:id==='panel'?2:['rail','terminals','meter','ct','fuse'].includes(id)?3:['q0','outlet','outletguard','entries'].includes(id)?4:5;
+      const first=id==='case'?1:id==='panel'?2:['rail','terminals','meter','ct','fuse'].includes(id)?3:['q0','outlet','entries'].includes(id)?4:5;
       g.visible=stage===0||stage>=first;
     }
     groups.panel.position.y=stage===2?300*(1-Number($('assembly-progress').value)/100):0;

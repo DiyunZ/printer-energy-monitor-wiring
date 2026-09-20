@@ -22,9 +22,17 @@ class RoutingChecks(unittest.TestCase):
     def test_current_design(self):
         self.assertEqual(drawing.validate()['circuit_breaker_count'], 1)
 
-    def test_outlet_box_cannot_be_bonded_to_neutral(self):
+    def test_fused_transition_cannot_connect_to_neutral(self):
         self.reconnect(23, 'JN.5')
-        self.assert_rejected('OUTLETBOX must remain on protective earth')
+        self.assert_rejected('D.L1')
+
+    def test_voltage_tap_cannot_bypass_fuse(self):
+        self.reconnect(4, 'JL.3')
+        self.assert_rejected('L1 sensing must not bypass Fv')
+
+    def test_pe_connectors_require_the_physical_bridge(self):
+        self.reconnect(24, 'JPE.B2')
+        self.assert_rejected('must remain on protective earth')
 
     def test_l2_cannot_be_connected_to_pe(self):
         self.reconnect(7, 'JPE.3')

@@ -42,7 +42,7 @@ export function audit(dimensions, manifest, buffer, procurement) {
   const record = (id, result, evidence, limits = '') => checks.push({ id, result, evidence, limits });
   const q = parts.q0;
   record('Q0 catalog body', q.size.every((v, i) => Math.abs(v - [19.18, 63.5, 47][i]) < .02) ? 'pass' : 'fail',
-    `Model ${q.size.join(' × ')} mm; Carling p.11 body envelope 19.18 × 63.50 × 47.00 mm.`, 'Body includes the front step; studs, handle and terminal guard are separate.');
+    `Model ${q.size.join(' × ')} mm; Carling p.11 body envelope 19.18 × 63.50 × 47.00 mm.`, 'Body includes the front step; studs, handle and terminal protection is supplied by the screw-fixed outer enclosure.');
   record('Q0 terminal and mounting pitches', q.terminalPitch === 49.28 && q.mountPitch === 52.37 ? 'pass' : 'fail',
     `Stud pitch ${q.terminalPitch ?? 'unspecified'} mm; mounting pitch ${q.mountPitch ?? 'unspecified'} mm. Carling: 49.28 / 52.37 mm.`);
   const lugs = procurement.items.find(p => p.id === 'ring-lugs');
@@ -55,7 +55,7 @@ export function audit(dimensions, manifest, buffer, procurement) {
   for (const id of ['dc-entry', 'usb-entry']) {
     const p = instances[id];
     record(`${id} envelope`, p.size.every((v, i) => v === [37, 40, 40][i]) ? 'pass' : 'fail',
-      `Model ${p.size.join(' × ')} mm; KVT 20 overall envelope 37 mm axial × Ø40 mm flange.`, 'Conservative cylinder; the threaded shank is M20, not Ø40.');
+      `Model ${p.size.join(' × ')} mm; KVT 32 overall envelope 37 mm axial × Ø40 mm flange.`, 'Conservative cylinder; the threaded shank is M32, not Ø40.');
   }
   const internal = ['meter', 'ct', 'fuse', 'rail'].map(id => parts[id]).concat(dimensions.instances.filter(p => p.part === 'terminals'));
   const collisions = [];
@@ -71,17 +71,22 @@ export function audit(dimensions, manifest, buffer, procurement) {
     'CT is an unidentified example. No connectors, open levers, flexible wires, mounting tolerances or screw-tool envelopes are certified by this check.');
   const sweeps = [];
   for (const p of [parts.panel, ...internal]) {
-    const swept = sweptBox(p), n = hits(swept, shell);
-    sweeps.push({ id: p.id, travel_mm: 300, shell_triangle_hits: n, result: n ? 'review' : 'pass' });
+    const swept = sweptBox(p), contactHits = hits(swept, shell);
+    // Panel underside intentionally seats on the factory supports at Y=0.
+    // Remove only numerical surface contact (0.0001 mm), not a fit allowance.
+    if (p.id === 'panel') swept.min.y += .0001;
+    const n = hits(swept, shell);
+    sweeps.push({ id: p.id, travel_mm: 300, shell_triangle_hits: n,
+      seated_contact_triangles: contactHits - n, result: n ? 'review' : 'pass' });
   }
   record('Vertical insertion through open case', sweeps.every(s => !s.shell_triangle_hits) ? 'pass' : 'review',
     `${sweeps.filter(s => !s.shell_triangle_hits).length}/${sweeps.length} swept bounding boxes clear the manufacturer shell.`,
-    '300 mm vertical translation, fixed orientation, wall fittings absent. This tests shell access, not the full sequence of brackets, wires or tool motions.');
-  const blocked = sweptBox(parts.panel).intersectsBox(bounds(parts.outletguard));
-  record('Panel before side outlet box', blocked ? 'sequence required' : 'pass',
-    blocked ? 'The panel insertion sweep intersects the side outlet-box envelope. Install the panel first; removal requires removing the box or a separately verified tilted path.' : 'No interference in this tested translation.');
+    '300 mm vertical translation, fixed orientation, wall fittings absent. Panel/support contact at Y=0 is excluded with a 0.0001 mm numerical offset. This tests shell access, not brackets, wires or tool motions.');
+  const blocked = sweptBox(parts.panel).intersectsBox(bounds(parts.outlet));
+  record('Panel before flanged outlet', blocked ? 'sequence required' : 'pass',
+    blocked ? 'The panel insertion sweep intersects the flanged-outlet envelope. Install the panel first; removal requires removing the outlet or a separately verified tilted path.' : 'No interference in this tested translation.');
   const bodyChecks = [];
-  for (const p of [parts.meter, parts.ct, parts.fuse, parts.outletguard, parts.q0]) {
+  for (const p of [parts.meter, parts.ct, parts.fuse, parts.outlet, parts.q0]) {
     const b = bounds(p), distances = [];
     for (const x of [b.min.x, b.max.x, p.position[0]]) for (const z of [b.min.z, b.max.z, p.position[2]]) {
       const ys = rayHits([x, b.max.y, z], [0, 1, 0], lid).map(v => v.y - b.max.y);
@@ -90,9 +95,9 @@ export function audit(dimensions, manifest, buffer, procurement) {
     bodyChecks.push({ id: p.id, shell_triangle_hits: hits(b, shell), lid_samples: distances.length,
       minimum_sampled_lid_gap_mm: distances.length ? round(Math.min(...distances)) : null });
   }
-  record('Wall hardware mounting interfaces', 'hold',
-    bodyChecks.filter(p => p.shell_triangle_hits).map(p => `${p.id}: ${p.shell_triangle_hits} intersecting shell triangles`).join('; '),
-    'Uncut factory CAD intersects proposed wall fittings. The support inserts, apertures, wall taper and body-front offsets are not fabrication drawings. Do not interpret overlap as an approved cutout.');
+  record('Machined wall geometry', manifest.fabrication ? 'pass' : 'hold',
+    manifest.fabrication || 'Factory shell remains uncut.',
+    'Exact cut-through gauges are in fabrication/cad-checks.json. Axis-aligned wall-device illustrations do not model the 0.937 degree draft; body/shell triangle contacts here are not mounting proofs. Received-part fit and fastening remain physical checks.');
   record('Closed lid screen', 'screen only',
     bodyChecks.map(p => `${p.id}: ${p.minimum_sampled_lid_gap_mm} mm (${p.lid_samples}/9 rays)`).join('; '),
     'Nine upward rays per body against lid mesh 15. Not a minimum-distance proof; excludes lid hardware, guards, open fuse door, wire bundles and tolerances.');
@@ -102,11 +107,11 @@ export function audit(dimensions, manifest, buffer, procurement) {
   });
   record('Cord diameter interfaces', 'pass', 'Southwire published nominal OD 9.17–9.27 mm lies within Hammond 6–12 mm gland and Leviton 0.245–0.655 in cord ranges.',
     'Published variants are not a manufacturing tolerance. Measure purchased cord; clamping, jacket preparation and pull resistance remain physical checks.');
-  record('Ring barrel and internal wire', 'pass', '3.581 mm wire insulation OD < 4.318 mm ring maximum; 14 AWG is within 16–14 AWG ring range.', 'Does not qualify the crimp or approve the AWM wire for this assembly.');
-  record('DIN rail capacity', 'pass', '100 − 17.5 − 2 × 6 = 70.5 mm remains after holder and two end stops.', 'Fasteners, PE bond and fuse-door service motion still need final placement.');
+  record('Ring barrel and internal wire', 'pass', 'Southwire nominal 2.87 mm insulation OD < 3M 4.318 mm ring maximum; 14 AWG is within 16–14 AWG ring range.', 'Does not qualify the crimp or approve the wiring method for this assembly.');
+  record('DIN rail capacity', 'pass', '100 − 17.78 − 2 × 6 = 70.22 mm remains after holder and two end stops.', 'Fasteners, PE bond and fuse-door service motion still need final placement.');
   record('Physical and electrical release', 'hold', 'No built assembly, nameplate verification, qualified acceptance or energized test has been recorded.');
-  return { revision: 'Installation audit, 2026-09-19', release: 'NOT RELEASED FOR FABRICATION OR ENERGIZING', units: 'mm',
-    method: 'Axis-aligned body envelopes, continuous vertical swept volumes against triangulated Hammond shell, nine lid rays per body and sourced interface arithmetic. The shell uses 0.45 mm triangulation deflection, not manufacturing tolerances.',
+  return { revision: 'Build package A, 2026-09-20', release: 'NOT RELEASED: close the receiving and electrical items in Build_Package.md', units: 'mm',
+    method: 'Axis-aligned body envelopes, continuous vertical swept volumes against the machined Hammond shell, nine lid rays per body and sourced interface arithmetic. Shell triangulation deflection is 0.3 mm; numerical seating-contact exclusion is 0.0001 mm. Neither is a manufacturing tolerance.',
     checks, insertion_sweeps: sweeps, body_screen: bodyChecks, wall_entries: wallEntries,
     material_groups: procurement.items.length, owned_groups: procurement.items.filter(p => p.availability === 'owned').length };
 }

@@ -1,14 +1,14 @@
 {
-  "revision": "2026-09-19 · installation audit",
-  "scope": "One 120 V L/N/PE printer enclosure. User confirmed only the five checked equipment groups are on hand; all other enclosure materials are to buy or fabricate. Quantities are per assembly, not vendor pack quantities. Purchase candidates are not a released construction BOM; no orders placed.",
+  "revision": "2026-09-20 · build package A",
+  "scope": "One 120 V, grounded, single-printer assembly, confirmed by the user. Five equipment groups are owned. Build package A includes exact new-part selections, machining geometry and an assembly schedule. CT scaling, blue-lead protection/termination and cable-entry inserts remain physical-information holds; complete-order and energizing release is not claimed.",
   "items": [
     {
       "id": "meter",
       "item": "Power logger",
       "quantity": "1",
       "model": "DENT ELITEpro XC",
-      "reason": "Reuse the photographed instrument. The model uses the published 216 × 63 × 47 mm body; measure this unit before making its cradle.",
-      "status": "On hand · confirmed by user and photos; dimensions still to measure",
+      "reason": "Reuse the photographed logger. Adjustable straps reserve 216 × 69 × 58 mm, covering both published case envelopes; the visible model retains the current slender 216 × 63 × 47 mm specification.",
+      "status": "Owned; confirm actual envelope and connector access before fitting straps.",
       "availability": "owned",
       "links": [],
       "image": {
@@ -32,8 +32,8 @@
       "item": "Current sensor",
       "quantity": "1 required; existing set available",
       "model": "Existing DENT split-core CT",
-      "reason": "Reuse one compatible sensor on printer hot only. Read its actual model, current range and output before setting CH1 in ELOG; the photo does not establish these ratings.",
-      "status": "On hand · compatibility and exact model still to verify",
+      "reason": "Visible original label establishes the DENT CTHSC family and 600 V marking. The primary-current/model digits are covered by the black and white leads. Do not infer 20 A versus 50 A from case appearance. Read the uncovered label during receiving inspection before setting CH1.",
+      "status": "Owned · CT range/output digits obscured by wires in supplied photo.",
       "availability": "owned",
       "links": [],
       "image": {
@@ -58,7 +58,7 @@
       "quantity": "3",
       "model": "Existing detachable blue pigtails",
       "reason": "A1 is the hot voltage tap to L1; A2 and A3 are neutral voltage taps to L2 and N. These are sensing leads, not the printer power conductors or protective earth.",
-      "status": "On hand · user confirmed three; lead ratings and termination acceptance pending",
+      "status": "Owned · no legible AWG/current marking in supplied blue-lead photo; protection/termination hold remains.",
       "availability": "owned",
       "links": [],
       "image": {
@@ -106,9 +106,9 @@
       "id": "adapter",
       "item": "AC/DC adapter",
       "quantity": "1 with original barrel cable",
-      "model": "Existing two-pin AC/DC adapter",
-      "reason": "Plug into XA outside the enclosure. Keep the original DC cable intact. Verify the adapter label against the meter input: 6–10 V DC, 500 mA, center positive.",
-      "status": "On hand · user confirmed this is the plug to use; output rating still to verify",
+      "model": "CUI SMI6-9-V-P5 · existing original adapter",
+      "reason": "Original photo label: 9 V DC, 0.667 A, center positive. This is within the ELITEpro 6–10 V / 500 mA input requirement. Keep the factory cable intact. SMI6 drawing: 64 × 40.5 × 30 mm, ±1 mm, excluding blades; P5 is 5.5 × 2.1 × 9.5 mm center positive. DC cable is UL2468 zip cord in the catalog: a round KT insert must not be assumed to fit.",
+      "status": "Owned · output and polarity confirmed from the original photo; cable-entry fit still needs verification.",
       "availability": "owned",
       "links": [],
       "image": {
@@ -132,7 +132,7 @@
       "quantity": "1",
       "model": "Hammond PCJ16148CC",
       "reason": "Gray polycarbonate body with a clear lift-off lid. Selected for connector clearance and lead storage around the long meter. Nominal 16 × 14 × 8 in; use the manufacturer drawing/CAD for real outside dimensions.",
-      "status": "Panel compatible; nominal insertion checked. Wall openings / hardware and physical dry fit remain unresolved.",
+      "status": "Machined STEP / wall drawing supplied; compare received parts and close release items before cutting.",
       "links": [
         {
           "label": "Buy · Solutions Direct",
@@ -164,7 +164,7 @@
       "quantity": "1",
       "model": "Hammond 14R1513",
       "reason": "Steel panel, approximately 327 × 374.7 × 1.9 mm. Ordered separately from the box. Provide its own PE bond; do not depend on painted mounting screws.",
-      "status": "Matches selected enclosure",
+      "status": "Panel cut/slot drawing supplied. Transfer-drill WAGO carrier holes from the actual carriers.",
       "links": [
         {
           "label": "Buy · DigiKey",
@@ -195,12 +195,12 @@
       "item": "Q0 operating breaker",
       "quantity": "1",
       "model": "Carling CA1-B0-24-615-121-DG",
-      "reason": "Panel-mounted, one-pole 15 A candidate with exterior handle. Manufacturer ordering code specifies 50/60 Hz medium delay, stud terminals and the 240 VAC UL 489 / CSA option. Confirm exact suffix, branch-circuit suitability, supply fault level, combined printer + logger load, inrush and switching duty. Do not substitute a DC-only or UL 1077 variant.",
-      "status": "Confirm electrical selection; request price / lead time",
+      "reason": "Single 15 A operating breaker, 50/60 Hz medium-delay, UL489/CSA option DG. Mount directly on the front wall using the manufacturer pattern. No custom wall insert. Keep all four cover screws installed; Q0 OFF leaves its supply terminal live.",
+      "status": "Exact SKU selected; supplier quote/lead time, supply fault rating and printer inrush acceptance remain open.",
       "links": [
         {
-          "label": "Quote · Mouser listing",
-          "url": "https://www.mouser.kr/ProductDetail/Carling-Technologies/CA1-B0-24-615-121-DG?qs=vln4JGBFwFoweMB2W4WfRg%3D%3D",
+          "label": "Quote exact SKU · Mouser US",
+          "url": "https://www.mouser.com/ProductDetail/Carling-Technologies/CA1-B0-24-615-121-DG?qs=vln4JGBFwFoweMB2W4WfRg%3D%3D",
           "kind": "quote"
         },
         {
@@ -226,18 +226,18 @@
     {
       "item": "XA adapter receptacle",
       "quantity": "1",
-      "model": "Leviton 5261 / 5261-W",
-      "reason": "One NEMA 5-15R, 15 A / 125 V receptacle. Existing black two-pin adapter plugs in outside the right wall. Rear terminations stay in the bonded device box. Label ELITEpro ADAPTER ONLY · UNMETERED.",
-      "status": "Confirm adapter clearance and mounting stack",
+      "model": "Leviton 5279-C · NEMA 5-15R flanged outlet",
+      "reason": "One complete panel-mounted outlet replaces the old 5261 receptacle, RACO rear box, separate plate and custom support. Its molded body encloses the wire terminals. Dedicated to the existing ELITEpro adapter.",
+      "status": "Selected: Ø44.00 ±0.15 mm opening; 53.57 mm mounting pitch. Dry indoor use.",
       "links": [
         {
-          "label": "Buy · RS",
-          "url": "https://us.rs-online.com/product/leviton/5261-w/71692784/",
+          "label": "Buy · Crescent Electric",
+          "url": "https://www.crescentelectric.com/product/98283/5279-c-grounding-outlet-receptacle-125-v-ac-15-a-2-poles-3-wires-white",
           "kind": "buy"
         },
         {
-          "label": "Leviton",
-          "url": "https://leviton.com/products/5261",
+          "label": "Leviton drawing / instructions",
+          "url": "https://leviton.com/products/5279-c",
           "kind": "reference"
         }
       ],
@@ -245,137 +245,66 @@
       "availability": "buy",
       "image": {
         "src": "assets/materials/receptacle.png",
-        "source_image": "https://leviton.com/content/dam/leviton/commercial-industrial/product_images/5261/5261.png",
-        "kind": "reference",
-        "alt": "Leviton 5261 / 5261-W — reference image",
-        "caption": "5261 shown in brown; the linked 5261-W is white.",
-        "source_label": "Leviton",
-        "source_url": "https://leviton.com/products/5261",
+        "alt": "Leviton 5279-C flanged outlet",
+        "caption": "Leviton 5279-C flanged outlet",
         "width": 325,
-        "height": 325
-      }
-    },
-    {
-      "item": "XA rear device box",
-      "quantity": "1",
-      "model": "RACO 670RAC / retail 8670",
-      "reason": "4 × 2.125 × 2.188 in handy-box envelope, about 101.6 × 54 × 55.6 mm. Guards the rear of XA. Include a dedicated PE bond, listed knockout closure(s) and a suitable wire-entry fitting. Wall support remains a fabricated item.",
-      "status": "Confirm yoke / box / support fit",
-      "links": [
-        {
-          "label": "Buy · Platt",
-          "url": "https://www.platt.com/p/0052365/hubbell-raco/handy-box-2-1-8-deep-1-2-kos-welded-metallic/050169906705/rac670rac",
-          "kind": "buy"
-        },
-        {
-          "label": "RACO dimensions",
-          "url": "https://hubbellcdn.com/specsheet/RACO-670RAC-SPEC-EN.pdf",
-          "kind": "reference"
-        }
-      ],
-      "id": "outlet-box",
-      "availability": "buy",
-      "image": {
-        "src": "assets/materials/outlet-box.jpg",
-        "source_image": "https://rexel-cdn.com/products/image.jpg?i=6B6F5A60-9371-4A6D-B1E6-3E33C5820C54&f=420",
-        "kind": "product",
-        "alt": "RACO 670RAC / retail 8670 — product image",
-        "caption": "Product image",
-        "source_label": "Platt",
-        "source_url": "https://www.platt.com/p/0052365/hubbell-raco/handy-box-2-1-8-deep-1-2-kos-welded-metallic/050169906705/rac670rac",
-        "width": 419,
-        "height": 419
-      }
-    },
-    {
-      "item": "XA faceplate",
-      "quantity": "1",
-      "model": "Leviton 84004-40",
-      "reason": "Single round 1.406 in opening; standard stainless wallplate, approximately 114.3 × 69.9 mm. Fits the single-receptacle concept. Bond accessible metalwork through the approved device/box arrangement.",
-      "status": "Confirm complete stack before cutting wall",
-      "links": [
-        {
-          "label": "Buy · Leviton",
-          "url": "https://store.leviton.com/products/1-gang-single-1-406-inch-hole-device-receptacle-wall-plate-standard-size-device-mount-stainless-steel-84004-40",
-          "kind": "buy"
-        },
-        {
-          "label": "Leviton specification",
-          "url": "https://leviton.com/products/84004-40",
-          "kind": "reference"
-        }
-      ],
-      "id": "faceplate",
-      "availability": "buy",
-      "image": {
-        "src": "assets/materials/faceplate.jpg",
-        "source_image": "https://store.leviton.com/cdn/shop/products/84004-40.jpg?v=1749058904",
-        "kind": "product",
-        "alt": "Leviton 84004-40 — product image",
-        "caption": "Product image",
+        "height": 325,
+        "source_url": "https://leviton.com/products/5279-c",
         "source_label": "Leviton",
-        "source_url": "https://store.leviton.com/products/1-gang-single-1-406-inch-hole-device-receptacle-wall-plate-standard-size-device-mount-stainless-steel-84004-40",
-        "width": 400,
-        "height": 480
+        "kind": "product"
       }
     },
     {
       "item": "Fv fuse holder",
       "quantity": "1",
-      "model": "Eaton Bussmann CHCC1DU",
-      "reason": "Single Class CC DIN fuse-holder candidate for the hot voltage tap before A1. Body approximately 17.5 × 73.9 × 83.2 mm. Holder rating does not specify the required fuse ampere rating. Confirm lead size and termination acceptance.",
-      "status": "Hold purchase: Eaton SKU page and technical sheet disagree on dimensions / voltage. Obtain exact-revision confirmation; fuse value remains pending.",
+      "model": "Littelfuse LPSC0001Z",
+      "reason": "1-pole, non-indicating Class CC, 600 V AC/DC holder. This replaces the conflicting Eaton revision. 14 AWG Class C copper in and out; the fused output goes to JV before the blue pigtail.",
+      "status": "Selected: 17.78 × 78.5 × 61 mm maximum; 35 mm DIN; terminal torque 2.0 N·m.",
       "links": [
         {
           "label": "Buy · DigiKey",
-          "url": "https://www.digikey.com/en/products/detail/eaton-bussmann-electrical-division/CHCC1DU/2767773",
+          "url": "https://www.digikey.com/en/products/detail/littelfuse-inc/LPSC0001Z/2516312",
           "kind": "buy"
         },
         {
-          "label": "Bussmann catalog · p.145",
-          "url": "https://www.eaton.com/content/dam/eaton/products/electrical-circuit-protection/bussmann-iec-low-voltage-fuses/eaton-bussmann-series-low-voltage-fuses-catalog-ca134002en-en-us.pdf",
+          "label": "Buy · Mouser",
+          "url": "https://www.mouser.com/en/ProductDetail/Littelfuse/LPSC0001Z?qs=gu7KAQ731UTaa%2FsFry13Yw%3D%3D",
+          "kind": "buy"
+        },
+        {
+          "label": "Littelfuse catalog",
+          "url": "https://www.littelfuse.com/de/assetdocs/powr-gard-catalog?assetguid=85d36235-a32b-4608-bfed-f9878aa43af0",
           "kind": "reference"
-        },
-        {
-          "kind": "reference",
-          "label": "Eaton technical data 10430",
-          "url": "https://www.eaton.com/content/dam/eaton/products/electrical-circuit-protection/fuses/data-sheets/bus-ele-ds-10430-chcc-chm-chpv.pdf"
-        },
-        {
-          "kind": "reference",
-          "label": "Eaton SKU page (conflicting data)",
-          "url": "https://www.eaton.com/us/en-us/skuPage.CHCC1DU.html"
         }
       ],
       "id": "fuse-holder",
       "availability": "buy",
       "image": {
         "src": "assets/materials/fuse-holder.jpg",
-        "source_image": "https://assets.rs-online.com/c_scale%2Cw_600%2Cf_auto%2Cq_auto%2Cd_no_image.png/70150778_left.jpg",
-        "kind": "product",
-        "alt": "Eaton Bussmann CHCC1DU — product image",
-        "caption": "Product image",
-        "source_label": "RS",
-        "source_url": "https://us.rs-online.com/product/bussmann-by-eaton/chcc1du/70150778/",
-        "width": 600,
-        "height": 600
+        "alt": "Littelfuse LPSC0001Z supplier photo",
+        "caption": "Littelfuse LPSC0001Z supplier photo",
+        "width": 200,
+        "height": 200,
+        "source_url": "https://www.digikey.com/en/products/detail/littelfuse-inc/LPSC0001Z/2516312",
+        "source_label": "DigiKey / Littelfuse",
+        "kind": "reference"
       }
     },
     {
       "item": "Fv fuse",
-      "quantity": "1 + spare",
-      "model": "Compatible Class CC fuse · value pending",
-      "reason": "Select voltage, ampere, interrupting rating and time characteristic for the exact sensing leads and prospective fault current. KTK-R / FNQ-R / LP-CC are holder-compatible families in the catalog; no particular value has been approved. Fv is passive and adds no operating switch.",
-      "status": "Rating first · no fuse SKU or ampere value released for purchase",
+      "quantity": "2 (1 installed + 1 spare)",
+      "model": "Littelfuse KLKR.500T · 0.5 A Class CC",
+      "reason": "Specific fast-acting 600 V AC Class CC candidate for the voltage-tap branch. Correct cartridge family for LPSC0001Z. Final release requires existing lead ratings and meter energization/inrush review; 0.5 A alone does not prove fault protection of unidentified leads.",
+      "status": "DO NOT ORDER YET: verify existing lead specification and protection coordination.",
       "links": [
         {
-          "label": "Select rating / buy · Class CC fuses",
-          "url": "https://www.mouser.com/c/circuit-protection/fuses/?fuse+size+%2F+group=Class+CC",
-          "kind": "configure"
+          "label": "Exact candidate · DigiKey",
+          "url": "https://www.digikey.com/en/products/detail/littelfuse-ibu/KLKR-500T/2518128",
+          "kind": "buy"
         },
         {
-          "label": "Compatible families / selection",
-          "url": "https://www.eaton.com/content/dam/eaton/products/electrical-circuit-protection/bussmann-iec-low-voltage-fuses/eaton-bussmann-series-low-voltage-fuses-catalog-ca134002en-en-us.pdf",
+          "label": "Littelfuse KLKR data",
+          "url": "https://www.littelfuse.com/assetdocs/klkr-classcc-fuse-datasheet-final?assetguid=4443e5f6-97ee-4206-9abe-9e155371a03e",
           "kind": "reference"
         }
       ],
@@ -383,22 +312,21 @@
       "availability": "buy",
       "image": {
         "src": "assets/materials/fuse.jpg",
-        "source_image": "https://www.eaton.com/mdmfiles/PDM26909659/KTK-R-1_C/500x500_72dpi",
-        "kind": "reference",
-        "alt": "Compatible Class CC fuse · value pending — reference image",
-        "caption": "Class CC example: KTK-R-1 shown. The project fuse rating is still pending.",
-        "source_label": "Eaton",
-        "source_url": "https://www.eaton.com/us/en-us/skuPage.KTK-R-1.html",
-        "width": 500,
-        "height": 500
+        "alt": "KLKR family reference; selected 0.5 A value remains on hold",
+        "caption": "KLKR family reference; selected 0.5 A value remains on hold",
+        "width": 200,
+        "height": 200,
+        "source_url": "https://www.digikey.com/en/products/detail/littelfuse-ibu/KLKR-500T/2518128",
+        "source_label": "DigiKey / Littelfuse",
+        "kind": "reference"
       }
     },
     {
       "item": "Distribution connectors",
-      "quantity": "4",
+      "quantity": "5",
       "model": "WAGO 221-415",
-      "reason": "One each for JL and JN; two bridged connectors for JPE and six external PE connections. Use only with permitted copper conductors, sizes and terminations; confirm tinned blue pigtail and protective-bonding suitability. All groups remain separate.",
-      "status": "Confirm conductor / bonding acceptance",
+      "reason": "One each for JL and JN; two bridged connectors for JPE and six external PE connections. Use only with permitted copper conductors, sizes and terminations; confirm tinned blue pigtail and protective-bonding suitability. All groups remain separate. Fifth group JV transitions from the holder’s 14 AWG output to the blue A1 sensing pigtail.",
+      "status": "Selected; five mounting positions in the panel drawing. Conductor acceptance is checked at assembly.",
       "links": [
         {
           "label": "Buy · DigiKey",
@@ -427,10 +355,10 @@
     },
     {
       "item": "Connector carriers",
-      "quantity": "4",
+      "quantity": "5",
       "model": "WAGO 221-505",
-      "reason": "Secure the connector groups to the backpanel using the carrier's permitted mounting method. 3D carrier envelope is provisional. Add guards as needed; loose connectors must not rely on the wire for support.",
-      "status": "Catalog fit confirmed for 221-415; use M3 or ST2.9 fixing per WAGO drawing, with final screw length to suit panel.",
+      "reason": "Secure the connector groups to the backpanel using the carrier's permitted mounting method. 3D carrier envelope is provisional. Add guards as needed; loose connectors must not rely on the wire for support. Fifth group JV transitions from the holder’s 14 AWG output to the blue A1 sensing pigtail.",
+      "status": "Five carriers, two M3 fixings each; transfer-drill actual front-foot holes.",
       "links": [
         {
           "label": "Buy · DigiKey",
@@ -491,10 +419,10 @@
     },
     {
       "item": "Mains / printer cord",
-      "quantity": "Length after routing",
+      "quantity": "10 ft (3.048 m): supply blank 2.0 m; output blank 1.0 m",
       "model": "Southwire 55808699 · 14/3 SJOOW",
       "reason": "Candidate 3-conductor flexible cord for input and printer output. Catalog nominal OD is about 9.17 mm; measure actual cord and choose fittings accordingly. Final current rating depends on the complete assembly and use conditions.",
-      "status": "Confirm load, length and actual OD",
+      "status": "Selected length allowance; final ends trimmed only after dry routing.",
       "links": [
         {
           "label": "Buy · Home Depot",
@@ -522,7 +450,7 @@
       "quantity": "1",
       "model": "Leviton 515PV · NEMA 5-15P",
       "reason": "Grounded 15 A / 125 V male supply plug for the 14/3 input cord. Check accepted wire size and jacket OD against the chosen cord.",
-      "status": "Confirm cord acceptance before ordering",
+      "status": "Published 6.22–16.64 mm cord range includes the selected nominal 9.2 mm cord; verify clamping on receipt.",
       "availability": "buy",
       "links": [
         {
@@ -554,7 +482,7 @@
       "quantity": "1",
       "model": "Leviton 515CV · NEMA 5-15R",
       "reason": "Grounded female cord connector for the measured printer output. The printer connects here; XA is reserved for the meter adapter.",
-      "status": "Confirm cord acceptance before ordering",
+      "status": "Published 6.22–16.64 mm cord range includes the selected nominal 9.2 mm cord; verify clamping on receipt.",
       "availability": "buy",
       "links": [
         {
@@ -583,18 +511,18 @@
     {
       "item": "Mains / printer strain relief",
       "quantity": "2",
-      "model": "Hammond 1427NCGM20B",
-      "reason": "M20 × 1.5 cable gland candidate for a 6–12 mm cable OD, with correct locknut / sealing parts. Terminate the cord after feeding through. The model uses a provisional envelope, not its drilling dimensions.",
-      "status": "Confirm exact package, OD and wall thickness",
+      "model": "Hammond 1427NCGPG13LB · long PG13.5 thread",
+      "reason": "Two long-thread glands for the selected 14/3 SJOOW mains cords. 6–12 mm clamp range covers the published ~9.2 mm cord OD. The 15 mm thread replaces the former short-thread candidate. Includes nylon locknut and EPDM O-ring.",
+      "status": "15 mm long thread selected for the ~4.8 mm wall; verify full locknut engagement on receipt.",
       "links": [
         {
-          "label": "Buy · Solutions Direct",
-          "url": "https://www.solutionsdirectonline.com/hammond-liquid-tight-nylon-cable-gland-black-6-to-12-mm-1427ncgm20b",
+          "label": "Buy · DigiKey",
+          "url": "https://www.digikey.com/en/products/detail/hammond-manufacturing/1427NCGPG13LB/22152326",
           "kind": "buy"
         },
         {
-          "label": "Hammond selection table",
-          "url": "https://www.hammfg.com/electronics/small-case/accessories/1427ncg",
+          "label": "Hammond dimensions",
+          "url": "https://www.hammfg.com/part/1427NCGPG13LB",
           "kind": "reference"
         }
       ],
@@ -602,46 +530,44 @@
       "availability": "buy",
       "image": {
         "src": "assets/materials/cord-glands.jpg",
-        "source_image": "https://asset.solutionsdirectonline.com/img/Hammond_Manufacturing/hammond_1427ncgm20b.jpg",
-        "kind": "product",
-        "alt": "Hammond 1427NCGM20B — product image",
-        "caption": "Product image",
-        "source_label": "Solutions Direct",
-        "source_url": "https://www.solutionsdirectonline.com/hammond-liquid-tight-nylon-cable-gland-black-6-to-12-mm-1427ncgm20b",
-        "width": 400,
-        "height": 400
+        "alt": "Hammond 1427NCGPG13LB long-thread gland",
+        "caption": "Hammond 1427NCGPG13LB long-thread gland",
+        "width": 200,
+        "height": 200,
+        "source_url": "https://www.hammfg.com/part/1427NCGPG13LB",
+        "source_label": "Hammond",
+        "kind": "product"
       }
     },
     {
       "item": "DC / USB split cable entry",
-      "quantity": "2 bodies; 1 for DC + 1 for USB",
-      "model": "icotek KVT 20 · 45024",
-      "reason": "Split entries retain the factory barrel and USB connectors. KT inserts are listed separately below. Confirm supplied locknut/seal, connector transit, wall thickness and strain relief. The 3D shapes are placeholders, not drilling templates.",
-      "status": "Ø40 mm flange, 37 mm overall; USB spacing corrected. Cable inserts, plug passage and wall stack remain pending.",
+      "quantity": "2",
+      "model": "icotek KVT 32 black · 45026",
+      "reason": "Two split entry bodies for factory-terminated DC and USB cables. M32 replaces M20 to increase connector passage space. Includes sealing rings and locknuts; KT inserts are separate. Confirm the actual plug passes the unassembled hole and nut before drilling.",
+      "status": "KVT 32 selected: larger bare-wall passage for factory plugs; dry-fit nut/seal stack and insert.",
       "links": [
         {
-          "label": "Part / quote · icotek",
-          "url": "https://www.icotek.com/en-us/products/cable-glands/kvt-45024",
-          "kind": "quote"
+          "label": "Buy · RS",
+          "url": "https://us.rs-online.com/product/icotek/45026/72428954/",
+          "kind": "buy"
         },
         {
-          "kind": "reference",
-          "label": "KVT 20 dimension drawing",
-          "url": "https://pim.icotek.com/Produkte/PG02%20Kabelverschraubungen/KVT/KVT%2020/Datenbl%C3%A4tter/45024_KVT%2020_bk.PDF"
+          "label": "icotek dimensioned drawing",
+          "url": "https://pim.icotek.com/Produkte/PG02%20Kabelverschraubungen/KVT/KVT%2032/Datenbl%C3%A4tter/45026_KVT%2032_bk.PDF",
+          "kind": "reference"
         }
       ],
       "id": "split-entries",
       "availability": "buy",
       "image": {
-        "src": "assets/materials/split-entries.jpg",
-        "source_image": "https://pim.icotek.com/Bilder/Produktgruppen/PG02-Kabelverschraubungen/icotek_Kabelverschraubung_KVT.jpg",
-        "kind": "reference",
-        "alt": "icotek KVT 20 · 45024 — reference image",
-        "caption": "KVT family example. Cable and plug are not included.",
+        "src": "assets/materials/kvt32.png",
+        "alt": "icotek KVT 32 family photo; inserts selected separately",
+        "caption": "icotek KVT 32 family photo; inserts selected separately",
+        "width": 370,
+        "height": 370,
+        "source_url": "https://www.icotek.com/en-us/products/cable-glands/kvt-45026",
         "source_label": "icotek",
-        "source_url": "https://www.icotek.com/en-us/products/cable-glands/kvt-45024",
-        "width": 530,
-        "height": 333
+        "kind": "reference"
       }
     },
     {
@@ -707,13 +633,13 @@
       "id": "kt-inserts",
       "item": "DC / USB sealing inserts",
       "quantity": "2; one per split entry",
-      "model": "icotek KT small · bore sizes pending",
-      "reason": "One insert for the measured DC cable and one for the selected USB cable. Request compatibility with KVT 20 / 45024; do not choose the bore from connector size.",
-      "status": "Measure first · specify both cable ODs when requesting the quote",
+      "model": "icotek KT gray: 39934 / 41203 / 41204 / 41205",
+      "reason": "USB: select 39934 (2–3 mm), 41203 (3–4 mm), 41204 (4–5 mm), or 41205 (5–6 mm) from measured round jacket OD. DC: CUI specifies flat UL2468 cable; obtain a matching split insert/profile from icotek before ordering or cutting the DC entry. Do not squeeze flat zip cord into a guessed round insert.",
+      "status": "Hold · USB OD and DC cable profile must match the insert; round DC fit is not established.",
       "availability": "buy",
       "links": [
         {
-          "label": "Select size / quote · icotek KT",
+          "label": "Select exact insert · icotek",
           "url": "https://www.icotek.com/en-us/products/cable-grommets/kt-gy",
           "kind": "configure"
         }
@@ -733,42 +659,52 @@
     {
       "id": "internal-wire",
       "item": "Internal L / N / PE wire",
-      "quantity": "Black, white and green; cut lengths after routing",
-      "model": "Remington 14UL1015STRKITS · 14 AWG stranded, 600 V UL1015",
-      "reason": "Buy one 6-color kit with 25 ft per spool; use black for hot, white for neutral and green for PE. Includes the PE bridge and separate metalwork bonds. Extra kit colors are spare. Confirm wire/terminal acceptance and assembly ampacity; the blue sensing pigtails do not replace this wire.",
-      "status": "Candidate wire · finalize conductor and insulation selection before cutting",
+      "quantity": "Black 3 m; white 2 m; green 3 m minimum. Linked rolls: 100 ft each.",
+      "model": "Southwire 14 AWG, 19-strand Class C, THHN/THWN/MTW, 600 V",
+      "reason": "Specified stranded class matches LPSC0001Z pressure terminals. Buy black 22955984, white 22956784 and green 22959184; linked rolls leave substantial spare stock. Do not substitute a finer flex class at the fuse holder without its approval. Wire blanks and terminal preparation are in the build package.",
+      "status": "Selected: manufacturer nominal OD 0.113 in (2.87 mm); 14 AWG fits WAGO and #10 rings.",
       "availability": "buy",
       "links": [
         {
-          "label": "Configure / buy · Remington kit",
-          "url": "https://www.remingtonindustries.com/hook-up-wire/hook-up-wire-14-awg-600v-pvc-stranded-kit-2-color-sets-2-spool-sizes-available/",
-          "kind": "configure"
+          "label": "Black 22955984 · Home Depot",
+          "url": "https://www.homedepot.com/p/204834035",
+          "kind": "buy"
         },
         {
-          "label": "UL1015 data",
-          "url": "https://www.remingtonindustries.com/content/UL1015%20Hook%20Up%20Wire%20Data%20Sheet.pdf",
+          "label": "White 22956784 · Home Depot",
+          "url": "https://www.homedepot.com/p/204834037",
+          "kind": "buy"
+        },
+        {
+          "label": "Green 22959184 · Home Depot",
+          "url": "https://www.homedepot.com/p/204834032",
+          "kind": "buy"
+        },
+        {
+          "label": "Southwire construction",
+          "url": "https://www.southwire.com/wire-cable/building-wire/thhn-thwn-copper-silicone-free/p/22955984",
           "kind": "reference"
         }
       ],
       "image": {
         "src": "assets/materials/internal-wire.jpg",
-        "source_image": "https://cdn11.bigcommerce.com/s-ryhfhsn/products/2145/images/10702/HWKit-6Color-6x5x4__52480.1637096731.500.500.jpg?c=2",
+        "source_image": "https://assets.southwire.com/adaptivemedia/rendition?id=a2bb165ee1a2faf46ae334521d4021d5e87137f6&prid=01200Wx1200H&clid=SAPDAM&prclid=productpictures",
         "kind": "reference",
-        "alt": "Remington 14UL1015STRKITS · 14 AWG stranded, 600 V UL1015 — reference image",
-        "caption": "Kit example. Select the required wire colors and spool size.",
-        "source_label": "Remington",
-        "source_url": "https://www.remingtonindustries.com/hook-up-wire/hook-up-wire-14-awg-600v-pvc-stranded-kit-2-color-sets-2-spool-sizes-available/",
-        "width": 500,
-        "height": 500
+        "alt": "Southwire 14 AWG stranded THHN wire",
+        "caption": "Southwire 14 AWG stranded THHN family reference",
+        "source_label": "Southwire",
+        "source_url": "https://www.southwire.com/wire-cable/building-wire/thhn-thwn-copper-silicone-free/p/22955984",
+        "width": 1200,
+        "height": 240
       }
     },
     {
       "id": "ring-lugs",
       "item": "Ring terminals",
-      "quantity": "2 for Q0 + required PE lug ends; allow spares",
+      "quantity": "6 minimum: 2 Q0, 2 panel/rail bonds + 2 spares",
       "model": "3M MV14-10R/LX-BOTTLE · #10 stud, 16–14 AWG",
       "reason": "Two Q0 terminals are #10-32 studs. The former #8 alternative has been removed. Other PE terminations must match their own studs.",
-      "status": "Q0 requires #10 rings; use separate #6-32 mounting screws. Confirm each PE stud, insulation OD and crimp tool.",
+      "status": "Selected #10 hole, 16–14 AWG. Dedicated #10-32 bond bolts in fastener schedule; terminal-matched crimper required.",
       "availability": "buy",
       "links": [
         {
@@ -784,119 +720,22 @@
       ],
       "image": {
         "src": "assets/materials/ring-lugs.jpg",
-        "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/002/689/538/Schotchlok%20MV14-8R_sml%28200x200%29.jpg",
-        "kind": "reference",
-        "alt": "3M insulated ring terminal family reference; specified Q0 ring uses a #10 stud hole",
-        "caption": "Family reference (#8 pictured); order the specified #10 version.",
-        "source_label": "DigiKey",
-        "source_url": "https://www.digikey.com/en/products/detail/3m/MV14-8R-LX-BOTTLE/2666579",
+        "alt": "3M MV14-10R/LX-BOTTLE supplier photo; #10 stud",
+        "caption": "3M MV14-10R/LX-BOTTLE supplier photo; #10 stud",
         "width": 200,
-        "height": 200
-      }
-    },
-    {
-      "id": "box-ground-screw",
-      "item": "Device-box grounding screw",
-      "quantity": "1 used; pack of 50",
-      "model": "IDEAL 30-3194",
-      "reason": "Dedicated grounding screw candidate for the metal XA box. Match the box ground hole and terminal. The panel and rail need their own approved bonding fasteners, listed separately; painted mounting screws are not a substitute.",
-      "status": "Confirm box ground-hole thread and engagement",
-      "availability": "buy",
-      "links": [
-        {
-          "label": "Buy · SupplyHouse",
-          "url": "https://www.supplyhouse.com/Ideal-30-3194-Thread-Forming-Hole-Finding-Combination-Hex-Grounding-Screw-Card-of-50",
-          "kind": "buy"
-        },
-        {
-          "label": "IDEAL grounding catalog",
-          "url": "https://www.idealind.com/content/dam/electrical/support/P-070%20FullLineCatalog2018.pdf",
-          "kind": "reference"
-        }
-      ],
-      "image": {
-        "src": "assets/materials/box-ground-screw.jpg",
-        "source_image": "https://d3501hjdis3g5w.cloudfront.net/images/products/zoom/30-3194-3.jpg",
-        "kind": "product",
-        "alt": "IDEAL 30-3194 — product image",
-        "caption": "Product image",
-        "source_label": "SupplyHouse",
-        "source_url": "https://www.supplyhouse.com/Ideal-30-3194-Thread-Forming-Hole-Finding-Combination-Hex-Grounding-Screw-Card-of-50",
-        "width": 500,
-        "height": 500
-      }
-    },
-    {
-      "id": "box-entry",
-      "item": "Rear-box wire-entry protection",
-      "quantity": "1 entry; final fitting subject to approval",
-      "model": "Heyco G1508 / TG 875 · internal-entry candidate",
-      "reason": "Candidate edge protection for a 22.2 mm opening in the rear metal box, inside the outer enclosure. Check actual sheet thickness, conductor bundle and retention; this grommet is not strain relief or a substitute for any required listed wiring fitting.",
-      "status": "0.8–2.0 mm metal panel range; not for the 4.8 mm enclosure wall. Grommet provides edge protection, not strain relief; wiring-method acceptance pending.",
-      "availability": "buy",
-      "links": [
-        {
-          "label": "Buy candidate · Mouser",
-          "url": "https://www.mouser.com/ProductDetail/Heyco/G1508?qs=J6YSCTFSniBvhVAN2sASUg%3D%3D",
-          "kind": "buy"
-        },
-        {
-          "label": "Heyco dimensions · p.6-9",
-          "url": "https://www.heyco.com/pdf/Heyco_Cat_115.pdf",
-          "kind": "reference"
-        }
-      ],
-      "image": {
-        "src": "assets/materials/box-entry.jpg",
-        "source_image": "https://www.heyco.com/wp-content/uploads/2024/12/Heyco%C2%AE-UL-Listed-Thermoplastic-Rubber-Grommets.jpg",
-        "kind": "reference",
-        "alt": "Heyco G1508 / TG 875 · internal-entry candidate — reference image",
-        "caption": "TG grommet family reference.",
-        "source_label": "Heyco",
-        "source_url": "https://www.heyco.com/products/bushings-grommets-heycaps-plugs/tubing-caps-and-plugs/heyco-ul-listed-thermoplastic-rubber-grommets/",
-        "width": 305,
-        "height": 201
-      }
-    },
-    {
-      "id": "knockout-seals",
-      "item": "Unused-opening closures",
-      "quantity": "Only for opened, unused 1/2 in trade knockouts",
-      "model": "RACO 1042",
-      "reason": "Close any unused knockout that has been removed. Leave intact factory knockouts intact; this is a conditional spare, not an instruction to open extra holes.",
-      "status": "Conditional purchase · count opened unused holes after fabrication",
-      "availability": "buy",
-      "links": [
-        {
-          "label": "Buy · Platt RACO 1042",
-          "url": "https://www.platt.com/p/0794385/hubbell-raco/knockout-seal-1-2-snap-in-steel/050169010426/rac1042",
-          "kind": "buy"
-        },
-        {
-          "label": "RACO specification",
-          "url": "https://hubbellcdn.com/specsheet/RACO_CA-1042-SPEC-EN.pdf",
-          "kind": "reference"
-        }
-      ],
-      "image": {
-        "src": "assets/materials/knockout-seals.jpg",
-        "source_image": "https://rexel-cdn.com/products/rac1046.jpg?i=C6DEB25D-B723-4EAC-97AA-897275FFA401&f=420",
-        "kind": "reference",
-        "alt": "RACO 1042 — reference image",
-        "caption": "Supplier family image; order the specified 1042 size.",
-        "source_label": "Platt",
-        "source_url": "https://www.platt.com/p/0794385/hubbell-raco/knockout-seal-1-2-snap-in-steel/050169010426/rac1042",
-        "width": 420,
-        "height": 326
+        "height": 200,
+        "source_url": "https://www.digikey.com/en/products/detail/3m/MV14-10R-LX-BOTTLE/2670218",
+        "source_label": "DigiKey / 3M",
+        "kind": "reference"
       }
     },
     {
       "id": "tie-mounts",
       "item": "Screw-fixed cable mounts",
-      "quantity": "Routing allowance: 8–12; finalize during dry fit",
+      "quantity": "12 installed; pack of 100",
       "model": "Panduit TM2S8-C",
       "reason": "Screw-mounted bases for the retained leads and separate power/signal routes. Match #8 / M4 fasteners to the mounting stack. Do not rely on adhesive alone. Linked package contains 100.",
-      "status": "To buy · estimated count, no mounting-hole pattern released",
+      "status": "Twelve panel locations; M4 × 20 mm screws, washers and locknuts in the fastener schedule.",
       "availability": "buy",
       "links": [
         {
@@ -920,10 +759,10 @@
     {
       "id": "cable-ties",
       "item": "Cable ties",
-      "quantity": "Routing allowance: 12–20; pack of 100",
+      "quantity": "24 allowed; pack of 100",
       "model": "Panduit PLT2S-C · 188 × 4.8 mm",
       "reason": "For small wire bundles and the screw-fixed bases. Keep allowed bend radii and avoid crushing insulation. This length is for cables, not a strap around the meter.",
-      "status": "To buy · final count after lead routing",
+      "status": "Selected: small bundles only. Inspect retained lead bend radii during dry fit.",
       "availability": "buy",
       "links": [
         {
@@ -950,7 +789,7 @@
       "quantity": "1 SWD dispenser + 1 SLW dispenser; pens included",
       "model": "3M ScotchCode SWD + SLW",
       "reason": "SWD for smaller wire IDs; SLW for larger cables and longer identification. Match actual cable OD to the 3M size table. Mark both wire ends and Q0, JL, JN, PE, Fv, CT1 and A1/A2/A3. Add durable SUPPLY, PRINTER OUTPUT, Q0 ON/OFF and ELITEpro ADAPTER ONLY — UNMETERED legends.",
-      "status": "SWD fits 3.58 mm internal wire; SLW fits approximately 9.2 mm cord. Measure pigtails and verify adhesion.",
+      "status": "SWD fits 2.87 mm internal wire; SLW fits approximately 9.2 mm cord. Measure pigtails and verify adhesion.",
       "availability": "buy",
       "links": [
         {
@@ -984,21 +823,16 @@
     {
       "id": "fasteners",
       "item": "Mounting and bonding hardware",
-      "quantity": "1 matched set; count from final mounting schedule",
-      "model": "Machine screws, nuts, flat/locking washers and approved bonding hardware",
-      "reason": "Cover the DIN rail, four carriers, tie bases, logger restraint, Q0 support, XA box and faceplate stack. Include separate panel and rail PE bolt/lug connections. Check hardware included with each part before ordering duplicates.",
-      "status": "Q0 mount: #6-32, max 4.95 mm insert depth; Q0 studs: #10-32; WAGO carriers: M3 or ST2.9; tie mounts: #8/M4. Lengths, counts and bonding stacks pending.",
+      "quantity": "Six assembly groups with exact fastener links and counts",
+      "model": "Screw / nut / washer schedule in Build_Package.md",
+      "reason": "The package names thread, length, quantity, mating material and engagement. M3 for WAGO; M4 for rail and tie bases; #6-32 for Q0 and XA; #10-32 for dedicated PE bolts. Factory enclosure fasteners are reused.",
+      "status": "Specific purchase links provided; receiving checks cover washer thickness and actual stacks.",
       "availability": "buy",
       "links": [
         {
-          "label": "Select / buy machine screws · Bolt Depot",
-          "url": "https://boltdepot.com/Machine_screws",
-          "kind": "configure"
-        },
-        {
-          "label": "Select matching nuts / washers · Bolt Depot",
-          "url": "https://boltdepot.com/Catalog-Tabs?F_Units=US",
-          "kind": "configure"
+          "label": "Fastener sizes and purchase links",
+          "url": "build.html#fasteners",
+          "kind": "buy"
         }
       ],
       "image": {
@@ -1014,88 +848,34 @@
       }
     },
     {
-      "id": "wall-inserts",
-      "item": "Q0 / XA wall supports",
-      "quantity": "2 custom mounting inserts / supports",
-      "model": "Fabricate to approved measurements",
-      "reason": "Support Q0 on the front wall and XA / rear box on the right wall. Confirm wall taper, thickness, load and electrical insulation requirements. The illustrated inserts are envelopes, not fabrication drawings.",
-      "status": "Hold fabrication: wall taper and CAD intersections require resolved Q0 / outlet support and aperture drawings.",
+      "id": "logger-restraint",
+      "item": "Adjustable logger straps",
+      "quantity": "2 × 400 mm blanks; buy one 12 ft roll",
+      "model": "VELCRO ONE-WRAP 90340 · 19.05 mm (3/4 in) wide roll",
+      "reason": "Two 21 × 4 mm rounded panel slots per strap, 82 mm apart; flexible retention accommodates the two published logger widths. Feed straps before the panel goes in. Deburr and smooth every slot edge. No rigid custom cradle or housing drilling.",
+      "status": "Four 21 × 4 mm panel slots suit the selected 19.05 mm strap; fit and trim two 400 mm blanks.",
       "availability": "buy",
       "links": [
         {
-          "label": "Fabrication quote · Xometry CNC",
-          "url": "https://www.xometry.com/capabilities/cnc-machining-service/",
-          "kind": "quote"
-        }
-      ],
-      "image": {
-        "src": "assets/materials/wall-inserts.svg",
-        "kind": "design",
-        "alt": "Concept illustration of q0 / xa wall supports, not a fabricated part",
-        "caption": "Design concept · not yet fabricated",
-        "source_label": "Project design",
-        "width": 480,
-        "height": 320
-      }
-    },
-    {
-      "id": "terminal-guard",
-      "item": "Q0 terminal guard",
-      "quantity": "1 guard over both live studs",
-      "model": "Custom guard or manufacturer-approved terminal covers",
-      "reason": "Prevent contact with Q0 studs and keep the mains terminals separated from signal cables. Use an approved insulating material and fastening scheme; ordinary hobby-print plastic has not been specified. Include any further covers required by the termination review.",
-      "status": "Hold fabrication: stud, ring, insulation, tool access and clearance envelope not yet defined.",
-      "availability": "buy",
-      "links": [
-        {
-          "label": "Fabrication quote · Xometry CNC",
-          "url": "https://www.xometry.com/capabilities/cnc-machining-service/",
-          "kind": "quote"
+          "label": "Buy · Lowe’s 90340",
+          "url": "https://www.lowes.com/pd/VELCRO-0-75-in-Black-Strap-Fastener/1087893",
+          "kind": "buy"
         },
         {
-          "label": "Carling terminal dimensions",
-          "url": "https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf",
+          "label": "VELCRO product",
+          "url": "https://www.velcro.com/products/organization/heavy-duty-one-wrap-roll/",
           "kind": "reference"
         }
       ],
       "image": {
-        "src": "assets/materials/terminal-guard.svg",
-        "kind": "design",
-        "alt": "Concept illustration of q0 terminal guard, not a fabricated part",
-        "caption": "Design concept · not yet fabricated",
-        "source_label": "Project design",
-        "width": 480,
-        "height": 320
-      }
-    },
-    {
-      "id": "logger-restraint",
-      "item": "Logger cradle and straps",
-      "quantity": "1 cradle + 2 straps cut to fit",
-      "model": "Custom cradle + VELCRO ONE-WRAP 91808 roll candidate",
-      "reason": "Hold the long logger without drilling its housing or loading its connectors. Fix the cradle mechanically to the panel; cut straps from the roll with adequate overlap. Confirm material, retention and access to all ports.",
-      "status": "Custom cradle and strap fit pending · not validated as a restraint",
-      "availability": "buy",
-      "links": [
-        {
-          "label": "Buy strap roll · Micro Center",
-          "url": "https://www.microcenter.com/product/658718/91808-one-wrap-roll-12",
-          "kind": "buy"
-        },
-        {
-          "label": "Cradle fabrication quote · Xometry CNC",
-          "url": "https://www.xometry.com/capabilities/cnc-machining-service/",
-          "kind": "quote"
-        }
-      ],
-      "image": {
-        "src": "assets/materials/logger-restraint.svg",
-        "kind": "design",
-        "alt": "Concept illustration of logger cradle and straps, not a fabricated part",
-        "caption": "Design concept · not yet fabricated",
-        "source_label": "Project design",
-        "width": 480,
-        "height": 320
+        "src": "assets/materials/logger-straps.png",
+        "width": 1024,
+        "height": 1024,
+        "kind": "product",
+        "alt": "VELCRO ONE-WRAP 90340 black roll",
+        "caption": "VELCRO 90340 · 12 ft × 3/4 in roll",
+        "source_url": "https://www.velcro.com/products/organization/heavy-duty-one-wrap-roll/",
+        "source_label": "VELCRO"
       }
     }
   ],
@@ -1118,5 +898,35 @@
       "reason": "Calipers, wire stripper, terminal-matched crimper, torque tools, machining/deburring tools, PE/polarity/insulation test equipment and an independent power reference. Arrange access before assembly; tool ratings and procedures belong to the approved build process."
     }
   ],
-  "image_note": "Photos identify the equipment or candidate part. Family examples and unfinished custom parts are labeled. Images are not at a common scale; use the dimension schedule and 3D layout for size comparisons."
+  "image_note": "Photos identify the equipment or candidate part. Family examples and unfinished custom parts are labeled. Images are not at a common scale; use the dimension schedule and 3D layout for size comparisons.",
+  "removed_items": [
+    {
+      "id": "outlet-box",
+      "model": "RACO 670RAC / retail 8670"
+    },
+    {
+      "id": "faceplate",
+      "model": "Leviton 84004-40"
+    },
+    {
+      "id": "box-ground-screw",
+      "model": "IDEAL 30-3194"
+    },
+    {
+      "id": "box-entry",
+      "model": "Heyco G1508 / TG 875 · internal-entry candidate"
+    },
+    {
+      "id": "knockout-seals",
+      "model": "RACO 1042"
+    },
+    {
+      "id": "wall-inserts",
+      "model": "Fabricate to approved measurements"
+    },
+    {
+      "id": "terminal-guard",
+      "model": "Custom guard or manufacturer-approved terminal covers"
+    }
+  ]
 }

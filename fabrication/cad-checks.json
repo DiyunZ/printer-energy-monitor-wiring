@@ -1,0 +1,255 @@
+{
+  "units": "mm",
+  "status": "Digital geometry checks only; open release conditions in build.html",
+  "source_step_sha256": "df50fe8c21b6777720d72a9c30f8983c156294afbf1cdb82c1c4a936318eb318",
+  "unchecked_standard_interfaces": "Vendor interfaces outside bundled standards database; dimensions from linked drawings, no physical qualification.",
+  "results": [
+    {
+      "id": "case-machined",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 2227247.1276208013,
+      "bounds_mm": [
+        392.2499770979982,
+        207.39100020000006,
+        433.22092349841625
+      ]
+    },
+    {
+      "id": "panel-machined",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 231150.69342025463,
+      "bounds_mm": [
+        327.0250000000001,
+        1.8973800000000831,
+        374.65
+      ]
+    },
+    {
+      "id": "Q0 toggle",
+      "removed_mm3": 1926.6109744068235,
+      "result": "pass"
+    },
+    {
+      "id": "Q0 fixing -1",
+      "removed_mm3": 58.74299837136641,
+      "result": "pass"
+    },
+    {
+      "id": "Q0 fixing +1",
+      "removed_mm3": 58.742988066747785,
+      "result": "pass"
+    },
+    {
+      "id": "XA outlet",
+      "removed_mm3": 7260.769089837093,
+      "result": "pass"
+    },
+    {
+      "id": "XA fixing -1",
+      "removed_mm3": 59.93710879795253,
+      "result": "pass"
+    },
+    {
+      "id": "XA fixing +1",
+      "removed_mm3": 59.937098576687276,
+      "result": "pass"
+    },
+    {
+      "id": "SUPPLY",
+      "removed_mm3": 1653.8714826796204,
+      "result": "pass"
+    },
+    {
+      "id": "OUTPUT",
+      "removed_mm3": 1653.8718264363706,
+      "result": "pass"
+    },
+    {
+      "id": "DC",
+      "removed_mm3": 3912.719623708166,
+      "result": "pass"
+    },
+    {
+      "id": "USB",
+      "removed_mm3": 3995.2725340211764,
+      "result": "pass"
+    },
+    {
+      "id": "Rail fixing 1",
+      "removed_mm3": 30.176525037153624,
+      "result": "pass"
+    },
+    {
+      "id": "Rail fixing 2",
+      "removed_mm3": 30.176525037182728,
+      "result": "pass"
+    },
+    {
+      "id": "Tie anchor 1",
+      "removed_mm3": 30.176525037182728,
+      "result": "pass"
+    },
+    {
+      "id": "Tie anchor 2",
+      "removed_mm3": 30.176525037182728,
+      "result": "pass"
+    },
+    {
+      "id": "Tie anchor 3",
+      "removed_mm3": 30.17652503721183,
+      "result": "pass"
+    },
+    {
+      "id": "Tie anchor 4",
+      "removed_mm3": 30.176525037182728,
+      "result": "pass"
+    },
+    {
+      "id": "Tie anchor 5",
+      "removed_mm3": 30.176525037182728,
+      "result": "pass"
+    },
+    {
+      "id": "Tie anchor 6",
+      "removed_mm3": 30.176525037182728,
+      "result": "pass"
+    },
+    {
+      "id": "Tie anchor 7",
+      "removed_mm3": 30.176525037182728,
+      "result": "pass"
+    },
+    {
+      "id": "Tie anchor 8",
+      "removed_mm3": 30.176525037182728,
+      "result": "pass"
+    },
+    {
+      "id": "Tie anchor 9",
+      "removed_mm3": 30.176525037182728,
+      "result": "pass"
+    },
+    {
+      "id": "Tie anchor 10",
+      "removed_mm3": 30.176525037182728,
+      "result": "pass"
+    },
+    {
+      "id": "Tie anchor 11",
+      "removed_mm3": 30.176525037182728,
+      "result": "pass"
+    },
+    {
+      "id": "Tie anchor 12",
+      "removed_mm3": 30.17652503721183,
+      "result": "pass"
+    },
+    {
+      "id": "Panel PE bond",
+      "removed_mm3": 41.85968337254599,
+      "result": "pass"
+    },
+    {
+      "id": "Strap slot 1",
+      "removed_mm3": 152.86502027633833,
+      "result": "pass"
+    },
+    {
+      "id": "Strap slot 2",
+      "removed_mm3": 152.86502027630922,
+      "result": "pass"
+    },
+    {
+      "id": "Strap slot 3",
+      "removed_mm3": 152.86502027628012,
+      "result": "pass"
+    },
+    {
+      "id": "Strap slot 4",
+      "removed_mm3": 152.86502027630922,
+      "result": "pass"
+    },
+    {
+      "id": "Q0 toggle through gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Q0 fixing -1 through gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Q0 fixing +1 through gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "XA outlet through gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "XA fixing -1 through gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "XA fixing +1 through gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "SUPPLY through gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "OUTPUT through gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "DC through gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "USB through gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Strap 1 19.3 x 2.0 mm gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Strap 2 19.3 x 2.0 mm gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Strap 3 19.3 x 2.0 mm gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Strap 4 19.3 x 2.0 mm gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Rail 1 M4 gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Rail 2 M4 gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    }
+  ]
+}

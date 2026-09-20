@@ -1,0 +1,6 @@
+# Preserve generated CAD exports byte-for-byte and keep them out of text diffs.
+fabrication/* linguist-generated=true
+fabrication/*.step binary
+fabrication/*.stl binary
+fabrication/*.dxf binary
+fabrication/*.svg -diff

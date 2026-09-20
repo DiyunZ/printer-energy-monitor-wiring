@@ -11,9 +11,9 @@ const run = (dimensions = d, procurement = p) => audit(dimensions, m, buffer, pr
 const result = run();
 test('current nominal checks pass while unresolved release gates stay visible', () => {
   assert.equal(result.checks.filter(c => c.result === 'fail').length, 0);
-  assert.ok(result.checks.some(c => c.id === 'Wall hardware mounting interfaces' && c.result === 'hold'));
+  assert.ok(result.checks.some(c => c.id === 'Machined wall geometry' && c.result === 'pass'));
   assert.match(result.release, /NOT RELEASED/);
-  assert.equal(result.insertion_sweeps.length, 9);
+  assert.equal(result.insertion_sweeps.length, 10);
   assert.ok(result.insertion_sweeps.every(s => s.shell_triangle_hits === 0));
 });
 test('old split-entry locations fail real flange clearance even when small model bodies fit', () => {
@@ -32,7 +32,7 @@ test('old breaker body depth and #8 ring option are rejected', () => {
   assert.equal(checks.find(c => c.id === 'Q0 ring size').result, 'fail');
 });
 test('a final-position fit does not imply an unobstructed insertion path', () => {
-  const panel = d.parts.find(p => p.id === 'panel'), outlet = d.parts.find(p => p.id === 'outletguard');
+  const panel = d.parts.find(p => p.id === 'panel'), outlet = d.parts.find(p => p.id === 'outlet');
   assert.equal(bounds(panel).intersectsBox(bounds(outlet)), false);
   assert.equal(sweptBox(panel).intersectsBox(bounds(outlet)), true);
 });

@@ -1,0 +1,287 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Machining and assembly package · ELITEpro XC</title><link rel="stylesheet" href="material-images.css"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#layout">← Interactive 3D layout</a><a href="index.html#wiring">Circuit</a><a href="materials.html">Materials</a><a href="references.html">Sources</a><a href="installation.html">Installation audit</a><a href="build.html">Build package</a><a href="Build_Package.md" download>Download Markdown</a></nav><h1>Build package A</h1>
+<p>September 20, 2026 · one grounded 120 V supply · one printer at a time.</p>
+<p><strong>Engineering review package. Complete-order, machining and energizing release remain open.</strong> The drawings and part selections below replace the earlier outlet-box concept. They do not represent a physically assembled or certified product.</p>
+<p><a href="materials.html">Materials with pictures and purchase links</a> · <a href="index.html#assembly-preview">3D installation sequence</a> · <a href="installation.html">Installation audit</a></p>
+<h2>Downloads</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="fabrication/Machining_Drawings.pdf">Five-page machining drawing</a></td>
+<td>Hole coordinates, viewing directions, dimensions and tolerances. Print for reference, not as a scale template.</td>
+</tr>
+<tr>
+<td><a href="fabrication/case-machined.step">Machined case STEP</a> · <a href="fabrication/panel-machined.step">Machined panel STEP</a></td>
+<td>Exact solid geometry for shop review and fixturing. Modify the purchased Hammond parts; do not print a substitute mains enclosure.</td>
+</tr>
+<tr>
+<td><a href="fabrication/front.dxf">Front DXF</a> · <a href="fabrication/right.dxf">Right DXF</a> · <a href="fabrication/left.dxf">Left DXF</a> · <a href="fabrication/rear.dxf">Rear DXF</a> · <a href="fabrication/panel.dxf">Panel DXF</a></td>
+<td>Millimetres, 1:1. Machine only the <code>CUT</code> layer. <code>REFERENCE</code> and <code>TEXT</code> layers are non-cutting.</td>
+</tr>
+<tr>
+<td><a href="fabrication/cad-checks.json">Cut and clearance results</a> · <a href="fabrication/wall-openings.json">Wall opening coordinates</a></td>
+<td>Reproducible digital checks and shared datums.</td>
+</tr>
+<tr>
+<td><a href="wiring_routes.svg">Wiring drawing</a> · <a href="connector_detail.svg">Connector detail</a> · <a href="routes.json">Connection schedule</a></td>
+<td>Electrical topology. These drawings are not machining templates.</td>
+</tr>
+</tbody></table></div>
+<h2>What is fixed, and what is still needed</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Interface</th>
+<th>Current decision</th>
+<th>Release evidence still needed</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Existing black adapter</td>
+<td>Photo identifies <strong>CUI SMI6-9-V-P5</strong>, <strong>9 V DC, 0.667 A, center positive</strong>. Retain it and its original cable. The CUI P5 drawing specifies a 5.5/2.1 mm plug.</td>
+<td>Check condition and delivered voltage before connecting the logger; do not buy a replacement merely because the earlier label was unread.</td>
+</tr>
+<tr>
+<td>Existing CT</td>
+<td>Use one split-core CT on printer hot only. The photograph shows the CTHSC family, but wires cover the current/output digits.</td>
+<td>Record the actual model, rated A and mV output. The illustrated 20 A body is an example; do not enter 20 A in ELOG from the model. If the original cannot be identified, <a href="https://www.dentinstruments.com/shop/current-sensors/hinged-current-transformers-sensors-for-energy-metering/">DENT CT-HSC-020-U</a> is a separately purchasable 20 A / 333 mV alternative; select the exact 20 A variant and retain its documentation. It is not included as a mandatory duplicate purchase.</td>
+</tr>
+<tr>
+<td>Three existing blue pigtails</td>
+<td>Assign A1 = hot/L1; A2 = neutral/L2; A3 = neutral/N. They carry sensing current, not printer current or PE.</td>
+<td>The blue-wire photograph has no readable conductor/current specification. Establish identity, ratings and terminal preparation. <strong>Do not order the proposed 0.5 A fuse until this is resolved.</strong></td>
+</tr>
+<tr>
+<td>DC entry</td>
+<td>KVT 32 frame location is drawn. CUI&#39;s SMI6 cord specification is UL2468, a flat cord construction.</td>
+<td>A round KT insert is not established as suitable for this cord. Match its actual cross-section to a documented insert or revise this interface before drilling its opening. Do not cut the adapter cable or pack a gap with tape.</td>
+</tr>
+<tr>
+<td>USB entry</td>
+<td>StarTech USB2HAB6; KVT 32 frame location is drawn.</td>
+<td>Select its KT insert from measured jacket OD; confirm the factory plug passes the empty opening. Frame and insert are separate purchases.</td>
+</tr>
+<tr>
+<td>Q0 / supply</td>
+<td>Carling CA1-B0-24-615-121-DG, 15 A, single pole; 5-15 power interfaces.</td>
+<td>Exact-SKU availability, available fault current, startup behavior and application acceptance by the responsible electrical professional. The 15 A component rating does not approve a 15 A continuous load.</td>
+</tr>
+</tbody></table></div>
+<p>These are specific outstanding interfaces, not permission requests. The supplied photographs support the adapter identification but do not expose the hidden CT digits or establish the blue conductors&#39; ratings. <a href="https://in.ftcelectronics.com/datasheets-55/SMI6-12-V-P5.pdf">CUI original SMI6 datasheet</a>, <a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/">DENT accessory description</a>.</p>
+<h2>Selected construction</h2>
+<p>Hammond <strong>PCJ16148CC</strong> with <strong>14R1513</strong> steel panel. Q0 mounts directly through the front wall. <strong>Leviton 5279-C</strong> mounts through the right wall and provides an enclosed rear body, eliminating the separate metal outlet box, faceplate and custom wall supports. Its exterior socket is dedicated to the original adapter; label it <strong>LOGGER ADAPTER ONLY</strong>.</p>
+<p><strong>Littelfuse LPSC0001Z</strong> clips onto a 100 mm DIN rail. Its input and output use compatible <strong>14 AWG Class C copper</strong>. Output terminates at the added <strong>JV</strong> connector before the small A1 pigtail. Five WAGO 221-415 / 221-505 pairs provide JL, JN, PE, PE+ and JV. One wire per port. PE and PE+ are bridged; neutral and PE remain separate.</p>
+<p>The existing meter uses two adjustable <strong>19.05 mm</strong> ONE-WRAP straps. Four <strong>21 × 4 mm</strong> smooth slots allow the straps to pass through the panel. Reserve the larger <strong>216 × 69 × 58 mm</strong> meter envelope when fitting the actual older unit. Do not drill the instrument or use its magnetic feet as the only restraint.</p>
+<h2>Machining datums</h2>
+<p>The 3D and wiring plan share X/Z locations. X is across the panel; Y is upward from the <strong>panel underside</strong>; Z is forward toward Q0. Negative Z is the printer exit. The real case walls have approximately <strong>0.937° draft</strong>. The wall DXFs are local flat-face setups, not projections to a vertical plane.</p>
+<p>For outside views: front U = X; rear U = −X; right U = −Z; left U = Z. V runs up along the wall. Its origin is the intersection of that face with Y = 0 and the case centerline. Use the STEP model and the physical panel support datum to fixture the case; the bottom outside edge is <strong>not</strong> Y = 0. Panel drawing: view from the lid, U = X, V = −Z, origin at the blank center.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Cut geometry</th>
+<th>Datum in assembly coordinates</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Q0 handle</td>
+<td>10.97 × 36.78 mm rectangle; two Ø3.96 mm holes at 52.37 mm vertical pitch</td>
+<td>Front wall; X = −112, Y = 120 mm</td>
+</tr>
+<tr>
+<td>XA</td>
+<td>Ø44.00 ±0.15 mm; two Ø4.00 mm fixings at 53.57 mm vertical pitch</td>
+<td>Right wall; Y = 121, Z = 13 mm</td>
+</tr>
+<tr>
+<td>Supply gland</td>
+<td>Ø21.00 mm</td>
+<td>Left wall; Y = 43, Z = 128 mm</td>
+</tr>
+<tr>
+<td>Printer gland</td>
+<td>Ø21.00 mm</td>
+<td>Rear wall; X = 0, Y = 36 mm</td>
+</tr>
+<tr>
+<td>DC / USB frames</td>
+<td>Ø32.30 mm, both conditional on entry acceptance above</td>
+<td>Right wall; DC Y/Z = 78/106, USB = 55/167 mm</td>
+</tr>
+<tr>
+<td>Rail</td>
+<td>Two Ø4.50 mm panel holes, 80 mm apart</td>
+<td>X/Z = −95/−28 and −15/−28 mm</td>
+</tr>
+<tr>
+<td>Panel bond</td>
+<td>Ø5.30 mm, dedicated to PE</td>
+<td>X/Z = −125/60 mm</td>
+</tr>
+<tr>
+<td>Meter straps</td>
+<td>Four 21 × 4 mm slots, long axis Z</td>
+<td>X = 50 and 132; Z = −70 and 50 mm</td>
+</tr>
+<tr>
+<td>Cable mounts</td>
+<td>Twelve Ø4.50 mm holes</td>
+<td>Individual coordinates in the panel drawing</td>
+</tr>
+<tr>
+<td>Five WAGO carriers</td>
+<td>Two Ø3.30 mm fixing holes per carrier</td>
+<td>Place within the dashed locator envelope, orient the carrier as shown, then transfer-drill from the actual part. The unlocated longitudinal fixing datum is not invented.</td>
+</tr>
+</tbody></table></div>
+<p>Retain all factory panel and lid features. Transfer-drill the rail&#39;s two fixing holes to match the panel; add a separate Ø5.30 mm rail-web PE hole at X/Z = −27/−28 mm, clear of the holder and end stops. Deburr every cut, remove chips and protect the gasket. Smooth strap slots on both faces without enlarging their functional opening. Machining does not preserve or confer an IP/NEMA certification on the completed assembly.</p>
+<h2 id="fasteners">Fasteners and purchase quantities</h2>
+
+<p>Counts below are <strong>installed</strong>, followed by suggested purchase counts including spares. Supplier packaging may be larger. Metric and US threads are deliberately distinguished.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Assembly</th>
+<th>Installed hardware</th>
+<th>Exact purchase links</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Q0</td>
+<td>2 × #6-32 × 3/8 in screws; 2 × #6 flat washers</td>
+<td>Buy 4 <a href="https://boltdepot.com/Product-Details?product=1335">screws, 1335</a>; washers included in the 10-piece allowance below. No nut on Q0&#39;s threaded inserts.</td>
+</tr>
+<tr>
+<td>XA</td>
+<td>2 × #6-32 × 5/8 in screws; 4 × #6 flat washers; 2 × #6-32 nylon locknuts</td>
+<td>Buy 4 <a href="https://boltdepot.com/Product-Details?product=1438">screws, 1438</a>, 10 total <a href="https://boltdepot.com/Product-Details?product=2942">washers, 2942</a>, 4 <a href="https://boltdepot.com/Product-Details?product=2550">nuts, 2550</a>.</td>
+</tr>
+<tr>
+<td>Five WAGO carriers</td>
+<td>10 × M3 × 16 mm pan screws; 10 × M3 washers; 10 × M3 locknuts</td>
+<td>Buy 12 each: <a href="https://boltdepot.com/Product-Details?product=6835">screws, 6835</a>, <a href="https://boltdepot.com/Product-Details?product=4513">washers, 4513</a>, <a href="https://boltdepot.com/Product-Details?product=4792">nuts, 4792</a>.</td>
+</tr>
+<tr>
+<td>Twelve tie anchors</td>
+<td>12 × M4 × 20 mm pan screws; 12 × M4 washers; 12 × M4 locknuts</td>
+<td>Buy 14 each: <a href="https://boltdepot.com/Product-Details?product=17888">screws, 17888</a>, <a href="https://boltdepot.com/Product-Details?product=4525">washers, 4525</a>, <a href="https://boltdepot.com/Product-Details?product=4802">nuts, 4802</a>.</td>
+</tr>
+<tr>
+<td>DIN rail mounting</td>
+<td>2 × M4 × 12 mm pan screws; 2 × M4 washers; 2 × M4 locknuts</td>
+<td>Buy 4 each: <a href="https://boltdepot.com/Product-Details?product=19249">screws, 19249</a>, <a href="https://boltdepot.com/Product-Details?product=4514">washers, 4514</a>, <a href="https://boltdepot.com/Product-Details?product=4793">nuts, 4793</a>.</td>
+</tr>
+<tr>
+<td>Panel and rail PE studs</td>
+<td>2 × #10-32 × 3/4 in screws; 4 plain nuts; 4 external-tooth washers; 4 flat washers; 2 ring lugs</td>
+<td>Buy 4 <a href="https://boltdepot.com/Product-Details?product=1368">screws, 1368</a>, 6 <a href="https://boltdepot.com/Product-Details?product=2561">nuts, 2561</a>, 6 <a href="https://boltdepot.com/Product-Details?product=4078">tooth washers, 4078</a>, 6 <a href="https://boltdepot.com/Product-Details?product=2946">flat washers, 2946</a>. Rings come from the 3M row in the main BOM.</td>
+</tr>
+</tbody></table></div>
+<p>Use the supplied Hammond screws for the backpanel and all four cover fixings. Q0 power studs use the manufacturer&#39;s supplied terminal hardware and two #10 ring lugs. Do not substitute #8 lugs or metric nuts on these studs.</p>
+<p><strong>Stack checks:</strong> the nominal case wall is 4.775 mm. For Q0, measure/select washers 0.8–1.0 mm thick: 9.525 − 4.775 − washer = <strong>3.75–3.95 mm</strong> nominal insert engagement, below the 4.95 mm insert depth. Reject a stack that bottoms out before clamping. The general #6 washer listing does not guarantee thickness; this is a receiving check. XA&#39;s fixing stack must leave the locking element fully engaged. Do not crush or distort its flange or the polycarbonate wall.</p>
+<p>Fit carrier/anchor fasteners while the panel is out. There is about <strong>16.66 mm</strong> between the panel underside and the inner case floor in the source CAD. Check actual screw projections and washers against this space and the molded supports. The longer 20 mm tie screws accommodate the anchor&#39;s recessed seat; verify each full locking-nut engagement and floor clearance before installing the panel.</p>
+<p>For each PE stud, put the screw head and flat washer underneath. On the conductive side, use an external-tooth washer and first nut to secure the dedicated stud, then the ring lug, flat washer, external-tooth washer and second nut. Establish a clean metal contact under the bonding hardware; do not rely on paint, straps or rail mounting screws for bonding. Final bonding method, tightening and continuity acceptance belong to the qualified assembler. The website does not assign an unsupported universal bonding torque.</p>
+<h2>Wire and length schedule</h2>
+<p>Buy <strong>10 ft of 14/3 SJOOW</strong> and start with 2.0 m supply and 1.0 m printer-output blanks. Their internal conductors extend directly to the specified terminals. Keep sufficient PE slack so that jacket displacement does not pull PE free first. Measure the desired exterior reach before cutting.</p>
+<p>Use the selected 14 AWG black / white / green internal wire. The following are conservative <strong>cutting blanks</strong>, not proved finished lengths; final routing, bends and stripping are done with the assembly de-energized. Buy at least 3 m black, 2 m white and 3 m green (linked retail rolls exceed these needs).</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Connection</th>
+<th>Starting blank</th>
+<th>Termination</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>02 Q0 OUT → JL</td>
+<td>Black, 500 mm</td>
+<td>#10 ring at Q0; bare prepared copper at JL</td>
+</tr>
+<tr>
+<td>04 JL → Fv IN</td>
+<td>Black, 250 mm</td>
+<td>WAGO to fuse-holder pressure terminal</td>
+</tr>
+<tr>
+<td>24 Fv OUT → JV</td>
+<td>Black, 150 mm</td>
+<td>Fuse-holder pressure terminal to WAGO; <strong>14 AWG throughout</strong></td>
+</tr>
+<tr>
+<td>17 JL → XA hot</td>
+<td>Black, 700 mm</td>
+<td>WAGO to brass/hot outlet terminal</td>
+</tr>
+<tr>
+<td>18 JN → XA neutral</td>
+<td>White, 650 mm</td>
+<td>WAGO to silver/neutral outlet terminal</td>
+</tr>
+<tr>
+<td>25 PE port 5 → PE+ port 5</td>
+<td>Green, 200 mm</td>
+<td>WAGO bridge</td>
+</tr>
+<tr>
+<td>12 PE+ → panel bond</td>
+<td>Green, 200 mm</td>
+<td>WAGO to #10 ring</td>
+</tr>
+<tr>
+<td>13 PE+ → rail bond</td>
+<td>Green, 250 mm</td>
+<td>WAGO to #10 ring</td>
+</tr>
+<tr>
+<td>19 PE+ → XA ground</td>
+<td>Green, 700 mm</td>
+<td>WAGO to green ground terminal</td>
+</tr>
+</tbody></table></div>
+<p>Connections 01/03/06/07/10/11 use the supply/output cord conductors. Connections 05/08/09 use the three existing pigtail + full-lead chains; retain their full factory length. Connections 14/15 use the CT pair; 16 is the factory USB cable. Connections 20–23 illustrate factory adapter contacts and DC wiring, <strong>not</strong> instructions to open or modify the adapter. The site provides the full 25-path schedule.</p>
+<p>Label both ends of every conductor. A1 is hot, A2 and A3 are neutral despite all three jackets being blue. Grounding uses the separate green conductors. The full voltage-lead storage model assumes 2 m of flexible cable per lead and 3 mm OD; real cable lengths, connector bodies and minimum bends must fit without loading meter sockets.</p>
+<h2>Assembly and acceptance sequence</h2>
+<ol>
+<li>Close the identification/entry/protection items above, obtain the exact parts and compare them with the machining setups. Keep the case and all cords disconnected while machining or wiring.</li>
+<li>Machine the <strong>empty</strong> case and removable panel. Transfer-drill carrier and rail fixings, deburr, clean, and inspect for cracks. Complete underside nuts, PE studs, carrier/anchor fixings and thread the straps before lowering the panel.</li>
+<li>Install and secure the panel <strong>before XA</strong>. The digital insertion sweep shows that the installed right-side outlet obstructs the straight panel path. Fit rail/end stops/Fv, carriers, meter and CT. Leave access to the CT latch, fuse door and WAGO levers.</li>
+<li>Install Q0, XA and the accepted cord entries. Route the supply and output jackets through their glands before fitting plug/connector ends. Fit the adapter and USB cables without cutting factory plugs. Do not force round inserts onto the flat DC cable.</li>
+<li>Bond panel, rail, output and XA; then complete neutral, protected hot, voltage sensing, CT and low-voltage wiring. Only the printer hot conductor goes through CT once, arrow toward the printer. Keep voltage taps and adapter consumption upstream of CT.</li>
+<li>Check every termination, strain relief, bend, clearance and fastener. Verify actual fuse-door travel and plug removal access. Confirm that all four cover screws close the lid without pressing on cables or components. This dry fit is still outstanding.</li>
+<li>Qualified personnel document PE continuity, polarity, insulation/isolation, protection and supply suitability using the applicable test procedure. Disconnect sensitive electronics where the manufacturer requires it for insulation testing. Q0 OFF leaves incoming terminals live while the supply is plugged in.</li>
+<li>Configure ELOG for single-phase/two-wire measurement and the <strong>identified</strong> CT. Verify positive real power and reasonable readings with an independent reference. Test start/stop and power-return recording behavior, then check each printer&#39;s cold start and sustained load. Do not release daily use from a browser simulation alone.</li>
+</ol>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Manufacturer termination</th>
+<th>Published preparation / torque</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>WAGO 221-415</td>
+<td>Strip 11 mm; one accepted conductor per port, lever fully closed. Identify the factory-tinned blue ends before selecting preparation; do not add solder.</td>
+</tr>
+<tr>
+<td>LPSC0001Z</td>
+<td>Selected 14 AWG Class C copper; terminal torque 2.0 N·m. Use the holder&#39;s strip gauge/instructions.</td>
+</tr>
+<tr>
+<td>Carling Q0</td>
+<td>Mounting screws 0.8–1.0 N·m; #10-32 terminal hardware 1.7–2.3 N·m. Check the received device&#39;s instructions.</td>
+</tr>
+<tr>
+<td>Leviton 5279-C</td>
+<td>Strip 9/16 in (14.3 mm); terminal screws 10–14 in·lbf (1.13–1.58 N·m); do not tin conductors.</td>
+</tr>
+<tr>
+<td>515PV / 515CV, glands, end stops and enclosure</td>
+<td>Follow the exact supplied instructions. The Q0 or outlet torque must not be reused for unrelated parts.</td>
+</tr>
+</tbody></table></div>
+<p>Manufacturer sources and per-material limits are linked in the <a href="installation.html">installation audit</a> and <a href="references.html">reference schedule</a>. The public project records digital geometry and circuit checks; it does not yet record a built, tested or approved assembly.</p>
+</body></html>

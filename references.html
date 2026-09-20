@@ -1,124 +1,116 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sources and design limits · ELITEpro XC</title><link rel="stylesheet" href="material-images.css"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#layout">← Interactive 3D layout</a><a href="index.html#wiring">Circuit</a><a href="materials.html">Materials</a><a href="references.html">Sources</a><a href="installation.html">Installation audit</a><a href="Wiring_References_EN.md" download>Download Markdown</a></nav><h1>Wiring and assembly references — Rev. 6</h1>
-<p>September 19, 2026. Applies to the interactive 3D layout, material schedule and wiring drawings.</p>
-<p>The design now has one operating breaker (Q0), a dedicated adapter receptacle (XA), and a proposed passive voltage-tap fuse (Fv). The user confirmed that the receptacle is for the existing black two-pin AC/DC adapter. This is a reviewable design, not an approved construction drawing.</p>
-<h2>Primary sources</h2>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sources and design limits · ELITEpro XC</title><link rel="stylesheet" href="material-images.css"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#layout">← Interactive 3D layout</a><a href="index.html#wiring">Circuit</a><a href="materials.html">Materials</a><a href="references.html">Sources</a><a href="installation.html">Installation audit</a><a href="build.html">Build package</a><a href="Wiring_References_EN.md" download>Download Markdown</a></nav><h1>Sources and design decisions — build package A</h1>
+<p>September 20, 2026. One 120 V grounded supply and one printer at a time, confirmed by the user. This is an engineering review package; physical and electrical release remain open in the <a href="build.html">build package</a>.</p>
+<h2>Primary references</h2>
 <div class="table-wrap"><table>
 <thead>
 <tr>
 <th>ID</th>
 <th>Source</th>
-<th>Supported facts</th>
-<th>Limit</th>
+<th>Used for</th>
+<th>Evidence limit</th>
 </tr>
 </thead>
 <tbody><tr>
 <td id="r1">R1</td>
-<td><a href="https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf">DENT ELITEpro XC / ELOG 19 Operator’s Guide, 2024-11-15</a>, printed pp. 9, 19–23, 29, 55; single-phase figure is PDF page 54</td>
-<td>Single phase: hot to L1; neutral to L2 and N. Split-core CT white +, black −; load-facing arrow. S is a CT shield terminal. Shunted 333 mV CT selection; voltage-lead adapters; USB insulation.</td>
-<td>Photo confirmation of the actual CT model/range is still needed. The factory figure has its hot voltage tap after CT; this project moves it before CT.</td>
+<td><a href="https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf">DENT XC / ELOG 19 manual</a>, single-phase figure at PDF page 54</td>
+<td>L1 = hot, L2 and N = neutral; CT white/+ and black/−; load-facing arrow; S is shield.</td>
+<td>The actual CT range is hidden in the photograph. The project moves the voltage tap upstream of CT; that is a project adaptation.</td>
 </tr>
 <tr>
 <td id="r2">R2</td>
-<td><a href="https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf">DENT ELITEpro XC datasheet, rev01272026</a>, final page</td>
-<td>Line power uses L1–L2; optional power input is 6–10 V DC, 500 mA. USB is Type B. Internal 0.5 A fuse is part of the instrument. Current body size: 216 × 63 × 47 mm; older R1 dimensions differ.</td>
-<td>Internal instrument protection does not establish protection of the entire external pigtail run. DC power does not replace voltage sensing.</td>
+<td><a href="https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf">DENT XC current datasheet</a></td>
+<td>Current body 216 × 63 × 47 mm, USB-B, DC input 6–10 V / 500 mA and L1–L2 line power.</td>
+<td>Older instrument dimensions differ. The meter&#39;s internal fuse does not establish protection of the external small leads.</td>
 </tr>
 <tr>
 <td id="r3">R3</td>
-<td><a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/">DENT replacement unterminated voltage leads</a>, Description / Part Numbers</td>
-<td>Blue LD-SKTSP-BLU is a voltage-lead adapter: tinned end at a terminal, socket mating with the full 2 m voltage lead.</td>
-<td>The photographed blue item resembles this accessory. Its exact part number, conductor rating and mating compatibility are not proven by appearance. It is not a printer load wire or a PE bonding conductor.</td>
+<td><a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/">DENT blue lead accessory</a></td>
+<td>LD-SKTSP-BLU adapter concept: terminal end to full voltage lead.</td>
+<td>Similar appearance does not establish the supplied lead&#39;s identity, ampacity or approved terminal preparation.</td>
 </tr>
 <tr>
 <td id="r4">R4</td>
-<td><a href="https://leviton.com/products/5261">Leviton 5261 single receptacle</a></td>
-<td>Grounded NEMA 5-15R, 15 A / 125 V, industrial-grade single outlet: a candidate for the existing adapter.</td>
-<td>Requires a compatible mounting box / cover / guarded rear terminals and verified fit. This is not a snap-in connector or an approval of the modified enclosure.</td>
+<td><a href="https://leviton.com/products/5279-c">Leviton 5279-C</a>, <a href="https://leviton.com/content/dam/leviton/commercial-industrial/product_documents/dimensional_drawing/CATSTD-05279-00C-M01.pdf">drawing</a>, <a href="https://leviton.com/content/dam/leviton/commercial-industrial/product_documents/instruction_sheet/PK-93763-10-02-0C-W.pdf">instructions</a></td>
+<td>15 A / 125 V flanged 5-15R; body, mounting and terminal interfaces.</td>
+<td>The actual flange, tapered wall and fastener stack require a received-part check.</td>
 </tr>
 <tr>
 <td id="r5">R5</td>
-<td><a href="https://leviton.com/content/dam/leviton/residential/product_documents/instruction_sheet/515_Instruction_Sheet.pdf">Leviton grounded plug / connector instructions</a>, 515PV / 515CV section</td>
-<td>Existing input plug and printer-output concept use hot/brass, neutral/silver and earth/green identification with jacket strain relief.</td>
-<td>Apply the exact device’s instructions, conductor acceptance and torque. Confirm the actual printer plug and lab outlet.</td>
+<td><a href="https://leviton.com/content/dam/leviton/residential/product_documents/instruction_sheet/515_Instruction_Sheet.pdf">Leviton 515PV / 515CV instructions</a></td>
+<td>Supply plug and printer cord connector; wire identification and jacket clamp.</td>
+<td>Confirm the purchased cord jacket clamps correctly.</td>
 </tr>
 <tr>
 <td id="r6">R6</td>
-<td><a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">Carling C-Series datasheet</a>, ordering code p.8 and dimensions p.11</td>
-<td>CA1-B0-24-615-121-DG candidate: one pole, 15 A, AC medium delay, panel-mounted; DG agency/application option. Body 19.18 × 63.5 × 47.00 mm; 49.28 mm terminal pitch, 52.37 mm mounting pitch. #10-32 studs and #6-32 mounting inserts.</td>
-<td>Exact suffix, application rating, fault level and operating duty must be approved. Other C-Series variants are not equivalent. No DIN mounting is assumed.</td>
+<td><a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">Carling C-Series</a>, ordering code and p.11</td>
+<td>CA1-B0-24-615-121-DG; body 19.18 × 63.5 × 47 mm, 49.28 mm stud pitch, 52.37 mm mounting pitch; #10-32 studs / #6-32 inserts.</td>
+<td>Other suffixes are not equivalent. Fault level, inrush, duty and exact SKU availability still need acceptance.</td>
 </tr>
 <tr>
 <td id="r7">R7</td>
-<td><a href="https://www.hammfg.com/part/PCJ16148CC">Hammond PCJ16148CC</a>, <a href="https://www.hammfg.com/files/parts/pdf/PCJ16148CC.pdf">dimension drawing</a>, <a href="https://www.hammfg.com/files/parts/stp/PCJ16148CC.zip">STEP assembly</a> and <a href="https://www.hammfg.com/part/14R1513">14R1513 panel</a></td>
-<td>Actual case, lid, mounting panel and hardware geometry. Panel is 327.025 × 374.65 mm; STEP full outside bounds include feet/projections and differ from nominal catalog size.</td>
-<td>Proposed penetrations and supports are not machined in the manufacturer model. Dry fit still needed; modifications do not automatically retain the factory enclosure rating.</td>
+<td><a href="https://www.hammfg.com/files/parts/pdf/PCJ16148CC.pdf">Hammond drawing</a>, <a href="https://www.hammfg.com/files/parts/stp/PCJ16148CC.zip">STEP</a>, <a href="https://www.hammfg.com/part/14R1513">14R1513</a></td>
+<td>Unscaled case/lid/panel geometry and factory hardware. Panel 327.025 × 374.65 mm.</td>
+<td>The project adds machining. The modified assembly has no claimed IP/NEMA certification.</td>
 </tr>
 <tr>
 <td id="r8">R8</td>
-<td><a href="https://leviton.com/content/dam/leviton/commercial-industrial/product_documents/none/Document-32236-Dimensional%20Data.jpg">Leviton 5261 dimension drawing</a> and <a href="https://leviton.com/products/84004-40">84004-40 faceplate</a></td>
-<td>Receptacle depth 27 mm, yoke 103.2 × 33.3 mm. Single 1.406 in hole faceplate.</td>
-<td>Mounting insert, wall taper and device-box stack require checking.</td>
+<td><a href="https://www.littelfuse.com/de/assetdocs/powr-gard-catalog?assetguid=85d36235-a32b-4608-bfed-f9878aa43af0">Littelfuse catalog</a></td>
+<td>LPSC0001Z Class CC holder, 35 mm DIN interface and 14 AWG Class C terminal choice.</td>
+<td>Holder compatibility does not select or coordinate the fuse value.</td>
 </tr>
 <tr>
 <td id="r9">R9</td>
-<td><a href="https://hubbellcdn.com/specsheet/RACO-670RAC-SPEC-EN.pdf">RACO 670RAC specification</a></td>
-<td>Rear device-box outer dimensions 4 × 2.125 × 2.188 in; metal enclosure for outlet terminations.</td>
-<td>Dedicated bond and suitable cable-entry fittings are additional; not a ready-made module for this Hammond wall.</td>
+<td><a href="https://www.littelfuse.com/assetdocs/klkr-classcc-fuse-datasheet-final?assetguid=4443e5f6-97ee-4206-9abe-9e155371a03e">Littelfuse KLKR</a></td>
+<td>KLKR.500T is the named 0.5 A Class CC candidate.</td>
+<td>On hold pending the actual sensing-lead specifications and protection review. Component interrupt rating is not the assembly SCCR.</td>
 </tr>
 <tr>
 <td id="r10">R10</td>
-<td><a href="https://www.eaton.com/content/dam/eaton/products/electrical-circuit-protection/bussmann-iec-low-voltage-fuses/eaton-bussmann-series-low-voltage-fuses-catalog-ca134002en-en-us.pdf">Eaton Bussmann fuse catalog</a>, p.145</td>
-<td>CHCC1DU Class CC holder envelope, compatible fuse families and terminal range.</td>
-<td>Holder dimensions / ratings do not choose a fuse value or prove pigtail protection.</td>
+<td><a href="https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415">WAGO 221-415</a>, <a href="https://www1.futureelectronics.com/doc/WAGO/221-505.pdf">221-505 drawing</a></td>
+<td>Five connector/carrier pairs: JL, JN, PE, PE+ and JV. Carrier 35 × 16.9 × 52.8 mm.</td>
+<td>Transfer-drill carrier fixings; one accepted conductor per port. Existing tinned blue ends are not presumed accepted.</td>
 </tr>
 <tr>
 <td id="r11">R11</td>
-<td><a href="https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415">WAGO 221-415</a> and <a href="https://www.wago.com/us/wire-splicing-connectors/mounting-carrier-221-series-24-12-awg/p/221-505">221-505 carrier</a></td>
-<td>Five-port connectors; current CAD body dimensions 29.80 × 8.15 × 18.30 mm. Four connectors proposed, including two bridged PE connectors.</td>
-<td>Carrier 221-505 is 35 × 16.9 × 52.8 mm with M3 or ST2.9 fixings; conductor, tinned-end and PE use still need checking.</td>
+<td><a href="https://www.dentinstruments.com/wp-content/uploads/2022/08/20A_Mini_Hinged_CT_Specs.pdf">DENT 20 A CT example</a></td>
+<td>Example body 26.4 × 29.4 × 41.7 mm, Ø10.2 mm aperture.</td>
+<td>This does not identify the owned CT or select its ELOG scaling.</td>
 </tr>
 <tr>
 <td id="r12">R12</td>
-<td><a href="https://www.dentinstruments.com/wp-content/uploads/2022/08/20A_Mini_Hinged_CT_Specs.pdf">DENT 20 A mini-hinged CT drawing</a></td>
-<td>Example CT envelope 26.4 × 29.4 × 41.7 mm and 10.2 mm aperture.</td>
-<td>Does not establish that this is the existing CT model or correct measurement range.</td>
+<td><a href="https://www.hammfg.com/part/1427NCGPG13LB">Hammond 1427NCGPG13LB</a>, <a href="https://pim.icotek.com/Produkte/PG02%20Kabelverschraubungen/KVT/KVT%2032/Datenbl%C3%A4tter/45026_KVT%2032_bk.PDF">icotek KVT 32</a>, <a href="https://www.icotek.com/en-us/products/cable-grommets/kt-gy">KT inserts</a></td>
+<td>Long-thread power glands; M32 split frames and separate cable inserts.</td>
+<td>Match the actual cable profile and wall stack. Round KT inserts are not established for the CUI flat cord.</td>
 </tr>
 <tr>
 <td id="r13">R13</td>
-<td><a href="https://www.hammfg.com/electronics/small-case/accessories/1427ncg">Hammond glands</a> and <a href="https://www.icotek.com/en-us/products/cable-glands/kvt-45024">icotek KVT 20 / 45024</a></td>
-<td>Mains cable gland and split-entry concepts; split entry preserves factory connector ends.</td>
-<td>KVT 20 flange is Ø40 mm with 37 mm overall length; USB spacing was corrected. Mains fitting geometry, cable ODs, grommets, wall stack and plug transit still need checking.</td>
+<td><a href="https://in.ftcelectronics.com/datasheets-55/SMI6-12-V-P5.pdf">CUI original SMI6 drawing</a></td>
+<td>SMI6-9-V-P5 dimensions, 9 V model, P5 center-positive 5.5/2.1 mm plug and UL2468 cord. This is CUI-authored data hosted by a distributor.</td>
+<td>Use the original SMI6, not the different SMI6B. Body envelope 64 × 40.5 × 30 mm excludes blades; drawing tolerance ±1 mm.</td>
+</tr>
+<tr>
+<td id="r14">R14</td>
+<td><a href="https://www.velcro.com/products/organization/heavy-duty-one-wrap-roll/">VELCRO ONE-WRAP</a></td>
+<td>90340 black 12 ft × 3/4 in roll; cut two 400 mm strap blanks.</td>
+<td>The 19.05 mm strap requires the revised 21 × 4 mm slots. Verify overlap and retention on the actual meter.</td>
 </tr>
 </tbody></table></div>
-<p>The new mechanical and protection candidates were checked against the linked manufacturer information. Retail links and per-item selection limits are in <a href="materials.html">Materials and fit notes</a>. No manufacturer source approves the complete custom assembly.</p>
-<h2>What the supplied photographs establish</h2>
+<p>The <a href="installation.html">per-material audit</a> also links primary cord, wire, ring, label, rail, cable-tie and printer sources. Retail links are in the <a href="materials.html">materials list</a>. Source documents describe components, not approval of this custom assembly.</p>
+<h2>Supplied-photo evidence</h2>
+<p>The instrument markings identify ELITEpro XC, voltage sockets N / L3 / L2 / L1, the CT input block, a separate analog block, USB-B and the DC input. The full-resolution adapter photograph identifies <strong>CUI SMI6-9-V-P5, 9 V DC, 0.667 A, center positive</strong>. The user confirms the five owned equipment groups and three blue pigtails.</p>
+<p>The CT&#39;s current/output digits are physically obscured by the black/white wires. The blue-pigtail photograph has no legible conductor or current rating. Ruler photographs are not calibrated dimension drawings. Packaging text is evidence about an accessory, not an instruction to the assistant or proof that an arbitrary breaker protects it.</p>
+<h2>Project choices</h2>
 <ul>
-<li>The instrument is marked ELITEpro XC. Its measurement end has CT CH1–CH4 and S, with voltage sockets ordered N / L3 / L2 / L1 in the illustrated front-facing orientation.</li>
-<li>The opposite end has a different analog-input CH1–CH4 block, USB Type B, and POWER IN / OUT. The case shows 6–10 V DC, 500 mA input and center-positive polarity.</li>
-<li>Split-core DENT current sensors, long voltage leads, an AC/DC adapter and a blue unterminated pigtail are visible. The user reports three blue pigtails available.</li>
-<li>Exact CT model, rated current, output, adapter output label, pigtail ampacity and measured installed dimensions are not established here. Ruler photographs are not treated as dimensioned engineering drawings.</li>
+<li>Q0 is the single operating breaker. JL branches to printer hot through CT, the dedicated adapter outlet, and Fv. Neutral and PE remain separate; PE stays continuous. Unplug the supply and verify absence of voltage before removing the screw-fixed cover. Q0 OFF alone does not isolate incoming terminals.</li>
+<li>Fv OUT uses 14 AWG wire to JV; A1 then connects to L1. A2 and A3 connect JN to L2 and N. The three blue wires are sensing accessories, not load wires or PE conductors. Keep the mating pairs inside the enclosure.</li>
+<li>Only printer hot crosses CT once. Adapter and voltage-tap branch currents are outside the measured current. Voltage is sensed upstream, so downstream cord loss and voltage drop still affect the measurement boundary.</li>
+<li>XA is the Leviton 5279-C flanged outlet. Its earth terminal, printer earth, steel panel and DIN rail receive deliberate PE connections. The obsolete metal outlet-box bond is removed. Path 24 is now the <strong>Fv-to-JV</strong> transition.</li>
+<li>The original adapter and DC cable remain intact. The outlet and supply share Q0&#39;s capacity. XA is for the logger adapter only. Low-voltage routing and USB insulation require appropriate segregation from mains; separate holes alone do not prove electrical insulation.</li>
+<li>ELOG must be configured and validated before routine use. Powering the instrument is not proof that recording started. Verify CT scaling, polarity, reference readings and restart behavior.</li>
 </ul>
-<p>The attached packaging note is evidence about the lead kit, not authorization or proof that any chosen breaker protects it.</p>
-<h2>Project design decisions</h2>
-<ol>
-<li><strong>One breaker, three hot branches.</strong> Q0 feeds the printer, XA adapter outlet and Fv voltage tap. It opens hot only; neutral and PE are not independently switched or fused. Q0 OFF leaves input terminals live while plugged in. USB may keep the meter powered.</li>
-<li><strong>Three blue adapters.</strong> A1 connects the protected hot voltage tap to L1. A2 and A3 connect neutral separately to L2 and N. Mark both ends. Keep the shrouded mating pairs guarded inside the enclosure; disconnect only after full de-energization. Use separate power conductors and PE bonds.</li>
-<li><strong>Proposed Fv fuse.</strong> Fv replaces the previous Qv breaker as the proposed small-lead protection method. Its current, voltage and interrupt ratings remain unspecified pending coordination with the actual pigtails and supply. CHCC1DU is now a proposed holder, with no fuse value yet selected. The pigtail’s tinned end must be accepted by the chosen terminal. A larger load breaker is not automatically adequate for it. A qualified designer must also assess the complete neutral-return paths and supply polarity. This is a project protection proposal, not a manufacturer-specified AC fuse value or a requirement inferred from DENT’s unrelated high-voltage DC fuse note.</li>
-<li><strong>Measurement boundary.</strong> Only the printer’s hot conductor crosses CT once. The adapter and logger voltage/power taps are before CT, so their branch currents are outside the measured current. The measured voltage is at the distribution point; downstream cord voltage drop and energy loss are not automatically excluded. Validate against a reference meter at the agreed boundary.</li>
-<li><strong>Dedicated outlet.</strong> XA is a single grounded receptacle for the two-pin adapter. The unused earth contact and accessible metal mounting parts remain bonded. It is not the measured printer outlet. No additional appliance is intended at XA. Both outlets share Q0’s total allowed load.</li>
-<li><strong>Power and data routing.</strong> Retain the verified manufacturer adapter and factory barrel cable intact. Secure the exterior adapter if mounted outside; route its DC cable through a suitable entry, with segregation / insulation appropriate to adjacent mains. Protect the USB route as required by DENT. A physically separate entry alone is not electrical insulation.</li>
-<li><strong>Terminal capacity and bonding.</strong> JL needs four external connections, JN five, and JPE six. Two bridged five-port PE connectors provide eight occupied ports including the bridge ends. Use distinct secured, guarded groups. Path 24 explicitly bonds the outlet rear box. Drawn metal plate / rail bonds are deliberate; ordinary mounting screws are not presumed to make a reliable earth bond.</li>
-<li><strong>Simple operation needs prior setup.</strong> Confirm ELOG channel mapping, CT scaling, recording status and restart behavior. Daily use can then be plug in with Q0 OFF, turn Q0 ON, and confirm logging. No claim is made that powering the meter alone starts data recording.</li>
-</ol>
-<h2>Drawing and software checks</h2>
-<p><code>python3 build_routes.py</code> verifies 24 named paths, separate electrical nets, no unrelated terminal dot lying on a route, only the printer hot through the illustrated CT aperture, and Q0-open behavior. It does not model current through appliances, adapter isolation construction, terminal torque, real fault currents or hardware quality.</p>
-<p>Browser checks and visual review validate the published drawing and controls only. Physical assembly, protection coordination, lead ratings, actual CT identification, clearances and electrical acceptance remain unverified.</p>
-<h2>3D scale and fit evidence</h2>
-<p>Every body uses millimetres in one common coordinate frame. Orthographic orbit controls rotate the camera; component proportions do not change with UI sizing. ELITEpro&#39;s long case is no longer stretched into the available drawing space. The wiring plan projects the same component X/Z coordinates and body dimensions from <code>layout_dimensions.json</code>. Rear is above and front is below, matching the 3D Top view. Terminal symbols are spaced for electrical clarity and wire routes are rectilinear; neither drawing is a drilling template. The browser regression check compares actual rendered 3D body bounds to SVG footprints for 23 component and entry envelopes, including repeated terminal carriers, blue pigtails and cable entries.</p>
-<p>The manufacturer STEP is triangulated with occt-import-js 0.0.23 at 0.45 mm linear deflection, without dimensional rescaling. Source axes are transformed to put the backpanel underside at Y = 0. The manifest records mesh offsets and overall bounds. The interactive scene uses Three.js 0.186.0, stored locally with its MIT license. No CDN or third-party API is needed to view it.</p>
-<p>The outer enclosure and panel have manufacturer CAD geometry; the meter and selected parts use published body dimensions. Existing CT identity, adapter dimensions, wire diameters and lengths, cable bends, gland envelopes, internal details and mounting inserts are not all known. Their limits appear in the component inspector and dimension schedule. Rendered wire paths illustrate physical routing; the separately checked schematic is the connectivity reference. Neither mesh intersections nor software tests establish required electrical spacing or an approved real build.</p>
-<h2>Installation audit — September 19, 2026</h2>
-<p>The <a href="installation.html">36-part audit and installation sequence</a> records catalog matches, corrected dimensions and unresolved interfaces. Nine nominal insertion sweeps clear the empty manufacturer shell; the backpanel must precede the side outlet box. Proposed Q0 and outlet interfaces still intersect uncut shell geometry and have no final support / cutout drawings. The CHCC1DU SKU page conflicts with Eaton technical data 10430 and is on hold.</p>
-<p>The revised coil illustration solves for 2 m of flexible cable per lead at an assumed 3 mm OD, using 4 mm pitch and separate layers. This is a dimensional scenario, not a measurement of the supplied leads or validation of their bends and transitions. The former coils represented only roughly 1.64–1.68 m and overlapped at the assumed cable diameter.</p>
-<p>The audit covers one of the user-confirmed UltiMaker S5, Bambu Lab P2S or Prusa CORE One+ at a time on a verified 120 V supply. Published power figures do not establish RMS nameplate current, inrush, available fault current or approval of the 15 A proposal. No hardware has been built, energized or released.</p>
+<h2>Digital checks and limits</h2>
+<p><code>layout_dimensions.json</code> supplies the body locations for the 3D scene and wiring plan. Rear is at the top of both plan views. Browser checks compare actual rendered body bounds with SVG footprints for all 23 envelopes; schematic terminal symbols and wire bends are simplified.</p>
+<p>The original Hammond STEP is retained at full scale. Project machining is generated with build123d 0.11.1; the case and panel are tessellated at 0.3 mm. Original cover/hardware meshes retain their earlier 0.45 mm triangulation. Numerical surface-contact exclusion at the seated panel is 0.0001 mm; these values are not manufacturing tolerances. Exact STEP cut-through gauges and the dated source hash are in <code>fabrication/cad-checks.json</code>.</p>
+<p>Ten nominal insertion sweeps clear the open case after excluding intentional panel-support contact. Install the panel before the side outlet. Lid checks use nine sampled rays per body. These are geometric screens, not tolerance, thermal, electrical-clearance or flexible-cable proofs. The 2 m / 3 mm voltage-lead coil is an illustrative storage scenario, not a measurement of the supplied cables.</p>
+<p>The circuit checker validates 24 named paths, separated nets, printer-hot-only CT routing and Q0-open behavior. Regression tests reject selected wiring mistakes. Website tests verify gestures, views, alignment, images, links and responsive layout. No check constitutes a physical dry fit or energized acceptance result. See the <a href="build.html">build package</a> for the exact remaining work.</p>
 </body></html>

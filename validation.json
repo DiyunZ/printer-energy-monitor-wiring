@@ -1,6 +1,6 @@
 {
-  "revision": "Rev. 6 \u00b7 installation audit corrections \u00b7 2026-09-19",
-  "connection_count": 24,
+  "revision": "Rev. 7 \u00b7 build package A \u00b7 2026-09-20",
+  "connection_count": 25,
   "circuit_breaker_count": 1,
   "blue_adapters": {
     "A1": "L1 / hot",
@@ -15,7 +15,9 @@
   "Q0_opens_all_downstream_hot_branches": true,
   "PE_continuity_independent_of_Q0": true,
   "aux_and_voltage_taps_before_CT": true,
-  "lead_fuse_rating": "TBD by qualified electrical personnel",
+  "Fv_opens_only_L1_sensing": true,
+  "PE_bridge_explicit": true,
+  "lead_fuse_rating": "KLKR.500T 0.5 A candidate; existing lead ratings and coordination required",
   "physical_build_validated": false,
   "protection_coordination_validated": false
 }
