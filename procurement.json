@@ -1,5 +1,5 @@
 {
-  "revision": "2026-09-20 · build package A, revision 8",
+  "revision": "2026-09-20 / six cable supports; label dispensers removed",
   "scope": "One grounded 120 V supply, one printer at a time. Five equipment groups are owned. Photo/product matching identifies the adapter, blue pigtail product and Mini HSC CT family. Round DC extension and USB sealing inserts are now specified. CT scaling and voltage-lead protection/termination still require the acceptance checks in the build package; no physical build or energizing release is claimed.",
   "items": [
     {
@@ -867,10 +867,10 @@
     {
       "id": "tie-mounts",
       "item": "Screw-fixed cable mounts",
-      "quantity": "12 installed; pack of 100",
+      "quantity": "6 installed; pack of 100",
       "model": "Panduit TM2S8-C",
-      "reason": "Screw-mounted bases for the retained leads and separate power/signal routes. Match #8 / M4 fasteners to the mounting stack. Do not rely on adhesive alone. Linked package contains 100.",
-      "status": "Twelve panel locations; M4 × 20 mm screws, washers and locknuts in the fastener schedule.",
+      "reason": "Six screw-fixed bases retain the mains bundle, outlet supply, CT pair, two sides of the voltage-lead coils, and DC/USB cables. The linked package contains 100; only six are installed.",
+      "status": "Six panel locations; M4 × 16 mm screws, underside washers and locknuts in the fastener schedule.",
       "availability": "buy",
       "links": [
         {
@@ -890,14 +890,14 @@
         "width": 1024,
         "height": 1024
       },
-      "installation": "Twelve bases at the panel drawing’s cable-anchor holes. Final cable dressing is adjusted during dry fit.",
-      "location_summary": "At the twelve cable-anchor holes on the mounting panel.",
-      "quantity_summary": "12"
+      "installation": "Six bases at the revised panel anchor holes. The 3D locator shows each bundle and its restraint. Set final slack during dry fit; keep CT/DC/USB separate from mains bundles.",
+      "location_summary": "Six panel supports: two AC bundles, CT pair, two coil supports and DC/USB.",
+      "quantity_summary": "6"
     },
     {
       "id": "cable-ties",
       "item": "Cable ties",
-      "quantity": "24 allowed; pack of 100",
+      "quantity": "6 installed; 6 spare allowance; pack of 100",
       "model": "Panduit PLT2S-C · 188 × 4.8 mm",
       "reason": "For small wire bundles and the screw-fixed bases. Keep allowed bend radii and avoid crushing insulation. This length is for cables, not a strap around the meter.",
       "status": "Selected: small bundles only. Inspect retained lead bend radii during dry fit.",
@@ -920,49 +920,9 @@
         "width": 420,
         "height": 420
       },
-      "installation": "Twelve illustrated loops at the anchor bases; the remaining allowance is for dressing leads during assembly. Spare pack contents are not installed.",
-      "location_summary": "Through the cable-mount bases to secure the wire bundles.",
-      "quantity_summary": "24"
-    },
-    {
-      "id": "labels",
-      "item": "Wire and component labels",
-      "quantity": "1 SWD dispenser + 1 SLW dispenser; pens included",
-      "model": "3M ScotchCode SWD + SLW",
-      "reason": "SWD for smaller wire IDs; SLW for larger cables and longer identification. Match actual cable OD to the 3M size table. Mark both wire ends and Q0, JL, JN, PE, Fv, CT1 and A1/A2/A3. Add durable SUPPLY, PRINTER OUTPUT, Q0 ON/OFF and ELITEpro ADAPTER ONLY — UNMETERED legends.",
-      "status": "SWD fits 2.87 mm internal wire; SLW fits approximately 9.2 mm cord. Measure pigtails and verify adhesion.",
-      "availability": "buy",
-      "links": [
-        {
-          "label": "Buy SWD · Platt",
-          "url": "https://www.platt.com/p/0063831/3m/wire-marker-write-on-dispenser-with-tape-1-3-8-in-l-x-3-4-in-w-lab/054007119548/mmmswd",
-          "kind": "buy"
-        },
-        {
-          "label": "Buy SLW · Specialized Products",
-          "url": "https://www.specialized.net/3m-slw-scotchcode-write-on-dispenser-w-pen.html",
-          "kind": "buy"
-        },
-        {
-          "label": "3M sizes / cable OD ranges",
-          "url": "https://multimedia.3m.com/mws/media/1854486O/ft-scotchcode-slw-us-pdf.pdf",
-          "kind": "reference"
-        }
-      ],
-      "image": {
-        "src": "assets/materials/labels.jpg",
-        "source_image": "https://multimedia.3m.com/mws/media/1689258J/3m-scotchcode-write-on-wire-marker-dispenser-11954.jpg",
-        "kind": "reference",
-        "alt": "3M ScotchCode SWD + SLW — reference image",
-        "caption": "SWD dispenser shown; this row also includes SLW labels.",
-        "source_label": "3M",
-        "source_url": "https://www.3m.com/3M/en_US/p/dc/v000076616/",
-        "width": 236,
-        "height": 236
-      },
-      "installation": "Identification on the component groups, pigtails, cable exits and external controls. Additional wire-end labels follow the connection schedule.",
-      "location_summary": "On components, pigtails, cable exits and external controls.",
-      "quantity_summary": "1 SWD + 1 SLW"
+      "installation": "One 4.8 mm band through each of the six mounting-base slots and around its actual wire bundle. Two bands retain the concentric voltage-lead coils. Spare pack contents are not installed.",
+      "location_summary": "Through all six mounting-base slots and around the routed wires.",
+      "quantity_summary": "6 + 6 spares"
     },
     {
       "id": "fasteners",
@@ -990,7 +950,7 @@
         "width": 175,
         "height": 58
       },
-      "installation": "Mounting screw/washer/nut sets for Q0, XA, five carriers, twelve cable bases, DIN rail and two PE bonds. Small hardware is schematic; use the build-package sizes and transfer-drilling instructions.",
+      "installation": "Mounting screw/washer/nut sets for Q0, XA, five carriers, six cable bases, DIN rail and two PE bonds. Small hardware is schematic; use the build-package sizes and transfer-drilling instructions.",
       "location_summary": "At component mounts, cable bases, the rail and PE bonds.",
       "quantity_summary": "See fastener schedule"
     },

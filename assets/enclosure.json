@@ -272,40 +272,40 @@
       "name": "70-60825-2",
       "role": "panel",
       "positionOffset": 4577556,
-      "positionCount": 11970,
-      "indexOffset": 4625436,
-      "indexCount": 12000
+      "positionCount": 9420,
+      "indexOffset": 4615236,
+      "indexCount": 9420
     },
     {
       "name": "55-1032516_PreviewCfg",
       "role": "panel",
-      "positionOffset": 4673436,
+      "positionOffset": 4652916,
       "positionCount": 3246,
-      "indexOffset": 4686420,
+      "indexOffset": 4665900,
       "indexCount": 4956
     },
     {
       "name": "55-1032516_PreviewCfg",
       "role": "panel",
-      "positionOffset": 4706244,
+      "positionOffset": 4685724,
       "positionCount": 3246,
-      "indexOffset": 4719228,
+      "indexOffset": 4698708,
       "indexCount": 4956
     },
     {
       "name": "55-1032516_PreviewCfg",
       "role": "panel",
-      "positionOffset": 4739052,
+      "positionOffset": 4718532,
       "positionCount": 3246,
-      "indexOffset": 4752036,
+      "indexOffset": 4731516,
       "indexCount": 4956
     },
     {
       "name": "55-1032516_PreviewCfg",
       "role": "panel",
-      "positionOffset": 4771860,
+      "positionOffset": 4751340,
       "positionCount": 3246,
-      "indexOffset": 4784844,
+      "indexOffset": 4764324,
       "indexCount": 4956
     }
   ],

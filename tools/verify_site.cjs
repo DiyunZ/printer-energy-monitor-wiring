@@ -26,7 +26,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  assert.equal(await page.locator('details[open]').count(),0,'Supporting details should be collapsed initially');
  assert.equal(await page.locator('#layout').isVisible(),true);
  assert.equal(await page.locator('#wiring').isVisible(),false);
- assert.equal(await page.locator('.materials tbody tr:visible').count(),25);
+ assert.equal(await page.locator('.materials tbody tr:visible').count(),24);
  assert.equal(await page.locator('#owned-materials').getAttribute('open'),null);
  assert.equal(await page.locator('#confirm .review-items li').count(),3);
  assert.equal(await page.locator('#assembly-preview').isVisible(),false);
@@ -62,11 +62,11 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  for(let i=0;i<lengths.length;i++){
   assert.ok(close(lengths[i].modeledFlexibleLengthMm,2000,.1),'Full 2 m flexible-length scenario');
   assert.ok(lengths[i].pitchMm>lengths[i].assumedDiameterMm,'Coil turns need space at assumed diameter');
-  if(i)assert.ok(lengths[i].coilMin[1]>lengths[i-1].coilMax[1],'Coil-layer envelopes must not overlap');
+  if(i)assert.ok(lengths[i].coilMin[0]<lengths[i-1].coilMin[0]-3.9 && lengths[i].coilMax[0]>lengths[i-1].coilMax[0]+3.9,'Concentric coils preserve radial spacing');
  }
  if(process.env.EXPORT_AUDIT==='1'){
   assert.ok(['127.0.0.1','localhost'].includes(new URL(base).hostname),'Export audit from local model only');
-  fs.writeFileSync(path.join(root,'installation_cables.json'),JSON.stringify({scope:'Illustrative 2 m flexible length per lead at assumed 3 mm OD; actual hardware not measured',leads:lengths,meterRouteScreen:{samplesPerCurve:301,intrusions:initial.meterRouteIntrusions,limit:'Sampled route centerlines tested against the meter body enlarged by each assumed wire radius. Does not establish clearances to other objects or between wires.'}},null,2)+'\n');
+  fs.writeFileSync(path.join(root,'installation_cables.json'),JSON.stringify({scope:'Illustrative 2 m flexible length per lead at assumed 3 mm OD; actual hardware not measured',leads:lengths,meterRouteScreen:{minimumSamplesPerCurve:601,intrusions:initial.meterRouteIntrusions,limit:'Sampled route centerlines tested against the meter body enlarged by each assumed wire radius. Does not establish clearances to other objects or between wires.'}},null,2)+'\n');
  }
  // Compare actual SVG geometry to actual WebGL meshes, not two copies of labels.
  const plan=await page.locator('#main-stage svg').evaluate(svg=>({

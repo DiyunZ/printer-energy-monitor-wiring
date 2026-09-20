@@ -43,8 +43,8 @@ dc_yz_mm = (78.0, 106.0)
 usb_yz_mm = (55.0, 167.0)
 rail_holes_xz_mm = [(-95.0, -28.0), (-15.0, -28.0)]
 panel_bond_xz_mm = (-125.0, 60.0)
-anchor_holes_xz_mm = [(-150,110),(-85,105),(-80,155),(-20,155),(30,120),
- (140,112),(143,-143),(42,-150),(-77,-155),(-83,-100),(-155,-18),(-40,68)]
+rail_bond_xz_mm = (-27.0, -28.0)
+anchor_holes_xz_mm = [(-153,80),(8,-175),(38,-151),(-79,130),(9,130),(145,158)]
 strap_slots_xz_mm = [(50,-70),(132,-70),(50,50),(132,50)]
 strap_slot_mm = (21.0, 4.0)
 m4_clear_d_mm = 4.5
@@ -101,6 +101,7 @@ def panel_features():
     result += [dict(id=f'Tie anchor {i+1}',plane=p,at=pt,diameter=m4_clear_d_mm)
                for i,pt in enumerate(anchor_holes_xz_mm)]
     result += [dict(id='Panel PE bond',plane=p,at=panel_bond_xz_mm,diameter=bond_clear_d_mm)]
+    result += [dict(id='Rail PE through panel',plane=p,at=rail_bond_xz_mm,diameter=bond_clear_d_mm)]
     result += [dict(id=f'Strap slot {i+1}',plane=p,at=pt,slot=strap_slot_mm)
                for i,pt in enumerate(strap_slots_xz_mm)]
     return result
@@ -218,7 +219,10 @@ def main():
         [(f'Strap {i+1} 19.3 x 2.0 mm gauge',p,(2.0,19.3),None)
          for i,p in enumerate(strap_slots_xz_mm)] +
         [(f'Rail {i+1} M4 gauge',p,None,4.0)
-         for i,p in enumerate(rail_holes_xz_mm)]):
+         for i,p in enumerate(rail_holes_xz_mm)] +
+        [(f'Anchor {i+1} M4 gauge',p,None,4.0)
+         for i,p in enumerate(anchor_holes_xz_mm)] +
+        [('Rail PE #10 shaft gauge',(-27,-28),None,4.83)]):
         with BuildPart() as gauge:
             with BuildSketch(panel_plane):
                 with Locations(at):

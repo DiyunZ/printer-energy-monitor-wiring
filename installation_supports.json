@@ -1,0 +1,135 @@
+{
+  "scope": "Digital routing checks; not physical retention, bend-radius or electrical acceptance.",
+  "supports": [
+    {
+      "id": "mains",
+      "label": "Supply and switched hot",
+      "crossings": 3,
+      "routeIds": [
+        "internal-wire:q0-jl",
+        "cord:supply-neutral",
+        "cord:supply-pe"
+      ],
+      "missingRoutes": [],
+      "minimumOpeningClearanceMm": 0.8999999999999997,
+      "bandWidthMm": 4.8,
+      "loopWidthMm": 15.270276125330907,
+      "loopHeightMm": 9.599944446206695,
+      "lengthWithLockAllowanceMm": 70.8218561652805,
+      "pass": true
+    },
+    {
+      "id": "rear-ac",
+      "label": "AC supply to adapter outlet",
+      "crossings": 3,
+      "routeIds": [
+        "internal-wire:xa-hot",
+        "internal-wire:xa-neutral",
+        "internal-wire:xa-pe"
+      ],
+      "missingRoutes": [],
+      "minimumOpeningClearanceMm": 0.8999999999999997,
+      "bandWidthMm": 4.8,
+      "loopWidthMm": 21.2,
+      "loopHeightMm": 9.6,
+      "lengthWithLockAllowanceMm": 82.68141502220529,
+      "pass": true
+    },
+    {
+      "id": "ct-pair",
+      "label": "CT signal pair",
+      "crossings": 2,
+      "routeIds": [
+        "ct:white",
+        "ct:black"
+      ],
+      "missingRoutes": [],
+      "minimumOpeningClearanceMm": 0.8999999999999995,
+      "bandWidthMm": 4.8,
+      "loopWidthMm": 12,
+      "loopHeightMm": 7.9,
+      "lengthWithLockAllowanceMm": 60.88141502220529,
+      "pass": true
+    },
+    {
+      "id": "coil-left",
+      "label": "Voltage lead coils, left",
+      "crossings": 16,
+      "routeIds": [
+        "voltage:A1",
+        "voltage:A2",
+        "voltage:A3"
+      ],
+      "missingRoutes": [],
+      "minimumOpeningClearanceMm": 0.899999999999995,
+      "bandWidthMm": 4.8,
+      "loopWidthMm": 12.920886811131542,
+      "loopHeightMm": 29.04933811385252,
+      "lengthWithLockAllowanceMm": 105.02186487217344,
+      "pass": true
+    },
+    {
+      "id": "coil-right",
+      "label": "Voltage lead coils, right",
+      "crossings": 16,
+      "routeIds": [
+        "voltage:A1",
+        "voltage:A2",
+        "voltage:A3"
+      ],
+      "missingRoutes": [],
+      "minimumOpeningClearanceMm": 0.8999999999999986,
+      "bandWidthMm": 4.8,
+      "loopWidthMm": 12.921494797547247,
+      "loopHeightMm": 31.049328608451525,
+      "lengthWithLockAllowanceMm": 109.02306183420285,
+      "pass": true
+    },
+    {
+      "id": "dc-usb",
+      "label": "DC and USB inside entries",
+      "crossings": 2,
+      "routeIds": [
+        "dc-extension:internal",
+        "usb:internal"
+      ],
+      "missingRoutes": [],
+      "minimumOpeningClearanceMm": 0.899999999999999,
+      "bandWidthMm": 4.8,
+      "loopWidthMm": 14.052282012257496,
+      "loopHeightMm": 10.499744555414148,
+      "lengthWithLockAllowanceMm": 70.18546815754858,
+      "pass": true
+    }
+  ],
+  "coilSeparation": [
+    {
+      "pair": [
+        "voltage:A1",
+        "voltage:A2"
+      ],
+      "sampledSurfaceGapMm": 0.945963240483616,
+      "conservativePolylineGapMm": 0.4381584433030039
+    },
+    {
+      "pair": [
+        "voltage:A1",
+        "voltage:A3"
+      ],
+      "sampledSurfaceGapMm": 4.946955204636473,
+      "conservativePolylineGapMm": 4.424087361587175
+    },
+    {
+      "pair": [
+        "voltage:A2",
+        "voltage:A3"
+      ],
+      "sampledSurfaceGapMm": 0.9762677967643847,
+      "conservativePolylineGapMm": 0.4604633771066713
+    }
+  ],
+  "componentBodyIntrusions": [],
+  "ctAperture": "One straight printer-hot conductor",
+  "entries": "Outer jackets extend through both power glands; bare conductor breakouts stay inside",
+  "limitations": "Sampled curves with assumed wire diameters. Named WAGO/fuse terminations exclude a 20 mm endpoint region because port cavities are simplified. Does not certify every wire-to-wire clearance, cable stiffness, torque, pull retention or manufactured fit."
+}

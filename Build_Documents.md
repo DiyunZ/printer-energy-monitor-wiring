@@ -61,4 +61,4 @@ Amber marks the selected material; hidden housings become transparent. Top view 
 | Long-thread power glands / KVT 32 split entries | 27.0 × 37.0 × 27.0 | Catalog envelopes; 41380 inserts selected · [Source](https://www.hammfg.com/electronics/small-case/accessories/1427ncg) |
 | Blue adapters & retained lead slack | Routing only | Illustrative routing; length not validated · [Source](https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/) |
 
-[Dimensions JSON](layout_dimensions.json) · [Enclosure CAD provenance](assets/enclosure.json) · [Materials JSON](procurement.json)
+[Dimensions JSON](layout_dimensions.json) · [Enclosure CAD provenance](assets/enclosure.json) · [Materials JSON](procurement.json) · [Cable-support checks](installation_supports.json)

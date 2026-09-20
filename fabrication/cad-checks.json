@@ -19,7 +19,7 @@
       "id": "panel-machined",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 231150.69342025463,
+      "volume_mm3": 231289.89288710503,
       "bounds_mm": [
         327.0250000000001,
         1.8973800000000831,
@@ -88,7 +88,7 @@
     },
     {
       "id": "Tie anchor 1",
-      "removed_mm3": 30.176525037182728,
+      "removed_mm3": 30.176525037153624,
       "result": "pass"
     },
     {
@@ -98,7 +98,7 @@
     },
     {
       "id": "Tie anchor 3",
-      "removed_mm3": 30.17652503721183,
+      "removed_mm3": 30.176525037182728,
       "result": "pass"
     },
     {
@@ -113,42 +113,17 @@
     },
     {
       "id": "Tie anchor 6",
-      "removed_mm3": 30.176525037182728,
-      "result": "pass"
-    },
-    {
-      "id": "Tie anchor 7",
-      "removed_mm3": 30.176525037182728,
-      "result": "pass"
-    },
-    {
-      "id": "Tie anchor 8",
-      "removed_mm3": 30.176525037182728,
-      "result": "pass"
-    },
-    {
-      "id": "Tie anchor 9",
-      "removed_mm3": 30.176525037182728,
-      "result": "pass"
-    },
-    {
-      "id": "Tie anchor 10",
-      "removed_mm3": 30.176525037182728,
-      "result": "pass"
-    },
-    {
-      "id": "Tie anchor 11",
-      "removed_mm3": 30.176525037182728,
-      "result": "pass"
-    },
-    {
-      "id": "Tie anchor 12",
-      "removed_mm3": 30.17652503721183,
+      "removed_mm3": 30.176525037153624,
       "result": "pass"
     },
     {
       "id": "Panel PE bond",
       "removed_mm3": 41.85968337254599,
+      "result": "pass"
+    },
+    {
+      "id": "Rail PE through panel",
+      "removed_mm3": 41.85968337257509,
       "result": "pass"
     },
     {
@@ -248,6 +223,41 @@
     },
     {
       "id": "Rail 2 M4 gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Anchor 1 M4 gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Anchor 2 M4 gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Anchor 3 M4 gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Anchor 4 M4 gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Anchor 5 M4 gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Anchor 6 M4 gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Rail PE #10 shaft gauge",
       "intrusion_mm3": 0,
       "result": "pass"
     }

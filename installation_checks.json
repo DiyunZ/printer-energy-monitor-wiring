@@ -79,7 +79,7 @@
     {
       "id": "Closed lid screen",
       "result": "screen only",
-      "evidence": "meter: 159.012 mm (9/9 rays); ct: 164.312 mm (9/9 rays); fuse: 141.512 mm (9/9 rays); outlet: 33.747 mm (9/9 rays); q0: 32.992 mm (9/9 rays)",
+      "evidence": "meter: 159.012 mm (9/9 rays); ct: 168.315 mm (9/9 rays); fuse: 141.512 mm (9/9 rays); outlet: 33.747 mm (9/9 rays); q0: 32.992 mm (9/9 rays)",
       "limits": "Nine upward rays per body against lid mesh 15. Not a minimum-distance proof; excludes lid hardware, guards, open fuse door, wire bundles and tolerances."
     },
     {
@@ -190,7 +190,7 @@
       "id": "ct",
       "shell_triangle_hits": 0,
       "lid_samples": 9,
-      "minimum_sampled_lid_gap_mm": 164.312
+      "minimum_sampled_lid_gap_mm": 168.315
     },
     {
       "id": "fuse",
@@ -223,6 +223,6 @@
       "local_wall_mm": null
     }
   ],
-  "material_groups": 30,
+  "material_groups": 29,
   "owned_groups": 5
 }

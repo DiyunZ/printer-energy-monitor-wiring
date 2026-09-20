@@ -66,11 +66,14 @@ For outside views: front U = X; rear U = −X; right U = −Z; left U = Z. V run
 | DC / USB frames | Ø32.30 mm; KVT 32 + split 41380 inserts | Right wall; DC Y/Z = 78/106, USB = 55/167 mm |
 | Rail | Two Ø4.50 mm panel holes, 80 mm apart | X/Z = −95/−28 and −15/−28 mm |
 | Panel bond | Ø5.30 mm, dedicated to PE | X/Z = −125/60 mm |
+| Rail bond through panel | Ø5.30 mm through panel and rail web, dedicated to PE | X/Z = −27/−28 mm; bolt head and washer beneath panel |
 | Meter straps | Four 21 × 4 mm slots, long axis Z | X = 50 and 132; Z = −70 and 50 mm |
-| Cable mounts | Twelve Ø4.50 mm holes | Individual coordinates in the panel drawing |
+| Cable mounts | Six Ø4.50 mm holes | Individual coordinates in the panel drawing |
 | Five WAGO carriers | Two Ø3.30 mm fixing holes per carrier | Place within the dashed locator envelope, orient the carrier as shown, then transfer-drill from the actual part. The unlocated longitudinal fixing datum is not invented. |
 
-Retain all factory panel and lid features. Transfer-drill the rail's two fixing holes to match the panel; add a separate Ø5.30 mm rail-web PE hole at X/Z = −27/−28 mm, clear of the holder and end stops. Deburr every cut, remove chips and protect the gasket. Smooth strap slots on both faces without enlarging their functional opening. Machining does not preserve or confer an IP/NEMA certification on the completed assembly.
+The six anchor positions support the mains bundle, outlet supply, CT pair, two sides of the voltage-lead coils and DC/USB cables. Each tie passes through its mounting-base slot and encloses that bundle. The same coordinates drive the panel CAD and 3D view.
+
+Retain all factory panel and lid features. Transfer-drill the rail's two fixing holes to match the panel; align its separate Ø5.30 mm PE hole with the new panel hole at X/Z = −27/−28 mm, clear of the holder and end stops. The rail PE bolt passes through both parts: its head/washer belongs beneath the panel, not trapped between the rail and panel. The revision removes six anchor holes and adds this bond hole, reducing the total panel machining features by five. Deburr every cut, remove chips and protect the gasket. Smooth strap slots on both faces without enlarging their functional opening. Machining does not preserve or confer an IP/NEMA certification on the completed assembly.
 
 <h2 id="fasteners">Fasteners and purchase quantities</h2>
 
@@ -81,15 +84,17 @@ Counts below are **installed**, followed by suggested purchase counts including 
 | Q0 | 2 × #6-32 × 3/8 in screws; 2 × #6 flat washers | Buy 4 [screws, 1335](https://boltdepot.com/Product-Details?product=1335); washers included in the 10-piece allowance below. No nut on Q0's threaded inserts. |
 | XA | 2 × #6-32 × 5/8 in screws; 4 × #6 flat washers; 2 × #6-32 nylon locknuts | Buy 4 [screws, 1438](https://boltdepot.com/Product-Details?product=1438), 10 total [washers, 2942](https://boltdepot.com/Product-Details?product=2942), 4 [nuts, 2550](https://boltdepot.com/Product-Details?product=2550). |
 | Five WAGO carriers | 10 × M3 × 16 mm pan screws; 10 × M3 washers; 10 × M3 locknuts | Buy 12 each: [screws, 6835](https://boltdepot.com/Product-Details?product=6835), [washers, 4513](https://boltdepot.com/Product-Details?product=4513), [nuts, 4792](https://boltdepot.com/Product-Details?product=4792). |
-| Twelve tie anchors | 12 × M4 × 20 mm pan screws; 12 × M4 washers; 12 × M4 locknuts | Buy 14 each: [screws, 17888](https://boltdepot.com/Product-Details?product=17888), [washers, 4525](https://boltdepot.com/Product-Details?product=4525), [nuts, 4802](https://boltdepot.com/Product-Details?product=4802). |
+| Six tie anchors | 6 × M4 × 16 mm pan screws; 6 × M4 washers; 6 × M4 locknuts | Buy 8 each: [screws, 17887](https://boltdepot.com/Product-Details?product=17887), [washers, 4525](https://boltdepot.com/Product-Details?product=4525), [nuts, 4802](https://boltdepot.com/Product-Details?product=4802). |
 | DIN rail mounting | 2 × M4 × 12 mm pan screws; 2 × M4 washers; 2 × M4 locknuts | Buy 4 each: [screws, 19249](https://boltdepot.com/Product-Details?product=19249), [washers, 4514](https://boltdepot.com/Product-Details?product=4514), [nuts, 4793](https://boltdepot.com/Product-Details?product=4793). |
 | Panel and rail PE studs | 2 × #10-32 × 3/4 in screws; 4 plain nuts; 4 external-tooth washers; 4 flat washers; 2 ring lugs | Buy 4 [screws, 1368](https://boltdepot.com/Product-Details?product=1368), 6 [nuts, 2561](https://boltdepot.com/Product-Details?product=2561), 6 [tooth washers, 4078](https://boltdepot.com/Product-Details?product=4078), 6 [flat washers, 2946](https://boltdepot.com/Product-Details?product=2946). Rings come from the 3M row in the main BOM. |
 
 Use the supplied Hammond screws for the backpanel and all four cover fixings. Q0 power studs use the manufacturer's supplied terminal hardware and two #10 ring lugs. Do not substitute #8 lugs or metric nuts on these studs.
 
+Each anchor uses an M4 × 16 mm pan screw with its head directly on the base, then an underside washer and locknut. The illustrated stack leaves about 4.6 mm to the case floor, versus only 0.6 mm with the previous 20 mm screw. Confirm actual base thickness, nut engagement and floor clearance on receipt; small molded details are illustrative.
+
 **Stack checks:** the nominal case wall is 4.775 mm. For Q0, measure/select washers 0.8–1.0 mm thick: 9.525 − 4.775 − washer = **3.75–3.95 mm** nominal insert engagement, below the 4.95 mm insert depth. Reject a stack that bottoms out before clamping. The general #6 washer listing does not guarantee thickness; this is a receiving check. XA's fixing stack must leave the locking element fully engaged. Do not crush or distort its flange or the polycarbonate wall.
 
-Fit carrier/anchor fasteners while the panel is out. There is about **16.66 mm** between the panel underside and the inner case floor in the source CAD. Check actual screw projections and washers against this space and the molded supports. The longer 20 mm tie screws accommodate the anchor's recessed seat; verify each full locking-nut engagement and floor clearance before installing the panel.
+Fit carrier/anchor fasteners while the panel is out. There is about **16.66 mm** between the panel underside and the inner case floor in the source CAD. Check actual screw projections and washers against this space and the molded supports. For the six revised M4 × 16 mm anchor screws, verify full locking-nut engagement and at least 3 mm clearance to the actual case floor before installing the panel.
 
 For each PE stud, put the screw head and flat washer underneath. On the conductive side, use an external-tooth washer and first nut to secure the dedicated stud, then the ring lug, flat washer, external-tooth washer and second nut. Establish a clean metal contact under the bonding hardware; do not rely on paint, straps or rail mounting screws for bonding. Final bonding method, tightening and continuity acceptance belong to the qualified assembler. The website does not assign an unsupported universal bonding torque.
 

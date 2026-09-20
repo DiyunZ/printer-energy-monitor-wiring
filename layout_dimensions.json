@@ -1,6 +1,6 @@
 {
   "units": "mm",
-  "revision": "2026-09-20 · build package A, revision 8",
+  "revision": "2026-09-20 / six cable supports and wire-through-tie geometry",
   "coordinates": "X across the panel; Y above the panel underside; Z along the panel, negative toward the printer exit (rear), positive toward Q0 (front). One scene unit is one millimetre. The wiring plan projects the same X/Z positions with rear at the top. Dimensions below are X × Y × Z unless noted.",
   "parts": [
     {
@@ -59,12 +59,12 @@
       ],
       "position": [
         -55,
-        26.75,
+        22.74738,
         -123
       ],
       "status": "Mini HSC family matched; 50 A variant probable",
       "source": "https://www.dentinstruments.com/shop/current-sensors/hinged-current-transformers-sensors-for-energy-metering/",
-      "note": "White Mini HSC 20 A and 50 A versions use the same 29.4 × 41.7 × 26.4 mm body and nominal 10 mm window (legacy drawing 10.2 mm). The partially visible DENT 50… label resembles legacy CTHSC-050-U/B; complete model digits remain covered. This establishes the family envelope, not the final ELOG scale. White is + and black is −; arrow toward printer, one hot conductor only."
+      "note": "White Mini HSC 20 A and 50 A versions use the same 29.4 × 41.7 × 26.4 mm body and nominal 10 mm window (legacy drawing 10.2 mm). The partially visible DENT 50… label resembles legacy CTHSC-050-U/B; complete model digits remain covered. This establishes the family envelope, not the final ELOG scale. White is + and black is −; arrow toward printer, one hot conductor only. The illustrated body rests on the panel; it has no added mounting screw."
     },
     {
       "id": "q0",
@@ -439,21 +439,21 @@
       "id": "lead-slack",
       "part": "leads",
       "size": [
-        91,
-        84,
-        77
+        99,
+        43,
+        81
       ],
       "position": [
         -35,
-        64.5,
-        101
+        28,
+        122
       ],
       "label": "Retained lead slack",
       "flexibleLengthMm": 2000,
       "assumedCableDiameterMm": 3,
       "pitchMm": 4,
-      "layerSpacingMm": 28,
-      "note": "Scenario only: each full lead reserves 2000 mm of flexible cable, 3 mm assumed OD, 4 mm helix pitch and 28 mm between lead-layer starts. Actual lengths, diameters, bend limits and transitions must be measured."
+      "note": "Scenario only: each full lead reserves 2000 mm flexible cable at assumed 3 mm OD. Three concentric helices use 4 mm radial spacing and pitch, with two shared restraints. Measure actual cable length, diameter, bend limits and support fit during dry assembly.",
+      "radialSpacingMm": 4
     },
     {
       "id": "JV",
@@ -488,56 +488,32 @@
     }
   ],
   "installationHardware": {
-    "note": "Installation visualization only. Panel anchors, rail fixings and panel bond copy the machining source; carrier fastener centers are schematic, not drilling dimensions. Threads and small molded features are simplified.",
+    "note": "Six support datums are shared with the machining source. Tie openings follow actual rendered cable cross-sections. TM2S8 outer size and PLT2S band width are catalog values; saddle/lock molding and 1 mm band thickness are illustrative. Carrier fastener centers remain transfer-drill references, not machining datums. The rail PE bolt passes through a dedicated hole in both the rail web and panel; both PE heads are beneath the panel.",
     "source": "tools/cad/enclosure_model.py",
     "cableMountsXZ": [
       [
-        -150,
-        110
+        -153,
+        80
       ],
       [
-        -85,
-        105
+        8,
+        -175
       ],
       [
-        -80,
-        155
+        38,
+        -151
       ],
       [
-        -20,
-        155
+        -79,
+        130
       ],
       [
-        30,
-        120
+        9,
+        130
       ],
       [
-        140,
-        112
-      ],
-      [
-        143,
-        -143
-      ],
-      [
-        42,
-        -150
-      ],
-      [
-        -77,
-        -155
-      ],
-      [
-        -83,
-        -100
-      ],
-      [
-        -155,
-        -18
-      ],
-      [
-        -40,
-        68
+        145,
+        158
       ]
     ],
     "railFixingsXZ": [
@@ -587,6 +563,96 @@
         ]
       ],
       "source": "https://cdn.automationdirect.com/static/specs/screwlessdinnectors.pdf"
-    }
+    },
+    "cableSupports": [
+      {
+        "id": "mains",
+        "label": "Supply and switched hot",
+        "holeXZ": [
+          -153,
+          80
+        ],
+        "axis": "z",
+        "routes": [
+          "internal-wire:q0-jl",
+          "cord:supply-neutral",
+          "cord:supply-pe"
+        ],
+        "captureHalfWidthMm": 14
+      },
+      {
+        "id": "rear-ac",
+        "label": "AC supply to adapter outlet",
+        "holeXZ": [
+          8,
+          -175
+        ],
+        "axis": "x",
+        "routes": [
+          "internal-wire:xa-hot",
+          "internal-wire:xa-neutral",
+          "internal-wire:xa-pe"
+        ],
+        "captureHalfWidthMm": 15
+      },
+      {
+        "id": "ct-pair",
+        "label": "CT signal pair",
+        "holeXZ": [
+          38,
+          -151
+        ],
+        "axis": "x",
+        "routes": [
+          "ct:white",
+          "ct:black"
+        ],
+        "captureHalfWidthMm": 10
+      },
+      {
+        "id": "coil-left",
+        "label": "Voltage lead coils, left",
+        "holeXZ": [
+          -79,
+          130
+        ],
+        "axis": "z",
+        "routes": [
+          "voltage:A1",
+          "voltage:A2",
+          "voltage:A3"
+        ],
+        "captureHalfWidthMm": 12
+      },
+      {
+        "id": "coil-right",
+        "label": "Voltage lead coils, right",
+        "holeXZ": [
+          9,
+          130
+        ],
+        "axis": "z",
+        "routes": [
+          "voltage:A1",
+          "voltage:A2",
+          "voltage:A3"
+        ],
+        "captureHalfWidthMm": 12
+      },
+      {
+        "id": "dc-usb",
+        "label": "DC and USB inside entries",
+        "holeXZ": [
+          145,
+          158
+        ],
+        "axis": "z",
+        "routes": [
+          "dc-extension:internal",
+          "usb:internal"
+        ],
+        "captureHalfWidthMm": 12
+      }
+    ]
   }
 }

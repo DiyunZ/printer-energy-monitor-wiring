@@ -1,9 +1,10 @@
 import * as THREE from 'three';
 import { OrbitControls } from './vendor/OrbitControls.js';
 import { RoundedBoxGeometry } from './vendor/RoundedBoxGeometry.js';
-import { installMaterialLocator } from './material-locator.js?v=14';
-import { addInstallationHardware } from './installation-hardware.js?v=14';
-import { showDesignPanel } from './site-navigation.js?v=14';
+import { installMaterialLocator } from './material-locator.js?v=15';
+import { addInstallationHardware } from './installation-hardware.js?v=15';
+import { screenCableBodies } from './cable-supports.js?v=15';
+import { showDesignPanel } from './site-navigation.js?v=15';
 
 // All geometry is in millimetres. Only the camera changes the screen scale.
 const host = document.querySelector('#model-view');
@@ -13,11 +14,11 @@ const V = a => new THREE.Vector3(...a);
 
 async function start() {
   const [dimensions, cad, buffer, review, procurement] = await Promise.all([
-    fetch('./layout_dimensions.json?v=14').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
-    fetch('./assets/enclosure.json?v=14').then(r => { if (!r.ok) throw Error('CAD manifest unavailable'); return r.json(); }),
-    fetch('./assets/enclosure.bin?v=14').then(r => { if (!r.ok) throw Error('CAD geometry unavailable'); return r.arrayBuffer(); }),
-    fetch('./installation_review.json?v=14').then(r => { if (!r.ok) throw Error('Installation review unavailable'); return r.json(); }),
-    fetch('./procurement.json?v=14').then(r => { if (!r.ok) throw Error('Materials unavailable'); return r.json(); })
+    fetch('./layout_dimensions.json?v=15').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
+    fetch('./assets/enclosure.json?v=15').then(r => { if (!r.ok) throw Error('CAD manifest unavailable'); return r.json(); }),
+    fetch('./assets/enclosure.bin?v=15').then(r => { if (!r.ok) throw Error('CAD geometry unavailable'); return r.arrayBuffer(); }),
+    fetch('./installation_review.json?v=15').then(r => { if (!r.ok) throw Error('Installation review unavailable'); return r.json(); }),
+    fetch('./procurement.json?v=15').then(r => { if (!r.ok) throw Error('Materials unavailable'); return r.json(); })
   ]);
   const parts = Object.fromEntries(dimensions.parts.map(p => [p.id, p]));
   const instances = Object.fromEntries(dimensions.instances.map(p => [p.id, p]));
@@ -68,7 +69,7 @@ async function start() {
   function capture(id, key, label, build, reveal = []) {
     const start = allMeshes.length; build(); mark(id, key, label, allMeshes.slice(start), reveal);
   }
-  function locatedCable(id, key, label, ...args) { const m = cable(...args); mark(id, key, label, [m]); return m; }
+  function locatedCable(id, key, label, ...args) { const m = cable(...args); m.userData.route.id=`${id}:${key}`; mark(id, key, label, [m]); return m; }
   const mats = new Map();
   const material = (color, metal = 0) => {
     const key = `${color}/${metal}`;
@@ -103,7 +104,8 @@ async function start() {
     const m = mesh(new THREE.TubeGeometry(curve, Math.max(24, points.length * 6), radius, 8, false), material(color), [0,0,0], id, parent);
     curve.arcLengthDivisions = Math.max(200, points.length * 10);
     m.userData.lengthMm = curve.getLength();
-    cableRoutes.push({part:id,samples:curve.getSpacedPoints(300),radius});
+    m.userData.route={part:id,samples:curve.getSpacedPoints(Math.max(600,points.length*8)).map(p=>p.toArray()),radius};
+    cableRoutes.push(m.userData.route);
     return m;
   }
   function tag(text, position, id, kind = '') {
@@ -120,7 +122,7 @@ async function start() {
     const m = mesh(new THREE.PlaneGeometry(width, height), new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide }), position, id);
     if (facing === 'up') m.rotation.x = -Math.PI / 2;
     if (facing === 'right') m.rotation.y = Math.PI / 2;
-    if (['q0','outlet','fuse','terminals'].includes(id)) mark('labels', text, text.replaceAll('\n', ' '), [m]);
+    m.userData.annotation=true;
     return m;
   }
   // The unscaled manufacturer assembly includes the actual taper, feet, panel, fasteners and lift-off lid.
@@ -194,7 +196,12 @@ async function start() {
   tag('Q0 · external handle',[qx-9,qy+71,217],'q0');
   // Fuse holder and short, bonded DIN rail.
   const [rw,rh,rd] = parts.rail.size, [rx,ry,rz] = parts.rail.position;
-  planBodies.rail = [box([rw,1.5,rd],[rx,ry-rh/2+.75,rz],material('#bdc6c9',.65),'rail')];
+  const railWeb=new THREE.Shape();railWeb.moveTo(-rw/2,-rd/2);railWeb.lineTo(rw/2,-rd/2);railWeb.lineTo(rw/2,rd/2);railWeb.lineTo(-rw/2,rd/2);railWeb.closePath();
+  for(const [x,z,r] of [...dimensions.installationHardware.railFixingsXZ.map(([x,z])=>[x,z,2.25]),[...dimensions.installationHardware.railBondXZ,2.65]]){
+    const hole=new THREE.Path();hole.absarc(x-rx,z-rz,r,0,Math.PI*2,true);railWeb.holes.push(hole);
+  }
+  const railGeo=new THREE.ExtrudeGeometry(railWeb,{depth:1.5,bevelEnabled:false,curveSegments:24});railGeo.rotateX(Math.PI/2);railGeo.translate(0,.75,0);
+  planBodies.rail = [mesh(railGeo,material('#bdc6c9',.65),[rx,ry-rh/2+.75,rz],'rail')];
   for(const side of [-1,1]) planBodies.rail.push(box([rw,rh,1.5],[rx,ry,rz+side*(rd/2-.75)],material('#aeb9be',.6),'rail'));
   fitBodies.fuse=[box(parts.fuse.size,parts.fuse.position,'#d4d8d4','fuse',1.5)];
   box([14,4,35],[-60,70.4,-28],'#f2f0e3','fuse',1);
@@ -232,45 +239,60 @@ async function start() {
   function gland(id) {
     const p=instances[id], pos=p.position, axis=p.axis;
     const r=p.size[1]/2, length=p.size[axis==='x'?0:2];
-    planBodies[id]=[cylinder(r,length,pos,'#343e45','entries',axis)];
+    const split=['dc-entry','usb-entry'].includes(id);
+    function hollow(outer,depth,at,color) {
+      const shape=new THREE.Shape();shape.absarc(0,0,outer,0,Math.PI*2,false);
+      const hole=new THREE.Path();
+      if(split){hole.moveTo(-10.6,-10.6);hole.lineTo(-10.6,10.6);hole.lineTo(10.6,10.6);hole.lineTo(10.6,-10.6);hole.closePath();}
+      else hole.absarc(0,0,4.7,0,Math.PI*2,true);
+      shape.holes.push(hole);
+      const g=new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:false,curveSegments:32});g.translate(0,0,-depth/2);
+      if(axis==='x')g.rotateY(Math.PI/2);
+      return mesh(g,material(color),at,'entries');
+    }
+    planBodies[id]=[hollow(r,length,pos,'#343e45')];
     const v=[...pos],axisN=axis==='x'?0:axis==='y'?1:2;v[axisN]+=length/2;
-    const trim=cylinder(r*.68,4,v,'#171e23','entries',axis);
+    const trim=hollow(split?r:r*.68,4,v,'#171e23');
     mark(['dc-entry','usb-entry'].includes(id) ? 'split-entries' : 'cord-glands', id, p.label, [...planBodies[id],trim]);
   }
   ['supply-entry','printer-entry','dc-entry','usb-entry'].forEach(gland);
   tag('SUPPLY IN',[-239,54,144],'entries'); tag('TO PRINTER',[3,44,-254],'entries');
   // Actual wire routes remain in the separately validated schematic. These curved paths show physical routing intent.
   const hot='#20262b', neutral='#c9d0d5', pe='#23945e', blue='#268bd4', signal='#a08bb5';
-  locatedCable('cord','supply','Supply cord',[[-275,43,128],[-225,43,128],[-172,43,128]],'#293137',4.6,'entries');
+  locatedCable('cord','supply','Supply cord',[[-275,43,128],[-225,43,128],[-157,43,128]],'#293137',4.6,'entries');
   planBodies['supply-plug']=[box(instances['supply-plug'].size,instances['supply-plug'].position,'#e2b837','entries',6)];
   const supplyStart=allMeshes.length;
   for (const z of [-6.35,6.35]) box([16,6.4,1.5],[-329,46,128+z],'#b6b9b3','entries');
   cylinder(2.4,18,[-330,34,128],'#b6b9b3','entries','x');
   mark('supply-plug','plug','Supply plug',[...planBodies['supply-plug'],...allMeshes.slice(supplyStart)]);
-  locatedCable('cord','supply','Supply cord',[[-172,43,128],[-150,43,128],[-140,119,132],[qx,qy+parts.q0.terminalPitch/2,terminalZ]],hot,1.7,'q0');
-  locatedCable('internal-wire','q0-jl','Q0 output to JL',[[qx,qy-parts.q0.terminalPitch/2,terminalZ],[-141,60,123],[-149,22,77],[-151,23,-98],[-134,15,-120]],hot,1.7,'terminals');
-  locatedCable('cord','printer','Printer cord',[[-120,14,-137],[-100,cy,-135],[-88,cy,cz],[-20,cy,cz],[0,cy,-150],[0,36,-233]],hot,1.7,'ct');
-  locatedCable('cord','supply','Supply cord',[[-170,42,128],[-157,24,112],[-159,21,-33],[-134,14,-51]],neutral,1.7,'terminals');
-  locatedCable('cord','printer','Printer cord',[[-121,13,-67],[-113,15,-95],[-113,15,-161],[-11,15,-172],[-4,36,-233]],neutral,1.7,'entries');
-  locatedCable('cord','supply','Supply cord',[[-168,43,128],[-158,19,108],[-139,13,27]],pe,1.7,'terminals');
-  locatedCable('cord','printer','Printer cord',[[-128,13,9],[-147,13,-10],[-150,12,-180],[-8,13,-183],[-8,36,-233]],pe,1.7,'entries');
-  locatedCable('cord','printer','Printer cord',[[0,36,-233],[0,36,-256],[18,36,-283]],'#2a333c',4.6,'entries');
+  locatedCable('cord','supply-hot','Supply hot to Q0',[[-157,45,128],[-145,51,131],[-138,103,142],[qx,qy+parts.q0.terminalPitch/2-15.5,terminalZ+8]],hot,1.7,'q0');
+  locatedCable('internal-wire','q0-jl','Q0 output to JL',[[qx,qy-parts.q0.terminalPitch/2-15.5,terminalZ+8],[-143,43,121],[-148,12,100],[-148,12,72],[-148,12,35],[-150,15,-98],[-134,15,-118]],hot,1.7,'terminals');
+  locatedCable('cord','printer-hot-in','Printer hot to CT',[[-120,14,-138],[-99,19,-148],[-87,cy,cz],[-78,cy,cz]],hot,1.7,'ct');
+  locatedCable('cord','printer-hot-ct','Printer hot through CT',[[-78,cy,cz],[-32,cy,cz]],hot,1.7,'ct',false);
+  locatedCable('cord','printer-hot-out','Printer hot from CT',[[-32,cy,cz],[-15,cy,-135],[0,35,-167],[0,38,-190]],hot,1.7,'ct');
+  locatedCable('cord','supply-neutral','Supply neutral',[[-157,42,130],[-154,25,115],[-153,12,100],[-153,12,72],[-153,12,-33],[-134,14,-48]],neutral,1.7,'terminals');
+  locatedCable('cord','printer-neutral','Printer neutral',[[-121,13,-68],[-99,22,-91],[-97,15,-158],[-20,18,-162],[-2,35,-190]],neutral,1.7,'entries');
+  locatedCable('cord','supply-pe','Supply protective earth',[[-157,41,126],[-161,20,110],[-158,12,100],[-158,12,72],[-158,12,45],[-139,13,28]],pe,1.7,'terminals');
+  locatedCable('cord','printer-pe','Printer protective earth',[[-128,13,7],[-162,13,-10],[-162,12,-189],[-25,16,-191],[2,35,-190]],pe,1.7,'entries');
+  locatedCable('cord','printer','Jacket through output gland',[[0,36,-190],[0,36,-240]],'#2a333c',4.6,'entries',false);
+  locatedCable('cord','printer','Printer cord outside enclosure',[[0,36,-240],[0,36,-258],[18,36,-283]],'#2a333c',4.6,'entries');
   planBodies['printer-plug']=[box(instances['printer-plug'].size,instances['printer-plug'].position,'#e2b837','entries',6)];
   mark('printer-connector','connector','Printer output connector',[...planBodies['printer-plug'],cylinder(12,3,[24,36,-326],'#e1d7ad','entries','z')]);
   locatedCable('internal-wire','jl-fv','JL to Fv',[[-130,14,-120],[-97,20,-100],[-78,22,-80],[-60,27,-72]],hot,1.7,'fuse');
-  locatedCable('internal-wire','xa-hot','XA hot',[[-135,13,-120],[-146,21,-116],[-155,22,-160],[133,30,-160],[144,76,-20],[141,113,4]],hot,1.7,'outlet');
-  locatedCable('internal-wire','xa-neutral','XA neutral',[[-127,13,-52],[-140,21,-32],[-145,20,-151],[131,26,-151],[139,72,-16],[141,121,4]],neutral,1.7,'outlet');
+  locatedCable('internal-wire','xa-hot','XA hot',[[-135,13,-138],[-146,17,-154],[-132,12,-175],[-35,12,-175],[0,12,-175],[40,12,-175],[132,22,-175],[143,76,-20],[141,113,4]],hot,1.7,'outlet');
+  locatedCable('internal-wire','xa-neutral','XA neutral',[[-127,13,-48],[-148,21,-65],[-143,21,-153],[-117,12,-167],[-35,12,-167],[0,12,-167],[40,12,-167],[133,26,-167],[140,72,-16],[141,121,4]],neutral,1.7,'outlet');
   locatedCable('internal-wire','pe-bridge','PE bridge',[[-118,13,25],[-100,12,32],[-83,12,44]],pe,1.7,'terminals');
-  locatedCable('internal-wire','xa-pe','XA protective earth',[[-71,13,60],[-97,22,96],[-87,24,151],[134,25,151],[143,67,36],[141,128,25]],pe,1.7,'outlet');
-  locatedCable('internal-wire','rail-pe','Rail bond',[[-78,13,60],[-39,14,17],[-24,13,-19],[-27,7,-28]],pe,1.7,'rail');
-  locatedCable('internal-wire','panel-pe','Panel bond',[[-82,13,60],[-85,14,49],[-125,7,60]],pe,1.7,'panel');
+  locatedCable('internal-wire','xa-pe','XA protective earth',[[-71,13,62],[-91,18,78],[-97,19,22],[-92,19,-80],[-92,12,-183],[-35,12,-183],[0,12,-183],[40,12,-183],[140,24,-183],[148,67,36],[141,128,25]],pe,1.7,'outlet');
+  locatedCable('internal-wire','rail-pe','Rail bond',[[-78,13,62],[-52,23,78],[-4,23,72],[-3,23,7],[-9,14,-9],[-27+15.5/Math.sqrt(2),8.9,-28+15.5/Math.sqrt(2)]],pe,1.7,'rail');
+  locatedCable('internal-wire','panel-pe','Panel bond',[[-82,13,62],[-99,13,78],[-119,8,83],[-125,7.4,75.5]],pe,1.7,'panel');
   locatedCable('internal-wire','fv-jv','Fv to JV',[[-60,26,11.25],[-60,25,22],[-39.6,18,22],[-39.6,14,37.15]],hot,1.45,'fuse');
   // Blue pigtails and three full voltage leads, including a visible retained-slack zone.
   const leadPorts = [3,2,0], leadColors = ['#283039','#ad4d4a','#dddcd1'];
   for(let i=0;i<3;i++) {
     const p=instances[`A${i+1}`], [x,,plugZ]=p.position, z=plugZ-9;
     const startPt = i===0?[-33.8,14,37.15]:[-124+i*6,14,-49];
-    const shortLead=cable([startPt,[-44-i*8,30,29],[x,22,z]],blue,1.65);
+    const shortLead=cable(i===0?[startPt,[-44,29,49],[x,22,z]]:[startPt,[-99,24,-30],[-86-i*4,31,-5],[-80-i*4,32,21],[-53,31,40],[x,22,z]],blue,1.65);
+    shortLead.userData.route.id=`blue:A${i+1}`;
     planBodies[p.id]=[cylinder(p.size[0]/2,p.size[2],p.position,blue,'leads','z')];
     mark('blue-leads',p.id,p.label,[shortLead,...planBodies[p.id]]);
     const longPlug=cylinder(4.4,26,[x,22,z+30],'#b8b5a4','leads','z');
@@ -278,25 +300,28 @@ async function start() {
     const ex=portX[leadPorts[i]];
     const pathsFor = turns => {
       const coil=[];
-      for(let j=0;j<=240;j++) {const t=j/240, a=t*Math.PI*2*turns;coil.push([slack.position[0]+44*Math.cos(a),24+i*slack.layerSpacingMm+t*turns*slack.pitchMm,slack.position[2]+37*Math.sin(a)]);}
-      return [[[x,22,z+43],coil[0]],coil,[coil.at(-1),[24+i*6,28+i*5,143],[41+i*4,37,-94],[48+i*5,30,-151],[ex,18,-153],[ex,18,mz-ml/2-16]]];
+      for(let j=0;j<=320;j++) {const t=j/320, a=Math.PI/2+t*Math.PI*2*turns;coil.push([slack.position[0]+(40+i*4)*Math.cos(a),10.6+t*turns*slack.pitchMm,slack.position[2]+(31+i*4)*Math.sin(a)]);}
+      return [[[x,22,z+43],[x+15,7,z+43],[26+i*5,7,z+43],[26+i*5,7,175+i*4],[-35,7,175+i*4],coil[0]],coil,[coil.at(-1),[24+i*6,51+i*5,170],[39+i*4,40,-90],[43+i*5,30,-143],[ex,18,-158],[ex,18,mz-ml/2-31]]];
     };
     const lengthOf = points => {const c=new THREE.CatmullRomCurve3(points.map(V),false,'centripetal');c.arcLengthDivisions=Math.max(200,points.length*10);return c.getLength();};
-    let lo=4,hi=6.5;
+    let lo=2,hi=9;
     for(let j=0;j<28;j++){const n=(lo+hi)/2,len=pathsFor(n).reduce((s,p)=>s+lengthOf(p),0);if(len<slack.flexibleLengthMm)lo=n;else hi=n;}
     const turns=(lo+hi)/2, paths=pathsFor(turns);
     const leadSegments=paths.map(p=>cable(p,leadColors[i],slack.assumedCableDiameterMm/2));
+    leadSegments[1].userData.route.id=`voltage:A${i+1}`;
+    leadSegments[0].userData.route.id=`voltage-feed:A${i+1}`;
+    leadSegments[2].userData.route.id=`voltage-tail:A${i+1}`;
     const coilBounds=new THREE.Box3().setFromObject(leadSegments[1]);
     voltageLeadLengths.push({id:`A${i+1}`,modeledFlexibleLengthMm:leadSegments.reduce((n,m)=>n+m.userData.lengthMm,0),turns,pitchMm:slack.pitchMm,assumedDiameterMm:slack.assumedCableDiameterMm,coilMin:coilBounds.min.toArray(),coilMax:coilBounds.max.toArray()});
     const meterPlug=cylinder(4.7,30,[ex,18,mz-ml/2-16],'#b6b4a5','leads','z');
     mark('voltage-leads',p.id,`${p.id} to ${['L1','L2','N'][i]}`,[longPlug,...leadSegments,meterPlug]);
-    mark('labels',p.id,p.label,[decal(p.id,8,8,[x,28,plugZ],'leads')]);
+    decal(p.id,8,8,[x,28,plugZ],'leads');
   }
   tag('3 blue voltage adapters',[-22,56,59],'leads');
-  tag('Retained lead slack',[-35,49,132],'leads');
+  tag('Retained lead slack',[-35,49,148],'leads');
   // CT pair reaches CH1, distinct from voltage sockets and AC/DC power.
-  cable([[cx+6,cy+15,cz],[cx+23,53,cz-8],[44,61,-150],[102,59,-139],[mx+22,44,mz-ml/2-4]],'#bfc3c0',1,'ct');
-  cable([[cx+3,cy+15,cz+2],[cx+20,55,cz-8],[42,63,-153],[104,61,-140],[mx+17,44,mz-ml/2-4]],'#30323a',1,'ct');
+  locatedCable('ct','white','CT CH1 positive',[[cx+6,50,cz],[-27,47,-145],[8,11,-149],[22,11,-149],[30,11,-149],[40,11,-149],[73,16,-149],[mx+22,44,mz-ml/2-4]],'#bfc3c0',1,'ct');
+  locatedCable('ct','black','CT CH1 negative',[[cx+3,50,cz+3],[-29,49,-148],[8,11,-153],[22,11,-153],[30,11,-153],[40,11,-153],[70,18,-153],[mx+17,44,mz-ml/2-4]],'#30323a',1,'ct');
   // Original flat cord stays outside. Only the round factory extension crosses the DC insert.
   // Flexible paths show routing intent; the assembly schedule retains the full cable lengths.
   const coupling=instances['dc-coupling'], [dx,dy,dz]=coupling.position;
@@ -310,25 +335,27 @@ async function start() {
   cable([[207,89,oz],[230,83,23],[dx,dy,dz-30]],'#554534',1.4,'adapter');
   locatedCable('dc-extension','extension','External coupling to logger DC input',[[dx,dy,dz+30],[dx,dy,149],[290,dy,144],[276,dy,106],[224,dy,106]],'#393e44',2.6,'adapter');
   locatedCable('dc-extension','extension','External coupling to logger DC input',[[224,78,106],[208,78,106],[185.5,78,106],[165,78,106],[146,78,106]],'#393e44',2.6,'adapter');
-  locatedCable('dc-extension','extension','External coupling to logger DC input',[[146,78,106],[145,50,142],[113,18,174],[mx-17,18,160],[mx-17,18,mz+ml/2+39]],'#393e44',2.6,'adapter');
+  const dcInside=locatedCable('dc-extension','extension','External coupling to logger DC input',[[146,78,106],[142,32,134],[142,12,143],[142,12,150],[142,12,158],[124,16,175],[84,18,174],[mx-17,18,mz+ml/2+39]],'#393e44',2.6,'adapter');
+  dcInside.userData.route.id='dc-extension:internal';
   mark('dc-extension','extension','External coupling to logger DC input',[cylinder(4.8,35,[mx-17,18,mz+ml/2+21.5],'#24282b','adapter','z')]);
   const usbZ = instances['usb-entry'].position[2];
-  locatedCable('usb','usb','Logger USB-B to computer',[[mx+16,23,mz+ml/2+12],[117,31,125],[143,55,usbZ]],'#516d86',2.4,'entries');
-  locatedCable('usb','usb','Logger USB-B to computer',[[143,55,usbZ],[166,55,usbZ],[185.5,55,usbZ],[205,55,usbZ],[225,55,usbZ]],'#516d86',2.4,'entries');
+  const usbInside=locatedCable('usb','usb','Logger USB-B to computer',[[mx+16,23,mz+ml/2+21],[122,18,127],[149,12,140],[149,12,150],[149,12,158],[161,42,usbZ],[169,55,usbZ]],'#516d86',2.4,'entries');
+  usbInside.userData.route.id='usb:internal';
+  locatedCable('usb','usb','Logger USB-B to computer',[[169,55,usbZ],[185.5,55,usbZ],[205,55,usbZ],[225,55,usbZ]],'#516d86',2.4,'entries');
   locatedCable('usb','usb','Logger USB-B to computer',[[225,55,usbZ],[245,48,175],[267,38,195]],'#516d86',2.4,'entries');
   mark('usb','usb','Logger USB-B to computer',[box([10,11,20],[mx+16,23,mz+ml/2+11],'#43576a','entries',2)]);
-  addInstallationHardware({ dimensions, instances, parts, allMeshes, box, cylinder, mesh, material, decal, mark, capture, materialLocations });
+  const supportChecks=addInstallationHardware({ dimensions, instances, parts, allMeshes, box, cylinder, mesh, material, decal, mark, capture, materialLocations, cableRoutes });
   // Remaining integral features belong to their purchased assembly, not a new BOM item.
   const assemblyMaterials={case:'enclosure',panel:'panel',meter:'meter',ct:'ct',q0:'breaker',outlet:'receptacle',adapter:'adapter',rail:'din-rail',fuse:'fuse-holder'};
   for(const [part,id] of Object.entries(assemblyMaterials)) {
-    const objects=allMeshes.filter(m=>m.userData.part===part&&!m.userData.materialId);
+    const objects=allMeshes.filter(m=>m.userData.part===part&&!m.userData.materialId&&!m.userData.annotation);
     if(id==='enclosure') {
       mark(id,'case','Case and factory fittings',objects.filter(m=>!lidObjects.includes(m)));
       mark(id,'lid','Clear lid and factory fittings',objects.filter(m=>lidObjects.includes(m)));
     } else mark(id,id==='adapter'?'adapter':part,parts[part].name,objects);
   }
   for(const p of procurement.items) if(!materialLocations[p.id]?.length) throw Error(`Missing installation geometry: ${p.id}`);
-  if(allMeshes.some(m=>m.userData.part&&!m.userData.materialId)) throw Error('Unassigned installation geometry');
+  if(allMeshes.some(m=>m.userData.part&&!m.userData.materialId&&!m.userData.annotation)) throw Error('Unassigned installation geometry');
   // World-space dimension lines retain the same millimetre scale as the solids.
   function dimension(a,b,text,pos) {
     const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints([V(a),V(b)]), new THREE.LineBasicMaterial({ color:'#527086' })); dims.add(line);
@@ -467,7 +494,7 @@ async function start() {
   renderer.domElement.addEventListener('pointerup',e=>{
     if(!pointerStart||Math.hypot(e.clientX-pointerStart[0],e.clientY-pointerStart[1])>5)return;
     const r=renderer.domElement.getBoundingClientRect();ray.setFromCamera(new THREE.Vector2((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1),camera);
-    const hit=ray.intersectObjects(picking).find(h=>{if(locator?.isGhost(h.object))return false;for(let p=h.object;p;p=p.parent)if(!p.visible)return false;return true;});if(hit)locator.select(hit.object.userData.materialId);
+    const hit=ray.intersectObjects(picking).find(h=>{if(!h.object.userData.materialId||locator?.isGhost(h.object))return false;for(let p=h.object;p;p=p.parent)if(!p.visible)return false;return true;});if(hit)locator.select(hit.object.userData.materialId);
   });
   renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();status.textContent='3D graphics context lost. Reload the page to restore; the dimension schedule remains available.';});
   controls.addEventListener('change',render);
@@ -507,9 +534,11 @@ async function start() {
   function meterRouteIntrusions(){
     const b=new THREE.Box3(V(parts.meter.position).sub(V(parts.meter.size).multiplyScalar(.5)),V(parts.meter.position).add(V(parts.meter.size).multiplyScalar(.5)));
     // Screen the insulated route against the meter body; actual port terminations are modeled outside it.
-    return cableRoutes.flatMap((r,index)=>{const envelope=b.clone().expandByScalar(r.radius);const hits=r.samples.filter(p=>envelope.containsPoint(p)).length;return hits?[{index,part:r.part,samplesInside:hits}]:[]});
+    return cableRoutes.flatMap((r,index)=>{const envelope=b.clone().expandByScalar(r.radius);const hits=r.samples.filter(p=>envelope.containsPoint(V(p))).length;return hits?[{index,part:r.part,samplesInside:hits}]:[]});
   }
-  window.enclosureDiagnostics=()=>({materialLocator:locator.diagnostics(),units:dimensions.units,camera:camera.position.toArray(),zoom:camera.zoom,mode:$('model-shell').value,selected:activePart,cadSize:cad.bounds.size,projectedMeter:V(parts.meter.position).project(camera).toArray(),meterSize:parts.meter.size,meshCount:picking.length,triangles:renderer.info.render.triangles,wiresVisible:wires.visible,lidOffset:lidObjects[0].position.y,shellVisible:shellObjects[0].visible,shellOpacity:shellMat.opacity,fitBodies:boundsOf(fitBodies),planBodies:boundsOf({...planBodies,...fitBodies}),voltageLeadLengths,breakerTerminals:breakerTerminals.map(m=>m.position.toArray()),breakerMounts:breakerMounts.map(m=>m.position.toArray()),assemblyStage,panelInsertionOffset:groups.panel.position.y,visibleGroups:Object.entries(groups).filter(([,g])=>g.visible).map(([id])=>id),lidVisible:lidObjects[0].visible,meterRouteIntrusions:meterRouteIntrusions()});
+  window.enclosureDiagnostics=()=>({supportChecks,materialLocator:locator.diagnostics(),units:dimensions.units,camera:camera.position.toArray(),zoom:camera.zoom,mode:$('model-shell').value,selected:activePart,cadSize:cad.bounds.size,projectedMeter:V(parts.meter.position).project(camera).toArray(),meterSize:parts.meter.size,meshCount:picking.length,triangles:renderer.info.render.triangles,wiresVisible:wires.visible,lidOffset:lidObjects[0].position.y,shellVisible:shellObjects[0].visible,shellOpacity:shellMat.opacity,fitBodies:boundsOf(fitBodies),planBodies:boundsOf({...planBodies,...fitBodies}),voltageLeadLengths,breakerTerminals:breakerTerminals.map(m=>m.position.toArray()),breakerMounts:breakerMounts.map(m=>m.position.toArray()),assemblyStage,panelInsertionOffset:groups.panel.position.y,visibleGroups:Object.entries(groups).filter(([,g])=>g.visible).map(([id])=>id),lidVisible:lidObjects[0].visible,meterRouteIntrusions:meterRouteIntrusions()});
+  window.cableGeometryDiagnostics=()=>({supports:supportChecks,routes:cableRoutes,
+    bodyIntrusions:screenCableBodies(cableRoutes,boundsOf(fitBodies),parts.ct)});
 }
 start().catch(error=>{
   console.error(error);$('model-loading').hidden=true;

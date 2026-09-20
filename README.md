@@ -4,11 +4,13 @@
 
 Build package A, September 20, 2026: one grounded 120 V printer, one operating breaker, a dedicated outlet for the existing adapter, three sensing pigtails and one CT on printer hot. The user's printer alternatives are UltiMaker S5, Bambu P2S and Prusa CORE One+; only one is connected at a time.
 
-The English site provides a rotatable 3D model, matching 2D component positions, 25 traceable circuit paths, a 30-group illustrated checklist (5 owned / 25 to buy or fabricate), six installation stages and machining downloads. The meter retains its long 216 × 63 × 47 mm catalog proportions. Real component dimensions and estimates are distinguished.
+The English site provides a rotatable 3D model, matching 2D component positions, 25 traceable circuit paths, a 29-group illustrated checklist (5 owned / 24 to buy or fabricate), six installation stages and machining downloads. The meter retains its long 216 × 63 × 47 mm catalog proportions. Real component dimensions and estimates are distinguished.
 
 Each material has a **View in 3D** link on both checklist pages. It frames and highlights the installed parts, with an occurrence selector for materials used in several places. Hidden cartridges and sealing inserts can be seen through their housings. Direct links such as `?material=ring-lugs#layout` survive reloads; **Back to material** returns to the relevant checklist row. Spares and leftover stock are excluded. Small fittings and cable dressing are illustrative; this feature does not add physical assembly validation or new drilling dimensions.
 
-The main page is organized for project review and purchasing. **Design** switches between 3D and wiring while retaining the camera and circuit selection. **Materials** shows the 25 purchase groups first, with the 5 owned groups expandable below; material links open that group when needed. **To confirm** lists the remaining CT, sensing-lead protection and breaker decisions. **Details** retains full specifications, receiving checks, pack quantities and image credits; purchasing holds remain visible. **More** contains additional views, enclosure modes, display toggles and PNG export.
+The revised layout uses **six cable mounts and six ties**, with matching panel machining datums. Flat tie bands wrap the rendered wire cross-sections; two restrain the concentric voltage-lead coils. Power-cord jackets pass through the glands and break out inside the case. CT hot is a straight through-aperture segment, and the CT body rests on the panel. Anchor screws are M4 × 16 mm with underside washers and locknuts. The dedicated rail PE bolt now passes through both panel and rail, with its head below the panel. Label dispensers are removed from purchasing; drawing identifiers remain.
+
+The main page is organized for project review and purchasing. **Design** switches between 3D and wiring while retaining the camera and circuit selection. **Materials** shows the 24 purchase groups first, with the 5 owned groups expandable below; material links open that group when needed. **To confirm** lists the remaining CT, sensing-lead protection and breaker decisions. **Details** retains full specifications, receiving checks, pack quantities and image credits; purchasing holds remain visible. **More** contains additional views, enclosure modes, display toggles and PNG export.
 
 **Build documents** collects the machining package, six-stage interactive installation sequence, operation and setup instructions, dimensions, sources, audit and full BOM. Existing material, wiring and operation bookmarks remain supported. The main page omits routine photo captions but still identifies reference images and design concepts.
 
@@ -25,7 +27,8 @@ The original photo identifies the adapter as **CUI SMI6-9-V-P5, 9 V, 0.667 A, ce
 - `build_routes.py`, `draw_external.py`, `page_template.html`: netlist, drawings and main-page generator.
 - `procurement.json`: ownership, quantities, exact parts, pictures and buying links.
 - `Build_Package.md`, `Wiring_References_EN.md`: build details and evidence.
-- `installation_review.json`, `installation_checks.json`, `installation_cables.json`: material review and bounded digital checks.
+- `installation_review.json`, `installation_checks.json`, `installation_cables.json`, `installation_supports.json`: material review and bounded digital checks.
+- `cable-supports.js`: sampled wire cross-sections, fitted tie openings and component-body screening.
 - `tools/cad/`: parametric machining and drawing generators; `fabrication/`: STEP, STL, DXF, PDF and exact cut checks. These modify purchased parts, not a 3D-printed replacement mains enclosure.
 - `tools/render_documents.cjs`: generates materials, references, audit, build HTML and the `Build_Documents.md` / `documents.html` hub using `marked`.
 - `tools/verify_site.cjs`: Playwright behavior/alignment/asset checks. Three.js is vendored with its license; the deployed site needs no CDN.
@@ -45,6 +48,8 @@ python3 -m http.server 8770
 With the local server running, use `CHECK_URL=http://127.0.0.1:8770/ node tools/verify_site.cjs`. `EXPORT_AUDIT=1` refreshes the illustrative cable report; `EXPORT_DRAWINGS=1` refreshes PNG drawings. After updating audit data, rerun the document generator. The checks require Node with Playwright and `marked`; the public static site does not.
 
 Run `node tools/verify_material_locator.cjs` for the material-to-model behavior and `python3 -m unittest -v test_material_locations.py` for installation-datum consistency with the machining source. `QA_OUTPUT=/path/out` saves screenshots and browser check reports outside the source tree.
+
+Run `node --test tools/test_cable_supports.mjs` for negative controls (empty, misplaced, too-small and too-long ties), then `node tools/verify_cable_geometry.cjs` for all six rendered supports, coil separation, CT passage and cord breakouts. `EXPORT_AUDIT=1` refreshes `installation_supports.json`. These are geometry checks with assumed cable diameters and simplified terminal regions, not physical retention or electrical acceptance.
 
 For machining regeneration, install Python 3.12 with `build123d==0.11.1`, `ezdxf` and `matplotlib`. Obtain the linked original Hammond STEP and run:
 

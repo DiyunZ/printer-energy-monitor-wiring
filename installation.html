@@ -1,6 +1,6 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Installation audit · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=14"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Installation_Audit.md" download>Download Markdown</a></nav><h1>Installation audit</h1>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Installation audit · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=15"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Installation_Audit.md" download>Download Markdown</a></nav><h1>Installation audit</h1>
 <p>2026-09-20 · build package A, revision 8. <strong>ENGINEERING PACKAGE A — RECEIVING AND ELECTRICAL RELEASE ITEMS OPEN.</strong></p>
-<p>All <strong>30 material groups</strong> were reviewed: 11 catalog match · 16 conditional · 2 measure · 1 hold. A catalog match confirms the stated interface only; it is not approval of the complete item or assembly.</p>
+<p>All <strong>29 material groups</strong> were reviewed: 10 catalog match · 16 conditional · 2 measure · 1 hold. A catalog match confirms the stated interface only; it is not approval of the complete item or assembly.</p>
 <p>One grounded 120 V supply, one printer at a time. Five equipment groups are owned. Photo/product matching identifies the adapter, blue pigtail product and Mini HSC CT family. Round DC extension and USB sealing inserts are now specified. CT scaling and voltage-lead protection/termination still require the acceptance checks in the build package; no physical build or energizing release is claimed.</p>
 <p>The box and major panel parts have nominal space, but the current design cannot be called a perfect or fully installable assembly. Machining geometry is supplied; Exact CT scaling, blue-lead protection and physical/electrical acceptance remain open. Both cable-entry inserts are now specified. Do not treat a purchase link or an inventory tick as a release.</p>
 <p><a href="index.html#assembly-preview">Inspect the 3D installation stages</a> · <a href="materials.html">Materials and buying links</a> · <a href="installation_checks.json">Machine-readable checks</a></p>
@@ -50,7 +50,7 @@
 <p>Complete underside hardware on the removable panel, then lower it into the case. Keep the side outlet absent until the panel is secured with Hammond fasteners.</p>
 <p><strong>Result:</strong> Vertical insertion is tested digitally; side outlet must follow the panel.</p>
 <h3>3. Fit panel components</h3>
-<p>Fit DIN rail/stops/Fv, five WAGO carriers, two meter straps, CT and twelve cable anchors. Place CT on printer hot only; set the arrow toward output.</p>
+<p>Fit DIN rail/stops/Fv, five WAGO carriers, two meter straps, CT and six cable anchors. Place CT on printer hot only; set the arrow toward output.</p>
 <p><strong>Result:</strong> Nominal body separation and shell access checked. Verify actual CT latch and holder door sweep.</p>
 <h3>4. Install wall fittings</h3>
 <p>Install Q0 directly in its front-wall pattern; install 5279-C, two long-thread glands and split entries. Use the fastener/torque schedule.</p>
@@ -133,7 +133,7 @@
 <tr>
 <td>Closed lid screen</td>
 <td><strong>SCREEN ONLY</strong></td>
-<td>meter: 159.012 mm (9/9 rays); ct: 164.312 mm (9/9 rays); fuse: 141.512 mm (9/9 rays); outlet: 33.747 mm (9/9 rays); q0: 32.992 mm (9/9 rays) Nine upward rays per body against lid mesh 15. Not a minimum-distance proof; excludes lid hardware, guards, open fuse door, wire bundles and tolerances.</td>
+<td>meter: 159.012 mm (9/9 rays); ct: 168.315 mm (9/9 rays); fuse: 141.512 mm (9/9 rays); outlet: 33.747 mm (9/9 rays); q0: 32.992 mm (9/9 rays) Nine upward rays per body against lid mesh 15. Not a minimum-distance proof; excludes lid hardware, guards, open fuse door, wire bundles and tolerances.</td>
 </tr>
 <tr>
 <td>Cord diameter interfaces</td>
@@ -161,9 +161,9 @@
 <p>The old illustration had 4.5 turns rising only 6 mm, giving 1.33 mm pitch against its assumed 3 mm cable diameter. The new illustration separates turns and lead layers and adjusts turns for 2 m of flexible cable per lead. Connector body lengths are outside that flexible-length target. Actual leads have not been measured.</p>
 <p>| Lead | Modeled flexible length | Turns | Pitch / assumed OD |
 |---|---|---|
-| A1 | 2000.0 mm | 5.74 | 4 / 3 mm |
-| A2 | 2000.0 mm | 5.78 | 4 / 3 mm |
-| A3 | 2000.0 mm | 5.75 | 4 / 3 mm |</p>
+| A1 | 2000.0 mm | 5.90 | 4 / 3 mm |
+| A2 | 2000.0 mm | 5.14 | 4 / 3 mm |
+| A3 | 2000.0 mm | 4.97 | 4 / 3 mm |</p>
 <p>Cable-to-meter screen: 301 points per curve; 0 sampled intrusions against the logger body expanded by wire radius. This does not check all other objects or wire-to-wire clearances.</p>
 <p>The elliptical coil centerline uses 44 and 37 mm radii (minimum planar radius of curvature about 31.1 mm). No manufacturer bend limit is available for the actual leads. Transitions between coils, plugs, supports and other wires still need routing and physical inspection. <a href="installation_cables.json">Rendered cable measurements</a>.</p>
 <h2>All materials and interfaces</h2>
@@ -330,25 +330,19 @@
 <tr>
 <td><a href="index.html#material-tie-mounts">Screw-fixed cable mounts</a><br>Panduit TM2S8-C<br>□ Buy / fabricate</td>
 <td><strong>Catalog match</strong></td>
-<td>TM2S8-C is 16 × 10.8 × 7 mm with #8/M4 screw attachment and supports standard cable ties. <a href="https://www.panduit.com/content/dam/panduit/en/website/support/catalogs/pdf/iei-catalog-2023-web-cpcb294-sa-eng.pdf">mount</a></td>
-<td>M4 × 20 mm fasteners with underside washers and locking nuts; verify full nut engagement and underside clearance.</td>
+<td>TM2S8 nominal 16 × 10.8 × 7 mm, #8/M4 fixing; six revised panel datums also drive the 3D hardware. Six holes replace the former twelve. <a href="https://www.panduit.com/content/dam/panduit/en/website/support/catalogs/pdf/iei-catalog-2023-web-cpcb294-sa-eng.pdf">mount</a></td>
+<td>Verify received saddle/slot dimensions and dry-fit each bundle before fastening. Six mounting screws use underside washers and locknuts.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-cable-ties">Cable ties</a><br>Panduit PLT2S-C · 188 × 4.8 mm<br>□ Buy / fabricate</td>
 <td><strong>Catalog match</strong></td>
-<td>PLT2S-C standard ties are 188 × 4.8 mm; their width fits the selected mount family. <a href="https://www.panduit.com/content/dam/panduit/en/products/media/2/92/492/0492/30492.pdf">ties</a>, <a href="https://www.panduit.com/content/dam/panduit/en/website/support/catalogs/pdf/iei-catalog-2023-web-cpcb294-sa-eng.pdf">mount</a></td>
-<td>24 is a routing allowance. Fit to the 12 specified anchors; leave slack at ports and do not crush cables.</td>
-</tr>
-<tr>
-<td><a href="index.html#material-labels">Wire and component labels</a><br>3M ScotchCode SWD + SLW<br>□ Buy / fabricate</td>
-<td><strong>Catalog match</strong></td>
-<td>SWD recommended OD 2.3–7.9 mm covers the 2.87 mm internal wire; SLW 5.8–33.5 mm covers the roughly 9.2 mm cords. <a href="https://multimedia.3m.com/mws/media/1854486O/ft-scotchcode-slw-us-pdf.pdf">labels</a></td>
-<td>Measure blue leads before choosing wrap size. Confirm adhesion and use durable exterior legends sized for the finished device.</td>
+<td>PLT2S-C length 188 mm, width 4.8 mm. Six rendered bands pass through the saddle slots and around sampled wire cross-sections; coil routes share two restraints. <a href="https://www.panduit.com/content/dam/panduit/en/products/media/2/92/492/0492/30492.pdf">ties</a>, <a href="https://www.panduit.com/content/dam/panduit/en/website/support/catalogs/pdf/iei-catalog-2023-web-cpcb294-sa-eng.pdf">mount</a></td>
+<td>Six ties installed, six spares allowed. Confirm actual lead length, diameter, bend radius and retention; modeled band thickness/lock are illustrative.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-fasteners">Mounting and bonding hardware</a><br>Screw / nut / washer schedule in Build_Package.md<br>□ Buy / fabricate</td>
 <td><strong>Conditional</strong></td>
-<td>Six assembly groups specify purchase links, quantities, diameters, lengths and stack limits in build.html. <a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">carling</a>, <a href="https://www1.futureelectronics.com/doc/WAGO/221-505.pdf">carrier</a>, <a href="https://leviton.com/content/dam/leviton/commercial-industrial/product_documents/instruction_sheet/PK-93763-10-02-0C-W.pdf">outlet-install</a></td>
+<td>Six assembly groups specify purchase links, quantities, diameters, lengths and stack limits in build.html. Six anchors use M4 × 16 mm screws with underside washers/locknuts. Both PE bolt heads are below the panel; the rail bond has a dedicated through-hole in the panel and rail web. <a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">carling</a>, <a href="https://www1.futureelectronics.com/doc/WAGO/221-505.pdf">carrier</a>, <a href="https://leviton.com/content/dam/leviton/commercial-industrial/product_documents/instruction_sheet/PK-93763-10-02-0C-W.pdf">outlet-install</a></td>
 <td>Measure actual washers/carrier feet/anchor recesses before tightening; qualified PE bond inspection remains required.</td>
 </tr>
 <tr>

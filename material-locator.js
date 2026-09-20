@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { showDesignPanel, revealMaterial } from './site-navigation.js?v=14';
+import { showDesignPanel, revealMaterial } from './site-navigation.js?v=15';
 
 // Installation locations reference the meshes used to draw the assembly.
 // A material can have several installed occurrences; spare stock has no mesh.

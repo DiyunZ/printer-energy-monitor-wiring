@@ -30,7 +30,7 @@ const close = (a,b) => Math.abs(a-b) < .05;
     assert.equal(initial.selected, null);
     const allMeshes = Object.values(initial.locations).flatMap(ps => ps.flatMap(p => p.meshes));
     assert.equal(new Set(allMeshes).size, allMeshes.length, 'Each physical mesh belongs to exactly one material');
-    const counts = { fuse: 1, connectors: 5, carriers: 5, 'blue-leads': 3, 'voltage-leads': 3, 'ring-lugs': 4, 'tie-mounts': 12, 'cable-ties': 12, 'kt-inserts': 2, 'din-stops': 2, 'logger-restraint': 2, fasteners: 30 };
+    const counts = { fuse: 1, connectors: 5, carriers: 5, 'blue-leads': 3, 'voltage-leads': 3, 'ring-lugs': 4, 'tie-mounts': 6, 'cable-ties': 6, 'kt-inserts': 2, 'din-stops': 2, 'logger-restraint': 2, fasteners: 24 };
     for (const [id,count] of Object.entries(counts)) assert.equal(initial.locations[id].length, count, id);
     const fuse = initial.locations.fuse[0], holder = initial.locations['fuse-holder'][0];
     for (let i=0;i<3;i++) assert.ok(fuse.min[i] >= holder.min[i] && fuse.max[i] <= holder.max[i], 'Cartridge belongs inside the holder');

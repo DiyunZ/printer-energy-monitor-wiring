@@ -3,58 +3,58 @@
   "leads": [
     {
       "id": "A1",
-      "modeledFlexibleLengthMm": 2000.000000197624,
-      "turns": 5.736999410204589,
+      "modeledFlexibleLengthMm": 2000.0000013812237,
+      "turns": 5.898464625701308,
       "pitchMm": 4,
       "assumedDiameterMm": 3,
       "coilMin": [
-        -80.49810028076172,
-        22.500221252441406,
-        62.50423049926758
+        -76.49848175048828,
+        9.100190162658691,
+        89.50347137451172
       ],
       "coilMax": [
-        10.494304656982422,
-        48.413124084472656,
-        139.49940490722656
+        6.49329137802124,
+        35.68525695800781,
+        154.4985809326172
       ]
     },
     {
       "id": "A2",
-      "modeledFlexibleLengthMm": 2000.0000001861736,
-      "turns": 5.783701735548675,
+      "modeledFlexibleLengthMm": 2000.0000043654168,
+      "turns": 5.143888646736741,
       "pitchMm": 4,
       "assumedDiameterMm": 3,
       "coilMin": [
-        -80.49766540527344,
-        50.500221252441406,
-        62.505828857421875
+        -80.49765014648438,
+        9.100156784057617,
+        85.50199890136719
       ],
       "coilMax": [
-        10.494211196899414,
-        76.60106658935547,
-        139.4971160888672
+        10.494434356689453,
+        32.6248893737793,
+        158.4988555908203
       ]
     },
     {
       "id": "A3",
-      "modeledFlexibleLengthMm": 2000.0000001019434,
-      "turns": 5.750908079557121,
+      "modeledFlexibleLengthMm": 1999.9999998223675,
+      "turns": 4.968977527692914,
       "pitchMm": 4,
       "assumedDiameterMm": 3,
       "coilMin": [
-        -80.49677276611328,
-        78.5002212524414,
-        62.506019592285156
+        -84.49957275390625,
+        9.10013198852539,
+        81.50163269042969
       ],
       "coilMax": [
-        10.494277000427246,
-        104.46910095214844,
-        139.4992218017578
+        14.496126174926758,
+        31.898406982421875,
+        162.49888610839844
       ]
     }
   ],
   "meterRouteScreen": {
-    "samplesPerCurve": 301,
+    "minimumSamplesPerCurve": 601,
     "intrusions": [],
     "limit": "Sampled route centerlines tested against the meter body enlarged by each assumed wire radius. Does not establish clearances to other objects or between wires."
   }

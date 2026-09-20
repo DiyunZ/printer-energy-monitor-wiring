@@ -26,7 +26,6 @@
     "ring": "https://multimedia.3m.com/mws/media/61020O/ring-tongues-vinyl-insulated-brazed-seam-16-14-awg.pdf",
     "mount": "https://www.panduit.com/content/dam/panduit/en/website/support/catalogs/pdf/iei-catalog-2023-web-cpcb294-sa-eng.pdf",
     "ties": "https://www.panduit.com/content/dam/panduit/en/products/media/2/92/492/0492/30492.pdf",
-    "labels": "https://multimedia.3m.com/mws/media/1854486O/ft-scotchcode-slw-us-pdf.pdf",
     "s5": "https://um-support-files.ultimaker.com/manuals/user-manual/S3-%26-S5/Ultimaker%20S3-S5%20-%20User%20manual%20ENv2.4.pdf",
     "p2s": "https://csm.bblcdn.com/hub/0a3c3e8ab9554a5c9c91815e41540f42.pdf",
     "prusa": "https://www.prusa3d.com/product/prusa-core-one/",
@@ -378,8 +377,8 @@
       "model": "Panduit TM2S8-C",
       "availability": "buy",
       "result": "Catalog match",
-      "checked": "TM2S8-C is 16 × 10.8 × 7 mm with #8/M4 screw attachment and supports standard cable ties.",
-      "remaining": "M4 × 20 mm fasteners with underside washers and locking nuts; verify full nut engagement and underside clearance.",
+      "checked": "TM2S8 nominal 16 × 10.8 × 7 mm, #8/M4 fixing; six revised panel datums also drive the 3D hardware. Six holes replace the former twelve.",
+      "remaining": "Verify received saddle/slot dimensions and dry-fit each bundle before fastening. Six mounting screws use underside washers and locknuts.",
       "sources": [
         "mount"
       ]
@@ -390,23 +389,11 @@
       "model": "Panduit PLT2S-C · 188 × 4.8 mm",
       "availability": "buy",
       "result": "Catalog match",
-      "checked": "PLT2S-C standard ties are 188 × 4.8 mm; their width fits the selected mount family.",
-      "remaining": "24 is a routing allowance. Fit to the 12 specified anchors; leave slack at ports and do not crush cables.",
+      "checked": "PLT2S-C length 188 mm, width 4.8 mm. Six rendered bands pass through the saddle slots and around sampled wire cross-sections; coil routes share two restraints.",
+      "remaining": "Six ties installed, six spares allowed. Confirm actual lead length, diameter, bend radius and retention; modeled band thickness/lock are illustrative.",
       "sources": [
         "ties",
         "mount"
-      ]
-    },
-    {
-      "id": "labels",
-      "item": "Wire and component labels",
-      "model": "3M ScotchCode SWD + SLW",
-      "availability": "buy",
-      "result": "Catalog match",
-      "checked": "SWD recommended OD 2.3–7.9 mm covers the 2.87 mm internal wire; SLW 5.8–33.5 mm covers the roughly 9.2 mm cords.",
-      "remaining": "Measure blue leads before choosing wrap size. Confirm adhesion and use durable exterior legends sized for the finished device.",
-      "sources": [
-        "labels"
       ]
     },
     {
@@ -415,7 +402,7 @@
       "model": "Screw / nut / washer schedule in Build_Package.md",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "Six assembly groups specify purchase links, quantities, diameters, lengths and stack limits in build.html.",
+      "checked": "Six assembly groups specify purchase links, quantities, diameters, lengths and stack limits in build.html. Six anchors use M4 × 16 mm screws with underside washers/locknuts. Both PE bolt heads are below the panel; the rail bond has a dedicated through-hole in the panel and rail web.",
       "remaining": "Measure actual washers/carrier feet/anchor recesses before tightening; qualified PE bond inspection remains required.",
       "sources": [
         "carling",
@@ -488,7 +475,7 @@
     {
       "stage": 3,
       "title": "Fit panel components",
-      "action": "Fit DIN rail/stops/Fv, five WAGO carriers, two meter straps, CT and twelve cable anchors. Place CT on printer hot only; set the arrow toward output.",
+      "action": "Fit DIN rail/stops/Fv, five WAGO carriers, two meter straps, CT and six cable anchors. Place CT on printer hot only; set the arrow toward output.",
       "result": "Nominal body separation and shell access checked. Verify actual CT latch and holder door sweep."
     },
     {
