@@ -29,6 +29,7 @@ See [sources and design decisions](Wiring_References_EN.md). The enclosure is se
 - `layout3d.js` / `.css`: local WebGL model and camera/component controls.
 - `layout_dimensions.json`: shared component and repeated-part positions, plan projection, dimension provenance and evidence limits.
 - `procurement.json`: the inventory source for the website and downloadable BOM. Five equipment groups are confirmed on hand; all other enclosure materials, including USB, are to buy or fabricate. Rows distinguish direct purchase, size/rating selection, fabrication quotes and references.
+- `assets/materials/` / `material-images.css`: images displayed below each material name. Image metadata and source credits live in `procurement.json`. Supplied equipment photos are unmodified; CSS selects the relevant area. Supplier family references and the three custom-part concepts are labeled, and gallery images do not share the 3D model's millimetre scale.
 - `assets/enclosure.bin` / `.json`: triangulated manufacturer enclosure geometry and provenance.
 - `vendor/`: Three.js 0.186.0 browser modules and license.
 - `Procurement_BOM.md` / `materials.html`: generated checklist with ownership ticks, quantities, shopping links and fit notes. “Owned” records inventory only; unresolved electrical and dimensional checks remain explicit.

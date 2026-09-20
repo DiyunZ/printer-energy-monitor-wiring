@@ -1,0 +1,10 @@
+.material-name { display: block; }
+.material-photo { width: 100%; max-width: 220px; margin: 12px 0 0; font-weight: 400; }
+.material-image { display: flex; align-items: center; justify-content: center; width: 100%; height: 176px; overflow: hidden; border: 1px solid #dce4eb; border-radius: 5px; background: #fff; }
+.material-image > img { display: block; width: 100%; height: 100%; padding: 8px; object-fit: contain; }
+.material-crop { display: block; position: relative; width: 100%; overflow: hidden; }
+.material-crop img { position: absolute; display: block; height: auto; max-width: none; }
+.material-photo figcaption { margin-top: 7px; font-size: 11px; line-height: 1.45; color: #596f82; overflow-wrap: anywhere; }
+.material-photo figcaption a { display: block; margin-top: 3px; color: #426983; }
+.material-photo[data-image-kind="design"] .material-image { background: #f3f7fa; }
+@media print { .material-photo { break-inside: avoid; } }

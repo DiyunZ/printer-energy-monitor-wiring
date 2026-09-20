@@ -117,8 +117,16 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
    assert.ok(p.links.some(l=>['buy','configure','quote'].includes(l.kind)),p.id+' must have a purchase or quote route, not just a PDF');
    assert.ok(await row.locator('a[data-link-kind="buy"],a[data-link-kind="configure"],a[data-link-kind="quote"]').count()>0,p.id+' missing rendered purchase route');
   }
-  for(const l of p.links)assert.equal(await row.locator('a').filter({hasText:l.label}).getAttribute('href'),l.url);
+  for(const l of p.links)assert.equal(await row.locator('a[data-link-kind]').filter({hasText:l.label}).getAttribute('href'),l.url);
+  const photo=row.locator('td[data-label="Material"] .material-photo');
+  assert.equal(await photo.count(),1,p.id+' needs an image below its name');
+  assert.equal(await photo.locator('img').getAttribute('src'),p.image.src);
+  assert.equal(await photo.locator('img').getAttribute('alt'),p.image.alt);
+  assert.ok((await photo.locator('figcaption').textContent()).includes(p.image.caption));
+  if(p.image.source_url)assert.equal(await photo.locator('figcaption a').getAttribute('href'),p.image.source_url);
+  assert.ok(await row.evaluate(e=>e.querySelector('.material-photo').getBoundingClientRect().top>=e.querySelector('.material-name').getBoundingClientRect().bottom),p.id+' photo must be below the material name');
  }
+ await page.locator('.material-photo img').evaluateAll(es=>Promise.all(es.map(async img=>{img.loading='eager';await img.decode();if(!img.naturalWidth||!img.naturalHeight)throw Error('Image did not load: '+img.src);})));
  for(const state of ['owned','buy','all']){
   await page.locator(`[data-inventory="${state}"]`).click();
   const expected=bom.items.filter(p=>state==='all'||p.availability===state).map(p=>'material-'+p.id);
@@ -146,8 +154,11 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   await page.goto(new URL(file,base).href);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),file+' mobile overflow');
   if(file==='materials.html'){
    assert.equal(await page.locator('tbody tr').count(),bom.items.length);
-   assert.equal(await page.locator('tbody tr').filter({hasText:'✓ 已有 / Owned'}).count(),ownedIds.length);
-   assert.equal(await page.locator('tbody tr').filter({hasText:'□ 待购 / To buy'}).count(),bom.items.length-ownedIds.length);
+   assert.equal(await page.locator('tbody tr').filter({hasText:'✓ Owned'}).count(),ownedIds.length);
+   assert.equal(await page.locator('tbody tr').filter({hasText:'□ To buy'}).count(),bom.items.length-ownedIds.length);
+   assert.equal(await page.locator('.material-photo img').count(),bom.items.length);
+   assert.ok(await page.locator('.material-image').evaluateAll(es=>es.every(e=>e.clientWidth>=150)),'Document image columns must remain readable');
+   await page.locator('.material-photo img').evaluateAll(es=>Promise.all(es.map(async img=>{img.loading='eager';await img.decode();})));
   }
   else assert.equal(await page.locator('#r1').count(),1);
  }
@@ -157,7 +168,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   const render=await browser.newPage({viewport:{width:1800,height:1300},deviceScaleFactor:2});
   for(const name of ['wiring_routes','connector_detail']){await render.goto(new URL(name+'.svg',base).href);await render.locator('svg').screenshot({path:path.join(root,name+'.png')});}
  }
- const report={date:new Date().toISOString(),base,connections:24,circuitGroups:7,alignedComponentFootprints:plan.bodies.length,planTo3DMaximumToleranceMm:.05,compareTopView:true,renderedMeterBody:initial.fitBodies.meter.size,primaryBodyOverlaps:false,mouseOrbit:true,wheelZoom:true,keyboardOrbit:true,picking:true,shellModes:4,pngExport:true,viewportWidths:[1440,768,390],pageOverflow:false,internalLinks:true,materialsRows:bom.items.length,ownedGroups:ownedIds.length,purchaseGroups:bom.items.length-ownedIds.length,inventoryFilters:true,jsErrors:errors,physicalBuildValidated:false};
+ const report={date:new Date().toISOString(),base,connections:24,circuitGroups:7,alignedComponentFootprints:plan.bodies.length,planTo3DMaximumToleranceMm:.05,compareTopView:true,renderedMeterBody:initial.fitBodies.meter.size,primaryBodyOverlaps:false,mouseOrbit:true,wheelZoom:true,keyboardOrbit:true,picking:true,shellModes:4,pngExport:true,viewportWidths:[1440,768,390],pageOverflow:false,internalLinks:true,materialsRows:bom.items.length,materialImagesLoaded:bom.items.length,ownedGroups:ownedIds.length,purchaseGroups:bom.items.length-ownedIds.length,inventoryFilters:true,jsErrors:errors,physicalBuildValidated:false};
  if(out)fs.writeFileSync(path.join(out,'browser-validation.json'),JSON.stringify(report,null,2)+'\n');
  console.log(JSON.stringify(report,null,2));
  }finally{await browser.close();}

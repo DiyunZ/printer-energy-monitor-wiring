@@ -275,6 +275,19 @@ def make_diagram():
     text(48,1735,'Component estimates and electrical selection limits still apply. This is a design reference, not a fabrication or energization release.',18,color='#8b651e')
     add('</svg>');return ''.join(parts)
 
+def material_photo(p):
+    photo = p['image']
+    style = ''
+    if 'crop' in photo:
+        x, y, w, h = photo['crop']
+        ratio = photo['width'] * w / (photo['height'] * h)
+        style = f' style="width:{100/w:.5f}%;left:{-100*x/w:.5f}%;top:{-100*y/h:.5f}%"'
+    img = '<img src="'+E(photo['src'])+'" alt="'+E(photo['alt'])+'" width="'+str(photo['width'])+'" height="'+str(photo['height'])+'" loading="lazy" decoding="async"'+style+'>'
+    if 'crop' in photo:
+        img = f'<span class="material-crop" style="max-width:{176*ratio:.5f}px;aspect-ratio:{ratio:.5f}">'+img+'</span>'
+    credit = '<a href="'+E(photo['source_url'])+'">Image: '+E(photo['source_label'])+' ↗</a>' if photo.get('source_url') else ''
+    return '<figure class="material-photo" data-image-kind="'+E(photo['kind'])+'"><a class="material-image" href="'+E(photo['src'])+'" target="_blank" rel="noopener" aria-label="View full image: '+E(p['item'])+'">'+img+'</a><figcaption>'+E(photo['caption'])+credit+'</figcaption></figure>'
+
 def main():
     validation=validate();svg=make_diagram();(OUT/'wiring_routes.svg').write_text(svg)
     start_svg(1800,1200,'ELITEpro connectors, blue adapter chain and enclosure front-panel concept')
@@ -287,11 +300,11 @@ def main():
     material_rows=[]
     for p in materials['items']:
         owned=p['availability']=='owned'
-        badge='✓ 已有 / Owned' if owned else '□ 待购 / To buy'
+        badge='✓ Owned' if owned else '□ To buy'
         links=''.join('<a data-link-kind="'+E(l['kind'])+'" href="'+E(l['url'])+'">'+E(l['label'])+' ↗</a>' for l in p['links'])
-        material_rows.append('<tr id="material-'+E(p['id'])+'" data-availability="'+E(p['availability'])+'"><td data-label="Inventory"><span class="inventory-badge '+p['availability']+'">'+badge+'</span></td><td data-label="Material">'+E(p['item'])+'</td><td data-label="Quantity needed">'+E(p['quantity'])+'</td><td data-label="Part / purpose"><strong>'+E(p['model'])+'</strong><p>'+E(p['reason'])+'</p><small class="material-note">'+E(p['status'])+'</small></td><td class="material-links" data-label="Purchase / source">'+(links if links else '<span class="reuse-note">Reuse · 无需购买</span>')+'</td></tr>')
+        material_rows.append('<tr id="material-'+E(p['id'])+'" data-availability="'+E(p['availability'])+'"><td data-label="Inventory"><span class="inventory-badge '+p['availability']+'">'+badge+'</span></td><td data-label="Material"><span class="material-name">'+E(p['item'])+'</span>'+material_photo(p)+'</td><td data-label="Quantity needed">'+E(p['quantity'])+'</td><td data-label="Part / purpose"><strong>'+E(p['model'])+'</strong><p>'+E(p['reason'])+'</p><small class="material-note">'+E(p['status'])+'</small></td><td class="material-links" data-label="Purchase / source">'+(links if links else '<span class="reuse-note">Reuse · No purchase needed</span>')+'</td></tr>')
     counts={'all':len(materials['items']),**{state:sum(p['availability']==state for p in materials['items']) for state in ['owned','buy']}}
-    filters=''.join('<button type="button" data-inventory="'+state+'" aria-pressed="'+('true' if state=='all' else 'false')+'"'+(' class="active"' if state=='all' else '')+'>'+label+' · '+str(counts[state])+'</button>' for state,label in [('all','全部 / All'),('owned','✓ 已有 / Owned'),('buy','□ 待购 / To buy')])
+    filters=''.join('<button type="button" data-inventory="'+state+'" aria-pressed="'+('true' if state=='all' else 'false')+'"'+(' class="active"' if state=='all' else '')+'>'+label+' · '+str(counts[state])+'</button>' for state,label in [('all','All'),('owned','✓ Owned'),('buy','□ To buy')])
     setup=''.join('<li><strong>'+E(r['item'])+' · '+E(r['action'])+'</strong><br>'+E(r['reason'])+(' <a href="'+E(r['url'])+'">DENT download ↗</a>' if r.get('url') else '')+'</li>' for r in materials['setup_requirements'])
     html=(OUT/'page_template.html').read_text().replace('<!-- MAIN_DIAGRAM -->',svg).replace('<!-- DETAIL_DIAGRAM -->',detail).replace('<!-- CONNECTION_ROWS -->',rows).replace('<!-- DIMENSION_ROWS -->',dimension_rows).replace('<!-- MATERIAL_ROWS -->',''.join(material_rows)).replace('<!-- INVENTORY_FILTERS -->',filters).replace('<!-- SETUP_REQUIREMENTS -->',setup).replace('{{MATERIAL_COUNT}}',str(counts['all'])).replace('{{REV}}',REV)
     (OUT/'index.html').write_text(html)
