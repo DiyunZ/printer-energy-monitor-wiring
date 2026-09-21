@@ -238,7 +238,7 @@
       "quantity": "1",
       "model": "Carling CA1-B0-24-615-121-DG",
       "reason": "Single 15 A operating breaker, 50/60 Hz medium-delay, UL489/CSA option DG. Mount directly on the front wall using the manufacturer pattern. No custom wall insert. Keep all four cover screws installed; Q0 OFF leaves its supply terminal live.",
-      "status": "Manufacturer table confirms 10 kA interruption at 120 V AC for the selected UL489 configuration; delay 24 has specified half-cycle inrush tolerance. Actual JIS outlet fault current and combined startup waveform are not published. Exact-SKU stock/lead time still needs a supplier quote.",
+      "status": "Selected for purchase on September 21, 2026: 15 A, matching the confirmed design limit. Manufacturer interrupting rating: 10 kA at 120 V AC. Pre-use electrical checks remain in the protection review. Confirm stock and lead time with the supplier.",
       "links": [
         {
           "label": "Quote / availability · Mouser",
@@ -270,8 +270,7 @@
         "height": 150
       },
       "installation": "Q0 mounts in the front wall: handle outside, supply and load studs inside.",
-      "location_summary": "In the front wall, with its handle outside.",
-      "notice": "10 kA at 120 V verified; site fault current and startup duty remain open."
+      "location_summary": "In the front wall, with its handle outside."
     },
     {
       "item": "XA adapter receptacle",

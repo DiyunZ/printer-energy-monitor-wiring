@@ -6,7 +6,7 @@ September 20, 2026 · 120 V grounded supply · one printer at a time.
 
 | Item | Verified | Decision |
 |---|---|---|
-| Q0, CA1-B0-24-615-121-DG | 15 A, delay 24, UL489 option; 10 kA interrupting rating at 120 V AC | Keep selected model on hold for site and startup confirmation; exact-SKU stock needs a quote. |
+| Q0, CA1-B0-24-615-121-DG | 15 A, delay 24, UL489 option; 10 kA interrupting rating at 120 V AC | Selected for purchase by the user on September 21, 2026, following the professor's confirmation of the 15 A design limit. Site and startup checks remain pre-use acceptance items; confirm supplier stock and lead time. |
 | Voltage tap | A1 connects to JL after Q0; no dedicated fuse | Confirm that upstream Q0 protection is suitable for the original DENT leads before energizing. |
 | USB cable | Included in DENT kit; use the lid-pocket cable | No routine purchase. Confirm it is present; use only for offline service. |
 | DC entry | Tensility round extension with KVT 32 / 41380 | Quantity reduced to one frame and one insert; USB opening removed. |
