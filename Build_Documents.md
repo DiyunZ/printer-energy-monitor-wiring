@@ -1,6 +1,6 @@
 # Build documents
 
-- [Revision D: one USB cable, costs and certification evidence](revision.html)
+- [Design, sourcing and component evidence](revision.html)
 - [Machining files and assembly guide](build.html) — drawings, fasteners and assembly order.
 - [Interactive installation sequence](index.html#assembly-preview) — inspect the six stages in 3D.
 - [Protection review](protection.html) — Q0, upstream voltage-lead protection and the remaining evidence.

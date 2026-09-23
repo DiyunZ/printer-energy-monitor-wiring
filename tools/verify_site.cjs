@@ -38,6 +38,12 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  await page.goto(base,{waitUntil:'networkidle'});
  await page.waitForFunction(()=>document.querySelector('#model-view').dataset.ready==='true',{timeout:45000});
  assert.match(await page.title(),/3D enclosure/);
+ assert.doesNotMatch(await page.locator('body').textContent(),/\brevision(?:\s+[a-d])?\b|\brev\.\s*\d+/i,'Main page should describe the current design without revision labels');
+ assert.equal(await page.locator('.revision-note').count(),0);
+ for(const p of bom.items.filter(p=>p.availability==='buy')){
+  assert.notEqual(p.image.kind,'design',p.id+' should use a catalog product photo');
+  assert.match(p.image.src,/\.(jpg|png)$/i);
+ }
  // Keep the main page focused while preserving access to supporting information.
  assert.deepEqual(await page.locator('main > section').evaluateAll(es=>es.map(e=>e.id)),['design','confirm','hardware']);
  assert.deepEqual(await page.locator('header nav a').evaluateAll(es=>es.map(e=>e.getAttribute('href'))),['#design','#hardware','#confirm','documents.html']);
@@ -280,6 +286,8 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  for(const href of [...new Set(links)]){const res=await page.request.get(new URL(href,base).href);assert.equal(res.status(),200,href);}
  for(const file of ['materials.html','references.html','installation.html','build.html','documents.html','protection.html','revision.html']){
   await page.goto(new URL(file,base).href);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),file+' mobile overflow');
+  assert.doesNotMatch(await page.title(),/\brevision\b/i,file+' title must omit revision labels');
+  assert.doesNotMatch(await page.locator('body').textContent(),/\brevision(?:\s+[a-d])?\b|\brev\.\s*\d+|\bbuild package [a-d]\b/i,file+' should not expose revision labels');
   if(file==='materials.html'){
    assert.equal(await page.locator('tbody tr').filter({has:page.locator('.material-name')}).count(),bom.items.length);
    assert.ok((await page.locator('#order-plan').textContent()).includes('$'+bom.purchasing.material_subtotal_usd.toFixed(2)));

@@ -16,7 +16,7 @@
 
 .section-detail{border-top:1px solid #dae2e9;padding-top:16px;margin-top:16px;scroll-margin-top:16px}.section-detail>summary{font-size:15px;margin:0;font-weight:600}.section-detail[open]>summary{margin-bottom:14px}.section-detail>p,.section-detail>ul{font-size:14px}.section-detail li{margin-bottom:12px}.connection-note{font-size:14px;margin:18px 0 8px}.material-details{margin-top:12px;font-size:13px}.material-details summary{font-size:13px;font-weight:400;margin:0;color:#165b93}.material-details[open] summary{margin-bottom:8px}.material-image-note{font-size:11px;color:#627689}.material-details a{display:block;font-size:12px;margin-top:8px}.part-details summary{font-size:13px;font-weight:400;margin:6px 0;color:#165b93}footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 #design{padding:0;overflow:hidden}.design-tabs{display:flex;gap:8px;padding:0 24px 18px}.design-tabs [aria-selected="true"]{background:#173f64;color:#fff;border-color:#173f64}.design-tabs button{min-width:100px}#wiring{padding:22px 24px}#design [role="tabpanel"][hidden],#assembly-preview[hidden]{display:none}.review-items{padding-left:20px;margin:0}.review-items li{margin:8px 0;font-size:14px}#confirm .meta{margin:14px 0 0}#owned-materials{margin-top:22px}@media(max-width:700px){.design-tabs{padding:0 17px 16px}#wiring{padding:17px}.design-tabs button{min-width:95px}}
-.revision-note{margin:18px 0 24px;padding:16px 20px;border-left:4px solid #267762;background:#f0f6f3;border-radius:4px}.revision-note p{margin:6px 0}.inventory-badge.fabricate{background:#f4ecd9;color:#725b19;white-space:normal}</style>
+.inventory-badge.fabricate{background:#f4ecd9;color:#725b19;white-space:normal}</style>
 <link rel="stylesheet" href="wiring.css?v=16">
 <script type="module" src="wiring.js?v=26"></script>
 </head>
@@ -79,7 +79,7 @@
 </section>
 <section id="confirm">
 <h2>To confirm</h2>
-<p class="meta">Revision D needs aluminum stock measurements, internal plug retention, USB insulation acceptance and a closed-enclosure temperature check. <a href="revision.html">Design and sourcing changes ↗</a></p>
+<p class="meta">Before assembly, confirm aluminum stock measurements, internal plug retention, USB insulation and closed-enclosure temperature. <a href="revision.html">Design and sourcing details ↗</a></p>
 <ul class="review-items">
 <li><a href="#material-ct">CT range</a> — confirm the actual sensor rating for ELOG.</li>
 <li><a href="#material-blue-leads">Voltage leads</a> — confirm termination and protection by upstream Q0 before use.</li>
@@ -91,10 +91,10 @@
 <section id="hardware">
 <h2>Materials</h2>
 <p class="meta">{{BUY_COUNT}} purchase groups from five sellers. Reuse / fabrication and existing equipment are listed separately. Exact-part approval evidence is under Details.</p>
-<div class="revision-note"><strong>Revision D · one existing USB cable</strong><p>Opaque PCJ16148 + proposed aluminum-panel reuse; XA and the original adapter stay inside. Six cable anchors and four equipment straps control movement.</p><p>Reuse the existing USB cable through one protected hole. Removing the coupler, extra cable and two fixing sets saves <strong>$17.28</strong> from revision C. Keep the required internal insulation and existing cable restraint.</p><p><a href="materials.html#order-plan"><strong>Full material order plan: ${{MATERIAL_TOTAL}}</strong> ↗</a> · actual retail quantities included; fabrication, bonding changes if required, freight and tax excluded.</p><a href="revision.html#checkout">Compare delivered costs and check lab stock ↗</a></div>
 <div id="purchase-materials">
 <h3 class="inventory-heading">Purchase list · {{BUY_COUNT}} groups · ${{MATERIAL_TOTAL}}</h3>
 <p class="meta">USD estimates checked {{PRICE_DATE}}. Subtotals include purchase packs and spares; fabrication, freight and tax are excluded. XA and printer output each use one 515CV, two total.</p>
+<p class="meta"><a href="materials.html#order-plan">Itemized order plan ↗</a> · <a href="revision.html#checkout">Delivery costs and lab-stock checks ↗</a></p>
 <div class="table-wrap"><table class="materials"><caption class="sr-only">Materials to purchase with unit prices and subtotals in USD</caption><thead><tr><th>Status</th><th>Material</th><th>Qty.</th><th>Part &amp; details</th><th>Price &amp; purchase (USD)</th></tr></thead><tbody><!-- BUY_ROWS --></tbody></table></div>
 </div>
 <div id="fabrication-materials" class="section-detail">

@@ -1,8 +1,8 @@
-# Build package D
+# Machining and assembly guide
 
 September 23, 2026 · one grounded 120 V supply · one printer at a time.
 
-**Engineering review package. Complete-order, machining and energizing release remain open.** This revision replaces the exterior adapter and DC feedthrough with internal power and proposed aluminum reuse. [Cost, sourcing and certification review](revision.html). They do not represent a physically assembled or certified product.
+**Engineering review package. Complete-order, machining and energizing release remain open.** The design uses internal adapter power and proposed aluminum reuse. [Cost, sourcing and certification review](revision.html). The drawings do not represent a physically assembled or certified product.
 
 [Materials with pictures and purchase links](materials.html) · [3D installation sequence](index.html#assembly-preview) · [Installation audit](installation.html) · [Protection review](protection.html)
 

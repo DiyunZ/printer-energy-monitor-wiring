@@ -1,10 +1,10 @@
 # Installation audit
 
-Revision D · September 23, 2026. **ENGINEERING REVISION D — STOCK, USB ASSEMBLY AND ELECTRICAL ACCEPTANCE OPEN.**
+**STOCK, USB ASSEMBLY AND ELECTRICAL ACCEPTANCE OPEN.**
 
 All **24 material groups** were reviewed: 1 catalog match · 20 conditional · 3 measure · 0 hold. A catalog match confirms the stated interface only; it is not approval of the complete item or assembly.
 
-One grounded 120 V supply, one printer at a time. Revision D uses an opaque-cover enclosure, proposed reuse of the professor’s aluminum sheet and an internal adapter connection. Six owned equipment groups, including the existing USB cable, are retained. The selected 15 A Q0 and upstream-only voltage-lead protection still require application acceptance. No purchase, physical fit, thermal test or electrical release is claimed. Closed-lid USB export is used only after unplugging mains; the internal portion of the existing USB cable requires rated insulation and accepted assembly.
+One grounded 120 V supply, one printer at a time. The design uses an opaque-cover enclosure, proposed reuse of the professor’s aluminum sheet and an internal adapter connection. Six owned equipment groups, including the existing USB cable, are retained. The selected 15 A Q0 and upstream-only voltage-lead protection still require application acceptance. No purchase, physical fit, thermal test or electrical release is claimed. Closed-lid USB export is used only after unplugging mains; the internal portion of the existing USB cable requires rated insulation and accepted assembly.
 
 The box and major panel parts have nominal space, but the current design cannot be called a perfect or fully installable assembly. Machining geometry is supplied; Exact CT scaling, voltage-lead protection and physical/electrical acceptance remain open. XA and DC remain inside. One existing USB cable runs directly from DENT through a protected right-wall hole to the PC; its internal portion is sleeved. Export with mains unplugged and lid closed. Do not treat a purchase link or an inventory tick as a release.
 
@@ -38,7 +38,7 @@ The analysis uses the checked-in component coordinates and actual shell triangle
 
 ### 1. Verify stock and machine empty parts
 
-Measure the offered aluminum and received enclosure. Close thickness, mounting and bonding decisions; use revision D CAD only. The right wall has one Ø22.2 mm USB cable exit; no USB flange fixing, XA or DC openings. Dry-fit the bushing and cable, deburr all holes and eight strap slots, and clear chips.
+Measure the offered aluminum and received enclosure. Close thickness, mounting and bonding decisions; use the linked machining files. The right wall has one Ø22.2 mm USB cable exit; no USB flange fixing, XA or DC openings. Dry-fit the bushing and cable, deburr all holes and eight strap slots, and clear chips.
 
 **Result:** Digital cut and restored-wall checks only; no material has been received or machined.
 

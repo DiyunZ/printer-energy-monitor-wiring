@@ -1,8 +1,8 @@
 {
   "revision": "Revision D · September 23, 2026",
   "baseline_commit": "3c36b4e",
-  "scope": "One grounded 120 V supply, one printer at a time. Revision D uses an opaque-cover enclosure, proposed reuse of the professor’s aluminum sheet and an internal adapter connection. Six owned equipment groups, including the existing USB cable, are retained. The selected 15 A Q0 and upstream-only voltage-lead protection still require application acceptance. No purchase, physical fit, thermal test or electrical release is claimed. Closed-lid USB export is used only after unplugging mains; the internal portion of the existing USB cable requires rated insulation and accepted assembly.",
-  "result": "ENGINEERING REVISION D — STOCK, USB ASSEMBLY AND ELECTRICAL ACCEPTANCE OPEN",
+  "scope": "One grounded 120 V supply, one printer at a time. The design uses an opaque-cover enclosure, proposed reuse of the professor’s aluminum sheet and an internal adapter connection. Six owned equipment groups, including the existing USB cable, are retained. The selected 15 A Q0 and upstream-only voltage-lead protection still require application acceptance. No purchase, physical fit, thermal test or electrical release is claimed. Closed-lid USB export is used only after unplugging mains; the internal portion of the existing USB cable requires rated insulation and accepted assembly.",
+  "result": "STOCK, USB ASSEMBLY AND ELECTRICAL ACCEPTANCE OPEN",
   "sources": {
     "dent": "https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf",
     "dent-size": "https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf",
@@ -400,7 +400,7 @@
     {
       "stage": 1,
       "title": "Verify stock and machine empty parts",
-      "action": "Measure the offered aluminum and received enclosure. Close thickness, mounting and bonding decisions; use revision D CAD only. The right wall has one Ø22.2 mm USB cable exit; no USB flange fixing, XA or DC openings. Dry-fit the bushing and cable, deburr all holes and eight strap slots, and clear chips.",
+      "action": "Measure the offered aluminum and received enclosure. Close thickness, mounting and bonding decisions; use the linked machining files. The right wall has one Ø22.2 mm USB cable exit; no USB flange fixing, XA or DC openings. Dry-fit the bushing and cable, deburr all holes and eight strap slots, and clear chips.",
       "result": "Digital cut and restored-wall checks only; no material has been received or machined."
     },
     {

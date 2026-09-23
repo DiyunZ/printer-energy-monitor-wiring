@@ -1,6 +1,6 @@
 {
   "revision": "September 23, 2026 · revision D · one existing USB cable",
-  "scope": "One grounded 120 V supply, one printer at a time. Revision D uses an opaque-cover enclosure, proposed reuse of the professor’s aluminum sheet and an internal adapter connection. Six owned equipment groups, including the existing USB cable, are retained. The selected 15 A Q0 and upstream-only voltage-lead protection still require application acceptance. No purchase, physical fit, thermal test or electrical release is claimed. Closed-lid USB export is used only after unplugging mains; the internal portion of the existing USB cable requires rated insulation and accepted assembly.",
+  "scope": "One grounded 120 V supply, one printer at a time. The design uses an opaque-cover enclosure, proposed reuse of the professor’s aluminum sheet and an internal adapter connection. Six owned equipment groups, including the existing USB cable, are retained. The selected 15 A Q0 and upstream-only voltage-lead protection still require application acceptance. No purchase, physical fit, thermal test or electrical release is claimed. Closed-lid USB export is used only after unplugging mains; the internal portion of the existing USB cable requires rated insulation and accepted assembly.",
   "items": [
     {
       "id": "meter",
@@ -196,14 +196,15 @@
       "id": "enclosure",
       "availability": "buy",
       "image": {
-        "src": "assets/materials/enclosure-solid.svg",
-        "kind": "design",
-        "alt": "Opaque PCJ16148 enclosure selection illustration",
-        "caption": "Opaque-cover concept; base geometry follows the PCJ series. See manufacturer drawing.",
-        "source_label": "Hammond selection basis",
-        "source_url": "https://www.hammfg.com/files/parts/pdf/PCJ16148.pdf",
-        "width": 320,
-        "height": 240
+        "src": "assets/materials/enclosure-pcj16148.jpg",
+        "kind": "product",
+        "alt": "Hammond PCJ16148 opaque-cover enclosure — product photo",
+        "caption": "PCJ16148 product photo from the selected supplier.",
+        "source_label": "Solutions Direct / Hammond",
+        "source_url": "https://www.solutionsdirectonline.com/hammond-16x14x8-polycarbonate-electrical-enclosure-with-solid-cover-pcj16148",
+        "source_image": "https://asset.solutionsdirectonline.com/img/Hammond_Manufacturing/hammond_pcj16148.jpg",
+        "width": 400,
+        "height": 400
       },
       "installation": "Case and opaque gray screw cover. Q0, two power-cord glands and one protected USB cable opening penetrate the walls. XA and DC stay inside.",
       "location_summary": "Opaque enclosure; existing USB cable exits the right wall.",
@@ -256,7 +257,7 @@
       "quantity": "1",
       "model": "Carling CA1-B0-24-615-121-DG",
       "reason": "Single 15 A operating breaker, 50/60 Hz medium-delay, UL489/CSA option DG. Mount directly on the front wall using the manufacturer pattern. No custom wall insert. Keep all four cover screws installed; Q0 OFF leaves its supply terminal live.",
-      "status": "Retain the user-selected 15 A / UL489 DG configuration. Master Electronics lists one piece at $40.32 and 16 in stock on 2026-09-23. The DIN comparison is complete in revision.html; direct mounting and the existing trip curve are retained. Delivery and price remain checkout-dependent; pre-use application checks are in protection.html.",
+      "status": "Retain the user-selected 15 A / UL489 DG configuration. Master Electronics lists one piece at $40.32 and 16 in stock on 2026-09-23. The sourcing review compares the DIN alternative; direct mounting and the existing trip curve are retained. Delivery and price remain checkout-dependent; pre-use application checks are in protection.html.",
       "links": [
         {
           "label": "Buy 1 · Master Electronics · $40.32",
@@ -829,15 +830,15 @@
         }
       ],
       "image": {
-        "src": "assets/materials/fasteners.png",
-        "source_image": "https://boltdepot.com/images/catalog/machine-screw-phillips-pan.png",
+        "src": "assets/materials/fasteners-photo.jpg",
+        "source_image": "https://simfix.com/cdn/shop/files/SIM7985A203010_20_28285P3010_29_203_e57dfe80-c934-474e-8153-6d3a3a35c121.jpg?v=1787228850&width=548",
         "kind": "reference",
-        "alt": "Machine screws, nuts, flat/locking washers and approved bonding hardware — reference image",
-        "caption": "Machine-screw reference illustration. Nuts, washers and final sizes are selected separately.",
-        "source_label": "Bolt Depot",
-        "source_url": "https://boltdepot.com/Machine_screws",
-        "width": 175,
-        "height": 58
+        "alt": "Stainless Phillips pan-head machine screw — reference product photo",
+        "caption": "Stainless Phillips pan-head screw reference photo. Buy the individual screw, nut and washer sizes in the Bolt Depot schedule; this is not a complete hardware kit.",
+        "source_label": "SIMFIX",
+        "source_url": "https://simfix.com/products/simfix-phil-pan-machine-screw-din-7985-a2-stainless-steel-m3-x-16",
+        "width": 548,
+        "height": 548
       },
       "installation": "Mounting hardware for Q0, three carriers, six cable bases and the panel PE bond. XA uses straps and the USB bushing snaps in. Use the build-package sizes and transfer-drilling instructions.",
       "location_summary": "Q0, carriers, six cable mounts and panel PE bond.",
@@ -910,14 +911,15 @@
         }
       ],
       "image": {
-        "src": "assets/materials/usb-bushing.svg",
-        "kind": "design",
-        "alt": "Snap bushing around a continuous USB cable",
-        "caption": "Design illustration of a snap bushing; received part controls fit.",
-        "source_label": "Heyco dimensions",
+        "src": "assets/materials/usb-bushing-heyco.jpg",
+        "kind": "reference",
+        "alt": "Heyco thick-panel snap bushing — manufacturer product photo",
+        "caption": "Heyco thick-panel snap-bushing family photo; selected part is black 3104 (SBT 875-11).",
+        "source_label": "Heyco",
         "source_url": "https://www.heyco.com/products/bushings-grommets-heycaps-plugs/tubing-caps-and-plugs/heyco-thick-panel-snap-bushings/",
-        "width": 480,
-        "height": 360
+        "source_image": "https://www.heyco.com/wp-content/uploads/2024/06/Heyco%C2%AE-Thick-Panel-Snap-Bushings.jpg",
+        "width": 305,
+        "height": 201
       },
       "installation": "Right wall Y/Z = 55/167 mm; one Ø22.2 mm mounting hole and no flange screws. Thread the bare USB-B end through the loose bushing before applying the sleeve. Pass the protected end through the empty wall hole, then snap in the bushing. Use the existing front/right cable support so external pull cannot reach DENT. Bushing alone is not strain relief.",
       "location_summary": "Right-wall protected passage for the single existing USB cable.",
@@ -950,14 +952,15 @@
         }
       ],
       "image": {
-        "src": "assets/materials/usb-sleeve.svg",
-        "kind": "design",
-        "alt": "Protective insulation sleeve around internal USB cable",
-        "caption": "Design illustration; use the linked manufacturer specification.",
-        "source_label": "Manufacturer specification",
-        "source_url": "https://www.alphawire.com/products/accessories/fit-heat-shrink-tubing/shrink-tubing/fit2213_4",
-        "width": 320,
-        "height": 240
+        "src": "assets/materials/usb-sleeve-fit221.jpg",
+        "kind": "reference",
+        "alt": "Alpha Wire black FIT-221 heat-shrink tubing — product photo",
+        "caption": "Black FIT-221 tubing family photo from the selected F2213/4 BK105 listing; supplied length is 4 ft.",
+        "source_label": "DigiKey / Alpha Wire",
+        "source_url": "https://www.digikey.com/en/products/detail/alpha-wire/F2213-4-BK105/3718418",
+        "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/010/223/260/F221B1IN-BK_sml.jpg",
+        "width": 200,
+        "height": 200
       },
       "installation": "Cover the entire internal portion of the existing USB cable, including the DENT-end protection, and continue beyond the protected wall edge. Secure the sleeve against movement at the existing front/right support. It is not galvanic isolation or a substitute for cable retention.",
       "location_summary": "Rated insulation on the internal portion of the existing USB cable.",
@@ -1022,22 +1025,22 @@
     {
       "id": "split-entries",
       "model": "icotek KVT 32 black · 45026",
-      "reason": "Revision B: original adapter and DC cable stay entirely inside the enclosure."
+      "reason": "Original adapter and DC cable stay entirely inside the enclosure."
     },
     {
       "id": "dc-extension",
       "model": "Tensility 10-02228 · 5.5/2.1 mm plug to jack",
-      "reason": "Revision B: original adapter and DC cable stay entirely inside the enclosure."
+      "reason": "Original adapter and DC cable stay entirely inside the enclosure."
     },
     {
       "id": "kt-inserts",
       "model": "icotek KTMBS 4–7 gray · 41380",
-      "reason": "Revision B: original adapter and DC cable stay entirely inside the enclosure."
+      "reason": "Original adapter and DC cable stay entirely inside the enclosure."
     },
     {
       "id": "usb-port",
       "item": "Neutrik NAUSB-W panel USB coupler",
-      "reason": "Revision D reuses one continuous existing cable through a protected opening."
+      "reason": "Reuse one continuous existing cable through a protected opening."
     },
     {
       "id": "usb-internal",

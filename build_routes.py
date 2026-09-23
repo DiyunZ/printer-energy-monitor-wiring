@@ -174,7 +174,7 @@ def make_diagram():
     start_svg(1760,1500,'ELITEpro enclosure wiring plan, aligned with the 3D top view',
         f'data-layout-scale="{SCALE}" data-layout-origin-x="{PLAN["origin"][0]}" data-layout-origin-y="{PLAN["origin"][1]}"',
         viewbox=(130,80,1760,1500))
-    add('<desc>'+E(REV+'; 120 V, one printer. Body footprints match the 3D top view; terminal symbols and wire bends are simplified. Physical fit and electrical acceptance remain pending.')+'</desc>')
+    add('<desc>120 V, one printer. Body footprints match the 3D top view; terminal symbols and wire bends are simplified. Physical fit and electrical acceptance remain pending.</desc>')
     footprint('case','#edf1f4','#9dabb8',20)
     footprint('panel','#fafbfc','#b6c3cb',3)
     for i,(x,z) in enumerate(DIMENSIONS['installationHardware']['cableMountsXZ']):

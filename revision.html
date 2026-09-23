@@ -1,5 +1,5 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Revision D: one USB cable and sourcing review · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=18"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Design_Revision_B.md" download>Download Markdown</a></nav><h1>Revision D · one existing USB cable and cost review</h1>
-<p>September 23, 2026. Revised in response to Professor Clemon’s review: fewer suppliers, lower-cost enclosure and panel, a breaker comparison, cable restraints, documented component approvals and internal logger power.</p>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Design, sourcing and component evidence · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=18"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Design_Revision_B.md" download>Download Markdown</a></nav><h1>Design, sourcing and component evidence</h1>
+<p>Prices and sources checked September 23, 2026. Design priorities: fewer suppliers, lower-cost enclosure and panel, a breaker comparison, cable restraints, documented component approvals and internal logger power.</p>
 <h2>Selected design</h2>
 <ul>
 <li><strong>Enclosure:</strong> Hammond <strong>PCJ16148</strong>, opaque screw cover, in the same size class as the previous clear-cover PCJ16148CC. X-ray mode is a viewing aid; the real lid is opaque.</li>
@@ -7,7 +7,7 @@
 <li><strong>Internal power:</strong> an internal <strong>Leviton 515CV</strong> cord connector supplies the original CUI adapter. A continuous 14/3 SJOOW branch connects to JL/JN/PE before CT. The original adapter cable connects directly to the logger. Buy <strong>two 515CV connectors total</strong>, including the printer output.</li>
 <li><strong>Fewer openings:</strong> remove the XA wall outlet and the DC opening, extension, KVT frame and insert. The right wall has one protected opening for the existing USB cable. Q0 and two power cords remain the other interfaces; XA/DC remain inside.</li>
 <li><strong>Retention:</strong> retain six screw-fixed cable anchors; provide four adjustable straps—two for the logger, one for XA and one for the adapter. Check full plug seating and that restraint prevents separation without loading the blades or blocking heat dissipation.</li>
-<li><strong>Breaker:</strong> retain Carling CA1-B0-24-615-121-DG and buy one from Master Electronics at the checked $40.32 price. The priced DIN comparison below explains why this revision keeps the existing direct mount and trip curve.</li>
+<li><strong>Breaker:</strong> retain Carling CA1-B0-24-615-121-DG and buy one from Master Electronics at the checked $40.32 price. The priced DIN comparison below explains why the design uses the existing direct mount and trip curve.</li>
 </ul>
 <p>The original 21 electrical paths and measurement boundary remain: only printer hot passes through CT; the adapter and voltage sensing branch before CT. Neutral and PE remain separate. No physical assembly, thermal test or electrical release has occurred.</p>
 <h2>One-cable closed-lid export</h2>
@@ -15,42 +15,28 @@
 <div class="table-wrap"><table>
 <thead>
 <tr>
-<th>Change from revision C</th>
-<th>Material cost change</th>
-<th>Result</th>
+<th>USB connection</th>
+<th>Purchase cost</th>
+<th>Purpose</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>Remove USB panel coupler</td>
-<td>−$10.68</td>
-<td>No intermediate USB connection.</td>
+<td>Existing USB-A to USB-B cable</td>
+<td>Already owned</td>
+<td>One continuous data connection; no coupler or extra cable.</td>
 </tr>
 <tr>
-<td>Remove extra short USB cable</td>
-<td>−$6.38</td>
-<td>Reuse the one existing cable, confirmed owned.</td>
+<td>One <a href="https://www.digikey.com/en/products/detail/heyco-products-corporation/3104/15907204">Heyco 3104 bushing</a></td>
+<td>$0.14</td>
+<td>Cable-edge protection; UL Recognized E15331 / CSA 8919 component evidence.</td>
 </tr>
 <tr>
-<td>Remove two M3 fixing sets</td>
-<td>−$0.36</td>
-<td>Only six M3 sets remain for the three carriers.</td>
-</tr>
-<tr>
-<td>Add one <a href="https://www.digikey.com/en/products/detail/heyco-products-corporation/3104/15907204">Heyco 3104 bushing</a></td>
-<td>+$0.14</td>
-<td>Edge protection; 6,537 listed in stock when checked. UL Recognized E15331 / CSA 8919 component evidence.</td>
-</tr>
-<tr>
-<td>Retain <a href="https://www.digikey.com/en/products/detail/alpha-wire/F2213-4-BK105/3718418">Alpha Wire F2213/4 BK105 sleeve</a></td>
-<td>No change; $9.39 already included</td>
-<td>DENT requires rated insulation inside the electrical panel; this black sleeve is specified to 600 V.</td>
-</tr>
-<tr>
-<td><strong>Net saving</strong></td>
-<td><strong>$17.28</strong></td>
-<td><strong>$287.71 → $270.43</strong>, before freight, tax and fabrication. Five sellers remain.</td>
+<td><a href="https://www.digikey.com/en/products/detail/alpha-wire/F2213-4-BK105/3718418">Alpha Wire F2213/4 BK105 sleeve</a></td>
+<td>$9.39</td>
+<td>Rated insulation for the cable inside the electrical panel; selected black sleeve is specified to 600 V.</td>
 </tr>
 </tbody></table></div>
+<p>Both purchased USB accessories are included in the <strong>$270.43</strong> material subtotal, before freight, tax and fabrication.</p>
 <p>The single Ø22.2 mm opening replaces the former USB bore and two screw holes. Published standard-B overmold dimensions fit the selected 17.5 mm bushing passage before sleeving. Reuse the existing front/right cable support; no extra support or connector is added. Confirm actual passage, full insulation coverage and restraint during assembly. <a href="build.html">Sources and construction</a>.</p>
 <h2>Dated price comparison</h2>
 <p>USD, single-unit displayed prices checked September 23, 2026. These are web listings, not accepted quotations. Stock, tax, shipping, machining, finishing and labor are excluded.</p>
@@ -58,8 +44,8 @@
 <thead>
 <tr>
 <th>Item</th>
-<th>Previous selection</th>
-<th>Revision D</th>
+<th>Alternative</th>
+<th>Selected design</th>
 <th>Price evidence</th>
 </tr>
 </thead>
@@ -103,7 +89,7 @@
 <p>The selected purchase quantities now have a <strong>$270.43 material subtotal</strong>, including the internal XA branch, all four strap blanks, the actual retail packs and fastener spares. The <a href="materials.html#order-plan">28-line order plan</a> records each seller, quantity, pack size, price and stock note. It excludes freight, tax, machining, tools, labor and any bonding changes required after inspecting the aluminum. The $42.78 remains a <strong>box/raw-panel-only</strong> comparison; it is not the difference between two fully priced systems. No purchase has been made.</p>
 <p>The previous 3M 100-piece bottle was <a href="https://www.digikey.com/en/products/detail/3m/MV14-10R-LX-BOTTLE/2670218">$105.36</a>. The selected <a href="https://www.homedepot.com/p/202522492">Gardner Bender 15-104 15-pack is $3.63</a>, a <strong>$101.73 reduction for that purchase line</strong>, with three installed and twelve spare. Buy ten PLT2S-C ties for $3.16, rather than a 100-piece pack. Buy four feet each of <a href="https://www.homedepot.com/p/204632031">black</a> and <a href="https://www.homedepot.com/p/204632154">green</a> stranded wire: $1.68 per color, rather than full rolls.</p>
 <h2>Consolidated purchasing</h2>
-<p>The previous BOM linked to 12 order-site domains, plus Bolt Depot through the fastener schedule: <strong>13 sources</strong>. Revision D uses <strong>five planned order sources</strong>, including fasteners. This counts ordering websites, not manufacturer references, photo credits or orders already placed. The former Marketplace ring-lug link is removed from the active order; Home Depot supplies the small pack. The order plan identifies the DigiKey -ND offers and selects no partner listing. Factory-stock glands may still have a separate lead time. Five sellers does not guarantee five parcels or fixed freight.</p>
+<p>The previous BOM linked to 12 order-site domains, plus Bolt Depot through the fastener schedule: <strong>13 sources</strong>. The design uses <strong>five planned order sources</strong>, including fasteners. This counts ordering websites, not manufacturer references, photo credits or orders already placed. The former Marketplace ring-lug link is removed from the active order; Home Depot supplies the small pack. The order plan identifies the DigiKey -ND offers and selects no partner listing. Factory-stock glands may still have a separate lead time. Five sellers does not guarantee five parcels or fixed freight.</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -163,7 +149,7 @@
 <td>No sufficient component-price advantage here; adds a seller. Not selected.</td>
 </tr>
 </tbody></table></div>
-<p><strong>Decision:</strong> use the offered plate and the $40.32 direct-mount Carling. A DIN rebuild could become economical with existing rail stock or a larger multi-device panel, but it is not needed for this single-printer revision. The logger and adapter still need a plate or other support. An inexpensive switch-only device or UL1077 protector is not an equivalent replacement for the selected UL489 breaker. Application acceptance remains separate from this sourcing decision.</p>
+<p><strong>Decision:</strong> use the offered plate and the $40.32 direct-mount Carling. A DIN rebuild could become economical with existing rail stock or a larger multi-device panel, but it is not needed for this single-printer enclosure. The logger and adapter still need a plate or other support. An inexpensive switch-only device or UL1077 protector is not an equivalent replacement for the selected UL489 breaker. Application acceptance remains separate from this sourcing decision.</p>
 <p><strong>Consolidation tradeoff:</strong> the same PCJ16148 is <a href="https://www.masterelectronics.com/en/productdetail/hammond-manufacturing/pcj16148-49489596.html">$160.56 at Master Electronics</a>, $23.45 above Solutions Direct. Retain the lower material-price source unless its extra delivered cost exceeds $23.45. Master lists a <strong>25-piece minimum</strong> for <a href="https://www.masterelectronics.com/en/productdetail/hammond-manufacturing/1427ncgpg13lb-50893024.html">1427NCGPG13LB</a>: $52 at $2.08 each, versus <strong>two at $2.97 = $5.94</strong> from DigiKey. Do not combine suppliers by purchasing unnecessary quantities.</p>
 <h2 id="checkout">Delivered-cost comparison and lab-stock check</h2>
 
@@ -314,5 +300,5 @@
 <h2>Review before fabrication</h2>
 <p>Measure the offered aluminum, verify the shared PCJ base and actual opaque lid, dry-fit both internal power parts with original connectors, and review aluminum-compatible bonding. The current source model uses the previously verified PCJ16148CC base/panel geometry and an illustrative opaque lid; it is not an independently verified PCJ16148 factory assembly.</p>
 <p>Moving the adapter inside requires a closed-enclosure temperature check and restraint that prevents the AC plug loosening. The opaque lid hides the logger indicators: configure offline, close the lid before mains operation, then verify saved records after unplugging and exporting the pilot. Never open the box while energized to inspect an LED.</p>
-<p><a href="materials.html">Current BOM</a> · <a href="build.html">Machining and assembly revision</a> · <a href="protection.html">Protection review</a> · <a href="index.html">3D and wiring</a></p>
+<p><a href="materials.html">Current BOM</a> · <a href="build.html">Machining and assembly guide</a> · <a href="protection.html">Protection review</a> · <a href="index.html">3D and wiring</a></p>
 </body></html>

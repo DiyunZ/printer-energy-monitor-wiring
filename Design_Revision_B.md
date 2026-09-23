@@ -1,6 +1,6 @@
-# Revision D · one existing USB cable and cost review
+# Design, sourcing and component evidence
 
-September 23, 2026. Revised in response to Professor Clemon’s review: fewer suppliers, lower-cost enclosure and panel, a breaker comparison, cable restraints, documented component approvals and internal logger power.
+Prices and sources checked September 23, 2026. Design priorities: fewer suppliers, lower-cost enclosure and panel, a breaker comparison, cable restraints, documented component approvals and internal logger power.
 
 ## Selected design
 
@@ -9,7 +9,7 @@ September 23, 2026. Revised in response to Professor Clemon’s review: fewer su
 - **Internal power:** an internal **Leviton 515CV** cord connector supplies the original CUI adapter. A continuous 14/3 SJOOW branch connects to JL/JN/PE before CT. The original adapter cable connects directly to the logger. Buy **two 515CV connectors total**, including the printer output.
 - **Fewer openings:** remove the XA wall outlet and the DC opening, extension, KVT frame and insert. The right wall has one protected opening for the existing USB cable. Q0 and two power cords remain the other interfaces; XA/DC remain inside.
 - **Retention:** retain six screw-fixed cable anchors; provide four adjustable straps—two for the logger, one for XA and one for the adapter. Check full plug seating and that restraint prevents separation without loading the blades or blocking heat dissipation.
-- **Breaker:** retain Carling CA1-B0-24-615-121-DG and buy one from Master Electronics at the checked $40.32 price. The priced DIN comparison below explains why this revision keeps the existing direct mount and trip curve.
+- **Breaker:** retain Carling CA1-B0-24-615-121-DG and buy one from Master Electronics at the checked $40.32 price. The priced DIN comparison below explains why the design uses the existing direct mount and trip curve.
 
 The original 21 electrical paths and measurement boundary remain: only printer hot passes through CT; the adapter and voltage sensing branch before CT. Neutral and PE remain separate. No physical assembly, thermal test or electrical release has occurred.
 
@@ -17,14 +17,13 @@ The original 21 electrical paths and measurement boundary remain: only printer h
 
 After printer shutdown: **Q0 OFF → unplug SUPPLY IN from the wall → connect the existing cable's free USB-A end to the PC → export in ELOG**, with the lid closed. Disconnect from the PC and stow the free end before the next mains run. USB-B stays in DENT; the whole cable remains attached to the box. Q0 OFF alone leaves its input live.
 
-| Change from revision C | Material cost change | Result |
+| USB connection | Purchase cost | Purpose |
 |---|---|---|
-| Remove USB panel coupler | −$10.68 | No intermediate USB connection. |
-| Remove extra short USB cable | −$6.38 | Reuse the one existing cable, confirmed owned. |
-| Remove two M3 fixing sets | −$0.36 | Only six M3 sets remain for the three carriers. |
-| Add one [Heyco 3104 bushing](https://www.digikey.com/en/products/detail/heyco-products-corporation/3104/15907204) | +$0.14 | Edge protection; 6,537 listed in stock when checked. UL Recognized E15331 / CSA 8919 component evidence. |
-| Retain [Alpha Wire F2213/4 BK105 sleeve](https://www.digikey.com/en/products/detail/alpha-wire/F2213-4-BK105/3718418) | No change; $9.39 already included | DENT requires rated insulation inside the electrical panel; this black sleeve is specified to 600 V. |
-| **Net saving** | **$17.28** | **$287.71 → $270.43**, before freight, tax and fabrication. Five sellers remain. |
+| Existing USB-A to USB-B cable | Already owned | One continuous data connection; no coupler or extra cable. |
+| One [Heyco 3104 bushing](https://www.digikey.com/en/products/detail/heyco-products-corporation/3104/15907204) | $0.14 | Cable-edge protection; UL Recognized E15331 / CSA 8919 component evidence. |
+| [Alpha Wire F2213/4 BK105 sleeve](https://www.digikey.com/en/products/detail/alpha-wire/F2213-4-BK105/3718418) | $9.39 | Rated insulation for the cable inside the electrical panel; selected black sleeve is specified to 600 V. |
+
+Both purchased USB accessories are included in the **$270.43** material subtotal, before freight, tax and fabrication.
 
 The single Ø22.2 mm opening replaces the former USB bore and two screw holes. Published standard-B overmold dimensions fit the selected 17.5 mm bushing passage before sleeving. Reuse the existing front/right cable support; no extra support or connector is added. Confirm actual passage, full insulation coverage and restraint during assembly. [Sources and construction](build.html).
 
@@ -32,7 +31,7 @@ The single Ø22.2 mm opening replaces the former USB bore and two screw holes. P
 
 USD, single-unit displayed prices checked September 23, 2026. These are web listings, not accepted quotations. Stock, tax, shipping, machining, finishing and labor are excluded.
 
-| Item | Previous selection | Revision D | Price evidence |
+| Item | Alternative | Selected design | Price evidence |
 |---|---|---|---|
 | Box | PCJ16148CC clear lid: **$149.45** | PCJ16148 opaque lid: **$137.11** | [Previous supplier listing](https://www.solutionsdirectonline.com/hammond-16x14x8-polycarbonate-electrical-enclosure-with-clear-cover-pcj16148cc) · [New supplier listing](https://www.solutionsdirectonline.com/hammond-16x14x8-polycarbonate-electrical-enclosure-with-solid-cover-pcj16148) |
 | Panel stock | Hammond 14R1513: **$30.44** | Offered aluminum: **$0 incremental raw-stock allowance**, conditional on suitability | [14R1513 listing](https://www.digikey.com/en/products/detail/hammond-manufacturing/14R1513/2359585) · professor’s offer; machining is not free |
@@ -47,7 +46,7 @@ The previous 3M 100-piece bottle was [$105.36](https://www.digikey.com/en/produc
 
 ## Consolidated purchasing
 
-The previous BOM linked to 12 order-site domains, plus Bolt Depot through the fastener schedule: **13 sources**. Revision D uses **five planned order sources**, including fasteners. This counts ordering websites, not manufacturer references, photo credits or orders already placed. The former Marketplace ring-lug link is removed from the active order; Home Depot supplies the small pack. The order plan identifies the DigiKey -ND offers and selects no partner listing. Factory-stock glands may still have a separate lead time. Five sellers does not guarantee five parcels or fixed freight.
+The previous BOM linked to 12 order-site domains, plus Bolt Depot through the fastener schedule: **13 sources**. The design uses **five planned order sources**, including fasteners. This counts ordering websites, not manufacturer references, photo credits or orders already placed. The former Marketplace ring-lug link is removed from the active order; Home Depot supplies the small pack. The order plan identifies the DigiKey -ND offers and selects no partner listing. Factory-stock glands may still have a separate lead time. Five sellers does not guarantee five parcels or fixed freight.
 
 | Supplier | Groups to source |
 |---|---|
@@ -68,7 +67,7 @@ There are **17 purchase groups, one proposed fabrication group and six owned gro
 | **Altech 1C15UL with rail and stops** | [Breaker $33.53](https://www.digikey.com/en/products/detail/altech-corporation/1C15UL/8547287) + one [2511120/1M 35 × 7.5 mm rail $4.62](https://www.digikey.com/en/products/detail/altech-corporation/2511120-1M/8546913) + two [CA802 stops at $0.62](https://www.digikey.com/en/products/detail/altech-corporation/CA802/8547037) = **$39.39**. Each offer permits individual quantities. CA802 fits this rail in the [manufacturer selection table](https://legacy.altechcorp.com/Blocks/Block-Accessories.pdf). | **Not selected.** Only $0.93 lower for these parts, before rail fasteners, an externally accessible operator/guard, fabrication and freight. C characteristic differs from Carling delay 24; its 17.5 × 105.3 × 68.4 mm body also requires a new arrangement. This is a priced component comparison, not a claim that every possible DIN installation costs more. |
 | **Eaton FAZ-C15/1-NA-SP** | 15 A C curve, DIN mount, $40.00 at [AutomationDirect](https://www.automationdirect.com/adc/shopping/catalog/circuit_protection_-z-_fuses_-z-_disconnects/circuit_breakers_-a-_circuit_protectors/miniature_circuit_breakers_%28mcb%29/faz-c15-1-na-sp), before rail/supports. | No sufficient component-price advantage here; adds a seller. Not selected. |
 
-**Decision:** use the offered plate and the $40.32 direct-mount Carling. A DIN rebuild could become economical with existing rail stock or a larger multi-device panel, but it is not needed for this single-printer revision. The logger and adapter still need a plate or other support. An inexpensive switch-only device or UL1077 protector is not an equivalent replacement for the selected UL489 breaker. Application acceptance remains separate from this sourcing decision.
+**Decision:** use the offered plate and the $40.32 direct-mount Carling. A DIN rebuild could become economical with existing rail stock or a larger multi-device panel, but it is not needed for this single-printer enclosure. The logger and adapter still need a plate or other support. An inexpensive switch-only device or UL1077 protector is not an equivalent replacement for the selected UL489 breaker. Application acceptance remains separate from this sourcing decision.
 
 **Consolidation tradeoff:** the same PCJ16148 is [$160.56 at Master Electronics](https://www.masterelectronics.com/en/productdetail/hammond-manufacturing/pcj16148-49489596.html), $23.45 above Solutions Direct. Retain the lower material-price source unless its extra delivered cost exceeds $23.45. Master lists a **25-piece minimum** for [1427NCGPG13LB](https://www.masterelectronics.com/en/productdetail/hammond-manufacturing/1427ncgpg13lb-50893024.html): $52 at $2.08 each, versus **two at $2.97 = $5.94** from DigiKey. Do not combine suppliers by purchasing unnecessary quantities.
 
@@ -124,4 +123,4 @@ Measure the offered aluminum, verify the shared PCJ base and actual opaque lid, 
 
 Moving the adapter inside requires a closed-enclosure temperature check and restraint that prevents the AC plug loosening. The opaque lid hides the logger indicators: configure offline, close the lid before mains operation, then verify saved records after unplugging and exporting the pilot. Never open the box while energized to inspect an LED.
 
-[Current BOM](materials.html) · [Machining and assembly revision](build.html) · [Protection review](protection.html) · [3D and wiring](index.html)
+[Current BOM](materials.html) · [Machining and assembly guide](build.html) · [Protection review](protection.html) · [3D and wiring](index.html)
