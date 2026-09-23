@@ -928,8 +928,7 @@
         "status": "UL Recognized / CSA component",
         "detail": "Heyco thick-panel series: UL component file E15331, CSA file 8919; nylon 6/6 UL94 V-2. No IP/NEMA seal, strain-relief or completed-assembly approval is inferred.",
         "url": "https://www.heyco.com/products/bushings-grommets-heycaps-plugs/tubing-caps-and-plugs/heyco-thick-panel-snap-bushings/"
-      },
-      "notice": "One protected opening; reuse the existing front/right cable restraint."
+      }
     },
     {
       "id": "usb-sleeve",
