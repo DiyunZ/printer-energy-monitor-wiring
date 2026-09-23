@@ -1,6 +1,6 @@
 {
   "units": "mm",
-  "revision": "September 23, 2026 · revision C · closed-lid offline USB",
+  "revision": "September 23, 2026 · revision D · one existing USB cable",
   "coordinates": "X across the panel; Y above the panel underside; Z along the panel, negative toward the printer exit (rear), positive toward Q0 (front). One scene unit is one millimetre. The wiring plan projects the same X/Z positions with rear at the top. Dimensions below are X × Y × Z unless noted.",
   "parts": [
     {
@@ -13,7 +13,7 @@
       ],
       "status": "PCJ common-base layout template; solid lid not independently modeled",
       "source": "https://www.hammfg.com/files/parts/pdf/PCJ16148.pdf",
-      "note": "PCJ16148 selected. Manufacturer series table gives the same enclosure and panel dimensions as PCJ16148CC. Base geometry and lid silhouette are inherited from the clear-cover STEP; gray rendering represents the selected opaque cover. Confirm received solid-lid geometry. Right wall has a USB service port; other wall interfaces are Q0 and two power glands. No certification of the modified assembly is claimed."
+      "note": "PCJ16148 selected. Manufacturer series table gives the same enclosure and panel dimensions as PCJ16148CC. Base geometry and lid silhouette are inherited from the clear-cover STEP; gray rendering represents the selected opaque cover. Confirm received solid-lid geometry. Right wall has a protected direct USB cable exit; other wall interfaces are Q0 and two power glands. No certification of the modified assembly is claimed."
     },
     {
       "id": "panel",
@@ -134,7 +134,7 @@
     },
     {
       "id": "entries",
-      "name": "Power glands and USB service port",
+      "name": "Power glands and direct USB cable exit",
       "size": [
         27,
         37,
@@ -142,7 +142,7 @@
       ],
       "status": "Catalog power-gland envelopes",
       "source": "https://www.hammfg.com/electronics/small-case/accessories/1427ncg",
-      "note": "Two mains cord glands plus one right-wall USB service port. XA and DC remain inside. External USB connects only after mains is unplugged."
+      "note": "Two power glands plus one protected USB cable passage. The existing USB cable is continuous from DENT to the PC. XA and DC remain inside. PC connects only after mains is unplugged."
     },
     {
       "id": "leads",
@@ -352,29 +352,24 @@
       "id": "usb-entry",
       "part": "entries",
       "position": [
-        165.680146,
+        175.805151,
         55,
         167
       ],
       "size": [
-        40.55,
-        31,
-        26
+        14.3,
+        24.2,
+        24.2
       ],
       "axis": "x",
-      "label": "USB-B service port",
-      "model": "NAUSB-W",
+      "label": "USB cable bushing",
+      "model": "Heyco 3104",
       "wallCenterYZ": [
         55,
         167
       ],
-      "boreDiameterMm": 24,
-      "fixingPitchMm": [
-        19,
-        24
-      ],
-      "fixingHoleDiameterMm": 3.2,
-      "note": "26 × 31 mm flange, total axial envelope 40.55 mm. Simplified view; exact cut follows local drafted-wall plane. B outside / A inside."
+      "boreDiameterMm": 22.2,
+      "note": "Manufacturer mounting bore 22.2 mm; passage 17.5 mm, head 24.2 mm, overall 14.3 mm. Simplified axis-aligned illustration; wall draft and actual locking features require dry fit."
     }
   ],
   "installationHardware": {
@@ -527,27 +522,23 @@
   },
   "usbService": {
     "mode": "offline-closed-lid",
-    "externalConnector": "USB-B",
-    "internalConnector": "USB-A",
-    "internalCable": "USB2HAB1",
+    "topology": "single-continuous-cable",
+    "cableMaterial": "usb",
+    "cableLengthMm": 1800,
+    "externalConnector": "USB-A",
+    "loggerConnector": "USB-B",
+    "intermediateConnections": 0,
     "sleeve": "F2213/4 BK105",
     "sleeveRatingV": 600,
     "requireMainsUnplugged": true,
-    "source": "https://www.neutrik.com/media/8974/download/nausb-w-2.pdf?v=1",
+    "source": "https://www.heyco.com/products/bushings-grommets-heycaps-plugs/tubing-caps-and-plugs/heyco-thick-panel-snap-bushings/",
     "wallCenterYZ": [
       55,
       167
     ],
-    "fixingLocalUV": [
-      [
-        -9.5,
-        12
-      ],
-      [
-        9.5,
-        -12
-      ]
-    ],
+    "bushing": "Heyco 3104",
+    "bushingPassageMm": 17.5,
+    "maximumPanelThicknessMm": 6.4,
     "sleeveOuterRadiusMm": 5.6,
     "route": [
       [
@@ -573,29 +564,34 @@
       [
         150,
         23,
-        158
+        142
       ],
       [
-        150,
-        36,
-        135
+        165,
+        42,
+        146
       ],
       [
-        130,
+        171,
         55,
-        136
+        167
       ],
       [
-        110,
-        55,
-        153
-      ],
-      [
-        122,
+        190,
         55,
         167
       ]
     ],
-    "note": "Routing intent, not an exact consumed cable length or electrical insulation qualification. Confirm usable slack, end coverage, sleeve process and strain relief on the received parts."
+    "note": "Single existing cable, no cut/splice or intermediate USB connection. Exterior length is abbreviated. Published USB-B overmold diagonal 15.57 mm fits the nominal 17.5 mm passage before sleeving. Dry-fit the received parts, then accept insulation and retention before machining.",
+    "standardBOvermoldMaxMm": [
+      11.5,
+      10.5
+    ],
+    "standardCableDiameterRangeMm": [
+      4.06,
+      5.21
+    ],
+    "dimensionSource": "https://www.usb.org/document-library/usb-20-specification",
+    "cableLengthBasis": "Conservative 1.8 m routing allowance from the kit datasheet; the current replacement is listed as 2 m. Retain the full owned cable; actual reach is checked during assembly."
   }
 }

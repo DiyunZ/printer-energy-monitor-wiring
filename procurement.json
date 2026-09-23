@@ -1,6 +1,6 @@
 {
-  "revision": "September 23, 2026 · revision C · closed-lid offline USB",
-  "scope": "One grounded 120 V supply, one printer at a time. Revision C uses an opaque-cover enclosure, proposed reuse of the professor’s aluminum sheet and an internal adapter connection. Five owned equipment groups and the kit USB are retained. The selected 15 A Q0 and upstream-only voltage-lead protection still require application acceptance. No purchase, physical fit, thermal test or electrical release is claimed. Closed-lid USB export is used only after unplugging mains; the permanent internal USB lead requires rated insulation and accepted assembly.",
+  "revision": "September 23, 2026 · revision D · one existing USB cable",
+  "scope": "One grounded 120 V supply, one printer at a time. Revision D uses an opaque-cover enclosure, proposed reuse of the professor’s aluminum sheet and an internal adapter connection. Six owned equipment groups, including the existing USB cable, are retained. The selected 15 A Q0 and upstream-only voltage-lead protection still require application acceptance. No purchase, physical fit, thermal test or electrical release is claimed. Closed-lid USB export is used only after unplugging mains; the internal portion of the existing USB cable requires rated insulation and accepted assembly.",
   "items": [
     {
       "id": "meter",
@@ -205,8 +205,8 @@
         "width": 320,
         "height": 240
       },
-      "installation": "Case and opaque gray screw cover. Q0, two power-cord glands and one USB service port penetrate the walls. XA and DC stay inside.",
-      "location_summary": "Opaque enclosure; USB service port on the right wall.",
+      "installation": "Case and opaque gray screw cover. Q0, two power-cord glands and one protected USB cable opening penetrate the walls. XA and DC stay inside.",
+      "location_summary": "Opaque enclosure; existing USB cable exits the right wall.",
       "supplier": "Solutions Direct",
       "compliance": {
         "status": "Manufacturer standards",
@@ -593,12 +593,12 @@
     },
     {
       "id": "usb",
-      "item": "External PC data cable",
+      "item": "Existing USB data cable",
       "quantity": "1",
-      "model": "DENT kit USB-A to USB-B cable · 1.8 m",
-      "reason": "Reuse the kit USB-A to USB-B cable outside the closed enclosure. After printer shutdown, switch Q0 OFF and unplug SUPPLY IN from the wall; connect PC USB-A to the external USB-B service port. The logger is USB-powered for configuration and export. Remove this external cable before reconnecting mains.",
-      "status": "Kit included · locate in the lid pocket; check the computer port and cable condition. Physical presence is not yet confirmed.",
-      "availability": "kit",
+      "model": "Existing USB-A to USB-B data cable · retain full length",
+      "reason": "Reuse the one existing DENT USB-A to USB-B cable without cutting or splicing it. USB-B stays connected to DENT inside; the same cable passes through the wall and ends in USB-A outside. After printer shutdown, Q0 OFF and unplug SUPPLY IN, connect the free USB-A end to the PC. Disconnect from the PC before restoring mains; the cable stays on the box.",
+      "status": "User confirms the cable is owned. USB 2.0 Figure 6-10 gives an 11.5 × 10.5 mm maximum standard-B overmold (15.57 mm diagonal); Table 6-5 gives nominal cable ODs 4.06–5.21 mm. These are design references, not measurements of this cable. Check passage, condition, usable reach and accepted internal insulation before assembly.",
+      "availability": "owned",
       "links": [
         {
           "label": "DENT kit contents",
@@ -608,6 +608,16 @@
         {
           "label": "DENT USB instructions",
           "url": "https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf",
+          "kind": "reference"
+        },
+        {
+          "label": "DENT original A-to-B cable",
+          "url": "https://www.dentinstruments.com/shop/powerscout-accessories/replacement-usb-a-to-b-communications-cable/",
+          "kind": "reference"
+        },
+        {
+          "label": "USB 2.0 plug and cable dimensions",
+          "url": "https://www.usb.org/document-library/usb-20-specification",
           "kind": "reference"
         }
       ],
@@ -622,9 +632,9 @@
         "width": 2000,
         "height": 2000
       },
-      "installation": "PC USB-A → kit cable → right-wall USB-B service port. The lid stays closed. Select this item to preview the external cable. Exterior cable is abbreviated in the model; retain the kit cable’s full factory length.",
-      "location_summary": "Outside the closed box: service USB-B port to the ELOG computer.",
-      "notice": "Offline export only: unplug SUPPLY IN from the wall first.",
+      "installation": "DENT USB-B → one continuous existing USB cable → protected right-wall opening → PC USB-A. No intermediate USB connection. Keep the lid closed for export. Internal segment stays sleeved and secured; stow the free exterior end during mains operation. The drawn exterior length is abbreviated; retain the full original cable.",
+      "location_summary": "One continuous existing cable from DENT, through the wall, to the computer.",
+      "notice": "Connect to the PC only after unplugging SUPPLY IN from the wall.",
       "supplier": "Existing kit"
     },
     {
@@ -806,10 +816,10 @@
     {
       "id": "fasteners",
       "item": "Mounting and bonding hardware",
-      "quantity": "Five assembly groups; check suitable lab stock first",
+      "quantity": "Four assembly groups; check suitable lab stock first",
       "model": "Screw / nut / washer schedule in Build_Package.md",
-      "reason": "Q0, three WAGO carriers, six cable mounts and the dedicated aluminum-panel PE bond. XA no longer needs flange screws. Thread, length and actual stack checks are in the build package; aluminum bonding method must be accepted. Two M3 sets previously allowed as spares now mount the USB port, keeping the eight-set order unchanged.",
-      "status": "Eight M3 sets total: six carriers + two USB. Check actual stacks; panel bonding remains conditional.",
+      "reason": "Q0, three WAGO carriers, six cable mounts and the dedicated aluminum-panel PE bond. No XA or USB flange screws. Buy six M3 sets for the carriers; two former USB sets are deleted. Check thread, length, actual stacks and the accepted aluminum bond.",
+      "status": "Six M3 screw/washer/locknut sets for the carriers. Check actual stacks; panel bonding remains conditional.",
       "availability": "buy",
       "links": [
         {
@@ -829,8 +839,8 @@
         "width": 175,
         "height": 58
       },
-      "installation": "Mounting screw/washer/nut sets for Q0, three carriers, six cable bases and the panel PE bond. XA uses straps. Small hardware is schematic; use the build-package sizes and transfer-drilling instructions. Two M3 × 16 sets mount the USB service flange; check wall/washer/locknut stack.",
-      "location_summary": "Q0, USB flange, carriers, cable mounts and panel PE bond.",
+      "installation": "Mounting hardware for Q0, three carriers, six cable bases and the panel PE bond. XA uses straps and the USB bushing snaps in. Use the build-package sizes and transfer-drilling instructions.",
+      "location_summary": "Q0, carriers, six cable mounts and panel PE bond.",
       "quantity_summary": "See fastener schedule",
       "supplier": "Bolt Depot",
       "compliance": {
@@ -880,95 +890,51 @@
       }
     },
     {
-      "id": "usb-port",
-      "item": "Closed-lid USB service port",
+      "id": "usb-bushing",
+      "item": "USB cable edge-protection bushing",
       "quantity": "1",
-      "model": "Neutrik NAUSB-W · USB-B outside / USB-A inside",
-      "reason": "Reversible USB 2.0 A/B feedthrough keeps the lid closed for offline export. Set the insert to B outside and A inside. One Ø24 mm project bore and two Ø3.2 mm project clearance holes follow the manufacturer D pattern; verify fit on received parts.",
-      "status": "Selected; check insert orientation, flange fastening, sleeve/end coverage and shield treatment. Dry indoor use; ordinary kit cable does not satisfy Neutrik’s special mated IP65 conditions.",
+      "model": "Heyco 3104 · SBT 875-11 · thick-panel snap bushing",
+      "reason": "One intact existing USB cable passes directly through this insulating bushing. Nominal mounting hole 22.2 mm; passage 17.5 mm, head 24.2 mm, height 14.3 mm; accepts walls up to 6.4 mm. The standard USB-B overmold diagonal is 15.57 mm, leaving 1.93 mm nominal diametral passage margin. This is edge protection, not a cable clamp or ingress seal.",
+      "status": "DigiKey lists 6,537 in stock at $0.14 for one on 2026-09-23; recheck at checkout. Dry-fit the intact USB-B plug through the loose bushing before sleeving. Confirm received-bushing fit, insulation coverage and cable retention before drilling.",
       "availability": "buy",
       "links": [
         {
-          "label": "Buy · DigiKey",
-          "url": "https://www.digikey.com/en/products/detail/neutrik-americas-inc/NAUSB-W/29371251",
+          "label": "Buy 1 · DigiKey · $0.14",
+          "url": "https://www.digikey.com/en/products/detail/heyco-products-corporation/3104/15907204",
           "kind": "buy"
         },
         {
-          "label": "Neutrik specification",
-          "url": "https://www.neutrik.com/en/product/nausb-w",
-          "kind": "reference"
-        },
-        {
-          "label": "Neutrik drawing",
-          "url": "https://www.neutrik.com/media/8974/download/nausb-w-2.pdf?v=1",
+          "label": "Dimensions and UL/CSA evidence",
+          "url": "https://www.heyco.com/products/bushings-grommets-heycaps-plugs/tubing-caps-and-plugs/heyco-thick-panel-snap-bushings/",
           "kind": "reference"
         }
       ],
       "image": {
-        "src": "assets/materials/usb-port.svg",
+        "src": "assets/materials/usb-bushing.svg",
         "kind": "design",
-        "alt": "USB-B service port with two mounting holes",
-        "caption": "Design illustration; use the linked manufacturer specification.",
-        "source_label": "Manufacturer specification",
-        "source_url": "https://www.neutrik.com/en/product/nausb-w",
-        "width": 320,
-        "height": 240
+        "alt": "Snap bushing around a continuous USB cable",
+        "caption": "Design illustration of a snap bushing; received part controls fit.",
+        "source_label": "Heyco dimensions",
+        "source_url": "https://www.heyco.com/products/bushings-grommets-heycaps-plugs/tubing-caps-and-plugs/heyco-thick-panel-snap-bushings/",
+        "width": 480,
+        "height": 360
       },
-      "installation": "Right wall, center Y=55 / Z=167 mm. USB-B faces outward; short internal A-to-B lead joins the rear USB-A to DENT. Keep mains unplugged while PC is connected.",
-      "location_summary": "Right wall near the front: export to PC without opening the lid.",
+      "installation": "Right wall Y/Z = 55/167 mm; one Ø22.2 mm mounting hole and no flange screws. Thread the bare USB-B end through the loose bushing before applying the sleeve. Pass the protected end through the empty wall hole, then snap in the bushing. Use the existing front/right cable support so external pull cannot reach DENT. Bushing alone is not strain relief.",
+      "location_summary": "Right-wall protected passage for the single existing USB cable.",
       "supplier": "DigiKey",
       "compliance": {
-        "status": "USB standard / material evidence",
-        "detail": "USB 2.0 specification; UL94 V-0 insert material. These are not a UL Listed product or a certified mains isolation barrier.",
-        "url": "https://www.neutrik.com/en/product/nausb-w"
-      }
-    },
-    {
-      "id": "usb-internal",
-      "item": "Short internal USB lead",
-      "quantity": "1",
-      "model": "StarTech USB2HAB1 · 1 ft / 304.8 mm · A male to B male",
-      "reason": "USB-B plugs into DENT; USB-A plugs into the service port inside. Short cable reduces stored slack. It stays installed during printing and must be covered by the selected rated sleeve; a USB 2.0 claim alone is not a mains insulation rating.",
-      "status": "Selected; dry-fit actual connector molds, usable flexible length, bends and retention. No standalone mains-voltage rating is claimed.",
-      "availability": "buy",
-      "links": [
-        {
-          "label": "Buy · DigiKey",
-          "url": "https://www.digikey.com/en/products/detail/startech-com/USB2HAB1/22260595",
-          "kind": "buy"
-        },
-        {
-          "label": "StarTech datasheet",
-          "url": "https://media.startech.com/cms/pdfs/usb2hab1_datasheet.pdf",
-          "kind": "reference"
-        }
-      ],
-      "image": {
-        "src": "assets/materials/usb.jpg",
-        "source_image": "https://media.startech.com/cms/products/gallery_large/usb2habx.main.jpg",
-        "kind": "reference",
-        "alt": "USB-A to USB-B connector reference; not a photo of the supplied DENT cable",
-        "caption": "USB-A/B connector reference; selected internal cable is USB2HAB1, 1 ft.",
-        "source_label": "StarTech",
-        "source_url": "https://media.startech.com/cms/pdfs/usb2hab1_datasheet.pdf",
-        "width": 2000,
-        "height": 2000
+        "status": "UL Recognized / CSA component",
+        "detail": "Heyco thick-panel series: UL component file E15331, CSA file 8919; nylon 6/6 UL94 V-2. No IP/NEMA seal, strain-relief or completed-assembly approval is inferred.",
+        "url": "https://www.heyco.com/products/bushings-grommets-heycaps-plugs/tubing-caps-and-plugs/heyco-thick-panel-snap-bushings/"
       },
-      "installation": "From DENT USB-B to rear USB-A of the right-wall port, beside the front/right DC route. Rated sleeve covers the internal cable; retain at the shared low-voltage support without socket load.",
-      "location_summary": "Inside: DENT USB-B → short sleeved lead → service port.",
-      "supplier": "DigiKey",
-      "compliance": {
-        "status": "Data interface specification",
-        "detail": "USB 2.0 A-to-B cable; not accepted as mains insulation. Additional rated sleeve and qualified installation are required.",
-        "url": "https://media.startech.com/cms/pdfs/usb2hab1_datasheet.pdf"
-      }
+      "notice": "One protected opening; reuse the existing front/right cable restraint."
     },
     {
       "id": "usb-sleeve",
       "item": "Internal USB insulation sleeve",
       "quantity": "1 × 4 ft stick; cut to accepted coverage",
       "model": "Alpha Wire F2213/4 BK105 · black FIT-221, 600 V",
-      "reason": "Provides the additional rated insulation required by DENT for USB cable inside an electrical enclosure. Minimum supplied ID 19.05 mm; recovered ID up to 9.53 mm. Cover the full internal cable and protect its terminations; keep clear of mains and secure against sliding. The model shows an illustrative sleeve envelope.",
+      "reason": "DENT requires suitably rated insulation on USB cable used inside an electrical panel. Retain the selected black 600 V tubing only on the internal portion of the existing cable, across the wall edge and at the DENT termination. The exterior free cable does not require an extra purchased lead. Approve sleeve application and complete coverage on the actual cable.",
       "status": "Assembly acceptance required: measure connector passage, full coverage and end retention. Approve the recovery process for the cable/connector materials; do not infer heat-application safety from continuous operating ratings.",
       "availability": "buy",
       "links": [
@@ -993,8 +959,8 @@
         "width": 320,
         "height": 240
       },
-      "installation": "Entire internal USB lead, with accepted protection at both ends and restraint at the front/right cable support. It remains installed during every mains run.",
-      "location_summary": "Around the permanent internal USB lead and its terminations.",
+      "installation": "Cover the entire internal portion of the existing USB cable, including the DENT-end protection, and continue beyond the protected wall edge. Secure the sleeve against movement at the existing front/right support. It is not galvanic isolation or a substitute for cable retention.",
+      "location_summary": "Rated insulation on the internal portion of the existing USB cable.",
       "supplier": "DigiKey",
       "rated_voltage_v": 600,
       "compliance": {
@@ -1004,7 +970,7 @@
       }
     }
   ],
-  "inventory_basis": "Five equipment groups confirmed by the user: ELITEpro XC, CTs, three user-confirmed original DENT kit pigtails in different colors, matching long leads and original black adapter. DENT specifies an included 1.8 m USB-A to B cable; the photographed kit card places it in the lid pocket. Its present physical location has not been confirmed. Reuse it before buying a replacement.",
+  "inventory_basis": "Six equipment groups are confirmed owned by the user: ELITEpro XC, CTs, three original kit pigtails, matching long voltage leads, original adapter and USB data cable. Reuse the existing USB cable intact. The design uses published USB-B overmold limits and a standard cable-diameter range; final passage, insulation and restraint are checked during assembly.",
   "setup_requirements": [
     {
       "item": "ELOG software",
@@ -1067,6 +1033,16 @@
       "id": "kt-inserts",
       "model": "icotek KTMBS 4–7 gray · 41380",
       "reason": "Revision B: original adapter and DC cable stay entirely inside the enclosure."
+    },
+    {
+      "id": "usb-port",
+      "item": "Neutrik NAUSB-W panel USB coupler",
+      "reason": "Revision D reuses one continuous existing cable through a protected opening."
+    },
+    {
+      "id": "usb-internal",
+      "item": "StarTech USB2HAB1 short data cable",
+      "reason": "No intermediate USB connection is needed."
     }
   ],
   "purchasing": {
@@ -1323,13 +1299,13 @@
         "sku": "6835 · M3 × 16 screws",
         "supplier": "Bolt Depot",
         "seller": "Bolt Depot",
-        "quantity": 8,
+        "quantity": 6,
         "unit": "each",
         "pieces_per_unit": 1,
         "unit_price_usd": 0.06,
-        "extended_usd": 0.48,
+        "extended_usd": 0.36,
         "url": "https://boltdepot.com/Product-Details?product=6835",
-        "availability_note": "Eight total: six carrier sets + two USB flange sets; no M3 spares"
+        "availability_note": "Six carrier sets only; no USB flange hardware and no extra M3 spares"
       },
       {
         "material_ids": [
@@ -1338,13 +1314,13 @@
         "sku": "4513 · M3 washers",
         "supplier": "Bolt Depot",
         "seller": "Bolt Depot",
-        "quantity": 8,
+        "quantity": 6,
         "unit": "each",
         "pieces_per_unit": 1,
         "unit_price_usd": 0.05,
-        "extended_usd": 0.4,
+        "extended_usd": 0.3,
         "url": "https://boltdepot.com/Product-Details?product=4513",
-        "availability_note": "Eight total: six carrier sets + two USB flange sets; no M3 spares"
+        "availability_note": "Six carrier sets only; no USB flange hardware and no extra M3 spares"
       },
       {
         "material_ids": [
@@ -1353,13 +1329,13 @@
         "sku": "4792 · M3 locknuts",
         "supplier": "Bolt Depot",
         "seller": "Bolt Depot",
-        "quantity": 8,
+        "quantity": 6,
         "unit": "each",
         "pieces_per_unit": 1,
         "unit_price_usd": 0.07,
-        "extended_usd": 0.56,
+        "extended_usd": 0.42,
         "url": "https://boltdepot.com/Product-Details?product=4792",
-        "availability_note": "Eight total: six carrier sets + two USB flange sets; no M3 spares"
+        "availability_note": "Six carrier sets only; no USB flange hardware and no extra M3 spares"
       },
       {
         "material_ids": [
@@ -1468,36 +1444,6 @@
       },
       {
         "material_ids": [
-          "usb-port"
-        ],
-        "sku": "NAUSB-W",
-        "supplier": "DigiKey",
-        "seller": "DigiKey",
-        "quantity": 1,
-        "unit": "each",
-        "pieces_per_unit": 1,
-        "unit_price_usd": 10.68,
-        "extended_usd": 10.68,
-        "url": "https://www.digikey.com/en/products/detail/neutrik-americas-inc/NAUSB-W/29371251",
-        "availability_note": "6473-NAUSB-W-ND; 154 listed in stock; quantity one"
-      },
-      {
-        "material_ids": [
-          "usb-internal"
-        ],
-        "sku": "USB2HAB1",
-        "supplier": "DigiKey",
-        "seller": "DigiKey",
-        "quantity": 1,
-        "unit": "each",
-        "pieces_per_unit": 1,
-        "unit_price_usd": 6.38,
-        "extended_usd": 6.38,
-        "url": "https://www.digikey.com/en/products/detail/startech-com/USB2HAB1/22260595",
-        "availability_note": "5214-USB2HAB1-ND; 1,761 listed in stock; quantity one"
-      },
-      {
-        "material_ids": [
           "usb-sleeve"
         ],
         "sku": "F2213/4 BK105",
@@ -1510,8 +1456,23 @@
         "extended_usd": 9.39,
         "url": "https://www.digikey.com/en/products/detail/alpha-wire/F2213-4-BK105/3718418",
         "availability_note": "F2213/4BK105-ND; 1,182 listed in stock; one 4 ft stick"
+      },
+      {
+        "material_ids": [
+          "usb-bushing"
+        ],
+        "sku": "Heyco 3104",
+        "supplier": "DigiKey",
+        "seller": "DigiKey",
+        "quantity": 1,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 0.14,
+        "extended_usd": 0.14,
+        "url": "https://www.digikey.com/en/products/detail/heyco-products-corporation/3104/15907204",
+        "availability_note": "3720-3104-ND; 6,537 listed in stock; quantity-one price. Verify actual passage and stock at checkout."
       }
     ],
-    "material_subtotal_usd": 287.71
+    "material_subtotal_usd": 270.43
   }
 }

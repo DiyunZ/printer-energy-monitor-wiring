@@ -1,5 +1,5 @@
 {
-  "revision": "Build package C, 2026-09-23",
+  "revision": "Build package D, 2026-09-23",
   "release": "NOT RELEASED: close the receiving and electrical items in Build_Package.md",
   "units": "mm",
   "method": "Axis-aligned body envelopes, continuous vertical swept volumes against the machined Hammond shell, nine lid rays per body and sourced interface arithmetic. Shell triangulation deflection is 0.3 mm; numerical seating-contact exclusion is 0.0001 mm. Neither is a manufacturing tolerance.",
@@ -83,16 +83,22 @@
       "limits": "A cross-section screen; exact source-CAD stock gauges are also recorded."
     },
     {
-      "id": "Closed-lid USB service port",
+      "id": "Closed-lid USB cable exit",
       "result": "pass",
-      "evidence": "USB center Y/Z = 55/167 mm has 0 obstructing wall intersections. NAUSB-W B-out/A-in service port is specified.",
-      "limits": "Mesh centerline check, not received-part flange fit. Exact pattern gauges are in the CAD report. No ingress or isolation rating is claimed."
+      "evidence": "USB center Y/Z = 55/167 mm has 0 obstructing wall intersections. Standard-B overmold diagonal 15.57 mm fits the 17.5 mm nominal passage.",
+      "limits": "Published standard envelope and mesh centerline checks; actual bushing locking fit, cable passage and external-pull restraint need dry fit. One mounting hole, no flange screws. No ingress or isolation rating is claimed."
+    },
+    {
+      "id": "One existing USB cable",
+      "result": "pass",
+      "evidence": "The owned cable connects DENT USB-B directly to the exterior USB-A end; no coupler or additional USB cable is purchased.",
+      "limits": "Full cable remains attached to the box; the model abbreviates the exterior length. Check available reach and prove export on the hardware."
     },
     {
       "id": "Offline USB insulation provision",
       "result": "pass",
-      "evidence": "Permanent internal lead, 600 V sleeve and unplug-before-PC operating rule are included in the design and BOM.",
-      "limits": "Provision only; cable/sleeve fit, recovery process, complete end protection, restraint and shield treatment still need physical acceptance. A sleeve is not USB galvanic isolation."
+      "evidence": "The existing cable has a 600 V sleeve provision on its entire internal portion, retained at the existing support. Unplug mains before connecting the PC.",
+      "limits": "Provision only; sleeve fit, recovery process, end protection, restraint and shield treatment still need physical acceptance. A sleeve is not USB galvanic isolation."
     },
     {
       "id": "Cord diameter interfaces",
@@ -198,6 +204,6 @@
     }
   ],
   "wall_entries": [],
-  "material_groups": 25,
-  "owned_groups": 5
+  "material_groups": 24,
+  "owned_groups": 6
 }

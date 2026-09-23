@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { fitSupport, auditSupport } from './cable-supports.js?v=25';
+import { fitSupport, auditSupport } from './cable-supports.js?v=26';
 
 // Secondary hardware is an installation illustration, not a machining template.
 // Panel datums come from the same schedule as the existing CAD openings.
@@ -28,15 +28,6 @@ export function addInstallationHardware({ dimensions, instances, parts, box, cyl
   for(const y of [-1,1]) fixing(`q0-${y}`,`Q0 mounting screw ${y<0?1:2}`,[parts.q0.position[0],parts.q0.position[1]+y*parts.q0.mountPitch/2,208.5],'q0',3.5,'z',9.525);
   dimensions.instances.filter(p=>p.part==='terminals').forEach(p=>{
     for(const x of [-10,10]) fixing(`${p.id}-${x}`,`${p.id} carrier fixing ${x<0?1:2}`,[p.position[0]+x,6.3,p.position[2]+17],'terminals',3,'y',16);
-  });
-  const usb=instances['usb-entry'], wallX=usb.position[0]+usb.size[0]/2-5;
-  dimensions.usbService.fixingLocalUV.forEach(([u,v],i)=>{
-    const pos=[wallX+2,usb.position[1]+v,usb.position[2]-u];
-    fixing(`usb-${i}`,`USB flange fixing ${i+1}`,pos,'entries',3,'x',16);
-    capture('fasteners',`usb-${i}`,`USB flange fixing ${i+1}`,()=>{
-      annulus(3.5,1.7,.5,[wallX-5.1,pos[1],pos[2]],'#acb5b7','entries','x');
-      annulus(3.2,1.7,4,[wallX-7.35,pos[1],pos[2]],'#89979c','entries','x',6);
-    });
   });
   const supportChecks=[];
   h.cableSupports.forEach((support,i)=>{

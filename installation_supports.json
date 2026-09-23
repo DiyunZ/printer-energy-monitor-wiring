@@ -94,11 +94,11 @@
         "usb-sleeve:internal"
       ],
       "missingRoutes": [],
-      "minimumOpeningClearanceMm": 0.9000000000000004,
+      "minimumOpeningClearanceMm": 0.8999999999999968,
       "bandWidthMm": 4.8,
-      "loopWidthMm": 18.803603230183484,
-      "loopHeightMm": 28.488252630369878,
-      "lengthWithLockAllowanceMm": 115.66512674331203,
+      "loopWidthMm": 16.14900293439922,
+      "loopHeightMm": 22.829007452011012,
+      "lengthWithLockAllowanceMm": 99.03743579502577,
       "pass": true
     }
   ],

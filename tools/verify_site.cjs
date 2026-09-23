@@ -26,7 +26,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  assert.equal(await page.locator('details[open]').count(),0,'Supporting details should be collapsed initially');
  assert.equal(await page.locator('#layout').isVisible(),true);
  assert.equal(await page.locator('#wiring').isVisible(),false);
- assert.equal(await page.locator('.materials tbody tr:visible').count(),19);
+ assert.equal(await page.locator('.materials tbody tr:visible').count(),18);
  assert.equal(await page.locator('#owned-materials').getAttribute('open'),null);
  assert.equal(await page.locator('#confirm .review-items li').count(),4);
  assert.equal(await page.locator('#assembly-preview').isVisible(),false);
@@ -186,9 +186,9 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  await page.locator('#zoom-in').click();assert.ok(close(Number(await page.locator('#main-stage').getAttribute('data-scale')),Math.min(2.5,wiringScale*1.25),.001));await page.locator('#zoom-reset').click();
  await page.locator('#connections summary').click();
  // Ownership follows the user's confirmation, not whether an item appears in the model.
- const ownedIds=['meter','ct','blue-leads','voltage-leads','adapter'];
+ const ownedIds=['meter','ct','blue-leads','voltage-leads','adapter','usb'];
  assert.deepEqual(bom.items.filter(p=>p.availability==='owned').map(p=>p.id),ownedIds);
- assert.equal(bom.items.find(p=>p.id==='usb').availability,'kit');
+ assert.equal(bom.items.find(p=>p.id==='usb').availability,'owned');
  assert.equal(await page.locator('.materials tbody tr').count(),bom.items.length);
  await openOwned();
  for(const p of bom.items){
@@ -229,7 +229,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  await page.locator('#owned-materials > summary').click();
  assert.deepEqual(await page.locator('.materials tbody tr:visible').evaluateAll(rows=>rows.map(r=>r.id)),bom.items.filter(p=>['buy','fabricate'].includes(p.availability)).map(p=>'material-'+p.id));
  await openOwned();
- assert.equal(await page.locator('#owned-materials tbody tr:visible').count(),ownedIds.length+1);
+ assert.equal(await page.locator('#owned-materials tbody tr:visible').count(),ownedIds.length);
  await page.locator('#owned-materials > summary').click();
  if(out){await page.locator('#hardware').scrollIntoViewIfNeeded();await page.screenshot({path:path.join(out,'inventory-desktop.png')});}
  for(const [width,height] of [[1440,1100],[768,1024],[390,844]]){
@@ -241,7 +241,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   if(out){await page.locator('#design').screenshot({path:path.join(out,`layout-${width}.png`)});}
   assert.ok(await page.locator('.materials').evaluateAll(es=>es.every(e=>e.scrollWidth<=e.clientWidth+2)),'Materials overflow at '+width);
   if(width===390){
-   await openOwned();assert.equal(await page.locator('#owned-materials tbody tr:visible').count(),ownedIds.length+1);
+   await openOwned();assert.equal(await page.locator('#owned-materials tbody tr:visible').count(),ownedIds.length);
    if(out)await page.locator('#material-meter').screenshot({path:path.join(out,'inventory-mobile.png')});
    await page.locator('#material-meter .material-details summary').focus();await page.keyboard.press('Enter');
    assert.equal(await page.locator('#material-meter .material-details .material-reason').isVisible(),true,'Material specifications must open by keyboard on mobile');
@@ -308,7 +308,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   const render=await browser.newPage({viewport:{width:1800,height:1300},deviceScaleFactor:2});
   for(const name of ['wiring_routes','connector_detail']){await render.goto(new URL(name+'.svg',base).href);await render.locator('svg').screenshot({path:path.join(root,name+'.png')});}
  }
- const report={date:new Date().toISOString(),base,connections:21,circuitGroups:7,alignedComponentFootprints:plan.bodies.length,planTo3DMaximumToleranceMm:.05,compareTopView:true,renderedMeterBody:initial.fitBodies.meter.size,primaryBodyOverlaps:false,mouseOrbit:true,wheelZoom:true,keyboardOrbit:true,picking:true,shellModes:4,pngExport:true,viewportWidths:[1440,768,390],pageOverflow:false,internalLinks:true,materialsRows:bom.items.length,materialImagesLoaded:bom.items.length,ownedGroups:ownedIds.length,kitGroups:1,purchaseGroups:bom.items.filter(p=>p.availability==='buy').length,fabricationGroups:bom.items.filter(p=>p.availability==='fabricate').length,ownedGroupCollapsedByDefault:true,designTabs:true,buildDocumentHub:true,assemblyStages:6,panelInsertionSlider:true,progressiveDisclosure:true,criticalNoticesVisible:true,advancedControlsKeyboard:true,coilScenarioLengthMm:2000,jsErrors:errors,physicalBuildValidated:false};
+ const report={date:new Date().toISOString(),base,connections:21,circuitGroups:7,alignedComponentFootprints:plan.bodies.length,planTo3DMaximumToleranceMm:.05,compareTopView:true,renderedMeterBody:initial.fitBodies.meter.size,primaryBodyOverlaps:false,mouseOrbit:true,wheelZoom:true,keyboardOrbit:true,picking:true,shellModes:4,pngExport:true,viewportWidths:[1440,768,390],pageOverflow:false,internalLinks:true,materialsRows:bom.items.length,materialImagesLoaded:bom.items.length,ownedGroups:ownedIds.length,kitGroups:bom.items.filter(p=>p.availability==='kit').length,purchaseGroups:bom.items.filter(p=>p.availability==='buy').length,fabricationGroups:bom.items.filter(p=>p.availability==='fabricate').length,ownedGroupCollapsedByDefault:true,designTabs:true,buildDocumentHub:true,assemblyStages:6,panelInsertionSlider:true,progressiveDisclosure:true,criticalNoticesVisible:true,advancedControlsKeyboard:true,coilScenarioLengthMm:2000,jsErrors:errors,physicalBuildValidated:false};
  if(out)fs.writeFileSync(path.join(out,'browser-validation.json'),JSON.stringify(report,null,2)+'\n');
  console.log(JSON.stringify(report,null,2));
  }finally{await browser.close();}

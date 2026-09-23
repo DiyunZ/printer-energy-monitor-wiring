@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Build documents · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=15"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Build_Documents.md" download>Download Markdown</a></nav><h1>Build documents</h1>
 <ul>
-<li><a href="revision.html">Revision C: closed-lid USB, costs and certification evidence</a></li>
+<li><a href="revision.html">Revision D: one USB cable, costs and certification evidence</a></li>
 <li><a href="build.html">Machining files and assembly guide</a> — drawings, fasteners and assembly order.</li>
 <li><a href="index.html#assembly-preview">Interactive installation sequence</a> — inspect the six stages in 3D.</li>
 <li><a href="protection.html">Protection review</a> — Q0, upstream voltage-lead protection and the remaining evidence.</li>
@@ -14,12 +14,12 @@
 
 <p>Daily use begins only after qualified electrical inspection and setup.</p>
 <ol>
-<li><strong>Configure offline.</strong> With mains unplugged and the lid closed, connect the kit cable from the side USB-B service port to the ELOG computer; use ELOG to set the clock, actual CT range and interval. Confirm logging is enabled and sufficient memory remains. Remove the external PC cable before reconnecting mains; the sleeved internal lead stays installed.</li>
+<li><strong>Configure offline.</strong> With mains unplugged and the lid closed, connect the free exterior USB-A end of the existing cable to the ELOG computer; use ELOG to set the clock, actual CT range and interval. Confirm logging is enabled and sufficient memory remains. Disconnect from the PC before reconnecting mains; the whole cable stays attached to the box.</li>
 <li><strong>Run independently.</strong> XA and the adapter stay secured inside. With Q0 OFF and the lid closed, connect one printer and the supply. Switch Q0 ON. The opaque lid hides the logger LEDs; verify recording by an offline export after the supervised pilot. Record each job&#39;s start, phase changes and finish times against the synchronized clock.</li>
-<li><strong>Download in batches.</strong> After the printer finishes its shutdown/cooldown, switch Q0 OFF, unplug mains and verify absence of mains voltage. Keep the lid closed, connect the kit USB cable to the side service port and export the records in ELOG. Preserve raw data before clearing memory. Remove the external USB cable before the next powered run.</li>
+<li><strong>Download in batches.</strong> After the printer finishes its shutdown/cooldown, switch Q0 OFF, unplug mains and verify absence of mains voltage. Keep the lid closed, connect the same free USB-A end to the PC and export the records in ELOG. Preserve raw data before clearing memory. Disconnect from the PC and stow the free end before the next powered run.</li>
 </ol>
-<p><strong>Q0 OFF is not isolation; its input remains live. Unplug SUPPLY IN from the wall before connecting a PC or opening the box. Only the sleeved internal USB lead remains installed during printing.</strong></p>
-<p>The logger stores time-series data in non-volatile memory and can be powered by USB for readout (<a href="https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf">DENT manual</a>, printed pp. 7, 18, 119). The permanent internal USB lead requires rated insulation even though the PC is connected only offline. The selected black FIT-221 sleeve has a manufacturer 600 V rating; its application, end coverage and restraint remain physical acceptance items. USB does not provide mains isolation. Validate one complete offline run and export before collecting the experiment series.</p>
+<p><strong>Q0 OFF is not isolation; its input remains live. Unplug SUPPLY IN from the wall before connecting a PC or opening the box. The complete USB cable stays attached to the box during printing; its exterior end is disconnected from the PC.</strong></p>
+<p>The logger stores time-series data in non-volatile memory and can be powered by USB for readout (<a href="https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf">DENT manual</a>, printed pp. 7, 18, 119). The internal portion of the existing USB cable requires rated insulation even though the PC is connected only offline. The selected black FIT-221 sleeve has a manufacturer 600 V rating; its application, end coverage and restraint remain physical acceptance items. USB does not provide mains isolation. Validate one complete offline run and export before collecting the experiment series.</p>
 <h3>Initial setup and electrical checks</h3>
 <p>Qualified electrical personnel verify terminations, polarity, PE continuity, insulation, protection and enclosure fit before releasing the assembly. Q0 opens hot only; PE stays continuous. Upstream Q0 protection for the original voltage leads and supply suitability must be accepted before energizing.</p>
 <p>Configure ELOG for single phase / two wire, CH1 voltage high L1 and low N, the actual CT type/range and logging interval. Disable unused channels. Verify sensible readings and positive real power against an independent reference meter; prove recording and restart behavior with a supervised power cycle.</p>
@@ -86,7 +86,7 @@
 <td>Photo-identified; manufacturer body dimensions · <a href="https://www.belfuse.com/media/datasheets/products/power-supplies/SMI6.pdf">Source</a></td>
 </tr>
 <tr>
-<td>Power glands and USB service port</td>
+<td>Power glands and direct USB cable exit</td>
 <td>27.0 × 37.0 × 27.0</td>
 <td>Catalog power-gland envelopes · <a href="https://www.hammfg.com/electronics/small-case/accessories/1427ncg">Source</a></td>
 </tr>

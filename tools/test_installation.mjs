@@ -38,20 +38,28 @@ test('current nominal checks pass while unresolved release gates stay visible', 
   assert.equal(result.insertion_sweeps.length, 8);
   assert.ok(result.insertion_sweeps.every(s => s.shell_triangle_hits === 0));
 });
-test('closed-lid offline USB keeps kit cable outside and requires internal insulation', () => {
+test('one owned USB cable exits directly through one protected hole', () => {
   assert.equal(d.instances.some(p => p.id === 'usb-entry'), true);
-  assert.equal(p.items.find(p => p.id === 'usb').availability, 'kit');
+  assert.equal(p.items.find(p => p.id === 'usb').availability, 'owned');
   assert.equal(p.items.some(p => p.id === 'split-entries'), false);
   const openings = read('fabrication/wall-openings.json');
-  assert.equal(openings.filter(p=>p.id.startsWith('USB')).length,3);
-  assert.equal(result.checks.find(c=>c.id==='Closed-lid USB service port').result,'pass');
-  assert.equal(result.checks.find(c=>c.id==='Offline USB insulation provision').result,'pass');
+  assert.equal(openings.filter(p=>p.id.startsWith('USB')).length,1);
+  for(const id of ['Closed-lid USB cable exit','One existing USB cable','Offline USB insulation provision'])
+    assert.equal(result.checks.find(c=>c.id===id).result,'pass');
   const wrong=structuredClone(d);wrong.instances=wrong.instances.filter(p=>p.id!=='usb-entry');
-  assert.equal(run(wrong).checks.find(c=>c.id==='Closed-lid USB service port').result,'fail');
-  for(const mutation of [x=>x.usbService.requireMainsUnplugged=false,x=>x.usbService.externalConnector='USB-A']){
+  assert.equal(run(wrong).checks.find(c=>c.id==='Closed-lid USB cable exit').result,'fail');
+  const narrow=structuredClone(d);narrow.usbService.bushingPassageMm=15;
+  assert.equal(run(narrow).checks.find(c=>c.id==='Closed-lid USB cable exit').result,'fail');
+  for(const mutation of [x=>x.usbService.intermediateConnections=1,x=>x.usbService.externalConnector='USB-B']){
     const bad=structuredClone(d);mutation(bad);
-    assert.equal(run(bad).checks.find(c=>c.id==='Offline USB insulation provision').result,'fail');
+    assert.equal(run(bad).checks.find(c=>c.id==='One existing USB cable').result,'fail');
   }
+  for(const id of ['usb-port','usb-internal']){
+    const bad=structuredClone(p);bad.items.push({id});
+    assert.equal(run(d,bad).checks.find(c=>c.id==='One existing USB cable').result,'fail');
+  }
+  const live=structuredClone(d);live.usbService.requireMainsUnplugged=false;
+  assert.equal(run(live).checks.find(c=>c.id==='Offline USB insulation provision').result,'fail');
   const missingSleeve=structuredClone(p);missingSleeve.items=missingSleeve.items.filter(p=>p.id!=='usb-sleeve');
   assert.equal(run(d,missingSleeve).checks.find(c=>c.id==='Offline USB insulation provision').result,'fail');
 });

@@ -91,54 +91,14 @@
     ]
   },
   {
-    "id": "USB service",
+    "id": "USB cable exit",
     "wall": "right",
-    "diameter": 24.0,
+    "diameter": 22.2,
     "tolerance_mm": 0.1,
     "center_xyz_mm": [
       180.95515144893918,
       55.0,
       167.0
-    ],
-    "normal": [
-      0.999866280680002,
-      -0.01635300459057521,
-      0.0
-    ]
-  },
-  {
-    "id": "USB fixing 1",
-    "wall": "right",
-    "at": [
-      -9.5,
-      12.0
-    ],
-    "diameter": 3.2,
-    "tolerance_mm": 0.1,
-    "center_xyz_mm": [
-      181.15138750402608,
-      66.99839536816003,
-      176.5
-    ],
-    "normal": [
-      0.999866280680002,
-      -0.01635300459057521,
-      0.0
-    ]
-  },
-  {
-    "id": "USB fixing 2",
-    "wall": "right",
-    "at": [
-      9.5,
-      -12.0
-    ],
-    "diameter": 3.2,
-    "tolerance_mm": 0.1,
-    "center_xyz_mm": [
-      180.75891539385228,
-      43.001604631839975,
-      157.5
     ],
     "normal": [
       0.999866280680002,

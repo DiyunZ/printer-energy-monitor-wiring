@@ -28,10 +28,10 @@ const close = (a,b) => Math.abs(a-b) < .05;
     const initial = await diag(), ids = bom.items.map(p => p.id).sort();
     assert.deepEqual(Object.keys(initial.locations).sort(), ids, 'Every BOM group needs rendered geometry');
     assert.equal(initial.selected, null);
-    assert.equal(await page.evaluate(()=>enclosureDiagnostics().usbPreviewVisible),false,'External PC cable is absent from normal operation');
+    assert.equal(await page.evaluate(()=>enclosureDiagnostics().usbCableVisible),true,'Existing USB cable stays attached to the box');
     const allMeshes = Object.values(initial.locations).flatMap(ps => ps.flatMap(p => p.meshes));
     assert.equal(new Set(allMeshes).size, allMeshes.length, 'Each physical mesh belongs to exactly one material');
-    const counts = { connectors: 3, carriers: 3, 'blue-leads': 3, 'voltage-leads': 3, 'ring-lugs': 3, 'tie-mounts': 6, 'cable-ties': 6, 'logger-restraint': 4, fasteners: 17, 'usb-port': 1, 'usb-internal': 1, 'usb-sleeve': 1 };
+    const counts = { connectors: 3, carriers: 3, 'blue-leads': 3, 'voltage-leads': 3, 'ring-lugs': 3, 'tie-mounts': 6, 'cable-ties': 6, 'logger-restraint': 4, fasteners: 15, usb: 1, 'usb-bushing': 1, 'usb-sleeve': 1 };
     for (const [id,count] of Object.entries(counts)) assert.equal(initial.locations[id].length, count, id);
     // Rendered fasteners retain the actual machining datums; avoid importing the CAD runtime.
     for (const [i,point] of dimensions.installationHardware.cableMountsXZ.entries()) {
@@ -104,12 +104,12 @@ const close = (a,b) => Math.abs(a-b) < .05;
     assert.ok((await diag()).overlaysAligned,'Lid highlight must move with the lid');
     await page.locator('#model-part').selectOption('usb');
     assert.equal(await page.evaluate(()=>enclosureDiagnostics().mode),'closed');
-    assert.equal(await page.evaluate(()=>enclosureDiagnostics().usbPreviewVisible),true);
+    assert.equal(await page.evaluate(()=>enclosureDiagnostics().usbCableVisible),true);
     await openMore();await page.locator('#model-shell').selectOption('closed');
-    assert.equal(await page.evaluate(()=>enclosureDiagnostics().usbPreviewVisible),true,'Offline USB export works with the lid closed');
+    assert.equal(await page.evaluate(()=>enclosureDiagnostics().usbCableVisible),true,'Offline USB export works with the lid closed');
     if(out)await page.locator('#design').screenshot({path:path.join(out,'usb-closed-lid.png')});
     await page.locator('#model-shell').selectOption('cutaway');
-    assert.equal(await page.evaluate(()=>enclosureDiagnostics().usbPreviewVisible),true);
+    assert.equal(await page.evaluate(()=>enclosureDiagnostics().usbCableVisible),true);
     await openMore();await page.locator('#model-wires').uncheck();
     assert.ok((await diag()).visibleHighlightCount < (await diag()).highlightMeshCount,'Hidden cable routes must hide their overlay');
     await page.locator('#model-label-toggle').uncheck();assert.equal((await diag()).visibleMarkers,0);

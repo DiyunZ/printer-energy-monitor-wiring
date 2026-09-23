@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Machining and assembly package · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=15"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Build_Package.md" download>Download Markdown</a></nav><h1>Build package C</h1>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Machining and assembly package · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=15"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Build_Package.md" download>Download Markdown</a></nav><h1>Build package D</h1>
 <p>September 23, 2026 · one grounded 120 V supply · one printer at a time.</p>
 <p><strong>Engineering review package. Complete-order, machining and energizing release remain open.</strong> This revision replaces the exterior adapter and DC feedthrough with internal power and proposed aluminum reuse. <a href="revision.html">Cost, sourcing and certification review</a>. They do not represent a physically assembled or certified product.</p>
 <p><a href="materials.html">Materials with pictures and purchase links</a> · <a href="index.html#assembly-preview">3D installation sequence</a> · <a href="installation.html">Installation audit</a> · <a href="protection.html">Protection review</a></p>
@@ -20,7 +20,7 @@
 </tr>
 <tr>
 <td><a href="fabrication/front.dxf">Front DXF</a> · <a href="fabrication/right.dxf">Right DXF</a> · <a href="fabrication/left.dxf">Left DXF</a> · <a href="fabrication/rear.dxf">Rear DXF</a> · <a href="fabrication/panel.dxf">Panel DXF</a></td>
-<td>Millimetres, 1:1. Internal features are on <code>CUT</code>; outline/support locations still require the received enclosure and stock check. <code>REFERENCE</code> and <code>TEXT</code> are non-cutting. The right-wall file contains the USB service bore and two fixing holes.</td>
+<td>Millimetres, 1:1. Internal features are on <code>CUT</code>; outline/support locations still require the received enclosure and stock check. <code>REFERENCE</code> and <code>TEXT</code> are non-cutting. The right-wall file contains one Ø22.2 mm USB cable-exit bore; no USB fixing holes.</td>
 </tr>
 <tr>
 <td><a href="fabrication/cad-checks.json">Cut and clearance results</a> · <a href="fabrication/wall-openings.json">Wall opening coordinates</a></td>
@@ -62,8 +62,8 @@
 <td>No extension, external coupling, KVT frame or insert. Check original plug seating, restraint, slack and closed-enclosure temperature.</td>
 </tr>
 <tr>
-<td>USB service connection</td>
-<td>Neutrik NAUSB-W, B outside / A inside; sleeved StarTech USB2HAB1 inside. Reuse the kit 1.8 m cable outside.</td>
+<td>Existing USB cable</td>
+<td>One intact owned A-to-B cable: B stays in DENT, cable passes through Heyco 3104, free A end connects to the PC. Sleeve the internal portion.</td>
 <td><a href="https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf">DENT manual</a>, printed pp. 16, 18, 29: USB power and insulation requirements. Export with mains unplugged and the lid closed.</td>
 </tr>
 <tr>
@@ -76,13 +76,14 @@
 <p>These checks use the photos already supplied. The hidden CT characters and unpublished conductor ratings remain explicit limits, rather than requests for more images.</p>
 <h2>Internal power and offline USB</h2>
 <p>XA is now <strong>Leviton 515CV</strong>, the same SKU as the printer output. Buy <strong>two total</strong>. Its complete molded body encloses its terminals; its integral cord clamp retains a continuous <strong>14/3 SJOOW</strong> branch from JL/JN/PE, upstream of CT. One adjustable strap supports XA, another independently retains the original adapter. Fully seat the adapter and verify the restraints prevent loosening without loading the blades. Do not modify either factory DC connector.</p>
-<p>The original adapter cable stays entirely inside and plugs directly into the logger. Dress its slack using the reserved DC tie location; do not crush the flat jacket. Cable curves are illustrative: actual length, bend allowance, mains separation and lid clearance need dry fitting. No XA or DC wall opening remains. One USB service port is retained on the right wall.</p>
-<p>USB configuration/download uses the side port with mains unplugged and verified absent. The lid stays closed. Remove the external PC cable before reconnecting mains; the short internal USB lead and its rated sleeve stay installed. Validate saved records with an offline download after a supervised pilot; the opaque cover hides the logger LEDs. Check adapter/enclosure temperature in that pilot.</p>
+<p>The original adapter cable stays entirely inside and plugs directly into the logger. Dress its slack using the reserved DC tie location; do not crush the flat jacket. Cable curves are illustrative: actual length, bend allowance, mains separation and lid clearance need dry fitting. No XA or DC wall opening remains. One protected USB cable exit remains on the right wall.</p>
+<p>USB configuration/download uses the free USB-A end with mains unplugged and verified absent. The lid stays closed. Disconnect from the PC before reconnecting mains; the complete cable stays attached to the box, with its internal portion sleeved. Validate saved records with an offline download after a supervised pilot; the opaque cover hides the logger LEDs. Check adapter/enclosure temperature in that pilot.</p>
 <h3>Closed-lid USB construction</h3>
-<p>Use the <strong>Neutrik NAUSB-W</strong> reversible insert as <strong>USB-B outside / USB-A inside</strong>. The internal <strong>StarTech USB2HAB1</strong> A-to-B lead is 1 ft (304.8 mm); the original kit cable stays outside. Route and restrain the internal lead beside the DC cable at the front/right support, keeping it away from mains wiring. The 3D curve is routing intent; store the actual remaining slack without tight bends or connector load.</p>
-<p>The selected <strong>black Alpha Wire F2213/4 BK105</strong> sleeve is specified to <strong>UL224 / CSA198, 600 V</strong> (<a href="https://www.alphawire.com/products/accessories/fit-heat-shrink-tubing/shrink-tubing/fit2213_4">manufacturer</a>). Buy one 4 ft stick. Minimum supplied ID is 19.05 mm; maximum recovered ID is 9.53 mm. Measure the actual plug molds before sleeving and verify complete internal-cable coverage, protected ends and retention against sliding. The rendered end boots are coverage illustrations made from that tubing allowance, not separately qualified parts.</p>
-<p>Approve the tubing application with the cable/connector materials before assembly: Alpha lists 90°C minimum shrink and 121°C full recovery, while StarTech specifies a 60°C continuous operating limit. These describe different conditions and do <strong>not</strong> establish that an unreviewed heat process is acceptable. No arbitrary heating recipe or insulation qualification is supplied here. If the received assembly cannot be sleeved acceptably, resolve that interface before machining or energizing.</p>
-<p>The port is a passive USB feedthrough, <strong>not galvanic isolation</strong>. Review exposed shell/shield treatment with the qualified assembler; do not create an undocumented PE-to-USB shield connection. Neutrik&#39;s IP65 claim requires its specified NKUSB mating cable and SCDP gasket. The ordinary kit cable and this modified enclosure have <strong>no claimed IP/NEMA rating</strong>; use the accepted assembly in its dry indoor environment.</p>
+<p>Reuse the <strong>one existing USB-A to USB-B cable intact</strong>. USB-B stays in DENT; the same cable exits through a <strong>Heyco 3104 (SBT 875-11)</strong> snap bushing and ends in USB-A for the PC. No coupler, short internal data cable or USB mounting screws are required. The existing front/right cable support restrains the sleeved cable beside the DC lead. The bushing only protects the edge: accept the restraint only if external pull cannot move the sleeve or load the DENT socket. The 3D exterior length is abbreviated; retain the full cable and check usable reach.</p>
+<p><strong>Published sizing:</strong> <a href="https://www.usb.org/document-library/usb-20-specification">USB 2.0</a>, Figure 6-10, limits a standard-B overmold to <strong>11.5 × 10.5 mm</strong> (diagonal <strong>15.57 mm</strong>); Table 6-5 gives nominal cable ODs <strong>4.06–5.21 mm</strong>. The <a href="https://www.heyco.com/products/bushings-grommets-heycaps-plugs/tubing-caps-and-plugs/heyco-thick-panel-snap-bushings/">Heyco drawing</a> gives a <strong>17.5 mm passage</strong>, leaving <strong>1.93 mm nominal diametral margin</strong> for the unsleeved standard plug. The mounting hole is <strong>22.2 mm</strong>, and the 6.4 mm maximum wall thickness covers the modeled 4.775 mm wall. These are published design dimensions, not measurements of the owned cable. DENT&#39;s kit datasheet lists 1.8 m; its <a href="https://www.dentinstruments.com/shop/powerscout-accessories/replacement-usb-a-to-b-communications-cable/">current replacement</a> lists 2 m, so retain the actual cable rather than cutting to either nominal length.</p>
+<p>Dry-fit the intact USB-B end through the <strong>loose bushing before adding the sleeve</strong>. Apply accepted insulation while the cable is disconnected from the logger and PC. Pass the protected end through the empty wall hole, then snap the bushing into the wall; confirm full seating and pull restraint. Do not force a plug or cut/splice the USB cable to make it fit.</p>
+<p>Retain <strong>black Alpha Wire F2213/4 BK105</strong>, specified to <strong>UL224 / CSA198, 600 V</strong> (<a href="https://www.alphawire.com/products/accessories/fit-heat-shrink-tubing/shrink-tubing/fit2213_4">manufacturer</a>). One 4 ft stick covers the internal run, the DENT termination and the wall crossing. Supplied minimum ID is 19.05 mm; recovered maximum ID is 9.53 mm. Accept complete coverage and retention against sliding. Alpha lists 90°C minimum shrink and 121°C full recovery; the original cable&#39;s permitted application process is unpublished. Have the assembler approve that process for the actual cable and protect the connectors. The illustrated end coverage is not a separately qualified boot.</p>
+<p>The bushing and sleeve provide no USB galvanic isolation or claimed IP/NEMA seal. Review shell/shield treatment with the electrical assembler; do not add an undocumented PE-to-USB connection. Use the accepted assembly indoors in its dry environment. Connect to the PC only after unplugging mains.</p>
 <h2 id="panel-stock">Selected construction and aluminum stock</h2>
 
 <p>Select <strong>Hammond PCJ16148</strong>, with the opaque screw cover. Its common base/panel dimensions match the prior clear-cover version in the <a href="https://www.hammfg.com/electrical/products/non-metallic/pcj-sc">manufacturer series table</a>. The current base CAD uses that existing PCJ16148CC template; the opaque-lid silhouette is illustrative and must be compared with the received part.</p>
@@ -117,9 +118,9 @@
 <td>Rear wall; X = 0, Y = 36 mm</td>
 </tr>
 <tr>
-<td>USB service</td>
-<td>Ø24.00 mm project bore; two Ø3.20 mm project clearance holes, diagonal 19 × 24 mm pattern</td>
-<td>Right wall; Y/Z = 55/167 mm. Outside local U/V offsets: −9.5/+12 and +9.5/−12 mm. <a href="https://www.neutrik.com/media/8974/download/nausb-w-2.pdf?v=1">Neutrik drawing</a> requires bore ≥23.6 mm and nominal Ø3.1 fixings; check actual flange before cutting.</td>
+<td>USB cable exit</td>
+<td>One Ø22.20 mm mounting hole; no fixing holes</td>
+<td>Right wall; Y/Z = 55/167 mm. <a href="https://www.heyco.com/products/bushings-grommets-heycaps-plugs/tubing-caps-and-plugs/heyco-thick-panel-snap-bushings/">Heyco 3104 dimensions</a>: 17.5 mm passage, 24.2 mm head, 14.3 mm overall height; wall up to 6.4 mm. Dry-fit before machining.</td>
 </tr>
 <tr>
 <td>Panel bond</td>
@@ -166,9 +167,9 @@
 <td>Buy 4 <a href="https://boltdepot.com/Product-Details?product=1335">screws, 1335</a> and 4 <a href="https://boltdepot.com/Product-Details?product=2942">washers, 2942</a>, including spares. No nut on Q0&#39;s threaded inserts.</td>
 </tr>
 <tr>
-<td>Three WAGO carriers + USB flange</td>
-<td>8 × M3 × 16 mm pan screws; 8 × M3 washers; 8 × M3 locknuts (6 carriers + 2 USB)</td>
-<td>Buy 8 each, no additional M3 spares: <a href="https://boltdepot.com/Product-Details?product=6835">screws, 6835</a>, <a href="https://boltdepot.com/Product-Details?product=4513">washers, 4513</a>, <a href="https://boltdepot.com/Product-Details?product=4792">nuts, 4792</a>.</td>
+<td>Three WAGO carriers</td>
+<td>6 × M3 × 16 mm pan screws; 6 × M3 washers; 6 × M3 locknuts</td>
+<td>Buy 6 each: <a href="https://boltdepot.com/Product-Details?product=6835">screws, 6835</a>, <a href="https://boltdepot.com/Product-Details?product=4513">washers, 4513</a>, <a href="https://boltdepot.com/Product-Details?product=4792">nuts, 4792</a>.</td>
 </tr>
 <tr>
 <td>Six tie anchors</td>
@@ -183,7 +184,7 @@
 </tbody></table></div>
 <p>Reuse the enclosure-supplied panel screws only after checking their stack with the actual aluminum thickness; retain all four cover fixings. Q0 power studs use the manufacturer&#39;s supplied terminal hardware and two #10 ring lugs. Do not substitute #8-only lugs or metric nuts on these studs.</p>
 <p>Each anchor uses an M4 × 16 mm pan screw with its head directly on the base, then an underside washer and locknut. The illustrated stack leaves about 4.6 mm to the case floor, versus only 0.6 mm with the previous 20 mm screw. Confirm actual base thickness, nut engagement and floor clearance on receipt; small molded details are illustrative.</p>
-<p><strong>Stack checks:</strong> the nominal case wall is 4.775 mm. For Q0, measure/select washers 0.8–1.0 mm thick: 9.525 − 4.775 − washer = <strong>3.75–3.95 mm</strong> nominal insert engagement, below the 4.95 mm insert depth. Reject a stack that bottoms out before clamping. The general #6 washer listing does not guarantee thickness; this is a receiving check. XA has no wall fixing screws. For USB, check the 2 mm flange + 4.775 mm wall + actual underside washer and locknut against the 16 mm screw; obtain full locking engagement without hitting the rear connector. Do not overtighten the polycarbonate.</p>
+<p><strong>Stack checks:</strong> the nominal case wall is 4.775 mm. For Q0, measure/select washers 0.8–1.0 mm thick: 9.525 − 4.775 − washer = <strong>3.75–3.95 mm</strong> nominal insert engagement, below the 4.95 mm insert depth. Reject a stack that bottoms out before clamping. The general #6 washer listing does not guarantee thickness; this is a receiving check. XA has no wall fixing screws. The USB bushing snaps into the wall; no USB fixing hardware is required. Do not overtighten the polycarbonate.</p>
 <p>Fit carrier/anchor fasteners while the panel is out. There is about <strong>16.66 mm</strong> between the panel underside and the inner case floor in the source CAD. Check actual screw projections and washers against this space and the molded supports. For the six revised M4 × 16 mm anchor screws, verify full locking-nut engagement and at least 3 mm clearance to the actual case floor before installing the panel.</p>
 <p>For the proposed panel PE stud, first approve the hardware/contact method for the actual aluminum. The geometric arrangement puts the screw head and flat washer underneath. On the conductive side, use an external-tooth washer and first nut to secure the dedicated stud, then the ring lug, flat washer, external-tooth washer and second nut. Establish a clean metal contact under the bonding hardware; do not rely on paint, straps or ordinary mounting screws for bonding. Final bonding method, tightening and continuity acceptance belong to the qualified assembler. The website does not assign an unsupported universal bonding torque.</p>
 <h2>Wire and length schedule</h2>
@@ -213,14 +214,14 @@
 <td>WAGO to #10 ring</td>
 </tr>
 </tbody></table></div>
-<p>Connections 01/03/06/07/10/11 use the supply/output cord conductors. Connections 05/08/09 use the three existing pigtail + full-lead chains; retain their full factory length. Connections 14/15 use the CT pair; 16 is the permanent sleeved internal lead plus the temporary external USB service cable, used with mains unplugged and the lid closed. Connections 20–23 illustrate factory adapter contacts and DC wiring, <strong>not</strong> instructions to open or modify the adapter. The site provides the full 21-path schedule; retained connection IDs stay unchanged.</p>
+<p>Connections 01/03/06/07/10/11 use the supply/output cord conductors. Connections 05/08/09 use the three existing pigtail + full-lead chains; retain their full factory length. Connections 14/15 use the CT pair; 16 is one existing USB cable, sleeved inside and passed directly through the wall, used with mains unplugged and the lid closed. Connections 20–23 illustrate factory adapter contacts and DC wiring, <strong>not</strong> instructions to open or modify the adapter. The site provides the full 21-path schedule; retained connection IDs stay unchanged.</p>
 <p>Label both ends of every conductor. A1 is hot; A2 and A3 are neutral. The three original pigtails have different colors; drawing colors are schematic, so follow connection IDs. Grounding uses the separate green conductors. The full voltage-lead storage model assumes 2 m of flexible cable per lead and 3 mm OD; real cable lengths, connector bodies and minimum bends must fit without loading meter sockets.</p>
 <h2>Assembly and acceptance sequence</h2>
 <ol>
 <li>Close the identification/entry/protection items above, obtain the exact parts and compare them with the machining setups. Keep the case and all cords disconnected while machining or wiring.</li>
 <li>Machine the <strong>empty</strong> case and removable panel. Transfer-drill carrier fixings, deburr, clean, and inspect for cracks. Complete underside nuts, PE studs, carrier/anchor fixings and thread the straps before lowering the panel.</li>
 <li>Install and secure the panel, then fit the three carriers, logger, CT and internal XA/adapter assembly. Leave access to the CT latch and WAGO levers; verify the four adjustable straps.</li>
-<li>Install Q0 and two power glands. Route intact supply/output jackets through the glands. Clamp the internal XA cord jacket in the 515CV body, fully seat and independently restrain the original adapter, and route its original DC cable inside. Fit the right-wall USB port, B out / A in, and the short internal cable with accepted 600 V sleeve/end protection. Remove only external PC USB before mains operation. XA/DC stay inside.</li>
+<li>Install Q0 and two power glands. Route intact supply/output jackets through the glands. Clamp the internal XA cord jacket in the 515CV body, fully seat and independently restrain the original adapter, and route its original DC cable inside. Fit the direct USB cable exit as described above, with accepted 600 V sleeve/end protection and restraint at the existing front/right support. Disconnect only the PC end before mains operation; leave the intact cable attached to the box. XA/DC stay inside.</li>
 <li>Bond panel, output and XA; then complete neutral, protected hot, voltage sensing, CT and low-voltage wiring. Only the printer hot conductor goes through CT once, arrow toward the printer. Keep voltage taps and adapter consumption upstream of CT.</li>
 <li>Check every termination, strain relief, bend, clearance and fastener. Verify CT latch travel and plug removal access. Confirm that all four cover screws close the lid without pressing on cables or components. This dry fit is still outstanding.</li>
 <li>Qualified personnel document PE continuity, polarity, insulation/isolation, protection and supply suitability using the applicable test procedure. Disconnect sensitive electronics where the manufacturer requires it for insulation testing. Q0 OFF leaves incoming terminals live while the supply is plugged in.</li>
@@ -266,7 +267,7 @@
 <tr>
 <td>Stock unavailable / designer</td>
 <td>Reuse result ___; fallback decision ___</td>
-<td>A <a href="https://www.digikey.com/en/products/detail/hammond-manufacturing/14R1513/2359585">Hammond 14R1513 panel</a>, previously priced $30.44, is the documented fallback. Recheck its price and fit if needed; it is not included in the active $287.71 budget or a claim of aluminum reuse.</td>
+<td>A <a href="https://www.digikey.com/en/products/detail/hammond-manufacturing/14R1513/2359585">Hammond 14R1513 panel</a>, previously priced $30.44, is the documented fallback. Recheck its price and fit if needed; it is not included in the active $270.43 budget or a claim of aluminum reuse.</td>
 </tr>
 <tr>
 <td>Purchased case / fabricator</td>
@@ -295,12 +296,12 @@
 </tr>
 <tr>
 <td>USB assembly / assembler</td>
-<td>B-out/A-in orientation ___; cable mold and sleeve dimensions ___; approved sleeve process ___; end coverage and retention ___; separation/shield treatment ___</td>
+<td>Intact USB-B passage ___; bushing fit ___; approved sleeve process ___; internal/end coverage ___; external-pull restraint ___; separation/shield treatment ___</td>
 <td>DENT requires rated insulation for cable inside the electrical panel. Black FIT-221 is specified to UL224/CSA198, 600 V; the assembled cable has not been qualified. No PC connection during mains operation.</td>
 </tr>
 <tr>
 <td>Offline configuration / operator</td>
-<td>Actual CT model/range/output ___; ELOG configuration file ___; kit USB present ___</td>
+<td>Actual CT model/range/output ___; ELOG configuration file ___; existing USB export verified ___</td>
 <td>Read the uncovered CT label. Do not assume 50 A from the photograph. Configure and download only with mains disconnected.</td>
 </tr>
 <tr>

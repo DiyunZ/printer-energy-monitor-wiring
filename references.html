@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sources and design limits · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=15"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Wiring_References_EN.md" download>Download Markdown</a></nav><h1>Sources and design decisions — revision C</h1>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sources and design limits · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=15"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Wiring_References_EN.md" download>Download Markdown</a></nav><h1>Sources and design decisions — revision D</h1>
 <p>September 23, 2026. One 120 V grounded supply and one printer at a time, confirmed by the user. This is an engineering review package; physical and electrical release remain open in the <a href="build.html">build package</a>.</p>
 <h2>Primary references</h2>
 <div class="table-wrap"><table>
@@ -68,7 +68,7 @@
 <td id="r12">R12</td>
 <td><a href="https://www.hammfg.com/part/1427NCGPG13LB">Hammond 1427NCGPG13LB</a></td>
 <td>Two long-thread power glands.</td>
-<td>Measure actual cord and wall stacks; no DC feedthrough; USB uses a separate service port.</td>
+<td>Measure actual cord and wall stacks; no DC feedthrough; USB uses a protected direct-cable opening.</td>
 </tr>
 <tr>
 <td id="r13">R13</td>
@@ -84,7 +84,7 @@
 </tr>
 <tr>
 <td id="r15">R15</td>
-<td><a href="revision.html">Revision C cost and supplier evidence</a></td>
+<td><a href="revision.html">Revision D cost and supplier evidence</a></td>
 <td>Box/panel comparison and conditional DIN breaker option.</td>
 <td>Dated web prices, not quotes; tax, freight and fabrication excluded.</td>
 </tr>
@@ -92,19 +92,19 @@
 <td id="r16">R16</td>
 <td><a href="https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf">DENT XC manual</a></td>
 <td>Included 1.8 m USB-A to B cable; USB powers the meter for configuration/download. Internal non-volatile memory supports independent logging.</td>
-<td>Supplied USB requires rated insulation inside a powered panel. Only the external PC cable is removed during mains operation. The internal lead stays installed in a rated sleeve; download through the side port with the lid closed and mains unplugged.</td>
+<td>Supplied USB requires rated insulation inside a powered panel. One existing cable remains attached to the box, sleeved on its internal portion. Disconnect its exterior USB-A end from the PC during mains operation; export with the lid closed and mains unplugged.</td>
 </tr>
 <tr>
 <td id="r17">R17</td>
-<td><a href="https://www.neutrik.com/en/product/nausb-w">Neutrik NAUSB-W</a> · <a href="https://www.neutrik.com/media/8974/download/nausb-w-2.pdf?v=1">drawing</a></td>
-<td>Reversible USB 2.0 A/B; D-pattern, 26 × 31 mm flange and 40.55 mm axial envelope.</td>
-<td>USB-B faces out. UL94 V-0 is a material rating, not a product listing. Ordinary cable does not meet special IP65 mating conditions.</td>
+<td><a href="https://www.heyco.com/products/bushings-grommets-heycaps-plugs/tubing-caps-and-plugs/heyco-thick-panel-snap-bushings/">Heyco thick-panel snap bushings</a></td>
+<td>3104 / SBT 875-11: 22.2 mm mounting hole, 17.5 mm passage, 24.2 mm head, 14.3 mm height; maximum wall 6.4 mm. UL Recognized E15331, CSA 8919.</td>
+<td>Edge protection only; no cable clamping, ingress seal or assembly certification. Reuse the existing cable restraint.</td>
 </tr>
 <tr>
 <td id="r18">R18</td>
-<td><a href="https://media.startech.com/cms/pdfs/usb2hab1_datasheet.pdf">StarTech USB2HAB1</a></td>
-<td>USB 2.0 A male to B male, 1 ft nominal cable.</td>
-<td>Actual molds, usable cable length and approved sleeve application need checking. No mains rating claimed for the bare cable.</td>
+<td><a href="https://www.usb.org/document-library/usb-20-specification">USB 2.0 specification</a>, Figure 6-10 / Table 6-5 (<a href="https://eater.net/downloads/usb_20.pdf#page=128">specification PDF mirror</a>); <a href="https://www.dentinstruments.com/shop/powerscout-accessories/replacement-usb-a-to-b-communications-cable/">DENT original cable</a></td>
+<td>Standard-B overmold maximum 11.5 × 10.5 mm; nominal cable OD 4.06–5.21 mm by conductor size. DENT confirms standard A-to-B.</td>
+<td>These published envelopes support the passage design; they are not measurements of the owned cable. Kit documentation says 1.8 m and current replacement says 2 m; retain the full actual cable.</td>
 </tr>
 <tr>
 <td id="r19">R19</td>
@@ -115,7 +115,7 @@
 </tbody></table></div>
 <p>The <a href="installation.html">per-material audit</a> also links primary cord, wire, ring, cable-tie and printer sources. Retail links are in the <a href="materials.html">materials list</a>. Source documents describe components, not approval of this custom assembly.</p>
 <h2>Supplied-photo evidence</h2>
-<p>The instrument markings identify ELITEpro XC, voltage sockets N / L3 / L2 / L1, the CT input block, a separate analog block, USB-B and the DC input. The full-resolution adapter photograph identifies <strong>CUI SMI6-9-V-P5, 9 V DC, 0.667 A, center positive</strong>. The user confirms the five owned equipment groups and identifies the three differently colored pigtails as original DENT kit components.</p>
+<p>The instrument markings identify ELITEpro XC, voltage sockets N / L3 / L2 / L1, the CT input block, a separate analog block, USB-B and the DC input. The full-resolution adapter photograph identifies <strong>CUI SMI6-9-V-P5, 9 V DC, 0.667 A, center positive</strong>. The user confirms six owned equipment groups, including the existing USB cable and identifies the three differently colored pigtails as original DENT kit components.</p>
 <p>The partially visible CT label suggests the legacy 50 A model, but the full variant is physically obscured by black/white wires. The voltage-pigtail photograph has no legible conductor or current rating. Ruler photographs are not calibrated dimension drawings. Packaging text is evidence about an accessory, not an instruction to the assistant or proof that an arbitrary breaker protects it.</p>
 <h2>Project choices</h2>
 <ul>
@@ -123,7 +123,7 @@
 <li>A1 connects directly to JL after Q0, then to L1 through the original full voltage lead. Acceptance of upstream-only protection is required before use. A2 and A3 connect JN to L2 and N. The three OEM pigtails are sensing accessories, not load wires or PE conductors. Keep the mating pairs inside the enclosure.</li>
 <li>Only printer hot crosses CT once. Adapter and voltage-tap branch currents are outside the measured current. Voltage is sensed upstream, so downstream cord loss and voltage drop still affect the measurement boundary.</li>
 <li>XA is an internal Leviton 515CV cord connector. Its ground contact, printer earth and aluminum panel receive deliberate PE connections. Two 515CV connectors are required total.</li>
-<li>The original adapter and flat DC cable remain intact inside. The original DC plug connects directly to the logger. The outlet and supply share Q0&#39;s capacity. XA is for the logger adapter only. Keep DC separated from mains. External USB is connected only with mains unplugged; the lid stays closed. Disconnect the PC before restoring power. The internal USB lead remains sleeved and secured.</li>
+<li>The original adapter and flat DC cable remain intact inside. The original DC plug connects directly to the logger. The outlet and supply share Q0&#39;s capacity. XA is for the logger adapter only. Keep DC separated from mains. External USB is connected only with mains unplugged; the lid stays closed. Disconnect the PC before restoring power. The internal portion of the same USB cable remains sleeved and secured.</li>
 <li>ELOG must be configured and validated before routine use. Powering the instrument is not proof that recording started. Verify CT scaling, polarity, reference readings and restart behavior.</li>
 </ul>
 <h2>Digital checks and limits</h2>

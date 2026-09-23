@@ -5,7 +5,7 @@ import json
 from draw_external import draw_external
 
 OUT = Path(__file__).resolve().parent
-REV = 'Rev. 13 · closed-lid offline USB · 2026-09-23'
+REV = 'Rev. 14 · one existing USB cable · 2026-09-23'
 C = {'L':'#202d3a','N':'#65758a','PE':'#18814a','CT':'#8544a5','USB':'#23739d','DC':'#aa621e','V':'#1567c1'}
 # Shared physical placement. The SVG is an X/Z projection of the same millimetre
 # coordinates consumed by layout3d.js. Electrical port symbols are spaced for clarity.
@@ -43,7 +43,7 @@ M = {
  **{f'JPE.{i}':pin('PE',i) for i in range(1,5)},
 }
 A = {name:project(point) for name,point in M.items()}
-# 16: sleeved internal USB + temporary external PC cable through service port.
+# 16: one continuous existing USB cable; sleeved inside, PC connected offline.
 # 20–23: factory plug/cable paths; other paths are installed.
 # Routing waypoints are intentionally rectilinear. Component locations are not rearranged for routing.
 raw = [
@@ -60,7 +60,7 @@ raw = [
  ('12','PE','JPE.3','PLATE',[],(-125,49),'PE → dedicated metal-plate bond','earth'),
  ('14','CT','CT.+','D.+',[(-63,-102),(134,-102),(134,-101)],(35,-102),'CT white (+) → current-input CH1 +','signal'),
  ('15','CT','CT.-','D.-',[(-47,-95),(142,-95),(142,-83)],(16,-95),'CT black (−) → current-input CH1 −','signal'),
- ('16','USB','D.USB','PC',[(140,110),(140,167),(280,167)],(235,167),'DENT → sleeved USB → service port → ELOG; lid closed, mains unplugged','signal'),
+ ('16','USB','D.USB','PC',[(140,110),(140,167),(280,167)],(235,167),'DENT → one existing USB cable → ELOG; lid closed, mains unplugged','signal'),
  ('17','L','JL.4','AUX.L',[(-119.2,-165),(30,-165),(30,-83),(-97.15,-83)],(-97.15,-67),'JL → internal XA cord hot; before CT','aux'),
  ('18','N','JN.5','AUX.N',[(-105,-48.85),(-105,-156),(24,-156),(24,-89),(-101,-89),(-101,-40)],(-101,-110),'JN → internal XA cord neutral','aux'),
  ('19','PE','JPE.4','AUX.PE',[(-119.2,52),(-99,52),(-99,-28)],(-99,3),'PE → internal XA ground contact','earth'),

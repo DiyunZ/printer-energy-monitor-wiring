@@ -32,9 +32,9 @@ class InstallationDatums(unittest.TestCase):
         port = next(p for p in dimensions['instances'] if p['id'] == 'usb-entry')
         self.assertEqual(usb['wallCenterYZ'], list(constants['usb_yz_mm']))
         self.assertEqual(port['position'][1:], usb['wallCenterYZ'])
-        self.assertEqual(usb['fixingLocalUV'], json.loads(json.dumps(constants['usb_fixing_uv_mm'])))
         self.assertEqual(port['boreDiameterMm'], constants['usb_bore_d_mm'])
-        self.assertEqual(port['fixingHoleDiameterMm'], constants['usb_fixing_d_mm'])
+        self.assertNotIn('fixingLocalUV', usb)
+        self.assertNotIn('fixingHoleDiameterMm', port)
 
 
 if __name__ == '__main__':

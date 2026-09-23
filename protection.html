@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Protection and data review · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=15"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Protection_Review.md" download>Download Markdown</a></nav><h1>Protection and data review</h1>
-<p>September 20, 2026 · 120 V grounded supply · one printer at a time.</p>
+<p>September 23, 2026 · 120 V grounded supply · one printer at a time.</p>
 <p><strong>Q0 and voltage-lead protection still need acceptance.</strong> The checks below resolve published component ratings and fit. Actual outlet fault current, combined startup duty and protection of the existing voltage leads remain unverified. No hardware test or qualified acceptance has been recorded.</p>
 <div class="table-wrap"><table>
 <thead>
@@ -21,8 +21,8 @@
 </tr>
 <tr>
 <td>USB cable</td>
-<td>Included in DENT kit; use the lid-pocket cable</td>
-<td>Reuse outside the closed box. Add the listed service port, short internal lead and rated sleeve; use PC only after unplugging mains.</td>
+<td>Existing A-to-B cable confirmed owned</td>
+<td>Reuse intact through one protected wall opening. Keep its internal portion sleeved and restrained; connect the free USB-A end to the PC only after unplugging mains.</td>
 </tr>
 <tr>
 <td>Internal adapter power</td>
@@ -78,6 +78,6 @@
 <p>The <a href="https://www.masterelectronics.com/en/productdetail/littelfuse-carling-technologies/ca1b024615121dg-16947583.html">Q0 purchase link</a> identifies the selected product. Exact-SKU stock, site fault-current suitability and startup behavior remain to be confirmed.</p>
 <h2>Experiment data workflow</h2>
 <p>Use <strong>standalone logging during prints, then offline batch downloads</strong>. Synchronize the logger clock and job/phase timestamps before the series. Keep the same validated interval for comparisons and check memory capacity. Preserve raw exports before clearing memory.</p>
-<p>The DENT manual identifies non-volatile memory, included USB and USB-powered readout. It also requires rated insulation for the supplied USB cable inside a powered electrical panel. The user selected closed-lid offline export. The external kit cable is removed before mains operation, but the short internal cable stays installed. It therefore requires the selected black FIT-221 600 V sleeve and accepted end protection, restraint and application process. The NAUSB-W is a passive feedthrough, not a mains isolation barrier. See <a href="build.html">USB construction and acceptance</a>. <a href="https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf">DENT manual, printed pp. 7, 18, 29, 119</a>.</p>
+<p>The DENT manual identifies non-volatile memory, included USB and USB-powered readout. It also requires rated insulation for the supplied USB cable inside a powered electrical panel. The user selected closed-lid offline export. One existing cable remains connected to DENT and passes directly through a Heyco 3104 bushing. Disconnect its free exterior USB-A end from the PC before mains operation. The internal portion retains the black FIT-221 600 V sleeve and accepted end protection, restraint and application process. The bushing and sleeve are not a mains isolation barrier. See <a href="build.html">USB construction and acceptance</a>. <a href="https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf">DENT manual, printed pp. 7, 18, 29, 119</a>.</p>
 <p>Prove the setup with one supervised print cycle and offline export, including startup, phase timestamps, final records and restart behavior, before collecting the experimental series. The website does not claim that physical validation has happened. <a href="documents.html#operation">Operating sequence</a>.</p>
 </body></html>

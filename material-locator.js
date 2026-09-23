@@ -38,7 +38,7 @@ export function installMaterialLocator({ items, locations, scene, camera, contro
   function frame(objects) {
     const b = bounds(objects), center = b.getCenter(new THREE.Vector3());
     // View the right-wall service connection from outside the closed case.
-    const offset = ['usb','usb-port'].includes(selected)
+    const offset = ['usb','usb-bushing'].includes(selected)
       ? new THREE.Vector3(950, 360, 650) : new THREE.Vector3(-650, 760, 850);
     camera.position.copy(center).add(offset); controls.target.copy(center); camera.up.set(0, 1, 0);
     camera.zoom = 1; controls.update(); camera.updateProjectionMatrix(); camera.updateMatrixWorld();
@@ -104,6 +104,8 @@ export function installMaterialLocator({ items, locations, scene, camera, contro
   }
   function sync() {
     if (!selected) return;
+    // A closed opaque case must conceal the internal portion of a selected cable.
+    tint.depthTest = outline.depthTest = $('model-shell').value === 'closed';
     scene.updateMatrixWorld(true);
     for (const overlayMesh of overlay.children) {
       const source = overlayMesh.userData.source;
@@ -148,7 +150,7 @@ export function installMaterialLocator({ items, locations, scene, camera, contro
     select, clear, fromUrl, updateLabels, sync,
     get active() { return selected; },
     isGhost: object => restored.some(([m]) => m === object),
-    diagnostics: () => ({ selected, occurrence, ghostCount: restored.length, highlightMeshCount: overlay.children.filter(m => m.isMesh).length,
+    diagnostics: () => ({ selected, occurrence, ghostCount: restored.length, highlightRespectsOcclusion: tint.depthTest, highlightMeshCount: overlay.children.filter(m => m.isMesh).length,
       visibleHighlightCount: overlay.children.filter(m => m.isMesh && m.visible).length,
       overlaysAligned: overlay.children.every(m => m.matrix.equals(m.userData.source.matrixWorld)),
       locations: Object.fromEntries(Object.entries(locations).map(([id, entries]) => [id, entries.map(p => ({ key: p.key, label: p.label, meshes: p.objects.map(m => m.uuid), min: bounds(p.objects).min.toArray(), max: bounds(p.objects).max.toArray() }))])),

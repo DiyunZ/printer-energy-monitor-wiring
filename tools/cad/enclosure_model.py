@@ -1,11 +1,11 @@
-"""ELITEpro enclosure revision C. Units: mm; X across, Y up, Z front.
+"""ELITEpro enclosure revision D. Units: mm; X across, Y up, Z front.
 Process: drill/mill selected Hammond PCJ16148 polycarbonate shell and
 reused aluminum panel (provisional thickness; measure stock before fabrication). Deburr; preserve original cover/gasket/support geometry.
 Vendor interfaces are NOT in the skill's standards registry. Sources:
 Hammond PCJ16148CC STEP (shell solid 0, panel solid 33, no scaling);
 Carling C-Series p.11 rectangular cutout and 52.37 pitch;
-Hammond 1427NCGPG13LB 21.0 bore; Neutrik ST-NAUSB-W D-pattern.
-No XA or DC wall opening. USB B-out/A-in service only with mains unplugged.
+Hammond 1427NCGPG13LB 21.0 bore; Heyco 3104 thick-panel snap bushing, 22.2 mm mounting bore.
+No XA or DC wall opening. One continuous existing USB cable; PC connects only with mains unplugged.
 PCJ16148 opaque cover selected; common base geometry uses the existing
 PCJ16148CC vendor template, with cover silhouette illustrative.
 Carrier fixing holes are intentionally transfer-drilled from actual 221-505
@@ -30,12 +30,10 @@ q0_rectangle_mm = (10.97, 36.78)
 q0_hole_d_mm = 3.96
 q0_pitch_mm = 52.37
 power_entry_d_mm = 21.0
-# Neutrik minimum bore 23.6, fixing holes 3.1; project clearance allowances
-# are 24.0 and 3.2 respectively. Outside view: upper-left/lower-right holes.
-usb_bore_d_mm = 24.0
-usb_fixing_d_mm = 3.2
+# Heyco thick-panel bushing 3104: manufacturer hole 22.2 mm. Actual
+# cable plug passage and snap fit must be accepted before drilling.
+usb_bore_d_mm = 22.2
 usb_yz_mm = (55.0, 167.0)
-usb_fixing_uv_mm = [(-9.5,12.0),(9.5,-12.0)]
 panel_thickness_mm = 1.89738
 # DESIGN: project locations and tooling allowances.
 cut_depth_mm = 20.0
@@ -85,9 +83,7 @@ def wall_features():
                            at=(0,sign*q0_pitch_mm/2), diameter=q0_hole_d_mm, tolerance_mm=.12))
     for name,wall,p in [('SUPPLY','left',supply_yz_mm),('OUTPUT','rear',printer_xy_mm)]:
         result.append(dict(id=name,wall=wall,plane=f(wall,p),diameter=power_entry_d_mm,tolerance_mm=.1))
-    result.append(dict(id='USB service',wall='right',plane=f('right',usb_yz_mm),diameter=usb_bore_d_mm,tolerance_mm=.1))
-    for i,at in enumerate(usb_fixing_uv_mm,1):
-        result.append(dict(id=f'USB fixing {i}',wall='right',plane=f('right',usb_yz_mm),at=at,diameter=usb_fixing_d_mm,tolerance_mm=.1))
+    result.append(dict(id='USB cable exit',wall='right',plane=f('right',usb_yz_mm),diameter=usb_bore_d_mm,tolerance_mm=.1))
     return result
 
 
@@ -239,7 +235,7 @@ def main():
         missing=gauge.part.volume-retained
         if missing>1e-4: raise ValueError('Removed rail opening remains at '+str(at))
         report.append(dict(id='Restored panel stock '+str(at),missing_mm3=missing,result='pass'))
-    for label,at in [('XA',(121,13)),('XA upper fixing',(147.785,13)),('XA lower fixing',(94.215,13)),('DC',(78,106))]:
+    for label,at in [('XA',(121,13)),('XA upper fixing',(147.785,13)),('XA lower fixing',(94.215,13)),('DC',(78,106)),('old USB upper fixing',(66.998395,176.5)),('old USB lower fixing',(43.001605,157.5))]:
         with BuildPart() as gauge:
             with BuildSketch(frames()('right',at)): Circle(1.5)
             extrude(amount=cut_depth_mm,both=True)
