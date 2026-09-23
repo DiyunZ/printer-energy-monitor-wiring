@@ -8,7 +8,7 @@
       "id": "case-machined",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 2242536.111073722,
+      "volume_mm3": 2240299.054047714,
       "bounds_mm": [
         392.2499770979982,
         207.39100020000006,
@@ -49,6 +49,21 @@
     {
       "id": "OUTPUT",
       "removed_mm3": 1653.8718264363706,
+      "result": "pass"
+    },
+    {
+      "id": "USB service",
+      "removed_mm3": 2160.1795450989157,
+      "result": "pass"
+    },
+    {
+      "id": "USB fixing 1",
+      "removed_mm3": 38.334362383466214,
+      "result": "pass"
+    },
+    {
+      "id": "USB fixing 2",
+      "removed_mm3": 38.334396560210735,
       "result": "pass"
     },
     {
@@ -148,6 +163,21 @@
     },
     {
       "id": "OUTPUT through gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "USB service through gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "USB fixing 1 through gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "USB fixing 2 through gauge",
       "intrusion_mm3": 0,
       "result": "pass"
     },
@@ -259,11 +289,6 @@
     {
       "id": "Restored right wall DC",
       "stock_mm3": 33.753899788699464,
-      "result": "pass"
-    },
-    {
-      "id": "Restored right wall USB",
-      "stock_mm3": 33.75389978869944,
       "result": "pass"
     }
   ]

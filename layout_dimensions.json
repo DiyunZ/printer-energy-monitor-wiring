@@ -1,6 +1,6 @@
 {
   "units": "mm",
-  "revision": "Revision B · internal adapter and reused panel · 2026-09-23",
+  "revision": "September 23, 2026 · revision C · closed-lid offline USB",
   "coordinates": "X across the panel; Y above the panel underside; Z along the panel, negative toward the printer exit (rear), positive toward Q0 (front). One scene unit is one millimetre. The wiring plan projects the same X/Z positions with rear at the top. Dimensions below are X × Y × Z unless noted.",
   "parts": [
     {
@@ -13,7 +13,7 @@
       ],
       "status": "PCJ common-base layout template; solid lid not independently modeled",
       "source": "https://www.hammfg.com/files/parts/pdf/PCJ16148.pdf",
-      "note": "PCJ16148 selected. Manufacturer series table gives the same enclosure and panel dimensions as PCJ16148CC. Base geometry and lid silhouette are inherited from the clear-cover STEP; gray rendering represents the selected opaque cover. Confirm received solid-lid geometry. Right wall is uncut; only Q0 and two power glands remain. No certification of the modified assembly is claimed."
+      "note": "PCJ16148 selected. Manufacturer series table gives the same enclosure and panel dimensions as PCJ16148CC. Base geometry and lid silhouette are inherited from the clear-cover STEP; gray rendering represents the selected opaque cover. Confirm received solid-lid geometry. Right wall has a USB service port; other wall interfaces are Q0 and two power glands. No certification of the modified assembly is claimed."
     },
     {
       "id": "panel",
@@ -134,7 +134,7 @@
     },
     {
       "id": "entries",
-      "name": "Two power-cord glands",
+      "name": "Power glands and USB service port",
       "size": [
         27,
         37,
@@ -142,7 +142,7 @@
       ],
       "status": "Catalog power-gland envelopes",
       "source": "https://www.hammfg.com/electronics/small-case/accessories/1427ncg",
-      "note": "Supply and printer output only. DC and adapter AC connections remain inside; USB is temporary offline service."
+      "note": "Two mains cord glands plus one right-wall USB service port. XA and DC remain inside. External USB connects only after mains is unplugged."
     },
     {
       "id": "leads",
@@ -347,6 +347,34 @@
       "pitchMm": 4,
       "note": "Scenario only: each full lead reserves 2000 mm flexible cable at assumed 3 mm OD. Three concentric helices use 4 mm radial spacing and pitch, with two shared restraints. Measure actual cable length, diameter, bend limits and support fit during dry assembly.",
       "radialSpacingMm": 4
+    },
+    {
+      "id": "usb-entry",
+      "part": "entries",
+      "position": [
+        165.680146,
+        55,
+        167
+      ],
+      "size": [
+        40.55,
+        31,
+        26
+      ],
+      "axis": "x",
+      "label": "USB-B service port",
+      "model": "NAUSB-W",
+      "wallCenterYZ": [
+        55,
+        167
+      ],
+      "boreDiameterMm": 24,
+      "fixingPitchMm": [
+        19,
+        24
+      ],
+      "fixingHoleDiameterMm": 3.2,
+      "note": "26 × 31 mm flange, total axial envelope 40.55 mm. Simplified view; exact cut follows local drafted-wall plane. B outside / A inside."
     }
   ],
   "installationHardware": {
@@ -459,14 +487,15 @@
       },
       {
         "id": "dc",
-        "label": "Original adapter DC cable",
+        "label": "Original DC cable and sleeved USB lead",
         "holeXZ": [
           145,
           158
         ],
         "axis": "z",
         "routes": [
-          "adapter:dc-internal"
+          "adapter:dc-internal",
+          "usb-sleeve:internal"
         ],
         "captureHalfWidthMm": 12
       }
@@ -495,5 +524,78 @@
         "topY": 43.6
       }
     ]
+  },
+  "usbService": {
+    "mode": "offline-closed-lid",
+    "externalConnector": "USB-B",
+    "internalConnector": "USB-A",
+    "internalCable": "USB2HAB1",
+    "sleeve": "F2213/4 BK105",
+    "sleeveRatingV": 600,
+    "requireMainsUnplugged": true,
+    "source": "https://www.neutrik.com/media/8974/download/nausb-w-2.pdf?v=1",
+    "wallCenterYZ": [
+      55,
+      167
+    ],
+    "fixingLocalUV": [
+      [
+        -9.5,
+        12
+      ],
+      [
+        9.5,
+        -12
+      ]
+    ],
+    "sleeveOuterRadiusMm": 5.6,
+    "route": [
+      [
+        107,
+        23,
+        124
+      ],
+      [
+        107,
+        23,
+        154
+      ],
+      [
+        117,
+        23,
+        177
+      ],
+      [
+        146,
+        23,
+        177
+      ],
+      [
+        150,
+        23,
+        158
+      ],
+      [
+        150,
+        36,
+        135
+      ],
+      [
+        130,
+        55,
+        136
+      ],
+      [
+        110,
+        55,
+        153
+      ],
+      [
+        122,
+        55,
+        167
+      ]
+    ],
+    "note": "Routing intent, not an exact consumed cable length or electrical insulation qualification. Confirm usable slack, end coverage, sleeve process and strain relief on the received parts."
   }
 }

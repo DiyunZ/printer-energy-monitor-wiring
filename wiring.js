@@ -16,7 +16,7 @@ const hints = {
   neutral: 'Neutral remains separate from protective earth.',
   earth: 'PE bonds the printer, outlet and panel.',
   aux: 'Internal adapter power branches before CT1; its original DC cable connects directly to the logger.',
-  signal: 'CT → CH1. USB is temporary: unplug mains and open the lid before connecting the computer.',
+  signal: 'CT → CH1. PC USB is offline only: unplug SUPPLY IN from the wall, keep the lid closed, then connect at the side USB-B port.',
 };
 let activeIds = null;
 function activate(mode) {

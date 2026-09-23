@@ -37,7 +37,9 @@ export function installMaterialLocator({ items, locations, scene, camera, contro
   }
   function frame(objects) {
     const b = bounds(objects), center = b.getCenter(new THREE.Vector3());
-    const offset = new THREE.Vector3(-650, 760, 850);
+    // View the right-wall service connection from outside the closed case.
+    const offset = ['usb','usb-port'].includes(selected)
+      ? new THREE.Vector3(950, 360, 650) : new THREE.Vector3(-650, 760, 850);
     camera.position.copy(center).add(offset); controls.target.copy(center); camera.up.set(0, 1, 0);
     camera.zoom = 1; controls.update(); camera.updateProjectionMatrix(); camera.updateMatrixWorld();
     let extent = 0;

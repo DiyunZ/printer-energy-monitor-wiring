@@ -103,14 +103,20 @@ export function audit(dimensions, manifest, buffer, procurement) {
     record(`No ${label} wall opening`,xs.length>=2?'pass':'fail',`Former ${label} center has ${xs.length} wall-surface intersections; right wall stock restored.`,'A cross-section screen; exact source-CAD stock gauges are also recorded.');
   }
   const usbWallHits = rayHits([130,55,167],[1,0,0],shell).map(v=>v.x).filter(x=>x>170&&x<195);
-  record('No permanent USB wall opening', !instances['usb-entry'] && usbWallHits.length>=2 ? 'pass':'fail',
-    `At the former USB center Y/Z = 55/167 mm, the shell has ${usbWallHits.length} wall-surface intersections; no USB fitting is installed.`,
-    'Mesh cross-section check at the former opening center. USB is temporary with mains unplugged and the lid open.');
+  const service=dimensions.usbService, port=instances['usb-entry'];
+  record('Closed-lid USB service port', port?.model==='NAUSB-W' && port.position[1]===55 && port.position[2]===167 && usbWallHits.length===0 ? 'pass':'fail',
+    `USB center Y/Z = 55/167 mm has ${usbWallHits.length} obstructing wall intersections. NAUSB-W B-out/A-in service port is specified.`,
+    'Mesh centerline check, not received-part flange fit. Exact pattern gauges are in the CAD report. No ingress or isolation rating is claimed.');
+  const sleeve=procurement.items.find(p=>p.id==='usb-sleeve');
+  record('Offline USB insulation provision', service?.mode==='offline-closed-lid' && service.requireMainsUnplugged===true && service.externalConnector==='USB-B' && service.internalConnector==='USB-A' &&
+    procurement.items.some(p=>p.id==='usb-internal'&&p.model.includes('USB2HAB1')) && sleeve?.rated_voltage_v>=600 ? 'pass':'fail',
+    'Permanent internal lead, 600 V sleeve and unplug-before-PC operating rule are included in the design and BOM.',
+    'Provision only; cable/sleeve fit, recovery process, complete end protection, restraint and shield treatment still need physical acceptance. A sleeve is not USB galvanic isolation.');
   record('Cord diameter interfaces', 'pass', 'Southwire published nominal OD 9.17–9.27 mm lies within Hammond 6–12 mm gland and Leviton 0.245–0.655 in cord ranges.',
     'Published variants are not a manufacturing tolerance. Measure purchased cord; clamping, jacket preparation and pull resistance remain physical checks.');
   record('Ring barrel and internal wire', 'review', 'The selected 15-104 accepts 14–16 AWG. Its manufacturer does not publish an insulation-barrel limit on the cited page; do not reuse the former 3M value.', 'Fit the actual 2.87 mm nominal-OD wire, use the specified crimp tooling and inspect/pull-test before accepting the termination.');
   record('Physical and electrical release', 'hold', 'No built assembly, nameplate verification, qualified acceptance or energized test has been recorded.');
-  return { revision: 'Build package B, 2026-09-23', release: 'NOT RELEASED: close the receiving and electrical items in Build_Package.md', units: 'mm',
+  return { revision: 'Build package C, 2026-09-23', release: 'NOT RELEASED: close the receiving and electrical items in Build_Package.md', units: 'mm',
     method: 'Axis-aligned body envelopes, continuous vertical swept volumes against the machined Hammond shell, nine lid rays per body and sourced interface arithmetic. Shell triangulation deflection is 0.3 mm; numerical seating-contact exclusion is 0.0001 mm. Neither is a manufacturing tolerance.',
     checks, insertion_sweeps: sweeps, body_screen: bodyChecks, wall_entries: wallEntries,
     material_groups: procurement.items.length, owned_groups: procurement.items.filter(p => p.availability === 'owned').length };

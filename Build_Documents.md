@@ -1,6 +1,6 @@
 # Build documents
 
-- [Revision B: costs, suppliers and certification evidence](revision.html)
+- [Revision C: closed-lid USB, costs and certification evidence](revision.html)
 - [Machining files and assembly guide](build.html) — drawings, fasteners and assembly order.
 - [Interactive installation sequence](index.html#assembly-preview) — inspect the six stages in 3D.
 - [Protection review](protection.html) — Q0, upstream voltage-lead protection and the remaining evidence.
@@ -16,13 +16,13 @@
 
 Daily use begins only after qualified electrical inspection and setup.
 
-1. **Configure offline.** With mains unplugged and the lid open, use the kit USB cable and ELOG to set the clock, actual CT range and interval. Confirm logging is enabled and sufficient memory remains. Remove USB, then close the lid.
+1. **Configure offline.** With mains unplugged and the lid closed, connect the kit cable from the side USB-B service port to the ELOG computer; use ELOG to set the clock, actual CT range and interval. Confirm logging is enabled and sufficient memory remains. Remove the external PC cable before reconnecting mains; the sleeved internal lead stays installed.
 2. **Run independently.** XA and the adapter stay secured inside. With Q0 OFF and the lid closed, connect one printer and the supply. Switch Q0 ON. The opaque lid hides the logger LEDs; verify recording by an offline export after the supervised pilot. Record each job's start, phase changes and finish times against the synchronized clock.
-3. **Download in batches.** After the printer finishes its shutdown/cooldown, switch Q0 OFF, unplug mains and verify absence of mains voltage. Open the lid, connect USB and export the records. Preserve raw data before clearing memory. Remove USB before the next powered run.
+3. **Download in batches.** After the printer finishes its shutdown/cooldown, switch Q0 OFF, unplug mains and verify absence of mains voltage. Keep the lid closed, connect the kit USB cable to the side service port and export the records in ELOG. Preserve raw data before clearing memory. Remove the external USB cable before the next powered run.
 
-**Q0 OFF is not isolation; its input remains live. Always unplug mains before opening. USB is not installed during printing.**
+**Q0 OFF is not isolation; its input remains live. Unplug SUPPLY IN from the wall before connecting a PC or opening the box. Only the sleeved internal USB lead remains installed during printing.**
 
-The logger stores time-series data in non-volatile memory and can be powered by USB for readout ([DENT manual](https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf), printed pp. 7, 18, 119). This design avoids the permanent powered-panel USB connection that would require additional rated insulation. Validate one complete offline run and export before collecting the experiment series.
+The logger stores time-series data in non-volatile memory and can be powered by USB for readout ([DENT manual](https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf), printed pp. 7, 18, 119). The permanent internal USB lead requires rated insulation even though the PC is connected only offline. The selected black FIT-221 sleeve has a manufacturer 600 V rating; its application, end coverage and restraint remain physical acceptance items. USB does not provide mains isolation. Validate one complete offline run and export before collecting the experiment series.
 
 ### Initial setup and electrical checks
 
@@ -60,7 +60,7 @@ Amber marks the selected material; hidden housings become transparent. Top view 
 | JL / JN / JPE distribution | 29.8 × 8.2 × 18.3 | Manufacturer connector and carrier dimensions · [Source](https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415) |
 | XA · internal Leviton 515CV | 66.3 × 39.1 × 39.1 | Manufacturer dimensional envelope; strap installation proposed · [Source](https://leviton.com/content/dam/leviton/residential/product_documents/none/Document-31435-Dimensional%20Data.jpg) |
 | CUI SMI6-9-V-P5 · existing adapter | 30.0 × 40.5 × 64.0 | Photo-identified; manufacturer body dimensions · [Source](https://www.belfuse.com/media/datasheets/products/power-supplies/SMI6.pdf) |
-| Two power-cord glands | 27.0 × 37.0 × 27.0 | Catalog power-gland envelopes · [Source](https://www.hammfg.com/electronics/small-case/accessories/1427ncg) |
+| Power glands and USB service port | 27.0 × 37.0 × 27.0 | Catalog power-gland envelopes · [Source](https://www.hammfg.com/electronics/small-case/accessories/1427ncg) |
 | DENT adapters & retained lead slack | Routing only | Illustrative routing; length not validated · [Source](https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/) |
 
 [Dimensions JSON](layout_dimensions.json) · [Enclosure CAD provenance](assets/enclosure.json) · [Materials JSON](procurement.json) · [Cable-support checks](installation_supports.json)

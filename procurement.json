@@ -1,6 +1,6 @@
 {
-  "revision": "September 23, 2026 · professor review revision B",
-  "scope": "One grounded 120 V supply, one printer at a time. Revision B uses an opaque-cover enclosure, proposed reuse of the professor’s aluminum sheet and an internal adapter connection. Five owned equipment groups and the kit USB are retained. The selected 15 A Q0 and upstream-only voltage-lead protection still require application acceptance. No purchase, physical fit, thermal test or electrical release is claimed.",
+  "revision": "September 23, 2026 · revision C · closed-lid offline USB",
+  "scope": "One grounded 120 V supply, one printer at a time. Revision C uses an opaque-cover enclosure, proposed reuse of the professor’s aluminum sheet and an internal adapter connection. Five owned equipment groups and the kit USB are retained. The selected 15 A Q0 and upstream-only voltage-lead protection still require application acceptance. No purchase, physical fit, thermal test or electrical release is claimed. Closed-lid USB export is used only after unplugging mains; the permanent internal USB lead requires rated insulation and accepted assembly.",
   "items": [
     {
       "id": "meter",
@@ -205,8 +205,8 @@
         "width": 320,
         "height": 240
       },
-      "installation": "Case and opaque gray screw cover. Only Q0 and the two power-cord glands penetrate the walls; the right wall is uncut.",
-      "location_summary": "Gray case and opaque lid; right wall has no openings.",
+      "installation": "Case and opaque gray screw cover. Q0, two power-cord glands and one USB service port penetrate the walls. XA and DC stay inside.",
+      "location_summary": "Opaque enclosure; USB service port on the right wall.",
       "supplier": "Solutions Direct",
       "compliance": {
         "status": "Manufacturer standards",
@@ -593,10 +593,10 @@
     },
     {
       "id": "usb",
-      "item": "USB data cable",
+      "item": "External PC data cable",
       "quantity": "1",
       "model": "DENT kit USB-A to USB-B cable · 1.8 m",
-      "reason": "Supplied with ELITEpro XC. Use temporarily for setup and batch downloads with the box mains unplugged and absence of mains voltage verified. Remove USB before closing and powering the enclosure. No USB wall opening, insert or permanent cable is required.",
+      "reason": "Reuse the kit USB-A to USB-B cable outside the closed enclosure. After printer shutdown, switch Q0 OFF and unplug SUPPLY IN from the wall; connect PC USB-A to the external USB-B service port. The logger is USB-powered for configuration and export. Remove this external cable before reconnecting mains.",
       "status": "Kit included · locate in the lid pocket; check the computer port and cable condition. Physical presence is not yet confirmed.",
       "availability": "kit",
       "links": [
@@ -622,9 +622,9 @@
         "width": 2000,
         "height": 2000
       },
-      "installation": "With mains unplugged and the lid removed, connect USB-B to the logger and USB-A to the ELOG computer. The 3D view shows this temporary service connection only when USB is selected. Remove the cable before powering the closed box.",
-      "location_summary": "Temporary connection at the logger USB-B port; lid open and mains unplugged.",
-      "notice": "Setup / download only — unplug mains first.",
+      "installation": "PC USB-A → kit cable → right-wall USB-B service port. The lid stays closed. Select this item to preview the external cable. Exterior cable is abbreviated in the model; retain the kit cable’s full factory length.",
+      "location_summary": "Outside the closed box: service USB-B port to the ELOG computer.",
+      "notice": "Offline export only: unplug SUPPLY IN from the wall first.",
       "supplier": "Existing kit"
     },
     {
@@ -736,7 +736,7 @@
       "item": "Screw-fixed cable mounts",
       "quantity": "Buy 6 individual pieces; all 6 installed",
       "model": "Panduit TM2S8-C",
-      "reason": "Six screw-fixed bases retain the mains bundle, XA branch conductors, CT pair, both sides of the voltage-lead coils, and the original internal DC cable. DigiKey lists individual pieces, avoiding the previous 100-piece purchase.",
+      "reason": "Six screw-fixed bases retain the mains bundle, XA branch conductors, CT pair, both sides of the voltage-lead coils, and the original internal DC cable and sleeved USB lead. DigiKey lists individual pieces, avoiding the previous 100-piece purchase.",
       "status": "Six panel locations; M4 × 16 mm screws, underside washers and locknuts in the fastener schedule.",
       "availability": "buy",
       "links": [
@@ -758,7 +758,7 @@
         "height": 1024
       },
       "installation": "Six bases at the revised panel anchor holes. The 3D locator shows each bundle and its restraint. Set final slack during dry fit; keep CT/DC separate from mains bundles.",
-      "location_summary": "Six panel supports: two AC bundles, CT pair, two coil supports and DC.",
+      "location_summary": "Six panel supports: two AC bundles, CT pair, two coil supports and DC / USB.",
       "quantity_summary": "6",
       "supplier": "DigiKey",
       "compliance": {
@@ -806,10 +806,10 @@
     {
       "id": "fasteners",
       "item": "Mounting and bonding hardware",
-      "quantity": "Four assembly groups; reuse suitable lab stock before buying",
+      "quantity": "Five assembly groups; check suitable lab stock first",
       "model": "Screw / nut / washer schedule in Build_Package.md",
-      "reason": "Q0, three WAGO carriers, six cable mounts and the dedicated aluminum-panel PE bond. XA no longer needs flange screws. Thread, length and actual stack checks are in the build package; aluminum bonding method must be accepted.",
-      "status": "No XA wall screws. Confirm stock, panel thickness and aluminum-compatible bonding hardware.",
+      "reason": "Q0, three WAGO carriers, six cable mounts and the dedicated aluminum-panel PE bond. XA no longer needs flange screws. Thread, length and actual stack checks are in the build package; aluminum bonding method must be accepted. Two M3 sets previously allowed as spares now mount the USB port, keeping the eight-set order unchanged.",
+      "status": "Eight M3 sets total: six carriers + two USB. Check actual stacks; panel bonding remains conditional.",
       "availability": "buy",
       "links": [
         {
@@ -829,8 +829,8 @@
         "width": 175,
         "height": 58
       },
-      "installation": "Mounting screw/washer/nut sets for Q0, three carriers, six cable bases and the panel PE bond. XA uses straps. Small hardware is schematic; use the build-package sizes and transfer-drilling instructions.",
-      "location_summary": "Q0, carriers, cable mounts and the panel PE bond.",
+      "installation": "Mounting screw/washer/nut sets for Q0, three carriers, six cable bases and the panel PE bond. XA uses straps. Small hardware is schematic; use the build-package sizes and transfer-drilling instructions. Two M3 × 16 sets mount the USB service flange; check wall/washer/locknut stack.",
+      "location_summary": "Q0, USB flange, carriers, cable mounts and panel PE bond.",
       "quantity_summary": "See fastener schedule",
       "supplier": "Bolt Depot",
       "compliance": {
@@ -877,6 +877,130 @@
         "status": "Mechanical accessory",
         "detail": "Verify mechanical/material suitability; this accessory does not provide mains insulation or confer assembly certification.",
         "url": "https://www.velcro.com/products/organization/heavy-duty-one-wrap-roll/"
+      }
+    },
+    {
+      "id": "usb-port",
+      "item": "Closed-lid USB service port",
+      "quantity": "1",
+      "model": "Neutrik NAUSB-W · USB-B outside / USB-A inside",
+      "reason": "Reversible USB 2.0 A/B feedthrough keeps the lid closed for offline export. Set the insert to B outside and A inside. One Ø24 mm project bore and two Ø3.2 mm project clearance holes follow the manufacturer D pattern; verify fit on received parts.",
+      "status": "Selected; check insert orientation, flange fastening, sleeve/end coverage and shield treatment. Dry indoor use; ordinary kit cable does not satisfy Neutrik’s special mated IP65 conditions.",
+      "availability": "buy",
+      "links": [
+        {
+          "label": "Buy · DigiKey",
+          "url": "https://www.digikey.com/en/products/detail/neutrik-americas-inc/NAUSB-W/29371251",
+          "kind": "buy"
+        },
+        {
+          "label": "Neutrik specification",
+          "url": "https://www.neutrik.com/en/product/nausb-w",
+          "kind": "reference"
+        },
+        {
+          "label": "Neutrik drawing",
+          "url": "https://www.neutrik.com/media/8974/download/nausb-w-2.pdf?v=1",
+          "kind": "reference"
+        }
+      ],
+      "image": {
+        "src": "assets/materials/usb-port.svg",
+        "kind": "design",
+        "alt": "USB-B service port with two mounting holes",
+        "caption": "Design illustration; use the linked manufacturer specification.",
+        "source_label": "Manufacturer specification",
+        "source_url": "https://www.neutrik.com/en/product/nausb-w",
+        "width": 320,
+        "height": 240
+      },
+      "installation": "Right wall, center Y=55 / Z=167 mm. USB-B faces outward; short internal A-to-B lead joins the rear USB-A to DENT. Keep mains unplugged while PC is connected.",
+      "location_summary": "Right wall near the front: export to PC without opening the lid.",
+      "supplier": "DigiKey",
+      "compliance": {
+        "status": "USB standard / material evidence",
+        "detail": "USB 2.0 specification; UL94 V-0 insert material. These are not a UL Listed product or a certified mains isolation barrier.",
+        "url": "https://www.neutrik.com/en/product/nausb-w"
+      }
+    },
+    {
+      "id": "usb-internal",
+      "item": "Short internal USB lead",
+      "quantity": "1",
+      "model": "StarTech USB2HAB1 · 1 ft / 304.8 mm · A male to B male",
+      "reason": "USB-B plugs into DENT; USB-A plugs into the service port inside. Short cable reduces stored slack. It stays installed during printing and must be covered by the selected rated sleeve; a USB 2.0 claim alone is not a mains insulation rating.",
+      "status": "Selected; dry-fit actual connector molds, usable flexible length, bends and retention. No standalone mains-voltage rating is claimed.",
+      "availability": "buy",
+      "links": [
+        {
+          "label": "Buy · DigiKey",
+          "url": "https://www.digikey.com/en/products/detail/startech-com/USB2HAB1/22260595",
+          "kind": "buy"
+        },
+        {
+          "label": "StarTech datasheet",
+          "url": "https://media.startech.com/cms/pdfs/usb2hab1_datasheet.pdf",
+          "kind": "reference"
+        }
+      ],
+      "image": {
+        "src": "assets/materials/usb.jpg",
+        "source_image": "https://media.startech.com/cms/products/gallery_large/usb2habx.main.jpg",
+        "kind": "reference",
+        "alt": "USB-A to USB-B connector reference; not a photo of the supplied DENT cable",
+        "caption": "USB-A/B connector reference; selected internal cable is USB2HAB1, 1 ft.",
+        "source_label": "StarTech",
+        "source_url": "https://media.startech.com/cms/pdfs/usb2hab1_datasheet.pdf",
+        "width": 2000,
+        "height": 2000
+      },
+      "installation": "From DENT USB-B to rear USB-A of the right-wall port, beside the front/right DC route. Rated sleeve covers the internal cable; retain at the shared low-voltage support without socket load.",
+      "location_summary": "Inside: DENT USB-B → short sleeved lead → service port.",
+      "supplier": "DigiKey",
+      "compliance": {
+        "status": "Data interface specification",
+        "detail": "USB 2.0 A-to-B cable; not accepted as mains insulation. Additional rated sleeve and qualified installation are required.",
+        "url": "https://media.startech.com/cms/pdfs/usb2hab1_datasheet.pdf"
+      }
+    },
+    {
+      "id": "usb-sleeve",
+      "item": "Internal USB insulation sleeve",
+      "quantity": "1 × 4 ft stick; cut to accepted coverage",
+      "model": "Alpha Wire F2213/4 BK105 · black FIT-221, 600 V",
+      "reason": "Provides the additional rated insulation required by DENT for USB cable inside an electrical enclosure. Minimum supplied ID 19.05 mm; recovered ID up to 9.53 mm. Cover the full internal cable and protect its terminations; keep clear of mains and secure against sliding. The model shows an illustrative sleeve envelope.",
+      "status": "Assembly acceptance required: measure connector passage, full coverage and end retention. Approve the recovery process for the cable/connector materials; do not infer heat-application safety from continuous operating ratings.",
+      "availability": "buy",
+      "links": [
+        {
+          "label": "Buy · DigiKey",
+          "url": "https://www.digikey.com/en/products/detail/alpha-wire/F2213-4-BK105/3718418",
+          "kind": "buy"
+        },
+        {
+          "label": "Alpha Wire 600 V specification",
+          "url": "https://www.alphawire.com/products/accessories/fit-heat-shrink-tubing/shrink-tubing/fit2213_4",
+          "kind": "reference"
+        }
+      ],
+      "image": {
+        "src": "assets/materials/usb-sleeve.svg",
+        "kind": "design",
+        "alt": "Protective insulation sleeve around internal USB cable",
+        "caption": "Design illustration; use the linked manufacturer specification.",
+        "source_label": "Manufacturer specification",
+        "source_url": "https://www.alphawire.com/products/accessories/fit-heat-shrink-tubing/shrink-tubing/fit2213_4",
+        "width": 320,
+        "height": 240
+      },
+      "installation": "Entire internal USB lead, with accepted protection at both ends and restraint at the front/right cable support. It remains installed during every mains run.",
+      "location_summary": "Around the permanent internal USB lead and its terminations.",
+      "supplier": "DigiKey",
+      "rated_voltage_v": 600,
+      "compliance": {
+        "status": "Manufacturer UL / CSA specification",
+        "detail": "Black FIT-221: UL224 and CSA198, 600 V. Material qualification does not validate this installed sleeve or provide USB galvanic isolation.",
+        "url": "https://www.alphawire.com/products/accessories/fit-heat-shrink-tubing/shrink-tubing/fit2213_4"
       }
     }
   ],
@@ -1205,7 +1329,7 @@
         "unit_price_usd": 0.06,
         "extended_usd": 0.48,
         "url": "https://boltdepot.com/Product-Details?product=6835",
-        "availability_note": "Sold individually; includes stated spares"
+        "availability_note": "Eight total: six carrier sets + two USB flange sets; no M3 spares"
       },
       {
         "material_ids": [
@@ -1220,7 +1344,7 @@
         "unit_price_usd": 0.05,
         "extended_usd": 0.4,
         "url": "https://boltdepot.com/Product-Details?product=4513",
-        "availability_note": "Sold individually; includes stated spares"
+        "availability_note": "Eight total: six carrier sets + two USB flange sets; no M3 spares"
       },
       {
         "material_ids": [
@@ -1235,7 +1359,7 @@
         "unit_price_usd": 0.07,
         "extended_usd": 0.56,
         "url": "https://boltdepot.com/Product-Details?product=4792",
-        "availability_note": "Sold individually; includes stated spares"
+        "availability_note": "Eight total: six carrier sets + two USB flange sets; no M3 spares"
       },
       {
         "material_ids": [
@@ -1341,8 +1465,53 @@
         "extended_usd": 0.24,
         "url": "https://boltdepot.com/Product-Details?product=2946",
         "availability_note": "Sold individually; proposed PE hardware remains subject to aluminum-bond acceptance"
+      },
+      {
+        "material_ids": [
+          "usb-port"
+        ],
+        "sku": "NAUSB-W",
+        "supplier": "DigiKey",
+        "seller": "DigiKey",
+        "quantity": 1,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 10.68,
+        "extended_usd": 10.68,
+        "url": "https://www.digikey.com/en/products/detail/neutrik-americas-inc/NAUSB-W/29371251",
+        "availability_note": "6473-NAUSB-W-ND; 154 listed in stock; quantity one"
+      },
+      {
+        "material_ids": [
+          "usb-internal"
+        ],
+        "sku": "USB2HAB1",
+        "supplier": "DigiKey",
+        "seller": "DigiKey",
+        "quantity": 1,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 6.38,
+        "extended_usd": 6.38,
+        "url": "https://www.digikey.com/en/products/detail/startech-com/USB2HAB1/22260595",
+        "availability_note": "5214-USB2HAB1-ND; 1,761 listed in stock; quantity one"
+      },
+      {
+        "material_ids": [
+          "usb-sleeve"
+        ],
+        "sku": "F2213/4 BK105",
+        "supplier": "DigiKey",
+        "seller": "DigiKey",
+        "quantity": 1,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 9.39,
+        "extended_usd": 9.39,
+        "url": "https://www.digikey.com/en/products/detail/alpha-wire/F2213-4-BK105/3718418",
+        "availability_note": "F2213/4BK105-ND; 1,182 listed in stock; one 4 ft stick"
       }
     ],
-    "material_subtotal_usd": 261.26
+    "material_subtotal_usd": 287.71
   }
 }

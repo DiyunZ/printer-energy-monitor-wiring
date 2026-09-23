@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sources and design limits · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=15"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Wiring_References_EN.md" download>Download Markdown</a></nav><h1>Sources and design decisions — revision B</h1>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sources and design limits · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=15"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Wiring_References_EN.md" download>Download Markdown</a></nav><h1>Sources and design decisions — revision C</h1>
 <p>September 23, 2026. One 120 V grounded supply and one printer at a time, confirmed by the user. This is an engineering review package; physical and electrical release remain open in the <a href="build.html">build package</a>.</p>
 <h2>Primary references</h2>
 <div class="table-wrap"><table>
@@ -68,7 +68,7 @@
 <td id="r12">R12</td>
 <td><a href="https://www.hammfg.com/part/1427NCGPG13LB">Hammond 1427NCGPG13LB</a></td>
 <td>Two long-thread power glands.</td>
-<td>Measure actual cord and wall stacks; no DC/USB feedthrough.</td>
+<td>Measure actual cord and wall stacks; no DC feedthrough; USB uses a separate service port.</td>
 </tr>
 <tr>
 <td id="r13">R13</td>
@@ -84,7 +84,7 @@
 </tr>
 <tr>
 <td id="r15">R15</td>
-<td><a href="revision.html">Revision B cost and supplier evidence</a></td>
+<td><a href="revision.html">Revision C cost and supplier evidence</a></td>
 <td>Box/panel comparison and conditional DIN breaker option.</td>
 <td>Dated web prices, not quotes; tax, freight and fabrication excluded.</td>
 </tr>
@@ -92,7 +92,25 @@
 <td id="r16">R16</td>
 <td><a href="https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf">DENT XC manual</a></td>
 <td>Included 1.8 m USB-A to B cable; USB powers the meter for configuration/download. Internal non-volatile memory supports independent logging.</td>
-<td>Supplied USB requires rated insulation inside a powered panel. This design removes USB during mains operation and provides no USB wall entry.</td>
+<td>Supplied USB requires rated insulation inside a powered panel. Only the external PC cable is removed during mains operation. The internal lead stays installed in a rated sleeve; download through the side port with the lid closed and mains unplugged.</td>
+</tr>
+<tr>
+<td id="r17">R17</td>
+<td><a href="https://www.neutrik.com/en/product/nausb-w">Neutrik NAUSB-W</a> · <a href="https://www.neutrik.com/media/8974/download/nausb-w-2.pdf?v=1">drawing</a></td>
+<td>Reversible USB 2.0 A/B; D-pattern, 26 × 31 mm flange and 40.55 mm axial envelope.</td>
+<td>USB-B faces out. UL94 V-0 is a material rating, not a product listing. Ordinary cable does not meet special IP65 mating conditions.</td>
+</tr>
+<tr>
+<td id="r18">R18</td>
+<td><a href="https://media.startech.com/cms/pdfs/usb2hab1_datasheet.pdf">StarTech USB2HAB1</a></td>
+<td>USB 2.0 A male to B male, 1 ft nominal cable.</td>
+<td>Actual molds, usable cable length and approved sleeve application need checking. No mains rating claimed for the bare cable.</td>
+</tr>
+<tr>
+<td id="r19">R19</td>
+<td><a href="https://www.alphawire.com/products/accessories/fit-heat-shrink-tubing/shrink-tubing/fit2213_4">Alpha Wire black FIT-221-3/4</a></td>
+<td>UL224 / CSA198, 600 V sleeve; order F2213/4 BK105.</td>
+<td>Full internal coverage, protected ends, retention and thermal application must be accepted. No installed-assembly qualification is claimed.</td>
 </tr>
 </tbody></table></div>
 <p>The <a href="installation.html">per-material audit</a> also links primary cord, wire, ring, cable-tie and printer sources. Retail links are in the <a href="materials.html">materials list</a>. Source documents describe components, not approval of this custom assembly.</p>
@@ -105,11 +123,11 @@
 <li>A1 connects directly to JL after Q0, then to L1 through the original full voltage lead. Acceptance of upstream-only protection is required before use. A2 and A3 connect JN to L2 and N. The three OEM pigtails are sensing accessories, not load wires or PE conductors. Keep the mating pairs inside the enclosure.</li>
 <li>Only printer hot crosses CT once. Adapter and voltage-tap branch currents are outside the measured current. Voltage is sensed upstream, so downstream cord loss and voltage drop still affect the measurement boundary.</li>
 <li>XA is an internal Leviton 515CV cord connector. Its ground contact, printer earth and aluminum panel receive deliberate PE connections. Two 515CV connectors are required total.</li>
-<li>The original adapter and flat DC cable remain intact inside. The original DC plug connects directly to the logger. The outlet and supply share Q0&#39;s capacity. XA is for the logger adapter only. Keep DC separated from mains. USB is connected only temporarily with mains unplugged and removed before the lid is closed and power is restored.</li>
+<li>The original adapter and flat DC cable remain intact inside. The original DC plug connects directly to the logger. The outlet and supply share Q0&#39;s capacity. XA is for the logger adapter only. Keep DC separated from mains. External USB is connected only with mains unplugged; the lid stays closed. Disconnect the PC before restoring power. The internal USB lead remains sleeved and secured.</li>
 <li>ELOG must be configured and validated before routine use. Powering the instrument is not proof that recording started. Verify CT scaling, polarity, reference readings and restart behavior.</li>
 </ul>
 <h2>Digital checks and limits</h2>
-<p><code>layout_dimensions.json</code> supplies the body locations for the 3D scene and wiring plan. Rear is at the top of both plan views. Browser checks compare actual rendered body bounds with SVG footprints for the 17 modeled envelopes; schematic terminal symbols and wire bends are simplified.</p>
+<p><code>layout_dimensions.json</code> supplies the body locations for the 3D scene and wiring plan. Rear is at the top of both plan views. Browser checks compare actual rendered body bounds with SVG footprints for the 18 modeled envelopes; schematic terminal symbols and wire bends are simplified.</p>
 <p>The original Hammond STEP is retained at full scale. Project machining is generated with build123d 0.11.1; the case and panel are tessellated at 0.3 mm. Original cover/hardware meshes retain their earlier 0.45 mm triangulation. Numerical surface-contact exclusion at the seated panel is 0.0001 mm; these values are not manufacturing tolerances. Exact STEP cut-through gauges and the dated source hash are in <code>fabrication/cad-checks.json</code>.</p>
 <p>Nominal insertion sweeps are recorded in the current installation audit after excluding intentional panel-support contact. Install and restrain XA on the panel; there is no side outlet. Lid checks use nine sampled rays per body. These are geometric screens, not tolerance, thermal, electrical-clearance or flexible-cable proofs. The 2 m / 3 mm voltage-lead coil is an illustrative storage scenario, not a measurement of the supplied cables.</p>
 <p>The circuit checker validates 21 named paths, separated nets, printer-hot-only CT routing and Q0-open behavior. Regression tests reject selected wiring mistakes. Website tests verify gestures, views, alignment, images, links and responsive layout. No check constitutes a physical dry fit or energized acceptance result. See the <a href="build.html">build package</a> for the exact remaining work.</p>

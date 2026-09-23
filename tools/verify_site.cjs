@@ -26,9 +26,9 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  assert.equal(await page.locator('details[open]').count(),0,'Supporting details should be collapsed initially');
  assert.equal(await page.locator('#layout').isVisible(),true);
  assert.equal(await page.locator('#wiring').isVisible(),false);
- assert.equal(await page.locator('.materials tbody tr:visible').count(),16);
+ assert.equal(await page.locator('.materials tbody tr:visible').count(),19);
  assert.equal(await page.locator('#owned-materials').getAttribute('open'),null);
- assert.equal(await page.locator('#confirm .review-items li').count(),3);
+ assert.equal(await page.locator('#confirm .review-items li').count(),4);
  assert.equal(await page.locator('#assembly-preview').isVisible(),false);
  await page.locator('#tab-layout').focus();await page.keyboard.press('ArrowRight');
  assert.equal(await page.locator('#wiring').isVisible(),true);
@@ -73,7 +73,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   scale:Number(svg.dataset.layoutScale),origin:[Number(svg.dataset.layoutOriginX),Number(svg.dataset.layoutOriginY)],
   bodies:[...svg.querySelectorAll('.component-footprint')].map(e=>({id:e.dataset.layoutId,x:e.x.baseVal.value,y:e.y.baseVal.value,w:e.width.baseVal.value,h:e.height.baseVal.value}))
  }));
- assert.equal(plan.bodies.length,17,'Every placed body, including both internal power parts, must appear in the wiring plan');
+ assert.equal(plan.bodies.length,18,'Every placed body, including both internal power parts, must appear in the wiring plan');
  assert.deepEqual(plan.bodies.map(p=>p.id).sort(),Object.keys(initial.planBodies).sort());
  for(const p of plan.bodies){
   const actual=initial.planBodies[p.id],bounds=[actual.min[0],actual.min[2],actual.size[0],actual.size[2]];
@@ -267,7 +267,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   }
   else if(file==='references.html')assert.equal(await page.locator('#r1').count(),1);
   else if(file==='installation.html') {
-   assert.match(await page.locator('body').innerText(),/STOCK, FIT AND ELECTRICAL ACCEPTANCE OPEN/);
+   assert.match(await page.locator('body').innerText(),/STOCK, USB ASSEMBLY AND ELECTRICAL ACCEPTANCE OPEN/);
    assert.equal(await page.locator('a[href^="index.html#material-"]').count(),bom.items.length);
    assert.equal(await page.locator('#simulation').count(),1);
   } else if(file==='build.html') {

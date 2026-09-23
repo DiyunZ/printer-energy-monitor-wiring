@@ -1,9 +1,9 @@
 import * as THREE from 'three';
 import { OrbitControls } from './vendor/OrbitControls.js';
 import { RoundedBoxGeometry } from './vendor/RoundedBoxGeometry.js';
-import { installMaterialLocator } from './material-locator.js?v=17';
-import { addInstallationHardware } from './installation-hardware.js?v=24';
-import { screenCableBodies } from './cable-supports.js?v=23';
+import { installMaterialLocator } from './material-locator.js?v=25';
+import { addInstallationHardware } from './installation-hardware.js?v=25';
+import { screenCableBodies } from './cable-supports.js?v=25';
 import { showDesignPanel } from './site-navigation.js?v=15';
 
 // All geometry is in millimetres. Only the camera changes the screen scale.
@@ -14,11 +14,11 @@ const V = a => new THREE.Vector3(...a);
 
 async function start() {
   const [dimensions, cad, buffer, review, procurement] = await Promise.all([
-    fetch('./layout_dimensions.json?v=23').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
-    fetch('./assets/enclosure.json?v=23').then(r => { if (!r.ok) throw Error('CAD manifest unavailable'); return r.json(); }),
-    fetch('./assets/enclosure.bin?v=23').then(r => { if (!r.ok) throw Error('CAD geometry unavailable'); return r.arrayBuffer(); }),
-    fetch('./installation_review.json?v=23').then(r => { if (!r.ok) throw Error('Installation review unavailable'); return r.json(); }),
-    fetch('./procurement.json?v=24').then(r => { if (!r.ok) throw Error('Materials unavailable'); return r.json(); })
+    fetch('./layout_dimensions.json?v=25').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
+    fetch('./assets/enclosure.json?v=25').then(r => { if (!r.ok) throw Error('CAD manifest unavailable'); return r.json(); }),
+    fetch('./assets/enclosure.bin?v=25').then(r => { if (!r.ok) throw Error('CAD geometry unavailable'); return r.arrayBuffer(); }),
+    fetch('./installation_review.json?v=25').then(r => { if (!r.ok) throw Error('Installation review unavailable'); return r.json(); }),
+    fetch('./procurement.json?v=25').then(r => { if (!r.ok) throw Error('Materials unavailable'); return r.json(); })
   ]);
   const parts = Object.fromEntries(dimensions.parts.map(p => [p.id, p]));
   const instances = Object.fromEntries(dimensions.instances.map(p => [p.id, p]));
@@ -242,7 +242,7 @@ async function start() {
     mark('cord-glands', id, p.label, [...planBodies[id],trim]);
   }
   ['supply-entry','printer-entry'].forEach(gland);
-  tag('SUPPLY IN',[-239,54,144],'entries'); tag('TO PRINTER',[3,44,-254],'entries');
+  tag('SUPPLY IN · to wall',[-239,54,144],'entries'); tag('TO PRINTER · plug printer here',[3,44,-254],'entries');
   // Actual wire routes remain in the separately validated schematic. These curved paths show physical routing intent.
   const hot='#20262b', neutral='#c9d0d5', pe='#23945e', blue='#268bd4', signal='#a08bb5';
   locatedCable('cord','supply','Supply cord',[[-275,43,128],[-225,43,128],[-157,43,128]],'#293137',4.6,'entries');
@@ -263,7 +263,10 @@ async function start() {
   locatedCable('cord','printer','Jacket through output gland',[[0,36,-190],[0,36,-240]],'#2a333c',4.6,'entries',false);
   locatedCable('cord','printer','Printer cord outside enclosure',[[0,36,-240],[0,36,-258],[18,36,-283]],'#2a333c',4.6,'entries');
   planBodies['printer-plug']=[box(instances['printer-plug'].size,instances['printer-plug'].position,'#e2b837','entries',6)];
-  mark('printer-connector','connector','Printer output connector',[...planBodies['printer-plug'],cylinder(12,3,[24,36,-326],'#e1d7ad','entries','z')]);
+  const printerFace=[cylinder(12,3,[24,36,-326],'#e1d7ad','entries','z')];
+  for(const x of [-6.35,6.35])printerFace.push(box([2.3,8,.4],[24+x,39,-327.55],'#293037','entries'));
+  printerFace.push(cylinder(2.5,.4,[24,29,-327.55],'#293037','entries','z'));
+  mark('printer-connector','connector','Plug the printer’s original wall plug here',[...planBodies['printer-plug'],...printerFace]);
   locatedCable('cord','aux-hot','Internal XA hot',[[-135,13,-138],[-146,17,-154],[-132,12,-175],[-35,12,-175],[0,12,-175],[40,12,-175],[46,18,-175]],hot,1.7,'outlet');
   locatedCable('cord','aux-neutral','Internal XA neutral',[[-127,13,-48],[-148,21,-65],[-143,21,-153],[-117,12,-167],[-35,12,-167],[0,12,-167],[40,12,-167],[46,18,-174]],neutral,1.7,'outlet');
   locatedCable('cord','aux-pe','Internal XA protective earth',[[-119.2,13,26.15],[-104,18,42],[-103,23,22],[-103,23,-80],[-92,12,-183],[-35,12,-183],[0,12,-183],[40,12,-183],[46,18,-176]],pe,1.7,'outlet');
@@ -310,9 +313,36 @@ async function start() {
   const dcInside=locatedCable('adapter','adapter','Original DC cable, entirely inside',[[-10,13,-8],[20,16,20],[26,16,140],[55,15,177],[126,12,177],[142,12,168],[142,12,150],[142,12,142],[132,16,134],[90,18,140],[mx-17,18,mz+ml/2+39]],'#554534',1.4,'adapter');
   dcInside.userData.route.id='adapter:dc-internal';
   mark('adapter','adapter','Original adapter and cable inside',[cylinder(4.8,35,[mx-17,18,mz+ml/2+21.5],'#24282b','adapter','z')]);
+  // Neutrik D-pattern, rotated to a vertical 31 mm flange. B faces out, A in.
+  // The cut is normal to the drafted wall in CAD; this view is axis-aligned.
+  const up=instances['usb-entry'], ux=up.position[0]+up.size[0]/2-5, uy=up.position[1], uz=up.position[2];
+  const portStart=allMeshes.length;
+  box([2,31,26],[ux+1,uy,uz],'#aab6bd','entries',1);
+  cylinder(11.8,30,[ux-15,uy,uz],'#a3adb5','entries','x');
+  box([10.55,12,15],[ux-30.275,uy,uz],'#313c48','entries',1);
+  cylinder(11.5,2.6,[ux+3.5,uy,uz],'#556472','entries','x');
+  box([.2,11,11],[ux+4.85,uy,uz],'#d5dde0','entries');
+  box([.1,8,8],[ux+4.95,uy,uz],'#182632','entries');
+  planBodies['usb-entry']=allMeshes.slice(portStart);
+  mark('usb-port','port','USB-B outside / USB-A inside',planBodies['usb-entry']);
+  decal('USB · MAINS UNPLUGGED',48,7,[ux+1.5,uy+24,uz],'entries','right');
+  tag('USB · offline PC export',[ux+25,uy+30,uz],'entries');
+  const usbInside=locatedCable('usb-internal','internal','DENT to service port',dimensions.usbService.route,'#516d86',2.4,'entries');
+  mark('usb-internal','internal','Short internal A-to-B lead',[
+    box([11.2,11.1,24],[107,23,112],'#43576a','entries',2),
+    box([23.4,11.1,13],[133.7,uy,uz],'#43576a','entries',2)
+  ]);
+  const sleeve=locatedCable('usb-sleeve','internal','600 V sleeve — installation to be accepted',dimensions.usbService.route,'#303d44',dimensions.usbService.sleeveOuterRadiusMm,'entries');
+  const sleeveEnds=[cylinder(9,23,[107,23,112.5],'#303d44','entries','z'),cylinder(9,24,[134,uy,uz],'#303d44','entries','x')];
+  mark('usb-sleeve','internal','Cable sleeve and illustrative end protection',sleeveEnds);
+  materialLocations['usb-internal'][0].reveal=[sleeve,...sleeveEnds];
   const usbPreviewStart = allMeshes.length;
-  locatedCable('usb','usb','Temporary USB — mains unplugged',[[mx+16,23,mz+ml/2+21],[132,30,132],[148,92,150],[151,160,160],[169,205,180],[215,215,180],[255,205,180]],'#516d86',2.4,'entries');
-  mark('usb','usb','Temporary USB — mains unplugged',[box([10,11,20],[mx+16,23,mz+ml/2+11],'#43576a','entries',2)]);
+  locatedCable('usb','usb','External PC USB — wall plug disconnected',[[ux+25,uy,uz],[225,uy,uz],[260,uy,150],[285,uy,135]],'#516d86',2.4,'entries');
+  mark('usb','usb','External kit cable — lid stays closed',[
+    box([20,11,11],[ux+15,uy,uz],'#43576a','entries',2),
+    box([22,8,14],[296,uy,135],'#43576a','entries',2),
+    box([10,4.5,12],[312,uy,135],'#b6c0c5','entries',.3)
+  ]);
   const usbPreview = allMeshes.slice(usbPreviewStart);
   const supportChecks=addInstallationHardware({ dimensions, instances, parts, box, cylinder, mesh, material, decal, mark, capture, materialLocations, cableRoutes });
   // Remaining integral features belong to their purchased assembly, not a new BOM item.
@@ -380,7 +410,7 @@ async function start() {
       el.style.left=x+'px';el.style.top=y+'px';
     });
   }
-  function render(){usbPreview.forEach(m=>m.visible=locator?.active==='usb'&&['cutaway','lifted'].includes($('model-shell').value)&&assemblyStage===0&&$('model-wires').checked);locator?.sync();renderer.render(scene,camera);updateLabels();locator?.updateLabels();}
+  function render(){usbPreview.forEach(m=>m.visible=locator?.active==='usb'&&assemblyStage===0&&$('model-wires').checked);locator?.sync();renderer.render(scene,camera);updateLabels();locator?.updateLabels();}
   function resize() {
     const w=host.clientWidth,h=host.clientHeight;
     if(!w||!h)return; // Hidden tabs retain the last valid projection and canvas size.
@@ -471,7 +501,7 @@ async function start() {
   controls.addEventListener('start',()=>document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed','false')));
   const aliases={enclosure:'case',breaker:'q0',receptacle:'outlet',connectors:'terminals',carriers:'terminals','blue-leads':'leads','voltage-leads':'leads'};
   locator=installMaterialLocator({items:procurement.items,locations:materialLocations,scene,camera,controls,host,render,
-    prepare:id=>{showDesignPanel('layout');resize();setAssembly(0,false);$('assembly-preview').hidden=true;$('assembly-preview').open=false;$('model-shell').value=id==='usb'?'cutaway':'xray';$('model-wires').checked=true;appearance();selection.visible=false;},
+    prepare:id=>{showDesignPanel('layout');resize();setAssembly(0,false);$('assembly-preview').hidden=true;$('assembly-preview').open=false;$('model-shell').value=['usb','usb-port'].includes(id)?'closed':'xray';$('model-wires').checked=true;appearance();selection.visible=false;},
     describe:p=>{
       activePart=p.id;
       materialCopy(p);
@@ -505,7 +535,7 @@ async function start() {
     // Screen the insulated route against the meter body; actual port terminations are modeled outside it.
     return cableRoutes.flatMap((r,index)=>{const envelope=b.clone().expandByScalar(r.radius);const hits=r.samples.filter(p=>envelope.containsPoint(V(p))).length;return hits?[{index,part:r.part,samplesInside:hits}]:[]});
   }
-  window.enclosureDiagnostics=()=>({supportChecks,usbPreviewVisible:usbPreview.some(m=>m.visible),materialLocator:locator.diagnostics(),units:dimensions.units,camera:camera.position.toArray(),zoom:camera.zoom,mode:$('model-shell').value,selected:activePart,cadSize:cad.bounds.size,projectedMeter:V(parts.meter.position).project(camera).toArray(),meterSize:parts.meter.size,meshCount:picking.length,triangles:renderer.info.render.triangles,wiresVisible:wires.visible,lidOffset:lidObjects[0].position.y,shellVisible:shellObjects[0].visible,shellOpacity:shellMat.opacity,fitBodies:boundsOf(fitBodies),planBodies:boundsOf({...planBodies,...fitBodies}),voltageLeadLengths,breakerTerminals:breakerTerminals.map(m=>m.position.toArray()),breakerMounts:breakerMounts.map(m=>m.position.toArray()),assemblyStage,panelInsertionOffset:groups.panel.position.y,visibleGroups:Object.entries(groups).filter(([,g])=>g.visible).map(([id])=>id),lidVisible:lidObjects[0].visible,meterRouteIntrusions:meterRouteIntrusions()});
+  window.enclosureDiagnostics=()=>({supportChecks,internalUsbLengthMm:usbInside.userData.lengthMm,usbServiceMode:dimensions.usbService.mode,usbPreviewVisible:usbPreview.some(m=>m.visible),materialLocator:locator.diagnostics(),units:dimensions.units,camera:camera.position.toArray(),zoom:camera.zoom,mode:$('model-shell').value,selected:activePart,cadSize:cad.bounds.size,projectedMeter:V(parts.meter.position).project(camera).toArray(),meterSize:parts.meter.size,meshCount:picking.length,triangles:renderer.info.render.triangles,wiresVisible:wires.visible,lidOffset:lidObjects[0].position.y,shellVisible:shellObjects[0].visible,shellOpacity:shellMat.opacity,fitBodies:boundsOf(fitBodies),planBodies:boundsOf({...planBodies,...fitBodies}),voltageLeadLengths,breakerTerminals:breakerTerminals.map(m=>m.position.toArray()),breakerMounts:breakerMounts.map(m=>m.position.toArray()),assemblyStage,panelInsertionOffset:groups.panel.position.y,visibleGroups:Object.entries(groups).filter(([,g])=>g.visible).map(([id])=>id),lidVisible:lidObjects[0].visible,meterRouteIntrusions:meterRouteIntrusions()});
   window.cableGeometryDiagnostics=()=>({supports:supportChecks,routes:cableRoutes,
     bodyIntrusions:screenCableBodies(cableRoutes,boundsOf(fitBodies),parts.ct)});
 }

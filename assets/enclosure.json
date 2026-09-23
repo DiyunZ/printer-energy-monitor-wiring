@@ -8,304 +8,304 @@
       "name": "CAD-001621_Long_Snap",
       "role": "shell",
       "positionOffset": 0,
-      "positionCount": 263421,
-      "indexOffset": 1053684,
-      "indexCount": 359472
+      "positionCount": 264951,
+      "indexOffset": 1059804,
+      "indexCount": 361020
     },
     {
       "name": "70-60250",
       "role": "hardware",
-      "positionOffset": 2491572,
+      "positionOffset": 2503884,
       "positionCount": 1497,
-      "indexOffset": 2497560,
+      "indexOffset": 2509872,
       "indexCount": 1434
     },
     {
       "name": "70-60250",
       "role": "hardware",
-      "positionOffset": 2503296,
+      "positionOffset": 2515608,
       "positionCount": 1497,
-      "indexOffset": 2509284,
+      "indexOffset": 2521596,
       "indexCount": 1434
     },
     {
       "name": "70-60250",
       "role": "hardware",
-      "positionOffset": 2515020,
+      "positionOffset": 2527332,
       "positionCount": 1497,
-      "indexOffset": 2521008,
+      "indexOffset": 2533320,
       "indexCount": 1434
     },
     {
       "name": "70-60250",
       "role": "hardware",
-      "positionOffset": 2526744,
+      "positionOffset": 2539056,
       "positionCount": 1497,
-      "indexOffset": 2532732,
+      "indexOffset": 2545044,
       "indexCount": 1434
     },
     {
       "name": "70-60250",
       "role": "hardware",
-      "positionOffset": 2538468,
+      "positionOffset": 2550780,
       "positionCount": 1497,
-      "indexOffset": 2544456,
+      "indexOffset": 2556768,
       "indexCount": 1434
     },
     {
       "name": "70-60250",
       "role": "hardware",
-      "positionOffset": 2550192,
+      "positionOffset": 2562504,
       "positionCount": 1497,
-      "indexOffset": 2556180,
+      "indexOffset": 2568492,
       "indexCount": 1434
     },
     {
       "name": "70-60250",
       "role": "hardware",
-      "positionOffset": 2561916,
+      "positionOffset": 2574228,
       "positionCount": 1497,
-      "indexOffset": 2567904,
+      "indexOffset": 2580216,
       "indexCount": 1434
     },
     {
       "name": "70-60250",
       "role": "hardware",
-      "positionOffset": 2573640,
+      "positionOffset": 2585952,
       "positionCount": 1497,
-      "indexOffset": 2579628,
+      "indexOffset": 2591940,
       "indexCount": 1434
     },
     {
       "name": "70-60250",
       "role": "hardware",
-      "positionOffset": 2585364,
+      "positionOffset": 2597676,
       "positionCount": 1497,
-      "indexOffset": 2591352,
+      "indexOffset": 2603664,
       "indexCount": 1434
     },
     {
       "name": "70-60250",
       "role": "hardware",
-      "positionOffset": 2597088,
+      "positionOffset": 2609400,
       "positionCount": 1497,
-      "indexOffset": 2603076,
+      "indexOffset": 2615388,
       "indexCount": 1434
     },
     {
       "name": "70-60250",
       "role": "hardware",
-      "positionOffset": 2608812,
+      "positionOffset": 2621124,
       "positionCount": 1497,
-      "indexOffset": 2614800,
+      "indexOffset": 2627112,
       "indexCount": 1434
     },
     {
       "name": "70-60250",
       "role": "hardware",
-      "positionOffset": 2620536,
+      "positionOffset": 2632848,
       "positionCount": 1497,
-      "indexOffset": 2626524,
+      "indexOffset": 2638836,
       "indexCount": 1434
     },
     {
       "name": "70-60250",
       "role": "hardware",
-      "positionOffset": 2632260,
+      "positionOffset": 2644572,
       "positionCount": 1497,
-      "indexOffset": 2638248,
+      "indexOffset": 2650560,
       "indexCount": 1434
     },
     {
       "name": "70-60250",
       "role": "hardware",
-      "positionOffset": 2643984,
+      "positionOffset": 2656296,
       "positionCount": 1497,
-      "indexOffset": 2649972,
+      "indexOffset": 2662284,
       "indexCount": 1434
     },
     {
       "name": "CAD-001622_CAD-001622_CLEAR",
       "role": "lid",
-      "positionOffset": 2655708,
+      "positionOffset": 2668020,
       "positionCount": 103416,
-      "indexOffset": 3069372,
+      "indexOffset": 3081684,
       "indexCount": 131544
     },
     {
       "name": "CAD-002552",
       "role": "lid",
-      "positionOffset": 3595548,
+      "positionOffset": 3607860,
       "positionCount": 1392,
-      "indexOffset": 3601116,
+      "indexOffset": 3613428,
       "indexCount": 1200
     },
     {
       "name": "55-103275316_PreviewCfg",
       "role": "lid",
-      "positionOffset": 3605916,
+      "positionOffset": 3618228,
       "positionCount": 1953,
-      "indexOffset": 3613728,
+      "indexOffset": 3626040,
       "indexCount": 2094
     },
     {
       "name": "70-006ORING",
       "role": "lid",
-      "positionOffset": 3622104,
+      "positionOffset": 3634416,
       "positionCount": 5652,
-      "indexOffset": 3644712,
+      "indexOffset": 3657024,
       "indexCount": 9072
     },
     {
       "name": "55-103275316_PreviewCfg",
       "role": "lid",
-      "positionOffset": 3681000,
+      "positionOffset": 3693312,
       "positionCount": 1953,
-      "indexOffset": 3688812,
+      "indexOffset": 3701124,
       "indexCount": 2094
     },
     {
       "name": "55-103275316_PreviewCfg",
       "role": "lid",
-      "positionOffset": 3697188,
+      "positionOffset": 3709500,
       "positionCount": 1953,
-      "indexOffset": 3705000,
+      "indexOffset": 3717312,
       "indexCount": 2094
     },
     {
       "name": "55-103275316_PreviewCfg",
       "role": "lid",
-      "positionOffset": 3713376,
+      "positionOffset": 3725688,
       "positionCount": 1953,
-      "indexOffset": 3721188,
+      "indexOffset": 3733500,
       "indexCount": 2094
     },
     {
       "name": "70-006ORING",
       "role": "lid",
-      "positionOffset": 3729564,
+      "positionOffset": 3741876,
       "positionCount": 5652,
-      "indexOffset": 3752172,
+      "indexOffset": 3764484,
       "indexCount": 9072
     },
     {
       "name": "70-006ORING",
       "role": "lid",
-      "positionOffset": 3788460,
+      "positionOffset": 3800772,
       "positionCount": 5652,
-      "indexOffset": 3811068,
+      "indexOffset": 3823380,
       "indexCount": 9072
     },
     {
       "name": "70-006ORING",
       "role": "lid",
-      "positionOffset": 3847356,
+      "positionOffset": 3859668,
       "positionCount": 5652,
-      "indexOffset": 3869964,
+      "indexOffset": 3882276,
       "indexCount": 9072
     },
     {
       "name": "2428001",
       "role": "hardware",
-      "positionOffset": 3906252,
+      "positionOffset": 3918564,
       "positionCount": 11427,
-      "indexOffset": 3951960,
+      "indexOffset": 3964272,
       "indexCount": 13122
     },
     {
       "name": "55-103212316",
       "role": "hardware",
-      "positionOffset": 4004448,
+      "positionOffset": 4016760,
       "positionCount": 8184,
-      "indexOffset": 4037184,
+      "indexOffset": 4049496,
       "indexCount": 7740
     },
     {
       "name": "2428001",
       "role": "hardware",
-      "positionOffset": 4068144,
+      "positionOffset": 4080456,
       "positionCount": 11427,
-      "indexOffset": 4113852,
+      "indexOffset": 4126164,
       "indexCount": 13122
     },
     {
       "name": "55-103212316",
       "role": "hardware",
-      "positionOffset": 4166340,
+      "positionOffset": 4178652,
       "positionCount": 8184,
-      "indexOffset": 4199076,
+      "indexOffset": 4211388,
       "indexCount": 7740
     },
     {
       "name": "2428001",
       "role": "hardware",
-      "positionOffset": 4230036,
+      "positionOffset": 4242348,
       "positionCount": 11427,
-      "indexOffset": 4275744,
+      "indexOffset": 4288056,
       "indexCount": 13122
     },
     {
       "name": "55-103212316",
       "role": "hardware",
-      "positionOffset": 4328232,
+      "positionOffset": 4340544,
       "positionCount": 8184,
-      "indexOffset": 4360968,
+      "indexOffset": 4373280,
       "indexCount": 7740
     },
     {
       "name": "2428001",
       "role": "hardware",
-      "positionOffset": 4391928,
+      "positionOffset": 4404240,
       "positionCount": 11427,
-      "indexOffset": 4437636,
+      "indexOffset": 4449948,
       "indexCount": 13122
     },
     {
       "name": "55-103212316",
       "role": "hardware",
-      "positionOffset": 4490124,
+      "positionOffset": 4502436,
       "positionCount": 8184,
-      "indexOffset": 4522860,
+      "indexOffset": 4535172,
       "indexCount": 7740
     },
     {
       "name": "70-60825-2",
       "role": "panel",
-      "positionOffset": 4553820,
+      "positionOffset": 4566132,
       "positionCount": 10098,
-      "indexOffset": 4594212,
+      "indexOffset": 4606524,
       "indexCount": 10032
     },
     {
       "name": "55-1032516_PreviewCfg",
       "role": "panel",
-      "positionOffset": 4634340,
+      "positionOffset": 4646652,
       "positionCount": 3246,
-      "indexOffset": 4647324,
+      "indexOffset": 4659636,
       "indexCount": 4956
     },
     {
       "name": "55-1032516_PreviewCfg",
       "role": "panel",
-      "positionOffset": 4667148,
+      "positionOffset": 4679460,
       "positionCount": 3246,
-      "indexOffset": 4680132,
+      "indexOffset": 4692444,
       "indexCount": 4956
     },
     {
       "name": "55-1032516_PreviewCfg",
       "role": "panel",
-      "positionOffset": 4699956,
+      "positionOffset": 4712268,
       "positionCount": 3246,
-      "indexOffset": 4712940,
+      "indexOffset": 4725252,
       "indexCount": 4956
     },
     {
       "name": "55-1032516_PreviewCfg",
       "role": "panel",
-      "positionOffset": 4732764,
+      "positionOffset": 4745076,
       "positionCount": 3246,
-      "indexOffset": 4745748,
+      "indexOffset": 4758060,
       "indexCount": 4956
     }
   ],

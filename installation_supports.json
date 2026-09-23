@@ -87,17 +87,18 @@
     },
     {
       "id": "dc",
-      "label": "Original adapter DC cable",
-      "crossings": 1,
+      "label": "Original DC cable and sleeved USB lead",
+      "crossings": 2,
       "routeIds": [
-        "adapter:dc-internal"
+        "adapter:dc-internal",
+        "usb-sleeve:internal"
       ],
       "missingRoutes": [],
-      "minimumOpeningClearanceMm": 0.9000000000000008,
+      "minimumOpeningClearanceMm": 0.9000000000000004,
       "bandWidthMm": 4.8,
-      "loopWidthMm": 12,
-      "loopHeightMm": 9.3,
-      "lengthWithLockAllowanceMm": 63.6814150222053,
+      "loopWidthMm": 18.803603230183484,
+      "loopHeightMm": 28.488252630369878,
+      "lengthWithLockAllowanceMm": 115.66512674331203,
       "pass": true
     }
   ],

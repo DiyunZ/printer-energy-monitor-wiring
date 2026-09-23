@@ -8,7 +8,7 @@ September 20, 2026 · 120 V grounded supply · one printer at a time.
 |---|---|---|
 | Q0, CA1-B0-24-615-121-DG | 15 A, delay 24, UL489 option; 10 kA interrupting rating at 120 V AC | Selected for purchase by the user on September 21, 2026, following the professor's confirmation of the 15 A design limit. Site and startup checks remain pre-use acceptance items; Master Electronics lists one at $40.32 and 16 in stock on September 23; delivery remains checkout-dependent. |
 | Voltage tap | A1 connects to JL after Q0; no dedicated fuse | Confirm that upstream Q0 protection is suitable for the original DENT leads before energizing. |
-| USB cable | Included in DENT kit; use the lid-pocket cable | No routine purchase. Confirm it is present; use only for offline service. |
+| USB cable | Included in DENT kit; use the lid-pocket cable | Reuse outside the closed box. Add the listed service port, short internal lead and rated sleeve; use PC only after unplugging mains. |
 | Internal adapter power | XA 515CV + original CUI cable, entirely inside | No DC extension or wall feedthrough. Verify plug retention and closed-enclosure temperature. |
 
 The [completed sourcing comparison](revision.html#breaker-options) retains the exact Carling at $40.32. Altech 1C15UL plus one compatible rail and two CA802 stops totals $39.39 before fasteners, operator access, fabrication and freight. Its different trip curve and mounting do not justify an unreviewed substitution for that small component-price difference. The remaining protection decisions concern the physical application, not an unresolved supplier quote.
@@ -51,12 +51,12 @@ The user confirms the three differently colored pigtails as original DENT kit co
 
 > For our proposed 120 V measurement enclosure, may original DENT LD-SKTSP pigtails and voltage leads connect to a circuit protected by a Carling CA1-B0-24-615-121-DG 15 A breaker without a dedicated voltage-tap fuse? A1 feeds L1 from switched hot; L2 and N connect to neutral. Please confirm the permitted upstream protection and terminal preparation, or identify any additional protection required. The original 9 V adapter is also powered from the switched circuit.
 
-The [Q0 purchase link](https://www.mouser.com/ProductDetail/Carling-Technologies/CA1-B0-24-615-121-DG?qs=vln4JGBFwFoweMB2W4WfRg%3D%3D) identifies the selected product. Exact-SKU stock, site fault-current suitability and startup behavior remain to be confirmed.
+The [Q0 purchase link](https://www.masterelectronics.com/en/productdetail/littelfuse-carling-technologies/ca1b024615121dg-16947583.html) identifies the selected product. Exact-SKU stock, site fault-current suitability and startup behavior remain to be confirmed.
 
 ## Experiment data workflow
 
 Use **standalone logging during prints, then offline batch downloads**. Synchronize the logger clock and job/phase timestamps before the series. Keep the same validated interval for comparisons and check memory capacity. Preserve raw exports before clearing memory.
 
-The DENT manual identifies non-volatile memory, included USB and USB-powered readout. It also requires rated insulation for the supplied USB cable inside a powered electrical panel. Here the cable is removed before mains operation, so no permanent USB entry or additional energized-USB sleeve is selected. [DENT manual, printed pp. 7, 18, 29, 119](https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf).
+The DENT manual identifies non-volatile memory, included USB and USB-powered readout. It also requires rated insulation for the supplied USB cable inside a powered electrical panel. The user selected closed-lid offline export. The external kit cable is removed before mains operation, but the short internal cable stays installed. It therefore requires the selected black FIT-221 600 V sleeve and accepted end protection, restraint and application process. The NAUSB-W is a passive feedthrough, not a mains isolation barrier. See [USB construction and acceptance](build.html). [DENT manual, printed pp. 7, 18, 29, 119](https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf).
 
 Prove the setup with one supervised print cycle and offline export, including startup, phase timestamps, final records and restart behavior, before collecting the experimental series. The website does not claim that physical validation has happened. [Operating sequence](documents.html#operation).

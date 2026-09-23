@@ -40,7 +40,7 @@ def draw_external(add,rect,text,line,circle,C):
     circle(1605,796,9,'#273440','#273440');text(1610,835,'INSIDE · XA',15,weight=700,anchor='middle')
     text(1350,911,'Guard rear terminals; bond metal mounting parts.',16,color='#63768a')
     rect(48,961,1702,174,'#f5f8fb','#c8d5df',10);text(70,998,'After assembly release and ELOG setup',25,weight=700)
-    for x,no,title,sub in [(75,'1','PLUG IN','Printer + supply; adapter stays inside'),(620,'2','Q0 ON','Printer, outlet and voltage tap powered'),(1170,'3','VERIFY OFFLINE','After pilot: unplug, then export records')]:
+    for x,no,title,sub in [(75,'1','PLUG IN','Printer + supply; adapter stays inside'),(620,'2','Q0 ON','Printer, outlet and voltage tap powered'),(1170,'3','VERIFY OFFLINE','Unplug supply; export with lid closed')]:
         circle(x+20,1054,23,'#173f64','#173f64');text(x+20,1062,no,22,'#fff',700,'middle')
         text(x+60,1048,title,23,weight=700);text(x+60,1082,sub,17,color='#63768a')
     text(48,1180,'Voltage leads remain inside the closed enclosure during routine use. Q0 OFF does not isolate its incoming terminals.',18,color='#8b651e')

@@ -57,7 +57,7 @@ def drawing(name, features, width, height, note):
     else:
         ax.set_xlim(-width/2,width/2);ax.set_ylim(0,height)
     ax.set_aspect('equal');ax.grid(alpha=.12);ax.axhline(0,c='#617989',lw=.8);ax.axvline(0,c='#617989',lw=.8)
-    ax.set_xlabel('U (mm)');ax.set_ylabel('V (mm)');ax.set_title(name.upper()+' / Build package B',loc='left',fontsize=13,weight='bold')
+    ax.set_xlabel('U (mm)');ax.set_ylabel('V (mm)');ax.set_title(name.upper()+' / Build package C',loc='left',fontsize=13,weight='bold')
     fig.subplots_adjust(left=.07,right=.58,bottom=.22 if name=='panel' else .14,top=.88)
     fig.text(.06,.95,'ENGINEERING REVIEW — release conditions in Build_Package.md',fontsize=9,color='#8c4d13')
     tableax=fig.add_axes([.62,.2,.36,.63]);tableax.axis('off')
@@ -66,7 +66,7 @@ def drawing(name, features, width, height, note):
         ms.add_text('NO CUTS - RIGHT WALL REMAINS SOLID',dxfattribs={'height':5,'layer':'TEXT','insert':(-160,100)})
         ax.text(0,100,'NO CUTS\nXA + DC remain inside',ha='center',va='center',color='#256853',fontsize=13)
     tab=tableax.table(cellText=rows,colLabels=['#','Feature','U','V','Cut size'],cellLoc='left',loc='upper left',colWidths=[.08,.34,.15,.15,.28]);tab.auto_set_font_size(False);tab.set_fontsize(7);tab.scale(1,1.5)
-    fig.text(.06,.055,note+'\nCUT layer only. REFERENCE/TEXT are not cuts. Drawing not to scale; DXF units = mm.\nPosition tolerance +/-0.5 mm; Q0 relative pattern +/-0.12 mm; other bores +/-0.1 mm.\nReview against received parts before machining. Do not machine with equipment or supply connected.',fontsize=8)
+    fig.text(.06,.055,note+'\nCUT layer only. REFERENCE/TEXT are not cuts. Drawing not to scale; DXF units = mm.\nPosition tolerance +/-0.5 mm; Q0 relative pattern +/-0.12 mm; USB relative pattern +/-0.1 mm; other bores +/-0.1 mm.\nReview against received parts before machining. Do not machine with equipment or supply connected.',fontsize=8)
     doc.saveas(out/(name+'.dxf'));fig.savefig(out/(name+'.svg'));return fig
 
 with PdfPages(out/'Machining_Drawings.pdf') as pdf:

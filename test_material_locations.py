@@ -27,6 +27,14 @@ class InstallationDatums(unittest.TestCase):
         power_slots = [[strap['x'], z] for strap in hardware['equipmentStraps'] for z in strap['slotZ']]
         self.assertEqual(power_slots, json.loads(json.dumps(constants['equipment_slots_xz_mm'])))
         self.assertEqual({s['part'] for s in hardware['equipmentStraps']}, {'outlet', 'adapter'})
+        dimensions = json.loads((ROOT / 'layout_dimensions.json').read_text())
+        usb = dimensions['usbService']
+        port = next(p for p in dimensions['instances'] if p['id'] == 'usb-entry')
+        self.assertEqual(usb['wallCenterYZ'], list(constants['usb_yz_mm']))
+        self.assertEqual(port['position'][1:], usb['wallCenterYZ'])
+        self.assertEqual(usb['fixingLocalUV'], json.loads(json.dumps(constants['usb_fixing_uv_mm'])))
+        self.assertEqual(port['boreDiameterMm'], constants['usb_bore_d_mm'])
+        self.assertEqual(port['fixingHoleDiameterMm'], constants['usb_fixing_d_mm'])
 
 
 if __name__ == '__main__':

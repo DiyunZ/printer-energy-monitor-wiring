@@ -23,7 +23,7 @@
     "Solutions Direct"
   ],
   "old_purchase_groups": 19,
-  "purchase_groups": 15,
+  "purchase_groups": 18,
   "fabrication_groups": 1,
   "removed_purchase_ids": [
     "dc-extension",
@@ -42,12 +42,16 @@
   "old_additional_fastener_supplier": "Bolt Depot",
   "old_total_planned_suppliers": 13,
   "supplier_count_basis": "Five selected sellers. Use the listed DigiKey -ND offers; no Marketplace partner offer is selected. Manufacturer factory stock can still ship later or separately. Recheck seller, quantity, delivery and tax in the final cart.",
-  "priced_material_subtotal_usd": 261.26,
+  "priced_material_subtotal_usd": 287.71,
   "q0_selection": {
     "sku": "Carling CA1-B0-24-615-121-DG",
     "supplier": "Master Electronics",
     "price_usd": 40.32,
     "din_parts_usd": 39.39,
     "decision": "Retain direct-mount Carling; DIN listed breaker/rail/two CA802 stops are only $0.93 lower before mounting, external access, fabrication or freight."
-  }
+  },
+  "revision": "C",
+  "closed_lid_usb_addition_usd": 26.45,
+  "previous_revision_b_materials_usd": 261.26,
+  "usb_mode": "Offline export with mains unplugged and lid closed"
 }

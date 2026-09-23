@@ -1,5 +1,5 @@
 {
-  "revision": "Rev. 12 \u00b7 professor review revision B \u00b7 2026-09-23",
+  "revision": "Rev. 13 \u00b7 closed-lid offline USB \u00b7 2026-09-23",
   "anchors": {
     "IN.L": [
       571.9,
@@ -723,11 +723,11 @@
         ],
         [
           1374.0,
-          1418.0
+          1384.2
         ],
         [
           1738.0,
-          1418.0
+          1384.2
         ],
         [
           1738.0,
@@ -736,9 +736,9 @@
       ],
       "badge": [
         1621.0,
-        1418.0
+        1384.2
       ],
-      "description": "Temporary USB \u2192 ELOG; open lid, mains unplugged",
+      "description": "DENT \u2192 sleeved USB \u2192 service port \u2192 ELOG; lid closed, mains unplugged",
       "group": "signal"
     },
     {

@@ -1,4 +1,4 @@
-# Revision B · cost and installation review
+# Revision C · closed-lid export and cost review
 
 September 23, 2026. Revised in response to Professor Clemon’s review: fewer suppliers, lower-cost enclosure and panel, a breaker comparison, cable restraints, documented component approvals and internal logger power.
 
@@ -7,17 +7,30 @@ September 23, 2026. Revised in response to Professor Clemon’s review: fewer su
 - **Enclosure:** Hammond **PCJ16148**, opaque screw cover, in the same size class as the previous clear-cover PCJ16148CC. X-ray mode is a viewing aid; the real lid is opaque.
 - **Panel:** fabricate from the aluminum offered by the professor. The 327.025 × 374.65 × 1.89738 mm CAD panel is a **provisional template**. Stock size, thickness, stiffness and aluminum bonding still need confirmation.
 - **Internal power:** an internal **Leviton 515CV** cord connector supplies the original CUI adapter. A continuous 14/3 SJOOW branch connects to JL/JN/PE before CT. The original adapter cable connects directly to the logger. Buy **two 515CV connectors total**, including the printer output.
-- **Fewer openings:** remove the XA wall outlet and the DC opening, extension, KVT frame and insert. The right wall is uncut. The only wall interfaces are Q0, supply cord and printer cord; USB remains temporary offline service.
+- **Fewer openings:** remove the XA wall outlet and the DC opening, extension, KVT frame and insert. The right wall has one USB service interface. Q0 and two power cords remain the other interfaces; XA/DC remain inside.
 - **Retention:** retain six screw-fixed cable anchors; provide four adjustable straps—two for the logger, one for XA and one for the adapter. Check full plug seating and that restraint prevents separation without loading the blades or blocking heat dissipation.
 - **Breaker:** retain Carling CA1-B0-24-615-121-DG and buy one from Master Electronics at the checked $40.32 price. The priced DIN comparison below explains why this revision keeps the existing direct mount and trip curve.
 
 The original 21 electrical paths and measurement boundary remain: only printer hot passes through CT; the adapter and voltage sensing branch before CT. Neutral and PE remain separate. No physical assembly, thermal test or electrical release has occurred.
 
+## Closed-lid export selected by the user
+
+After printer shutdown: **Q0 OFF → unplug SUPPLY IN from the wall → connect external USB → export in ELOG**, with the lid closed. Disconnect the PC cable before the next mains run. Q0 OFF alone leaves its input live. The kit USB cable stays outside; one permanent sleeved internal lead connects DENT to the side port. This service interface is an explicit user requirement; the professor requested fewer unnecessary penetrations and internal adapter power, not removal of PC access.
+
+| Added part | Selected price / seller | Purpose and evidence |
+|---|---|---|
+| [Neutrik NAUSB-W](https://www.digikey.com/en/products/detail/neutrik-americas-inc/NAUSB-W/29371251) | $10.68 · DigiKey, 6473-NAUSB-W-ND | USB-B out / USB-A in; [USB 2.0 and UL94 V-0 material evidence](https://www.neutrik.com/en/product/nausb-w), not UL Listed or mains isolation. |
+| [StarTech USB2HAB1](https://www.digikey.com/en/products/detail/startech-com/USB2HAB1/22260595) | $6.38 · DigiKey, 5214-USB2HAB1-ND | Short A-to-B data lead, 1 ft. Additional rated insulation required. |
+| [Alpha Wire F2213/4 BK105](https://www.digikey.com/en/products/detail/alpha-wire/F2213-4-BK105/3718418) | $9.39 · DigiKey, F2213/4BK105-ND | One 4 ft black stick; [UL224 / CSA198, 600 V](https://www.alphawire.com/products/accessories/fit-heat-shrink-tubing/shrink-tubing/fit2213_4). Installed coverage/process require acceptance. |
+| **Revision C increment** | **$26.45** | **$261.26 → $287.71** before tax, freight and fabrication. Five sellers remain. |
+
+The two M3 sets originally budgeted as spares now mount the USB flange: eight sets total, six for carriers and two for USB. No extra fastener order is added. The panel still uses six cable anchors; the front/right support retains the original DC cable and sleeved USB together. The ordinary external USB cable provides no claimed ingress seal. [Construction and receiving checks](build.html).
+
 ## Dated price comparison
 
 USD, single-unit displayed prices checked September 23, 2026. These are web listings, not accepted quotations. Stock, tax, shipping, machining, finishing and labor are excluded.
 
-| Item | Previous selection | Revision B | Price evidence |
+| Item | Previous selection | Revision C | Price evidence |
 |---|---|---|---|
 | Box | PCJ16148CC clear lid: **$149.45** | PCJ16148 opaque lid: **$137.11** | [Previous supplier listing](https://www.solutionsdirectonline.com/hammond-16x14x8-polycarbonate-electrical-enclosure-with-clear-cover-pcj16148cc) · [New supplier listing](https://www.solutionsdirectonline.com/hammond-16x14x8-polycarbonate-electrical-enclosure-with-solid-cover-pcj16148) |
 | Panel stock | Hammond 14R1513: **$30.44** | Offered aluminum: **$0 incremental raw-stock allowance**, conditional on suitability | [14R1513 listing](https://www.digikey.com/en/products/detail/hammond-manufacturing/14R1513/2359585) · professor’s offer; machining is not free |
@@ -26,24 +39,24 @@ USD, single-unit displayed prices checked September 23, 2026. These are web list
 | Six cable mounts | Previously linked 100-piece pack | Six individually listed TM2S8-C at **$0.68 each**, $4.08 | [DigiKey](https://www.digikey.com/en/products/detail/panduit-corp/TM2S8-C/1306625); stock and unit pricing can change |
 | DC accessories | Tensility 10-02228, icotek 45026 and 41380 | **Removed from active BOM** | No saving assigned because a comparable complete prior order was not priced |
 
-The selected purchase quantities now have a **$261.26 material subtotal**, including the internal XA branch, all four strap blanks, the actual retail packs and fastener spares. The [26-line order plan](materials.html#order-plan) records each seller, quantity, pack size, price and stock note. It excludes freight, tax, machining, tools, labor and any bonding changes required after inspecting the aluminum. The $42.78 remains a **box/raw-panel-only** comparison; it is not the difference between two fully priced systems. No purchase has been made.
+The selected purchase quantities now have a **$287.71 material subtotal**, including the internal XA branch, all four strap blanks, the actual retail packs and fastener spares. The [29-line order plan](materials.html#order-plan) records each seller, quantity, pack size, price and stock note. It excludes freight, tax, machining, tools, labor and any bonding changes required after inspecting the aluminum. The $42.78 remains a **box/raw-panel-only** comparison; it is not the difference between two fully priced systems. No purchase has been made.
 
 The previous 3M 100-piece bottle was [$105.36](https://www.digikey.com/en/products/detail/3m/MV14-10R-LX-BOTTLE/2670218). The selected [Gardner Bender 15-104 15-pack is $3.63](https://www.homedepot.com/p/202522492), a **$101.73 reduction for that purchase line**, with three installed and twelve spare. Buy ten PLT2S-C ties for $3.16, rather than a 100-piece pack. Buy four feet each of [black](https://www.homedepot.com/p/204632031) and [green](https://www.homedepot.com/p/204632154) stranded wire: $1.68 per color, rather than full rolls.
 
 ## Consolidated purchasing
 
-The previous BOM linked to 12 order-site domains, plus Bolt Depot through the fastener schedule: **13 sources**. Revision B uses **five planned order sources**, including fasteners. This counts ordering websites, not manufacturer references, photo credits or orders already placed. The former Marketplace ring-lug link is removed from the active order; Home Depot supplies the small pack. The order plan identifies the DigiKey -ND offers and selects no partner listing. Factory-stock glands may still have a separate lead time. Five sellers does not guarantee five parcels or fixed freight.
+The previous BOM linked to 12 order-site domains, plus Bolt Depot through the fastener schedule: **13 sources**. Revision C uses **five planned order sources**, including fasteners. This counts ordering websites, not manufacturer references, photo credits or orders already placed. The former Marketplace ring-lug link is removed from the active order; Home Depot supplies the small pack. The order plan identifies the DigiKey -ND offers and selects no partner listing. Factory-stock glands may still have a separate lead time. Five sellers does not guarantee five parcels or fixed freight.
 
 | Supplier | Groups to source |
 |---|---|
 | **Solutions Direct** | PCJ16148 enclosure |
-| **DigiKey** | WAGO connectors/carriers, two glands, six individual cable mounts and ten individual cable ties |
+| **DigiKey** | WAGO connectors/carriers, two glands, six individual cable mounts, ten individual cable ties, USB service port, short USB lead and rated sleeve |
 | **Home Depot** | 14/3 cord, supply plug, two 515CV connectors, four feet each of black/green wire if absent from stock, 15-104 rings, one 90340 strap roll |
 | **Master Electronics** | One exact Carling Q0; quantity-one price and stock verified |
 | **Bolt Depot** | Remaining exact fasteners after checking lab stock; no XA flange hardware |
 | **Lab reuse / fabrication** | Professor’s aluminum; five owned equipment groups; kit USB cable |
 
-There are **15 purchase groups, one proposed fabrication group, five owned groups and one kit-supplied group**. Counts refer to material groups, not pieces or supplier packs. The two 515CV rows intentionally describe different installation locations but the combined order quantity is two.
+There are **18 purchase groups, one proposed fabrication group, five owned groups and one kit-supplied group**. Counts refer to material groups, not pieces or supplier packs. The two 515CV rows intentionally describe different installation locations but the combined order quantity is two.
 
 <h2 id="breaker-options">Breaker and DIN alternatives</h2>
 
@@ -56,6 +69,23 @@ There are **15 purchase groups, one proposed fabrication group, five owned group
 **Decision:** use the offered plate and the $40.32 direct-mount Carling. A DIN rebuild could become economical with existing rail stock or a larger multi-device panel, but it is not needed for this single-printer revision. The logger and adapter still need a plate or other support. An inexpensive switch-only device or UL1077 protector is not an equivalent replacement for the selected UL489 breaker. Application acceptance remains separate from this sourcing decision.
 
 **Consolidation tradeoff:** the same PCJ16148 is [$160.56 at Master Electronics](https://www.masterelectronics.com/en/productdetail/hammond-manufacturing/pcj16148-49489596.html), $23.45 above Solutions Direct. Retain the lower material-price source unless its extra delivered cost exceeds $23.45. Master lists a **25-piece minimum** for [1427NCGPG13LB](https://www.masterelectronics.com/en/productdetail/hammond-manufacturing/1427ncgpg13lb-50893024.html): $52 at $2.08 each, versus **two at $2.97 = $5.94** from DigiKey. Do not combine suppliers by purchasing unnecessary quantities.
+
+<h2 id="checkout">Delivered-cost comparison and lab-stock check</h2>
+
+Compare the final carts before placing orders; freight and taxes are not known. A lower advertised component price alone is not a lower delivered cost.
+
+| Enclosure source / same PCJ16148 | Listed part price | Decision rule |
+|---|---|---|
+| [Solutions Direct](https://www.solutionsdirectonline.com/hammond-16x14x8-polycarbonate-electrical-enclosure-with-solid-cover-pcj16148) | $137.11 · active plan | Record delivered quote $___ and lead time ___. |
+| [Wistex](https://www.wistexllc.com/enclosures/pcj16148-16-x-14-x-8-junction-box-4-screw-lift-off-cover.html) | $133.06 · alternative listing | Only $4.05 lower before freight/tax. Verify exact new part, seller terms and available stock; substitute the seller only if its delivered quote and timing are better. Not included as a sixth seller. |
+| [Master Electronics](https://www.masterelectronics.com/en/productdetail/hammond-manufacturing/pcj16148-49489596.html) | $160.56 · consolidation alternative | Combining with Q0 costs $23.45 more in parts. It reduces sellers from five to four only if accepted and its delivery savings justify the difference. |
+
+| Check before ordering | Required / record | Budget treatment |
+|---|---|---|
+| Lab fasteners | 2 Q0 screws/washers; 8 M3 screw/washer/locknut sets; 6 M4 sets; accepted PE hardware. Suitable stock: ___; shortage: ___ | Baseline still includes the full $4.86 Bolt Depot allowance. If every required item is verified suitable in lab stock, omit that order: $282.85 and four sellers. Do not mark stock owned without inspection. |
+| Aluminum | Usable dimensions, thickness, finish/alloy, stiffness and bonding method: ___ | $0 raw-stock allowance remains conditional; update CAD to measured stock before cutting. |
+| Existing kit | Logger, CT, three pigtails, full voltage leads, original adapter; locate external USB cable: ___ | Reuse; no duplicate equipment orders. The kit cable’s current physical presence remains unconfirmed. |
+| Final five carts | Materials $287.71 + freight $___ + tax $___ + fabrication/other approved costs $___ | Record total $___, quoted date ___ and required arrival date ___. Recheck all quantities and exact seller offers. |
 
 ## Certification evidence
 
@@ -82,7 +112,7 @@ UL Listed, UL Recognized, a material flammability rating and an IEC standard are
 | Plate or DIN mounting | Plate-based design selected. Offered stock must first meet the receiving requirements below. |
 | Tie-down locations | Six screw-fixed cable mounts and four equipment straps appear in CAD, BOM and 3D. |
 | Recognized certification evidence | Source-specific evidence for purchased electrical parts; new UL/CSA-listed ring selection. No blanket assembly certification claim. |
-| No round DC extension; adapter inside | Original cable, XA and adapter are internal. No XA/DC/USB wall opening or related extension purchase. |
+| No round DC extension; adapter inside | Original cable, XA and adapter are internal. No XA/DC wall opening or DC extension purchase. The USB service port is retained for the user’s closed-lid offline export workflow. |
 
 These design and sourcing actions are implemented. Fabrication and energized-use acceptance remain **uncompleted physical work**, with an explicit [receiving and release record](build.html#receiving-record); they are not counted as passed requirements.
 

@@ -1,8 +1,8 @@
 {
-  "revision": "September 23, 2026 · professor review revision B",
+  "revision": "September 23, 2026 · revision C · closed-lid offline USB",
   "baseline_commit": "3c36b4e",
-  "scope": "One grounded 120 V supply, one printer at a time. Revision B uses an opaque-cover enclosure, proposed reuse of the professor’s aluminum sheet and an internal adapter connection. Five owned equipment groups and the kit USB are retained. The selected 15 A Q0 and upstream-only voltage-lead protection still require application acceptance. No purchase, physical fit, thermal test or electrical release is claimed.",
-  "result": "ENGINEERING REVISION B — STOCK, FIT AND ELECTRICAL ACCEPTANCE OPEN",
+  "scope": "One grounded 120 V supply, one printer at a time. Revision C uses an opaque-cover enclosure, proposed reuse of the professor’s aluminum sheet and an internal adapter connection. Five owned equipment groups and the kit USB are retained. The selected 15 A Q0 and upstream-only voltage-lead protection still require application acceptance. No purchase, physical fit, thermal test or electrical release is claimed. Closed-lid USB export is used only after unplugging mains; the permanent internal USB lead requires rated insulation and accepted assembly.",
+  "result": "ENGINEERING REVISION C — STOCK, USB ASSEMBLY AND ELECTRICAL ACCEPTANCE OPEN",
   "sources": {
     "dent": "https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf",
     "dent-size": "https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf",
@@ -32,12 +32,15 @@
     "restraint": "https://www.velcro.com/products/organization/heavy-duty-one-wrap-roll/",
     "ct-family": "https://www.dentinstruments.com/shop/current-sensors/hinged-current-transformers-sensors-for-energy-metering/",
     "ct-current": "https://www.dentinstruments.com/wp-content/uploads/CT-HSC-XXX-U_Datasheet_06132024.pdf",
-    "usb-drawing": "https://media.startech.com/cms/pdfs/usb2hab6_datasheet.pdf",
+    "usb-drawing": "https://www.neutrik.com/media/8974/download/nausb-w-2.pdf?v=1",
     "dent-fused-clip": "https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-fused-crocodile-clip/",
     "carling-delay": "https://www.carlingtech.com/sites/default/files/documents/Carling-HM-CB-Time-Delays.pdf",
     "jis": "https://mechse.illinois.edu/undergraduate/makerworks",
     "prusa-psu-spec": "https://www.prusa3d.com/product/psu-24v-240w/",
-    "q0-buy": "https://www.masterelectronics.com/en/productdetail/littelfuse-carling-technologies/ca1b024615121dg-16947583.html"
+    "q0-buy": "https://www.masterelectronics.com/en/productdetail/littelfuse-carling-technologies/ca1b024615121dg-16947583.html",
+    "usb-port": "https://www.neutrik.com/en/product/nausb-w",
+    "usb-internal": "https://media.startech.com/cms/pdfs/usb2hab1_datasheet.pdf",
+    "usb-sleeve": "https://www.alphawire.com/products/accessories/fit-heat-shrink-tubing/shrink-tubing/fit2213_4"
   },
   "materials": [
     {
@@ -238,12 +241,12 @@
     },
     {
       "id": "usb",
-      "item": "USB data cable",
+      "item": "External PC data cable",
       "model": "DENT kit USB-A to USB-B cable · 1.8 m",
       "availability": "kit",
       "result": "Catalog match",
-      "checked": "Supplied with ELITEpro XC. Use temporarily for setup and batch downloads with the box mains unplugged and absence of mains voltage verified. Remove USB before closing and powering the enclosure. No USB wall opening, insert or permanent cable is required.",
-      "remaining": "Locate the kit cable, check host USB compatibility and prove a sample export before the experiment. No permanent energized USB connection is provided.",
+      "checked": "Reuse the kit USB-A to USB-B cable outside the closed enclosure. After printer shutdown, switch Q0 OFF and unplug SUPPLY IN from the wall; connect PC USB-A to the external USB-B service port. The logger is USB-powered for configuration and export. Remove this external cable before reconnecting mains. The exterior 3D cable is abbreviated; it is not a cable-length or plug-envelope verification.",
+      "remaining": "Locate kit cable; verify host USB compatibility and a complete closed-lid ELOG export with the wall plug disconnected. No live-PC operation is selected.",
       "sources": [
         "dent",
         "dent-size"
@@ -283,7 +286,7 @@
       "model": "Panduit TM2S8-C",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "Six screw-fixed bases retain the mains bundle, XA branch conductors, CT pair, both sides of the voltage-lead coils, and the original internal DC cable. DigiKey lists individual pieces, avoiding the previous 100-piece purchase.",
+      "checked": "Six screw-fixed bases retain the mains bundle, XA branch conductors, CT pair, both sides of the voltage-lead coils, and the original internal DC cable and sleeved USB lead. DigiKey lists individual pieces, avoiding the previous 100-piece purchase.",
       "remaining": "Six panel locations; M4 × 16 mm screws, underside washers and locknuts in the fastener schedule.",
       "sources": [
         "mount"
@@ -308,8 +311,8 @@
       "model": "Screw / nut / washer schedule in Build_Package.md",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "Q0, three WAGO carriers, six cable mounts and the dedicated aluminum-panel PE bond. XA no longer needs flange screws. Thread, length and actual stack checks are in the build package; aluminum bonding method must be accepted.",
-      "remaining": "No XA wall screws. Confirm stock, panel thickness and aluminum-compatible bonding hardware.",
+      "checked": "Q0, three WAGO carriers, six cable mounts and the dedicated aluminum-panel PE bond. XA no longer needs flange screws. Thread, length and actual stack checks are in the build package; aluminum bonding method must be accepted. Two M3 sets previously allowed as spares now mount the USB port, keeping the eight-set order unchanged.",
+      "remaining": "Eight M3 sets total: six carriers + two USB. Check actual stacks; panel bonding remains conditional.",
       "sources": [
         "carling",
         "carrier",
@@ -327,6 +330,42 @@
       "sources": [
         "restraint",
         "dent-size"
+      ]
+    },
+    {
+      "id": "usb-port",
+      "item": "Closed-lid USB service port",
+      "model": "Neutrik NAUSB-W · USB-B outside / USB-A inside",
+      "availability": "buy",
+      "result": "Conditional",
+      "checked": "Reversible USB 2.0 A/B feedthrough keeps the lid closed for offline export. Set the insert to B outside and A inside. One Ø24 mm project bore and two Ø3.2 mm project clearance holes follow the manufacturer D pattern; verify fit on received parts.",
+      "remaining": "Selected; check insert orientation, flange fastening, sleeve/end coverage and shield treatment. Dry indoor use; ordinary kit cable does not satisfy Neutrik’s special mated IP65 conditions.",
+      "sources": [
+        "usb-port"
+      ]
+    },
+    {
+      "id": "usb-internal",
+      "item": "Short internal USB lead",
+      "model": "StarTech USB2HAB1 · 1 ft / 304.8 mm · A male to B male",
+      "availability": "buy",
+      "result": "Conditional",
+      "checked": "USB-B plugs into DENT; USB-A plugs into the service port inside. Short cable reduces stored slack. It stays installed during printing and must be covered by the selected rated sleeve; a USB 2.0 claim alone is not a mains insulation rating.",
+      "remaining": "Selected; dry-fit actual connector molds, usable flexible length, bends and retention. No standalone mains-voltage rating is claimed.",
+      "sources": [
+        "usb-internal"
+      ]
+    },
+    {
+      "id": "usb-sleeve",
+      "item": "Internal USB insulation sleeve",
+      "model": "Alpha Wire F2213/4 BK105 · black FIT-221, 600 V",
+      "availability": "buy",
+      "result": "Conditional",
+      "checked": "Provides the additional rated insulation required by DENT for USB cable inside an electrical enclosure. Minimum supplied ID 19.05 mm; recovered ID up to 9.53 mm. Cover the full internal cable and protect its terminations; keep clear of mains and secure against sliding. The model shows an illustrative sleeve envelope.",
+      "remaining": "Assembly acceptance required: measure connector passage, full coverage and end retention. Approve the recovery process for the cable/connector materials; do not infer heat-application safety from continuous operating ratings.",
+      "sources": [
+        "usb-sleeve"
       ]
     }
   ],
@@ -361,15 +400,16 @@
     "Replaced the clear-cover box selection with the same-size opaque PCJ16148; CAD retains the common-base template and an illustrative lid silhouette.",
     "Proposed reuse of the professor’s aluminum sheet, with stock measurement and aluminum bonding held open.",
     "Moved XA and the original adapter inside. XA uses the same 515CV SKU as the printer output, with a continuous 14/3 cord branch.",
-    "Removed the round DC extension, KVT frame and insert from the active BOM and model. Restored XA, DC and USB wall stock; the right wall has no cuts.",
+    "Removed the round DC extension, KVT frame and insert from the active BOM and model. Restored XA and DC wall stock; one USB service interface supports closed-lid export.",
     "Retained six cable anchor points and added separate straps for XA and adapter.",
-    "Consolidated purchase sources and added exact-part approval evidence and a conditional DIN-breaker comparison."
+    "Consolidated purchase sources and added exact-part approval evidence and a conditional DIN-breaker comparison.",
+    "User-selected offline closed-lid export: B-out/A-in USB port, short internal USB lead and 600 V sleeve. External kit USB is removed before mains is reconnected; two M3 spare sets are reassigned to the port."
   ],
   "assembly": [
     {
       "stage": 1,
       "title": "Verify stock and machine empty parts",
-      "action": "Measure the offered aluminum and received enclosure. Close thickness, mounting and bonding decisions; use revision B CAD only. No right-wall openings. Deburr all eight strap slots and clear chips.",
+      "action": "Measure the offered aluminum and received enclosure. Close thickness, mounting and bonding decisions; use revision C CAD only. The right wall has the USB service pattern; no XA or DC openings. Deburr all eight strap slots and clear chips.",
       "result": "Digital cut and restored-wall checks only; no material has been received or machined."
     },
     {
@@ -387,19 +427,19 @@
     {
       "stage": 4,
       "title": "Install Q0, glands and internal power",
-      "action": "Install Q0 and two power glands. Restrain the internal 515CV XA connector and original adapter separately; verify full blade seating, cord clamp and support. Nothing mounts through the right wall.",
+      "action": "Install Q0 and two power glands. Restrain the internal 515CV XA connector and original adapter separately; verify full blade seating, cord clamp and support. Fit the right-wall USB port, B outside / A inside, with two M3 sets.",
       "result": "Internal layout proposal; actual plug engagement, anti-unplug retention and thermal suitability remain open."
     },
     {
       "stage": 5,
       "title": "Connect and dress the cables",
-      "action": "Connect the XA 14/3 branch before CT. Route the intact original DC cable to the logger. Use six cable ties as needed to control slack; keep mains and low-voltage routes separated. Perform offline ELOG setup.",
+      "action": "Connect the XA 14/3 branch before CT. Route the intact original DC cable to the logger. Use six cable ties as needed to control slack; keep mains and low-voltage routes separated. Perform offline ELOG setup. Fit the short internal USB cable with accepted 600 V sleeve and end protection; share the front/right low-voltage restraint. Check the sleeve installation process before assembly.",
       "result": "Electrical topology and digital routing checks; not a qualified electrical acceptance."
     },
     {
       "stage": 6,
       "title": "Close and verify the pilot",
-      "action": "Remove USB and install the opaque lid before mains operation. Qualified personnel complete electrical and closed-enclosure thermal checks. Verify recording by unplugging mains and downloading after a supervised pilot.",
+      "action": "Remove external PC USB and install the opaque lid before mains operation. Qualified personnel complete electrical and closed-enclosure thermal checks. Verify recording by unplugging mains and downloading through the service port after a supervised pilot; keep the lid closed.",
       "result": "No energized test, temperature test or finished-assembly certification recorded."
     }
   ],
@@ -408,6 +448,7 @@
     "Voltage-lead acceptance: the user confirms the original DENT kit pigtails; do not re-request OEM identity. Accept terminal preparation and upstream-only protection with responsible electrical personnel; original-kit status alone does not establish protection by the 15 A main breaker.",
     "Measure aluminum sheet size, thickness and stiffness; approve aluminum-compatible panel bonding and adjust machining/fasteners before fabrication.",
     "Verify internal XA/adapter seating, independent restraint, intact DC cable slack, separation and closed-enclosure temperature. Opaque lid prevents live viewing of logger LEDs; verify logging by offline export after the pilot.",
-    "Commissioning: verify fastener stacks, CT latch and cable slack, supply conditions, PE/insulation/polarity, total load and restart/recording behavior before routine operation."
+    "Commissioning: verify fastener stacks, CT latch and cable slack, supply conditions, PE/insulation/polarity, total load and restart/recording behavior before routine operation.",
+    "USB assembly: verify B-out/A-in orientation, received cable/sleeve dimensions, accepted sleeve application and end coverage, retention, separation and shield treatment. Prove setup/export with mains unplugged and the lid closed; then remove the external USB lead before restoring mains. No isolation or ingress rating is claimed."
   ]
 }
