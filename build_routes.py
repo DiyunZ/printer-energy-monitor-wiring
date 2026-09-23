@@ -1,6 +1,7 @@
 """Generate the concept netlist, two SVG drawings and static website."""
 from pathlib import Path
 from html import escape as E
+from decimal import Decimal, ROUND_HALF_UP
 import json
 from draw_external import draw_external
 
@@ -263,6 +264,31 @@ def material_photo(p):
     caption = {'reference':'Reference image', 'design':'Design concept'}.get(photo['kind'])
     return '<figure class="material-photo" data-image-kind="'+E(photo['kind'])+'"><a class="material-image" href="'+E(photo['src'])+'" target="_blank" rel="noopener" aria-label="View full image: '+E(p['item'])+'">'+img+'</a>'+('<figcaption>'+caption+'</figcaption>' if caption else '')+'</figure>'
 
+def material_price(p, order):
+    if p['availability'] != 'buy':
+        return ''
+    lines = []
+    subtotal = Decimal('0')
+    rows = [r for r in order['rows'] if p['id'] in r['material_ids']]
+    if not rows:
+        raise ValueError('Missing purchase price: '+p['id'])
+    for r in rows:
+        quantity = r['quantity_by_material'][p['id']] if len(r['material_ids']) > 1 else r['quantity']
+        price = Decimal(str(r['unit_price_usd']))
+        amount = (Decimal(str(quantity))*price).quantize(Decimal('.01'), rounding=ROUND_HALF_UP)
+        subtotal += amount
+        unit_price = format(price, '.2f' if price == price.quantize(Decimal('.01')) else '.3f')
+        calculation = f'{quantity} × ${unit_price} each' if r['unit'] == 'each' else f'{quantity} {r["unit"]} × ${unit_price}/{r["unit"]}'
+        if r['pieces_per_unit'] > 1:
+            calculation += f' · {r["pieces_per_unit"]} pieces/{r["unit"]}'
+        sku = '<span class="price-sku">'+E(r['sku'])+'</span>' if len(rows) > 1 else ''
+        lines.append('<p>'+sku+E(calculation)+(f' = ${amount:.2f}' if len(rows) > 1 else '')+'</p>')
+    breakdown = ''.join(lines)
+    if len(rows) > 2:
+        breakdown = f'<details class="price-details"><summary>{len(rows)} item prices</summary>'+breakdown+'</details>'
+    return '<div class="material-price" data-material-id="'+E(p['id'])+f'" data-subtotal-usd="{subtotal:.2f}"><strong class="price-total">${subtotal:.2f}</strong> <span class="price-label">subtotal</span><div class="price-breakdown">'+breakdown+'</div></div>'
+
+
 def main():
     validation=validate();svg=make_diagram();(OUT/'wiring_routes.svg').write_text(svg)
     start_svg(1800,1200,'ELITEpro connectors, OEM adapter chain and enclosure front-panel concept')
@@ -270,7 +296,7 @@ def main():
     (OUT/'connector_detail.svg').write_text(detail)
     rows=''.join(f'<tr class="row" data-id="{w["id"]}"><td><button class="trace" data-id="{w["id"]}" aria-label="Trace connection {w["id"]}">{w["id"]}</button></td><td>{E(w["description"])}</td><td>{E(w["start"])} → {E(w["end"])}</td></tr>' for w in wires)
     materials=json.loads((OUT/'procurement.json').read_text())
-    material_rows={'owned':[], 'buy':[]}
+    material_rows={'owned':[], 'buy':[], 'fabricate':[]}
     for p in materials['items']:
         owned=p['availability']=='owned'
         badge='✓ Owned' if owned else '✓ Kit included' if p['availability']=='kit' else '◇ Reuse / fabricate' if p['availability']=='fabricate' else '□ To buy'
@@ -288,9 +314,13 @@ def main():
             details+='<p class="material-compliance"><strong>'+E(compliance['status'])+':</strong> '+E(compliance['detail'])+' <a href="'+E(compliance['url'])+'">Evidence ↗</a></p>'
         details+=''.join(reference_links)+'<p class="material-image-note">'+E(photo['caption'])+'</p>'+credit+'</details>'
         notice='<p class="material-notice">'+E(p['notice'])+'</p>' if p.get('notice') else ''
-        material_rows['buy' if p['availability'] in ('buy','fabricate') else 'owned'].append('<tr id="material-'+E(p['id'])+'" data-availability="'+E(p['availability'])+'"><td data-label="Inventory"><span class="inventory-badge '+p['availability']+'">'+badge+'</span></td><td data-label="Material"><span class="material-name">'+E(p['item'])+'</span>'+material_photo(p)+'<a class="locate-material" data-material="'+E(p['id'])+'" href="?material='+E(p['id'])+'#layout" aria-label="View '+E(p['item'])+' in 3D">View in 3D ↑</a></td><td data-label="Quantity needed">'+E(p.get('quantity_summary',p['quantity']))+'</td><td data-label="Part / details"><strong>'+E(p['model'])+'</strong>'+notice+details+'</td><td class="material-links" data-label="Purchase">'+(''.join(purchase_links) if purchase_links else '<span class="reuse-note">Reuse</span>')+'</td></tr>')
-    html=(OUT/'page_template.html').read_text().replace('<!-- MAIN_DIAGRAM -->',svg).replace('<!-- DETAIL_DIAGRAM -->',detail).replace('<!-- CONNECTION_ROWS -->',rows).replace('<!-- BUY_ROWS -->',''.join(material_rows['buy'])).replace('<!-- OWNED_ROWS -->',''.join(material_rows['owned'])).replace('{{BUY_COUNT}}',str(len(material_rows['buy']))).replace('{{OWNED_COUNT}}',str(len(material_rows['owned']))).replace('{{REV}}',REV)
+        group=p['availability'] if p['availability'] in ('buy','fabricate') else 'owned'
+        source_label='Price & purchase (USD)' if group=='buy' else 'Fabrication' if group=='fabricate' else 'Source'
+        price=material_price(p, materials['purchasing'])
+        material_rows[group].append('<tr id="material-'+E(p['id'])+'" data-availability="'+E(p['availability'])+'"><td data-label="Inventory"><span class="inventory-badge '+p['availability']+'">'+badge+'</span></td><td data-label="Material"><span class="material-name">'+E(p['item'])+'</span>'+material_photo(p)+'<a class="locate-material" data-material="'+E(p['id'])+'" href="?material='+E(p['id'])+'#layout" aria-label="View '+E(p['item'])+' in 3D">View in 3D ↑</a></td><td data-label="Quantity needed">'+E(p.get('quantity_summary',p['quantity']))+'</td><td data-label="Part / details"><strong>'+E(p['model'])+'</strong>'+notice+details+'</td><td class="material-links" data-label="'+E(source_label)+'">'+price+(''.join(purchase_links) if purchase_links else '<span class="reuse-note">Reuse</span>')+'</td></tr>')
+    html=(OUT/'page_template.html').read_text().replace('<!-- MAIN_DIAGRAM -->',svg).replace('<!-- DETAIL_DIAGRAM -->',detail).replace('<!-- CONNECTION_ROWS -->',rows).replace('<!-- BUY_ROWS -->',''.join(material_rows['buy'])).replace('<!-- FABRICATE_ROWS -->',''.join(material_rows['fabricate'])).replace('<!-- OWNED_ROWS -->',''.join(material_rows['owned'])).replace('{{BUY_COUNT}}',str(len(material_rows['buy']))).replace('{{FABRICATE_COUNT}}',str(len(material_rows['fabricate']))).replace('{{OWNED_COUNT}}',str(len(material_rows['owned']))).replace('{{REV}}',REV)
     html=html.replace('{{MATERIAL_TOTAL}}',format(materials['purchasing']['material_subtotal_usd'],'.2f'))
+    html=html.replace('{{PRICE_DATE}}',E(materials['purchasing']['checked_on']))
     (OUT/'index.html').write_text(html)
     (OUT/'routes.json').write_text(json.dumps({'revision':REV,'anchors':A,'projection':PLAN,'wires':wires},indent=2)+'\n')
     (OUT/'validation.json').write_text(json.dumps(validation,indent=2)+'\n')

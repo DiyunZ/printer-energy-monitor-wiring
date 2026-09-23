@@ -7,8 +7,8 @@ const root = path.resolve(__dirname, '..');
 const bom = JSON.parse(fs.readFileSync(path.join(root, 'procurement.json')));
 const owned = bom.items.filter(p => p.availability === 'owned');
 const kit = bom.items.filter(p => p.availability === 'kit');
-const toBuy = bom.items.filter(p => ['buy','fabricate'].includes(p.availability));
-const buyCount=toBuy.filter(p=>p.availability==='buy').length;
+const toBuy = bom.items.filter(p => p.availability === 'buy');
+const toFabricate = bom.items.filter(p => p.availability === 'fabricate');
 const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function materialPhoto(p) {
  const photo=p.image;
@@ -24,19 +24,41 @@ function materialPhoto(p) {
  const credit=photo.source_url?`<a href="${escape(photo.source_url)}">Image: ${escape(photo.source_label)} ↗</a>`:'';
  return `<figure class="material-photo" data-image-kind="${photo.kind}"><a class="material-image" href="${escape(photo.src)}" target="_blank" rel="noopener" aria-label="View full image: ${escape(p.item)}">${img}</a><figcaption>${escape(photo.caption)}${credit}</figcaption></figure>`;
 }
-let text = `# Materials checklist\n\n${bom.revision}. **✓ ${owned.length} confirmed owned groups${kit.length ? ` · ✓ ${kit.length} kit supplied` : ''} · □ ${buyCount} to buy + ${toBuy.length-buyCount} to reuse / fabricate**\n\n${bom.scope}\n\n**Inventory basis:** ${bom.inventory_basis}\n\nA check means on hand, not electrically approved. Counts refer to material groups, not individual pieces. Needed quantities and vendor pack sizes differ. The user confirms the existing USB cable is owned. Reuse it intact; no additional data cable or USB coupler is ordered.\n\nBuy links go to specific products; Select / Configure links need a size or rating first; Quote / Fabrication links require a supplier quote or a final custom drawing. Check current stock, minimum orders and lead times with each supplier. No orders have been placed.\n`;
+function materialPrice(p) {
+ if(p.availability !== 'buy')return '';
+ const rows=bom.purchasing.rows.filter(r=>r.material_ids.includes(p.id));
+ if(!rows.length)throw new Error('Missing purchase price: '+p.id);
+ let subtotal=0;
+ const lines=rows.map(r=>{
+  const quantity=r.material_ids.length>1?r.quantity_by_material[p.id]:r.quantity;
+  const cents=Math.round(quantity*r.unit_price_usd*100);subtotal+=cents;
+  const price=r.unit_price_usd.toFixed(Number(r.unit_price_usd.toFixed(2))===r.unit_price_usd?2:3);
+  let calculation=r.unit==='each'?`${quantity} × $${price} each`:`${quantity} ${r.unit} × $${price}/${r.unit}`;
+  if(r.pieces_per_unit>1)calculation+=` · ${r.pieces_per_unit} pieces/${r.unit}`;
+  return `<p>${rows.length>1?`<span class="price-sku">${escape(r.sku)}</span>`:''}${escape(calculation)}${rows.length>1?` = $${(cents/100).toFixed(2)}`:''}</p>`;
+ }).join('');
+ const breakdown=rows.length>2?`<details class="price-details"><summary>${rows.length} item prices</summary>${lines}</details>`:lines;
+ return `<div class="material-price" data-material-id="${escape(p.id)}" data-subtotal-usd="${(subtotal/100).toFixed(2)}"><strong class="price-total">$${(subtotal/100).toFixed(2)}</strong> <span class="price-label">subtotal</span><div class="price-breakdown">${breakdown}</div></div>`;
+}
+let text = `# Materials checklist\n\n${bom.revision}. **□ ${toBuy.length} purchase groups · ◇ ${toFabricate.length} reuse / fabrication group · ✓ ${owned.length} confirmed owned groups${kit.length ? ` · ✓ ${kit.length} kit supplied` : ''}**\n\n${bom.scope}\n\n**Inventory basis:** ${bom.inventory_basis}\n\nA check means on hand, not electrically approved. Counts refer to material groups, not individual pieces. Needed quantities and vendor pack sizes differ. The user confirms the existing USB cable is owned. Reuse it intact; no additional data cable or USB coupler is ordered.\n\nBuy links go to specific products; Select / Configure links need a size or rating first; Quote links require a supplier quote. Reused stock and fabrication are listed separately from purchases. Check current stock, minimum orders and lead times with each supplier. No orders have been placed.\n`;
 text += `\n${bom.image_note} Click an image to view the original. Use **View in 3D** to highlight each material’s installation locations. Image sources are credited below each picture.\n`;
 const order=bom.purchasing;
 const total=order.rows.reduce((sum,r)=>sum+Math.round(r.quantity*r.unit_price_usd*100),0)/100;
 if(Math.abs(total-order.material_subtotal_usd)>.001)throw new Error('Purchasing total does not match order quantities');
+for(const r of order.rows){
+ if(r.material_ids.length>1 && (!r.quantity_by_material || Object.keys(r.quantity_by_material).length!==r.material_ids.length || r.material_ids.reduce((sum,id)=>sum+r.quantity_by_material[id],0)!==r.quantity))throw new Error('Shared purchase quantities do not match: '+r.sku);
+}
 text += `\n<h2 id="order-plan">Priced order plan · $${total.toFixed(2)} materials</h2>\n\nChecked ${order.checked_on}. ${order.scope}\n\n${order.supplier_policy}\n\n| Seller / exact item | Quantity to enter | Unit price (USD) | Line total (USD) | Availability / packaging |\n|---|---|---|---|---|\n`;
 for(const r of order.rows)text+=`| ${r.seller} · [${r.sku}](${r.url}) | ${r.quantity} ${r.unit}${r.pieces_per_unit>1?` (${r.pieces_per_unit} pieces per ${r.unit})`:''} | $${r.unit_price_usd.toFixed(Number(r.unit_price_usd.toFixed(2))===r.unit_price_usd?2:3)} | $${r.extended_usd.toFixed(2)} | ${r.availability_note} |\n`;
 text+='\n| Seller | Materials subtotal (USD) |\n|---|---|\n';
 for(const seller of [...new Set(order.rows.map(r=>r.seller))])text+=`| ${seller} | $${(order.rows.filter(r=>r.seller===seller).reduce((sum,r)=>sum+Math.round(r.extended_usd*100),0)/100).toFixed(2)} |\n`;
 text+=`| **All selected materials** | **$${total.toFixed(2)}** |\n\nThe two 515CV installation rows below share the **single two-piece order line above**. Do not order two for each location. Aluminum stock and electrical acceptance remain open; see the [receiving record](build.html#receiving-record).\n`;
-for (const [title, items] of [['✓ Equipment to reuse', [...owned,...kit]], ['□ Purchase and fabrication list', toBuy]]) {
- text += `\n## ${title}\n\n| Inventory | Item | Quantity needed | Part and purpose | Purchase / source | Remaining checks |\n|---|---|---|---|---|---|\n`;
- for (const p of items) text += `| ${p.availability === 'owned' ? '✓ Owned' : p.availability === 'kit' ? '✓ Kit included' : p.availability === 'fabricate' ? '◇ Reuse / fabricate' : '□ To buy'} | <span class="material-name">${escape(p.item)}</span>${materialPhoto(p)}<a class="locate-material" data-material="${escape(p.id)}" href="index.html?material=${escape(p.id)}#layout" aria-label="View ${escape(p.item)} in 3D">View in 3D ↑</a> | ${p.quantity} | **${p.model}** — ${p.reason} | ${p.links.length ? p.links.map(l=>`[${l.label}](${l.url})`).join('<br>') : 'Reuse · No purchase needed'} | ${p.status}${p.compliance ? `<br>**${p.compliance.status}:** ${p.compliance.detail} [Evidence](${p.compliance.url})` : ''} |\n`;
+for (const [id, title, items, sourceLabel] of [['purchase-list',`□ Purchase list · ${toBuy.length} groups`,toBuy,'Price & purchase (USD)'],['fabrication-list',`◇ Reuse / fabrication · ${toFabricate.length}`,toFabricate,'Fabrication / source'],['owned-list',`✓ Existing equipment · ${owned.length+kit.length}`,[...owned,...kit],'Source']]) {
+ text += `\n<h2 id="${id}">${title}</h2>\n\n`;
+ if(id==='purchase-list')text+=`Prices checked ${order.checked_on}; subtotals include purchase packs and spares. Shared 515CV stock is allocated as one connector per location. [Full order quantities and seller totals](#order-plan).\n\n`;
+ if(id==='fabrication-list')text+='Mounting panel: use the professor’s offered aluminum after checking the stock. **Fabrication cost is pending and excluded from the purchase subtotal.**\n\n';
+ text += `| Inventory | Item | Quantity needed | Part and purpose | ${sourceLabel} | Remaining checks |\n|---|---|---|---|---|---|\n`;
+ for (const p of items) text += `| ${p.availability === 'owned' ? '✓ Owned' : p.availability === 'kit' ? '✓ Kit included' : p.availability === 'fabricate' ? '◇ Reuse / fabricate' : '□ To buy'} | <span class="material-name">${escape(p.item)}</span>${materialPhoto(p)}<a class="locate-material" data-material="${escape(p.id)}" href="index.html?material=${escape(p.id)}#layout" aria-label="View ${escape(p.item)} in 3D">View in 3D ↑</a> | ${p.quantity} | **${p.model}** — ${p.reason} | ${materialPrice(p)}${p.links.length ? p.links.map(l=>`[${l.label}](${l.url})`).join('<br>') : 'Reuse · No purchase needed'} | ${p.status}${p.compliance ? `<br>**${p.compliance.status}:** ${p.compliance.detail} [Evidence](${p.compliance.url})` : ''} |\n`;
 }
 text += '\n## Software and lab equipment\n\nArrange access separately from the enclosure purchases. These resources are not marked as owned.\n\n';
 for (const r of bom.setup_requirements) text += `- **${r.item} — ${r.action}.** ${r.reason}${r.url ? ` [DENT download](${r.url})` : ''}\n`;
@@ -61,7 +83,7 @@ audit+='\nThe former XA/DC wall positions remain solid. Exact CAD booleans provi
 for(const p of cables.leads)audit+=`| ${p.id} | ${p.modeledFlexibleLengthMm.toFixed(1)} mm | ${p.turns.toFixed(2)} | ${p.pitchMm} / ${p.assumedDiameterMm} mm |\n`;
 audit+=`\nCable-to-meter screen: ${cables.meterRouteScreen?.samplesPerCurve ?? 301} points per curve; ${cables.meterRouteScreen?.intrusions.length ?? 0} sampled intrusions against the logger body expanded by wire radius. This does not check all other objects or wire-to-wire clearances.\n`;
 audit+='\nThe elliptical coil centerline uses 44 and 37 mm radii (minimum planar radius of curvature about 31.1 mm). No manufacturer bend limit is available for the actual leads. Transitions between coils, plugs, supports and other wires still need routing and physical inspection. [Rendered cable measurements](installation_cables.json).\n\n## All materials and interfaces\n\n**Hold** means essential identification, source resolution or custom engineering is missing. **Measure** needs the actual part. **Conditional** has a plausible catalog interface with unresolved installation conditions. **Catalog match** covers only the interface described. Ownership remains unchanged.\n\n| Material | Result | Checked | Remaining work |\n|---|---|---|---|\n';
-for(const p of review.materials)audit+=`| [${p.item}](index.html#material-${p.id})<br>${p.model}<br>${p.availability==='owned'?'✓ Owned':p.availability==='kit'?'✓ Kit included':'□ Buy / fabricate'} | **${p.result}** | ${p.checked} ${sources(p.sources)} | ${p.remaining} |\n`;
+for(const p of review.materials)audit+=`| [${p.item}](index.html#material-${p.id})<br>${p.model}<br>${p.availability==='owned'?'✓ Owned':p.availability==='kit'?'✓ Kit included':p.availability==='fabricate'?'◇ Reuse / fabricate':'□ To buy'} | **${p.result}** | ${p.checked} ${sources(p.sources)} | ${p.remaining} |\n`;
 audit+='\n## Receiving and commissioning items\n\n'+review.needed.map(t=>`- ${t}`).join('\n');
 audit+='\n\nRecord receiving checks, update any affected drawings if substitutions are needed, then conduct a documented dry fit and qualified electrical acceptance. There is no hardware test result or energizing approval in this audit.\n\n## Reproduce the checks\n\nRun `node tools/audit_installation.mjs` and `node --test tools/test_installation.mjs`. Run the browser checks after regenerating drawings; `EXPORT_AUDIT=1` refreshes the rendered cable measurements from the local model. Then run `node tools/render_documents.cjs`. Software passes describe only the tested geometry / website behavior.\n\n[Review data and primary links](installation_review.json) · [Geometry check results](installation_checks.json) · [3D layout](index.html#layout)\n';
 fs.writeFileSync(path.join(root,'Installation_Audit.md'),audit);
@@ -128,6 +150,6 @@ const styles=`:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;colo
 for(const [input, output, title] of [['Procurement_BOM.md','materials.html','Materials and purchase links'],['Wiring_References_EN.md','references.html','Sources and design limits'],['Installation_Audit.md','installation.html','Installation audit'],['Build_Package.md','build.html','Machining and assembly package'],['Build_Documents.md','documents.html','Build documents'],['Protection_Review.md','protection.html','Protection and data review'],['Design_Revision_B.md','revision.html','Revision D: one USB cable and sourcing review']]) {
  const raw=fs.readFileSync(path.join(root,input),'utf8');
  const rendered=marked.parse(raw).replace(/<table>/g,'<div class="table-wrap"><table>').replace(/<\/table>/g,'</table></div>').replace(/<td>(R\d+)<\/td>/g,(_,id)=>`<td id="${id.toLowerCase()}">${id}</td>`);
- fs.writeFileSync(path.join(root,output),`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title} · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=15"><style>${styles}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="${input}" download>Download Markdown</a></nav>${rendered}</body></html>\n`);
+ fs.writeFileSync(path.join(root,output),`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title} · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=18"><style>${styles}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="${input}" download>Download Markdown</a></nav>${rendered}</body></html>\n`);
 }
 console.log('Generated BOM, build document hub, reference pages and installation audit');

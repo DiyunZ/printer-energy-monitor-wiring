@@ -5,7 +5,7 @@
 <meta name="description" content="ELITEpro XC single-printer measurement enclosure: one breaker, a dedicated adapter outlet, three labeled voltage adapters and one current transformer.">
 <title>ELITEpro XC · 3D enclosure and wiring</title>
 <link rel="stylesheet" href="layout3d.css?v=26">
-<link rel="stylesheet" href="material-images.css?v=17">
+<link rel="stylesheet" href="material-images.css?v=18">
 <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
 <script type="module" src="site-navigation.js?v=15"></script>
 <script type="module" src="layout3d.js?v=26"></script>
@@ -16,7 +16,7 @@
 
 .section-detail{border-top:1px solid #dae2e9;padding-top:16px;margin-top:16px;scroll-margin-top:16px}.section-detail>summary{font-size:15px;margin:0;font-weight:600}.section-detail[open]>summary{margin-bottom:14px}.section-detail>p,.section-detail>ul{font-size:14px}.section-detail li{margin-bottom:12px}.connection-note{font-size:14px;margin:18px 0 8px}.material-details{margin-top:12px;font-size:13px}.material-details summary{font-size:13px;font-weight:400;margin:0;color:#165b93}.material-details[open] summary{margin-bottom:8px}.material-image-note{font-size:11px;color:#627689}.material-details a{display:block;font-size:12px;margin-top:8px}.part-details summary{font-size:13px;font-weight:400;margin:6px 0;color:#165b93}footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 #design{padding:0;overflow:hidden}.design-tabs{display:flex;gap:8px;padding:0 24px 18px}.design-tabs [aria-selected="true"]{background:#173f64;color:#fff;border-color:#173f64}.design-tabs button{min-width:100px}#wiring{padding:22px 24px}#design [role="tabpanel"][hidden],#assembly-preview[hidden]{display:none}.review-items{padding-left:20px;margin:0}.review-items li{margin:8px 0;font-size:14px}#confirm .meta{margin:14px 0 0}#owned-materials{margin-top:22px}@media(max-width:700px){.design-tabs{padding:0 17px 16px}#wiring{padding:17px}.design-tabs button{min-width:95px}}
-.revision-note{margin:18px 0 24px;padding:16px 20px;border-left:4px solid #267762;background:#f0f6f3;border-radius:4px}.revision-note p{margin:6px 0}.inventory-badge.fabricate{background:#f4ecd9;color:#725b19}</style>
+.revision-note{margin:18px 0 24px;padding:16px 20px;border-left:4px solid #267762;background:#f0f6f3;border-radius:4px}.revision-note p{margin:6px 0}.inventory-badge.fabricate{background:#f4ecd9;color:#725b19;white-space:normal}</style>
 <link rel="stylesheet" href="wiring.css?v=16">
 <script type="module" src="wiring.js?v=26"></script>
 </head>
@@ -90,11 +90,19 @@
 </section>
 <section id="hardware">
 <h2>Materials</h2>
-<p class="meta">17 purchase groups + 1 proposed lab-fabricated panel. Five purchasing sources, including fasteners. Exact-part approval evidence is under Details.</p>
+<p class="meta">{{BUY_COUNT}} purchase groups from five sellers. Reuse / fabrication and existing equipment are listed separately. Exact-part approval evidence is under Details.</p>
 <div class="revision-note"><strong>Revision D · one existing USB cable</strong><p>Opaque PCJ16148 + proposed aluminum-panel reuse; XA and the original adapter stay inside. Six cable anchors and four equipment straps control movement.</p><p>Reuse the existing USB cable through one protected hole. Removing the coupler, extra cable and two fixing sets saves <strong>$17.28</strong> from revision C. Keep the required internal insulation and existing cable restraint.</p><p><a href="materials.html#order-plan"><strong>Full material order plan: ${{MATERIAL_TOTAL}}</strong> ↗</a> · actual retail quantities included; fabrication, bonding changes if required, freight and tax excluded.</p><a href="revision.html#checkout">Compare delivered costs and check lab stock ↗</a></div>
-<h3 class="inventory-heading">To source / fabricate · {{BUY_COUNT}}</h3>
-<div class="table-wrap"><table class="materials"><caption class="sr-only">Materials to purchase or fabricate</caption><thead><tr><th>Status</th><th>Material</th><th>Qty.</th><th>Part &amp; details</th><th>Purchase</th></tr></thead><tbody><!-- BUY_ROWS --></tbody></table></div>
-<details id="owned-materials" class="section-detail"><summary>✓ Existing equipment · {{OWNED_COUNT}}</summary><div class="table-wrap"><table class="materials"><caption class="sr-only">Owned equipment, including the existing USB cable</caption><thead><tr><th>Status</th><th>Material</th><th>Qty.</th><th>Part &amp; details</th><th>Purchase</th></tr></thead><tbody><!-- OWNED_ROWS --></tbody></table></div></details>
+<div id="purchase-materials">
+<h3 class="inventory-heading">Purchase list · {{BUY_COUNT}} groups · ${{MATERIAL_TOTAL}}</h3>
+<p class="meta">USD estimates checked {{PRICE_DATE}}. Subtotals include purchase packs and spares; fabrication, freight and tax are excluded. XA and printer output each use one 515CV, two total.</p>
+<div class="table-wrap"><table class="materials"><caption class="sr-only">Materials to purchase with unit prices and subtotals in USD</caption><thead><tr><th>Status</th><th>Material</th><th>Qty.</th><th>Part &amp; details</th><th>Price &amp; purchase (USD)</th></tr></thead><tbody><!-- BUY_ROWS --></tbody></table></div>
+</div>
+<div id="fabrication-materials" class="section-detail">
+<h3 class="inventory-heading">Reuse / fabrication · {{FABRICATE_COUNT}}</h3>
+<p class="meta">Mounting panel: use the professor’s offered aluminum after checking the stock. Fabrication cost is pending and excluded from the purchase subtotal.</p>
+<div class="table-wrap"><table class="materials"><caption class="sr-only">Reused stock and items to fabricate, separate from purchases</caption><thead><tr><th>Status</th><th>Material</th><th>Qty.</th><th>Part &amp; details</th><th>Fabrication</th></tr></thead><tbody><!-- FABRICATE_ROWS --></tbody></table></div>
+</div>
+<details id="owned-materials" class="section-detail"><summary>✓ Existing equipment · {{OWNED_COUNT}}</summary><div class="table-wrap"><table class="materials"><caption class="sr-only">Owned equipment, including the existing USB cable</caption><thead><tr><th>Status</th><th>Material</th><th>Qty.</th><th>Part &amp; details</th><th>Source</th></tr></thead><tbody><!-- OWNED_ROWS --></tbody></table></div></details>
 </section>
 </main>
 <dialog id="wiring-fullscreen" aria-label="Fullscreen wiring diagram"></dialog>

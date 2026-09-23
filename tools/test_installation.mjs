@@ -23,6 +23,7 @@ test('priced order covers every purchased group and counts each retail increment
   const cv=rows.filter(r=>r.sku==='515CV');
   assert.equal(cv.length,1);assert.equal(cv[0].quantity,2);
   assert.deepEqual(cv[0].material_ids,['receptacle','printer-connector']);
+  assert.deepEqual(cv[0].quantity_by_material,{'receptacle':1,'printer-connector':1});
   const rings=rows.find(r=>r.material_ids.includes('ring-lugs'));
   assert.equal(rings.quantity,1);assert.equal(rings.pieces_per_unit,15);
   assert.ok(rings.extended_usd<10,'avoid reintroducing the expensive 100-piece bottle');

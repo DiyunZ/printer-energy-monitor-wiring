@@ -9,6 +9,24 @@ const base=process.env.CHECK_URL||'http://127.0.0.1:8770/';
 const out=process.env.QA_OUTPUT;
 const root=path.resolve(__dirname,'..');
 const bom=JSON.parse(fs.readFileSync(path.join(root,'procurement.json')));
+const expectedPrices={enclosure:137.11,breaker:40.32,receptacle:6.99,connectors:3.51,carriers:6.69,cord:19.89,'supply-plug':3.96,'printer-connector':6.99,'cord-glands':5.94,'internal-wire':3.36,'ring-lugs':3.63,'tie-mounts':4.08,'cable-ties':3.16,fasteners:4.50,'logger-restraint':10.77,'usb-bushing':0.14,'usb-sleeve':9.39};
+async function checkPrices(page){
+ const prices=await page.locator('.material-price').evaluateAll(es=>Object.fromEntries(es.map(e=>[e.dataset.materialId,Number(e.dataset.subtotalUsd)])));
+ assert.deepEqual(prices,expectedPrices,'Pack costs and shared connectors must be counted once');
+ assert.equal(Object.values(prices).reduce((sum,price)=>sum+Math.round(price*100),0),Math.round(bom.purchasing.material_subtotal_usd*100));
+ for(const [id,price] of Object.entries(expectedPrices)){
+  const entry=page.locator(`.material-price[data-material-id="${id}"]`);
+  assert.equal(await entry.locator('.price-total').textContent(),'$'+price.toFixed(2));
+  assert.equal(await entry.locator('.price-total').isVisible(),true,'Prices must not require opening details');
+ }
+ assert.match(await page.locator('.material-price[data-material-id="ring-lugs"]').textContent(),/1 pack × \$3\.63\/pack · 15 pieces\/pack/);
+ assert.match(await page.locator('.material-price[data-material-id="cable-ties"]').textContent(),/10 × \$0\.316 each/);
+ assert.match(await page.locator('.material-price[data-material-id="cord"]').textContent(),/13 ft × \$1\.53\/ft/);
+ const hardware=page.locator('.material-price[data-material-id="fasteners"]');
+ await hardware.locator('summary').click();
+ assert.equal(await hardware.locator('.price-breakdown p:visible').count(),12);
+ await hardware.locator('summary').click();
+}
 const close=(a,b,t=.05)=>Math.abs(a-b)<t;
 (async()=>{
  if(out)fs.mkdirSync(out,{recursive:true});
@@ -27,6 +45,12 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  assert.equal(await page.locator('#layout').isVisible(),true);
  assert.equal(await page.locator('#wiring').isVisible(),false);
  assert.equal(await page.locator('.materials tbody tr:visible').count(),18);
+ assert.equal(await page.locator('#purchase-materials tbody tr').count(),17);
+ assert.equal(await page.locator('#purchase-materials [data-availability]:not([data-availability="buy"])').count(),0);
+ assert.equal(await page.locator('#fabrication-materials #material-panel').count(),1);
+ assert.equal(await page.locator('#fabrication-materials .material-price').count(),0);
+ assert.match(await page.locator('#fabrication-materials').textContent(),/Fabrication cost is pending/);
+ await checkPrices(page);
  assert.equal(await page.locator('#owned-materials').getAttribute('open'),null);
  assert.equal(await page.locator('#confirm .review-items li').count(),4);
  assert.equal(await page.locator('#assembly-preview').isVisible(),false);
@@ -227,7 +251,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  await page.locator('#material-breaker .material-details summary').click();
  await page.locator('.material-photo img').evaluateAll(es=>Promise.all(es.map(async img=>{img.loading='eager';await img.decode();if(!img.naturalWidth||!img.naturalHeight)throw Error('Image did not load: '+img.src);})));
  await page.locator('#owned-materials > summary').click();
- assert.deepEqual(await page.locator('.materials tbody tr:visible').evaluateAll(rows=>rows.map(r=>r.id)),bom.items.filter(p=>['buy','fabricate'].includes(p.availability)).map(p=>'material-'+p.id));
+ assert.deepEqual(await page.locator('.materials tbody tr:visible').evaluateAll(rows=>rows.map(r=>r.id)),['buy','fabricate'].flatMap(status=>bom.items.filter(p=>p.availability===status).map(p=>'material-'+p.id)));
  await openOwned();
  assert.equal(await page.locator('#owned-materials tbody tr:visible').count(),ownedIds.length);
  await page.locator('#owned-materials > summary').click();
@@ -241,6 +265,9 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   if(out){await page.locator('#design').screenshot({path:path.join(out,`layout-${width}.png`)});}
   assert.ok(await page.locator('.materials').evaluateAll(es=>es.every(e=>e.scrollWidth<=e.clientWidth+2)),'Materials overflow at '+width);
   if(width===390){
+   await checkPrices(page);
+   if(out)await page.locator('#material-enclosure').screenshot({path:path.join(out,'purchase-mobile.png')});
+   if(out)await page.locator('#fabrication-materials').screenshot({path:path.join(out,'fabrication-mobile.png')});
    await openOwned();assert.equal(await page.locator('#owned-materials tbody tr:visible').count(),ownedIds.length);
    if(out)await page.locator('#material-meter').screenshot({path:path.join(out,'inventory-mobile.png')});
    await page.locator('#material-meter .material-details summary').focus();await page.keyboard.press('Enter');
@@ -261,6 +288,13 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
    assert.equal(await page.locator('tbody tr').filter({hasText:'✓ Owned'}).count(),ownedIds.length);
    assert.equal(await page.locator('tbody tr').filter({hasText:'□ To buy'}).count(),bom.items.filter(p=>p.availability==='buy').length);
    assert.equal(await page.locator('tbody tr').filter({hasText:'◇ Reuse / fabricate'}).count(),1);
+   const purchaseTable=page.locator('#purchase-list').locator('xpath=following-sibling::div[contains(@class,"table-wrap")][1]');
+   const fabricationTable=page.locator('#fabrication-list').locator('xpath=following-sibling::div[contains(@class,"table-wrap")][1]');
+   assert.equal(await purchaseTable.locator('tbody tr').count(),17);
+   assert.equal(await purchaseTable.locator('a[data-material="panel"]').count(),0);
+   assert.equal(await fabricationTable.locator('a[data-material="panel"]').count(),1);
+   assert.equal(await fabricationTable.locator('.material-price').count(),0);
+   await checkPrices(page);
    assert.equal(await page.locator('.material-photo img').count(),bom.items.length);
    assert.ok(await page.locator('.material-image').evaluateAll(es=>es.every(e=>e.clientWidth>=150)),'Document image columns must remain readable');
    await page.locator('.material-photo img').evaluateAll(es=>Promise.all(es.map(async img=>{img.loading='eager';await img.decode();})));

@@ -11,4 +11,11 @@
 .locate-material { display: inline-flex; align-items: center; margin-top: 12px; padding: 7px 10px; border: 1px solid #9eafbd; border-radius: 5px; background: #f3f7fa; color: #174b74; font-size: 13px; font-weight: 600; text-decoration: none; }
 .locate-material:hover { background: #e2edf6; border-color: #557b9a; }
 .locate-material:focus-visible { outline: 3px solid #c47b21; outline-offset: 3px; }
+.material-price { margin-bottom: 12px; font-variant-numeric: tabular-nums; }
+.price-total { color: #173f64; font-size: 20px; white-space: nowrap; }
+.price-label { color: #586e83; font-size: 11px; }
+.price-breakdown { color: #435e76; font-size: 12px; font-weight: 400; }
+.price-breakdown p { margin: 5px 0 9px; }
+.price-sku { display: block; font-weight: 600; }
+.price-details summary { font-size: 13px; font-weight: 400; margin: 6px 0; color: #165b93; cursor: pointer; }
 @media print { .material-photo { break-inside: avoid; } }
