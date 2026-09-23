@@ -1,6 +1,6 @@
 {
-  "revision": "September 20, 2026 · upstream protection review",
-  "scope": "One grounded 120 V supply, one printer at a time. Five equipment groups are confirmed on hand; the USB cable is kit supplied. Log independently during printing and download only with mains unplugged. The voltage tap uses upstream Q0 protection only. Its suitability for the original DENT leads, Q0 site/startup suitability, CT scaling and physical acceptance remain open; this is not an energizing release.",
+  "revision": "September 23, 2026 · professor review revision B",
+  "scope": "One grounded 120 V supply, one printer at a time. Revision B uses an opaque-cover enclosure, proposed reuse of the professor’s aluminum sheet and an internal adapter connection. Five owned equipment groups and the kit USB are retained. The selected 15 A Q0 and upstream-only voltage-lead protection still require application acceptance. No purchase, physical fit, thermal test or electrical release is claimed.",
   "items": [
     {
       "id": "meter",
@@ -27,7 +27,8 @@
         "height": 5712
       },
       "installation": "Strapped to the right side of the mounting panel.",
-      "location_summary": "Strapped to the right side of the mounting panel."
+      "location_summary": "Strapped to the right side of the mounting panel.",
+      "supplier": "Existing kit"
     },
     {
       "id": "ct",
@@ -67,7 +68,8 @@
       "installation": "One CT surrounds only the printer hot conductor near the rear output. The remaining owned CTs stay outside this assembly.",
       "location_summary": "Around the printer hot wire near the rear output.",
       "quantity_summary": "1 from existing set",
-      "notice": "CT range unconfirmed — verify before configuring ELOG."
+      "notice": "CT range unconfirmed — verify before configuring ELOG.",
+      "supplier": "Existing kit"
     },
     {
       "id": "blue-leads",
@@ -101,7 +103,8 @@
       },
       "installation": "Three original DENT voltage pigtails: A1 at switched hot JL, A2/A3 at neutral JN. Shrouded ends mate with the long leads inside the case. Drawing colors are schematic; actual color assignments are not recorded.",
       "location_summary": "A1 connects at switched hot JL; A2 and A3 connect at neutral JN.",
-      "notice": "Upstream Q0 protection and lead termination need acceptance before use."
+      "notice": "Upstream Q0 protection and lead termination need acceptance before use.",
+      "supplier": "Existing kit"
     },
     {
       "id": "voltage-leads",
@@ -129,15 +132,16 @@
       },
       "installation": "Three retained long leads run from A1/A2/A3 to L1/L2/N; the illustrated slack is stored near the front of the panel.",
       "location_summary": "From A1/A2/A3 to L1/L2/N, with slack stored at the front.",
-      "quantity_summary": "3 leads"
+      "quantity_summary": "3 leads",
+      "supplier": "Existing kit"
     },
     {
       "id": "adapter",
       "item": "AC/DC adapter",
       "quantity": "1 with original barrel cable",
       "model": "CUI SMI6-9-V-P5 · existing original adapter",
-      "reason": "Original label identifies CUI SMI6-9-V-P5: 9 V DC, 0.667 A, center positive; compatible with the meter’s 6–10 V / 500 mA input. Official SMI6 drawing: 64 × 40.5 × 30 mm ±1 mm, excluding blades; P5 plug 5.5/2.1 × 9.5 mm. Keep its flat UL2468 cord outside the enclosure and mate it to the specified round DC extension.",
-      "status": "Owned · output, polarity and plug matched; original flat cord stays outside.",
+      "reason": "Reuse the original CUI 9 V / 0.667 A center-positive adapter, with its P5 plug and flat cord intact. It plugs into the internal XA cord connector; its original cable runs directly to the logger. No DC extension, coupling or wall feedthrough.",
+      "status": "Owned. Verify full plug seating, restraint, cable slack and temperature during the closed-enclosure pilot.",
       "availability": "owned",
       "links": [
         {
@@ -161,89 +165,103 @@
         "width": 5712,
         "height": 4284
       },
-      "installation": "Plugs into XA on the outside right wall. Its original flat cord stays outside and mates with the round extension.",
-      "location_summary": "Plugs into XA on the outside right wall.",
-      "quantity_summary": "1"
+      "installation": "Inside the enclosure, beside XA on the left-center panel. A separate adjustable strap retains the adapter; its original flat DC cable follows the front/right perimeter to the logger.",
+      "location_summary": "Inside the case beside XA; original DC cable goes directly to the logger.",
+      "quantity_summary": "1",
+      "supplier": "Existing kit"
     },
     {
       "item": "Enclosure",
       "quantity": "1",
-      "model": "Hammond PCJ16148CC",
-      "reason": "Gray polycarbonate body with a clear lift-off lid. Selected for connector clearance and lead storage around the long meter. Nominal 16 × 14 × 8 in; use the manufacturer drawing/CAD for real outside dimensions.",
-      "status": "Machined STEP / wall drawing supplied; compare received parts and close release items before cutting.",
+      "model": "Hammond PCJ16148 · opaque screw cover",
+      "reason": "Same PCJ 16 × 14 × 8 in size class with an opaque gray cover. Supplier list price $137.11 versus $149.45 for the previous clear-cover PCJ16148CC, checked 2026-09-23. X-ray display is a website viewing aid; the purchased lid is opaque.",
+      "status": "Proposed lower-cost selection. Common base/panel dimensions match the Hammond series drawing; the inherited clear-cover CAD remains a layout template, not a verified solid-cover lid model.",
       "links": [
         {
           "label": "Buy · Solutions Direct",
-          "url": "https://www.solutionsdirectonline.com/hammond-16x14x8-polycarbonate-electrical-enclosure-with-clear-cover-pcj16148cc",
+          "url": "https://www.solutionsdirectonline.com/hammond-16x14x8-polycarbonate-electrical-enclosure-with-solid-cover-pcj16148",
           "kind": "buy"
         },
         {
-          "label": "Hammond drawing",
-          "url": "https://www.hammfg.com/files/parts/pdf/PCJ16148CC.pdf",
+          "label": "Hammond dimensions",
+          "url": "https://www.hammfg.com/files/parts/pdf/PCJ16148.pdf",
+          "kind": "reference"
+        },
+        {
+          "label": "Hammond standards",
+          "url": "https://www.hammfg.com/electrical/products/non-metallic/pcj-sc",
           "kind": "reference"
         }
       ],
       "id": "enclosure",
       "availability": "buy",
       "image": {
-        "src": "assets/materials/enclosure.jpg",
-        "source_image": "https://asset.solutionsdirectonline.com/img/Hammond_Manufacturing/hammond_pcj16148cc.jpg",
-        "kind": "product",
-        "alt": "Hammond PCJ16148CC — product image",
-        "caption": "Product image",
-        "source_label": "Solutions Direct",
-        "source_url": "https://www.solutionsdirectonline.com/hammond-16x14x8-polycarbonate-electrical-enclosure-with-clear-cover-pcj16148cc",
-        "width": 400,
-        "height": 400
+        "src": "assets/materials/enclosure-solid.svg",
+        "kind": "design",
+        "alt": "Opaque PCJ16148 enclosure selection illustration",
+        "caption": "Opaque-cover concept; base geometry follows the PCJ series. See manufacturer drawing.",
+        "source_label": "Hammond selection basis",
+        "source_url": "https://www.hammfg.com/files/parts/pdf/PCJ16148.pdf",
+        "width": 320,
+        "height": 240
       },
-      "installation": "The surrounding case and clear removable lid. Transparent walls are a viewing aid.",
-      "location_summary": "The surrounding case and removable clear lid."
+      "installation": "Case and opaque gray screw cover. Only Q0 and the two power-cord glands penetrate the walls; the right wall is uncut.",
+      "location_summary": "Gray case and opaque lid; right wall has no openings.",
+      "supplier": "Solutions Direct",
+      "compliance": {
+        "status": "Manufacturer standards",
+        "detail": "UL 508A / cUL enclosure types; IEC 60529 IP66, unmodified enclosure only.",
+        "url": "https://www.hammfg.com/electrical/products/non-metallic/pcj-sc"
+      }
     },
     {
       "item": "Mounting panel",
       "quantity": "1",
-      "model": "Hammond 14R1513",
-      "reason": "Steel panel, approximately 327 × 374.7 × 1.9 mm. Ordered separately from the box. Provide its own PE bond; do not depend on painted mounting screws.",
-      "status": "Panel cut/slot drawing supplied. Transfer-drill WAGO carrier holes from the actual carriers.",
+      "model": "Professor-supplied aluminum · fabricate after measuring",
+      "reason": "Use the scrap aluminum offered by Professor Clemon instead of buying 14R1513. Target outline 327.025 × 374.65 mm; modeled thickness 1.89738 mm is a provisional 1.90 mm template, not a measurement of his stock. Confirm thickness, flatness, stiffness and usable area before cutting. Retain a dedicated PE bond using hardware and a method suitable for aluminum.",
+      "status": "Reuse proposed, not received or measured. Verify mounting pattern, bonding, screw stacks and stiffness before fabrication.",
       "links": [
         {
-          "label": "Buy · DigiKey",
-          "url": "https://www.digikey.com/en/products/detail/hammond-manufacturing/14R1513/2359585",
-          "kind": "buy"
+          "label": "Fabrication / stock checks",
+          "url": "build.html#panel-stock",
+          "kind": "fabrication"
         },
         {
-          "label": "Hammond",
-          "url": "https://www.hammfg.com/part/14R1513",
+          "label": "PCJ mounting-panel dimensions",
+          "url": "https://www.hammfg.com/files/parts/pdf/PCJ16148.pdf",
           "kind": "reference"
         }
       ],
       "id": "panel",
-      "availability": "buy",
+      "availability": "fabricate",
       "image": {
-        "src": "assets/materials/panel.jpg",
-        "source_image": "https://www.hammfg.com/files/parts/images/14R1513/14r1513.jpg?v=1781814574",
-        "kind": "product",
-        "alt": "Hammond 14R1513 — product image",
-        "caption": "Product image",
-        "source_label": "Hammond",
-        "source_url": "https://www.hammfg.com/part/14R1513",
-        "width": 1000,
-        "height": 1000
+        "src": "assets/materials/panel-reuse.svg",
+        "kind": "design",
+        "alt": "Proposed aluminum reuse panel with cable anchor and strap locations",
+        "caption": "Fabrication concept; scrap size and thickness remain to be measured.",
+        "width": 320,
+        "height": 240
       },
-      "installation": "The steel plate beneath the equipment. Its existing mounting points and added PE bond are below the components.",
-      "location_summary": "The steel plate beneath all internal components."
+      "installation": "Custom aluminum panel under the equipment, using the PCJ mounting interface. Includes six tie mounts, four logger slots and four internal-power restraint slots.",
+      "location_summary": "Aluminum panel with cable anchors and four adjustable straps.",
+      "supplier": "Lab stock / fabrication",
+      "compliance": {
+        "status": "Custom mechanical part",
+        "detail": "No standalone product certification claimed. Record alloy/thickness and accept aluminum bonding and the complete assembly.",
+        "url": "build.html#panel-stock"
+      }
     },
     {
       "item": "Q0 operating breaker",
       "quantity": "1",
       "model": "Carling CA1-B0-24-615-121-DG",
       "reason": "Single 15 A operating breaker, 50/60 Hz medium-delay, UL489/CSA option DG. Mount directly on the front wall using the manufacturer pattern. No custom wall insert. Keep all four cover screws installed; Q0 OFF leaves its supply terminal live.",
-      "status": "Selected for purchase on September 21, 2026: 15 A, matching the confirmed design limit. Manufacturer interrupting rating: 10 kA at 120 V AC. Pre-use electrical checks remain in the protection review. Confirm stock and lead time with the supplier.",
+      "status": "Retain the user-selected 15 A / UL489 DG configuration. Master Electronics lists one piece at $40.32 and 16 in stock on 2026-09-23. The DIN comparison is complete in revision.html; direct mounting and the existing trip curve are retained. Delivery and price remain checkout-dependent; pre-use application checks are in protection.html.",
       "links": [
         {
-          "label": "Quote / availability · Mouser",
-          "url": "https://www.mouser.com/ProductDetail/Carling-Technologies/CA1-B0-24-615-121-DG?qs=vln4JGBFwFoweMB2W4WfRg%3D%3D",
-          "kind": "quote"
+          "label": "Buy 1 · Master Electronics · $40.32",
+          "url": "https://www.masterelectronics.com/en/productdetail/littelfuse-carling-technologies/ca1b024615121dg-16947583.html",
+          "kind": "buy"
         },
         {
           "label": "Carling specification",
@@ -253,6 +271,11 @@
         {
           "label": "Carling delay curves",
           "url": "https://www.carlingtech.com/sites/default/files/documents/Carling-HM-CB-Time-Delays.pdf",
+          "kind": "reference"
+        },
+        {
+          "label": "Q0 cost and DIN alternative",
+          "url": "revision.html#breaker-options",
           "kind": "reference"
         }
       ],
@@ -270,40 +293,63 @@
         "height": 150
       },
       "installation": "Q0 mounts in the front wall: handle outside, supply and load studs inside.",
-      "location_summary": "In the front wall, with its handle outside."
+      "location_summary": "In the front wall, with its handle outside.",
+      "supplier": "Master Electronics",
+      "compliance": {
+        "status": "Manufacturer configuration",
+        "detail": "DG option: UL489 / CSA; verify exact ordered suffix.",
+        "url": "https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf"
+      }
     },
     {
       "item": "XA adapter receptacle",
       "quantity": "1",
-      "model": "Leviton 5279-C · NEMA 5-15R flanged outlet",
-      "reason": "One complete panel-mounted outlet replaces the old 5261 receptacle, RACO rear box, separate plate and custom support. Its molded body encloses the wire terminals. Dedicated to the existing ELITEpro adapter.",
-      "status": "Selected: Ø44.00 ±0.15 mm opening; 53.57 mm mounting pitch. Dry indoor use.",
+      "model": "Leviton 515CV · internal NEMA 5-15R",
+      "reason": "Use a complete cord connector inside the box, matching the printer output connector SKU. A dedicated 14/3 SJOOW branch connects JL/JN/PE to XA upstream of CT. The connector body encloses its terminals and clamps the cord jacket. No wall outlet, custom bracket or wall cutout.",
+      "status": "Catalog UL498 File E13393 / CSA LR-406. Verify the cord clamp and secure both XA and the adapter on the panel; plugs remain fully seated.",
       "links": [
         {
-          "label": "Buy · Crescent Electric",
-          "url": "https://www.crescentelectric.com/product/98283/5279-c-grounding-outlet-receptacle-125-v-ac-15-a-2-poles-3-wires-white",
+          "label": "Buy · Home Depot · 1 of 2 total",
+          "url": "https://www.homedepot.com/p/301304939",
           "kind": "buy"
         },
         {
-          "label": "Leviton drawing / instructions",
-          "url": "https://leviton.com/products/5279-c",
+          "label": "Leviton 515CV",
+          "url": "https://leviton.com/products/515cv",
+          "kind": "reference"
+        },
+        {
+          "label": "Leviton dimensions",
+          "url": "https://leviton.com/content/dam/leviton/residential/product_documents/none/Document-31435-Dimensional%20Data.jpg",
+          "kind": "reference"
+        },
+        {
+          "label": "Leviton cord instructions",
+          "url": "https://leviton.com/content/dam/leviton/residential/product_documents/instruction_sheet/515_Instruction_Sheet.pdf",
           "kind": "reference"
         }
       ],
       "id": "receptacle",
       "availability": "buy",
       "image": {
-        "src": "assets/materials/receptacle.png",
-        "alt": "Leviton 5279-C flanged outlet",
-        "caption": "Leviton 5279-C flanged outlet",
-        "width": 325,
-        "height": 325,
-        "source_url": "https://leviton.com/products/5279-c",
+        "src": "assets/materials/printer-connector.png",
+        "source_image": "https://leviton.com/content/dam/leviton/residential/product_images/515cv/lc_img_jpg_325_515CV.png",
+        "kind": "product",
+        "alt": "Leviton 515CV · NEMA 5-15R — product image",
+        "caption": "Product image",
         "source_label": "Leviton",
-        "kind": "product"
+        "source_url": "https://leviton.com/products/515cv",
+        "width": 325,
+        "height": 325
       },
-      "installation": "XA mounts through the right wall and receives the original adapter outside.",
-      "location_summary": "Through the right wall, facing the external adapter."
+      "installation": "Internal XA cord connector beside the adapter, restrained by an adjustable strap. The protected supply branches before CT; only printer hot is metered.",
+      "location_summary": "Inside the case at the left-center panel, next to the adapter.",
+      "supplier": "Home Depot",
+      "compliance": {
+        "status": "Manufacturer file identified",
+        "detail": "UL498 File E13393; CSA C22.2 No.42 File LR-406.",
+        "url": "https://leviton.com/products/515cv"
+      }
     },
     {
       "item": "Distribution connectors",
@@ -337,7 +383,13 @@
         "height": 200
       },
       "installation": "Three WAGO connector groups: JL, JN and PE. Each clips into its own mounting carrier.",
-      "location_summary": "Three groups on the panel: JL, JN and PE."
+      "location_summary": "Three groups on the panel: JL, JN and PE.",
+      "supplier": "DigiKey",
+      "compliance": {
+        "status": "Manufacturer certificate table",
+        "detail": "WAGO 221-415 datasheet (2024), p.5: cULus Listed UL 486C, E69654; UL 467 grounding, E201573. Confirm supplied part and installation conditions.",
+        "url": "https://www.netxl.com/wago/docs/221-415-data-sheet.pdf"
+      }
     },
     {
       "item": "Connector carriers",
@@ -376,13 +428,19 @@
         "height": 200
       },
       "installation": "Three carriers sit under JL, JN and PE and fasten to the panel.",
-      "location_summary": "One beneath each of the three distribution connectors."
+      "location_summary": "One beneath each of the three distribution connectors.",
+      "supplier": "DigiKey",
+      "compliance": {
+        "status": "Mechanical accessory",
+        "detail": "Verify mechanical/material suitability; this accessory does not provide mains insulation or confer assembly certification.",
+        "url": "https://www.wago.com/us/wire-splicing-connectors/mounting-carrier-221-series-24-12-awg/p/221-505"
+      }
     },
     {
-      "item": "Mains / printer cord",
-      "quantity": "10 ft (3.048 m): supply blank 2.0 m; output blank 1.0 m",
+      "item": "Supply / printer / internal XA cord",
+      "quantity": "13 ft (3.962 m): 2.0 m supply + 1.0 m printer + 0.8 m internal XA blanks",
       "model": "Southwire 55808699 · 14/3 SJOOW",
-      "reason": "Candidate 3-conductor flexible cord for input and printer output. Catalog nominal OD is about 9.17 mm; measure actual cord and choose fittings accordingly. Final current rating depends on the complete assembly and use conditions.",
+      "reason": "Use the same 14/3 SJOOW cord for all three runs. XA’s jacket enters its integral cord clamp; branch conductors terminate at JL/JN/PE before CT. Nominal OD approximately 9.17 mm is inside the 515CV 6.22–16.64 mm clamp range. Final route lengths are dry-fit allowances.",
       "status": "Selected length allowance; final ends trimmed only after dry routing.",
       "links": [
         {
@@ -404,9 +462,15 @@
         "width": 600,
         "height": 600
       },
-      "installation": "Two jacketed cord runs: supply through the left wall and printer output through the rear wall. Full external cord lengths are not drawn.",
-      "location_summary": "Supply enters the left wall; printer output exits the rear wall.",
-      "quantity_summary": "10 ft / 3.048 m"
+      "installation": "Two external power cords and one internal branch cord to XA. The power glands retain intact jackets; the third cord stays entirely inside.",
+      "location_summary": "Supply, printer output, and the internal XA branch.",
+      "quantity_summary": "13 ft total / 3 runs",
+      "supplier": "Home Depot",
+      "compliance": {
+        "status": "Manufacturer UL/CSA listed",
+        "detail": "Southwire stock 558086: UL 62 and CSA C22.2 No.49; sample jacket marks E46194 / LL90458. Verify actual cord markings and accepted application.",
+        "url": "https://cabletechsupport.southwire.com/en/tile/1/cable/7386/"
+      }
     },
     {
       "id": "supply-plug",
@@ -440,20 +504,26 @@
         "height": 325
       },
       "installation": "The external male plug at the supply end of the left-wall cord.",
-      "location_summary": "At the external end of the left-wall supply cord."
+      "location_summary": "At the external end of the left-wall supply cord.",
+      "supplier": "Home Depot",
+      "compliance": {
+        "status": "Manufacturer file identified",
+        "detail": "UL498 File E13393; CSA C22.2 No.42 File LR-406.",
+        "url": "https://leviton.com/products/515pv"
+      }
     },
     {
       "id": "printer-connector",
       "item": "Printer output connector",
       "quantity": "1",
       "model": "Leviton 515CV · NEMA 5-15R",
-      "reason": "Grounded female cord connector for the measured printer output. The printer connects here; XA is reserved for the meter adapter.",
+      "reason": "Grounded female cord connector for the measured printer output. The printer connects here; XA is reserved for the meter adapter. Buy two 515CV connectors total: one here and one for internal XA; do not order two per row.",
       "status": "Published 6.22–16.64 mm cord range includes the selected nominal 9.2 mm cord; verify clamping on receipt.",
       "availability": "buy",
       "links": [
         {
-          "label": "Buy connector · SupplyHouse",
-          "url": "https://www.supplyhouse.com/Leviton-515CV-Residential-Grade-Straight-Blade-Connector-15A-NEMA-5-15R-Yellow-2P-125V",
+          "label": "Buy · Home Depot · 1 of 2 total",
+          "url": "https://www.homedepot.com/p/301304939",
           "kind": "buy"
         },
         {
@@ -474,7 +544,13 @@
         "height": 325
       },
       "installation": "The external female connector at the end of the rear-wall printer cord.",
-      "location_summary": "At the external end of the rear-wall printer cord."
+      "location_summary": "At the external end of the rear-wall printer cord.",
+      "supplier": "Home Depot",
+      "compliance": {
+        "status": "Manufacturer file identified",
+        "detail": "UL498 File E13393; CSA C22.2 No.42 File LR-406.",
+        "url": "https://leviton.com/products/515cv"
+      }
     },
     {
       "item": "Mains / printer strain relief",
@@ -507,40 +583,13 @@
         "kind": "product"
       },
       "installation": "Two jacket clamps: supply at the left wall and printer output at the rear wall.",
-      "location_summary": "One at each mains cord opening: left and rear walls."
-    },
-    {
-      "item": "DC split cable entry",
-      "quantity": "1",
-      "model": "icotek KVT 32 black · 45026",
-      "reason": "One KVT 32 frame for the round factory-terminated Tensility DC extension. Takes one separately ordered KTMBS 4–7 gray insert, 41380. M32 × 1.5, 14 mm thread; Ø32.3 wall opening. Retain the included sealing ring and locknut.",
-      "status": "Selected · DC coordinates retained; one 41380 insert required. No USB wall entry.",
-      "links": [
-        {
-          "label": "Buy · RS",
-          "url": "https://us.rs-online.com/product/icotek/45026/72428954/",
-          "kind": "buy"
-        },
-        {
-          "label": "icotek dimensioned drawing",
-          "url": "https://pim.icotek.com/Produkte/PG02%20Kabelverschraubungen/KVT/KVT%2032/Datenbl%C3%A4tter/45026_KVT%2032_bk.PDF",
-          "kind": "reference"
-        }
-      ],
-      "id": "split-entries",
-      "availability": "buy",
-      "image": {
-        "src": "assets/materials/kvt32.png",
-        "alt": "icotek KVT 32 family photo; inserts selected separately",
-        "caption": "icotek KVT 32 family photo; inserts selected separately",
-        "width": 370,
-        "height": 370,
-        "source_url": "https://www.icotek.com/en-us/products/cable-glands/kvt-45026",
-        "source_label": "icotek",
-        "kind": "reference"
-      },
-      "installation": "One KVT 32 frame in the right wall for the round DC extension. USB uses the open lid temporarily with mains disconnected.",
-      "location_summary": "One frame in the right wall, around the DC extension."
+      "location_summary": "One at each mains cord opening: left and rear walls.",
+      "supplier": "DigiKey",
+      "compliance": {
+        "status": "Manufacturer UL Listed",
+        "detail": "Hammond lists the 1427NCG family, including 1427NCGPG13LB, as UL Listed with IP68 protection. Verify installed sealing and clamp; the modified assembly is not certified by this component listing.",
+        "url": "https://www.hammfg.com/electronics/small-case/accessories/1427ncg"
+      }
     },
     {
       "id": "usb",
@@ -575,105 +624,26 @@
       },
       "installation": "With mains unplugged and the lid removed, connect USB-B to the logger and USB-A to the ELOG computer. The 3D view shows this temporary service connection only when USB is selected. Remove the cable before powering the closed box.",
       "location_summary": "Temporary connection at the logger USB-B port; lid open and mains unplugged.",
-      "notice": "Setup / download only — unplug mains first."
-    },
-    {
-      "id": "dc-extension",
-      "item": "Round DC extension cable",
-      "quantity": "1; keep the full 0.915 m",
-      "model": "Tensility 10-02228 · 5.5/2.1 mm plug to jack",
-      "reason": "Factory round cable, 18 AWG, OD 5.2 ±0.3 mm, 7 A / 48 V; preserves center-to-center polarity. Adapter plugs into the female end outside; route the round cable through 41380/KVT 32 and plug the male end into the logger. Reserve 0.35 m inside and 0.565 m outside, adjusted at dry fit; retain slack with bends ≥35 mm radius (published minimum 31.2 mm). No cut or splice. Male barrel is 12 mm long; do not force its shoulder flush into the logger.",
-      "status": "Selected · resolves the flat-cord entry; verify seating, polarity and retention on receipt.",
-      "availability": "buy",
-      "links": [
-        {
-          "label": "Buy · Tensility 10-02228",
-          "url": "https://www.tensility.com/products/10-02228",
-          "kind": "buy"
-        },
-        {
-          "label": "Dimensioned cable drawing",
-          "url": "https://tensility.s3.us-west-2.amazonaws.com/imports/product_spec_sheets/10-02228.pdf",
-          "kind": "reference"
-        }
-      ],
-      "image": {
-        "src": "assets/materials/dc-extension.jpg",
-        "source_image": "https://www.tensility.com/cdn/shop/files/10-02228.jpg?v=1787016925&width=600",
-        "kind": "product",
-        "alt": "Tensility 10-02228 male and female 5.5/2.1 mm DC connectors",
-        "caption": "10-02228 product photo",
-        "source_label": "Tensility",
-        "source_url": "https://www.tensility.com/products/10-02228",
-        "width": 600,
-        "height": 400
-      },
-      "installation": "The female jack mates with the original adapter outside; its round cable passes through the DC entry to the logger.",
-      "location_summary": "From the adapter outside, through the DC entry, to the logger.",
-      "quantity_summary": "1 × 0.915 m"
-    },
-    {
-      "id": "kt-inserts",
-      "item": "DC sealing insert",
-      "quantity": "1 used; manufacturer pack is 10, confirm seller unit",
-      "model": "icotek KTMBS 4–7 gray · 41380",
-      "reason": "Split 21 × 21 × 19 mm insert for KVT, rated for round cables 4–7 mm. Accepts Tensility DC OD 5.2 ±0.3 mm. Select KTMBS (split), not unsplit KTMB. The original CUI flat cord stays outside.",
-      "status": "Selected · both cable diameters fit; seller lists backorder, confirm lead time.",
-      "availability": "buy",
-      "links": [
-        {
-          "label": "Buy / lead time · Powermatic 41380",
-          "url": "https://www.powermatic.net/part/icotek/41380/4218822",
-          "kind": "buy"
-        },
-        {
-          "label": "icotek exact product",
-          "url": "https://www.icotek.com/en-us/products/cable-grommets/ktmbs-41380",
-          "kind": "reference"
-        },
-        {
-          "label": "icotek dimensions and range",
-          "url": "https://www.icotek.com/Produkte/PDFs/en_US/KTMBS%20gy.pdf",
-          "kind": "reference"
-        }
-      ],
-      "image": {
-        "src": "assets/materials/ktmbs-inserts.jpg",
-        "source_image": "https://pim.icotek.com/Bilder/Produktgruppen/PG03-Kabeltuellen/icotek_Kabeltuellen_KTMBS_01.jpg",
-        "kind": "reference",
-        "alt": "icotek KTMBS family with small and large inserts; selected part is small 41380",
-        "caption": "KTMBS family photo · order small 41380",
-        "source_label": "icotek",
-        "source_url": "https://www.icotek.com/en-us/products/cable-grommets/ktmbs-41380",
-        "width": 530,
-        "height": 333
-      },
-      "installation": "One 41380 split insert inside the DC KVT 32 frame, around the round extension jacket. The frame becomes transparent for this view.",
-      "location_summary": "Inside the DC entry frame, around the round extension.",
-      "quantity_summary": "1"
+      "notice": "Setup / download only — unplug mains first.",
+      "supplier": "Existing kit"
     },
     {
       "id": "internal-wire",
       "item": "Internal L / N / PE wire",
-      "quantity": "Black 3 m; white 2 m; green 3 m minimum. Linked rolls: 100 ft each.",
+      "quantity": "Buy 4 ft black + 4 ft green (1.2192 m of each); use suitable lab stock first.",
       "model": "Southwire 14 AWG, 19-strand Class C, THHN/THWN/MTW, 600 V",
-      "reason": "Buy black 22955984, white 22956784 and green 22959184. The selected 14 AWG copper fits the connector and ring-terminal ranges; verify the accepted wiring method. Linked rolls leave spare stock. Wire blanks and preparation are in the build package.",
-      "status": "Selected: manufacturer nominal OD 0.113 in (2.87 mm); 14 AWG fits WAGO and #10 rings.",
+      "reason": "Separate 14 AWG conductors remain for Q0 OUT → JL and PE → panel. XA hot, neutral and PE are the conductors of its 14/3 cord; no separate white roll is required. Reuse suitable labeled lab stock first.",
+      "status": "Same 14 AWG stranded construction, sold by the foot; 4 ft of each color exceeds the 1 m cutting allowance. Confirm the received wire markings and crimp fit.",
       "availability": "buy",
       "links": [
         {
-          "label": "Black 22955984 · Home Depot",
-          "url": "https://www.homedepot.com/p/204834035",
+          "label": "Black 22955999 · buy 4 ft · $1.68",
+          "url": "https://www.homedepot.com/p/204632031",
           "kind": "buy"
         },
         {
-          "label": "White 22956784 · Home Depot",
-          "url": "https://www.homedepot.com/p/204834037",
-          "kind": "buy"
-        },
-        {
-          "label": "Green 22959184 · Home Depot",
-          "url": "https://www.homedepot.com/p/204834032",
+          "label": "Green 22959199 · buy 4 ft · $1.68",
+          "url": "https://www.homedepot.com/p/204632154",
           "kind": "buy"
         },
         {
@@ -693,56 +663,86 @@
         "width": 1200,
         "height": 240
       },
-      "installation": "Separate hot, neutral and protective-earth runs between distribution, breaker, outlet and panel bond. These are routing illustrations, not cut lengths.",
-      "location_summary": "Between the terminals, breaker, outlet and panel PE bond.",
-      "quantity_summary": "Black 3 m; white 2 m; green 3 m"
+      "installation": "Q0 output to JL and the dedicated aluminum-panel PE bond. XA uses the separate cord item.",
+      "location_summary": "Q0 → JL and PE → aluminum panel.",
+      "quantity_summary": "4 ft per color",
+      "supplier": "Home Depot",
+      "compliance": {
+        "status": "Manufacturer UL/cUL product",
+        "detail": "THHN/THWN/MTW listing and accepted wiring method; verify actual marked stock.",
+        "url": "https://www.southwire.com/wire-cable/building-wire/thhn-thwn-copper-silicone-free/p/22955984"
+      }
     },
     {
       "id": "ring-lugs",
       "item": "Ring terminals",
-      "quantity": "5 minimum: 2 Q0, 1 panel bond + 2 spares",
-      "model": "3M MV14-10R/LX-BOTTLE · #10 stud, 16–14 AWG",
-      "reason": "Two Q0 terminals are #10-32 studs. The former #8 alternative has been removed. Other PE terminations must match their own studs.",
-      "status": "Selected #10 hole, 16–14 AWG. Dedicated #10-32 bond bolts in fastener schedule; terminal-matched crimper required.",
+      "quantity": "1 pack of 15; 3 installed, 12 available as spares",
+      "model": "Gardner Bender 15-104 · #8–10 stud, 16–14 AWG",
+      "reason": "The #8–10 stud range includes the Q0 #10-32 studs. This UL/CSA-listed 15-pack replaces the $105.36 100-piece bottle with a $3.63 purchase. Use only on 14–16 AWG conductors; the aluminum-panel bond still requires an accepted contact method.",
+      "status": "Manufacturer: UL listed, CSA listed, 600 V building wire, 75°C. Use the specified insulated-terminal crimp tooling; inspect wire insertion, insulation fit and pull retention. No unpublished barrel diameter or crimp setting is assumed.",
       "availability": "buy",
       "links": [
         {
-          "label": "Buy #10 option · DigiKey",
-          "url": "https://www.digikey.com/en/products/detail/3m/MV14-10R-LX-BOTTLE/2670218",
+          "label": "Buy 1 pack of 15 · Home Depot · $3.63",
+          "url": "https://www.homedepot.com/p/202522492",
           "kind": "buy"
         },
         {
-          "kind": "reference",
-          "label": "3M dimensional data",
-          "url": "https://multimedia.3m.com/mws/media/61020O/ring-tongues-vinyl-insulated-brazed-seam-16-14-awg.pdf"
+          "label": "Gardner Bender approvals and dimensions",
+          "url": "https://www.gardnerbender.com/en/p/15-104/-16-14-AWG-2-mm-sq-Bnes-%C3%A0-anneau",
+          "kind": "reference"
         }
       ],
       "image": {
-        "src": "assets/materials/ring-lugs.jpg",
-        "alt": "3M MV14-10R/LX-BOTTLE supplier photo; #10 stud",
-        "caption": "3M MV14-10R/LX-BOTTLE supplier photo; #10 stud",
-        "width": 200,
-        "height": 200,
-        "source_url": "https://www.digikey.com/en/products/detail/3m/MV14-10R-LX-BOTTLE/2670218",
-        "source_label": "DigiKey / 3M",
-        "kind": "reference"
+        "src": "assets/materials/ring-lugs-gb.jpg",
+        "alt": "Gardner Bender 15-104 blue ring terminals, 15-pack",
+        "caption": "Selected 15-104 product; 15-pack",
+        "width": 600,
+        "height": 600,
+        "source_url": "https://www.homedepot.com/p/202522492",
+        "source_label": "Home Depot / Gardner Bender",
+        "kind": "product"
       },
-      "installation": "Three installed: Q0 input, Q0 output and panel PE stud. Two or more purchased spares stay outside.",
+      "installation": "Two Q0 rings and one proposed panel PE ring. The other 12 remain outside the enclosure as spares.",
       "location_summary": "At both Q0 studs and the panel PE bond.",
-      "quantity_summary": "3 + 2 spares"
+      "quantity_summary": "15-pack; 3 installed",
+      "supplier": "Home Depot",
+      "compliance": {
+        "status": "Manufacturer UL Listed / CSA Listed",
+        "detail": "Exact 15-104 product: 16–14 AWG, #8–10 studs, 600 V for building wire, 75°C. This certifies the terminal product, not the crimp workmanship or the custom panel bond.",
+        "url": "https://www.gardnerbender.com/en/p/15-104/-16-14-AWG-2-mm-sq-Bnes-%C3%A0-anneau"
+      },
+      "terminal_compatibility": {
+        "stud_numbers": [
+          8,
+          10
+        ],
+        "wire_awg": [
+          14,
+          16
+        ],
+        "temperature_c": 75,
+        "voltage_v": 600,
+        "overall_mm": [
+          25.4,
+          7.874,
+          6.35
+        ],
+        "max_insulation_od_mm": null
+      }
     },
     {
       "id": "tie-mounts",
       "item": "Screw-fixed cable mounts",
-      "quantity": "6 installed; pack of 100",
+      "quantity": "Buy 6 individual pieces; all 6 installed",
       "model": "Panduit TM2S8-C",
-      "reason": "Six screw-fixed bases retain the mains bundle, outlet supply, CT pair, two sides of the voltage-lead coils, and DC extension. The linked package contains 100; only six are installed.",
+      "reason": "Six screw-fixed bases retain the mains bundle, XA branch conductors, CT pair, both sides of the voltage-lead coils, and the original internal DC cable. DigiKey lists individual pieces, avoiding the previous 100-piece purchase.",
       "status": "Six panel locations; M4 × 16 mm screws, underside washers and locknuts in the fastener schedule.",
       "availability": "buy",
       "links": [
         {
-          "label": "Buy · bisco industries",
-          "url": "https://www.biscoind.com/en-US/panduit-cable-ties-and-accessories-tm2s8-c/p",
+          "label": "Buy individually · DigiKey",
+          "url": "https://www.digikey.com/en/products/detail/panduit-corp/TM2S8-C/1306625",
           "kind": "buy"
         }
       ],
@@ -759,20 +759,26 @@
       },
       "installation": "Six bases at the revised panel anchor holes. The 3D locator shows each bundle and its restraint. Set final slack during dry fit; keep CT/DC separate from mains bundles.",
       "location_summary": "Six panel supports: two AC bundles, CT pair, two coil supports and DC.",
-      "quantity_summary": "6"
+      "quantity_summary": "6",
+      "supplier": "DigiKey",
+      "compliance": {
+        "status": "Mechanical accessory",
+        "detail": "Verify mechanical/material suitability; this accessory does not provide mains insulation or confer assembly certification.",
+        "url": "https://www.digikey.com/en/products/detail/panduit-corp/TM2S8-C/1306625"
+      }
     },
     {
       "id": "cable-ties",
       "item": "Cable ties",
-      "quantity": "6 installed; 6 spare allowance; pack of 100",
+      "quantity": "Buy 10 individual ties; 6 installed + 4 spares",
       "model": "Panduit PLT2S-C · 188 × 4.8 mm",
       "reason": "For small wire bundles and the screw-fixed bases. Keep allowed bend radii and avoid crushing insulation. This length is for cables, not a strap around the meter.",
-      "status": "Selected: small bundles only. Inspect retained lead bend radii during dry fit.",
+      "status": "DigiKey lists individual ties: ten cost $3.16 at the 10-piece tier. No 100-piece pack required. Check actual bundle retention and bend radii.",
       "availability": "buy",
       "links": [
         {
-          "label": "Buy · Newark",
-          "url": "https://www.newark.com/panduit/plt2s-c/cable-tie-nat-188x4-8mm-pk100/dp/24M6057",
+          "label": "Buy 10 individual ties · DigiKey · $3.16",
+          "url": "https://www.digikey.com/en/products/detail/panduit-corp/PLT2S-C/280043",
           "kind": "buy"
         }
       ],
@@ -789,15 +795,21 @@
       },
       "installation": "One 4.8 mm band through each of the six mounting-base slots and around its actual wire bundle. Two bands retain the concentric voltage-lead coils. Spare pack contents are not installed.",
       "location_summary": "Through all six mounting-base slots and around the routed wires.",
-      "quantity_summary": "6 + 6 spares"
+      "quantity_summary": "10; 6 installed",
+      "supplier": "DigiKey",
+      "compliance": {
+        "status": "Mechanical accessory",
+        "detail": "Verify mechanical/material suitability; this accessory does not provide mains insulation or confer assembly certification.",
+        "url": "https://www.digikey.com/en/products/detail/panduit-corp/PLT2S-C/280043"
+      }
     },
     {
       "id": "fasteners",
       "item": "Mounting and bonding hardware",
-      "quantity": "Five assembly groups with exact fastener links and counts",
+      "quantity": "Four assembly groups; reuse suitable lab stock before buying",
       "model": "Screw / nut / washer schedule in Build_Package.md",
-      "reason": "The package names thread, length, quantity, mating material and engagement. M3 for WAGO; M4 for cable bases; #6-32 for Q0 and XA; #10-32 for the dedicated panel PE bolt. Factory enclosure fasteners are reused.",
-      "status": "Specific purchase links provided; receiving checks cover washer thickness and actual stacks.",
+      "reason": "Q0, three WAGO carriers, six cable mounts and the dedicated aluminum-panel PE bond. XA no longer needs flange screws. Thread, length and actual stack checks are in the build package; aluminum bonding method must be accepted.",
+      "status": "No XA wall screws. Confirm stock, panel thickness and aluminum-compatible bonding hardware.",
       "availability": "buy",
       "links": [
         {
@@ -817,22 +829,28 @@
         "width": 175,
         "height": 58
       },
-      "installation": "Mounting screw/washer/nut sets for Q0, XA, three carriers, six cable bases and the panel PE bond. Small hardware is schematic; use the build-package sizes and transfer-drilling instructions.",
-      "location_summary": "At component mounts, cable bases and the panel PE bond.",
-      "quantity_summary": "See fastener schedule"
+      "installation": "Mounting screw/washer/nut sets for Q0, three carriers, six cable bases and the panel PE bond. XA uses straps. Small hardware is schematic; use the build-package sizes and transfer-drilling instructions.",
+      "location_summary": "Q0, carriers, cable mounts and the panel PE bond.",
+      "quantity_summary": "See fastener schedule",
+      "supplier": "Bolt Depot",
+      "compliance": {
+        "status": "Mechanical accessory",
+        "detail": "Verify mechanical/material suitability; this accessory does not provide mains insulation or confer assembly certification.",
+        "url": "build.html#fasteners"
+      }
     },
     {
       "id": "logger-restraint",
-      "item": "Adjustable logger straps",
-      "quantity": "2 × 400 mm blanks; buy one 12 ft roll",
+      "item": "Adjustable equipment straps",
+      "quantity": "2 × 400 mm logger blanks + 2 × 250 mm XA/adapter blanks; one 12 ft roll",
       "model": "VELCRO ONE-WRAP 90340 · 19.05 mm (3/4 in) wide roll",
-      "reason": "Two 21 × 4 mm rounded panel slots per strap, 82 mm apart; flexible retention accommodates the two published logger widths. Feed straps before the panel goes in. Deburr and smooth every slot edge. No rigid custom cradle or housing drilling.",
-      "status": "Four 21 × 4 mm panel slots suit the selected 19.05 mm strap; fit and trim two 400 mm blanks.",
+      "reason": "Two straps retain the logger; one retains XA and one retains the adapter. Use eight smooth 21 × 4 mm slots, with each pair oriented to the illustrated strap. Fit, trim and verify retention without covering labels or overheating the adapter. No drilling into the equipment.",
+      "status": "Four straps proposed; actual fit, plug retention and temperature remain physical checks.",
       "availability": "buy",
       "links": [
         {
-          "label": "Buy · Lowe’s 90340",
-          "url": "https://www.lowes.com/pd/VELCRO-0-75-in-Black-Strap-Fastener/1087893",
+          "label": "Buy · Home Depot 90340",
+          "url": "https://www.homedepot.com/p/202261925",
           "kind": "buy"
         },
         {
@@ -851,9 +869,15 @@
         "source_url": "https://www.velcro.com/products/organization/heavy-duty-one-wrap-roll/",
         "source_label": "VELCRO"
       },
-      "installation": "Two straps wrap around the logger and pass through the four panel slots. Extra roll material stays outside.",
-      "location_summary": "Two straps around the logger, through four panel slots.",
-      "quantity_summary": "2 × 400 mm"
+      "installation": "Two logger straps plus separate straps around XA and the adapter, through eight panel slots. Spare roll stock is not rendered.",
+      "location_summary": "Two logger straps and two straps for the internal power connection.",
+      "quantity_summary": "4 straps / one roll",
+      "supplier": "Home Depot",
+      "compliance": {
+        "status": "Mechanical accessory",
+        "detail": "Verify mechanical/material suitability; this accessory does not provide mains insulation or confer assembly certification.",
+        "url": "https://www.velcro.com/products/organization/heavy-duty-one-wrap-roll/"
+      }
     }
   ],
   "inventory_basis": "Five equipment groups confirmed by the user: ELITEpro XC, CTs, three user-confirmed original DENT kit pigtails in different colors, matching long leads and original black adapter. DENT specifies an included 1.8 m USB-A to B cable; the photographed kit card places it in the lid pocket. Its present physical location has not been confirmed. Reuse it before buying a replacement.",
@@ -904,6 +928,421 @@
     {
       "id": "terminal-guard",
       "model": "Custom guard or manufacturer-approved terminal covers"
+    },
+    {
+      "id": "split-entries",
+      "model": "icotek KVT 32 black · 45026",
+      "reason": "Revision B: original adapter and DC cable stay entirely inside the enclosure."
+    },
+    {
+      "id": "dc-extension",
+      "model": "Tensility 10-02228 · 5.5/2.1 mm plug to jack",
+      "reason": "Revision B: original adapter and DC cable stay entirely inside the enclosure."
+    },
+    {
+      "id": "kt-inserts",
+      "model": "icotek KTMBS 4–7 gray · 41380",
+      "reason": "Revision B: original adapter and DC cable stay entirely inside the enclosure."
     }
-  ]
+  ],
+  "purchasing": {
+    "checked_on": "2026-09-23",
+    "currency": "USD",
+    "scope": "Displayed material prices for the selected design, including purchase packs and fastener spares. Not an order or delivered project quote. Offered panel stock is conditional at $0; machining, bonding changes if required, tools, labor, freight and tax are excluded.",
+    "supplier_policy": "Five selected sellers. Use the listed DigiKey -ND offers; no Marketplace partner offer is selected. Manufacturer factory stock can still ship later or separately. Recheck seller, quantity, delivery and tax in the final cart.",
+    "rows": [
+      {
+        "material_ids": [
+          "enclosure"
+        ],
+        "sku": "PCJ16148",
+        "supplier": "Solutions Direct",
+        "seller": "Solutions Direct",
+        "quantity": 1,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 137.11,
+        "extended_usd": 137.11,
+        "url": "https://www.solutionsdirectonline.com/hammond-16x14x8-polycarbonate-electrical-enclosure-with-solid-cover-pcj16148",
+        "availability_note": "Listed for sale; delivery confirmed at checkout"
+      },
+      {
+        "material_ids": [
+          "breaker"
+        ],
+        "sku": "CA1-B0-24-615-121-DG",
+        "supplier": "Master Electronics",
+        "seller": "Master Electronics",
+        "quantity": 1,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 40.32,
+        "extended_usd": 40.32,
+        "url": "https://www.masterelectronics.com/en/productdetail/littelfuse-carling-technologies/ca1b024615121dg-16947583.html",
+        "availability_note": "16 listed in stock; quantity-one tier"
+      },
+      {
+        "material_ids": [
+          "receptacle",
+          "printer-connector"
+        ],
+        "sku": "515CV",
+        "supplier": "Home Depot",
+        "seller": "Home Depot",
+        "quantity": 2,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 6.99,
+        "extended_usd": 13.98,
+        "url": "https://www.homedepot.com/p/301304939",
+        "availability_note": "One internal XA and one printer output; buy two total"
+      },
+      {
+        "material_ids": [
+          "connectors"
+        ],
+        "sku": "221-415",
+        "supplier": "DigiKey",
+        "seller": "DigiKey",
+        "quantity": 3,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 1.17,
+        "extended_usd": 3.51,
+        "url": "https://www.digikey.com/en/products/detail/wago-corporation/221-415/13549457",
+        "availability_note": "171,735 listed in stock; 2946-221-415-ND"
+      },
+      {
+        "material_ids": [
+          "carriers"
+        ],
+        "sku": "221-505",
+        "supplier": "DigiKey",
+        "seller": "DigiKey",
+        "quantity": 3,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 2.23,
+        "extended_usd": 6.69,
+        "url": "https://www.digikey.com/en/products/detail/wago-corporation/221-505/15568477",
+        "availability_note": "2,982 listed in stock; 2946-221-505-ND"
+      },
+      {
+        "material_ids": [
+          "cord"
+        ],
+        "sku": "55808699 · 14/3 SJOOW",
+        "supplier": "Home Depot",
+        "seller": "Home Depot",
+        "quantity": 13,
+        "unit": "ft",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 1.53,
+        "extended_usd": 19.89,
+        "url": "https://www.homedepot.com/p/Southwire-By-the-Foot-14-3-300-Volt-CU-Black-Flexible-Portable-Power-SJOOW-Cord-55808699/204633006",
+        "availability_note": "Minimum 6 ft; order one continuous 13 ft length"
+      },
+      {
+        "material_ids": [
+          "supply-plug"
+        ],
+        "sku": "515PV-YL",
+        "supplier": "Home Depot",
+        "seller": "Home Depot",
+        "quantity": 1,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 3.96,
+        "extended_usd": 3.96,
+        "url": "https://www.homedepot.com/p/Leviton-15-Amp-125-Volt-3-Wire-Plug-Yellow-515PV-YL-R10-515PV-0YL/309610976",
+        "availability_note": "Store / delivery availability varies"
+      },
+      {
+        "material_ids": [
+          "cord-glands"
+        ],
+        "sku": "1427NCGPG13LB",
+        "supplier": "DigiKey",
+        "seller": "DigiKey",
+        "quantity": 2,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 2.97,
+        "extended_usd": 5.94,
+        "url": "https://www.digikey.com/en/products/detail/hammond-manufacturing/1427NCGPG13LB/22152326",
+        "availability_note": "Factory stock 1,242; check lead time (not immediate DigiKey stock); 164-1427NCGPG13LB-ND"
+      },
+      {
+        "material_ids": [
+          "internal-wire"
+        ],
+        "sku": "22955999 · black 14 AWG stranded",
+        "supplier": "Home Depot",
+        "seller": "Home Depot",
+        "quantity": 4,
+        "unit": "ft",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 0.42,
+        "extended_usd": 1.68,
+        "url": "https://www.homedepot.com/p/204632031",
+        "availability_note": "One continuous 4 ft length; not a 100 ft roll"
+      },
+      {
+        "material_ids": [
+          "internal-wire"
+        ],
+        "sku": "22959199 · green 14 AWG stranded",
+        "supplier": "Home Depot",
+        "seller": "Home Depot",
+        "quantity": 4,
+        "unit": "ft",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 0.42,
+        "extended_usd": 1.68,
+        "url": "https://www.homedepot.com/p/204632154",
+        "availability_note": "One continuous 4 ft length; not a 100 ft roll"
+      },
+      {
+        "material_ids": [
+          "ring-lugs"
+        ],
+        "sku": "15-104 · 15 terminals",
+        "supplier": "Home Depot",
+        "seller": "Home Depot",
+        "quantity": 1,
+        "unit": "pack",
+        "pieces_per_unit": 15,
+        "unit_price_usd": 3.63,
+        "extended_usd": 3.63,
+        "url": "https://www.homedepot.com/p/202522492",
+        "availability_note": "15 pieces supplied for a single pack price"
+      },
+      {
+        "material_ids": [
+          "tie-mounts"
+        ],
+        "sku": "TM2S8-C",
+        "supplier": "DigiKey",
+        "seller": "DigiKey",
+        "quantity": 6,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 0.68,
+        "extended_usd": 4.08,
+        "url": "https://www.digikey.com/en/products/detail/panduit-corp/TM2S8-C/1306625",
+        "availability_note": "14,724 listed in stock; 298-10245-ND; individual pieces"
+      },
+      {
+        "material_ids": [
+          "cable-ties"
+        ],
+        "sku": "PLT2S-C",
+        "supplier": "DigiKey",
+        "seller": "DigiKey",
+        "quantity": 10,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 0.316,
+        "extended_usd": 3.16,
+        "url": "https://www.digikey.com/en/products/detail/panduit-corp/PLT2S-C/280043",
+        "availability_note": "113,092 listed in stock; 298-1030-ND; ten-piece price tier"
+      },
+      {
+        "material_ids": [
+          "logger-restraint"
+        ],
+        "sku": "90340 · 12 ft × 3/4 in",
+        "supplier": "Home Depot",
+        "seller": "Home Depot",
+        "quantity": 1,
+        "unit": "roll",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 10.77,
+        "extended_usd": 10.77,
+        "url": "https://www.homedepot.com/p/202261925",
+        "availability_note": "One roll supplies four blanks totaling 1.30 m"
+      },
+      {
+        "material_ids": [
+          "fasteners"
+        ],
+        "sku": "1335 · #6-32 × 3/8 screws",
+        "supplier": "Bolt Depot",
+        "seller": "Bolt Depot",
+        "quantity": 4,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 0.06,
+        "extended_usd": 0.24,
+        "url": "https://boltdepot.com/Product-Details?product=1335",
+        "availability_note": "Sold individually; includes stated spares"
+      },
+      {
+        "material_ids": [
+          "fasteners"
+        ],
+        "sku": "2942 · #6 flat washers",
+        "supplier": "Bolt Depot",
+        "seller": "Bolt Depot",
+        "quantity": 4,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 0.06,
+        "extended_usd": 0.24,
+        "url": "https://boltdepot.com/Product-Details?product=2942",
+        "availability_note": "Sold individually; includes stated spares"
+      },
+      {
+        "material_ids": [
+          "fasteners"
+        ],
+        "sku": "6835 · M3 × 16 screws",
+        "supplier": "Bolt Depot",
+        "seller": "Bolt Depot",
+        "quantity": 8,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 0.06,
+        "extended_usd": 0.48,
+        "url": "https://boltdepot.com/Product-Details?product=6835",
+        "availability_note": "Sold individually; includes stated spares"
+      },
+      {
+        "material_ids": [
+          "fasteners"
+        ],
+        "sku": "4513 · M3 washers",
+        "supplier": "Bolt Depot",
+        "seller": "Bolt Depot",
+        "quantity": 8,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 0.05,
+        "extended_usd": 0.4,
+        "url": "https://boltdepot.com/Product-Details?product=4513",
+        "availability_note": "Sold individually; includes stated spares"
+      },
+      {
+        "material_ids": [
+          "fasteners"
+        ],
+        "sku": "4792 · M3 locknuts",
+        "supplier": "Bolt Depot",
+        "seller": "Bolt Depot",
+        "quantity": 8,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 0.07,
+        "extended_usd": 0.56,
+        "url": "https://boltdepot.com/Product-Details?product=4792",
+        "availability_note": "Sold individually; includes stated spares"
+      },
+      {
+        "material_ids": [
+          "fasteners"
+        ],
+        "sku": "17887 · M4 × 16 screws",
+        "supplier": "Bolt Depot",
+        "seller": "Bolt Depot",
+        "quantity": 8,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 0.09,
+        "extended_usd": 0.72,
+        "url": "https://boltdepot.com/Product-Details?product=17887",
+        "availability_note": "Sold individually; includes stated spares"
+      },
+      {
+        "material_ids": [
+          "fasteners"
+        ],
+        "sku": "4525 · M4 washers",
+        "supplier": "Bolt Depot",
+        "seller": "Bolt Depot",
+        "quantity": 8,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 0.05,
+        "extended_usd": 0.4,
+        "url": "https://boltdepot.com/Product-Details?product=4525",
+        "availability_note": "Sold individually; includes stated spares"
+      },
+      {
+        "material_ids": [
+          "fasteners"
+        ],
+        "sku": "4802 · M4 locknuts",
+        "supplier": "Bolt Depot",
+        "seller": "Bolt Depot",
+        "quantity": 8,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 0.08,
+        "extended_usd": 0.64,
+        "url": "https://boltdepot.com/Product-Details?product=4802",
+        "availability_note": "Sold individually; includes stated spares"
+      },
+      {
+        "material_ids": [
+          "fasteners"
+        ],
+        "sku": "1368 · #10-32 × 3/4 bond screws",
+        "supplier": "Bolt Depot",
+        "seller": "Bolt Depot",
+        "quantity": 2,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 0.19,
+        "extended_usd": 0.38,
+        "url": "https://boltdepot.com/Product-Details?product=1368",
+        "availability_note": "Sold individually; proposed PE hardware remains subject to aluminum-bond acceptance"
+      },
+      {
+        "material_ids": [
+          "fasteners"
+        ],
+        "sku": "2561 · #10-32 nuts",
+        "supplier": "Bolt Depot",
+        "seller": "Bolt Depot",
+        "quantity": 4,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 0.08,
+        "extended_usd": 0.32,
+        "url": "https://boltdepot.com/Product-Details?product=2561",
+        "availability_note": "Sold individually; proposed PE hardware remains subject to aluminum-bond acceptance"
+      },
+      {
+        "material_ids": [
+          "fasteners"
+        ],
+        "sku": "4078 · #10 tooth washers",
+        "supplier": "Bolt Depot",
+        "seller": "Bolt Depot",
+        "quantity": 4,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 0.06,
+        "extended_usd": 0.24,
+        "url": "https://boltdepot.com/Product-Details?product=4078",
+        "availability_note": "Sold individually; proposed PE hardware remains subject to aluminum-bond acceptance"
+      },
+      {
+        "material_ids": [
+          "fasteners"
+        ],
+        "sku": "2946 · #10 flat washers",
+        "supplier": "Bolt Depot",
+        "seller": "Bolt Depot",
+        "quantity": 4,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 0.06,
+        "extended_usd": 0.24,
+        "url": "https://boltdepot.com/Product-Details?product=2946",
+        "availability_note": "Sold individually; proposed PE hardware remains subject to aluminum-bond acceptance"
+      }
+    ],
+    "material_subtotal_usd": 261.26
+  }
 }

@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="material-images.css?v=17">
 <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
 <script type="module" src="site-navigation.js?v=15"></script>
-<script type="module" src="layout3d.js?v=20"></script>
+<script type="module" src="layout3d.js?v=24"></script>
 <style>
 :root{font-family:Arial,Helvetica,sans-serif;color:#203346;background:#eef2f5;line-height:1.55}*{box-sizing:border-box}body{margin:0}a{color:#165b93}button{font:inherit;font-size:14px}button{cursor:pointer;border:1px solid #b7c6d3;border-radius:5px;background:#fff;color:#203346;padding:9px 12px}button:hover{background:#e4eef7}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #c47b21;outline-offset:3px}button.active{background:#173f64;color:#fff;border-color:#173f64}button:disabled{opacity:.4;cursor:default}header{background:#fff;border-bottom:1px solid #cbd6df;padding:24px max(22px,calc((100% - 1500px)/2))}h1{font-size:clamp(25px,3vw,38px);line-height:1.18;margin:0 0 13px}header p{margin:0;max-width:1000px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.toplinks{display:flex;gap:20px;flex-wrap:wrap;margin-top:16px;font-size:14px}main{max-width:1550px;margin:auto;padding:20px}section{background:#fff;border:1px solid #d2dce5;border-radius:8px;padding:24px;margin-bottom:20px;scroll-margin-top:15px}h2{font-size:23px;margin:0 0 12px}h3{font-size:18px;margin:0 0 8px}p{margin:8px 0 15px}.meta{color:#586e83;font-size:14px}.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.controls+.controls{margin-top:10px}.stage{margin-top:16px;overflow:auto;background:#fff;border:1px solid #d5dee6;padding:8px;max-height:85vh}.stage svg{display:block;width:100%;height:auto;margin:auto}.detail-stage{max-height:none}.detail-stage svg{min-width:1050px}#status{font-size:14px;color:#50697f;margin:12px 0 0;min-height:1.6em}#zoom-level{min-width:5ch;text-align:center;font-variant-numeric:tabular-nums}.table-wrap{overflow:auto}.table-wrap table{min-width:620px}table{border-collapse:collapse;width:100%;font-size:15px}th,td{padding:13px 12px;border-bottom:1px solid #dae2e9;text-align:left;vertical-align:top}th{background:#edf3f8;font-size:13px;color:#435e76}td:first-child{font-weight:600}.row.dimrow{opacity:.3}.row.selected-row{background:#eaf3fc}.trace{padding:5px 10px;font-weight:700;font-variant-numeric:tabular-nums}code{font-size:.92em;background:#edf2f6;padding:2px 4px;border-radius:3px}footer{padding:20px 25px 36px;max-width:1550px;margin:auto;color:#5e7183;font-size:13px}summary{cursor:pointer;font-size:21px;font-weight:700;margin:0 0 14px}@media(max-width:700px){header{padding:22px 16px}main{padding:12px}section{padding:16px}.controls button,.controls a{font-size:12px;padding:8px}th,td{padding:10px 8px}.stage{padding:0}h2{font-size:21px}.toplinks{gap:12px}}@media(prefers-reduced-motion:reduce){.wire{transition:none!important}}@media print{.controls,.toplinks,footer{display:none}header,section{border:0}body{background:#fff}.stage{overflow:visible;max-height:none;border:0}.stage svg{width:100%!important;min-width:0}section{break-inside:avoid}@page{size:A3 landscape;margin:10mm}}
 .inventory-heading{margin:20px 0 12px;font-size:15px;color:#435e76}.materials{table-layout:fixed}.materials th:nth-child(1){width:112px}.materials th:nth-child(2){width:24%}.materials th:nth-child(3){width:13%}.materials th:nth-child(5){width:18%}.materials td{overflow-wrap:anywhere}.materials td:nth-child(2){font-weight:600}.materials p{margin:5px 0 9px}.inventory-badge{display:inline-block;padding:5px 9px;border-radius:4px;white-space:nowrap;font-size:12px;font-weight:700}.inventory-badge.owned,.inventory-badge.kit{color:#1d6546;background:#e4f3eb;border:1px solid #add5bf}.inventory-badge.buy{color:#805112;background:#fff3dd;border:1px solid #e5cd9a}.material-notice{font-size:12px;line-height:1.5;color:#7d4710;background:#fff4df;border-left:3px solid #c28732;padding:8px 10px;margin:12px 0}.material-note{display:block;color:#5a6d7c;font-size:12px;margin-top:8px}.material-links a{display:block;margin-bottom:9px;font-size:13px}.reuse-note{font-size:13px;color:#1d6546}.materials [hidden]{display:none!important}
@@ -16,9 +16,9 @@
 
 .section-detail{border-top:1px solid #dae2e9;padding-top:16px;margin-top:16px;scroll-margin-top:16px}.section-detail>summary{font-size:15px;margin:0;font-weight:600}.section-detail[open]>summary{margin-bottom:14px}.section-detail>p,.section-detail>ul{font-size:14px}.section-detail li{margin-bottom:12px}.connection-note{font-size:14px;margin:18px 0 8px}.material-details{margin-top:12px;font-size:13px}.material-details summary{font-size:13px;font-weight:400;margin:0;color:#165b93}.material-details[open] summary{margin-bottom:8px}.material-image-note{font-size:11px;color:#627689}.material-details a{display:block;font-size:12px;margin-top:8px}.part-details summary{font-size:13px;font-weight:400;margin:6px 0;color:#165b93}footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 #design{padding:0;overflow:hidden}.design-tabs{display:flex;gap:8px;padding:0 24px 18px}.design-tabs [aria-selected="true"]{background:#173f64;color:#fff;border-color:#173f64}.design-tabs button{min-width:100px}#wiring{padding:22px 24px}#design [role="tabpanel"][hidden],#assembly-preview[hidden]{display:none}.review-items{padding-left:20px;margin:0}.review-items li{margin:8px 0;font-size:14px}#confirm .meta{margin:14px 0 0}#owned-materials{margin-top:22px}@media(max-width:700px){.design-tabs{padding:0 17px 16px}#wiring{padding:17px}.design-tabs button{min-width:95px}}
-</style>
+.revision-note{margin:18px 0 24px;padding:16px 20px;border-left:4px solid #267762;background:#f0f6f3;border-radius:4px}.revision-note p{margin:6px 0}.inventory-badge.fabricate{background:#f4ecd9;color:#725b19}</style>
 <link rel="stylesheet" href="wiring.css?v=16">
-<script type="module" src="wiring.js?v=19"></script>
+<script type="module" src="wiring.js?v=23"></script>
 </head>
 <body>
 <header>
@@ -27,7 +27,7 @@
 </header>
 <main>
 <section id="design">
-<div class="layout-heading"><h2>Design</h2><p class="meta">Hammond PCJ16148CC · 120 V · one printer</p></div>
+<div class="layout-heading"><h2>Design</h2><p class="meta">Hammond PCJ16148 · opaque cover · 120 V · one printer</p></div>
 <div class="design-tabs" role="tablist" aria-label="Design view"><button id="tab-layout" type="button" role="tab" aria-selected="true" aria-controls="layout" data-panel="layout">3D layout</button><button id="tab-wiring" type="button" role="tab" aria-selected="false" aria-controls="wiring" tabindex="-1" data-panel="wiring">Wiring</button></div>
 <div id="layout" role="tabpanel" aria-labelledby="tab-layout">
 <div class="model-bar">
@@ -65,16 +65,17 @@
 <tr><td>A2 · neutral</td><td>Neutral JN → full voltage lead → L2</td><td>L2 is connected to neutral in this single-phase topology. A red long lead is still neutral here.</td></tr>
 <tr><td>A3 · neutral</td><td>Neutral JN → full voltage lead → N</td><td>Voltage reference. Not protective earth.</td></tr>
 <tr><td>Existing CT</td><td>Printer hot only → current-input CH1 + / −</td><td>Use one compatible shunted 333 mV CT. Verify model/range; do not infer compatibility from the meter’s “1 V MAX” marking. DENT split-core convention: white +, black −; verify the actual sensor.</td></tr>
-<tr><td>Existing AC/DC adapter</td><td>XA → original adapter → round extension → POWER IN / OUT</td><td>CUI SMI6-9-V-P5: photo confirms 9 V DC, 0.667 A, center positive. This matches the meter’s 6–10 V / 500 mA requirement. Keep the original flat cord outside; pass only the Tensility 10-02228 round extension through the DC insert.</td></tr>
+<tr><td>Existing AC/DC adapter</td><td>Internal XA → original adapter and cable → POWER IN / OUT</td><td>CUI SMI6-9-V-P5: photo confirms 9 V DC, 0.667 A, center positive. This matches the meter’s 6–10 V / 500 mA requirement. Keep the original flat cable entirely inside. No extension, external coupling or DC feedthrough is used.</td></tr>
 <tr><td>L3 / CT CH2–CH4 / analog inputs</td><td>Unused in this one-printer setup</td><td>No connections needed. The analog-input terminal block on the USB end is not the CT terminal block.</td></tr>
 </tbody></table></div>
-<p class="meta">The XC can also obtain line power through L1–L2; DC power does not replace the voltage-sensing leads. The meter’s S terminal is for a CT shield, not PE. Bond the grounded XA receptacle and steel panel; keep N and PE separate. Keep the original adapter plug and cable intact. See the <a href="references.html#r1">DENT manual</a> and <a href="references.html#r2">datasheet</a>.</p>
+<p class="meta">The XC can also obtain line power through L1–L2; DC power does not replace the voltage-sensing leads. The meter’s S terminal is for a CT shield, not PE. Bond the grounded XA receptacle and aluminum panel; keep N and PE separate. Keep the original adapter plug and cable intact. See the <a href="references.html#r1">DENT manual</a> and <a href="references.html#r2">datasheet</a>.</p>
 </details>
-<details id="connections" class="section-detail"><summary>Connection schedule · 21 paths</summary><p class="meta">Select a number to trace its route. Paths 20–21 are the adapter’s AC contacts; 22–23 run through factory DC cables and the external plug coupling. No cable splice is required.</p><div class="table-wrap"><table><thead><tr><th>ID</th><th>Route</th><th>Endpoints</th></tr></thead><tbody><!-- CONNECTION_ROWS --></tbody></table></div></details>
+<details id="connections" class="section-detail"><summary>Connection schedule · 21 paths</summary><p class="meta">Select a number to trace its route. Paths 20–21 are the adapter’s AC contacts; 22–23 follow the original DC cable entirely inside the enclosure. No cable splice is required.</p><div class="table-wrap"><table><thead><tr><th>ID</th><th>Route</th><th>Endpoints</th></tr></thead><tbody><!-- CONNECTION_ROWS --></tbody></table></div></details>
 </div>
 </section>
 <section id="confirm">
 <h2>To confirm</h2>
+<p class="meta">Revision B also needs aluminum stock measurements, internal plug retention and a closed-enclosure temperature check. <a href="revision.html">Design and sourcing changes ↗</a></p>
 <ul class="review-items">
 <li><a href="#material-ct">CT range</a> — confirm the actual sensor rating for ELOG.</li>
 <li><a href="#material-blue-leads">Voltage leads</a> — confirm termination and protection by upstream Q0 before use.</li>
@@ -84,8 +85,9 @@
 </section>
 <section id="hardware">
 <h2>Materials</h2>
-<p class="meta">Quantities for one enclosure. Pack sizes and fit checks are in Details.</p>
-<h3 class="inventory-heading">To buy · {{BUY_COUNT}}</h3>
+<p class="meta">15 purchase groups + 1 proposed lab-fabricated panel. Five purchasing sources, including fasteners. Exact-part approval evidence is under Details.</p>
+<div class="revision-note"><strong>Revision B · fewer parts and orders</strong><p>Opaque PCJ16148 + proposed aluminum-panel reuse; XA and the original adapter stay inside. Six cable anchors and four equipment straps control movement.</p><p>Box and raw-panel comparison: <strong>$179.89 → $137.11</strong>. Estimated difference $42.78; machining, tax, shipping and other parts excluded.</p><p><a href="materials.html#order-plan"><strong>Full material order plan: ${{MATERIAL_TOTAL}}</strong> ↗</a> · actual packs and fastener spares included; fabrication, bonding changes if required, freight and tax excluded.</p><a href="revision.html">Compare choices, suppliers and certification evidence ↗</a></div>
+<h3 class="inventory-heading">To source / fabricate · {{BUY_COUNT}}</h3>
 <div class="table-wrap"><table class="materials"><caption class="sr-only">Materials to purchase or fabricate</caption><thead><tr><th>Status</th><th>Material</th><th>Qty.</th><th>Part &amp; details</th><th>Purchase</th></tr></thead><tbody><!-- BUY_ROWS --></tbody></table></div>
 <details id="owned-materials" class="section-detail"><summary>✓ Reuse / kit supplied · {{OWNED_COUNT}}</summary><div class="table-wrap"><table class="materials"><caption class="sr-only">Owned equipment and kit-supplied USB</caption><thead><tr><th>Status</th><th>Material</th><th>Qty.</th><th>Part &amp; details</th><th>Purchase</th></tr></thead><tbody><!-- OWNED_ROWS --></tbody></table></div></details>
 </section>

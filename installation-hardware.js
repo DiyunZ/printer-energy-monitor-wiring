@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { fitSupport, auditSupport } from './cable-supports.js?v=19';
+import { fitSupport, auditSupport } from './cable-supports.js?v=23';
 
 // Secondary hardware is an installation illustration, not a machining template.
 // Panel datums come from the same schedule as the existing CAD openings.
@@ -14,14 +14,6 @@ export function addInstallationHardware({ dimensions, instances, parts, box, cyl
     if(axis==='y')geo.rotateX(-Math.PI/2); if(axis==='x')geo.rotateY(Math.PI/2);
     return mesh(geo,material(color,.45),position,part);
   }
-  for(const id of ['dc-entry']) {
-    const p=instances[id], shape=new THREE.Shape();
-    shape.moveTo(-10.5,-10.5);shape.lineTo(10.5,-10.5);shape.lineTo(10.5,10.5);shape.lineTo(-10.5,10.5);shape.closePath();
-    const hole=new THREE.Path();hole.absarc(0,0,2.6,0,Math.PI*2,true);shape.holes.push(hole);
-    const geo=new THREE.ExtrudeGeometry(shape,{depth:19,bevelEnabled:false,curveSegments:24});geo.translate(0,0,-9.5);geo.rotateY(Math.PI/2);
-    const frame=materialLocations['split-entries'].find(p=>p.key===id).objects;
-    mark('kt-inserts',id,'DC insert inside KVT 32',[mesh(geo,material('#babdb8'),p.position,'entries')],frame);
-  }
   // Representative washer/head/shank stacks; use the build package for threads,
   // lengths and torque. Carrier longitudinal hole datums require transfer drilling.
   function fixing(key,label,[x,y,z],part,diameter=4,axis='y',length=12,throughPanel=false) {
@@ -34,7 +26,6 @@ export function addInstallationHardware({ dimensions, instances, parts, box, cyl
     });
   }
   for(const y of [-1,1]) fixing(`q0-${y}`,`Q0 mounting screw ${y<0?1:2}`,[parts.q0.position[0],parts.q0.position[1]+y*parts.q0.mountPitch/2,208.5],'q0',3.5,'z',9.525);
-  for(const y of [-26.785,26.785]) fixing(`xa-${y}`,`XA flange screw ${y<0?1:2}`,[184.94,parts.outlet.position[1]+y,parts.outlet.position[2]],'outlet',3.5,'x',15.875);
   dimensions.instances.filter(p=>p.part==='terminals').forEach(p=>{
     for(const x of [-10,10]) fixing(`${p.id}-${x}`,`${p.id} carrier fixing ${x<0?1:2}`,[p.position[0]+x,6.3,p.position[2]+17],'terminals',3,'y',16);
   });
@@ -83,10 +74,12 @@ export function addInstallationHardware({ dimensions, instances, parts, box, cyl
   ];
   for(const [key,label,[x,y,z],part,axis] of lugPlaces) {
     capture('ring-lugs',key,label,()=>{
-      annulus(5.7,2.65,1,[x,y,z],'#b6b6a6',part,axis);
-      const sleeve=axis==='y'?[x,y+1,z+11]:[x,y-11,z];
-      box(axis==='y'?[4,1,8]:[4,8,1],axis==='y'?[x,y,z+6]:[x,y-6,z],'#babbb0',part);
-      annulus(3,1.9,9,sleeve,'#3387bf',part,axis==='y'?'z':'y');
+      // 15-104 published overall envelope: 25.4 × 7.874 × 6.35 mm.
+      // Tongue, hole and barrel details are illustrative, not crimp-tool dimensions.
+      annulus(3.937,2.65,1,[x,y,z],'#b6b6a6',part,axis);
+      const sleeve=axis==='y'?[x,y+1,z+15.963]:[x,y-15.963,z];
+      box(axis==='y'?[4,1,12]:[4,12,1],axis==='y'?[x,y,z+8]:[x,y-8,z],'#babbb0',part);
+      annulus(3.175,1.9,11,sleeve,'#3387bf',part,axis==='y'?'z':'y');
     });
     if(key.endsWith('pe'))capture('fasteners',key,label+' hardware',()=>{
       // The dedicated PE stud starts beneath the panel. Thread and tooth details
@@ -103,7 +96,6 @@ export function addInstallationHardware({ dimensions, instances, parts, box, cyl
   }
   for(const [id,text,pos,facing] of [
     ['supply','SUPPLY IN',[-186.2,66,128],'right'],['printer','TO PRINTER',[0,62,-211.4],'front'],
-    ['dc','DC',[186.85,107,106],'right'],
     ['panel-pe','PE',[-125,2.1,77],'up']
   ]) decal(text,22,8,pos,'entries',facing);
   return supportChecks;

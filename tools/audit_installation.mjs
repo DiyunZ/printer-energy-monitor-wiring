@@ -43,21 +43,21 @@ export function audit(dimensions, manifest, buffer, procurement) {
   record('Q0 terminal and mounting pitches', q.terminalPitch === 49.28 && q.mountPitch === 52.37 ? 'pass' : 'fail',
     `Stud pitch ${q.terminalPitch ?? 'unspecified'} mm; mounting pitch ${q.mountPitch ?? 'unspecified'} mm. Carling: 49.28 / 52.37 mm.`);
   const lugs = procurement.items.find(p => p.id === 'ring-lugs');
-  record('Q0 ring size', lugs.model.includes('MV14-10R') && !lugs.model.includes('MV14-8R') ? 'pass' : 'fail',
-    'Selected Q0 terminal code 1 is #10-32; its two ring lugs must have #10 holes. Crimp tool and pull test remain required.');
-  for (const id of ['dc-entry']) {
-    const p = instances[id];
-    record(`${id} envelope`, p.size.every((v, i) => v === [37, 40, 40][i]) ? 'pass' : 'fail',
-      `Model ${p.size.join(' × ')} mm; KVT 32 overall envelope 37 mm axial × Ø40 mm flange.`, 'Conservative cylinder; the threaded shank is M32, not Ø40.');
-    const c=p.cable, insert=procurement.items.find(item=>item.id==='kt-inserts');
-    const matches=c?.profile==='round' && c.insertPart==='41380' && insert.model.includes(c.insertPart)
-      && c.insertRangeMm[0]===4 && c.insertRangeMm[1]===7
-      && c.diameterRangeMm[0]>=c.insertRangeMm[0] && c.diameterRangeMm[1]<=c.insertRangeMm[1];
-    record(`${id} cable / insert`, matches ? 'pass' : 'fail',
-      c ? `${c.item}: ${c.profile} jacket ${c.diameterRangeMm.join('–')} mm; KTMBS ${c.insertPart} accepts ${c.insertRangeMm.join('–')} mm.` : 'Cable profile / insert not specified.',
-      'Catalog interface check only. Original flat adapter cord is excluded; verify received jackets, connector passage, seals and strain relief.');
-  }
-  const internal = ['meter', 'ct'].map(id => parts[id]).concat(dimensions.instances.filter(p => p.part === 'terminals'));
+  record('Q0 ring size', lugs.model.includes('Gardner Bender 15-104') && lugs.terminal_compatibility?.stud_numbers.includes(10) ? 'pass' : 'fail',
+    'Selected 15-104 rings accept #8–10 studs, including Q0 terminal code 1 (#10-32). A #8-only ring is not acceptable. Crimp qualification remains a physical check.');
+  const removed=['dc-entry','dc-coupling'];
+  const unwanted=['dc-extension','split-entries','kt-inserts'];
+  record('Internal original DC connection', removed.every(id=>!instances[id]) && unwanted.every(id=>!procurement.items.some(p=>p.id===id)) ? 'pass':'fail',
+    'Original adapter cable stays inside; extension, external coupling and feedthrough purchasing are removed.');
+  const shellBounds=dimensions.plan.shellBounds;
+  const inside=['outlet','adapter'].every(id=>{
+    const b=bounds(parts[id]);
+    return b.min.x>shellBounds.min[0]+10 && b.max.x<shellBounds.max[0]-10 && b.min.z>shellBounds.min[2]+10 && b.max.z<shellBounds.max[2]-10;
+  });
+  record('Internal XA and adapter',inside?'pass':'fail','Both complete component envelopes remain inside the case plan with a 10 mm screening margin.','Not a creepage/clearance standard or a restraint/thermal check.');
+  record('Proposed aluminum reuse',procurement.items.find(p=>p.id==='panel')?.availability==='fabricate'?'pass':'fail',
+    'Offered aluminum is a fabrication proposal, not confirmed owned stock or a bought steel panel.','Actual thickness, stiffness and aluminum bonding remain to be accepted.');
+  const internal = ['meter', 'ct', 'outlet', 'adapter'].map(id => parts[id]).concat(dimensions.instances.filter(p => p.part === 'terminals'));
   const collisions = [];
   for (let i = 0; i < internal.length; i++) for (let j = i + 1; j < internal.length; j++) {
     const a = bounds(internal[i]), b = bounds(internal[j]);
@@ -80,9 +80,7 @@ export function audit(dimensions, manifest, buffer, procurement) {
   record('Vertical insertion through open case', sweeps.every(s => !s.shell_triangle_hits) ? 'pass' : 'review',
     `${sweeps.filter(s => !s.shell_triangle_hits).length}/${sweeps.length} swept bounding boxes clear the manufacturer shell.`,
     '300 mm vertical translation, fixed orientation, wall fittings absent. Panel/support contact at Y=0 is excluded with a 0.0001 mm numerical offset. This tests shell access, not brackets, wires or tool motions.');
-  const blocked = sweptBox(parts.panel).intersectsBox(bounds(parts.outlet));
-  record('Panel before flanged outlet', blocked ? 'sequence required' : 'pass',
-    blocked ? 'The panel insertion sweep intersects the flanged-outlet envelope. Install the panel first; removal requires removing the outlet or a separately verified tilted path.' : 'No interference in this tested translation.');
+  record('Internal power retention', 'hold', 'Separate XA and adapter straps replace the wall mount; physical plug retention and closed-enclosure temperature are untested.');
   const bodyChecks = [];
   for (const p of [parts.meter, parts.ct, parts.outlet, parts.q0]) {
     const b = bounds(p), distances = [];
@@ -99,19 +97,20 @@ export function audit(dimensions, manifest, buffer, procurement) {
   record('Closed lid screen', 'screen only',
     bodyChecks.map(p => `${p.id}: ${p.minimum_sampled_lid_gap_mm} mm (${p.lid_samples}/9 rays)`).join('; '),
     'Nine upward rays per body against lid mesh 15. Not a minimum-distance proof; excludes lid hardware, guards, wire bundles and tolerances.');
-  const wallEntries = ['dc-entry'].map(id => {
-    const p = instances[id], xs = rayHits([130, p.position[1], p.position[2]], [1, 0, 0], shell).map(v => v.x).sort((a, b) => a - b);
-    return { id, wall_intersections_x_mm: xs.map(round), local_wall_mm: xs.length >= 2 ? round(xs.at(-1) - xs[0]) : null };
-  });
+  const wallEntries = [];
+  for(const [label,y,z] of [['XA',121,13],['DC',78,106]]) {
+    const xs=rayHits([130,y,z],[1,0,0],shell).map(v=>v.x).filter(x=>x>170&&x<195);
+    record(`No ${label} wall opening`,xs.length>=2?'pass':'fail',`Former ${label} center has ${xs.length} wall-surface intersections; right wall stock restored.`,'A cross-section screen; exact source-CAD stock gauges are also recorded.');
+  }
   const usbWallHits = rayHits([130,55,167],[1,0,0],shell).map(v=>v.x).filter(x=>x>170&&x<195);
   record('No permanent USB wall opening', !instances['usb-entry'] && usbWallHits.length>=2 ? 'pass':'fail',
     `At the former USB center Y/Z = 55/167 mm, the shell has ${usbWallHits.length} wall-surface intersections; no USB fitting is installed.`,
     'Mesh cross-section check at the former opening center. USB is temporary with mains unplugged and the lid open.');
   record('Cord diameter interfaces', 'pass', 'Southwire published nominal OD 9.17–9.27 mm lies within Hammond 6–12 mm gland and Leviton 0.245–0.655 in cord ranges.',
     'Published variants are not a manufacturing tolerance. Measure purchased cord; clamping, jacket preparation and pull resistance remain physical checks.');
-  record('Ring barrel and internal wire', 'pass', 'Southwire nominal 2.87 mm insulation OD < 3M 4.318 mm ring maximum; 14 AWG is within 16–14 AWG ring range.', 'Does not qualify the crimp or approve the wiring method for this assembly.');
+  record('Ring barrel and internal wire', 'review', 'The selected 15-104 accepts 14–16 AWG. Its manufacturer does not publish an insulation-barrel limit on the cited page; do not reuse the former 3M value.', 'Fit the actual 2.87 mm nominal-OD wire, use the specified crimp tooling and inspect/pull-test before accepting the termination.');
   record('Physical and electrical release', 'hold', 'No built assembly, nameplate verification, qualified acceptance or energized test has been recorded.');
-  return { revision: 'Build package A, 2026-09-20', release: 'NOT RELEASED: close the receiving and electrical items in Build_Package.md', units: 'mm',
+  return { revision: 'Build package B, 2026-09-23', release: 'NOT RELEASED: close the receiving and electrical items in Build_Package.md', units: 'mm',
     method: 'Axis-aligned body envelopes, continuous vertical swept volumes against the machined Hammond shell, nine lid rays per body and sourced interface arithmetic. Shell triangulation deflection is 0.3 mm; numerical seating-contact exclusion is 0.0001 mm. Neither is a manufacturing tolerance.',
     checks, insertion_sweeps: sweeps, body_screen: bodyChecks, wall_entries: wallEntries,
     material_groups: procurement.items.length, owned_groups: procurement.items.filter(p => p.availability === 'owned').length };

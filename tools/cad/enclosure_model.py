@@ -1,11 +1,12 @@
-"""ELITEpro enclosure build-package A. Units: mm; X across, Y up, Z front.
-Process: drill/mill purchased Hammond PCJ16148CC polycarbonate shell and
-14R1513 steel panel. Deburr; preserve original cover/gasket/support geometry.
+"""ELITEpro enclosure revision B. Units: mm; X across, Y up, Z front.
+Process: drill/mill selected Hammond PCJ16148 polycarbonate shell and
+reused aluminum panel (provisional thickness; measure stock before fabrication). Deburr; preserve original cover/gasket/support geometry.
 Vendor interfaces are NOT in the skill's standards registry. Sources:
 Hammond PCJ16148CC STEP (shell solid 0, panel solid 33, no scaling);
 Carling C-Series p.11 rectangular cutout and 52.37 pitch;
-Leviton 5279-C instruction sheet 43.66..44.45 bore / 53.57 pitch;
-Hammond 1427NCGPG13LB 21.0 bore; icotek 45026 32.3 bore.
+Hammond 1427NCGPG13LB 21.0 bore. No XA, DC or USB wall opening.
+PCJ16148 opaque cover selected; common base geometry uses the existing
+PCJ16148CC vendor template, with cover silhouette illustrative.
 Carrier fixing holes are intentionally transfer-drilled from actual 221-505
 parts: the published drawing does not locate their longitudinal datum.
 REVIEW model, not unconditional machining/electrical release; see Build_Package.md.
@@ -27,23 +28,18 @@ wall_normal_thickness_mm = 4.7752
 q0_rectangle_mm = (10.97, 36.78)
 q0_hole_d_mm = 3.96
 q0_pitch_mm = 52.37
-xa_bore_d_mm = 44.0
-xa_pitch_mm = 53.57
-xa_fixing_d_mm = 4.0
 power_entry_d_mm = 21.0
-split_entry_d_mm = 32.3
 panel_thickness_mm = 1.89738
 # DESIGN: project locations and tooling allowances.
 cut_depth_mm = 20.0
 q0_xy_mm = (-112.0, 120.0)
-xa_yz_mm = (121.0, 13.0)
 supply_yz_mm = (43.0, 128.0)
 printer_xy_mm = (0.0, 36.0)
-dc_yz_mm = (78.0, 106.0)
 panel_bond_xz_mm = (-125.0, 60.0)
 anchor_holes_xz_mm = [(-153,80),(8,-175),(38,-151),(-79,130),(9,130),(145,158)]
 strap_slots_xz_mm = [(50,-70),(132,-70),(50,50),(132,50)]
 strap_slot_mm = (21.0, 4.0)
+equipment_slots_xz_mm = [(-68,-65),(-68,-15),(-16.85,-77),(-16.85,-3)]
 m4_clear_d_mm = 4.5
 bond_clear_d_mm = 5.3
 source_transform_y_mm = 181.7624
@@ -80,13 +76,8 @@ def wall_features():
     for sign in [-1,1]:
         result.append(dict(id=f'Q0 fixing {sign:+}',wall='front',plane=f('front',q0_xy_mm),
                            at=(0,sign*q0_pitch_mm/2), diameter=q0_hole_d_mm, tolerance_mm=.12))
-    result.append(dict(id='XA outlet',wall='right',plane=f('right',xa_yz_mm),diameter=xa_bore_d_mm,tolerance_mm=.15))
-    for sign in [-1,1]:
-        result.append(dict(id=f'XA fixing {sign:+}',wall='right',plane=f('right',xa_yz_mm),
-                           at=(0,sign*xa_pitch_mm/2),diameter=xa_fixing_d_mm,tolerance_mm=.1))
-    for name,wall,p,d in [('SUPPLY','left',supply_yz_mm,power_entry_d_mm),
-        ('OUTPUT','rear',printer_xy_mm,power_entry_d_mm),('DC','right',dc_yz_mm,split_entry_d_mm)]:
-        result.append(dict(id=name,wall=wall,plane=f(wall,p),diameter=d,tolerance_mm=.1))
+    for name,wall,p in [('SUPPLY','left',supply_yz_mm),('OUTPUT','rear',printer_xy_mm)]:
+        result.append(dict(id=name,wall=wall,plane=f(wall,p),diameter=power_entry_d_mm,tolerance_mm=.1))
     return result
 
 
@@ -97,6 +88,8 @@ def panel_features():
     result += [dict(id='Panel PE bond',plane=p,at=panel_bond_xz_mm,diameter=bond_clear_d_mm)]
     result += [dict(id=f'Strap slot {i+1}',plane=p,at=pt,slot=strap_slot_mm)
                for i,pt in enumerate(strap_slots_xz_mm)]
+    result += [dict(id=f'Power strap slot {i+1}',plane=p,at=pt,slot=strap_slot_mm,rotation=0)
+               for i,pt in enumerate(equipment_slots_xz_mm)]
     return result
 
 
@@ -122,7 +115,7 @@ def machine(original, features):
             with BuildSketch(f['plane']):
                 with Locations(f.get('at',(0,0))):
                     if 'rect' in f: Rectangle(*f['rect'])
-                    elif 'slot' in f: SlotOverall(*f['slot'],rotation=90)
+                    elif 'slot' in f: SlotOverall(*f['slot'],rotation=f.get('rotation',90))
                     else: Circle(f['diameter']/2)
             extrude(amount=cut_depth_mm,both=True,mode=Mode.SUBTRACT)
     return model.part
@@ -142,8 +135,6 @@ def build() -> Part:
 def checks():
     # Absolute independent go-gauges, not a restatement of the hole parameters.
     return [
-      {'feature':'XA 42.9 mm body clears bore', 'clear':{'cylinder':42.9,'axis':'x','at':[(121,13)],'span':(170,190)}},
-      {'feature':'KVT M32 shanks clear', 'clear':{'cylinder':32.0,'axis':'x','at':[(78,106)],'span':(168,190)}},
       {'feature':'19.05 mm strap passes slots', 'clear':{'box':(2.0,6.0,19.3),'at':[(x,0,z) for x,z in strap_slots_xz_mm]}},
       {'feature':'M4 cable anchor screws clear', 'clear':{'cylinder':4,'axis':'y','at':anchor_holes_xz_mm,'span':(-2,4)}},
       {'feature':'Removed rail holes remain solid', 'material':{'cylinder':3,'axis':'y','at':[(-95,-28),(-15,-28),(-27,-28)],'span':(.2,1.6)}},
@@ -212,6 +203,8 @@ def main():
     for name,at,rect,diameter in (
         [(f'Strap {i+1} 19.3 x 2.0 mm gauge',p,(2.0,19.3),None)
          for i,p in enumerate(strap_slots_xz_mm)] +
+        [(f'Power strap {i+1} 19.3 x 2.0 mm gauge',p,(19.3,2.0),None)
+         for i,p in enumerate(equipment_slots_xz_mm)] +
         [(f'Anchor {i+1} M4 gauge',p,None,4.0)
          for i,p in enumerate(anchor_holes_xz_mm)] +
         [('Panel PE #10 shaft gauge',panel_bond_xz_mm,None,4.83)]):
@@ -236,6 +229,16 @@ def main():
         missing=gauge.part.volume-retained
         if missing>1e-4: raise ValueError('Removed rail opening remains at '+str(at))
         report.append(dict(id='Restored panel stock '+str(at),missing_mm3=missing,result='pass'))
+    for label,at in [('XA',(121,13)),('XA upper fixing',(147.785,13)),('XA lower fixing',(94.215,13)),('DC',(78,106)),('USB',(55,167))]:
+        with BuildPart() as gauge:
+            with BuildSketch(frames()('right',at)): Circle(1.5)
+            extrude(amount=cut_depth_mm,both=True)
+        stock=original[0].intersect(gauge.part)
+        actual=parts[0].intersect(gauge.part)
+        stock_volume=0 if stock is None else sum(s.volume for s in stock)
+        actual_volume=0 if actual is None else sum(s.volume for s in actual)
+        if stock_volume<1 or abs(stock_volume-actual_volume)>1e-4: raise ValueError('Old wall opening not restored: '+label)
+        report.append(dict(id='Restored right wall '+label,stock_mm3=actual_volume,result='pass'))
     (target/'cad-checks.json').write_text(json.dumps({'units':'mm','status':'Digital geometry checks only; open release conditions in build.html',
         'source_step_sha256': hashlib.sha256(Path(source_step).read_bytes()).hexdigest() if source_step else None,
         'unchecked_standard_interfaces':'Vendor interfaces outside bundled standards database; dimensions from linked drawings, no physical qualification.',

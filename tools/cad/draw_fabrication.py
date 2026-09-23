@@ -30,9 +30,15 @@ def drawing(name, features, width, height, note):
             ax.add_patch(Rectangle((u-w/2,v-h/2),w,h,fill=False,lw=1.2));size=f'{w:.2f} x {h:.2f}'
         elif 'slot' in f:
             length,diameter=f['slot'];r=diameter/2;straight=length-diameter
-            ms.add_line((u-r,v-straight/2),(u-r,v+straight/2),dxfattribs=style);ms.add_line((u+r,v-straight/2),(u+r,v+straight/2),dxfattribs=style)
-            ms.add_arc((u,v+straight/2),r,0,180,dxfattribs=style);ms.add_arc((u,v-straight/2),r,180,360,dxfattribs=style)
-            ax.add_patch(FancyBboxPatch((u-r,v-length/2),diameter,length,boxstyle=f'round,pad=0,rounding_size={r}',fill=False,lw=1.2));size=f'{length:g} x {diameter:g} slot R{r:g}'
+            if f.get('rotation',90)==0:
+                ms.add_line((u-straight/2,v-r),(u+straight/2,v-r),dxfattribs=style);ms.add_line((u-straight/2,v+r),(u+straight/2,v+r),dxfattribs=style)
+                ms.add_arc((u+straight/2,v),r,270,90,dxfattribs=style);ms.add_arc((u-straight/2,v),r,90,270,dxfattribs=style)
+                w,h=length,diameter
+            else:
+                ms.add_line((u-r,v-straight/2),(u-r,v+straight/2),dxfattribs=style);ms.add_line((u+r,v-straight/2),(u+r,v+straight/2),dxfattribs=style)
+                ms.add_arc((u,v+straight/2),r,0,180,dxfattribs=style);ms.add_arc((u,v-straight/2),r,180,360,dxfattribs=style)
+                w,h=diameter,length
+            ax.add_patch(FancyBboxPatch((u-w/2,v-h/2),w,h,boxstyle=f'round,pad=0,rounding_size={r}',fill=False,lw=1.2));size=f'{length:g} x {diameter:g} slot R{r:g}'
         else:
             r=f['diameter']/2;ms.add_circle((u,v),r,dxfattribs=style);ax.add_patch(Circle((u,v),r,fill=False,lw=1.2));size=f'D{2*r:.2f}'
         ax.plot([u-2,u+2],[v,v],color='#617989',lw=.6);ax.plot([u,u],[v-2,v+2],color='#617989',lw=.6)
@@ -51,12 +57,16 @@ def drawing(name, features, width, height, note):
     else:
         ax.set_xlim(-width/2,width/2);ax.set_ylim(0,height)
     ax.set_aspect('equal');ax.grid(alpha=.12);ax.axhline(0,c='#617989',lw=.8);ax.axvline(0,c='#617989',lw=.8)
-    ax.set_xlabel('U (mm)');ax.set_ylabel('V (mm)');ax.set_title(name.upper()+' / Build package A',loc='left',fontsize=13,weight='bold')
+    ax.set_xlabel('U (mm)');ax.set_ylabel('V (mm)');ax.set_title(name.upper()+' / Build package B',loc='left',fontsize=13,weight='bold')
     fig.subplots_adjust(left=.07,right=.58,bottom=.22 if name=='panel' else .14,top=.88)
     fig.text(.06,.95,'ENGINEERING REVIEW — release conditions in Build_Package.md',fontsize=9,color='#8c4d13')
     tableax=fig.add_axes([.62,.2,.36,.63]);tableax.axis('off')
+    if not rows:
+        rows=[['—','NO CUTS','—','—','Solid wall']]
+        ms.add_text('NO CUTS - RIGHT WALL REMAINS SOLID',dxfattribs={'height':5,'layer':'TEXT','insert':(-160,100)})
+        ax.text(0,100,'NO CUTS\nXA + DC remain inside',ha='center',va='center',color='#256853',fontsize=13)
     tab=tableax.table(cellText=rows,colLabels=['#','Feature','U','V','Cut size'],cellLoc='left',loc='upper left',colWidths=[.08,.34,.15,.15,.28]);tab.auto_set_font_size(False);tab.set_fontsize(7);tab.scale(1,1.5)
-    fig.text(.06,.055,note+'\nCUT layer only. REFERENCE/TEXT are not cuts. Drawing not to scale; DXF units = mm.\nPosition tolerance +/-0.5 mm; Q0 relative pattern +/-0.12 mm; XA bore +/-0.15 mm; other bores +/-0.1 mm.\nReview against received parts before machining. Do not machine with equipment or supply connected.',fontsize=8)
+    fig.text(.06,.055,note+'\nCUT layer only. REFERENCE/TEXT are not cuts. Drawing not to scale; DXF units = mm.\nPosition tolerance +/-0.5 mm; Q0 relative pattern +/-0.12 mm; other bores +/-0.1 mm.\nReview against received parts before machining. Do not machine with equipment or supply connected.',fontsize=8)
     doc.saveas(out/(name+'.dxf'));fig.savefig(out/(name+'.svg'));return fig
 
 with PdfPages(out/'Machining_Drawings.pdf') as pdf:
@@ -73,6 +83,6 @@ with PdfPages(out/'Machining_Drawings.pdf') as pdf:
         pdf.savefig(fig);plt.close(fig)
     features=[f|{'uv':(f['at'][0],-f['at'][1])} for f in model.panel_features()]
     fig=drawing('panel',features,327.025,374.65,
-        'View from lid. U = X; V = -Z. Origin: center of 14R1513 blank. Rear = +V. Retain factory fixing holes.\nDashed WAGO carrier envelopes: locate as shown, then transfer-drill two D3.3 holes per actual carrier; do not cut outlines.')
+        'View from lid. U = X; V = -Z. Origin: center of aluminum template. Rear = +V. Measure stock; transfer enclosure-support pattern.\nDashed WAGO carrier envelopes: locate as shown, then transfer-drill two D3.3 holes per actual carrier; do not cut outlines.')
     pdf.savefig(fig);plt.close(fig)
 print('Generated five DXFs, five SVGs and five-page machining drawing PDF.')

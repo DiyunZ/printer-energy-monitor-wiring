@@ -6,10 +6,12 @@ September 20, 2026 · 120 V grounded supply · one printer at a time.
 
 | Item | Verified | Decision |
 |---|---|---|
-| Q0, CA1-B0-24-615-121-DG | 15 A, delay 24, UL489 option; 10 kA interrupting rating at 120 V AC | Selected for purchase by the user on September 21, 2026, following the professor's confirmation of the 15 A design limit. Site and startup checks remain pre-use acceptance items; confirm supplier stock and lead time. |
+| Q0, CA1-B0-24-615-121-DG | 15 A, delay 24, UL489 option; 10 kA interrupting rating at 120 V AC | Selected for purchase by the user on September 21, 2026, following the professor's confirmation of the 15 A design limit. Site and startup checks remain pre-use acceptance items; Master Electronics lists one at $40.32 and 16 in stock on September 23; delivery remains checkout-dependent. |
 | Voltage tap | A1 connects to JL after Q0; no dedicated fuse | Confirm that upstream Q0 protection is suitable for the original DENT leads before energizing. |
 | USB cable | Included in DENT kit; use the lid-pocket cable | No routine purchase. Confirm it is present; use only for offline service. |
-| DC entry | Tensility round extension with KVT 32 / 41380 | Quantity reduced to one frame and one insert; USB opening removed. |
+| Internal adapter power | XA 515CV + original CUI cable, entirely inside | No DC extension or wall feedthrough. Verify plug retention and closed-enclosure temperature. |
+
+The [completed sourcing comparison](revision.html#breaker-options) retains the exact Carling at $40.32. Altech 1C15UL plus one compatible rail and two CA802 stops totals $39.39 before fasteners, operator access, fabrication and freight. Its different trip curve and mounting do not justify an unreviewed substitution for that small component-price difference. The remaining protection decisions concern the physical application, not an unresolved supplier quote.
 
 ## Q0: what the rating proves
 

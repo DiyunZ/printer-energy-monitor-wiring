@@ -1,5 +1,5 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sources and design limits · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=15"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Wiring_References_EN.md" download>Download Markdown</a></nav><h1>Sources and design decisions — build package A</h1>
-<p>September 20, 2026. One 120 V grounded supply and one printer at a time, confirmed by the user. This is an engineering review package; physical and electrical release remain open in the <a href="build.html">build package</a>.</p>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sources and design limits · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=15"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Wiring_References_EN.md" download>Download Markdown</a></nav><h1>Sources and design decisions — revision B</h1>
+<p>September 23, 2026. One 120 V grounded supply and one printer at a time, confirmed by the user. This is an engineering review package; physical and electrical release remain open in the <a href="build.html">build package</a>.</p>
 <h2>Primary references</h2>
 <div class="table-wrap"><table>
 <thead>
@@ -30,9 +30,9 @@
 </tr>
 <tr>
 <td id="r4">R4</td>
-<td><a href="https://leviton.com/products/5279-c">Leviton 5279-C</a>, <a href="https://leviton.com/content/dam/leviton/commercial-industrial/product_documents/dimensional_drawing/CATSTD-05279-00C-M01.pdf">drawing</a>, <a href="https://leviton.com/content/dam/leviton/commercial-industrial/product_documents/instruction_sheet/PK-93763-10-02-0C-W.pdf">instructions</a></td>
-<td>15 A / 125 V flanged 5-15R; body, mounting and terminal interfaces.</td>
-<td>The actual flange, tapered wall and fastener stack require a received-part check.</td>
+<td><a href="https://leviton.com/products/515cv">Leviton 515CV</a>, <a href="https://leviton.com/content/dam/leviton/residential/product_documents/none/Document-31435-Dimensional%20Data.jpg">dimensional drawing</a></td>
+<td>Internal XA; 66.3 mm length, 39.1 mm maximum diameter; UL498 File E13393 / CSA LR-406.</td>
+<td>Existing adapter fit, mated depth, strap restraint and cord clamp need a physical check.</td>
 </tr>
 <tr>
 <td id="r5">R5</td>
@@ -48,9 +48,9 @@
 </tr>
 <tr>
 <td id="r7">R7</td>
-<td><a href="https://www.hammfg.com/files/parts/pdf/PCJ16148CC.pdf">Hammond drawing</a>, <a href="https://www.hammfg.com/files/parts/stp/PCJ16148CC.zip">STEP</a>, <a href="https://www.hammfg.com/part/14R1513">14R1513</a></td>
-<td>Unscaled case/lid/panel geometry and factory hardware. Panel 327.025 × 374.65 mm.</td>
-<td>The project adds machining. The modified assembly has no claimed IP/NEMA certification.</td>
+<td><a href="https://www.hammfg.com/files/parts/pdf/PCJ16148.pdf">PCJ16148 drawing</a>, <a href="https://www.hammfg.com/electrical/products/non-metallic/pcj-sc">series / standards</a>, <a href="https://www.hammfg.com/files/parts/stp/PCJ16148CC.zip">inherited PCJ16148CC STEP</a></td>
+<td>Same-size opaque cover and 327.025 × 374.65 mm panel template.</td>
+<td>Common-base CAD retained; opaque lid geometry not independently modeled. Aluminum stock thickness is unmeasured. No finished-assembly certification.</td>
 </tr>
 <tr>
 <td id="r10">R10</td>
@@ -66,9 +66,9 @@
 </tr>
 <tr>
 <td id="r12">R12</td>
-<td><a href="https://www.hammfg.com/part/1427NCGPG13LB">Hammond 1427NCGPG13LB</a>, <a href="https://pim.icotek.com/Produkte/PG02%20Kabelverschraubungen/KVT/KVT%2032/Datenbl%C3%A4tter/45026_KVT%2032_bk.PDF">icotek KVT 32</a>, <a href="https://www.icotek.com/Produkte/PDFs/en_US/KTMBS%20gy.pdf">KTMBS 41380</a></td>
-<td>Long-thread power glands; one M32 DC split frame and one 41380 split round-cable insert, 4–7 mm.</td>
-<td>Use the round DC extension. USB is temporary with mains unplugged. Original flat CUI cord stays outside; verify seals and wall stack.</td>
+<td><a href="https://www.hammfg.com/part/1427NCGPG13LB">Hammond 1427NCGPG13LB</a></td>
+<td>Two long-thread power glands.</td>
+<td>Measure actual cord and wall stacks; no DC/USB feedthrough.</td>
 </tr>
 <tr>
 <td id="r13">R13</td>
@@ -84,9 +84,9 @@
 </tr>
 <tr>
 <td id="r15">R15</td>
-<td><a href="https://www.tensility.com/products/10-02228">Tensility 10-02228</a>, <a href="https://tensility.s3.us-west-2.amazonaws.com/imports/product_spec_sheets/10-02228.pdf">drawing</a></td>
-<td>0.915 m factory extension, 5.5/2.1 mm, round OD 5.2 ±0.3 mm, 7 A / 48 V, minimum bend radius 31.2 mm.</td>
-<td>Preserves polarity; confirm engagement, retention and actual slack. Mated coupling is drawn as an approximate service envelope.</td>
+<td><a href="revision.html">Revision B cost and supplier evidence</a></td>
+<td>Box/panel comparison and conditional DIN breaker option.</td>
+<td>Dated web prices, not quotes; tax, freight and fabrication excluded.</td>
 </tr>
 <tr>
 <td id="r16">R16</td>
@@ -104,13 +104,13 @@
 <li>Q0 is the single operating breaker. JL branches to printer hot through CT, the dedicated adapter outlet, and A1. Neutral and PE remain separate; PE stays continuous. Unplug the supply and verify absence of voltage before removing the screw-fixed cover. Q0 OFF alone does not isolate incoming terminals.</li>
 <li>A1 connects directly to JL after Q0, then to L1 through the original full voltage lead. Acceptance of upstream-only protection is required before use. A2 and A3 connect JN to L2 and N. The three OEM pigtails are sensing accessories, not load wires or PE conductors. Keep the mating pairs inside the enclosure.</li>
 <li>Only printer hot crosses CT once. Adapter and voltage-tap branch currents are outside the measured current. Voltage is sensed upstream, so downstream cord loss and voltage drop still affect the measurement boundary.</li>
-<li>XA is the Leviton 5279-C flanged outlet. Its earth terminal, printer earth, steel panel receive deliberate PE connections. The obsolete metal outlet-box bond is removed.</li>
-<li>The original adapter and flat DC cable remain intact outside. A Tensility 10-02228 round extension passes through a 41380 insert to the logger. The outlet and supply share Q0&#39;s capacity. XA is for the logger adapter only. Keep DC separated from mains. USB is connected only temporarily with mains unplugged and removed before the lid is closed and power is restored.</li>
+<li>XA is an internal Leviton 515CV cord connector. Its ground contact, printer earth and aluminum panel receive deliberate PE connections. Two 515CV connectors are required total.</li>
+<li>The original adapter and flat DC cable remain intact inside. The original DC plug connects directly to the logger. The outlet and supply share Q0&#39;s capacity. XA is for the logger adapter only. Keep DC separated from mains. USB is connected only temporarily with mains unplugged and removed before the lid is closed and power is restored.</li>
 <li>ELOG must be configured and validated before routine use. Powering the instrument is not proof that recording started. Verify CT scaling, polarity, reference readings and restart behavior.</li>
 </ul>
 <h2>Digital checks and limits</h2>
-<p><code>layout_dimensions.json</code> supplies the body locations for the 3D scene and wiring plan. Rear is at the top of both plan views. Browser checks compare actual rendered body bounds with SVG footprints for all 24 envelopes, including the external DC coupling service envelope; schematic terminal symbols and wire bends are simplified.</p>
+<p><code>layout_dimensions.json</code> supplies the body locations for the 3D scene and wiring plan. Rear is at the top of both plan views. Browser checks compare actual rendered body bounds with SVG footprints for the 17 modeled envelopes; schematic terminal symbols and wire bends are simplified.</p>
 <p>The original Hammond STEP is retained at full scale. Project machining is generated with build123d 0.11.1; the case and panel are tessellated at 0.3 mm. Original cover/hardware meshes retain their earlier 0.45 mm triangulation. Numerical surface-contact exclusion at the seated panel is 0.0001 mm; these values are not manufacturing tolerances. Exact STEP cut-through gauges and the dated source hash are in <code>fabrication/cad-checks.json</code>.</p>
-<p>Ten nominal insertion sweeps clear the open case after excluding intentional panel-support contact. Install the panel before the side outlet. Lid checks use nine sampled rays per body. These are geometric screens, not tolerance, thermal, electrical-clearance or flexible-cable proofs. The 2 m / 3 mm voltage-lead coil is an illustrative storage scenario, not a measurement of the supplied cables.</p>
+<p>Nominal insertion sweeps are recorded in the current installation audit after excluding intentional panel-support contact. Install and restrain XA on the panel; there is no side outlet. Lid checks use nine sampled rays per body. These are geometric screens, not tolerance, thermal, electrical-clearance or flexible-cable proofs. The 2 m / 3 mm voltage-lead coil is an illustrative storage scenario, not a measurement of the supplied cables.</p>
 <p>The circuit checker validates 21 named paths, separated nets, printer-hot-only CT routing and Q0-open behavior. Regression tests reject selected wiring mistakes. Website tests verify gestures, views, alignment, images, links and responsive layout. No check constitutes a physical dry fit or energized acceptance result. See the <a href="build.html">build package</a> for the exact remaining work.</p>
 </body></html>

@@ -1,0 +1,53 @@
+{
+  "date": "2026-09-23",
+  "baseline_commit": "3c36b4e",
+  "old_order_link_hosts": [
+    "biscoind.com",
+    "crescentelectric.com",
+    "digikey.com",
+    "homedepot.com",
+    "lowes.com",
+    "mouser.com",
+    "newark.com",
+    "powermatic.net",
+    "solutionsdirectonline.com",
+    "supplyhouse.com",
+    "tensility.com",
+    "us.rs-online.com"
+  ],
+  "new_suppliers": [
+    "Bolt Depot",
+    "DigiKey",
+    "Home Depot",
+    "Master Electronics",
+    "Solutions Direct"
+  ],
+  "old_purchase_groups": 19,
+  "purchase_groups": 15,
+  "fabrication_groups": 1,
+  "removed_purchase_ids": [
+    "dc-extension",
+    "kt-inserts",
+    "split-entries"
+  ],
+  "box_and_panel_usd": {
+    "old_box": 149.45,
+    "old_panel": 30.44,
+    "new_box": 137.11,
+    "proposed_reused_stock": 0,
+    "difference": 42.78,
+    "limits": "Selected box and raw panel only; excludes machining, hardware, shipping, tax, stock availability and other components."
+  },
+  "physical_validation": false,
+  "old_additional_fastener_supplier": "Bolt Depot",
+  "old_total_planned_suppliers": 13,
+  "supplier_count_basis": "Five selected sellers. Use the listed DigiKey -ND offers; no Marketplace partner offer is selected. Manufacturer factory stock can still ship later or separately. Recheck seller, quantity, delivery and tax in the final cart.",
+  "priced_material_subtotal_usd": 261.26,
+  "q0_selection": {
+    "sku": "Carling CA1-B0-24-615-121-DG",
+    "supplier": "Master Electronics",
+    "price_usd": 40.32,
+    "din_parts_usd": 39.39,
+    "decision": "Retain direct-mount Carling; DIN listed breaker/rail/two CA802 stops are only $0.93 lower before mounting, external access, fabrication or freight."
+  }
+}

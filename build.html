@@ -1,6 +1,6 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Machining and assembly package · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=15"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Build_Package.md" download>Download Markdown</a></nav><h1>Build package A</h1>
-<p>September 20, 2026 · one grounded 120 V supply · one printer at a time.</p>
-<p><strong>Engineering review package. Complete-order, machining and energizing release remain open.</strong> The drawings and part selections below replace the earlier outlet-box concept. They do not represent a physically assembled or certified product.</p>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Machining and assembly package · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=15"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Build_Package.md" download>Download Markdown</a></nav><h1>Build package B</h1>
+<p>September 23, 2026 · one grounded 120 V supply · one printer at a time.</p>
+<p><strong>Engineering review package. Complete-order, machining and energizing release remain open.</strong> This revision replaces the exterior adapter and DC feedthrough with internal power and proposed aluminum reuse. <a href="revision.html">Cost, sourcing and certification review</a>. They do not represent a physically assembled or certified product.</p>
 <p><a href="materials.html">Materials with pictures and purchase links</a> · <a href="index.html#assembly-preview">3D installation sequence</a> · <a href="installation.html">Installation audit</a> · <a href="protection.html">Protection review</a></p>
 <h2>Downloads</h2>
 <div class="table-wrap"><table>
@@ -16,11 +16,11 @@
 </tr>
 <tr>
 <td><a href="fabrication/case-machined.step">Machined case STEP</a> · <a href="fabrication/panel-machined.step">Machined panel STEP</a></td>
-<td>Exact solid geometry for shop review and fixturing. Modify the purchased Hammond parts; do not print a substitute mains enclosure.</td>
+<td>Exact solid geometry for shop review and fixturing. Use the common PCJ base template and proposed aluminum plate; actual stock and opaque lid remain to be checked. Do not print a substitute mains enclosure.</td>
 </tr>
 <tr>
 <td><a href="fabrication/front.dxf">Front DXF</a> · <a href="fabrication/right.dxf">Right DXF</a> · <a href="fabrication/left.dxf">Left DXF</a> · <a href="fabrication/rear.dxf">Rear DXF</a> · <a href="fabrication/panel.dxf">Panel DXF</a></td>
-<td>Millimetres, 1:1. Machine only the <code>CUT</code> layer. <code>REFERENCE</code> and <code>TEXT</code> layers are non-cutting.</td>
+<td>Millimetres, 1:1. Internal features are on <code>CUT</code>; outline/support locations still require the received enclosure and stock check. <code>REFERENCE</code> and <code>TEXT</code> are non-cutting. The right-wall file contains no cuts.</td>
 </tr>
 <tr>
 <td><a href="fabrication/cad-checks.json">Cut and clearance results</a> · <a href="fabrication/wall-openings.json">Wall opening coordinates</a></td>
@@ -57,9 +57,9 @@
 <td><a href="https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/">DENT original accessory</a>. Photo connector, tinned end and ESIS card agree. Online data does not publish AWG/ampacity. Qualified acceptance of termination and upstream Q0 protection remains necessary.</td>
 </tr>
 <tr>
-<td>DC entry</td>
-<td>Add <strong>Tensility 10-02228</strong>, 0.915 m round extension, OD <strong>5.2 ±0.3 mm</strong>. Use <strong>icotek KTMBS 4–7 gray, 41380</strong> in the KVT 32. Original flat CUI cord stays outside.</td>
-<td><a href="https://tensility.s3.us-west-2.amazonaws.com/imports/product_spec_sheets/10-02228.pdf">Cable drawing</a>, <a href="https://www.icotek.com/Produkte/PDFs/en_US/KTMBS%20gy.pdf">insert range</a>. The entire 4.9–5.5 mm interval is inside 4–7 mm. Connector bodies are under 12 mm OD and clear the Ø32.3 wall bore. Verify the locknut passage and seals on receipt.</td>
+<td>Internal DC</td>
+<td>Original CUI adapter and intact flat cord connect directly to the logger inside.</td>
+<td>No extension, external coupling, KVT frame or insert. Check original plug seating, restraint, slack and closed-enclosure temperature.</td>
 </tr>
 <tr>
 <td>USB service connection</td>
@@ -74,19 +74,17 @@
 </tbody></table></div>
 <p><strong>Voltage-lead protection:</strong> A1 now connects directly to JL after Q0; no dedicated voltage-tap fuse is installed. Suitability of the upstream 15 A Q0 for the original DENT lead set remains unverified. Accept that protection scheme before energizing. The meter&#39;s internal fuse cannot clear an external lead short that bypasses the meter. See the <a href="protection.html">protection review</a>.</p>
 <p>These checks use the photos already supplied. The hidden CT characters and unpublished conductor ratings remain explicit limits, rather than requests for more images.</p>
-<h2>DC installation and offline USB</h2>
-<ol>
-<li>Keep Q0 OFF and unplug all sources. Insert the <strong>male end of 10-02228</strong> through the empty DC opening and locknut toward the logger. Do not cut either factory connector.</li>
-<li>Place <strong>41380</strong> around the round jacket, assemble the KVT 32 and its seals, and plug the 5.5/2.1 mm male into the logger. A 12 mm barrel may not seat its shoulder flush; never force it. Confirm firm electrical engagement without exposed contact access.</li>
-<li>Outside the case, plug the original adapter&#39;s P5 connector into the extension&#39;s female jack. Secure the joint and excess original cord to the adjacent bench support without tension on the adapter or gland. Keep the flat cord entirely outside the insert.</li>
-<li>Start with about <strong>0.35 m of extension inside / 0.565 m outside</strong>, adjusting at dry fit. Retain the full cord, with <strong>≥35 mm bend radius</strong> (Tensility minimum 31.2 mm). Use spare ties from the BOM, without crushing either cable. The 3D curves show the path and joint, not the complete slack length or bend-radius proof.</li>
-<li>For configuration or downloads, unplug the box mains, verify absence of mains voltage and remove the lid. Connect the kit USB cable directly to the logger and ELOG host. Disconnect USB before closing and energizing. The cable is absent during printing; no permanent energized USB route is provided.</li>
-</ol>
-<p>Only the <strong>DC Ø32.30 mm</strong> opening remains, at Y/Z = 78/106 mm. The former USB opening at 55/167 mm is removed from STEP, mesh, DXF and drawings. Buy <strong>one KVT 32 and one 41380 insert</strong>, subject to seller pack quantities. Confirm supplier lead time.</p>
-<h2>Selected construction</h2>
-<p>Hammond <strong>PCJ16148CC</strong> with <strong>14R1513</strong> steel panel. Q0 mounts directly through the front wall. <strong>Leviton 5279-C</strong> mounts through the right wall and provides an enclosed rear body, eliminating the separate metal outlet box, faceplate and custom wall supports. Its exterior socket is dedicated to the original adapter; label it <strong>LOGGER ADAPTER ONLY</strong>.</p>
-<p>Three WAGO <strong>221-415 / 221-505</strong> connector/carrier pairs provide JL, JN and PE. A1 connects to JL after Q0; A2 and A3 connect to JN. PE connects supply earth, printer earth, XA ground and the panel bond, leaving one spare port. One accepted conductor per port; neutral and PE remain separate.</p>
-<p>The existing meter uses two adjustable <strong>19.05 mm</strong> ONE-WRAP straps. Four <strong>21 × 4 mm</strong> smooth slots allow the straps to pass through the panel. Reserve the larger <strong>216 × 69 × 58 mm</strong> meter envelope when fitting the actual older unit. Do not drill the instrument or use its magnetic feet as the only restraint.</p>
+<h2>Internal power and offline USB</h2>
+<p>XA is now <strong>Leviton 515CV</strong>, the same SKU as the printer output. Buy <strong>two total</strong>. Its complete molded body encloses its terminals; its integral cord clamp retains a continuous <strong>14/3 SJOOW</strong> branch from JL/JN/PE, upstream of CT. One adjustable strap supports XA, another independently retains the original adapter. Fully seat the adapter and verify the restraints prevent loosening without loading the blades. Do not modify either factory DC connector.</p>
+<p>The original adapter cable stays entirely inside and plugs directly into the logger. Dress its slack using the reserved DC tie location; do not crush the flat jacket. Cable curves are illustrative: actual length, bend allowance, mains separation and lid clearance need dry fitting. No XA, DC or USB wall opening remains.</p>
+<p>USB configuration/download is temporary, with mains unplugged and verified absent. Remove USB and close the opaque cover before operation. Validate saved records with an offline download after a supervised pilot; the opaque cover hides the logger LEDs. Check adapter/enclosure temperature in that pilot.</p>
+<h2 id="panel-stock">Selected construction and aluminum stock</h2>
+
+<p>Select <strong>Hammond PCJ16148</strong>, with the opaque screw cover. Its common base/panel dimensions match the prior clear-cover version in the <a href="https://www.hammfg.com/electrical/products/non-metallic/pcj-sc">manufacturer series table</a>. The current base CAD uses that existing PCJ16148CC template; the opaque-lid silhouette is illustrative and must be compared with the received part.</p>
+<p>Use the scrap aluminum offered by Professor Clemon instead of buying 14R1513. The template outline is <strong>327.025 × 374.65 mm</strong>, with a provisional <strong>1.89738 mm (approximately 1.90 mm) thickness</strong>. This is not a measurement of the offered stock. Record alloy, usable size, thickness, flatness and stiffness; update CAD, support height and fastener stacks before fabrication. Transfer the enclosure-support mounting pattern from the verified drawing/received case. DXF internal-feature files alone are not a complete blank-cut program.</p>
+<p>Provide a dedicated PE bond with a reviewed method and hardware suitable for the actual aluminum. Do not assume the former steel-panel bonding stack is qualified for aluminum, or rely on ordinary mounting screws for electrical continuity. The existing #10 hardware is a dimensional proposal pending that review.</p>
+<p>Q0 retains its front-wall mounting. Three WAGO <strong>221-415 / 221-505</strong> connector/carrier pairs provide JL, JN and PE. A1 feeds from JL; A2/A3 from JN. PE joins supply earth, printer earth, internal XA earth and panel bond. One accepted conductor per port.</p>
+<p>The logger retains two <strong>19.05 mm ONE-WRAP</strong> straps, with a <strong>216 × 69 × 58 mm</strong> receiving envelope. Add two straps for XA and adapter. Eight <strong>21 × 4 mm</strong> smooth panel slots support all four straps. Fit and trim the flexible straps; do not drill equipment housings or cover required adapter markings/heat-dissipation surfaces.</p>
 <h2>Machining datums</h2>
 <p>The 3D and wiring plan share X/Z locations. X is across the panel; Y is upward from the <strong>panel underside</strong>; Z is forward toward Q0. Negative Z is the printer exit. The real case walls have approximately <strong>0.937° draft</strong>. The wall DXFs are local flat-face setups, not projections to a vertical plane.</p>
 <p>For outside views: front U = X; rear U = −X; right U = −Z; left U = Z. V runs up along the wall. Its origin is the intersection of that face with Y = 0 and the case centerline. Use the STEP model and the physical panel support datum to fixture the case; the bottom outside edge is <strong>not</strong> Y = 0. Panel drawing: view from the lid, U = X, V = −Z, origin at the blank center.</p>
@@ -104,11 +102,6 @@
 <td>Front wall; X = −112, Y = 120 mm</td>
 </tr>
 <tr>
-<td>XA</td>
-<td>Ø44.00 ±0.15 mm; two Ø4.00 mm fixings at 53.57 mm vertical pitch</td>
-<td>Right wall; Y = 121, Z = 13 mm</td>
-</tr>
-<tr>
 <td>Supply gland</td>
 <td>Ø21.00 mm</td>
 <td>Left wall; Y = 43, Z = 128 mm</td>
@@ -117,11 +110,6 @@
 <td>Printer gland</td>
 <td>Ø21.00 mm</td>
 <td>Rear wall; X = 0, Y = 36 mm</td>
-</tr>
-<tr>
-<td>DC frame</td>
-<td>One Ø32.30 mm hole; KVT 32 + split 41380 insert</td>
-<td>Right wall; Y/Z = 78/106 mm. No USB hole.</td>
 </tr>
 <tr>
 <td>Panel bond</td>
@@ -134,6 +122,11 @@
 <td>X = 50 and 132; Z = −70 and 50 mm</td>
 </tr>
 <tr>
+<td>Internal-power straps</td>
+<td>Four 21 × 4 mm slots, long axis X</td>
+<td>X/Z = −68/−65, −68/−15, −16.85/−77, −16.85/−3 mm</td>
+</tr>
+<tr>
 <td>Cable mounts</td>
 <td>Six Ø4.50 mm holes</td>
 <td>Individual coordinates in the panel drawing</td>
@@ -144,8 +137,8 @@
 <td>Place within the dashed locator envelope, orient the carrier as shown, then transfer-drill from the actual part. The unlocated longitudinal fixing datum is not invented.</td>
 </tr>
 </tbody></table></div>
-<p>The six anchor positions support the mains bundle, outlet supply, CT pair, two sides of the voltage-lead coils and the DC extension. Each tie passes through its mounting-base slot and encloses that bundle. The same coordinates drive the panel CAD and 3D view.</p>
-<p>Retain all factory panel and lid features. The panel now has 11 new cut features: six cable-anchor holes, one dedicated panel PE hole and four strap slots. Transfer-drill six additional holes for the three carriers. Deburr every cut, remove chips and protect the gasket. Smooth strap slots on both faces without enlarging their functional opening. Machining does not confer an IP/NEMA certification on the completed assembly.</p>
+<p>The six anchor positions support the mains bundle, outlet supply, CT pair, two sides of the voltage-lead coils and the original internal DC cable. Each tie passes through its mounting-base slot and encloses that bundle. The same coordinates drive the panel CAD and 3D view.</p>
+<p>Retain the verified enclosure support pattern and original lid features. The panel template has 15 internal cut features: six cable-anchor holes, one panel PE hole and eight strap slots. Transfer-drill six additional holes for the three carriers. Deburr every cut, remove chips and protect the gasket. Smooth strap slots on both faces without enlarging their functional opening. Machining does not confer an IP/NEMA certification on the completed assembly.</p>
 <h2 id="fasteners">Fasteners and purchase quantities</h2>
 
 <p>Counts below are <strong>installed</strong>, followed by suggested purchase counts including spares. Supplier packaging may be larger. Metric and US threads are deliberately distinguished.</p>
@@ -160,12 +153,7 @@
 <tbody><tr>
 <td>Q0</td>
 <td>2 × #6-32 × 3/8 in screws; 2 × #6 flat washers</td>
-<td>Buy 4 <a href="https://boltdepot.com/Product-Details?product=1335">screws, 1335</a>; washers included in the 10-piece allowance below. No nut on Q0&#39;s threaded inserts.</td>
-</tr>
-<tr>
-<td>XA</td>
-<td>2 × #6-32 × 5/8 in screws; 4 × #6 flat washers; 2 × #6-32 nylon locknuts</td>
-<td>Buy 4 <a href="https://boltdepot.com/Product-Details?product=1438">screws, 1438</a>, 10 total <a href="https://boltdepot.com/Product-Details?product=2942">washers, 2942</a>, 4 <a href="https://boltdepot.com/Product-Details?product=2550">nuts, 2550</a>.</td>
+<td>Buy 4 <a href="https://boltdepot.com/Product-Details?product=1335">screws, 1335</a> and 4 <a href="https://boltdepot.com/Product-Details?product=2942">washers, 2942</a>, including spares. No nut on Q0&#39;s threaded inserts.</td>
 </tr>
 <tr>
 <td>Three WAGO carriers</td>
@@ -180,17 +168,17 @@
 <tr>
 <td>Panel PE stud</td>
 <td>1 × #10-32 × 3/4 in screw; 2 plain nuts; 2 external-tooth washers; 2 flat washers; 1 ring lug</td>
-<td>Buy 2 <a href="https://boltdepot.com/Product-Details?product=1368">screws, 1368</a>, 4 <a href="https://boltdepot.com/Product-Details?product=2561">nuts, 2561</a>, 4 <a href="https://boltdepot.com/Product-Details?product=4078">tooth washers, 4078</a>, 4 <a href="https://boltdepot.com/Product-Details?product=2946">flat washers, 2946</a>. Rings come from the 3M row in the main BOM.</td>
+<td>Buy 2 <a href="https://boltdepot.com/Product-Details?product=1368">screws, 1368</a>, 4 <a href="https://boltdepot.com/Product-Details?product=2561">nuts, 2561</a>, 4 <a href="https://boltdepot.com/Product-Details?product=4078">tooth washers, 4078</a>, 4 <a href="https://boltdepot.com/Product-Details?product=2946">flat washers, 2946</a>. Rings come from the Gardner Bender 15-104 15-pack in the main BOM.</td>
 </tr>
 </tbody></table></div>
-<p>Use the supplied Hammond screws for the backpanel and all four cover fixings. Q0 power studs use the manufacturer&#39;s supplied terminal hardware and two #10 ring lugs. Do not substitute #8 lugs or metric nuts on these studs.</p>
+<p>Reuse the enclosure-supplied panel screws only after checking their stack with the actual aluminum thickness; retain all four cover fixings. Q0 power studs use the manufacturer&#39;s supplied terminal hardware and two #10 ring lugs. Do not substitute #8-only lugs or metric nuts on these studs.</p>
 <p>Each anchor uses an M4 × 16 mm pan screw with its head directly on the base, then an underside washer and locknut. The illustrated stack leaves about 4.6 mm to the case floor, versus only 0.6 mm with the previous 20 mm screw. Confirm actual base thickness, nut engagement and floor clearance on receipt; small molded details are illustrative.</p>
-<p><strong>Stack checks:</strong> the nominal case wall is 4.775 mm. For Q0, measure/select washers 0.8–1.0 mm thick: 9.525 − 4.775 − washer = <strong>3.75–3.95 mm</strong> nominal insert engagement, below the 4.95 mm insert depth. Reject a stack that bottoms out before clamping. The general #6 washer listing does not guarantee thickness; this is a receiving check. XA&#39;s fixing stack must leave the locking element fully engaged. Do not crush or distort its flange or the polycarbonate wall.</p>
+<p><strong>Stack checks:</strong> the nominal case wall is 4.775 mm. For Q0, measure/select washers 0.8–1.0 mm thick: 9.525 − 4.775 − washer = <strong>3.75–3.95 mm</strong> nominal insert engagement, below the 4.95 mm insert depth. Reject a stack that bottoms out before clamping. The general #6 washer listing does not guarantee thickness; this is a receiving check. XA has no wall fixing screws in revision B.</p>
 <p>Fit carrier/anchor fasteners while the panel is out. There is about <strong>16.66 mm</strong> between the panel underside and the inner case floor in the source CAD. Check actual screw projections and washers against this space and the molded supports. For the six revised M4 × 16 mm anchor screws, verify full locking-nut engagement and at least 3 mm clearance to the actual case floor before installing the panel.</p>
-<p>For each PE stud, put the screw head and flat washer underneath. On the conductive side, use an external-tooth washer and first nut to secure the dedicated stud, then the ring lug, flat washer, external-tooth washer and second nut. Establish a clean metal contact under the bonding hardware; do not rely on paint, straps or ordinary mounting screws for bonding. Final bonding method, tightening and continuity acceptance belong to the qualified assembler. The website does not assign an unsupported universal bonding torque.</p>
+<p>For the proposed panel PE stud, first approve the hardware/contact method for the actual aluminum. The geometric arrangement puts the screw head and flat washer underneath. On the conductive side, use an external-tooth washer and first nut to secure the dedicated stud, then the ring lug, flat washer, external-tooth washer and second nut. Establish a clean metal contact under the bonding hardware; do not rely on paint, straps or ordinary mounting screws for bonding. Final bonding method, tightening and continuity acceptance belong to the qualified assembler. The website does not assign an unsupported universal bonding torque.</p>
 <h2>Wire and length schedule</h2>
-<p>Buy <strong>10 ft of 14/3 SJOOW</strong> and start with 2.0 m supply and 1.0 m printer-output blanks. Their internal conductors extend directly to the specified terminals. Keep sufficient PE slack so that jacket displacement does not pull PE free first. Measure the desired exterior reach before cutting.</p>
-<p>Use the selected 14 AWG black / white / green internal wire. The following are conservative <strong>cutting blanks</strong>, not proved finished lengths; final routing, bends and stripping are done with the assembly de-energized. Allow 3 m black, 2 m white and 3 m green including spare wire (linked retail rolls exceed these needs).</p>
+<p>Buy <strong>13 ft of 14/3 SJOOW</strong> and start with 2.0 m supply, 1.0 m printer-output and 0.8 m internal-XA blanks. Their internal conductors extend directly to the specified terminals. Keep sufficient PE slack so that jacket displacement does not pull PE free first. Measure the desired exterior reach before cutting.</p>
+<p>Use the selected 14 AWG black and green internal wire for Q0 output and the panel bond. XA uses conductors from its continuous 14/3 cord. The following are conservative <strong>cutting blanks</strong>, not proved finished lengths; final routing, bends and stripping are done with the assembly de-energized. Allow 1 m black and 1 m green including spare wire. If absent from lab stock, buy 4 ft (1.2192 m) of each color by the foot; no full rolls are needed. No separate white-wire roll is required.</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -205,24 +193,14 @@
 <td>#10 ring at Q0; bare prepared copper at JL</td>
 </tr>
 <tr>
-<td>17 JL → XA hot</td>
-<td>Black, 700 mm</td>
-<td>WAGO to brass/hot outlet terminal</td>
-</tr>
-<tr>
-<td>18 JN → XA neutral</td>
-<td>White, 650 mm</td>
-<td>WAGO to silver/neutral outlet terminal</td>
+<td>17/18/19 distribution → XA</td>
+<td>One 800 mm 14/3 cord blank</td>
+<td>JL hot, JN neutral, PE earth → corresponding 515CV terminals; jacket in clamp</td>
 </tr>
 <tr>
 <td>12 PE → panel bond</td>
 <td>Green, 200 mm</td>
 <td>WAGO to #10 ring</td>
-</tr>
-<tr>
-<td>19 PE → XA ground</td>
-<td>Green, 700 mm</td>
-<td>WAGO to green ground terminal</td>
 </tr>
 </tbody></table></div>
 <p>Connections 01/03/06/07/10/11 use the supply/output cord conductors. Connections 05/08/09 use the three existing pigtail + full-lead chains; retain their full factory length. Connections 14/15 use the CT pair; 16 is a temporary USB service connection with mains unplugged. Connections 20–23 illustrate factory adapter contacts and DC wiring, <strong>not</strong> instructions to open or modify the adapter. The site provides the full 21-path schedule; retained connection IDs stay unchanged.</p>
@@ -231,12 +209,12 @@
 <ol>
 <li>Close the identification/entry/protection items above, obtain the exact parts and compare them with the machining setups. Keep the case and all cords disconnected while machining or wiring.</li>
 <li>Machine the <strong>empty</strong> case and removable panel. Transfer-drill carrier fixings, deburr, clean, and inspect for cracks. Complete underside nuts, PE studs, carrier/anchor fixings and thread the straps before lowering the panel.</li>
-<li>Install and secure the panel <strong>before XA</strong>. The digital insertion sweep shows that the installed right-side outlet obstructs the straight panel path. Fit the three carriers, meter and CT. Leave access to the CT latch and WAGO levers.</li>
-<li>Install Q0, XA and the accepted cord entries. Route the supply and output jackets through their glands before fitting plug/connector ends. Fit the round DC extension through one 41380 split insert without cutting factory plugs. Keep USB disconnected during operation. Keep the original flat adapter cord and DC mating joint outside.</li>
+<li>Install and secure the panel, then fit the three carriers, logger, CT and internal XA/adapter assembly. Leave access to the CT latch and WAGO levers; verify the four adjustable straps.</li>
+<li>Install Q0 and two power glands. Route intact supply/output jackets through the glands. Clamp the internal XA cord jacket in the 515CV body, fully seat and independently restrain the original adapter, and route its original DC cable inside. No connector or DC feedthrough penetrates the right wall. Remove USB before operation.</li>
 <li>Bond panel, output and XA; then complete neutral, protected hot, voltage sensing, CT and low-voltage wiring. Only the printer hot conductor goes through CT once, arrow toward the printer. Keep voltage taps and adapter consumption upstream of CT.</li>
 <li>Check every termination, strain relief, bend, clearance and fastener. Verify CT latch travel and plug removal access. Confirm that all four cover screws close the lid without pressing on cables or components. This dry fit is still outstanding.</li>
 <li>Qualified personnel document PE continuity, polarity, insulation/isolation, protection and supply suitability using the applicable test procedure. Disconnect sensitive electronics where the manufacturer requires it for insulation testing. Q0 OFF leaves incoming terminals live while the supply is plugged in.</li>
-<li>Configure ELOG for single-phase/two-wire measurement and the <strong>identified</strong> CT. Verify positive real power and reasonable readings with an independent reference. Test start/stop and power-return recording behavior, then check each printer&#39;s cold start and sustained load. Do not release daily use from a browser simulation alone.</li>
+<li>Check closed-enclosure adapter temperature and restrained plug seating in a supervised pilot. The opaque lid hides indicators; confirm logging by an offline export after unplugging mains. Configure ELOG for single-phase/two-wire measurement and the <strong>identified</strong> CT. Verify positive real power and reasonable readings with an independent reference. Test start/stop and power-return recording behavior, then check each printer&#39;s cold start and sustained load. Do not release daily use from a browser simulation alone.</li>
 </ol>
 <div class="table-wrap"><table>
 <thead>
@@ -254,13 +232,67 @@
 <td>Mounting screws 0.8–1.0 N·m; #10-32 terminal hardware 1.7–2.3 N·m. Check the received device&#39;s instructions.</td>
 </tr>
 <tr>
-<td>Leviton 5279-C</td>
-<td>Strip 9/16 in (14.3 mm); terminal screws 10–14 in·lbf (1.13–1.58 N·m); do not tin conductors.</td>
-</tr>
-<tr>
 <td>515PV / 515CV, glands and enclosure</td>
 <td>Follow the exact supplied instructions. The Q0 or outlet torque must not be reused for unrelated parts.</td>
 </tr>
 </tbody></table></div>
 <p>Manufacturer sources and per-material limits are linked in the <a href="installation.html">installation audit</a> and <a href="references.html">reference schedule</a>. The public project records digital geometry and circuit checks; it does not yet record a built, tested or approved assembly.</p>
+<h2 id="receiving-record">Receiving and release record</h2>
+
+<p>No measurements, acceptance signatures or live tests are recorded yet. Use this record to close the physical items; document actual values rather than changing a status to “pass” without evidence.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Stage / owner</th>
+<th>Record</th>
+<th>Acceptance or next action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Aluminum / fabricator</td>
+<td>Usable length ___ mm × width ___ mm; thickness ___ mm; alloy/finish ___; flatness/support assessment ___</td>
+<td>Finished outline is 327.025 × 374.65 mm. Stock must cover it plus the shop&#39;s trimming allowance. The current 1.89738 mm thickness is a template only. Measure and update the solid, support heights and every screw stack for the actual thickness; do not approve strength from thickness alone.</td>
+</tr>
+<tr>
+<td>Stock unavailable / designer</td>
+<td>Reuse result ___; fallback decision ___</td>
+<td>A <a href="https://www.digikey.com/en/products/detail/hammond-manufacturing/14R1513/2359585">Hammond 14R1513 panel</a>, previously priced $30.44, is the documented fallback. Recheck its price and fit if needed; it is not included in the active $261.26 budget or a claim of aluminum reuse.</td>
+</tr>
+<tr>
+<td>Purchased case / fabricator</td>
+<td>PCJ16148 label ___; four panel supports ___; actual opaque-lid clearance ___</td>
+<td>Match the physical support pattern and lid to the drawings before machining. Common-base CAD is a fit template; keep the gasket and four cover fasteners intact.</td>
+</tr>
+<tr>
+<td>Aluminum PE bond / electrical reviewer</td>
+<td>Accepted lug/contact stack ___; aluminum surface treatment ___; anti-rotation method ___; torque basis ___; measured bond result ___</td>
+<td>The generic #10 stud/ring arrangement is a proposal, not a listed aluminum-bond system. Accept an aluminum-compatible contact method and any required replacement hardware before fabrication or energizing. No unsupported bonding torque is assigned.</td>
+</tr>
+<tr>
+<td>Terminations / assembler</td>
+<td>Received 15-104 markings ___; tool/die and manufacturer instruction ___; sample crimp/pull result ___; all terminal torques ___</td>
+<td>#8–10 is compatible with #10 studs; #8-only is not. Validate the actual 14 AWG insulation fit. Preserve the 75°C terminal rating and the lower applicable temperature limit of every component.</td>
+</tr>
+<tr>
+<td>Closed-box fit / assembler</td>
+<td>Four restraints ___; full AC/DC plug seating ___; gland grip ___; wire/lid clearance ___; measured screw-floor clearance ___</td>
+<td>No connector blade load, pinched insulation or restrained heat-dissipation surface. Anchor screws need full locknut engagement and at least 3 mm actual floor clearance.</td>
+</tr>
+<tr>
+<td>Supply and protection / responsible electrical staff</td>
+<td>Outlet/circuit ___; supply/fault-current assessment ___; combined startup assessment ___; original DENT lead protection decision ___</td>
+<td>Accept the complete assembly for the intended 120 V supply and 15 A design. Q0&#39;s 10 kA rating is not an assembly SCCR. Upstream-only voltage-lead protection requires acceptance; see <a href="protection.html">protection review</a> and its prepared information requests.</td>
+</tr>
+<tr>
+<td>Offline configuration / operator</td>
+<td>Actual CT model/range/output ___; ELOG configuration file ___; kit USB present ___</td>
+<td>Read the uncovered CT label. Do not assume 50 A from the photograph. Configure and download only with mains disconnected.</td>
+</tr>
+<tr>
+<td>Release / responsible reviewer</td>
+<td>PE/polarity/insulation results ___; closed-box pilot temperature ___; sample log/export ___; reference-meter comparison ___; reviewer/date ___</td>
+<td>Apply the accepted test procedure and actual manufacturer limits. Close and inspect the assembly before any supervised pilot. Routine use begins only after release; software/CAD tests do not substitute for these measurements.</td>
+</tr>
+</tbody></table></div>
+<p>The current <a href="materials.html#order-plan">priced order plan</a> includes every selected material order increment and spare quantity. Verify delivered price and lead time at checkout; no order or message has been sent.</p>
 </body></html>

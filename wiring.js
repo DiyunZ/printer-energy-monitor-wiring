@@ -15,7 +15,7 @@ const hints = {
   voltage: 'A1 → L1 (hot) · A2 → L2 (neutral) · A3 → N (neutral)',
   neutral: 'Neutral remains separate from protective earth.',
   earth: 'PE bonds the printer, outlet and panel.',
-  aux: 'Adapter power branches before CT1; DC returns through the round extension.',
+  aux: 'Internal adapter power branches before CT1; its original DC cable connects directly to the logger.',
   signal: 'CT → CH1. USB is temporary: unplug mains and open the lid before connecting the computer.',
 };
 let activeIds = null;

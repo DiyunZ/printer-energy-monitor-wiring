@@ -8,7 +8,7 @@
       "id": "case-machined",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 2231242.4698613845,
+      "volume_mm3": 2242536.111073722,
       "bounds_mm": [
         392.2499770979982,
         207.39100020000006,
@@ -19,7 +19,7 @@
       "id": "panel-machined",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 231392.10562055177,
+      "volume_mm3": 230780.64553944682,
       "bounds_mm": [
         327.0250000000001,
         1.8973800000000831,
@@ -42,21 +42,6 @@
       "result": "pass"
     },
     {
-      "id": "XA outlet",
-      "removed_mm3": 7260.769089837093,
-      "result": "pass"
-    },
-    {
-      "id": "XA fixing -1",
-      "removed_mm3": 59.93710879795253,
-      "result": "pass"
-    },
-    {
-      "id": "XA fixing +1",
-      "removed_mm3": 59.937098576687276,
-      "result": "pass"
-    },
-    {
       "id": "SUPPLY",
       "removed_mm3": 1653.8714826796204,
       "result": "pass"
@@ -64,11 +49,6 @@
     {
       "id": "OUTPUT",
       "removed_mm3": 1653.8718264363706,
-      "result": "pass"
-    },
-    {
-      "id": "DC",
-      "removed_mm3": 3912.719623708166,
       "result": "pass"
     },
     {
@@ -127,6 +107,26 @@
       "result": "pass"
     },
     {
+      "id": "Power strap slot 1",
+      "removed_mm3": 152.86502027630922,
+      "result": "pass"
+    },
+    {
+      "id": "Power strap slot 2",
+      "removed_mm3": 152.86502027633833,
+      "result": "pass"
+    },
+    {
+      "id": "Power strap slot 3",
+      "removed_mm3": 152.86502027633833,
+      "result": "pass"
+    },
+    {
+      "id": "Power strap slot 4",
+      "removed_mm3": 152.86502027625102,
+      "result": "pass"
+    },
+    {
       "id": "Q0 toggle through gauge",
       "intrusion_mm3": 0,
       "result": "pass"
@@ -142,32 +142,12 @@
       "result": "pass"
     },
     {
-      "id": "XA outlet through gauge",
-      "intrusion_mm3": 0,
-      "result": "pass"
-    },
-    {
-      "id": "XA fixing -1 through gauge",
-      "intrusion_mm3": 0,
-      "result": "pass"
-    },
-    {
-      "id": "XA fixing +1 through gauge",
-      "intrusion_mm3": 0,
-      "result": "pass"
-    },
-    {
       "id": "SUPPLY through gauge",
       "intrusion_mm3": 0,
       "result": "pass"
     },
     {
       "id": "OUTPUT through gauge",
-      "intrusion_mm3": 0,
-      "result": "pass"
-    },
-    {
-      "id": "DC through gauge",
       "intrusion_mm3": 0,
       "result": "pass"
     },
@@ -188,6 +168,26 @@
     },
     {
       "id": "Strap 4 19.3 x 2.0 mm gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Power strap 1 19.3 x 2.0 mm gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Power strap 2 19.3 x 2.0 mm gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Power strap 3 19.3 x 2.0 mm gauge",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Power strap 4 19.3 x 2.0 mm gauge",
       "intrusion_mm3": 0,
       "result": "pass"
     },
@@ -239,6 +239,31 @@
     {
       "id": "Restored panel stock (-27, -28)",
       "missing_mm3": 0.0,
+      "result": "pass"
+    },
+    {
+      "id": "Restored right wall XA",
+      "stock_mm3": 33.75389978869949,
+      "result": "pass"
+    },
+    {
+      "id": "Restored right wall XA upper fixing",
+      "stock_mm3": 33.7538997886995,
+      "result": "pass"
+    },
+    {
+      "id": "Restored right wall XA lower fixing",
+      "stock_mm3": 33.753899788699485,
+      "result": "pass"
+    },
+    {
+      "id": "Restored right wall DC",
+      "stock_mm3": 33.753899788699464,
+      "result": "pass"
+    },
+    {
+      "id": "Restored right wall USB",
+      "stock_mm3": 33.75389978869944,
       "result": "pass"
     }
   ]

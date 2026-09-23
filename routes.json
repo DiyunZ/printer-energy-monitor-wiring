@@ -1,5 +1,5 @@
 {
-  "revision": "Rev. 11 \u00b7 upstream protection review \u00b7 2026-09-20",
+  "revision": "Rev. 12 \u00b7 professor review revision B \u00b7 2026-09-23",
   "anchors": {
     "IN.L": [
       571.9,
@@ -78,40 +78,40 @@
       1106.0
     ],
     "AUX.L": [
-      1419.864,
-      957.8
+      757.41,
+      820.0
     ],
     "AUX.N": [
-      1419.864,
-      983.8
+      757.41,
+      846.0
     ],
     "AUX.PE": [
-      1414.664,
-      1025.4
+      757.41,
+      877.2
     ],
     "AUX.FACE.L": [
-      1490.064,
-      967.29
+      927.19,
+      829.49
     ],
     "AUX.FACE.N": [
-      1490.064,
-      1000.31
+      927.19,
+      862.51
     ],
     "PSU.L": [
-      1534.784,
-      967.29
+      966.19,
+      829.49
     ],
     "PSU.N": [
-      1534.784,
-      1000.31
+      966.19,
+      862.51
     ],
     "PSU.DC+": [
-      1589.384,
-      1015.0
+      966.19,
+      929.2
     ],
     "PSU.DC-": [
-      1589.384,
-      1030.6
+      984.39,
+      944.8
     ],
     "PC": [
       1738.0,
@@ -753,26 +753,30 @@
         ],
         [
           700.08,
-          526.2
+          521.0
         ],
         [
-          1400.0,
-          526.2
+          1088.0,
+          521.0
         ],
         [
-          1400.0,
-          957.8
+          1088.0,
+          734.2
         ],
         [
-          1419.864,
-          957.8
+          757.41,
+          734.2
+        ],
+        [
+          757.41,
+          820.0
         ]
       ],
       "badge": [
-        1400.0,
-        617.2
+        757.41,
+        775.8
       ],
-      "description": "JL \u2192 AUX receptacle hot; before CT",
+      "description": "JL \u2192 internal XA cord hot; before CT",
       "group": "aux"
     },
     {
@@ -791,26 +795,34 @@
         ],
         [
           737.0,
-          549.6
+          544.4
         ],
         [
-          1418.2,
-          549.6
+          1072.4,
+          544.4
         ],
         [
-          1418.2,
-          983.8
+          1072.4,
+          718.6
         ],
         [
-          1419.864,
-          983.8
+          747.4,
+          718.6
+        ],
+        [
+          747.4,
+          846.0
+        ],
+        [
+          757.41,
+          846.0
         ]
       ],
       "badge": [
-        1418.2,
-        820.0
+        747.4,
+        664.0
       ],
-      "description": "JN \u2192 AUX receptacle neutral",
+      "description": "JN \u2192 internal XA cord neutral",
       "group": "aux"
     },
     {
@@ -825,30 +837,26 @@
         ],
         [
           700.08,
-          1191.8
+          1085.2
         ],
         [
-          1366.2,
-          1191.8
+          752.6,
+          1085.2
         ],
         [
-          1366.2,
-          1048.8
+          752.6,
+          877.2
         ],
         [
-          1414.664,
-          1048.8
-        ],
-        [
-          1414.664,
-          1025.4
+          757.41,
+          877.2
         ]
       ],
       "badge": [
-        1309.0,
-        1191.8
+        752.6,
+        957.8
       ],
-      "description": "PE \u2192 XA ground contact",
+      "description": "PE \u2192 internal XA ground contact",
       "group": "earth"
     },
     {
@@ -858,19 +866,19 @@
       "end": "PSU.L",
       "points": [
         [
-          1490.064,
-          967.29
+          927.19,
+          829.49
         ],
         [
-          1534.784,
-          967.29
+          966.19,
+          829.49
         ]
       ],
       "badge": [
-        1548.2,
-        967.29
+        947.6,
+        829.49
       ],
-      "description": "Existing adapter AC blade: hot contact",
+      "description": "Internal adapter AC blade: hot contact",
       "group": "aux"
     },
     {
@@ -880,19 +888,19 @@
       "end": "PSU.N",
       "points": [
         [
-          1490.064,
-          1000.31
+          927.19,
+          862.51
         ],
         [
-          1534.784,
-          1000.31
+          966.19,
+          862.51
         ]
       ],
       "badge": [
-        1548.2,
-        1000.31
+        947.6,
+        862.51
       ],
-      "description": "Existing adapter AC blade: neutral contact",
+      "description": "Internal adapter AC blade: neutral contact",
       "group": "aux"
     },
     {
@@ -902,20 +910,24 @@
       "end": "D.DC+",
       "points": [
         [
-          1589.384,
-          1015.0
+          966.19,
+          929.2
         ],
         [
-          1670.4,
-          1015.0
+          966.19,
+          994.2
         ],
         [
-          1670.4,
-          1225.6
+          1088.0,
+          994.2
+        ],
+        [
+          1088.0,
+          1415.4
         ],
         [
           1400.0,
-          1225.6
+          1415.4
         ],
         [
           1400.0,
@@ -931,10 +943,10 @@
         ]
       ],
       "badge": [
-        1670.4,
-        1137.2
+        1400.0,
+        1347.8
       ],
-      "description": "Original adapter \u2192 external DC coupling \u2192 round extension: center-positive path",
+      "description": "Original adapter cable \u2192 logger: center positive; entirely inside",
       "group": "aux"
     },
     {
@@ -944,20 +956,24 @@
       "end": "D.DC-",
       "points": [
         [
-          1589.384,
-          1030.6
+          984.39,
+          944.8
         ],
         [
-          1649.6,
-          1030.6
+          984.39,
+          1009.8
         ],
         [
-          1649.6,
-          1238.6
+          1103.6,
+          1009.8
+        ],
+        [
+          1103.6,
+          1431.0
         ],
         [
           1410.4,
-          1238.6
+          1431.0
         ],
         [
           1410.4,
@@ -973,10 +989,10 @@
         ]
       ],
       "badge": [
-        1649.6,
-        1173.6
+        1410.4,
+        1314.0
       ],
-      "description": "Original adapter \u2192 external DC coupling \u2192 round extension: sleeve-negative path",
+      "description": "Original adapter cable \u2192 logger: sleeve negative; entirely inside",
       "group": "aux"
     }
   ]

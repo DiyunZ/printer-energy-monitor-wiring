@@ -61,8 +61,9 @@ export function screenCableBodies(routes,bodies,ct) {
     'internal-wire:q0-jl':['JL'], 'cord:printer-hot-in':['JL'],
     'cord:supply-neutral':['JN'], 'cord:printer-neutral':['JN'],
     'cord:supply-pe':['PE'], 'cord:printer-pe':['PE'],
-    'internal-wire:xa-hot':['JL'], 'internal-wire:xa-neutral':['JN'],
-    'internal-wire:xa-pe':['PE'], 'internal-wire:panel-pe':['PE'],
+    'cord:aux-hot':['JL'], 'cord:aux-neutral':['JN'],
+    'cord:aux-pe':['PE'], 'internal-wire:panel-pe':['PE'],
+    'cord:aux-jacket':['outlet'], 'adapter:dc-internal':['adapter'],
     'blue:A1':['JL'], 'blue:A2':['JN'], 'blue:A3':['JN']
   };
   const distance=(a,b)=>Math.hypot(...a.map((v,i)=>v-b[i]));

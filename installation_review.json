@@ -1,47 +1,43 @@
 {
-  "revision": "September 20, 2026 · upstream protection review",
-  "baseline_commit": "89f5c811a81187cd4debc71646a4d5dacc7d6591",
-  "scope": "One grounded 120 V supply, one printer at a time. Five equipment groups are confirmed on hand; the USB cable is kit supplied. Log independently during printing and download only with mains unplugged. The voltage tap uses upstream Q0 protection only. Its suitability for the original DENT leads, Q0 site/startup suitability, CT scaling and physical acceptance remain open; this is not an energizing release.",
-  "result": "ENGINEERING PACKAGE A — RECEIVING AND ELECTRICAL RELEASE ITEMS OPEN",
+  "revision": "September 23, 2026 · professor review revision B",
+  "baseline_commit": "3c36b4e",
+  "scope": "One grounded 120 V supply, one printer at a time. Revision B uses an opaque-cover enclosure, proposed reuse of the professor’s aluminum sheet and an internal adapter connection. Five owned equipment groups and the kit USB are retained. The selected 15 A Q0 and upstream-only voltage-lead protection still require application acceptance. No purchase, physical fit, thermal test or electrical release is claimed.",
+  "result": "ENGINEERING REVISION B — STOCK, FIT AND ELECTRICAL ACCEPTANCE OPEN",
   "sources": {
     "dent": "https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf",
     "dent-size": "https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf",
     "ct": "https://www.dentinstruments.com/wp-content/uploads/2022/08/20A_Mini_Hinged_CT_Specs.pdf",
-    "case": "https://www.hammfg.com/files/parts/pdf/PCJ16148CC.pdf",
+    "case": "https://www.hammfg.com/files/parts/pdf/PCJ16148.pdf",
     "panel": "https://www.hammfg.com/electrical/products/accessories/pcjp",
     "carling": "https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf",
-    "outlet": "https://leviton.com/products/5279-c",
-    "outlet-drawing": "https://leviton.com/content/dam/leviton/commercial-industrial/product_documents/dimensional_drawing/CATSTD-05279-00C-M01.pdf",
+    "outlet": "https://leviton.com/products/515cv",
+    "outlet-drawing": "https://leviton.com/content/dam/leviton/residential/product_documents/none/Document-31435-Dimensional%20Data.jpg",
     "wago": "https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415",
     "carrier": "https://www1.futureelectronics.com/doc/WAGO/221-505.pdf",
     "cord": "https://cabletechsupport.southwire.com/cablespec/download_spec/?country=US&spec=70126",
     "plug": "https://leviton.com/content/dam/leviton/residential/product_documents/instruction_sheet/515_Instruction_Sheet.pdf",
     "gland": "https://www.hammfg.com/electronics/small-case/accessories/1427ncg",
-    "kvt": "https://pim.icotek.com/Produkte/PG02%20Kabelverschraubungen/KVT/KVT%2032/Datenbl%C3%A4tter/45026_KVT%2032_bk.PDF",
-    "kvt-product": "https://www.icotek.com/en-us/products/cable-glands/kvt-45026",
-    "kt": "https://www.icotek.com/Produkte/PDFs/en_US/KTMBS%20gy.pdf",
     "usb": "https://www.startech.com/en-us/cables/usb2hab6",
     "wire": "https://www.southwire.com/wire-cable/building-wire/thhn-thwn-copper-silicone-free/p/22955984",
-    "ring": "https://multimedia.3m.com/mws/media/61020O/ring-tongues-vinyl-insulated-brazed-seam-16-14-awg.pdf",
+    "ring": "https://www.gardnerbender.com/en/p/15-104/-16-14-AWG-2-mm-sq-Bnes-%C3%A0-anneau",
     "mount": "https://www.panduit.com/content/dam/panduit/en/website/support/catalogs/pdf/iei-catalog-2023-web-cpcb294-sa-eng.pdf",
     "ties": "https://www.panduit.com/content/dam/panduit/en/products/media/2/92/492/0492/30492.pdf",
     "s5": "https://um-support-files.ultimaker.com/manuals/user-manual/S3-%26-S5/Ultimaker%20S3-S5%20-%20User%20manual%20ENv2.4.pdf",
     "p2s": "https://csm.bblcdn.com/hub/0a3c3e8ab9554a5c9c91815e41540f42.pdf",
     "prusa": "https://www.prusa3d.com/product/prusa-core-one/",
     "prusa-psu": "https://help.prusa3d.com/wp-content/uploads/generated/prusa-core-one-kit-assembly_2321_en_2026-05-18.pdf",
-    "outlet-install": "https://leviton.com/content/dam/leviton/commercial-industrial/product_documents/instruction_sheet/PK-93763-10-02-0C-W.pdf",
+    "outlet-install": "https://leviton.com/content/dam/leviton/residential/product_documents/instruction_sheet/515_Instruction_Sheet.pdf",
     "cui": "https://www.belfuse.com/media/datasheets/products/power-supplies/SMI6.pdf",
     "blue": "https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/",
     "restraint": "https://www.velcro.com/products/organization/heavy-duty-one-wrap-roll/",
     "ct-family": "https://www.dentinstruments.com/shop/current-sensors/hinged-current-transformers-sensors-for-energy-metering/",
     "ct-current": "https://www.dentinstruments.com/wp-content/uploads/CT-HSC-XXX-U_Datasheet_06132024.pdf",
     "usb-drawing": "https://media.startech.com/cms/pdfs/usb2hab6_datasheet.pdf",
-    "dc-extension": "https://www.tensility.com/products/10-02228",
-    "dc-extension-drawing": "https://tensility.s3.us-west-2.amazonaws.com/imports/product_spec_sheets/10-02228.pdf",
     "dent-fused-clip": "https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-fused-crocodile-clip/",
     "carling-delay": "https://www.carlingtech.com/sites/default/files/documents/Carling-HM-CB-Time-Delays.pdf",
     "jis": "https://mechse.illinois.edu/undergraduate/makerworks",
-    "prusa-psu-spec": "https://www.prusa3d.com/product/psu-24v-240w/"
+    "prusa-psu-spec": "https://www.prusa3d.com/product/psu-24v-240w/",
+    "q0-buy": "https://www.masterelectronics.com/en/productdetail/littelfuse-carling-technologies/ca1b024615121dg-16947583.html"
   },
   "materials": [
     {
@@ -101,9 +97,9 @@
       "item": "AC/DC adapter",
       "model": "CUI SMI6-9-V-P5 · existing original adapter",
       "availability": "owned",
-      "result": "Catalog match",
-      "checked": "Original label identifies CUI SMI6-9-V-P5: 9 V DC, 0.667 A, center positive; compatible with the meter’s 6–10 V / 500 mA input. Official SMI6 drawing: 64 × 40.5 × 30 mm ±1 mm, excluding blades; P5 plug 5.5/2.1 × 9.5 mm. Keep its flat UL2468 cord outside the enclosure and mate it to the specified round DC extension.",
-      "remaining": "Check condition, blade and barrel seating, 9 V polarity and external cord restraint; no replacement adapter is required.",
+      "result": "Conditional",
+      "checked": "Reuse the original CUI 9 V / 0.667 A center-positive adapter, with its P5 plug and flat cord intact. It plugs into the internal XA cord connector; its original cable runs directly to the logger. No DC extension, coupling or wall feedthrough.",
+      "remaining": "Owned. Verify full plug seating, restraint, cable slack and temperature during the closed-enclosure pilot.",
       "sources": [
         "dent",
         "cui"
@@ -112,11 +108,11 @@
     {
       "id": "enclosure",
       "item": "Enclosure",
-      "model": "Hammond PCJ16148CC",
+      "model": "Hammond PCJ16148 · opaque screw cover",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "Factory STEP has now been Boolean-cut with the coordinated wall openings; four screw-fixed cover fasteners isolate normal use from terminals.",
-      "remaining": "Compare received parts with drawings; obtain qualified approval of the modified dry-indoor assembly.",
+      "checked": "Same PCJ 16 × 14 × 8 in size class with an opaque gray cover. Supplier list price $137.11 versus $149.45 for the previous clear-cover PCJ16148CC, checked 2026-09-23. X-ray display is a website viewing aid; the purchased lid is opaque.",
+      "remaining": "Proposed lower-cost selection. Common base/panel dimensions match the Hammond series drawing; the inherited clear-cover CAD remains a layout template, not a verified solid-cover lid model.",
       "sources": [
         "case"
       ]
@@ -124,11 +120,11 @@
     {
       "id": "panel",
       "item": "Mounting panel",
-      "model": "Hammond 14R1513",
-      "availability": "buy",
-      "result": "Conditional",
-      "checked": "Factory panel plus 11 cut features: six tie-anchor holes, one PE bond and four strap slots; three carrier locator envelopes.",
-      "remaining": "Transfer-drill six carrier holes; inspect underside hardware clearance before mounting the panel.",
+      "model": "Professor-supplied aluminum · fabricate after measuring",
+      "availability": "fabricate",
+      "result": "Measure",
+      "checked": "Use the scrap aluminum offered by Professor Clemon instead of buying 14R1513. Target outline 327.025 × 374.65 mm; modeled thickness 1.89738 mm is a provisional 1.90 mm template, not a measurement of his stock. Confirm thickness, flatness, stiffness and usable area before cutting. Retain a dedicated PE bond using hardware and a method suitable for aluminum.",
+      "remaining": "Reuse proposed, not received or measured. Verify mounting pattern, bonding, screw stacks and stiffness before fabrication.",
       "sources": [
         "panel",
         "carrier"
@@ -140,26 +136,28 @@
       "model": "Carling CA1-B0-24-615-121-DG",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "19.18 × 63.5 × 47 mm body; #10 studs; #6-32 mount. Direct wall rectangle and 52.37 mm fixing pitch supplied. Manufacturer UL489 table: 10 kA at 120 V AC. Delay 24: 12 × rated current for a 60 Hz half-cycle pulse (180 A, 8.33 ms at 15 A), under the stated test conditions.",
-      "remaining": "Manufacturer table confirms 10 kA interruption at 120 V AC for the selected UL489 configuration; delay 24 has specified half-cycle inrush tolerance. Actual JIS outlet fault current and combined startup waveform are not published. Exact-SKU stock/lead time still needs a supplier quote. Check washer stack, body shoulder and terminal spacing on receipt.",
+      "checked": "19.18 × 63.5 × 47 mm body; #10 studs; #6-32 mount. Direct wall rectangle and 52.37 mm fixing pitch supplied. Manufacturer UL489 table: 10 kA at 120 V AC. Delay 24: 12 × rated current for a 60 Hz half-cycle pulse (180 A, 8.33 ms at 15 A), under the stated test conditions. Master Electronics: $40.32 quantity one; 16 listed in stock, checked 2026-09-23.",
+      "remaining": "Manufacturer table confirms 10 kA interruption at 120 V AC for the selected UL489 configuration; delay 24 has specified half-cycle inrush tolerance. Actual JIS outlet fault current and combined startup waveform are not published. Check washer stack, body shoulder and terminal spacing on receipt.",
       "sources": [
         "carling",
         "carling-delay",
-        "jis"
+        "jis",
+        "q0-buy"
       ]
     },
     {
       "id": "receptacle",
       "item": "XA adapter receptacle",
-      "model": "Leviton 5279-C · NEMA 5-15R flanged outlet",
+      "model": "Leviton 515CV · internal NEMA 5-15R",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "5279-C replaces the metal-box assembly. Ø44.00±0.15 bore falls inside Leviton 43.66–44.45 range; fixing pitch 53.57 mm.",
-      "remaining": "Verify rear terminal clearance and screw/washer stack. Use the specified conductor torque and keep XA ground connected.",
+      "checked": "Use a complete cord connector inside the box, matching the printer output connector SKU. A dedicated 14/3 SJOOW branch connects JL/JN/PE to XA upstream of CT. The connector body encloses its terminals and clamps the cord jacket. No wall outlet, custom bracket or wall cutout.",
+      "remaining": "Catalog UL498 File E13393 / CSA LR-406. Verify the cord clamp and secure both XA and the adapter on the panel; plugs remain fully seated.",
       "sources": [
         "outlet",
         "outlet-drawing",
-        "outlet-install"
+        "outlet-install",
+        "cord"
       ]
     },
     {
@@ -188,13 +186,16 @@
     },
     {
       "id": "cord",
-      "item": "Mains / printer cord",
+      "item": "Supply / printer / internal XA cord",
       "model": "Southwire 55808699 · 14/3 SJOOW",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "14/3 SJOOW catalog OD 9.17–9.27 mm fits the proposed entry and plug clamp ranges. Jacket is 300 V rated.",
-      "remaining": "Confirm exact delivered OD and ampacity / temperature / routing conditions, total length and voltage drop. Keep the outer jacket under each cord clamp.",
+      "checked": "Use the same 14/3 SJOOW cord for all three runs. XA’s jacket enters its integral cord clamp; branch conductors terminate at JL/JN/PE before CT. Nominal OD approximately 9.17 mm is inside the 515CV 6.22–16.64 mm clamp range. Final route lengths are dry-fit allowances.",
+      "remaining": "Selected length allowance; final ends trimmed only after dry routing.",
       "sources": [
+        "outlet",
+        "outlet-drawing",
+        "outlet-install",
         "cord"
       ]
     },
@@ -236,19 +237,6 @@
       ]
     },
     {
-      "id": "split-entries",
-      "item": "DC split cable entry",
-      "model": "icotek KVT 32 black · 45026",
-      "availability": "buy",
-      "result": "Conditional",
-      "checked": "One KVT 32 frame for the round factory-terminated Tensility DC extension. Takes one separately ordered KTMBS 4–7 gray insert, 41380. M32 × 1.5, 14 mm thread; Ø32.3 wall opening. Retain the included sealing ring and locknut.",
-      "remaining": "Dry-fit plugs through empty opening and locknut; check full thread engagement and the seal against the drafted wall.",
-      "sources": [
-        "kvt",
-        "kt"
-      ]
-    },
-    {
       "id": "usb",
       "item": "USB data cable",
       "model": "DENT kit USB-A to USB-B cable · 1.8 m",
@@ -262,42 +250,13 @@
       ]
     },
     {
-      "id": "dc-extension",
-      "item": "Round DC extension cable",
-      "model": "Tensility 10-02228 · 5.5/2.1 mm plug to jack",
-      "availability": "buy",
-      "result": "Catalog match",
-      "checked": "Factory round cable, 18 AWG, OD 5.2 ±0.3 mm, 7 A / 48 V; preserves center-to-center polarity. Adapter plugs into the female end outside; route the round cable through 41380/KVT 32 and plug the male end into the logger. Reserve 0.35 m inside and 0.565 m outside, adjusted at dry fit; retain slack with bends ≥35 mm radius (published minimum 31.2 mm). No cut or splice. Male barrel is 12 mm long; do not force its shoulder flush into the logger.",
-      "remaining": "Inspect factory continuity/polarity and contact engagement, secure the external joint without tension and retain both slack loops. Full flexible routing is not certified by the body model.",
-      "sources": [
-        "dc-extension",
-        "dc-extension-drawing",
-        "cui",
-        "dent",
-        "kt"
-      ]
-    },
-    {
-      "id": "kt-inserts",
-      "item": "DC sealing insert",
-      "model": "icotek KTMBS 4–7 gray · 41380",
-      "availability": "buy",
-      "result": "Catalog match",
-      "checked": "Split 21 × 21 × 19 mm insert for KVT, rated for round cables 4–7 mm. Accepts Tensility DC OD 5.2 ±0.3 mm. Select KTMBS (split), not unsplit KTMB. The original CUI flat cord stays outside.",
-      "remaining": "Check the received round DC jacket and KVT nut/seal seating; assembly IP rating is not claimed.",
-      "sources": [
-        "kt",
-        "dc-extension"
-      ]
-    },
-    {
       "id": "internal-wire",
       "item": "Internal L / N / PE wire",
       "model": "Southwire 14 AWG, 19-strand Class C, THHN/THWN/MTW, 600 V",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "Selected Southwire 14 AWG 19-strand Class C THHN/THWN/MTW, nominal OD 2.87 mm. Matches connector and ring-terminal ranges.",
-      "remaining": "Qualified assembler verifies wiring method, ampacity, routing, bends and strip/torque; no AWM-only assumption.",
+      "checked": "Separate 14 AWG conductors remain for Q0 OUT → JL and PE → panel. XA hot, neutral and PE are the conductors of its 14/3 cord; no separate white roll is required. Reuse suitable labeled lab stock first.",
+      "remaining": "Same 14 AWG stranded construction, sold by the foot; 4 ft of each color exceeds the 1 m cutting allowance. Confirm the received wire markings and crimp fit.",
       "sources": [
         "wire",
         "wago",
@@ -307,11 +266,11 @@
     {
       "id": "ring-lugs",
       "item": "Ring terminals",
-      "model": "3M MV14-10R/LX-BOTTLE · #10 stud, 16–14 AWG",
+      "model": "Gardner Bender 15-104 · #8–10 stud, 16–14 AWG",
       "availability": "buy",
-      "result": "Catalog match",
-      "checked": "Corrected Q0 selection to MV14-10R (#10 hole, 16–14 AWG). Wire OD 2.87 mm is below the ring’s 4.318 mm maximum insulation OD.",
-      "remaining": "Use the specified crimp tool and inspection / pull procedure. Select other PE lugs by their own stud; do not use #10 rings indiscriminately.",
+      "result": "Conditional",
+      "checked": "Exact Gardner Bender 15-104 manufacturer listing confirms UL/CSA Listed, 600 V, 75°C, 16–14 AWG and #8–10 stud compatibility. Overall published envelope 25.4 × 7.874 × 6.35 mm. Small-package source: 15 for $3.63.",
+      "remaining": "Manufacturer: UL listed, CSA listed, 600 V building wire, 75°C. Use the specified insulated-terminal crimp tooling; inspect wire insertion, insulation fit and pull retention. No unpublished barrel diameter or crimp setting is assumed.",
       "sources": [
         "ring",
         "carling",
@@ -323,9 +282,9 @@
       "item": "Screw-fixed cable mounts",
       "model": "Panduit TM2S8-C",
       "availability": "buy",
-      "result": "Catalog match",
-      "checked": "Six screw-fixed bases retain the mains bundle, outlet supply, CT pair, two sides of the voltage-lead coils, and DC extension. The linked package contains 100; only six are installed.",
-      "remaining": "Verify received saddle/slot dimensions and dry-fit each bundle before fastening. Six mounting screws use underside washers and locknuts.",
+      "result": "Conditional",
+      "checked": "Six screw-fixed bases retain the mains bundle, XA branch conductors, CT pair, both sides of the voltage-lead coils, and the original internal DC cable. DigiKey lists individual pieces, avoiding the previous 100-piece purchase.",
+      "remaining": "Six panel locations; M4 × 16 mm screws, underside washers and locknuts in the fastener schedule.",
       "sources": [
         "mount"
       ]
@@ -335,9 +294,9 @@
       "item": "Cable ties",
       "model": "Panduit PLT2S-C · 188 × 4.8 mm",
       "availability": "buy",
-      "result": "Catalog match",
+      "result": "Conditional",
       "checked": "For small wire bundles and the screw-fixed bases. Keep allowed bend radii and avoid crushing insulation. This length is for cables, not a strap around the meter.",
-      "remaining": "Six ties installed, six spares allowed. Confirm actual lead length, diameter, bend radius and retention; modeled band thickness/lock are illustrative.",
+      "remaining": "DigiKey lists individual ties: ten cost $3.16 at the 10-piece tier. No 100-piece pack required. Check actual bundle retention and bend radii.",
       "sources": [
         "ties",
         "mount"
@@ -349,8 +308,8 @@
       "model": "Screw / nut / washer schedule in Build_Package.md",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "Five assembly groups specify purchase links and counts. Three carriers use six M3 fixings; six anchors use M4 × 16 mm fixings. One dedicated panel PE bolt has its head beneath the panel.",
-      "remaining": "Measure actual washers/carrier feet/anchor recesses before tightening; qualified PE bond inspection remains required.",
+      "checked": "Q0, three WAGO carriers, six cable mounts and the dedicated aluminum-panel PE bond. XA no longer needs flange screws. Thread, length and actual stack checks are in the build package; aluminum bonding method must be accepted.",
+      "remaining": "No XA wall screws. Confirm stock, panel thickness and aluminum-compatible bonding hardware.",
       "sources": [
         "carling",
         "carrier",
@@ -359,12 +318,12 @@
     },
     {
       "id": "logger-restraint",
-      "item": "Adjustable logger straps",
+      "item": "Adjustable equipment straps",
       "model": "VELCRO ONE-WRAP 90340 · 19.05 mm (3/4 in) wide roll",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "Selected 19.05 mm wide roll fits the 21 × 4 mm rounded slot design; slot pairs are 82 mm apart. Adjustable restraint reserves the larger meter envelope.",
-      "remaining": "Dry-fit strap overlap, slot edge smoothness and instrument retention.",
+      "checked": "Two straps retain the logger; one retains XA and one retains the adapter. Use eight smooth 21 × 4 mm slots, with each pair oriented to the illustrated strap. Fit, trim and verify retention without covering labels or overheating the adapter. No drilling into the equipment.",
+      "remaining": "Four straps proposed; actual fit, plug retention and temperature remain physical checks.",
       "sources": [
         "restraint",
         "dent-size"
@@ -399,56 +358,56 @@
     }
   ],
   "corrections": [
-    "Identified the existing CUI SMI6-9-V-P5 adapter from the original photo: 9 V, 0.667 A, center positive.",
-    "User confirms three original DENT kit pigtails in different colors; LD-SKTSP is the matched family, with 10 in nominal length. The CT remains identified as Mini HSC, with the legacy 50 A variant probable but obscured digits not treated as confirmed.",
-    "Replaced the outlet/metal box/support/cover assembly with directly mounted Leviton 5279-C. Removed seven obsolete material groups.",
-    "Use one KVT 32 frame and one 41380 insert for the round Tensility DC extension. Reuse the kit USB cable temporarily with mains unplugged; no USB penetration or energized USB routing remains.",
-    "Removed the dedicated voltage fuse, holder, DIN rail, end stops and JV transition. A1 now connects to JL after Q0. Upstream-only lead protection requires acceptance before energizing.",
-    "Consolidated PE into one five-port connector after removing the rail bond. Three connectors/carriers, three installed ring lugs and one panel PE stud remain.",
-    "Removed two rail mounting holes and the rail PE hole from the panel CAD. Eleven panel cut features and six carrier transfer-drill holes remain."
+    "Replaced the clear-cover box selection with the same-size opaque PCJ16148; CAD retains the common-base template and an illustrative lid silhouette.",
+    "Proposed reuse of the professor’s aluminum sheet, with stock measurement and aluminum bonding held open.",
+    "Moved XA and the original adapter inside. XA uses the same 515CV SKU as the printer output, with a continuous 14/3 cord branch.",
+    "Removed the round DC extension, KVT frame and insert from the active BOM and model. Restored XA, DC and USB wall stock; the right wall has no cuts.",
+    "Retained six cable anchor points and added separate straps for XA and adapter.",
+    "Consolidated purchase sources and added exact-part approval evidence and a conditional DIN-breaker comparison."
   ],
   "assembly": [
     {
       "stage": 1,
-      "title": "Machine and clean empty parts",
-      "action": "Receive the exact parts and close release items in build.html. Machine the empty shell and panel from the PDF/STEP/DXF; transfer-drill carriers from actual parts. Deburr and remove all chips.",
-      "result": "Exact CAD cut/through gauges checked; no physical machining has occurred."
+      "title": "Verify stock and machine empty parts",
+      "action": "Measure the offered aluminum and received enclosure. Close thickness, mounting and bonding decisions; use revision B CAD only. No right-wall openings. Deburr all eight strap slots and clear chips.",
+      "result": "Digital cut and restored-wall checks only; no material has been received or machined."
     },
     {
       "stage": 2,
-      "title": "Install the backpanel first",
-      "action": "Complete underside hardware on the removable panel, then lower it into the case. Keep the side outlet absent until the panel is secured with Hammond fasteners.",
-      "result": "Vertical insertion is tested digitally; side outlet must follow the panel."
+      "title": "Fit underside hardware and panel",
+      "action": "Fit the six cable mounts and carrier fasteners, thread four equipment straps and check underside projections. Seat the panel on its factory supports.",
+      "result": "Nominal vertical insertion screen; actual stock thickness and fastener stacks need measurement."
     },
     {
       "stage": 3,
-      "title": "Fit panel components",
-      "action": "Fit three WAGO carriers, two meter straps, CT and six cable anchors. Place CT on printer hot only; set the arrow toward output.",
-      "result": "Nominal body separation and shell access checked. Verify the actual CT latch and retained cable slack."
+      "title": "Restrain logger, CT and terminals",
+      "action": "Fit the logger with two adjustable straps; retain three WAGO groups, one CT and a dedicated aluminum-panel PE connection. Confirm CT label and cable slack.",
+      "result": "Catalog envelopes and routed cable geometry only; no physical retention test."
     },
     {
       "stage": 4,
-      "title": "Install wall fittings",
-      "action": "Install Q0 directly in its front-wall pattern; install 5279-C, two long-thread glands and one DC split entry. Use the fastener/torque schedule.",
-      "result": "Machined shell openings modeled. Actual threads, wall draft, seal seating and plug retention need receiving checks."
+      "title": "Install Q0, glands and internal power",
+      "action": "Install Q0 and two power glands. Restrain the internal 515CV XA connector and original adapter separately; verify full blade seating, cord clamp and support. Nothing mounts through the right wall.",
+      "result": "Internal layout proposal; actual plug engagement, anti-unplug retention and thermal suitability remain open."
     },
     {
       "stage": 5,
-      "title": "Wire and retain",
-      "action": "Unplug all sources. Bond the panel, printer and outlet; complete permanent wiring. A1 starts at switched hot JL; A2/A3 start at neutral JN. Path 16 is temporary offline USB. Keep the original adapter cord outside and pass only the round DC extension through its insert. Retain cable slack.",
-      "result": "Topology and the DC jacket-to-insert range checked. Upstream-only voltage-lead protection, terminations and CT scale remain acceptance items."
+      "title": "Connect and dress the cables",
+      "action": "Connect the XA 14/3 branch before CT. Route the intact original DC cable to the logger. Use six cable ties as needed to control slack; keep mains and low-voltage routes separated. Perform offline ELOG setup.",
+      "result": "Electrical topology and digital routing checks; not a qualified electrical acceptance."
     },
     {
       "stage": 6,
-      "title": "Inspect and close",
-      "action": "Perform documented qualified polarity/PE/insulation/protection checks, verify lid closure with all four screws, then validate logging with a reference meter.",
-      "result": "No physical assembly, energizing or thermal qualification has been performed."
+      "title": "Close and verify the pilot",
+      "action": "Remove USB and install the opaque lid before mains operation. Qualified personnel complete electrical and closed-enclosure thermal checks. Verify recording by unplugging mains and downloading after a supervised pilot.",
+      "result": "No energized test, temperature test or finished-assembly certification recorded."
     }
   ],
   "needed": [
     "CT commissioning: Mini HSC family is matched; 50 A is probable. Read the unobscured label during assembly and set that exact range/output in ELOG.",
     "Voltage-lead acceptance: the user confirms the original DENT kit pigtails; do not re-request OEM identity. Accept terminal preparation and upstream-only protection with responsible electrical personnel; original-kit status alone does not establish protection by the 15 A main breaker.",
-    "Use one KVT 32 frame and one 41380 insert for the round Tensility DC extension. Reuse the kit USB cable temporarily with mains unplugged; no USB penetration or energized USB routing remains.",
+    "Measure aluminum sheet size, thickness and stiffness; approve aluminum-compatible panel bonding and adjust machining/fasteners before fabrication.",
+    "Verify internal XA/adapter seating, independent restraint, intact DC cable slack, separation and closed-enclosure temperature. Opaque lid prevents live viewing of logger LEDs; verify logging by offline export after the pilot.",
     "Commissioning: verify fastener stacks, CT latch and cable slack, supply conditions, PE/insulation/polarity, total load and restart/recording behavior before routine operation."
   ]
 }

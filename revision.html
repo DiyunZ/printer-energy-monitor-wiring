@@ -1,0 +1,220 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Revision B: cost and sourcing review · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=15"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Design_Revision_B.md" download>Download Markdown</a></nav><h1>Revision B · cost and installation review</h1>
+<p>September 23, 2026. Revised in response to Professor Clemon’s review: fewer suppliers, lower-cost enclosure and panel, a breaker comparison, cable restraints, documented component approvals and internal logger power.</p>
+<h2>Selected design</h2>
+<ul>
+<li><strong>Enclosure:</strong> Hammond <strong>PCJ16148</strong>, opaque screw cover, in the same size class as the previous clear-cover PCJ16148CC. X-ray mode is a viewing aid; the real lid is opaque.</li>
+<li><strong>Panel:</strong> fabricate from the aluminum offered by the professor. The 327.025 × 374.65 × 1.89738 mm CAD panel is a <strong>provisional template</strong>. Stock size, thickness, stiffness and aluminum bonding still need confirmation.</li>
+<li><strong>Internal power:</strong> an internal <strong>Leviton 515CV</strong> cord connector supplies the original CUI adapter. A continuous 14/3 SJOOW branch connects to JL/JN/PE before CT. The original adapter cable connects directly to the logger. Buy <strong>two 515CV connectors total</strong>, including the printer output.</li>
+<li><strong>Fewer openings:</strong> remove the XA wall outlet and the DC opening, extension, KVT frame and insert. The right wall is uncut. The only wall interfaces are Q0, supply cord and printer cord; USB remains temporary offline service.</li>
+<li><strong>Retention:</strong> retain six screw-fixed cable anchors; provide four adjustable straps—two for the logger, one for XA and one for the adapter. Check full plug seating and that restraint prevents separation without loading the blades or blocking heat dissipation.</li>
+<li><strong>Breaker:</strong> retain Carling CA1-B0-24-615-121-DG and buy one from Master Electronics at the checked $40.32 price. The priced DIN comparison below explains why this revision keeps the existing direct mount and trip curve.</li>
+</ul>
+<p>The original 21 electrical paths and measurement boundary remain: only printer hot passes through CT; the adapter and voltage sensing branch before CT. Neutral and PE remain separate. No physical assembly, thermal test or electrical release has occurred.</p>
+<h2>Dated price comparison</h2>
+<p>USD, single-unit displayed prices checked September 23, 2026. These are web listings, not accepted quotations. Stock, tax, shipping, machining, finishing and labor are excluded.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Previous selection</th>
+<th>Revision B</th>
+<th>Price evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Box</td>
+<td>PCJ16148CC clear lid: <strong>$149.45</strong></td>
+<td>PCJ16148 opaque lid: <strong>$137.11</strong></td>
+<td><a href="https://www.solutionsdirectonline.com/hammond-16x14x8-polycarbonate-electrical-enclosure-with-clear-cover-pcj16148cc">Previous supplier listing</a> · <a href="https://www.solutionsdirectonline.com/hammond-16x14x8-polycarbonate-electrical-enclosure-with-solid-cover-pcj16148">New supplier listing</a></td>
+</tr>
+<tr>
+<td>Panel stock</td>
+<td>Hammond 14R1513: <strong>$30.44</strong></td>
+<td>Offered aluminum: <strong>$0 incremental raw-stock allowance</strong>, conditional on suitability</td>
+<td><a href="https://www.digikey.com/en/products/detail/hammond-manufacturing/14R1513/2359585">14R1513 listing</a> · professor’s offer; machining is not free</td>
+</tr>
+<tr>
+<td><strong>Box + raw panel only</strong></td>
+<td><strong>$179.89</strong></td>
+<td><strong>$137.11</strong></td>
+<td><strong>$42.78 less</strong>, before fabrication, delivery and tax</td>
+</tr>
+<tr>
+<td>Internal XA</td>
+<td>Prior 5279-C wall receptacle</td>
+<td>515CV: <strong>$6.99</strong></td>
+<td><a href="https://www.homedepot.com/p/301304939">Home Depot</a>; two total 515CV units cost $13.98 before tax, including printer output</td>
+</tr>
+<tr>
+<td>Six cable mounts</td>
+<td>Previously linked 100-piece pack</td>
+<td>Six individually listed TM2S8-C at <strong>$0.68 each</strong>, $4.08</td>
+<td><a href="https://www.digikey.com/en/products/detail/panduit-corp/TM2S8-C/1306625">DigiKey</a>; stock and unit pricing can change</td>
+</tr>
+<tr>
+<td>DC accessories</td>
+<td>Tensility 10-02228, icotek 45026 and 41380</td>
+<td><strong>Removed from active BOM</strong></td>
+<td>No saving assigned because a comparable complete prior order was not priced</td>
+</tr>
+</tbody></table></div>
+<p>The selected purchase quantities now have a <strong>$261.26 material subtotal</strong>, including the internal XA branch, all four strap blanks, the actual retail packs and fastener spares. The <a href="materials.html#order-plan">26-line order plan</a> records each seller, quantity, pack size, price and stock note. It excludes freight, tax, machining, tools, labor and any bonding changes required after inspecting the aluminum. The $42.78 remains a <strong>box/raw-panel-only</strong> comparison; it is not the difference between two fully priced systems. No purchase has been made.</p>
+<p>The previous 3M 100-piece bottle was <a href="https://www.digikey.com/en/products/detail/3m/MV14-10R-LX-BOTTLE/2670218">$105.36</a>. The selected <a href="https://www.homedepot.com/p/202522492">Gardner Bender 15-104 15-pack is $3.63</a>, a <strong>$101.73 reduction for that purchase line</strong>, with three installed and twelve spare. Buy ten PLT2S-C ties for $3.16, rather than a 100-piece pack. Buy four feet each of <a href="https://www.homedepot.com/p/204632031">black</a> and <a href="https://www.homedepot.com/p/204632154">green</a> stranded wire: $1.68 per color, rather than full rolls.</p>
+<h2>Consolidated purchasing</h2>
+<p>The previous BOM linked to 12 order-site domains, plus Bolt Depot through the fastener schedule: <strong>13 sources</strong>. Revision B uses <strong>five planned order sources</strong>, including fasteners. This counts ordering websites, not manufacturer references, photo credits or orders already placed. The former Marketplace ring-lug link is removed from the active order; Home Depot supplies the small pack. The order plan identifies the DigiKey -ND offers and selects no partner listing. Factory-stock glands may still have a separate lead time. Five sellers does not guarantee five parcels or fixed freight.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Supplier</th>
+<th>Groups to source</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Solutions Direct</strong></td>
+<td>PCJ16148 enclosure</td>
+</tr>
+<tr>
+<td><strong>DigiKey</strong></td>
+<td>WAGO connectors/carriers, two glands, six individual cable mounts and ten individual cable ties</td>
+</tr>
+<tr>
+<td><strong>Home Depot</strong></td>
+<td>14/3 cord, supply plug, two 515CV connectors, four feet each of black/green wire if absent from stock, 15-104 rings, one 90340 strap roll</td>
+</tr>
+<tr>
+<td><strong>Master Electronics</strong></td>
+<td>One exact Carling Q0; quantity-one price and stock verified</td>
+</tr>
+<tr>
+<td><strong>Bolt Depot</strong></td>
+<td>Remaining exact fasteners after checking lab stock; no XA flange hardware</td>
+</tr>
+<tr>
+<td><strong>Lab reuse / fabrication</strong></td>
+<td>Professor’s aluminum; five owned equipment groups; kit USB cable</td>
+</tr>
+</tbody></table></div>
+<p>There are <strong>15 purchase groups, one proposed fabrication group, five owned groups and one kit-supplied group</strong>. Counts refer to material groups, not pieces or supplier packs. The two 515CV rows intentionally describe different installation locations but the combined order quantity is two.</p>
+<h2 id="breaker-options">Breaker and DIN alternatives</h2>
+
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Evidence / price</th>
+<th>Decision and tradeoff</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Carling CA1-B0-24-615-121-DG</strong></td>
+<td><strong>$40.32, quantity one; 16 listed in stock</strong> at <a href="https://www.masterelectronics.com/en/productdetail/littelfuse-carling-technologies/ca1b024615121dg-16947583.html">Master Electronics</a>, checked September 23. Use the <a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">manufacturer C-Series table</a> for ratings; the seller&#39;s prose contains inconsistent current wording.</td>
+<td><strong>Selected.</strong> Same 15 A UL489/CSA configuration, 10 kA at 120 V, direct wall mount and external operator. No electrical or hole-pattern substitution.</td>
+</tr>
+<tr>
+<td><strong>Altech 1C15UL with rail and stops</strong></td>
+<td><a href="https://www.digikey.com/en/products/detail/altech-corporation/1C15UL/8547287">Breaker $33.53</a> + one <a href="https://www.digikey.com/en/products/detail/altech-corporation/2511120-1M/8546913">2511120/1M 35 × 7.5 mm rail $4.62</a> + two <a href="https://www.digikey.com/en/products/detail/altech-corporation/CA802/8547037">CA802 stops at $0.62</a> = <strong>$39.39</strong>. Each offer permits individual quantities. CA802 fits this rail in the <a href="https://legacy.altechcorp.com/Blocks/Block-Accessories.pdf">manufacturer selection table</a>.</td>
+<td><strong>Not selected.</strong> Only $0.93 lower for these parts, before rail fasteners, an externally accessible operator/guard, fabrication and freight. C characteristic differs from Carling delay 24; its 17.5 × 105.3 × 68.4 mm body also requires a new arrangement. This is a priced component comparison, not a claim that every possible DIN installation costs more.</td>
+</tr>
+<tr>
+<td><strong>Eaton FAZ-C15/1-NA-SP</strong></td>
+<td>15 A C curve, DIN mount, $40.00 at <a href="https://www.automationdirect.com/adc/shopping/catalog/circuit_protection_-z-_fuses_-z-_disconnects/circuit_breakers_-a-_circuit_protectors/miniature_circuit_breakers_%28mcb%29/faz-c15-1-na-sp">AutomationDirect</a>, before rail/supports.</td>
+<td>No sufficient component-price advantage here; adds a seller. Not selected.</td>
+</tr>
+</tbody></table></div>
+<p><strong>Decision:</strong> use the offered plate and the $40.32 direct-mount Carling. A DIN rebuild could become economical with existing rail stock or a larger multi-device panel, but it is not needed for this single-printer revision. The logger and adapter still need a plate or other support. An inexpensive switch-only device or UL1077 protector is not an equivalent replacement for the selected UL489 breaker. Application acceptance remains separate from this sourcing decision.</p>
+<p><strong>Consolidation tradeoff:</strong> the same PCJ16148 is <a href="https://www.masterelectronics.com/en/productdetail/hammond-manufacturing/pcj16148-49489596.html">$160.56 at Master Electronics</a>, $23.45 above Solutions Direct. Retain the lower material-price source unless its extra delivered cost exceeds $23.45. Master lists a <strong>25-piece minimum</strong> for <a href="https://www.masterelectronics.com/en/productdetail/hammond-manufacturing/1427ncgpg13lb-50893024.html">1427NCGPG13LB</a>: $52 at $2.08 each, versus <strong>two at $2.97 = $5.94</strong> from DigiKey. Do not combine suppliers by purchasing unnecessary quantities.</p>
+<h2>Certification evidence</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Evidence available</th>
+<th>What remains</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Hammond PCJ16148</td>
+<td><a href="https://www.hammfg.com/electrical/products/non-metallic/pcj-sc">Manufacturer series standards</a>: UL508A/cUL enclosure types; IEC60529 IP66 for the original enclosure</td>
+<td>Confirm received label and exact variant. Machining and custom assembly do not inherit a finished-product listing.</td>
+</tr>
+<tr>
+<td>Carling Q0</td>
+<td>Manufacturer ordering code and UL489 table for the selected DG configuration</td>
+<td>Confirm exact SKU, receiving marks and application suitability.</td>
+</tr>
+<tr>
+<td>Leviton 515PV / 515CV</td>
+<td><a href="https://leviton.com/products/515pv">515PV manufacturer page</a> and <a href="https://leviton.com/products/515cv">515CV</a>: UL498 File E13393; CSA C22.2 No.42 File LR-406</td>
+<td>Confirm received markings, approved cord preparation and clamp.</td>
+</tr>
+<tr>
+<td>Southwire internal wire</td>
+<td><a href="https://www.southwire.com/wire-cable/building-wire/thhn-thwn-copper-silicone-free/p/22955984">UL/cUL product description</a></td>
+<td>Check markings on actual stock and accepted wiring method.</td>
+</tr>
+<tr>
+<td>WAGO 221-415</td>
+<td><a href="https://www.netxl.com/wago/docs/221-415-data-sheet.pdf">Manufacturer datasheet, p.5, distributor-hosted</a>: UL486C cULus Listed E69654; UL467 E201573</td>
+<td>Apply the exact conductor and installation conditions; confirm received marks. Carrier 221-505 is a mechanical accessory.</td>
+</tr>
+<tr>
+<td>Hammond 1427NCGPG13LB glands</td>
+<td><a href="https://www.hammfg.com/electronics/small-case/accessories/1427ncg">Manufacturer series page</a>: UL Listed; IP68; exact long-thread part included in its table</td>
+<td>Verify actual cord diameter, clamp and sealing. Component rating does not certify the machined box.</td>
+</tr>
+<tr>
+<td>Southwire 558086 cord</td>
+<td><a href="https://cabletechsupport.southwire.com/en/tile/1/cable/7386/">Manufacturer cable specification</a>: UL62 / CSA C22.2 No.49; E46194 / LL90458</td>
+<td>Verify actual jacket marks and installation method.</td>
+</tr>
+<tr>
+<td>Gardner Bender 15-104 rings</td>
+<td><a href="https://www.gardnerbender.com/en/p/15-104/-16-14-AWG-2-mm-sq-Bnes-%C3%A0-anneau">Exact manufacturer product</a>: UL Listed, CSA Listed, 600 V building wire, 75°C; #8–10 studs and 16–14 AWG</td>
+<td>Certification wording is resolved for the replacement. Actual crimp tooling/fit and the aluminum bond still require acceptance; the manufacturer page does not publish a barrel-insulation diameter.</td>
+</tr>
+<tr>
+<td>Custom aluminum and mechanical restraints</td>
+<td>Material/interface review, not standalone equipment certification</td>
+<td>Record stock and bonding method; verify retention, stiffness and temperature. Straps are not electrical insulation.</td>
+</tr>
+</tbody></table></div>
+<p>UL Listed, UL Recognized, a material flammability rating and an IEC standard are different evidence. The website records the specific evidence instead of showing a blanket “certified” badge. No assembled-product certification is claimed.</p>
+<h2>Professor feedback: disposition</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Requested change</th>
+<th>Current result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Fewer suppliers</td>
+<td>Five selected sellers, versus thirteen prior ordering sources; actual order quantities documented.</td>
+</tr>
+<tr>
+<td>Cheaper box, plate and switch</td>
+<td>Opaque box and offered plate selected; exact-SKU Q0 sourcing priced; DIN hardware comparison complete.</td>
+</tr>
+<tr>
+<td>Plate or DIN mounting</td>
+<td>Plate-based design selected. Offered stock must first meet the receiving requirements below.</td>
+</tr>
+<tr>
+<td>Tie-down locations</td>
+<td>Six screw-fixed cable mounts and four equipment straps appear in CAD, BOM and 3D.</td>
+</tr>
+<tr>
+<td>Recognized certification evidence</td>
+<td>Source-specific evidence for purchased electrical parts; new UL/CSA-listed ring selection. No blanket assembly certification claim.</td>
+</tr>
+<tr>
+<td>No round DC extension; adapter inside</td>
+<td>Original cable, XA and adapter are internal. No XA/DC/USB wall opening or related extension purchase.</td>
+</tr>
+</tbody></table></div>
+<p>These design and sourcing actions are implemented. Fabrication and energized-use acceptance remain <strong>uncompleted physical work</strong>, with an explicit <a href="build.html#receiving-record">receiving and release record</a>; they are not counted as passed requirements.</p>
+<h2>Review before fabrication</h2>
+<p>Measure the offered aluminum, verify the shared PCJ base and actual opaque lid, dry-fit both internal power parts with original connectors, and review aluminum-compatible bonding. The current source model uses the previously verified PCJ16148CC base/panel geometry and an illustrative opaque lid; it is not an independently verified PCJ16148 factory assembly.</p>
+<p>Moving the adapter inside requires a closed-enclosure temperature check and restraint that prevents the AC plug loosening. The opaque lid hides the logger indicators: configure offline, close the lid before mains operation, then verify saved records after unplugging and exporting the pilot. Never open the box while energized to inspect an LED.</p>
+<p><a href="materials.html">Current BOM</a> · <a href="build.html">Machining and assembly revision</a> · <a href="protection.html">Protection review</a> · <a href="index.html">3D and wiring</a></p>
+</body></html>

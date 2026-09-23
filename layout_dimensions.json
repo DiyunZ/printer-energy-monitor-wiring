@@ -1,31 +1,31 @@
 {
   "units": "mm",
-  "revision": "Build package A · upstream protection review · 2026-09-20",
+  "revision": "Revision B · internal adapter and reused panel · 2026-09-23",
   "coordinates": "X across the panel; Y above the panel underside; Z along the panel, negative toward the printer exit (rear), positive toward Q0 (front). One scene unit is one millimetre. The wiring plan projects the same X/Z positions with rear at the top. Dimensions below are X × Y × Z unless noted.",
   "parts": [
     {
       "id": "case",
-      "name": "Hammond PCJ16148CC",
+      "name": "Hammond PCJ16148 · opaque cover",
       "size": [
         393.8016,
         240.2078,
         479.3996
       ],
-      "status": "Manufacturer CAD",
-      "source": "https://www.hammfg.com/files/parts/stp/PCJ16148CC.zip",
-      "note": "Factory Hammond STEP with project wall openings removed by exact CAD booleans. Dry indoor use only; the modified assembly has no claimed IP/NEMA certification. Four screw-fixed cover fasteners must be installed during operation."
+      "status": "PCJ common-base layout template; solid lid not independently modeled",
+      "source": "https://www.hammfg.com/files/parts/pdf/PCJ16148.pdf",
+      "note": "PCJ16148 selected. Manufacturer series table gives the same enclosure and panel dimensions as PCJ16148CC. Base geometry and lid silhouette are inherited from the clear-cover STEP; gray rendering represents the selected opaque cover. Confirm received solid-lid geometry. Right wall is uncut; only Q0 and two power glands remain. No certification of the modified assembly is claimed."
     },
     {
       "id": "panel",
-      "name": "14R1513 mounting panel",
+      "name": "Reused aluminum panel · provisional 1.90 mm",
       "size": [
         327.025,
         1.89738,
         374.65
       ],
-      "status": "Manufacturer CAD",
-      "source": "https://www.hammfg.com/files/parts/pdf/PCJ16148CC.pdf",
-      "note": "Panel and fixing screws from the enclosure STEP assembly. The drawing gives 12.88 × 14.75 in and 0.075 in steel thickness. Electrical bonding is separate from the mounting screws.",
+      "status": "Proposed fabrication template; stock not measured",
+      "source": "https://www.hammfg.com/files/parts/pdf/PCJ16148.pdf",
+      "note": "Use the scrap aluminum offered by Professor Clemon instead of buying 14R1513. Target outline 327.025 × 374.65 mm; modeled thickness 1.89738 mm is a provisional 1.90 mm template, not a measurement of his stock. Confirm thickness, flatness, stiffness and usable area before cutting. Retain a dedicated PE bond using hardware and a method suitable for aluminum. The CAD template retains the common panel mounting features. Actual stock thickness must replace the modeled 1.89738 mm before machining; adjust all affected stacks.",
       "position": [
         0,
         0.94869,
@@ -100,49 +100,49 @@
     },
     {
       "id": "outlet",
-      "name": "XA · Leviton 5279-C flanged outlet",
+      "name": "XA · internal Leviton 515CV",
       "size": [
-        48.4,
-        63.5,
-        63.5
+        66.3,
+        39.1,
+        39.1
       ],
       "position": [
-        162.64,
-        121,
-        13
+        -65,
+        22.25,
+        -40
       ],
-      "status": "Manufacturer drawing and mounting instructions",
-      "source": "https://leviton.com/products/5279-c",
-      "note": "15 A, 125 V, NEMA 5-15R; direct panel mount. Rear body Ø42.8 × 43.6 mm; flange Ø63.5 mm. Project cutout Ø44.00 ±0.15 mm within manufacturer 43.66–44.45 mm; two mounting points 53.57 mm apart. No RACO box, separate cover or outlet-box PE conductor. XA ground contact still connects to PE. Torque 10–14 in-lb, copper conductors only. Rotate with actual wall draft during assembly; the website shows the conservative axis-aligned envelope."
+      "status": "Manufacturer dimensional envelope; strap installation proposed",
+      "source": "https://leviton.com/content/dam/leviton/residential/product_documents/none/Document-31435-Dimensional%20Data.jpg",
+      "note": "515CV overall length 66.3 mm, maximum diameter 39.1 mm, axis along X. Integral enclosure and cord clamp; one continuous 14/3 branch from JL/JN/PE. Strap to panel beside the original adapter. Validate seating, support and routing at dry fit."
     },
     {
       "id": "adapter",
       "name": "CUI SMI6-9-V-P5 · existing adapter",
       "size": [
         30,
-        64,
-        40.5
+        40.5,
+        64
       ],
       "position": [
-        201.84,
-        121,
-        13
+        -16.85,
+        22.25,
+        -40
       ],
       "status": "Photo-identified; manufacturer body dimensions",
       "source": "https://www.belfuse.com/media/datasheets/products/power-supplies/SMI6.pdf",
-      "note": "Original label identifies CUI SMI6-9-V-P5: 9 V DC, 0.667 A, center positive; compatible with the meter’s 6–10 V / 500 mA input. Official SMI6 drawing: 64 × 40.5 × 30 mm ±1 mm, excluding blades; P5 plug 5.5/2.1 × 9.5 mm. Keep its flat UL2468 cord outside the enclosure and mate it to the specified round DC extension. Keep the external cord and coupling supported, with no pull on the adapter blades."
+      "note": "Reuse the original CUI 9 V / 0.667 A center-positive adapter, with its P5 plug and flat cord intact. It plugs into the internal XA cord connector; its original cable runs directly to the logger. No DC extension, coupling or wall feedthrough. Body is rotated about the plug axis to lie low on the panel. Blade geometry, mated depth and support contact remain illustrative; verify in the dry fit."
     },
     {
       "id": "entries",
-      "name": "Power glands / DC KVT 32 entry",
+      "name": "Two power-cord glands",
       "size": [
         27,
         37,
         27
       ],
-      "status": "Catalog envelopes; 41380 inserts selected",
+      "status": "Catalog power-gland envelopes",
       "source": "https://www.hammfg.com/electronics/small-case/accessories/1427ncg",
-      "note": "Two long-thread power glands and one KVT 32 DC entry. USB is a temporary open-lid service connection, with mains unplugged."
+      "note": "Supply and printer output only. DC and adapter AC connections remain inside; USB is temporary offline service."
     },
     {
       "id": "leads",
@@ -254,35 +254,6 @@
       "label": "Printer exit"
     },
     {
-      "id": "dc-entry",
-      "part": "entries",
-      "size": [
-        37,
-        40,
-        40
-      ],
-      "position": [
-        185.5,
-        78,
-        106
-      ],
-      "axis": "x",
-      "label": "DC entry",
-      "cable": {
-        "item": "dc-extension",
-        "profile": "round",
-        "diameterRangeMm": [
-          4.9,
-          5.5
-        ],
-        "insertPart": "41380",
-        "insertRangeMm": [
-          4,
-          7
-        ]
-      }
-    },
-    {
       "id": "supply-plug",
       "part": "entries",
       "size": [
@@ -376,26 +347,10 @@
       "pitchMm": 4,
       "note": "Scenario only: each full lead reserves 2000 mm flexible cable at assumed 3 mm OD. Three concentric helices use 4 mm radial spacing and pitch, with two shared restraints. Measure actual cable length, diameter, bend limits and support fit during dry assembly.",
       "radialSpacingMm": 4
-    },
-    {
-      "id": "dc-coupling",
-      "part": "adapter",
-      "size": [
-        14,
-        14,
-        60
-      ],
-      "position": [
-        250,
-        78,
-        68
-      ],
-      "label": "DC coupling",
-      "note": "External original P5 plug mated to 10-02228 female jack; 60 mm service envelope, not exact molded geometry."
     }
   ],
   "installationHardware": {
-    "note": "Six support datums and the panel PE bond are shared with the machining source. Tie openings follow actual rendered cable cross-sections. TM2S8 outer size and PLT2S band width are catalog values; saddle/lock molding and 1 mm band thickness are illustrative. Carrier fastener centers remain transfer-drill references. The dedicated panel PE bolt head is beneath the panel.",
+    "note": "Six cable supports and the dedicated panel PE bond retain shared CAD datums. Four adjustable straps: two logger straps and two internal-power straps. Stock thickness, retention and temperature require physical checks; simplified mesh details are not manufacturing proof.",
     "source": "tools/cad/enclosure_model.py",
     "cableMountsXZ": [
       [
@@ -445,16 +400,16 @@
       },
       {
         "id": "rear-ac",
-        "label": "AC supply to adapter outlet",
+        "label": "Internal XA branch conductors",
         "holeXZ": [
           8,
           -175
         ],
         "axis": "x",
         "routes": [
-          "internal-wire:xa-hot",
-          "internal-wire:xa-neutral",
-          "internal-wire:xa-pe"
+          "cord:aux-hot",
+          "cord:aux-neutral",
+          "cord:aux-pe"
         ],
         "captureHalfWidthMm": 15
       },
@@ -504,16 +459,40 @@
       },
       {
         "id": "dc",
-        "label": "DC extension inside entry",
+        "label": "Original adapter DC cable",
         "holeXZ": [
           145,
           158
         ],
         "axis": "z",
         "routes": [
-          "dc-extension:internal"
+          "adapter:dc-internal"
         ],
         "captureHalfWidthMm": 12
+      }
+    ],
+    "equipmentStraps": [
+      {
+        "id": "xa",
+        "part": "outlet",
+        "x": -68,
+        "z": -40,
+        "slotZ": [
+          -65,
+          -15
+        ],
+        "topY": 43.6
+      },
+      {
+        "id": "adapter",
+        "part": "adapter",
+        "x": -16.85,
+        "z": -40,
+        "slotZ": [
+          -77,
+          -3
+        ],
+        "topY": 43.6
       }
     ]
   }

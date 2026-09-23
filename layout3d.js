@@ -2,8 +2,8 @@ import * as THREE from 'three';
 import { OrbitControls } from './vendor/OrbitControls.js';
 import { RoundedBoxGeometry } from './vendor/RoundedBoxGeometry.js';
 import { installMaterialLocator } from './material-locator.js?v=17';
-import { addInstallationHardware } from './installation-hardware.js?v=19';
-import { screenCableBodies } from './cable-supports.js?v=19';
+import { addInstallationHardware } from './installation-hardware.js?v=24';
+import { screenCableBodies } from './cable-supports.js?v=23';
 import { showDesignPanel } from './site-navigation.js?v=15';
 
 // All geometry is in millimetres. Only the camera changes the screen scale.
@@ -14,11 +14,11 @@ const V = a => new THREE.Vector3(...a);
 
 async function start() {
   const [dimensions, cad, buffer, review, procurement] = await Promise.all([
-    fetch('./layout_dimensions.json?v=19').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
-    fetch('./assets/enclosure.json?v=19').then(r => { if (!r.ok) throw Error('CAD manifest unavailable'); return r.json(); }),
-    fetch('./assets/enclosure.bin?v=19').then(r => { if (!r.ok) throw Error('CAD geometry unavailable'); return r.arrayBuffer(); }),
-    fetch('./installation_review.json?v=19').then(r => { if (!r.ok) throw Error('Installation review unavailable'); return r.json(); }),
-    fetch('./procurement.json?v=20').then(r => { if (!r.ok) throw Error('Materials unavailable'); return r.json(); })
+    fetch('./layout_dimensions.json?v=23').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
+    fetch('./assets/enclosure.json?v=23').then(r => { if (!r.ok) throw Error('CAD manifest unavailable'); return r.json(); }),
+    fetch('./assets/enclosure.bin?v=23').then(r => { if (!r.ok) throw Error('CAD geometry unavailable'); return r.arrayBuffer(); }),
+    fetch('./installation_review.json?v=23').then(r => { if (!r.ok) throw Error('Installation review unavailable'); return r.json(); }),
+    fetch('./procurement.json?v=24').then(r => { if (!r.ok) throw Error('Materials unavailable'); return r.json(); })
   ]);
   const parts = Object.fromEntries(dimensions.parts.map(p => [p.id, p]));
   const instances = Object.fromEntries(dimensions.instances.map(p => [p.id, p]));
@@ -133,7 +133,7 @@ async function start() {
     geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(buffer, entry.positionOffset, entry.positionCount), 3));
     geo.setIndex(new THREE.BufferAttribute(new Uint32Array(buffer, entry.indexOffset, entry.indexCount), 1));
     geo.computeVertexNormals();
-    let mat = entry.role === 'shell' ? shellMat : entry.role === 'lid' ? (index === 15 ? lidMat : material('#64747b', .4)) : entry.role === 'panel' ? material('#eef0ed', .18) : material('#9aa4a7', .55);
+    let mat = entry.role === 'shell' ? shellMat : entry.role === 'lid' ? (index === 15 ? lidMat : material('#64747b', .4)) : entry.role === 'panel' ? material('#bcc2c6', .6) : material('#9aa4a7', .55);
     const obj = mesh(geo, mat, [0,0,0], entry.role === 'panel' ? 'panel' : 'case');
     obj.name = entry.name; obj.castShadow = false;
     if (index === 0) planBodies.case = [obj];
@@ -209,29 +209,28 @@ async function start() {
     decal(name,25,13,[x,6.2,z+18],'terminals');
   });
   tag('JL / JN / PE',[-142,35,-45],'terminals');
-  // Direct-mounted flanged receptacle: no separate rear box or wall support.
-  const [ox,oy,oz] = parts.outlet.position;
-  const faceX=182.04;
-  planBodies.outlet=[cylinder(21.4,43.6,[faceX-21.8,oy,oz],'#d8d8cd','outlet','x'),
-    cylinder(31.75,2.4,[faceX+1.2,oy,oz],'#f0eee6','outlet','x'),
-    cylinder(17.65,2.4,[faceX+3.6,oy,oz],'#f0eee6','outlet','x')];
-  for(const z of [-6.35,6.35])box([.6,9,2.3],[faceX+5,oy+5,oz+z],'#303237','outlet');
-  cylinder(3,.6,[faceX+5,oy-7,oz],'#303237','outlet','x');
-  for(const y of [-26.785,26.785]) mark('fasteners', `xa-${y}`, `XA flange screw ${y < 0 ? 1 : 2}`, [cylinder(2,1,[faceX+2.9,oy+y,oz],'#75828a','outlet','x')]);
-  decal('ELITEpro ADAPTER\nONLY · UNMETERED',65,18,[faceX+3,oy+51,oz],'outlet','right');
-  planBodies.adapter=[box(parts.adapter.size,parts.adapter.position,'#272b30','adapter',5)];
-  decal('9 V DC',32,25,[201.84,153.3,oz],'adapter','up','#272b30','#d2d7dc');
-  tag('XA + existing adapter',[233,174,oz],'adapter');
-  // Entry fittings use drawing locations; bore geometry is in the machined shell mesh.
+  // Internal 515CV connector: its integral cord clamp replaces the wall flange.
+  const [ox,oy,oz] = parts.outlet.position, faceX=ox+parts.outlet.size[0]/2;
+  planBodies.outlet=[cylinder(19.55,66.3,[ox,oy,oz],'#e2b837','outlet','x')];
+  for(const z of [-6.35,6.35])box([.6,9,2.3],[faceX+.3,oy+5,oz+z],'#303237','outlet');
+  cylinder(3,.6,[faceX+.3,oy-7,oz],'#303237','outlet','x');
+  planBodies.adapter=[box(parts.adapter.size,parts.adapter.position,'#272b30','adapter',3)];
+  fitBodies.outlet=planBodies.outlet;fitBodies.adapter=planBodies.adapter;
+  decal('9 V DC',24,32,[parts.adapter.position[0],43,oz],'adapter','up','#272b30','#d2d7dc');
+  tag('XA + adapter · inside',[-38,82,-45],'adapter');
+  for(const strap of dimensions.installationHardware.equipmentStraps) capture('logger-restraint',strap.id,strap.id==='xa'?'Internal XA strap':'Internal adapter strap',()=>{
+    const [rear,front]=strap.slotZ, span=front-rear;
+    box([19.05,1.2,span],[strap.x,strap.topY,strap.z],'#404a50',strap.part,.3);
+    box([19.05,1.2,span],[strap.x,-1.1,strap.z],'#404a50',strap.part,.3);
+    for(const z of strap.slotZ)box([19.05,strap.topY+1,1.2],[strap.x,(strap.topY-1)/2,z],'#404a50',strap.part,.3);
+  });
   function gland(id) {
     const p=instances[id], pos=p.position, axis=p.axis;
     const r=p.size[1]/2, length=p.size[axis==='x'?0:2];
-    const split=id==='dc-entry';
     function hollow(outer,depth,at,color) {
       const shape=new THREE.Shape();shape.absarc(0,0,outer,0,Math.PI*2,false);
       const hole=new THREE.Path();
-      if(split){hole.moveTo(-10.6,-10.6);hole.lineTo(-10.6,10.6);hole.lineTo(10.6,10.6);hole.lineTo(10.6,-10.6);hole.closePath();}
-      else hole.absarc(0,0,4.7,0,Math.PI*2,true);
+      hole.absarc(0,0,4.7,0,Math.PI*2,true);
       shape.holes.push(hole);
       const g=new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:false,curveSegments:32});g.translate(0,0,-depth/2);
       if(axis==='x')g.rotateY(Math.PI/2);
@@ -239,10 +238,10 @@ async function start() {
     }
     planBodies[id]=[hollow(r,length,pos,'#343e45')];
     const v=[...pos],axisN=axis==='x'?0:axis==='y'?1:2;v[axisN]+=length/2;
-    const trim=hollow(split?r:r*.68,4,v,'#171e23');
-    mark(split ? 'split-entries' : 'cord-glands', id, p.label, [...planBodies[id],trim]);
+    const trim=hollow(r*.68,4,v,'#171e23');
+    mark('cord-glands', id, p.label, [...planBodies[id],trim]);
   }
-  ['supply-entry','printer-entry','dc-entry'].forEach(gland);
+  ['supply-entry','printer-entry'].forEach(gland);
   tag('SUPPLY IN',[-239,54,144],'entries'); tag('TO PRINTER',[3,44,-254],'entries');
   // Actual wire routes remain in the separately validated schematic. These curved paths show physical routing intent.
   const hot='#20262b', neutral='#c9d0d5', pe='#23945e', blue='#268bd4', signal='#a08bb5';
@@ -265,16 +264,17 @@ async function start() {
   locatedCable('cord','printer','Printer cord outside enclosure',[[0,36,-240],[0,36,-258],[18,36,-283]],'#2a333c',4.6,'entries');
   planBodies['printer-plug']=[box(instances['printer-plug'].size,instances['printer-plug'].position,'#e2b837','entries',6)];
   mark('printer-connector','connector','Printer output connector',[...planBodies['printer-plug'],cylinder(12,3,[24,36,-326],'#e1d7ad','entries','z')]);
-  locatedCable('internal-wire','xa-hot','XA hot',[[-135,13,-138],[-146,17,-154],[-132,12,-175],[-35,12,-175],[0,12,-175],[40,12,-175],[132,22,-175],[143,76,-20],[141,113,4]],hot,1.7,'outlet');
-  locatedCable('internal-wire','xa-neutral','XA neutral',[[-127,13,-48],[-148,21,-65],[-143,21,-153],[-117,12,-167],[-35,12,-167],[0,12,-167],[40,12,-167],[133,26,-167],[140,72,-16],[141,121,4]],neutral,1.7,'outlet');
-  locatedCable('internal-wire','xa-pe','XA protective earth',[[-119.2,13,26.15],[-104,18,42],[-97,19,22],[-92,19,-80],[-92,12,-183],[-35,12,-183],[0,12,-183],[40,12,-183],[140,24,-183],[148,67,36],[141,128,25]],pe,1.7,'outlet');
+  locatedCable('cord','aux-hot','Internal XA hot',[[-135,13,-138],[-146,17,-154],[-132,12,-175],[-35,12,-175],[0,12,-175],[40,12,-175],[46,18,-175]],hot,1.7,'outlet');
+  locatedCable('cord','aux-neutral','Internal XA neutral',[[-127,13,-48],[-148,21,-65],[-143,21,-153],[-117,12,-167],[-35,12,-167],[0,12,-167],[40,12,-167],[46,18,-174]],neutral,1.7,'outlet');
+  locatedCable('cord','aux-pe','Internal XA protective earth',[[-119.2,13,26.15],[-104,18,42],[-103,23,22],[-103,23,-80],[-92,12,-183],[-35,12,-183],[0,12,-183],[40,12,-183],[46,18,-176]],pe,1.7,'outlet');
+  locatedCable('cord','aux-jacket','Internal XA cord and integral clamp',[[46,18,-175],[35,18,-166],[25,24,-100],[-20,30,-91],[-83,32,-91],[-108,32,-62],[-112,30,-40],[ox-33.15,oy,oz]],'#2a333c',4.6,'outlet');
   locatedCable('internal-wire','panel-pe','Panel bond',[[-125,13,26.15],[-125,24,36],[-108,25,49],[-109,13,78],[-125,7.4,75.5]],pe,1.7,'panel');
   // OEM voltage pigtails and three full voltage leads, including a visible retained-slack zone.
   const leadPorts = [3,2,0], leadColors = ['#283039','#ad4d4a','#dddcd1'];
   for(let i=0;i<3;i++) {
     const p=instances[`A${i+1}`], [x,,plugZ]=p.position, z=plugZ-9;
     const startPt = i===0?[-125,14,-118.85]:[-124+i*6,14,-49];
-    const shortLead=cable(i===0?[startPt,[-101,22,-103],[-83,22,-77],[-65,23,-30],[-47,23,14],[x,22,z]]:[startPt,[-99,24,-30],[-86-i*4,31,-5],[-80-i*4,32,21],[-53,31,40],[x,22,z]],blue,1.65);
+    const shortLead=cable(i===0?[startPt,[-104,25,-103],[-104,25,-77],[-104,25,-8],[-78,25,14],[-47,23,14],[x,22,z]]:[startPt,[-104,25+i*4,-45],[-104,25+i*4,-10],[-86-i*4,31,8],[-80-i*4,32,21],[-53,31,40],[x,22,z]],blue,1.65);
     shortLead.userData.route.id=`blue:A${i+1}`;
     planBodies[p.id]=[cylinder(p.size[0]/2,p.size[2],p.position,blue,'leads','z')];
     mark('blue-leads',p.id,p.label,[shortLead,...planBodies[p.id]]);
@@ -305,23 +305,11 @@ async function start() {
   // CT pair reaches CH1, distinct from voltage sockets and AC/DC power.
   locatedCable('ct','white','CT CH1 positive',[[cx+6,50,cz],[-27,47,-145],[8,11,-149],[22,11,-149],[30,11,-149],[40,11,-149],[73,16,-149],[mx+22,44,mz-ml/2-4]],'#bfc3c0',1,'ct');
   locatedCable('ct','black','CT CH1 negative',[[cx+3,50,cz+3],[-29,49,-148],[8,11,-153],[22,11,-153],[30,11,-153],[40,11,-153],[70,18,-153],[mx+17,44,mz-ml/2-4]],'#30323a',1,'ct');
-  // Original flat cord stays outside. Only the round factory extension crosses the DC insert.
+  // The original adapter and its intact flat DC cord both stay inside the enclosure.
   // Flexible paths show routing intent; the assembly schedule retains the full cable lengths.
-  const coupling=instances['dc-coupling'], [dx,dy,dz]=coupling.position;
-  planBodies[coupling.id]=[
-    cylinder(coupling.size[0]/2,30,[dx,dy,dz-15],'#42484e','adapter','z'),
-    cylinder(5.7,30,[dx,dy,dz+15],'#252a30','adapter','z')
-  ];
-  mark('adapter','adapter','Outside XA and original cord',[planBodies[coupling.id][0]]);
-  mark('dc-extension','extension','External coupling to logger DC input',[planBodies[coupling.id][1]]);
-  tag('DC COUPLING',[dx,dy+18,dz],'adapter');
-  cable([[207,89,oz],[230,83,23],[dx,dy,dz-30]],'#554534',1.4,'adapter');
-  locatedCable('dc-extension','extension','External coupling to logger DC input',[[dx,dy,dz+30],[dx,dy,149],[290,dy,144],[276,dy,106],[224,dy,106]],'#393e44',2.6,'adapter');
-  locatedCable('dc-extension','extension','External coupling to logger DC input',[[224,78,106],[208,78,106],[185.5,78,106],[165,78,106],[146,78,106]],'#393e44',2.6,'adapter');
-  const dcInside=locatedCable('dc-extension','extension','External coupling to logger DC input',[[146,78,106],[142,32,134],[142,12,143],[142,12,150],[142,12,158],[124,16,175],[84,18,174],[mx-17,18,mz+ml/2+39]],'#393e44',2.6,'adapter');
-  dcInside.userData.route.id='dc-extension:internal';
-  mark('dc-extension','extension','External coupling to logger DC input',[cylinder(4.8,35,[mx-17,18,mz+ml/2+21.5],'#24282b','adapter','z')]);
-  // Kit USB is removable service equipment. It is absent during energized operation.
+  const dcInside=locatedCable('adapter','adapter','Original DC cable, entirely inside',[[-10,13,-8],[20,16,20],[26,16,140],[55,15,177],[126,12,177],[142,12,168],[142,12,150],[142,12,142],[132,16,134],[90,18,140],[mx-17,18,mz+ml/2+39]],'#554534',1.4,'adapter');
+  dcInside.userData.route.id='adapter:dc-internal';
+  mark('adapter','adapter','Original adapter and cable inside',[cylinder(4.8,35,[mx-17,18,mz+ml/2+21.5],'#24282b','adapter','z')]);
   const usbPreviewStart = allMeshes.length;
   locatedCable('usb','usb','Temporary USB — mains unplugged',[[mx+16,23,mz+ml/2+21],[132,30,132],[148,92,150],[151,160,160],[169,205,180],[215,215,180],[255,205,180]],'#516d86',2.4,'entries');
   mark('usb','usb','Temporary USB — mains unplugged',[box([10,11,20],[mx+16,23,mz+ml/2+11],'#43576a','entries',2)]);
@@ -333,7 +321,7 @@ async function start() {
     const objects=allMeshes.filter(m=>m.userData.part===part&&!m.userData.materialId&&!m.userData.annotation);
     if(id==='enclosure') {
       mark(id,'case','Case and factory fittings',objects.filter(m=>!lidObjects.includes(m)));
-      mark(id,'lid','Clear lid and factory fittings',objects.filter(m=>lidObjects.includes(m)));
+      mark(id,'lid','Opaque lid and factory fittings',objects.filter(m=>lidObjects.includes(m)));
     } else mark(id,id==='adapter'?'adapter':part,parts[part].name,objects);
   }
   for(const p of procurement.items) if(!materialLocations[p.id]?.length) throw Error(`Missing installation geometry: ${p.id}`);
@@ -421,7 +409,7 @@ async function start() {
     shellObjects.forEach(m=>m.visible=mode!=='cutaway');hideWithCase.forEach(m=>m.visible=mode!=='cutaway');
     lidObjects.forEach(m=>{m.visible=mode!=='cutaway';m.position.y=mode==='lifted'?230:0;});
     shellMat.opacity=mode==='closed'?1:.12;shellMat.depthWrite=mode==='closed';shellMat.transparent=mode!=='closed';shellMat.needsUpdate=true;
-    lidMat.opacity=mode==='closed'?.22:.08;wires.visible=$('model-wires').checked;dims.visible=$('model-dimensions').checked;
+    lidMat.opacity=mode==='closed'?1:.08;lidMat.color.set('#a4b2bd');lidMat.depthWrite=mode==='closed';lidMat.transparent=mode!=='closed';lidMat.needsUpdate=true;wires.visible=$('model-wires').checked;dims.visible=$('model-dimensions').checked;
     applyAssembly();
     render();
   }

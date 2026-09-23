@@ -24,6 +24,9 @@ class InstallationDatums(unittest.TestCase):
                                    ('panelBondXZ', 'panel_bond_xz_mm')]:
             # JSON normalizes CAD tuples to arrays, retaining every coordinate.
             self.assertEqual(hardware[modeled], json.loads(json.dumps(constants[machined])), modeled)
+        power_slots = [[strap['x'], z] for strap in hardware['equipmentStraps'] for z in strap['slotZ']]
+        self.assertEqual(power_slots, json.loads(json.dumps(constants['equipment_slots_xz_mm'])))
+        self.assertEqual({s['part'] for s in hardware['equipmentStraps']}, {'outlet', 'adapter'})
 
 
 if __name__ == '__main__':

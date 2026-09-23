@@ -1,5 +1,6 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Build documents · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=15"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Build_Documents.md" download>Download Markdown</a></nav><h1>Build documents</h1>
 <ul>
+<li><a href="revision.html">Revision B: costs, suppliers and certification evidence</a></li>
 <li><a href="build.html">Machining files and assembly guide</a> — drawings, fasteners and assembly order.</li>
 <li><a href="index.html#assembly-preview">Interactive installation sequence</a> — inspect the six stages in 3D.</li>
 <li><a href="protection.html">Protection review</a> — Q0, upstream voltage-lead protection and the remaining evidence.</li>
@@ -14,7 +15,7 @@
 <p>Daily use begins only after qualified electrical inspection and setup.</p>
 <ol>
 <li><strong>Configure offline.</strong> With mains unplugged and the lid open, use the kit USB cable and ELOG to set the clock, actual CT range and interval. Confirm logging is enabled and sufficient memory remains. Remove USB, then close the lid.</li>
-<li><strong>Run independently.</strong> With Q0 OFF, connect one printer and the adapter, then connect the supply. Switch Q0 ON and check the logging indicator. Record each job&#39;s start, phase changes and finish times against the synchronized clock.</li>
+<li><strong>Run independently.</strong> XA and the adapter stay secured inside. With Q0 OFF and the lid closed, connect one printer and the supply. Switch Q0 ON. The opaque lid hides the logger LEDs; verify recording by an offline export after the supervised pilot. Record each job&#39;s start, phase changes and finish times against the synchronized clock.</li>
 <li><strong>Download in batches.</strong> After the printer finishes its shutdown/cooldown, switch Q0 OFF, unplug mains and verify absence of mains voltage. Open the lid, connect USB and export the records. Preserve raw data before clearing memory. Remove USB before the next powered run.</li>
 </ol>
 <p><strong>Q0 OFF is not isolation; its input remains live. Always unplug mains before opening. USB is not installed during printing.</strong></p>
@@ -35,7 +36,7 @@
 <h2 id="dimensions">Dimensions and model notes</h2>
 
 <p><strong>Concept layout; use the build package for machining.</strong> Manufacturer CAD, published sizes and estimates share one scale. Small hardware and cable dressing are simplified; spare stock is excluded. Received parts still need a physical fit check.</p>
-<p>Amber marks the selected material; hidden housings become transparent. Top view matches the wiring plan. The real case has gray walls and a clear lid. Drag to rotate, scroll or pinch to zoom; keyboard controls are arrow keys, + / − and Home.</p>
+<p>Amber marks the selected material; hidden housings become transparent. Top view matches the wiring plan. The selected case has gray walls and an opaque lid. X-ray mode is a visualization aid, not a transparent product cover. The lid silhouette is inherited from the earlier common-base CAD. Drag to rotate, scroll or pinch to zoom; keyboard controls are arrow keys, + / − and Home.</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -45,14 +46,14 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>Hammond PCJ16148CC</td>
+<td>Hammond PCJ16148 · opaque cover</td>
 <td>393.8 × 240.2 × 479.4</td>
-<td>Manufacturer CAD · <a href="https://www.hammfg.com/files/parts/stp/PCJ16148CC.zip">Source</a></td>
+<td>PCJ common-base layout template; solid lid not independently modeled · <a href="https://www.hammfg.com/files/parts/pdf/PCJ16148.pdf">Source</a></td>
 </tr>
 <tr>
-<td>14R1513 mounting panel</td>
+<td>Reused aluminum panel · provisional 1.90 mm</td>
 <td>327.0 × 1.9 × 374.6</td>
-<td>Manufacturer CAD · <a href="https://www.hammfg.com/files/parts/pdf/PCJ16148CC.pdf">Source</a></td>
+<td>Proposed fabrication template; stock not measured · <a href="https://www.hammfg.com/files/parts/pdf/PCJ16148.pdf">Source</a></td>
 </tr>
 <tr>
 <td>DENT ELITEpro XC</td>
@@ -75,19 +76,19 @@
 <td>Manufacturer connector and carrier dimensions · <a href="https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415">Source</a></td>
 </tr>
 <tr>
-<td>XA · Leviton 5279-C flanged outlet</td>
-<td>48.4 × 63.5 × 63.5</td>
-<td>Manufacturer drawing and mounting instructions · <a href="https://leviton.com/products/5279-c">Source</a></td>
+<td>XA · internal Leviton 515CV</td>
+<td>66.3 × 39.1 × 39.1</td>
+<td>Manufacturer dimensional envelope; strap installation proposed · <a href="https://leviton.com/content/dam/leviton/residential/product_documents/none/Document-31435-Dimensional%20Data.jpg">Source</a></td>
 </tr>
 <tr>
 <td>CUI SMI6-9-V-P5 · existing adapter</td>
-<td>30.0 × 64.0 × 40.5</td>
+<td>30.0 × 40.5 × 64.0</td>
 <td>Photo-identified; manufacturer body dimensions · <a href="https://www.belfuse.com/media/datasheets/products/power-supplies/SMI6.pdf">Source</a></td>
 </tr>
 <tr>
-<td>Power glands / DC KVT 32 entry</td>
+<td>Two power-cord glands</td>
 <td>27.0 × 37.0 × 27.0</td>
-<td>Catalog envelopes; 41380 inserts selected · <a href="https://www.hammfg.com/electronics/small-case/accessories/1427ncg">Source</a></td>
+<td>Catalog power-gland envelopes · <a href="https://www.hammfg.com/electronics/small-case/accessories/1427ncg">Source</a></td>
 </tr>
 <tr>
 <td>DENT adapters &amp; retained lead slack</td>

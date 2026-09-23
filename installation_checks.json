@@ -1,5 +1,5 @@
 {
-  "revision": "Build package A, 2026-09-20",
+  "revision": "Build package B, 2026-09-23",
   "release": "NOT RELEASED: close the receiving and electrical items in Build_Package.md",
   "units": "mm",
   "method": "Axis-aligned body envelopes, continuous vertical swept volumes against the machined Hammond shell, nine lid rays per body and sourced interface arithmetic. Shell triangulation deflection is 0.3 mm; numerical seating-contact exclusion is 0.0001 mm. Neither is a manufacturing tolerance.",
@@ -19,37 +19,43 @@
     {
       "id": "Q0 ring size",
       "result": "pass",
-      "evidence": "Selected Q0 terminal code 1 is #10-32; its two ring lugs must have #10 holes. Crimp tool and pull test remain required.",
+      "evidence": "Selected 15-104 rings accept #8–10 studs, including Q0 terminal code 1 (#10-32). A #8-only ring is not acceptable. Crimp qualification remains a physical check.",
       "limits": ""
     },
     {
-      "id": "dc-entry envelope",
+      "id": "Internal original DC connection",
       "result": "pass",
-      "evidence": "Model 37 × 40 × 40 mm; KVT 32 overall envelope 37 mm axial × Ø40 mm flange.",
-      "limits": "Conservative cylinder; the threaded shank is M32, not Ø40."
+      "evidence": "Original adapter cable stays inside; extension, external coupling and feedthrough purchasing are removed.",
+      "limits": ""
     },
     {
-      "id": "dc-entry cable / insert",
+      "id": "Internal XA and adapter",
       "result": "pass",
-      "evidence": "dc-extension: round jacket 4.9–5.5 mm; KTMBS 41380 accepts 4–7 mm.",
-      "limits": "Catalog interface check only. Original flat adapter cord is excluded; verify received jackets, connector passage, seals and strain relief."
+      "evidence": "Both complete component envelopes remain inside the case plan with a 10 mm screening margin.",
+      "limits": "Not a creepage/clearance standard or a restraint/thermal check."
+    },
+    {
+      "id": "Proposed aluminum reuse",
+      "result": "pass",
+      "evidence": "Offered aluminum is a fabrication proposal, not confirmed owned stock or a bought steel panel.",
+      "limits": "Actual thickness, stiffness and aluminum bonding remain to be accepted."
     },
     {
       "id": "Panel component body separation",
       "result": "pass",
-      "evidence": "5 nominal body envelopes do not overlap.",
+      "evidence": "7 nominal body envelopes do not overlap.",
       "limits": "CT uses the matched Mini HSC family envelope; exact scale remains unconfirmed. No connectors, open levers, flexible wires, mounting tolerances or screw-tool envelopes are certified by this check."
     },
     {
       "id": "Vertical insertion through open case",
       "result": "pass",
-      "evidence": "6/6 swept bounding boxes clear the manufacturer shell.",
+      "evidence": "8/8 swept bounding boxes clear the manufacturer shell.",
       "limits": "300 mm vertical translation, fixed orientation, wall fittings absent. Panel/support contact at Y=0 is excluded with a 0.0001 mm numerical offset. This tests shell access, not brackets, wires or tool motions."
     },
     {
-      "id": "Panel before flanged outlet",
-      "result": "sequence required",
-      "evidence": "The panel insertion sweep intersects the flanged-outlet envelope. Install the panel first; removal requires removing the outlet or a separately verified tilted path.",
+      "id": "Internal power retention",
+      "result": "hold",
+      "evidence": "Separate XA and adapter straps replace the wall mount; physical plug retention and closed-enclosure temperature are untested.",
       "limits": ""
     },
     {
@@ -61,8 +67,20 @@
     {
       "id": "Closed lid screen",
       "result": "screen only",
-      "evidence": "meter: 159.012 mm (9/9 rays); ct: 168.315 mm (9/9 rays); outlet: 33.747 mm (9/9 rays); q0: 32.992 mm (9/9 rays)",
+      "evidence": "meter: 159.012 mm (9/9 rays); ct: 168.315 mm (9/9 rays); outlet: 170.112 mm (9/9 rays); q0: 32.992 mm (9/9 rays)",
       "limits": "Nine upward rays per body against lid mesh 15. Not a minimum-distance proof; excludes lid hardware, guards, wire bundles and tolerances."
+    },
+    {
+      "id": "No XA wall opening",
+      "result": "pass",
+      "evidence": "Former XA center has 2 wall-surface intersections; right wall stock restored.",
+      "limits": "A cross-section screen; exact source-CAD stock gauges are also recorded."
+    },
+    {
+      "id": "No DC wall opening",
+      "result": "pass",
+      "evidence": "Former DC center has 2 wall-surface intersections; right wall stock restored.",
+      "limits": "A cross-section screen; exact source-CAD stock gauges are also recorded."
     },
     {
       "id": "No permanent USB wall opening",
@@ -78,9 +96,9 @@
     },
     {
       "id": "Ring barrel and internal wire",
-      "result": "pass",
-      "evidence": "Southwire nominal 2.87 mm insulation OD < 3M 4.318 mm ring maximum; 14 AWG is within 16–14 AWG ring range.",
-      "limits": "Does not qualify the crimp or approve the wiring method for this assembly."
+      "result": "review",
+      "evidence": "The selected 15-104 accepts 14–16 AWG. Its manufacturer does not publish an insulation-barrel limit on the cited page; do not reuse the former 3M value.",
+      "limits": "Fit the actual 2.87 mm nominal-OD wire, use the specified crimp tooling and inspect/pull-test before accepting the termination."
     },
     {
       "id": "Physical and electrical release",
@@ -106,6 +124,20 @@
     },
     {
       "id": "ct",
+      "travel_mm": 300,
+      "shell_triangle_hits": 0,
+      "seated_contact_triangles": 0,
+      "result": "pass"
+    },
+    {
+      "id": "outlet",
+      "travel_mm": 300,
+      "shell_triangle_hits": 0,
+      "seated_contact_triangles": 0,
+      "result": "pass"
+    },
+    {
+      "id": "adapter",
       "travel_mm": 300,
       "shell_triangle_hits": 0,
       "seated_contact_triangles": 0,
@@ -148,9 +180,9 @@
     },
     {
       "id": "outlet",
-      "shell_triangle_hits": 567,
+      "shell_triangle_hits": 0,
       "lid_samples": 9,
-      "minimum_sampled_lid_gap_mm": 33.747
+      "minimum_sampled_lid_gap_mm": 170.112
     },
     {
       "id": "q0",
@@ -159,13 +191,7 @@
       "minimum_sampled_lid_gap_mm": 32.992
     }
   ],
-  "wall_entries": [
-    {
-      "id": "dc-entry",
-      "wall_intersections_x_mm": [],
-      "local_wall_mm": null
-    }
-  ],
-  "material_groups": 25,
+  "wall_entries": [],
+  "material_groups": 22,
   "owned_groups": 5
 }

@@ -27,7 +27,7 @@ const near = (a, b, epsilon = .001) => Math.abs(a - b) < epsilon;
     };
     assert.equal(await page.locator('#main-stage .wire-route').count(), 21);
     assert.equal(await page.locator('#main-stage .wire-badge:visible').count(), 0, 'Default hides wire numbers');
-    assert.equal(await page.locator('#main-stage text:visible').count(), 21, 'Overview keeps short labels only');
+    assert.equal(await page.locator('#main-stage text:visible').count(), 20, 'Overview keeps short labels only');
     assert.equal(await page.locator('#zoom-focus').isVisible(), false);
     assert.equal(await page.locator('#trace-endpoints').isVisible(), false);
     assert.equal(await page.locator('.legend').count(), 0, 'Circuit buttons replace the repeated legend');
@@ -110,7 +110,7 @@ const near = (a, b, epsilon = .001) => Math.abs(a - b) < epsilon;
     assert.match(await page.locator('#connectors').innerText(), /White gaps are insulated crossings/);
     await page.locator('#connectors summary').click();
     assert.deepEqual(errors, []);
-    const report = { defaultVisibleLabels: 21, allPaths: 21, defaultLabelMinimumPx: Math.min(...labels), fitAll: true, focusWireAndGroup: true, physicalEndpointNames: true, dragAndKeyboardPan: true, fullscreenAndEscape: true, viewportWidths: [1440,768,390,320], errors };
+    const report = { defaultVisibleLabels: 20, allPaths: 21, defaultLabelMinimumPx: Math.min(...labels), fitAll: true, focusWireAndGroup: true, physicalEndpointNames: true, dragAndKeyboardPan: true, fullscreenAndEscape: true, viewportWidths: [1440,768,390,320], errors };
     if (out) fs.writeFileSync(path.join(out, 'wiring-validation.json'), JSON.stringify(report,null,2)+'\n');
     console.log(JSON.stringify(report, null, 2));
   } finally { await browser.close(); }

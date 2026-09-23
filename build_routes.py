@@ -5,7 +5,7 @@ import json
 from draw_external import draw_external
 
 OUT = Path(__file__).resolve().parent
-REV = 'Rev. 11 · upstream protection review · 2026-09-20'
+REV = 'Rev. 12 · professor review revision B · 2026-09-23'
 C = {'L':'#202d3a','N':'#65758a','PE':'#18814a','CT':'#8544a5','USB':'#23739d','DC':'#aa621e','V':'#1567c1'}
 # Shared physical placement. The SVG is an X/Z projection of the same millimetre
 # coordinates consumed by layout3d.js. Electrical port symbols are spaced for clarity.
@@ -34,10 +34,10 @@ M = {
  'D.DC+':position('meter',-17,118), 'D.DC-':position('meter',-10,118),
  'CT.+':position('ct',-8,BODIES['ct']['size'][2]/2), 'CT.-':position('ct',8,BODIES['ct']['size'][2]/2),
  'PLATE':(-125,60),
- 'AUX.L':position('outlet',-5,-10), 'AUX.N':position('outlet',-5), 'AUX.PE':position('outlet',-7,16),
- 'AUX.FACE.L':position('outlet',22,-6.35), 'AUX.FACE.N':position('outlet',22,6.35),
+ 'AUX.L':position('outlet',-32.15,-10), 'AUX.N':position('outlet',-32.15), 'AUX.PE':position('outlet',-32.15,12),
+ 'AUX.FACE.L':position('outlet',33.15,-6.35), 'AUX.FACE.N':position('outlet',33.15,6.35),
  'PSU.L':position('adapter',0,-6.35), 'PSU.N':position('adapter',0,6.35),
- 'PSU.DC+':position('adapter',21,12), 'PSU.DC-':position('adapter',21,18), 'PC':(280,180),
+ 'PSU.DC+':position('adapter',0,32), 'PSU.DC-':position('adapter',7,38), 'PC':(280,180),
  **{f'JL.{i}':pin('JL',i) for i in range(1,5)},
  **{f'JN.{i}':pin('JN',i) for i in range(1,6)},
  **{f'JPE.{i}':pin('PE',i) for i in range(1,5)},
@@ -60,13 +60,13 @@ raw = [
  ('14','CT','CT.+','D.+',[(-63,-102),(134,-102),(134,-101)],(35,-102),'CT white (+) → current-input CH1 +','signal'),
  ('15','CT','CT.-','D.-',[(-47,-95),(142,-95),(142,-83)],(16,-95),'CT black (−) → current-input CH1 −','signal'),
  ('16','USB','D.USB','PC',[(140,110),(140,180),(280,180)],(235,180),'Temporary USB → ELOG; open lid, mains unplugged','signal'),
- ('17','L','JL.4','AUX.L',[(-119.2,-163),(150,-163),(150,3)],(150,-128),'JL → AUX receptacle hot; before CT','aux'),
- ('18','N','JN.5','AUX.N',[(-105,-48.85),(-105,-154),(157,-154),(157,13)],(157,-50),'JN → AUX receptacle neutral','aux'),
- ('19','PE','JPE.4','AUX.PE',[(-119.2,93),(137,93),(137,38),(M['AUX.PE'][0],38)],(115,93),'PE → XA ground contact','earth'),
- ('20','L','AUX.FACE.L','PSU.L',[],(207,6.65),'Existing adapter AC blade: hot contact','aux'),
- ('21','N','AUX.FACE.N','PSU.N',[],(207,19.35),'Existing adapter AC blade: neutral contact','aux'),
- ('22','DC','PSU.DC+','D.DC+',[(254,25),(254,106),(150,106),(150,118),(74,118)],(254,72),'Original adapter → external DC coupling → round extension: center-positive path','aux'),
- ('23','DC','PSU.DC-','D.DC-',[(246,31),(246,111),(154,111),(154,125),(81,125)],(246,86),'Original adapter → external DC coupling → round extension: sleeve-negative path','aux'),
+ ('17','L','JL.4','AUX.L',[(-119.2,-165),(30,-165),(30,-83),(-97.15,-83)],(-97.15,-67),'JL → internal XA cord hot; before CT','aux'),
+ ('18','N','JN.5','AUX.N',[(-105,-48.85),(-105,-156),(24,-156),(24,-89),(-101,-89),(-101,-40)],(-101,-110),'JN → internal XA cord neutral','aux'),
+ ('19','PE','JPE.4','AUX.PE',[(-119.2,52),(-99,52),(-99,-28)],(-99,3),'PE → internal XA ground contact','earth'),
+ ('20','L','AUX.FACE.L','PSU.L',[],(-24,-46.35),'Internal adapter AC blade: hot contact','aux'),
+ ('21','N','AUX.FACE.N','PSU.N',[],(-24,-33.65),'Internal adapter AC blade: neutral contact','aux'),
+ ('22','DC','PSU.DC+','D.DC+',[(-16.85,17),(30,17),(30,179),(150,179),(150,118),(74,118)],(150,153),'Original adapter cable → logger: center positive; entirely inside','aux'),
+ ('23','DC','PSU.DC-','D.DC-',[(-9.85,23),(36,23),(36,185),(154,185),(154,125),(81,125)],(154,140),'Original adapter cable → logger: sleeve negative; entirely inside','aux'),
 ]
 wires = [dict(id=n,kind=k,start=a,end=b,points=[A[a],*[project(p) for p in m],A[b]],badge=project(lab),description=d,group=g) for n,k,a,b,m,lab,d,g in raw]
 CT_WINDOW = (*project(position('ct',-BODIES['ct']['size'][0]/2,-3)), *project(position('ct',BODIES['ct']['size'][0]/2,3)))
@@ -182,9 +182,7 @@ def make_diagram():
     line([project(position('supply-plug',24)),project(position('supply-entry'))],'#465563',18)
     line([project(position('printer-entry')),project((0,-265)),project(position('printer-plug',0,25))],'#465563',18)
     for part in ['supply-plug','printer-plug']: footprint(part,'#e9c658','#b9972b',8)
-    for part in ['supply-entry','printer-entry','dc-entry']: footprint(part,'#71808a','#46535b',5)
-    footprint('dc-coupling','#e4d5bf','#8c7352',7)
-    text(1710,1134,'DC joint',22,weight=600)
+    for part in ['supply-entry','printer-entry']: footprint(part,'#71808a','#46535b',5)
     at('supply-plug','Supply',-20,22)
     text(1140,180,'Printer',22,weight=600)
     slack=BODIES['lead-slack']; sx,sy=project(position('lead-slack'))
@@ -204,11 +202,10 @@ def make_diagram():
     footprint('q0','#3c4a56','#273542',4);at('q0','Q0',3,22,'#fff')
     # Direct-mounted Q0 handle; its mounting pattern is in the fabrication package.
     px,py=project(position('q0',-6,32.14));rect(px,py,12*SCALE,15*SCALE,'#e9eeea','#63717a',2)
-    footprint('outlet','#c9bbae','#a39284',2)
-    at('outlet','XA',-38,22)
-    px,py=project((182.04,13-31.75));rect(px,py,2.4*SCALE,63.5*SCALE,'#e7e5d9','#8397a5',2)
+    footprint('outlet','#e9c658','#a39254',6)
+    at('outlet','XA · inside',-27,20)
     footprint('adapter','#293744','#293744',6)
-    at('adapter','AC/DC',-BODIES['adapter']['size'][2]/2-9,22)
+    at('adapter','AC/DC',42,20)
     bx,by,bw,bh=footprint('meter','#263748','#1c2b3a',11)
     rect(bx+4,by+20*SCALE,bw-8,bh-40*SCALE,'#126ab8','#0c589c',6,extra='id="elitepro-body"')
     at('meter','ELITEpro',-12,26,'#fff',700);at('meter','XC',2,22,'#fff')
@@ -274,7 +271,7 @@ def main():
     material_rows={'owned':[], 'buy':[]}
     for p in materials['items']:
         owned=p['availability']=='owned'
-        badge='✓ Owned' if owned else '✓ Kit included' if p['availability']=='kit' else '□ To buy'
+        badge='✓ Owned' if owned else '✓ Kit included' if p['availability']=='kit' else '◇ Reuse / fabricate' if p['availability']=='fabricate' else '□ To buy'
         purchase_links=[];reference_links=[]
         for link in p['links']:
             anchor='<a data-link-kind="'+E(link['kind'])+'" href="'+E(link['url'])+'">'+E(link['label'])+' ↗</a>'
@@ -284,10 +281,14 @@ def main():
         details='<details class="material-details"><summary>Details</summary><p class="material-reason">'+E(p['reason'])+'</p><p class="material-note">'+E(p['status'])+'</p>'
         if p.get('quantity_summary'):
             details+='<p class="material-quantity"><strong>Quantity &amp; pack size:</strong> '+E(p['quantity'])+'</p>'
+        compliance=p.get('compliance')
+        if compliance:
+            details+='<p class="material-compliance"><strong>'+E(compliance['status'])+':</strong> '+E(compliance['detail'])+' <a href="'+E(compliance['url'])+'">Evidence ↗</a></p>'
         details+=''.join(reference_links)+'<p class="material-image-note">'+E(photo['caption'])+'</p>'+credit+'</details>'
         notice='<p class="material-notice">'+E(p['notice'])+'</p>' if p.get('notice') else ''
-        material_rows['buy' if p['availability']=='buy' else 'owned'].append('<tr id="material-'+E(p['id'])+'" data-availability="'+E(p['availability'])+'"><td data-label="Inventory"><span class="inventory-badge '+p['availability']+'">'+badge+'</span></td><td data-label="Material"><span class="material-name">'+E(p['item'])+'</span>'+material_photo(p)+'<a class="locate-material" data-material="'+E(p['id'])+'" href="?material='+E(p['id'])+'#layout" aria-label="View '+E(p['item'])+' in 3D">View in 3D ↑</a></td><td data-label="Quantity needed">'+E(p.get('quantity_summary',p['quantity']))+'</td><td data-label="Part / details"><strong>'+E(p['model'])+'</strong>'+notice+details+'</td><td class="material-links" data-label="Purchase">'+(''.join(purchase_links) if purchase_links else '<span class="reuse-note">Reuse</span>')+'</td></tr>')
+        material_rows['buy' if p['availability'] in ('buy','fabricate') else 'owned'].append('<tr id="material-'+E(p['id'])+'" data-availability="'+E(p['availability'])+'"><td data-label="Inventory"><span class="inventory-badge '+p['availability']+'">'+badge+'</span></td><td data-label="Material"><span class="material-name">'+E(p['item'])+'</span>'+material_photo(p)+'<a class="locate-material" data-material="'+E(p['id'])+'" href="?material='+E(p['id'])+'#layout" aria-label="View '+E(p['item'])+' in 3D">View in 3D ↑</a></td><td data-label="Quantity needed">'+E(p.get('quantity_summary',p['quantity']))+'</td><td data-label="Part / details"><strong>'+E(p['model'])+'</strong>'+notice+details+'</td><td class="material-links" data-label="Purchase">'+(''.join(purchase_links) if purchase_links else '<span class="reuse-note">Reuse</span>')+'</td></tr>')
     html=(OUT/'page_template.html').read_text().replace('<!-- MAIN_DIAGRAM -->',svg).replace('<!-- DETAIL_DIAGRAM -->',detail).replace('<!-- CONNECTION_ROWS -->',rows).replace('<!-- BUY_ROWS -->',''.join(material_rows['buy'])).replace('<!-- OWNED_ROWS -->',''.join(material_rows['owned'])).replace('{{BUY_COUNT}}',str(len(material_rows['buy']))).replace('{{OWNED_COUNT}}',str(len(material_rows['owned']))).replace('{{REV}}',REV)
+    html=html.replace('{{MATERIAL_TOTAL}}',format(materials['purchasing']['material_subtotal_usd'],'.2f'))
     (OUT/'index.html').write_text(html)
     (OUT/'routes.json').write_text(json.dumps({'revision':REV,'anchors':A,'projection':PLAN,'wires':wires},indent=2)+'\n')
     (OUT/'validation.json').write_text(json.dumps(validation,indent=2)+'\n')

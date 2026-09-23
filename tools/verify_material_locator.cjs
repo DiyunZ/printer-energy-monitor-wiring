@@ -31,7 +31,7 @@ const close = (a,b) => Math.abs(a-b) < .05;
     assert.equal(await page.evaluate(()=>enclosureDiagnostics().usbPreviewVisible),false,'USB is absent from normal operation');
     const allMeshes = Object.values(initial.locations).flatMap(ps => ps.flatMap(p => p.meshes));
     assert.equal(new Set(allMeshes).size, allMeshes.length, 'Each physical mesh belongs to exactly one material');
-    const counts = { connectors: 3, carriers: 3, 'blue-leads': 3, 'voltage-leads': 3, 'ring-lugs': 3, 'tie-mounts': 6, 'cable-ties': 6, 'kt-inserts': 1, 'logger-restraint': 2, fasteners: 17 };
+    const counts = { connectors: 3, carriers: 3, 'blue-leads': 3, 'voltage-leads': 3, 'ring-lugs': 3, 'tie-mounts': 6, 'cable-ties': 6, 'logger-restraint': 4, fasteners: 15 };
     for (const [id,count] of Object.entries(counts)) assert.equal(initial.locations[id].length, count, id);
     // Rendered fasteners retain the actual machining datums; avoid importing the CAD runtime.
     for (const [i,point] of dimensions.installationHardware.cableMountsXZ.entries()) {
@@ -75,10 +75,10 @@ const close = (a,b) => Math.abs(a-b) < .05;
         d.target.forEach((n,i)=>assert.ok(close(n,(p.min[i]+p.max[i])/2),`${id}/${p.key} camera must frame this occurrence`));
       }
     }
-    for (const [id,shot] of [['carriers','carriers'],['kt-inserts','inserts'],['ring-lugs','ring-terminals']]) {
+    for (const [id,shot] of [['carriers','carriers'],['adapter','internal-adapter'],['ring-lugs','ring-terminals']]) {
       await page.locator('#model-part').selectOption(id);
       if(id==='carriers')await page.locator('#material-location').selectOption(initial.locations[id][0].key);
-      const d=await diag(); if(id!=='ring-lugs')assert.ok(d.ghostCount>0,id+' surrounding housing must become transparent');
+      const d=await diag(); if(id==='carriers')assert.ok(d.ghostCount>0,id+' surrounding housing must become transparent');
       if(out)await page.locator('#design').screenshot({path:path.join(out,`locator-${shot}.png`)});
     }
     await page.locator('#model-part').selectOption('breaker');
