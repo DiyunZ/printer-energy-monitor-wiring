@@ -174,12 +174,12 @@
       "item": "Enclosure",
       "quantity": "1",
       "model": "Hammond PCJ16148 · opaque screw cover",
-      "reason": "Same PCJ 16 × 14 × 8 in size class with an opaque gray cover. Supplier list price $137.11 versus $149.45 for the previous clear-cover PCJ16148CC, checked 2026-09-23. X-ray display is a website viewing aid; the purchased lid is opaque.",
-      "status": "Proposed lower-cost selection. Common base/panel dimensions match the Hammond series drawing; the inherited clear-cover CAD remains a layout template, not a verified solid-cover lid model.",
+      "reason": "Same PCJ 16 × 14 × 8 in enclosure and opaque gray cover. Buy from Master Electronics with Q0: $160.56, checked 2026-09-23. This adds $23.45 versus the former enclosure seller and removes one order source. X-ray display is a website viewing aid; the purchased lid is opaque.",
+      "status": "Same selected enclosure; manufacturer stock listed, estimated ship date October 5, 2026. Recheck delivery at checkout. Common base/panel dimensions match the Hammond drawing; inherited clear-cover CAD remains a layout template, not a verified opaque-lid model.",
       "links": [
         {
-          "label": "Buy · Solutions Direct",
-          "url": "https://www.solutionsdirectonline.com/hammond-16x14x8-polycarbonate-electrical-enclosure-with-solid-cover-pcj16148",
+          "label": "Buy · Master Electronics",
+          "url": "https://www.masterelectronics.com/en/productdetail/hammond-manufacturing/pcj16148-49489596.html",
           "kind": "buy"
         },
         {
@@ -199,7 +199,7 @@
         "src": "assets/materials/enclosure-pcj16148.jpg",
         "kind": "product",
         "alt": "Hammond PCJ16148 opaque-cover enclosure — product photo",
-        "caption": "PCJ16148 product photo from the selected supplier.",
+        "caption": "Hammond PCJ16148 product photo; image credit is separate from the selected purchase source.",
         "source_label": "Solutions Direct / Hammond",
         "source_url": "https://www.solutionsdirectonline.com/hammond-16x14x8-polycarbonate-electrical-enclosure-with-solid-cover-pcj16148",
         "source_image": "https://asset.solutionsdirectonline.com/img/Hammond_Manufacturing/hammond_pcj16148.jpg",
@@ -208,7 +208,7 @@
       },
       "installation": "Case and opaque gray screw cover. Q0, two power-cord glands and one protected USB cable opening penetrate the walls. XA and DC stay inside.",
       "location_summary": "Opaque enclosure; existing USB cable exits the right wall.",
-      "supplier": "Solutions Direct",
+      "supplier": "Master Electronics",
       "compliance": {
         "status": "Manufacturer standards",
         "detail": "UL 508A / cUL enclosure types; IEC 60529 IP66, unmodified enclosure only.",
@@ -641,9 +641,9 @@
     {
       "id": "internal-wire",
       "item": "Internal L / N / PE wire",
-      "quantity": "Buy 4 ft black + 4 ft green (1.2192 m of each); use suitable lab stock first.",
+      "quantity": "Buy 4 ft black + 4 ft green (1.2192 m of each).",
       "model": "Southwire 14 AWG, 19-strand Class C, THHN/THWN/MTW, 600 V",
-      "reason": "Separate 14 AWG conductors remain for Q0 OUT → JL and PE → panel. XA hot, neutral and PE are the conductors of its 14/3 cord; no separate white roll is required. Reuse suitable labeled lab stock first.",
+      "reason": "Separate 14 AWG conductors remain for Q0 OUT → JL and PE → panel. XA hot, neutral and PE are the conductors of its 14/3 cord; no separate white roll is required. Both lengths are included in the purchase budget.",
       "status": "Same 14 AWG stranded construction, sold by the foot; 4 ft of each color exceeds the 1 m cutting allowance. Confirm the received wire markings and crimp fit.",
       "availability": "buy",
       "links": [
@@ -817,10 +817,10 @@
     {
       "id": "fasteners",
       "item": "Mounting and bonding hardware",
-      "quantity": "Four assembly groups; check suitable lab stock first",
+      "quantity": "Four assembly groups; buy all required hardware",
       "model": "Screw / nut / washer schedule in Build_Package.md",
-      "reason": "Q0, three WAGO carriers, six cable mounts and the dedicated aluminum-panel PE bond. No XA or USB flange screws. Buy six M3 sets for the carriers; two former USB sets are deleted. Check thread, length, actual stacks and the accepted aluminum bond.",
-      "status": "Six M3 screw/washer/locknut sets for the carriers. Check actual stacks; panel bonding remains conditional.",
+      "reason": "Q0, three WAGO carriers, six cable mounts and the dedicated panel PE bond. Source all screws, nuts and washers from DigiKey and Home Depot; no lab fastener stock is assumed. Installed quantities and purchase packs are separated in the fastener schedule.",
+      "status": "Selected threads and screw lengths preserve the existing hole layout. Metric pan screws and some washers/nuts are zinc-plated steel; other pieces are stainless. Check actual stacks and the accepted aluminum bond.",
       "availability": "buy",
       "links": [
         {
@@ -834,7 +834,7 @@
         "source_image": "https://simfix.com/cdn/shop/files/SIM7985A203010_20_28285P3010_29_203_e57dfe80-c934-474e-8153-6d3a3a35c121.jpg?v=1787228850&width=548",
         "kind": "reference",
         "alt": "Stainless Phillips pan-head machine screw — reference product photo",
-        "caption": "Stainless Phillips pan-head screw reference photo. Buy the individual screw, nut and washer sizes in the Bolt Depot schedule; this is not a complete hardware kit.",
+        "caption": "Pan-head screw reference photo. The linked schedule specifies each screw, nut and washer, including its finish; this is not a complete hardware kit.",
         "source_label": "SIMFIX",
         "source_url": "https://simfix.com/products/simfix-phil-pan-machine-screw-din-7985-a2-stainless-steel-m3-x-16",
         "width": 548,
@@ -843,7 +843,7 @@
       "installation": "Mounting hardware for Q0, three carriers, six cable bases and the panel PE bond. XA uses straps and the USB bushing snaps in. Use the build-package sizes and transfer-drilling instructions.",
       "location_summary": "Q0, carriers, six cable mounts and panel PE bond.",
       "quantity_summary": "See fastener schedule",
-      "supplier": "Bolt Depot",
+      "supplier": "DigiKey / Home Depot",
       "compliance": {
         "status": "Mechanical accessory",
         "detail": "Verify mechanical/material suitability; this accessory does not provide mains insulation or confer assembly certification.",
@@ -1051,22 +1051,22 @@
     "checked_on": "2026-09-23",
     "currency": "USD",
     "scope": "Displayed purchase prices for the selected design, including purchase packs and fastener spares. Not an order or delivered project quote. Reused stock and fabrication are listed separately. Machining, bonding changes if required, tools, labor, freight and tax are excluded.",
-    "supplier_policy": "Five selected sellers. Use the listed DigiKey -ND offers; no Marketplace partner offer is selected. Manufacturer factory stock can still ship later or separately. Recheck seller, quantity, delivery and tax in the final cart.",
+    "supplier_policy": "Three selected sellers: Master Electronics, DigiKey and Home Depot. All required fasteners are included in the purchase budget; no lab fastener stock is assumed. Use the listed DigiKey -ND offers, with no Marketplace partner selected. Factory stock may ship later or separately. Prices and availability can vary by location; recheck seller, quantity, delivery, freight and tax at checkout.",
     "rows": [
       {
         "material_ids": [
           "enclosure"
         ],
         "sku": "PCJ16148",
-        "supplier": "Solutions Direct",
-        "seller": "Solutions Direct",
+        "supplier": "Master Electronics",
+        "seller": "Master Electronics",
         "quantity": 1,
         "unit": "each",
         "pieces_per_unit": 1,
-        "unit_price_usd": 137.11,
-        "extended_usd": 137.11,
-        "url": "https://www.solutionsdirectonline.com/hammond-16x14x8-polycarbonate-electrical-enclosure-with-solid-cover-pcj16148",
-        "availability_note": "Listed for sale; delivery confirmed at checkout"
+        "unit_price_usd": 160.56,
+        "extended_usd": 160.56,
+        "url": "https://www.masterelectronics.com/en/productdetail/hammond-manufacturing/pcj16148-49489596.html",
+        "availability_note": "Quantity-one offer; 12 at manufacturer, none at distributor; estimated ship October 5, 2026. Recheck before ordering."
       },
       {
         "material_ids": [
@@ -1272,181 +1272,193 @@
         "material_ids": [
           "fasteners"
         ],
-        "sku": "1335 · #6-32 × 3/8 screws",
-        "supplier": "Bolt Depot",
-        "seller": "Bolt Depot",
+        "sku": "9904 · #6-32 × 3/8 stainless pan screws",
+        "supplier": "DigiKey",
+        "seller": "DigiKey",
         "quantity": 4,
         "unit": "each",
         "pieces_per_unit": 1,
-        "unit_price_usd": 0.06,
-        "extended_usd": 0.24,
-        "url": "https://boltdepot.com/Product-Details?product=1335",
-        "availability_note": "Sold individually; includes stated spares"
+        "unit_price_usd": 0.22,
+        "extended_usd": 0.88,
+        "url": "https://www.digikey.com/en/products/detail/keystone-electronics/9904/317325",
+        "availability_note": "Q0; 36-9904-ND, listed in stock",
+        "installed_quantity": 2
       },
       {
         "material_ids": [
           "fasteners"
         ],
-        "sku": "2942 · #6 flat washers",
-        "supplier": "Bolt Depot",
-        "seller": "Bolt Depot",
+        "sku": "4699 · #6 zinc-plated steel flat washers",
+        "supplier": "DigiKey",
+        "seller": "DigiKey",
         "quantity": 4,
         "unit": "each",
         "pieces_per_unit": 1,
-        "unit_price_usd": 0.06,
-        "extended_usd": 0.24,
-        "url": "https://boltdepot.com/Product-Details?product=2942",
-        "availability_note": "Sold individually; includes stated spares"
+        "unit_price_usd": 0.12,
+        "extended_usd": 0.48,
+        "url": "https://www.digikey.com/en/products/detail/keystone-electronics/4699/316268",
+        "availability_note": "Q0; 36-4699-ND, 0.031 in nominal thickness",
+        "installed_quantity": 2
       },
       {
         "material_ids": [
           "fasteners"
         ],
-        "sku": "6835 · M3 × 16 screws",
-        "supplier": "Bolt Depot",
-        "seller": "Bolt Depot",
+        "sku": "837781 · M3-0.5 × 16 zinc pan screws",
+        "supplier": "Home Depot",
+        "seller": "Home Depot",
+        "quantity": 2,
+        "unit": "pack",
+        "pieces_per_unit": 4,
+        "unit_price_usd": 1.95,
+        "extended_usd": 3.9,
+        "url": "https://www.homedepot.com/p/321071713",
+        "availability_note": "Carriers; 8 screws supplied, 6 installed; displayed store price; availability varies by location",
+        "installed_quantity": 6
+      },
+      {
+        "material_ids": [
+          "fasteners"
+        ],
+        "sku": "4692 · M3 / #4 zinc-plated steel flat washers",
+        "supplier": "DigiKey",
+        "seller": "DigiKey",
         "quantity": 6,
         "unit": "each",
         "pieces_per_unit": 1,
-        "unit_price_usd": 0.06,
-        "extended_usd": 0.36,
-        "url": "https://boltdepot.com/Product-Details?product=6835",
-        "availability_note": "Six carrier sets only; no USB flange hardware and no extra M3 spares"
+        "unit_price_usd": 0.11,
+        "extended_usd": 0.66,
+        "url": "https://www.digikey.com/en/products/detail/keystone-electronics/4692/316261",
+        "availability_note": "Carriers; 36-4692-ND, 3.25 mm bore",
+        "installed_quantity": 6
       },
       {
         "material_ids": [
           "fasteners"
         ],
-        "sku": "4513 · M3 washers",
-        "supplier": "Bolt Depot",
-        "seller": "Bolt Depot",
-        "quantity": 6,
-        "unit": "each",
-        "pieces_per_unit": 1,
-        "unit_price_usd": 0.05,
-        "extended_usd": 0.3,
-        "url": "https://boltdepot.com/Product-Details?product=4513",
-        "availability_note": "Six carrier sets only; no USB flange hardware and no extra M3 spares"
+        "sku": "837221 · M3-0.5 stainless locknuts",
+        "supplier": "Home Depot",
+        "seller": "Home Depot",
+        "quantity": 2,
+        "unit": "pack",
+        "pieces_per_unit": 4,
+        "unit_price_usd": 1.95,
+        "extended_usd": 3.9,
+        "url": "https://www.homedepot.com/p/321071866",
+        "availability_note": "Carriers; 8 nuts supplied, 6 installed; displayed store price; availability varies by location",
+        "installed_quantity": 6
       },
       {
         "material_ids": [
           "fasteners"
         ],
-        "sku": "4792 · M3 locknuts",
-        "supplier": "Bolt Depot",
-        "seller": "Bolt Depot",
-        "quantity": 6,
-        "unit": "each",
-        "pieces_per_unit": 1,
-        "unit_price_usd": 0.07,
-        "extended_usd": 0.42,
-        "url": "https://boltdepot.com/Product-Details?product=4792",
-        "availability_note": "Six carrier sets only; no USB flange hardware and no extra M3 spares"
+        "sku": "836371 · M4-0.7 × 16 zinc pan screws",
+        "supplier": "Home Depot",
+        "seller": "Home Depot",
+        "quantity": 2,
+        "unit": "pack",
+        "pieces_per_unit": 4,
+        "unit_price_usd": 1.95,
+        "extended_usd": 3.9,
+        "url": "https://www.homedepot.com/p/321071606",
+        "availability_note": "Tie anchors; 8 screws supplied, 6 installed; displayed store price; availability varies by location",
+        "installed_quantity": 6
       },
       {
         "material_ids": [
           "fasteners"
         ],
-        "sku": "17887 · M4 × 16 screws",
-        "supplier": "Bolt Depot",
-        "seller": "Bolt Depot",
-        "quantity": 8,
-        "unit": "each",
-        "pieces_per_unit": 1,
-        "unit_price_usd": 0.09,
-        "extended_usd": 0.72,
-        "url": "https://boltdepot.com/Product-Details?product=17887",
-        "availability_note": "Sold individually; includes stated spares"
+        "sku": "4118 · M4 stainless flat washers",
+        "supplier": "Home Depot",
+        "seller": "Home Depot",
+        "quantity": 1,
+        "unit": "pack",
+        "pieces_per_unit": 50,
+        "unit_price_usd": 4.96,
+        "extended_usd": 4.96,
+        "url": "https://www.homedepot.com/p/204801237",
+        "availability_note": "Tie anchors; one 50-piece pack, 6 installed; retain the remainder; displayed store price; availability varies by location",
+        "installed_quantity": 6
       },
       {
         "material_ids": [
           "fasteners"
         ],
-        "sku": "4525 · M4 washers",
-        "supplier": "Bolt Depot",
-        "seller": "Bolt Depot",
-        "quantity": 8,
-        "unit": "each",
-        "pieces_per_unit": 1,
-        "unit_price_usd": 0.05,
-        "extended_usd": 0.4,
-        "url": "https://boltdepot.com/Product-Details?product=4525",
-        "availability_note": "Sold individually; includes stated spares"
+        "sku": "837171 · M4-0.7 stainless locknuts",
+        "supplier": "Home Depot",
+        "seller": "Home Depot",
+        "quantity": 2,
+        "unit": "pack",
+        "pieces_per_unit": 4,
+        "unit_price_usd": 1.95,
+        "extended_usd": 3.9,
+        "url": "https://www.homedepot.com/p/321071795",
+        "availability_note": "Tie anchors; 8 nuts supplied, 6 installed; displayed store price; availability varies by location",
+        "installed_quantity": 6
       },
       {
         "material_ids": [
           "fasteners"
         ],
-        "sku": "4802 · M4 locknuts",
-        "supplier": "Bolt Depot",
-        "seller": "Bolt Depot",
-        "quantity": 8,
-        "unit": "each",
-        "pieces_per_unit": 1,
-        "unit_price_usd": 0.08,
-        "extended_usd": 0.64,
-        "url": "https://boltdepot.com/Product-Details?product=4802",
-        "availability_note": "Sold individually; includes stated spares"
-      },
-      {
-        "material_ids": [
-          "fasteners"
-        ],
-        "sku": "1368 · #10-32 × 3/4 bond screws",
-        "supplier": "Bolt Depot",
-        "seller": "Bolt Depot",
+        "sku": "9911 · #10-32 × 3/4 stainless pan screws",
+        "supplier": "DigiKey",
+        "seller": "DigiKey",
         "quantity": 2,
         "unit": "each",
         "pieces_per_unit": 1,
-        "unit_price_usd": 0.19,
-        "extended_usd": 0.38,
-        "url": "https://boltdepot.com/Product-Details?product=1368",
-        "availability_note": "Sold individually; proposed PE hardware remains subject to aluminum-bond acceptance"
+        "unit_price_usd": 0.39,
+        "extended_usd": 0.78,
+        "url": "https://www.digikey.com/en/products/detail/keystone-electronics/9911/317331",
+        "availability_note": "Panel PE stud; 36-9911-ND, listed in stock",
+        "installed_quantity": 1
       },
       {
         "material_ids": [
           "fasteners"
         ],
-        "sku": "2561 · #10-32 nuts",
-        "supplier": "Bolt Depot",
-        "seller": "Bolt Depot",
+        "sku": "4705 · #10-32 zinc-plated steel plain nuts",
+        "supplier": "DigiKey",
+        "seller": "DigiKey",
         "quantity": 4,
         "unit": "each",
         "pieces_per_unit": 1,
-        "unit_price_usd": 0.08,
-        "extended_usd": 0.32,
-        "url": "https://boltdepot.com/Product-Details?product=2561",
-        "availability_note": "Sold individually; proposed PE hardware remains subject to aluminum-bond acceptance"
+        "unit_price_usd": 0.1,
+        "extended_usd": 0.4,
+        "url": "https://www.digikey.com/en/products/detail/keystone-electronics/4705/316276",
+        "availability_note": "Panel PE stud; 36-4705-ND, listed in stock",
+        "installed_quantity": 2
       },
       {
         "material_ids": [
           "fasteners"
         ],
-        "sku": "4078 · #10 tooth washers",
-        "supplier": "Bolt Depot",
-        "seller": "Bolt Depot",
-        "quantity": 4,
-        "unit": "each",
-        "pieces_per_unit": 1,
-        "unit_price_usd": 0.06,
-        "extended_usd": 0.24,
-        "url": "https://boltdepot.com/Product-Details?product=4078",
-        "availability_note": "Sold individually; proposed PE hardware remains subject to aluminum-bond acceptance"
+        "sku": "827311 · #10 zinc-plated external-tooth washers",
+        "supplier": "Home Depot",
+        "seller": "Home Depot",
+        "quantity": 1,
+        "unit": "pack",
+        "pieces_per_unit": 18,
+        "unit_price_usd": 1.57,
+        "extended_usd": 1.57,
+        "url": "https://www.homedepot.com/p/317479556",
+        "availability_note": "Panel PE stud; one 18-piece pack, 2 installed; retain the remainder; displayed store price; availability varies by location",
+        "installed_quantity": 2
       },
       {
         "material_ids": [
           "fasteners"
         ],
-        "sku": "2946 · #10 flat washers",
-        "supplier": "Bolt Depot",
-        "seller": "Bolt Depot",
+        "sku": "4703 · #10 zinc-plated steel flat washers",
+        "supplier": "DigiKey",
+        "seller": "DigiKey",
         "quantity": 4,
         "unit": "each",
         "pieces_per_unit": 1,
-        "unit_price_usd": 0.06,
-        "extended_usd": 0.24,
-        "url": "https://boltdepot.com/Product-Details?product=2946",
-        "availability_note": "Sold individually; proposed PE hardware remains subject to aluminum-bond acceptance"
+        "unit_price_usd": 0.13,
+        "extended_usd": 0.52,
+        "url": "https://www.digikey.com/en/products/detail/keystone-electronics/4703/316274",
+        "availability_note": "Panel PE stud; 36-4703-ND, 0.033 in nominal thickness",
+        "installed_quantity": 2
       },
       {
         "material_ids": [
@@ -1479,6 +1491,6 @@
         "availability_note": "3720-3104-ND; 6,537 listed in stock; quantity-one price. Verify actual passage and stock at checkout."
       }
     ],
-    "material_subtotal_usd": 270.43
+    "material_subtotal_usd": 315.23
   }
 }

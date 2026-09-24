@@ -81,7 +81,7 @@
       ],
       "status": "Catalog body; direct wall mount",
       "source": "https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf",
-      "note": "Carling CA1-B0-24-615-121-DG. Mount directly against the inner front wall, with the handle nose through the manufacturer rectangle. Two #6-32 × 3/8 in screws and measured 0.8–1.0 mm flat washers; nominal engagement 3.75–3.95 mm into 4.95 mm inserts. Catalog torque: mounting 0.8–1.0 N·m; #10-32 studs 1.7–2.3 N·m. Outer screw-fixed enclosure guards terminals; unplug SUPPLY and verify dead before removing the cover. No separate speculative wall insert or live-service access.",
+      "note": "Carling CA1-B0-24-615-121-DG. Mount directly against the inner front wall, with the handle nose through the manufacturer rectangle. Two Keystone 9904 #6-32 × 3/8 in screws and 4699 flat washers, nominally 0.031 in (0.79 mm); nominal engagement 3.96 mm into 4.95 mm inserts. Measure the received stack and reject bottoming before clamping. Catalog torque: mounting 0.8–1.0 N·m; #10-32 studs 1.7–2.3 N·m. Outer screw-fixed enclosure guards terminals; unplug SUPPLY and verify dead before removing the cover. No separate speculative wall insert or live-service access.",
       "terminalPitch": 49.28,
       "mountPitch": 52.37,
       "studProjection": 15.87

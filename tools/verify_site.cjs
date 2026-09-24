@@ -9,8 +9,10 @@ const base=process.env.CHECK_URL||'http://127.0.0.1:8770/';
 const out=process.env.QA_OUTPUT;
 const root=path.resolve(__dirname,'..');
 const bom=JSON.parse(fs.readFileSync(path.join(root,'procurement.json')));
-const expectedPrices={enclosure:137.11,breaker:40.32,receptacle:6.99,connectors:3.51,carriers:6.69,cord:19.89,'supply-plug':3.96,'printer-connector':6.99,'cord-glands':5.94,'internal-wire':3.36,'ring-lugs':3.63,'tie-mounts':4.08,'cable-ties':3.16,fasteners:4.50,'logger-restraint':10.77,'usb-bushing':0.14,'usb-sleeve':9.39};
+const expectedPrices={enclosure:160.56,breaker:40.32,receptacle:6.99,connectors:3.51,carriers:6.69,cord:19.89,'supply-plug':3.96,'printer-connector':6.99,'cord-glands':5.94,'internal-wire':3.36,'ring-lugs':3.63,'tie-mounts':4.08,'cable-ties':3.16,fasteners:25.85,'logger-restraint':10.77,'usb-bushing':0.14,'usb-sleeve':9.39};
 async function checkPrices(page){
+ assert.deepEqual([...new Set(bom.purchasing.rows.map(r=>r.seller))].sort(),['DigiKey','Home Depot','Master Electronics']);
+ for(const r of bom.purchasing.rows.filter(r=>r.material_ids.includes('fasteners')))assert.ok(r.quantity*r.pieces_per_unit>=r.installed_quantity,'Purchase packs must cover installed hardware: '+r.sku);
  const prices=await page.locator('.material-price').evaluateAll(es=>Object.fromEntries(es.map(e=>[e.dataset.materialId,Number(e.dataset.subtotalUsd)])));
  assert.deepEqual(prices,expectedPrices,'Pack costs and shared connectors must be counted once');
  assert.equal(Object.values(prices).reduce((sum,price)=>sum+Math.round(price*100),0),Math.round(bom.purchasing.material_subtotal_usd*100));
@@ -319,8 +321,8 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
    for(const href of localLinks)assert.equal((await page.request.get(new URL(href,base).href)).status(),200,href);
   } else if(file==='revision.html') {
    const text=await page.locator('body').innerText();
-   assert.match(text,/five planned order sources/);
-   assert.match(text,/42.78/);
+   assert.match(text,/three planned order sources/);
+   assert.match(text,/19.33/);
    assert.match(text,/Altech 1C15UL/);
    assert.equal(await page.locator('#breaker-options').count(),1);
   } else if(file==='protection.html') {

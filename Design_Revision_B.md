@@ -1,6 +1,6 @@
 # Design, sourcing and component evidence
 
-Prices and sources checked September 23, 2026. Design priorities: fewer suppliers, lower-cost enclosure and panel, a breaker comparison, cable restraints, documented component approvals and internal logger power.
+Prices and sources checked September 23, 2026. Design priorities: fewer suppliers, economical parts and panel reuse, a breaker comparison, cable restraints, documented component approvals and internal logger power.
 
 ## Selected design
 
@@ -23,7 +23,7 @@ After printer shutdown: **Q0 OFF → unplug SUPPLY IN from the wall → connect 
 | One [Heyco 3104 bushing](https://www.digikey.com/en/products/detail/heyco-products-corporation/3104/15907204) | $0.14 | Cable-edge protection; UL Recognized E15331 / CSA 8919 component evidence. |
 | [Alpha Wire F2213/4 BK105 sleeve](https://www.digikey.com/en/products/detail/alpha-wire/F2213-4-BK105/3718418) | $9.39 | Rated insulation for the cable inside the electrical panel; selected black sleeve is specified to 600 V. |
 
-Both purchased USB accessories are included in the **$270.43** material subtotal, before freight, tax and fabrication.
+Both purchased USB accessories are included in the **$315.23** material subtotal, before freight, tax and fabrication.
 
 The single Ø22.2 mm opening replaces the former USB bore and two screw holes. Published standard-B overmold dimensions fit the selected 17.5 mm bushing passage before sleeving. Reuse the existing front/right cable support; no extra support or connector is added. Confirm actual passage, full insulation coverage and restraint during assembly. [Sources and construction](build.html).
 
@@ -33,29 +33,28 @@ USD, single-unit displayed prices checked September 23, 2026. These are web list
 
 | Item | Alternative | Selected design | Price evidence |
 |---|---|---|---|
-| Box | PCJ16148CC clear lid: **$149.45** | PCJ16148 opaque lid: **$137.11** | [Previous supplier listing](https://www.solutionsdirectonline.com/hammond-16x14x8-polycarbonate-electrical-enclosure-with-clear-cover-pcj16148cc) · [New supplier listing](https://www.solutionsdirectonline.com/hammond-16x14x8-polycarbonate-electrical-enclosure-with-solid-cover-pcj16148) |
+| Box | PCJ16148CC clear lid: **$149.45** | Same selected PCJ16148 opaque lid, now **$160.56** at Master Electronics | [Previous clear-lid listing](https://www.solutionsdirectonline.com/hammond-16x14x8-polycarbonate-electrical-enclosure-with-clear-cover-pcj16148cc) · [Selected consolidated source](https://www.masterelectronics.com/en/productdetail/hammond-manufacturing/pcj16148-49489596.html); the box alone costs more to reduce sellers |
 | Panel stock | Hammond 14R1513: **$30.44** | Offered aluminum: **$0 incremental raw-stock allowance**, conditional on suitability | [14R1513 listing](https://www.digikey.com/en/products/detail/hammond-manufacturing/14R1513/2359585) · professor’s offer; machining is not free |
-| **Box + raw panel only** | **$179.89** | **$137.11** | **$42.78 less**, before fabrication, delivery and tax |
+| **Box + raw panel only** | **$179.89** | **$160.56** | **$19.33 less**, before fabrication, delivery and tax |
 | Internal XA | Prior 5279-C wall receptacle | 515CV: **$6.99** | [Home Depot](https://www.homedepot.com/p/301304939); two total 515CV units cost $13.98 before tax, including printer output |
 | Six cable mounts | Previously linked 100-piece pack | Six individually listed TM2S8-C at **$0.68 each**, $4.08 | [DigiKey](https://www.digikey.com/en/products/detail/panduit-corp/TM2S8-C/1306625); stock and unit pricing can change |
 | DC accessories | Tensility 10-02228, icotek 45026 and 41380 | **Removed from active BOM** | No saving assigned because a comparable complete prior order was not priced |
 
-The selected purchase quantities now have a **$270.43 material subtotal**, including the internal XA branch, all four strap blanks, the actual retail packs and fastener spares. The [28-line order plan](materials.html#order-plan) records each seller, quantity, pack size, price and stock note. It excludes freight, tax, machining, tools, labor and any bonding changes required after inspecting the aluminum. The $42.78 remains a **box/raw-panel-only** comparison; it is not the difference between two fully priced systems. No purchase has been made.
+The selected purchase quantities now have a **$315.23 material subtotal**, including the internal XA branch, all four strap blanks, the actual retail packs and fastener spares. The [28-line order plan](materials.html#order-plan) records each seller, quantity, pack size, price and stock note. It excludes freight, tax, machining, tools, labor and any bonding changes required after inspecting the aluminum. The $19.33 remains a **box/raw-panel-only** comparison; it is not the difference between two fully priced systems. No purchase has been made.
 
 The previous 3M 100-piece bottle was [$105.36](https://www.digikey.com/en/products/detail/3m/MV14-10R-LX-BOTTLE/2670218). The selected [Gardner Bender 15-104 15-pack is $3.63](https://www.homedepot.com/p/202522492), a **$101.73 reduction for that purchase line**, with three installed and twelve spare. Buy ten PLT2S-C ties for $3.16, rather than a 100-piece pack. Buy four feet each of [black](https://www.homedepot.com/p/204632031) and [green](https://www.homedepot.com/p/204632154) stranded wire: $1.68 per color, rather than full rolls.
 
 ## Consolidated purchasing
 
-The previous BOM linked to 12 order-site domains, plus Bolt Depot through the fastener schedule: **13 sources**. The design uses **five planned order sources**, including fasteners. This counts ordering websites, not manufacturer references, photo credits or orders already placed. The former Marketplace ring-lug link is removed from the active order; Home Depot supplies the small pack. The order plan identifies the DigiKey -ND offers and selects no partner listing. Factory-stock glands may still have a separate lead time. Five sellers does not guarantee five parcels or fixed freight.
+The design uses **three planned order sources**, reduced from the previous five. All required fasteners are included in the purchase budget; no lab fastener stock is assumed. This counts actual selected sellers, excluding manufacturer references and photo credits. DigiKey Marketplace partner offers are not selected. Manufacturer stock can ship later or separately, so three sellers does not guarantee three parcels.
 
-| Supplier | Groups to source |
-|---|---|
-| **Solutions Direct** | PCJ16148 enclosure |
-| **DigiKey** | WAGO connectors/carriers, two glands, six individual cable mounts, ten individual cable ties, one USB cable bushing and rated sleeve |
-| **Home Depot** | 14/3 cord, supply plug, two 515CV connectors, four feet each of black/green wire if absent from stock, 15-104 rings, one 90340 strap roll |
-| **Master Electronics** | One exact Carling Q0; quantity-one price and stock verified |
-| **Bolt Depot** | Remaining exact fasteners after checking lab stock; no XA flange hardware |
-| **Lab reuse / fabrication** | Professor’s aluminum; six owned equipment groups including the USB cable |
+| Supplier | Groups to source | Material subtotal |
+|---|---|---|
+| **Master Electronics** | PCJ16148 enclosure and exact Carling Q0 | **$200.88** |
+| **DigiKey** | WAGO connectors/carriers, two glands, six cable mounts, ten ties, USB bushing/sleeve and selected individual screws, nuts and washers | **$36.63** |
+| **Home Depot** | Cord, plug, two 515CV connectors, black/green wire, rings, strap roll, metric screws/locknuts and packaged washers | **$77.72** |
+
+[Exact quantities, packs and purchase links](materials.html#order-plan). The professor's aluminum and six owned equipment groups remain separate from these purchases.
 
 There are **17 purchase groups, one proposed fabrication group and six owned groups**. Counts refer to material groups, not pieces or supplier packs. The two 515CV rows intentionally describe different installation locations but the combined order quantity is two.
 
@@ -69,24 +68,19 @@ There are **17 purchase groups, one proposed fabrication group and six owned gro
 
 **Decision:** use the offered plate and the $40.32 direct-mount Carling. A DIN rebuild could become economical with existing rail stock or a larger multi-device panel, but it is not needed for this single-printer enclosure. The logger and adapter still need a plate or other support. An inexpensive switch-only device or UL1077 protector is not an equivalent replacement for the selected UL489 breaker. Application acceptance remains separate from this sourcing decision.
 
-**Consolidation tradeoff:** the same PCJ16148 is [$160.56 at Master Electronics](https://www.masterelectronics.com/en/productdetail/hammond-manufacturing/pcj16148-49489596.html), $23.45 above Solutions Direct. Retain the lower material-price source unless its extra delivered cost exceeds $23.45. Master lists a **25-piece minimum** for [1427NCGPG13LB](https://www.masterelectronics.com/en/productdetail/hammond-manufacturing/1427ncgpg13lb-50893024.html): $52 at $2.08 each, versus **two at $2.97 = $5.94** from DigiKey. Do not combine suppliers by purchasing unnecessary quantities.
+**Consolidation tradeoff:** buying the unchanged [PCJ16148 from Master Electronics](https://www.masterelectronics.com/en/productdetail/hammond-manufacturing/pcj16148-49489596.html) adds **$23.45** in parts and removes Solutions Direct from the active order. Purchasing all fasteners through the two remaining accessory sellers costs **$25.85**, versus the former $4.50 Bolt Depot schedule, and removes Bolt Depot. Total material cost rises **$44.80**, from $270.43 to **$315.23**, before changes in freight and tax. The fastener budget includes every full pack, not just the installed pieces.
 
-<h2 id="checkout">Delivered-cost comparison and lab-stock check</h2>
+**Why retain three sellers:** no two-seller combination was verified for the selected electrical parts at practical quantities. Master lists a **25-piece minimum** for [1427NCGPG13LB](https://www.masterelectronics.com/en/productdetail/hammond-manufacturing/1427ncgpg13lb-50893024.html), $52 total versus two from DigiKey for $5.94. The checked [DigiKey enclosure offer](https://www.digikey.com/en/products/detail/hammond-manufacturing/PCJ16148/22148641) begins at 15 units; a single unit was not verified there. Home Depot supplies the small cord, wire and connector quantities. The priced DIN alternative also requires mounting and operator changes. Three sellers is the practical plan for the reviewed offers, not a claim that every possible two-seller redesign was ruled out.
 
-Compare the final carts before placing orders; freight and taxes are not known. A lower advertised component price alone is not a lower delivered cost.
+<h2 id="checkout">Order and delivery checks</h2>
 
-| Enclosure source / same PCJ16148 | Listed part price | Decision rule |
-|---|---|---|
-| [Solutions Direct](https://www.solutionsdirectonline.com/hammond-16x14x8-polycarbonate-electrical-enclosure-with-solid-cover-pcj16148) | $137.11 · active plan | Record delivered quote $___ and lead time ___. |
-| [Wistex](https://www.wistexllc.com/enclosures/pcj16148-16-x-14-x-8-junction-box-4-screw-lift-off-cover.html) | $133.06 · alternative listing | Only $4.05 lower before freight/tax. Verify exact new part, seller terms and available stock; substitute the seller only if its delivered quote and timing are better. Not included as a sixth seller. |
-| [Master Electronics](https://www.masterelectronics.com/en/productdetail/hammond-manufacturing/pcj16148-49489596.html) | $160.56 · consolidation alternative | Combining with Q0 costs $23.45 more in parts. It reduces sellers from five to four only if accepted and its delivery savings justify the difference. |
-
-| Check before ordering | Required / record | Budget treatment |
-|---|---|---|
-| Lab fasteners | 2 Q0 screws/washers; 6 M3 screw/washer/locknut sets; 6 M4 sets; accepted PE hardware. Suitable stock: ___; shortage: ___ | Baseline still includes the full $4.50 Bolt Depot allowance. If every required item is verified suitable in lab stock, omit that order: $265.93 and four sellers. Do not mark stock owned without inspection. |
-| Aluminum | Usable dimensions, thickness, finish/alloy, stiffness and bonding method: ___ | $0 raw-stock allowance remains conditional; update CAD to measured stock before cutting. |
-| Existing kit | Logger, CT, three pigtails, full voltage leads, original adapter and existing USB cable | All six groups are confirmed owned. Reuse them; check condition and fit during assembly. |
-| Final five carts | Materials $270.43 + freight $___ + tax $___ + fabrication/other approved costs $___ | Record total $___, quoted date ___ and required arrival date ___. Recheck all quantities and exact seller offers. |
+| Check before ordering | Current plan / record |
+|---|---|
+| Enclosure delivery | Master lists 12 units at the manufacturer and no distributor stock; estimated ship date **October 5, 2026**, checked September 23. Record confirmed delivery ___; do not treat this as immediate stock. |
+| Fasteners | Buy every line in the [fastener schedule](build.html#fasteners). Install two Q0 sets, six M3 sets, six M4 sets and the accepted PE hardware. Keep unused pack contents as spares. |
+| Aluminum | Professor's offered raw stock remains a conditional $0 allowance. Measure dimensions/thickness and accept the material and bond before cutting. Fabrication is separate. |
+| Existing kit | Reuse the six confirmed owned equipment groups, including the USB cable; check condition and fit during assembly. |
+| Final three carts | **$315.23 materials** + freight $___ + tax $___ + fabrication/other accepted costs $___. Record total $___ and required arrival date ___. Store prices and stock can vary. |
 
 ## Certification evidence
 
@@ -108,8 +102,8 @@ UL Listed, UL Recognized, a material flammability rating and an IEC standard are
 
 | Requested change | Current result |
 |---|---|
-| Fewer suppliers | Five selected sellers, versus thirteen prior ordering sources; actual order quantities documented. |
-| Cheaper box, plate and switch | Opaque box and offered plate selected; exact-SKU Q0 sourcing priced; DIN hardware comparison complete. |
+| Fewer suppliers | Three selected sellers, down from five; all required fasteners budgeted and full packs priced. |
+| Cheaper box, plate and switch | Offered panel reduces raw-stock cost; consolidation increases the unchanged box price. Exact-SKU Q0 and DIN alternatives remain priced above. |
 | Plate or DIN mounting | Plate-based design selected. Offered stock must first meet the receiving requirements below. |
 | Tie-down locations | Six screw-fixed cable mounts and four equipment straps appear in CAD, BOM and 3D. |
 | Recognized certification evidence | Source-specific evidence for purchased electrical parts; new UL/CSA-listed ring selection. No blanket assembly certification claim. |
