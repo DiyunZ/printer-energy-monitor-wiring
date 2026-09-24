@@ -19,3 +19,7 @@
 .price-sku { display: block; font-weight: 600; }
 .price-details summary { font-size: 13px; font-weight: 400; margin: 6px 0; color: #165b93; cursor: pointer; }
 @media print { .material-photo { break-inside: avoid; } }
+
+.hardware-purchases .price-breakdown { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 20px; }
+.hardware-purchases .material-price .price-sku { margin-bottom: 3px; }
+@media (max-width: 700px) { .hardware-purchases .price-breakdown { grid-template-columns: 1fr; } }

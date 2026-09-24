@@ -268,6 +268,7 @@ def material_price(p, order):
     if p['availability'] != 'buy':
         return ''
     lines = []
+    direct_links = p['id'] == 'fasteners'
     subtotal = Decimal('0')
     rows = [r for r in order['rows'] if p['id'] in r['material_ids']]
     if not rows:
@@ -282,9 +283,12 @@ def material_price(p, order):
         if r['pieces_per_unit'] > 1:
             calculation += f' · {r["pieces_per_unit"]} pieces/{r["unit"]}'
         sku = '<span class="price-sku">'+E(r['sku'])+'</span>' if len(rows) > 1 else ''
+        if direct_links:
+            sku = '<a class="price-sku" data-link-kind="buy" href="'+E(r['url'])+'">'+E(r['sku'])+' ↗</a>'
+            calculation = r['seller']+' · '+calculation
         lines.append('<p>'+sku+E(calculation)+(f' = ${amount:.2f}' if len(rows) > 1 else '')+'</p>')
     breakdown = ''.join(lines)
-    if len(rows) > 2:
+    if len(rows) > 2 and not direct_links:
         breakdown = f'<details class="price-details"><summary>{len(rows)} item prices</summary>'+breakdown+'</details>'
     return '<div class="material-price" data-material-id="'+E(p['id'])+f'" data-subtotal-usd="{subtotal:.2f}"><strong class="price-total">${subtotal:.2f}</strong> <span class="price-label">subtotal</span><div class="price-breakdown">'+breakdown+'</div></div>'
 
@@ -317,7 +321,12 @@ def main():
         group=p['availability'] if p['availability'] in ('buy','fabricate') else 'owned'
         source_label='Price & purchase (USD)' if group=='buy' else 'Fabrication' if group=='fabricate' else 'Source'
         price=material_price(p, materials['purchasing'])
-        material_rows[group].append('<tr id="material-'+E(p['id'])+'" data-availability="'+E(p['availability'])+'"><td data-label="Inventory"><span class="inventory-badge '+p['availability']+'">'+badge+'</span></td><td data-label="Material"><span class="material-name">'+E(p['item'])+'</span>'+material_photo(p)+'<a class="locate-material" data-material="'+E(p['id'])+'" href="?material='+E(p['id'])+'#layout" aria-label="View '+E(p['item'])+' in 3D">View in 3D ↑</a></td><td data-label="Quantity needed">'+E(p.get('quantity_summary',p['quantity']))+'</td><td data-label="Part / details"><strong>'+E(p['model'])+'</strong>'+notice+details+'</td><td class="material-links" data-label="'+E(source_label)+'">'+price+(''.join(purchase_links) if purchase_links else '<span class="reuse-note">Reuse</span>')+'</td></tr>')
+        specifications='<strong>'+E(p['model'])+'</strong>'+notice+details
+        if p['id']=='fasteners':
+            purchase_cells='<td colspan="2" class="hardware-purchases" data-label="Part, price &amp; purchase (USD)">'+specifications+'<div class="material-links">'+price+'</div></td>'
+        else:
+            purchase_cells='<td data-label="Part / details">'+specifications+'</td><td class="material-links" data-label="'+E(source_label)+'">'+price+(''.join(purchase_links) if purchase_links else '<span class="reuse-note">Reuse</span>')+'</td>'
+        material_rows[group].append('<tr id="material-'+E(p['id'])+'" data-availability="'+E(p['availability'])+'"><td data-label="Inventory"><span class="inventory-badge '+p['availability']+'">'+badge+'</span></td><td data-label="Material"><span class="material-name">'+E(p['item'])+'</span>'+material_photo(p)+'<a class="locate-material" data-material="'+E(p['id'])+'" href="?material='+E(p['id'])+'#layout" aria-label="View '+E(p['item'])+' in 3D">View in 3D ↑</a></td><td data-label="Quantity needed">'+E(p.get('quantity_summary',p['quantity']))+'</td>'+purchase_cells+'</tr>')
     html=(OUT/'page_template.html').read_text().replace('<!-- MAIN_DIAGRAM -->',svg).replace('<!-- DETAIL_DIAGRAM -->',detail).replace('<!-- CONNECTION_ROWS -->',rows).replace('<!-- BUY_ROWS -->',''.join(material_rows['buy'])).replace('<!-- FABRICATE_ROWS -->',''.join(material_rows['fabricate'])).replace('<!-- OWNED_ROWS -->',''.join(material_rows['owned'])).replace('{{BUY_COUNT}}',str(len(material_rows['buy']))).replace('{{FABRICATE_COUNT}}',str(len(material_rows['fabricate']))).replace('{{OWNED_COUNT}}',str(len(material_rows['owned']))).replace('{{REV}}',REV)
     html=html.replace('{{SELLER_COUNT}}',str(len({r['seller'] for r in materials['purchasing']['rows']})))
     html=html.replace('{{MATERIAL_TOTAL}}',format(materials['purchasing']['material_subtotal_usd'],'.2f'))

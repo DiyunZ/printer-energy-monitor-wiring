@@ -25,9 +25,11 @@ async function checkPrices(page){
  assert.match(await page.locator('.material-price[data-material-id="cable-ties"]').textContent(),/10 × \$0\.316 each/);
  assert.match(await page.locator('.material-price[data-material-id="cord"]').textContent(),/13 ft × \$1\.53\/ft/);
  const hardware=page.locator('.material-price[data-material-id="fasteners"]');
- await hardware.locator('summary').click();
- assert.equal(await hardware.locator('.price-breakdown p:visible').count(),13);
- await hardware.locator('summary').click();
+ const hardwareRows=bom.purchasing.rows.filter(r=>r.material_ids.includes('fasteners'));
+ assert.equal(await hardware.locator('details').count(),0,'Hardware purchase links are visible without expansion');
+ assert.equal(await hardware.locator('.price-breakdown p:visible').count(),hardwareRows.length);
+ assert.deepEqual(await hardware.locator('a[data-link-kind="buy"]').evaluateAll(es=>es.map(e=>e.href)),hardwareRows.map(r=>r.url));
+ assert.equal(await hardware.locator('a[data-link-kind="buy"]:visible').count(),hardwareRows.length);
 }
 const close=(a,b,t=.05)=>Math.abs(a-b)<t;
 (async()=>{
@@ -239,7 +241,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   assert.equal(await row.locator('.material-details .material-reason').textContent(),p.reason,'Full specifications must be retained');
   assert.equal(await row.locator('.material-details .material-reason').isVisible(),false);
   if(p.availability==='buy'){
-   assert.ok(p.links.some(l=>['buy','configure','quote'].includes(l.kind)),p.id+' must have a purchase or quote route, not just a PDF');
+   assert.ok(p.links.some(l=>['buy','configure','quote'].includes(l.kind)) || bom.purchasing.rows.some(r=>r.material_ids.includes(p.id)&&r.url.startsWith('https://')),p.id+' must have a purchase or quote route, not just a PDF');
    assert.ok(await row.locator('a[data-link-kind="buy"],a[data-link-kind="configure"],a[data-link-kind="quote"]').count()>0,p.id+' missing rendered purchase route');
    assert.equal(await row.locator('.material-links a').first().isVisible(),true,p.id+' purchase route must not be collapsed');
   }

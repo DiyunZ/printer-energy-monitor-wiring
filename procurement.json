@@ -817,32 +817,26 @@
     {
       "id": "fasteners",
       "item": "Mounting and bonding hardware",
-      "quantity": "Four assembly groups; buy all required hardware",
-      "model": "Screw / nut / washer schedule in Build_Package.md",
+      "quantity": "13 item lines; purchase quantities and full packs listed below",
+      "model": "Screws, nuts and washers",
       "reason": "Purchase all screws, washers and nuts in the build schedule: Q0 #6-32 × 1/4 in; carriers M3 × 12 mm; anchors M4 × 10 mm; panel supports M5 × 10 mm; dedicated #10 PE stud. Full packs and spares are priced, with no assumed lab hardware stock.",
       "status": "Thirteen order lines, including four separately purchased panel screws. Verify received stack thickness, thread engagement, aluminum bonding and at least 3 mm screw-to-floor clearance.",
       "availability": "buy",
-      "links": [
-        {
-          "label": "Fastener sizes and purchase links",
-          "url": "build.html#fasteners",
-          "kind": "buy"
-        }
-      ],
+      "links": [],
       "image": {
         "src": "assets/materials/fasteners-photo.jpg",
         "source_image": "https://simfix.com/cdn/shop/files/SIM7985A203010_20_28285P3010_29_203_e57dfe80-c934-474e-8153-6d3a3a35c121.jpg?v=1787228850&width=548",
         "kind": "reference",
         "alt": "Stainless Phillips pan-head machine screw — reference product photo",
-        "caption": "Pan-head screw reference photo. The linked schedule specifies each screw, nut and washer, including its finish; this is not a complete hardware kit.",
+        "caption": "Pan-head screw reference photo. Each screw, nut and washer, including its finish, is specified in the purchase list; this is not a complete hardware kit.",
         "source_label": "SIMFIX",
         "source_url": "https://simfix.com/products/simfix-phil-pan-machine-screw-din-7985-a2-stainless-steel-m3-x-16",
         "width": 548,
         "height": 548
       },
-      "installation": "Mounting hardware for Q0, three carriers, six cable bases and the panel PE bond. XA uses straps and the USB bushing snaps in. Use the build-package sizes and transfer-drilling instructions.",
-      "location_summary": "Q0, carriers, six cable mounts and panel PE bond.",
-      "quantity_summary": "See fastener schedule",
+      "installation": "Mounting hardware for Q0, three carriers, six cable bases, four panel supports and the panel PE bond. XA uses straps and the USB bushing snaps in. Use the build-package sizes and transfer-drilling instructions.",
+      "location_summary": "Q0, carriers, six cable mounts, four panel supports and panel PE bond.",
+      "quantity_summary": "13 items",
       "supplier": "DigiKey / Home Depot",
       "compliance": {
         "status": "Mechanical accessory",

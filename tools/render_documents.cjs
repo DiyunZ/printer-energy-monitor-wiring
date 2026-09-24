@@ -28,6 +28,7 @@ function materialPrice(p) {
  if(p.availability !== 'buy')return '';
  const rows=bom.purchasing.rows.filter(r=>r.material_ids.includes(p.id));
  if(!rows.length)throw new Error('Missing purchase price: '+p.id);
+ const directLinks=p.id==='fasteners';
  let subtotal=0;
  const lines=rows.map(r=>{
   const quantity=r.material_ids.length>1?r.quantity_by_material[p.id]:r.quantity;
@@ -35,9 +36,14 @@ function materialPrice(p) {
   const price=r.unit_price_usd.toFixed(Number(r.unit_price_usd.toFixed(2))===r.unit_price_usd?2:3);
   let calculation=r.unit==='each'?`${quantity} × $${price} each`:`${quantity} ${r.unit} × $${price}/${r.unit}`;
   if(r.pieces_per_unit>1)calculation+=` · ${r.pieces_per_unit} pieces/${r.unit}`;
-  return `<p>${rows.length>1?`<span class="price-sku">${escape(r.sku)}</span>`:''}${escape(calculation)}${rows.length>1?` = $${(cents/100).toFixed(2)}`:''}</p>`;
+  let sku=rows.length>1?`<span class="price-sku">${escape(r.sku)}</span>`:'';
+  if(directLinks){
+   sku=`<a class="price-sku" data-link-kind="buy" href="${escape(r.url)}">${escape(r.sku)} ↗</a>`;
+   calculation=r.seller+' · '+calculation;
+  }
+  return `<p>${sku}${escape(calculation)}${rows.length>1?` = $${(cents/100).toFixed(2)}`:''}</p>`;
  }).join('');
- const breakdown=rows.length>2?`<details class="price-details"><summary>${rows.length} item prices</summary>${lines}</details>`:lines;
+ const breakdown=rows.length>2&&!directLinks?`<details class="price-details"><summary>${rows.length} item prices</summary>${lines}</details>`:lines;
  return `<div class="material-price" data-material-id="${escape(p.id)}" data-subtotal-usd="${(subtotal/100).toFixed(2)}"><strong class="price-total">$${(subtotal/100).toFixed(2)}</strong> <span class="price-label">subtotal</span><div class="price-breakdown">${breakdown}</div></div>`;
 }
 let text = `# Materials checklist\n\n**□ ${toBuy.length} purchase groups · ◇ ${toFabricate.length} reuse / fabrication group · ✓ ${owned.length} confirmed owned groups${kit.length ? ` · ✓ ${kit.length} kit supplied` : ''}**\n\n${bom.scope}\n\n**Inventory basis:** ${bom.inventory_basis}\n\nA check means on hand, not electrically approved. Counts refer to material groups, not individual pieces. Needed quantities and vendor pack sizes differ. The user confirms the existing USB cable is owned. Reuse it intact; no additional data cable or USB coupler is ordered.\n\nBuy links go to specific products; Select / Configure links need a size or rating first; Quote links require a supplier quote. Reused stock and fabrication are listed separately from purchases. Check current stock, minimum orders and lead times with each supplier. No orders have been placed.\n`;
@@ -58,7 +64,7 @@ for (const [id, title, items, sourceLabel] of [['purchase-list',`□ Purchase li
  if(id==='purchase-list')text+=`Prices checked ${order.checked_on}; subtotals include purchase packs and spares. Shared 515CV stock is allocated as one connector per location. [Full order quantities and seller totals](#order-plan).\n\n`;
  if(id==='fabrication-list')text+='Mounting panel: use the professor’s offered aluminum after checking the stock. **Fabrication cost is pending and excluded from the purchase subtotal.**\n\n';
  text += `| Inventory | Item | Quantity needed | Part and purpose | ${sourceLabel} | Remaining checks |\n|---|---|---|---|---|---|\n`;
- for (const p of items) text += `| ${p.availability === 'owned' ? '✓ Owned' : p.availability === 'kit' ? '✓ Kit included' : p.availability === 'fabricate' ? '◇ Reuse / fabricate' : '□ To buy'} | <span class="material-name">${escape(p.item)}</span>${materialPhoto(p)}<a class="locate-material" data-material="${escape(p.id)}" href="index.html?material=${escape(p.id)}#layout" aria-label="View ${escape(p.item)} in 3D">View in 3D ↑</a> | ${p.quantity} | **${p.model}** — ${p.reason} | ${materialPrice(p)}${p.links.length ? p.links.map(l=>`[${l.label}](${l.url})`).join('<br>') : 'Reuse · No purchase needed'} | ${p.status}${p.compliance ? `<br>**${p.compliance.status}:** ${p.compliance.detail} [Evidence](${p.compliance.url})` : ''} |\n`;
+ for (const p of items) text += `| ${p.availability === 'owned' ? '✓ Owned' : p.availability === 'kit' ? '✓ Kit included' : p.availability === 'fabricate' ? '◇ Reuse / fabricate' : '□ To buy'} | <span class="material-name">${escape(p.item)}</span>${materialPhoto(p)}<a class="locate-material" data-material="${escape(p.id)}" href="index.html?material=${escape(p.id)}#layout" aria-label="View ${escape(p.item)} in 3D">View in 3D ↑</a> | ${p.quantity} | **${p.model}** — ${p.reason} | ${materialPrice(p)}${p.links.length ? p.links.map(l=>`[${l.label}](${l.url})`).join('<br>') : p.availability==='buy' ? '' : 'Reuse · No purchase needed'} | ${p.status}${p.compliance ? `<br>**${p.compliance.status}:** ${p.compliance.detail} [Evidence](${p.compliance.url})` : ''} |\n`;
 }
 text += '\n## Software and lab equipment\n\nArrange access separately from the enclosure purchases. These resources are not marked as owned.\n\n';
 for (const r of bom.setup_requirements) text += `- **${r.item} — ${r.action}.** ${r.reason}${r.url ? ` [DENT download](${r.url})` : ''}\n`;
@@ -150,6 +156,6 @@ const styles=`:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;colo
 for(const [input, output, title] of [['Procurement_BOM.md','materials.html','Materials and purchase links'],['Wiring_References_EN.md','references.html','Sources and design limits'],['Installation_Audit.md','installation.html','Installation audit'],['Build_Package.md','build.html','Machining and assembly package'],['Build_Documents.md','documents.html','Build documents'],['Protection_Review.md','protection.html','Protection and data review'],['Design_Revision_B.md','revision.html','Design, sourcing and component evidence']]) {
  const raw=fs.readFileSync(path.join(root,input),'utf8');
  const rendered=marked.parse(raw).replace(/<table>/g,'<div class="table-wrap"><table>').replace(/<\/table>/g,'</table></div>').replace(/<td>(R\d+)<\/td>/g,(_,id)=>`<td id="${id.toLowerCase()}">${id}</td>`);
- fs.writeFileSync(path.join(root,output),`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title} · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=18"><style>${styles}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="${input}" download>Download Markdown</a></nav>${rendered}</body></html>\n`);
+ fs.writeFileSync(path.join(root,output),`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title} · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=19"><style>${styles}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="${input}" download>Download Markdown</a></nav>${rendered}</body></html>\n`);
 }
 console.log('Generated BOM, build document hub, reference pages and installation audit');
