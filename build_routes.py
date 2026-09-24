@@ -34,7 +34,7 @@ M = {
  'D.+':position('meter',34.5,-93), 'D.-':position('meter',34.5,-75), 'D.USB':position('meter',16,118),
  'D.DC+':position('meter',-17,118), 'D.DC-':position('meter',-10,118),
  'CT.+':position('ct',-8,BODIES['ct']['size'][2]/2), 'CT.-':position('ct',8,BODIES['ct']['size'][2]/2),
- 'PLATE':(-125,60),
+ 'PLATE':tuple(DIMENSIONS['installationHardware']['panelBondXZ']),
  'AUX.L':position('outlet',-32.15,-10), 'AUX.N':position('outlet',-32.15), 'AUX.PE':position('outlet',-32.15,12),
  'AUX.FACE.L':position('outlet',33.15,-6.35), 'AUX.FACE.N':position('outlet',33.15,6.35),
  'PSU.L':position('adapter',0,-6.35), 'PSU.N':position('adapter',0,6.35),
@@ -48,27 +48,27 @@ A = {name:project(point) for name,point in M.items()}
 # 20–23: factory plug/cable paths; other paths are installed.
 # Routing waypoints are intentionally rectilinear. Component locations are not rearranged for routing.
 raw = [
- ('01','L','IN.L','Q0.IN',[(-137,116),(-137,144),(-117,144)],(-137,130),'Input hot → Q0 IN','main'),
- ('02','L','Q0.OUT','JL.1',[(-100,M['Q0.OUT'][1]),(-100,148),(-154,148),(-154,-103),(-136.6,-103)],(-154,88),'Q0 OUT → hot distribution JL','main'),
- ('03','L','JL.2','OUT.L',[(-115,-118.85),(-115,-123),(-12,-123),(-12,-175),(0,-175)],(-25,-123),'JL → printer hot; one pass through CT','main'),
- ('05','V','JL.3','D.L1',[(-125,-104),(-83,-104),(-83,32),(-33,32),(-33,165),(40,165),(40,-156),(114,-156)],(40,-15),'JL → A1 → full lead → L1 (HOT); upstream protection review required','voltage'),
- ('06','N','IN.N','JN.1',[(-170,128),(-170,-33),(-136.6,-33)],(-170,-12),'Input neutral → neutral distribution JN','neutral'),
- ('07','N','JN.2','OUT.N',[(-130.8,-36),(-148,-36),(-148,-176),(-4,-176)],(-148,-80),'JN → printer neutral; outside CT','neutral'),
- ('08','V','JN.3','D.L2',[(-125,-10),(-97,-10),(-97,38),(-24,38),(-24,159),(46,159),(46,-149),(99,-149)],(46,60),'JN → A2 → full lead → L2 (NEUTRAL)','voltage'),
- ('09','V','JN.4','D.N',[(-119.2,-17),(-91,-17),(-91,44),(-15,44),(-15,153),(52,153),(52,-142),(68,-142)],(52,125),'JN → A3 → full lead → N (NEUTRAL)','voltage'),
- ('10','PE','IN.PE','JPE.1',[(-145,140),(-145,35),(-136.6,35)],(-145,78),'Input PE → protective-earth distribution','earth'),
- ('11','PE','JPE.2','OUT.PE',[(-130.8,43),(-161,43),(-161,-185),(-8,-185)],(-161,-143),'PE → printer ground; outside CT','earth'),
- ('12','PE','JPE.3','PLATE',[],(-125,49),'PE → dedicated metal-plate bond','earth'),
- ('14','CT','CT.+','D.+',[(-63,-102),(134,-102),(134,-101)],(35,-102),'CT white (+) → current-input CH1 +','signal'),
- ('15','CT','CT.-','D.-',[(-47,-95),(142,-95),(142,-83)],(16,-95),'CT black (−) → current-input CH1 −','signal'),
+ ('01','L','IN.L','Q0.IN',[(-137,M['IN.L'][1]),(-137,144),(M['Q0.IN'][0],144)],(-137,130),'Input hot → Q0 IN','main'),
+ ('02','L','Q0.OUT','JL.1',[(-100,M['Q0.OUT'][1]),(-100,148),(-139,148),(-139,M['JL.1'][1])],(-139,88),'Q0 OUT → hot distribution JL','main'),
+ ('03','L','JL.2','OUT.L',[(M['JL.2'][0],-118.85),(-115,-118.85),(-115,-123),(-12,-123),(-12,-175),(0,-175)],(-25,-123),'JL → printer hot; one pass through CT','main'),
+ ('05','V','JL.3','D.L1',[(M['JL.3'][0],-104),(-83,-104),(-83,32),(-33,32),(-33,165),(40,165),(40,-156),(M['D.L1'][0],-156)],(40,-15),'JL → A1 → full lead → L1 (HOT); upstream protection review required','voltage'),
+ ('06','N','IN.N','JN.1',[(-145,128),(-145,M['JN.1'][1])],(-145,-12),'Input neutral → neutral distribution JN','neutral'),
+ ('07','N','JN.2','OUT.N',[(M['JN.2'][0],-36),(-130,-36),(-130,-176),(-4,-176)],(-130,-80),'JN → printer neutral; outside CT','neutral'),
+ ('08','V','JN.3','D.L2',[(M['JN.3'][0],-10),(-97,-10),(-97,38),(-24,38),(-24,159),(46,159),(46,-149),(M['D.L2'][0],-149)],(46,60),'JN → A2 → full lead → L2 (NEUTRAL)','voltage'),
+ ('09','V','JN.4','D.N',[(M['JN.4'][0],-17),(-91,-17),(-91,44),(-15,44),(-15,153),(52,153),(52,-142),(M['D.N'][0],-142)],(52,125),'JN → A3 → full lead → N (NEUTRAL)','voltage'),
+ ('10','PE','IN.PE','JPE.1',[(-134,140),(-134,M['JPE.1'][1])],(-134,78),'Input PE → protective-earth distribution','earth'),
+ ('11','PE','JPE.2','OUT.PE',[(M['JPE.2'][0],43),(-137,43),(-137,-185),(-8,-185)],(-137,-143),'PE → printer ground; outside CT','earth'),
+ ('12','PE','JPE.3','PLATE',[],(-110,49),'PE → dedicated metal-plate bond','earth'),
+ ('14','CT','CT.+','D.+',[(-63,-102),(124,-102),(124,M['D.+'][1])],(35,-102),'CT white (+) → current-input CH1 +','signal'),
+ ('15','CT','CT.-','D.-',[(-47,-95),(132,-95),(132,M['D.-'][1])],(16,-95),'CT black (−) → current-input CH1 −','signal'),
  ('16','USB','D.USB','PC',[(140,110),(140,167),(280,167)],(235,167),'DENT → one existing USB cable → ELOG; lid closed, mains unplugged','signal'),
- ('17','L','JL.4','AUX.L',[(-119.2,-165),(30,-165),(30,-83),(-97.15,-83)],(-97.15,-67),'JL → internal XA cord hot; before CT','aux'),
- ('18','N','JN.5','AUX.N',[(-105,-48.85),(-105,-156),(24,-156),(24,-89),(-101,-89),(-101,-40)],(-101,-110),'JN → internal XA cord neutral','aux'),
- ('19','PE','JPE.4','AUX.PE',[(-119.2,52),(-99,52),(-99,-28)],(-99,3),'PE → internal XA ground contact','earth'),
- ('20','L','AUX.FACE.L','PSU.L',[],(-24,-46.35),'Internal adapter AC blade: hot contact','aux'),
- ('21','N','AUX.FACE.N','PSU.N',[],(-24,-33.65),'Internal adapter AC blade: neutral contact','aux'),
- ('22','DC','PSU.DC+','D.DC+',[(-16.85,17),(30,17),(30,179),(150,179),(150,118),(74,118)],(150,153),'Original adapter cable → logger: center positive; entirely inside','aux'),
- ('23','DC','PSU.DC-','D.DC-',[(-9.85,23),(36,23),(36,185),(154,185),(154,125),(81,125)],(154,140),'Original adapter cable → logger: sleeve negative; entirely inside','aux'),
+ ('17','L','JL.4','AUX.L',[(M['JL.4'][0],-165),(30,-165),(30,-83),(M['AUX.L'][0],-83)],(M['AUX.L'][0],-67),'JL → internal XA cord hot; before CT','aux'),
+ ('18','N','JN.5','AUX.N',[(-90,M['JN.5'][1]),(-90,-156),(24,-156),(24,-89),(-95,-89),(-95,-40)],(-95,-110),'JN → internal XA cord neutral','aux'),
+ ('19','PE','JPE.4','AUX.PE',[(M['JPE.4'][0],52),(-89,52),(-89,-28)],(-89,3),'PE → internal XA ground contact','earth'),
+ ('20','L','AUX.FACE.L','PSU.L',[],(-12,-46.35),'Internal adapter AC blade: hot contact','aux'),
+ ('21','N','AUX.FACE.N','PSU.N',[],(-12,-33.65),'Internal adapter AC blade: neutral contact','aux'),
+ ('22','DC','PSU.DC+','D.DC+',[(M['PSU.DC+'][0],17),(30,17),(30,179),(126,179),(126,118),(M['D.DC+'][0],118)],(126,153),'Original adapter cable → logger: center positive; entirely inside','aux'),
+ ('23','DC','PSU.DC-','D.DC-',[(M['PSU.DC-'][0],23),(36,23),(36,185),(130,185),(130,125),(M['D.DC-'][0],125)],(130,140),'Original adapter cable → logger: sleeve negative; entirely inside','aux'),
 ]
 wires = [dict(id=n,kind=k,start=a,end=b,points=[A[a],*[project(p) for p in m],A[b]],badge=project(lab),description=d,group=g) for n,k,a,b,m,lab,d,g in raw]
 CT_WINDOW = (*project(position('ct',-BODIES['ct']['size'][0]/2,-3)), *project(position('ct',BODIES['ct']['size'][0]/2,3)))
@@ -319,6 +319,7 @@ def main():
         price=material_price(p, materials['purchasing'])
         material_rows[group].append('<tr id="material-'+E(p['id'])+'" data-availability="'+E(p['availability'])+'"><td data-label="Inventory"><span class="inventory-badge '+p['availability']+'">'+badge+'</span></td><td data-label="Material"><span class="material-name">'+E(p['item'])+'</span>'+material_photo(p)+'<a class="locate-material" data-material="'+E(p['id'])+'" href="?material='+E(p['id'])+'#layout" aria-label="View '+E(p['item'])+' in 3D">View in 3D ↑</a></td><td data-label="Quantity needed">'+E(p.get('quantity_summary',p['quantity']))+'</td><td data-label="Part / details"><strong>'+E(p['model'])+'</strong>'+notice+details+'</td><td class="material-links" data-label="'+E(source_label)+'">'+price+(''.join(purchase_links) if purchase_links else '<span class="reuse-note">Reuse</span>')+'</td></tr>')
     html=(OUT/'page_template.html').read_text().replace('<!-- MAIN_DIAGRAM -->',svg).replace('<!-- DETAIL_DIAGRAM -->',detail).replace('<!-- CONNECTION_ROWS -->',rows).replace('<!-- BUY_ROWS -->',''.join(material_rows['buy'])).replace('<!-- FABRICATE_ROWS -->',''.join(material_rows['fabricate'])).replace('<!-- OWNED_ROWS -->',''.join(material_rows['owned'])).replace('{{BUY_COUNT}}',str(len(material_rows['buy']))).replace('{{FABRICATE_COUNT}}',str(len(material_rows['fabricate']))).replace('{{OWNED_COUNT}}',str(len(material_rows['owned']))).replace('{{REV}}',REV)
+    html=html.replace('{{SELLER_COUNT}}',str(len({r['seller'] for r in materials['purchasing']['rows']})))
     html=html.replace('{{MATERIAL_TOTAL}}',format(materials['purchasing']['material_subtotal_usd'],'.2f'))
     html=html.replace('{{PRICE_DATE}}',E(materials['purchasing']['checked_on']))
     (OUT/'index.html').write_text(html)

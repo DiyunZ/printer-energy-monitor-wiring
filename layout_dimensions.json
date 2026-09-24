@@ -1,31 +1,36 @@
 {
   "units": "mm",
-  "revision": "September 23, 2026 · revision D · one existing USB cable",
+  "revision": "September 24, 2026 · BUD NBF-32126 procurement and layout",
   "coordinates": "X across the panel; Y above the panel underside; Z along the panel, negative toward the printer exit (rear), positive toward Q0 (front). One scene unit is one millimetre. The wiring plan projects the same X/Z positions with rear at the top. Dimensions below are X × Y × Z unless noted.",
   "parts": [
     {
       "id": "case",
-      "name": "Hammond PCJ16148 · opaque cover",
+      "name": "BUD NBF-32126 · opaque hinged cover",
       "size": [
-        393.8016,
-        240.2078,
-        479.3996
+        318.475376100268,
+        164.30000004,
+        411.0990002000001
       ],
-      "status": "PCJ common-base layout template; solid lid not independently modeled",
-      "source": "https://www.hammfg.com/files/parts/pdf/PCJ16148.pdf",
-      "note": "PCJ16148 selected. Manufacturer series table gives the same enclosure and panel dimensions as PCJ16148CC. Base geometry and lid silhouette are inherited from the clear-cover STEP; gray rendering represents the selected opaque cover. Confirm received solid-lid geometry. Right wall has a protected direct USB cable exit; other wall interfaces are Q0 and two power glands. No certification of the modified assembly is claimed."
+      "status": "Manufacturer common-base STEP; opaque lid silhouette illustrative",
+      "source": "https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/",
+      "note": "Selected ABS/PC NBF-32126, nominal 400 × 300 × 160 mm. The displayed CAD envelope includes projecting hinges and latches. Factory STEP linked on its page uses the NBF-32226 common base and lid outline; opaque cover is rendered gray. Preserve the hinges, latches and gasket. Custom openings remove any claim to the original ingress rating. Closed-cover operation and qualified electrical acceptance remain required. Unplug supply before opening the latches.",
+      "position": [
+        -0.7376879501339886,
+        67.65025992400001,
+        -1.4210854715202004e-14
+      ]
     },
     {
       "id": "panel",
       "name": "Reused aluminum panel · provisional 1.90 mm",
       "size": [
-        327.025,
+        260,
         1.89738,
-        374.65
+        340
       ],
       "status": "Proposed fabrication template; stock not measured",
-      "source": "https://www.hammfg.com/files/parts/pdf/PCJ16148.pdf",
-      "note": "Use the scrap aluminum offered by Professor Clemon instead of buying 14R1513. Target outline 327.025 × 374.65 mm; modeled thickness 1.89738 mm is a provisional 1.90 mm template, not a measurement of his stock. Confirm thickness, flatness, stiffness and usable area before cutting. Retain a dedicated PE bond using hardware and a method suitable for aluminum. The CAD template retains the common panel mounting features. Actual stock thickness must replace the modeled 1.89738 mm before machining; adjust all affected stacks.",
+      "source": "https://www.budind.com/wp-content/uploads/2019/01/hbnbf32226.pdf",
+      "note": "Proposed 260 × 340 mm aluminum panel with 10 mm corner chamfers. Thickness 1.89738 mm is provisional; measure stock and verify M5 support pattern before fabrication.",
       "position": [
         0,
         0.94869,
@@ -41,7 +46,7 @@
         216
       ],
       "position": [
-        91,
+        81,
         29.4,
         -8
       ],
@@ -75,16 +80,18 @@
         47
       ],
       "position": [
-        -112,
-        120,
-        179.14
+        -107,
+        80,
+        167.513841
       ],
       "status": "Catalog body; direct wall mount",
       "source": "https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf",
-      "note": "Carling CA1-B0-24-615-121-DG. Mount directly against the inner front wall, with the handle nose through the manufacturer rectangle. Two Keystone 9904 #6-32 × 3/8 in screws and 4699 flat washers, nominally 0.031 in (0.79 mm); nominal engagement 3.96 mm into 4.95 mm inserts. Measure the received stack and reject bottoming before clamping. Catalog torque: mounting 0.8–1.0 N·m; #10-32 studs 1.7–2.3 N·m. Outer screw-fixed enclosure guards terminals; unplug SUPPLY and verify dead before removing the cover. No separate speculative wall insert or live-service access.",
+      "note": "Carling CA1-B0-24-615-121-DG retained. Mount in the front wall at Y=80 mm to fit the shallower enclosure. Two Keystone 9903 #6-32 × 1/4 in screws and 4699 washers give about 2.56 mm nominal engagement into 4.95 mm inserts through the 3 mm wall. Verify actual engagement, clamping and no bottoming. Mounting torque 0.8–1.0 N·m; #10-32 studs 1.7–2.3 N·m. Operate only with the cover closed; unplug supply and verify dead before opening.",
       "terminalPitch": 49.28,
       "mountPitch": 52.37,
-      "studProjection": 15.87
+      "studProjection": 15.87,
+      "wallOuterZ": 194.013841,
+      "mountingScrewLengthMm": 6.35
     },
     {
       "id": "terminals",
@@ -107,7 +114,7 @@
         39.1
       ],
       "position": [
-        -65,
+        -53,
         22.25,
         -40
       ],
@@ -124,7 +131,7 @@
         64
       ],
       "position": [
-        -16.85,
+        -4.85,
         22.25,
         -40
       ],
@@ -163,17 +170,17 @@
     "height": 1790,
     "shellBounds": {
       "min": [
-        -201.03952,
-        -21.4376,
-        -216.61046
+        -159.64973,
+        -14.49974,
+        -205.5495
       ],
       "max": [
-        191.21046,
-        185.9534,
-        216.61046
+        156.911963,
+        125.80026,
+        205.5495
       ]
     },
-    "note": "Shell bounds are the top-view envelope of enclosure.bin mesh 0; the mounting panel is mesh 33. The plan is a placement reference, not a fabrication template. Terminal symbols are separated for readable connectivity."
+    "note": "Top-view shell envelope from the BUD common-base factory STEP. The aluminum panel is a custom 260 × 340 mm blank. Plan is a placement reference; use the machining files and received-part checks."
   },
   "instances": [
     {
@@ -185,7 +192,7 @@
         52.8
       ],
       "position": [
-        -125,
+        -110,
         10.45,
         -128
       ],
@@ -200,7 +207,7 @@
         52.8
       ],
       "position": [
-        -125,
+        -110,
         10.45,
         -58
       ],
@@ -215,7 +222,7 @@
         52.8
       ],
       "position": [
-        -125,
+        -110,
         10.45,
         17
       ],
@@ -230,7 +237,7 @@
         27
       ],
       "position": [
-        -187,
+        -148.567903,
         43,
         128
       ],
@@ -248,7 +255,7 @@
       "position": [
         0,
         36,
-        -213
+        -199.245818
       ],
       "axis": "z",
       "label": "Printer exit"
@@ -352,7 +359,7 @@
       "id": "usb-entry",
       "part": "entries",
       "position": [
-        175.805151,
+        137.627363,
         55,
         167
       ],
@@ -377,12 +384,12 @@
     "source": "tools/cad/enclosure_model.py",
     "cableMountsXZ": [
       [
-        -153,
+        -122,
         80
       ],
       [
         8,
-        -175
+        -163
       ],
       [
         38,
@@ -397,20 +404,20 @@
         130
       ],
       [
-        145,
-        158
+        122,
+        154
       ]
     ],
     "panelBondXZ": [
-      -125.0,
-      60.0
+      -110,
+      60
     ],
     "cableSupports": [
       {
         "id": "mains",
         "label": "Supply and switched hot",
         "holeXZ": [
-          -153,
+          -122,
           80
         ],
         "axis": "z",
@@ -426,7 +433,7 @@
         "label": "Internal XA branch conductors",
         "holeXZ": [
           8,
-          -175
+          -163
         ],
         "axis": "x",
         "routes": [
@@ -484,8 +491,8 @@
         "id": "dc",
         "label": "Original DC cable and sleeved USB lead",
         "holeXZ": [
-          145,
-          158
+          122,
+          154
         ],
         "axis": "z",
         "routes": [
@@ -499,7 +506,7 @@
       {
         "id": "xa",
         "part": "outlet",
-        "x": -68,
+        "x": -56,
         "z": -40,
         "slotZ": [
           -65,
@@ -510,7 +517,7 @@
       {
         "id": "adapter",
         "part": "adapter",
-        "x": -16.85,
+        "x": -4.85,
         "z": -40,
         "slotZ": [
           -77,
@@ -518,7 +525,32 @@
         ],
         "topY": 43.6
       }
-    ]
+    ],
+    "panelSupportsXZ": [
+      [
+        -114.875,
+        -162.625
+      ],
+      [
+        114.875,
+        -162.625
+      ],
+      [
+        -114.875,
+        162.625
+      ],
+      [
+        114.875,
+        162.625
+      ]
+    ],
+    "carrierScrewLengthMm": 12,
+    "anchorScrewLengthMm": 10,
+    "loggerStrapX": [
+      40,
+      122
+    ],
+    "panelCornerChamferMm": 10
   },
   "usbService": {
     "mode": "offline-closed-lid",
@@ -542,42 +574,42 @@
     "sleeveOuterRadiusMm": 5.6,
     "route": [
       [
-        107,
+        97,
         23,
         124
       ],
       [
-        107,
+        97,
         23,
-        154
+        151
       ],
       [
-        117,
+        105,
         23,
-        177
+        173
       ],
       [
-        146,
+        120,
         23,
-        177
+        173
       ],
       [
-        150,
+        124,
         23,
         142
       ],
       [
-        165,
+        128,
         42,
-        146
+        147
       ],
       [
-        171,
+        136,
         55,
         167
       ],
       [
-        190,
+        153,
         55,
         167
       ]
@@ -592,6 +624,7 @@
       5.21
     ],
     "dimensionSource": "https://www.usb.org/document-library/usb-20-specification",
-    "cableLengthBasis": "Conservative 1.8 m routing allowance from the kit datasheet; the current replacement is listed as 2 m. Retain the full owned cable; actual reach is checked during assembly."
+    "cableLengthBasis": "Conservative 1.8 m routing allowance from the kit datasheet; the current replacement is listed as 2 m. Retain the full owned cable; actual reach is checked during assembly.",
+    "wallThicknessMm": 3
   }
 }

@@ -7,7 +7,7 @@ import ezdxf
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from matplotlib.patches import Circle, Rectangle, FancyBboxPatch
+from matplotlib.patches import Circle, Rectangle, FancyBboxPatch, Polygon
 from matplotlib.backends.backend_pdf import PdfPages
 import enclosure_model as model
 root=Path(__file__).resolve().parents[2]
@@ -52,12 +52,15 @@ def drawing(name, features, width, height, note):
             coords=[(x-w/2,v-h/2),(x+w/2,v-h/2),(x+w/2,v+h/2),(x-w/2,v+h/2)]
             ms.add_lwpolyline(coords,close=True,dxfattribs={'layer':'REFERENCE'})
             ax.add_patch(Rectangle((x-w/2,v-h/2),w,h,fill=False,ec='#258283',ls='--',lw=.8));ax.text(x,v,p['id'],fontsize=8,ha='center',color='#258283')
-        ax.add_patch(Rectangle((-width/2,-height/2),width,height,fill=False,ec='#80939d'))
+        x,y=width/2,height/2;c=model.panel_corner_chamfer_mm
+        outline=[(-x+c,-y),(x-c,-y),(x,-y+c),(x,y-c),(x-c,y),(-x+c,y),(-x,y-c),(-x,-y+c)]
+        ms.add_lwpolyline(outline,close=True,dxfattribs={'layer':'CUT'})
+        ax.add_patch(Polygon(outline,fill=False,ec='#80939d'))
         ax.set_xlim(-width/2-18,width/2+18);ax.set_ylim(-height/2-10,height/2+10)
     else:
         ax.set_xlim(-width/2,width/2);ax.set_ylim(0,height)
     ax.set_aspect('equal');ax.grid(alpha=.12);ax.axhline(0,c='#617989',lw=.8);ax.axvline(0,c='#617989',lw=.8)
-    ax.set_xlabel('U (mm)');ax.set_ylabel('V (mm)');ax.set_title(name.upper()+' / Build package D',loc='left',fontsize=13,weight='bold')
+    ax.set_xlabel('U (mm)');ax.set_ylabel('V (mm)');ax.set_title(name.upper()+' / BUD NBF-32126',loc='left',fontsize=13,weight='bold')
     fig.subplots_adjust(left=.07,right=.58,bottom=.22 if name=='panel' else .14,top=.88)
     fig.text(.06,.95,'ENGINEERING REVIEW — release conditions in Build_Package.md',fontsize=9,color='#8c4d13')
     tableax=fig.add_axes([.62,.2,.36,.63]);tableax.axis('off')
@@ -78,11 +81,11 @@ with PdfPages(out/'Machining_Drawings.pdf') as pdf:
             u={'front':x,'rear':-x,'right':-z,'left':z}[wall]
             features.append(f|{'uv':(u,y/c)})
         axes={'front':'U = X','rear':'U = -X','right':'U = -Z','left':'U = Z'}[wall]
-        fig=drawing(wall,features,420 if wall in ['right','left'] else 365,200,
-          f'Outside face view. {axes}; V = Y / cos(0.937 deg), measured up along wall.\nOrigin: wall plane at Y=0 and case centerline. Y=0 is the mounting-panel underside plane; use STEP datums to fixture.')
+        fig=drawing(wall,features,400 if wall in ['right','left'] else 300,130,
+          f'Outside face view. {axes}; V = Y / cos(1 deg), measured up along wall.\nOrigin: wall plane at Y=0 and case centerline. Y=0 is the mounting-panel underside plane; use STEP datums to fixture.')
         pdf.savefig(fig);plt.close(fig)
     features=[f|{'uv':(f['at'][0],-f['at'][1])} for f in model.panel_features()]
-    fig=drawing('panel',features,327.025,374.65,
-        'View from lid. U = X; V = -Z. Origin: center of aluminum template. Rear = +V. Measure stock; transfer enclosure-support pattern.\nDashed WAGO carrier envelopes: locate as shown, then transfer-drill two D3.3 holes per actual carrier; do not cut outlines.')
+    fig=drawing('panel',features,*model.panel_outline_mm,
+        'View from lid. U = X; V = -Z. Origin: center of aluminum template. Rear = +V. 260 x 340 mm blank; four 10 mm corner chamfers. Confirm M5 support pattern.\nDashed WAGO carrier envelopes: locate as shown, then transfer-drill two D3.3 holes per actual carrier; do not cut outlines.')
     pdf.savefig(fig);plt.close(fig)
 print('Generated five DXFs, five SVGs and five-page machining drawing PDF.')

@@ -9,7 +9,7 @@ const base=process.env.CHECK_URL||'http://127.0.0.1:8770/';
 const out=process.env.QA_OUTPUT;
 const root=path.resolve(__dirname,'..');
 const bom=JSON.parse(fs.readFileSync(path.join(root,'procurement.json')));
-const expectedPrices={enclosure:160.56,breaker:40.32,receptacle:6.99,connectors:3.51,carriers:6.69,cord:19.89,'supply-plug':3.96,'printer-connector':6.99,'cord-glands':5.94,'internal-wire':3.36,'ring-lugs':3.63,'tie-mounts':4.08,'cable-ties':3.16,fasteners:25.85,'logger-restraint':10.77,'usb-bushing':0.14,'usb-sleeve':9.39};
+const expectedPrices={enclosure:90.81,breaker:40.32,receptacle:6.99,connectors:3.51,carriers:6.69,cord:19.89,'supply-plug':3.96,'printer-connector':6.99,'cord-glands':5.94,'internal-wire':3.36,'ring-lugs':3.63,'tie-mounts':4.08,'cable-ties':3.16,fasteners:27.31,'logger-restraint':10.77,'usb-bushing':0.14,'usb-sleeve':9.39};
 async function checkPrices(page){
  assert.deepEqual([...new Set(bom.purchasing.rows.map(r=>r.seller))].sort(),['DigiKey','Home Depot','Master Electronics']);
  for(const r of bom.purchasing.rows.filter(r=>r.material_ids.includes('fasteners')))assert.ok(r.quantity*r.pieces_per_unit>=r.installed_quantity,'Purchase packs must cover installed hardware: '+r.sku);
@@ -26,7 +26,7 @@ async function checkPrices(page){
  assert.match(await page.locator('.material-price[data-material-id="cord"]').textContent(),/13 ft × \$1\.53\/ft/);
  const hardware=page.locator('.material-price[data-material-id="fasteners"]');
  await hardware.locator('summary').click();
- assert.equal(await hardware.locator('.price-breakdown p:visible').count(),12);
+ assert.equal(await hardware.locator('.price-breakdown p:visible').count(),13);
  await hardware.locator('summary').click();
 }
 const close=(a,b,t=.05)=>Math.abs(a-b)<t;
@@ -54,6 +54,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  assert.equal(await page.locator('#wiring').isVisible(),false);
  assert.equal(await page.locator('.materials tbody tr:visible').count(),18);
  assert.equal(await page.locator('#purchase-materials tbody tr').count(),17);
+ assert.match(await page.locator('#hardware > .meta').innerText(),/17 purchase groups from 3 sellers/);
  assert.equal(await page.locator('#purchase-materials [data-availability]:not([data-availability="buy"])').count(),0);
  assert.equal(await page.locator('#fabrication-materials #material-panel').count(),1);
  assert.equal(await page.locator('#fabrication-materials .material-price').count(),0);
@@ -321,9 +322,9 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
    for(const href of localLinks)assert.equal((await page.request.get(new URL(href,base).href)).status(),200,href);
   } else if(file==='revision.html') {
    const text=await page.locator('body').innerText();
-   assert.match(text,/three planned order sources/);
-   assert.match(text,/19.33/);
-   assert.match(text,/Altech 1C15UL/);
+   assert.match(text,/three sellers/);
+   assert.match(text,/68.29/);
+   assert.match(text,/Altech DIN breaker/);
    assert.equal(await page.locator('#breaker-options').count(),1);
   } else if(file==='protection.html') {
    const text=await page.locator('body').innerText();

@@ -1,331 +1,92 @@
 {
-  "source": "https://www.hammfg.com/files/parts/stp/PCJ16148CC.zip",
-  "drawing": "https://www.hammfg.com/files/parts/pdf/PCJ16148CC.pdf",
+  "source": "https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/",
+  "drawing": "https://www.budind.com/wp-content/uploads/2019/01/hbnbf32226.pdf",
   "units": "mm",
-  "conversion": "occt-import-js 0.0.23; 0.45 mm linear deflection; no dimensional rescaling; Y-up with mounting-panel underside at 0",
+  "conversion": "Factory STEP; rotate Y -90 deg, translate Y +119.30026 mm. No scaling. build123d 0.11.1.",
+  "fabrication": "BUD common shell and custom aluminum panel machined; lid and latches retained from linked factory STEP. Opaque-cover silhouette illustrative. Carrier holes transfer-drilled.",
+  "panel_insertion": {
+    "id": "panel",
+    "travel_mm": 300,
+    "outline_mm": [
+      260.0,
+      340.0
+    ],
+    "corner_chamfer_mm": 10.0,
+    "thickness_mm": 1.89738,
+    "position_mm": [
+      0,
+      0.94869,
+      0
+    ],
+    "intrusion_mm3": 0.0,
+    "method": "Exact chamfered blank swept vertically; support contact excluded by 0.0001 mm.",
+    "result": "pass"
+  },
+  "wall_opening_ids": [
+    "Q0 toggle",
+    "Q0 fixing -1",
+    "Q0 fixing +1",
+    "SUPPLY",
+    "OUTPUT",
+    "USB cable exit"
+  ],
   "meshes": [
     {
-      "name": "CAD-001621_Long_Snap",
+      "name": "BUD NBF common base",
       "role": "shell",
       "positionOffset": 0,
-      "positionCount": 263931,
-      "indexOffset": 1055724,
-      "indexCount": 359988
+      "positionCount": 117354,
+      "indexOffset": 469416,
+      "indexCount": 158559
     },
     {
-      "name": "70-60250",
-      "role": "hardware",
-      "positionOffset": 2495676,
-      "positionCount": 1497,
-      "indexOffset": 2501664,
-      "indexCount": 1434
-    },
-    {
-      "name": "70-60250",
-      "role": "hardware",
-      "positionOffset": 2507400,
-      "positionCount": 1497,
-      "indexOffset": 2513388,
-      "indexCount": 1434
-    },
-    {
-      "name": "70-60250",
-      "role": "hardware",
-      "positionOffset": 2519124,
-      "positionCount": 1497,
-      "indexOffset": 2525112,
-      "indexCount": 1434
-    },
-    {
-      "name": "70-60250",
-      "role": "hardware",
-      "positionOffset": 2530848,
-      "positionCount": 1497,
-      "indexOffset": 2536836,
-      "indexCount": 1434
-    },
-    {
-      "name": "70-60250",
-      "role": "hardware",
-      "positionOffset": 2542572,
-      "positionCount": 1497,
-      "indexOffset": 2548560,
-      "indexCount": 1434
-    },
-    {
-      "name": "70-60250",
-      "role": "hardware",
-      "positionOffset": 2554296,
-      "positionCount": 1497,
-      "indexOffset": 2560284,
-      "indexCount": 1434
-    },
-    {
-      "name": "70-60250",
-      "role": "hardware",
-      "positionOffset": 2566020,
-      "positionCount": 1497,
-      "indexOffset": 2572008,
-      "indexCount": 1434
-    },
-    {
-      "name": "70-60250",
-      "role": "hardware",
-      "positionOffset": 2577744,
-      "positionCount": 1497,
-      "indexOffset": 2583732,
-      "indexCount": 1434
-    },
-    {
-      "name": "70-60250",
-      "role": "hardware",
-      "positionOffset": 2589468,
-      "positionCount": 1497,
-      "indexOffset": 2595456,
-      "indexCount": 1434
-    },
-    {
-      "name": "70-60250",
-      "role": "hardware",
-      "positionOffset": 2601192,
-      "positionCount": 1497,
-      "indexOffset": 2607180,
-      "indexCount": 1434
-    },
-    {
-      "name": "70-60250",
-      "role": "hardware",
-      "positionOffset": 2612916,
-      "positionCount": 1497,
-      "indexOffset": 2618904,
-      "indexCount": 1434
-    },
-    {
-      "name": "70-60250",
-      "role": "hardware",
-      "positionOffset": 2624640,
-      "positionCount": 1497,
-      "indexOffset": 2630628,
-      "indexCount": 1434
-    },
-    {
-      "name": "70-60250",
-      "role": "hardware",
-      "positionOffset": 2636364,
-      "positionCount": 1497,
-      "indexOffset": 2642352,
-      "indexCount": 1434
-    },
-    {
-      "name": "70-60250",
-      "role": "hardware",
-      "positionOffset": 2648088,
-      "positionCount": 1497,
-      "indexOffset": 2654076,
-      "indexCount": 1434
-    },
-    {
-      "name": "CAD-001622_CAD-001622_CLEAR",
+      "name": "Opaque cover silhouette",
       "role": "lid",
-      "positionOffset": 2659812,
-      "positionCount": 103416,
-      "indexOffset": 3073476,
-      "indexCount": 131544
+      "positionOffset": 1103652,
+      "positionCount": 59727,
+      "indexOffset": 1342560,
+      "indexCount": 82962
     },
     {
-      "name": "CAD-002552",
-      "role": "lid",
-      "positionOffset": 3599652,
-      "positionCount": 1392,
-      "indexOffset": 3605220,
-      "indexCount": 1200
-    },
-    {
-      "name": "55-103275316_PreviewCfg",
-      "role": "lid",
-      "positionOffset": 3610020,
-      "positionCount": 1953,
-      "indexOffset": 3617832,
-      "indexCount": 2094
-    },
-    {
-      "name": "70-006ORING",
-      "role": "lid",
-      "positionOffset": 3626208,
-      "positionCount": 5652,
-      "indexOffset": 3648816,
-      "indexCount": 9072
-    },
-    {
-      "name": "55-103275316_PreviewCfg",
-      "role": "lid",
-      "positionOffset": 3685104,
-      "positionCount": 1953,
-      "indexOffset": 3692916,
-      "indexCount": 2094
-    },
-    {
-      "name": "55-103275316_PreviewCfg",
-      "role": "lid",
-      "positionOffset": 3701292,
-      "positionCount": 1953,
-      "indexOffset": 3709104,
-      "indexCount": 2094
-    },
-    {
-      "name": "55-103275316_PreviewCfg",
-      "role": "lid",
-      "positionOffset": 3717480,
-      "positionCount": 1953,
-      "indexOffset": 3725292,
-      "indexCount": 2094
-    },
-    {
-      "name": "70-006ORING",
-      "role": "lid",
-      "positionOffset": 3733668,
-      "positionCount": 5652,
-      "indexOffset": 3756276,
-      "indexCount": 9072
-    },
-    {
-      "name": "70-006ORING",
-      "role": "lid",
-      "positionOffset": 3792564,
-      "positionCount": 5652,
-      "indexOffset": 3815172,
-      "indexCount": 9072
-    },
-    {
-      "name": "70-006ORING",
-      "role": "lid",
-      "positionOffset": 3851460,
-      "positionCount": 5652,
-      "indexOffset": 3874068,
-      "indexCount": 9072
-    },
-    {
-      "name": "2428001",
+      "name": "Latch 1",
       "role": "hardware",
-      "positionOffset": 3910356,
-      "positionCount": 11427,
-      "indexOffset": 3956064,
-      "indexCount": 13122
+      "positionOffset": 1674408,
+      "positionCount": 21933,
+      "indexOffset": 1762140,
+      "indexCount": 32964
     },
     {
-      "name": "55-103212316",
+      "name": "Latch 2",
       "role": "hardware",
-      "positionOffset": 4008552,
-      "positionCount": 8184,
-      "indexOffset": 4041288,
-      "indexCount": 7740
+      "positionOffset": 1893996,
+      "positionCount": 21933,
+      "indexOffset": 1981728,
+      "indexCount": 32964
     },
     {
-      "name": "2428001",
-      "role": "hardware",
-      "positionOffset": 4072248,
-      "positionCount": 11427,
-      "indexOffset": 4117956,
-      "indexCount": 13122
-    },
-    {
-      "name": "55-103212316",
-      "role": "hardware",
-      "positionOffset": 4170444,
-      "positionCount": 8184,
-      "indexOffset": 4203180,
-      "indexCount": 7740
-    },
-    {
-      "name": "2428001",
-      "role": "hardware",
-      "positionOffset": 4234140,
-      "positionCount": 11427,
-      "indexOffset": 4279848,
-      "indexCount": 13122
-    },
-    {
-      "name": "55-103212316",
-      "role": "hardware",
-      "positionOffset": 4332336,
-      "positionCount": 8184,
-      "indexOffset": 4365072,
-      "indexCount": 7740
-    },
-    {
-      "name": "2428001",
-      "role": "hardware",
-      "positionOffset": 4396032,
-      "positionCount": 11427,
-      "indexOffset": 4441740,
-      "indexCount": 13122
-    },
-    {
-      "name": "55-103212316",
-      "role": "hardware",
-      "positionOffset": 4494228,
-      "positionCount": 8184,
-      "indexOffset": 4526964,
-      "indexCount": 7740
-    },
-    {
-      "name": "70-60825-2",
+      "name": "Reused aluminum panel",
       "role": "panel",
-      "positionOffset": 4557924,
-      "positionCount": 10098,
-      "indexOffset": 4598316,
-      "indexCount": 10032
-    },
-    {
-      "name": "55-1032516_PreviewCfg",
-      "role": "panel",
-      "positionOffset": 4638444,
-      "positionCount": 3246,
-      "indexOffset": 4651428,
-      "indexCount": 4956
-    },
-    {
-      "name": "55-1032516_PreviewCfg",
-      "role": "panel",
-      "positionOffset": 4671252,
-      "positionCount": 3246,
-      "indexOffset": 4684236,
-      "indexCount": 4956
-    },
-    {
-      "name": "55-1032516_PreviewCfg",
-      "role": "panel",
-      "positionOffset": 4704060,
-      "positionCount": 3246,
-      "indexOffset": 4717044,
-      "indexCount": 4956
-    },
-    {
-      "name": "55-1032516_PreviewCfg",
-      "role": "panel",
-      "positionOffset": 4736868,
-      "positionCount": 3246,
-      "indexOffset": 4749852,
-      "indexCount": 4956
+      "positionOffset": 2113584,
+      "positionCount": 10296,
+      "indexOffset": 2154768,
+      "indexCount": 10152
     }
   ],
   "bounds": {
     "min": [
-      -201.03951524879008,
-      -23.520400000000024,
-      -239.69979999999998
+      -159.975376000268,
+      -14.499740095999996,
+      -205.54950010000005
     ],
     "max": [
-      192.76208475120993,
-      216.68739999999997,
-      239.69979999999998
+      158.50000010000002,
+      149.800259944,
+      205.54950010000002
     ],
     "size": [
-      393.8016,
-      240.2078,
-      479.39959999999996
+      318.475376100268,
+      164.30000004,
+      411.0990002000001
     ]
-  },
-  "sourceStepSha256": "df50fe8c21b6777720d72a9c30f8983c156294afbf1cdb82c1c4a936318eb318",
-  "fabrication": "Project openings in shell 0 and panel 33; build123d 0.11.1, 0.3 mm tessellation; other meshes retained. Carrier fixing holes transfer-drilled, not in mesh."
+  }
 }

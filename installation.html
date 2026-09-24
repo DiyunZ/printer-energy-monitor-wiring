@@ -6,7 +6,7 @@
 <p><a href="index.html#assembly-preview">Inspect the 3D installation stages</a> · <a href="materials.html">Materials and buying links</a> · <a href="installation_checks.json">Machine-readable checks</a></p>
 <h2>Corrections from the audit</h2>
 <ul>
-<li>Replaced the clear-cover box selection with the same-size opaque PCJ16148; CAD retains the common-base template and an illustrative lid silhouette.</li>
+<li>Selected the in-stock BUD NBF-32126 and regenerated the common-base machining, chamfered aluminum panel, fasteners and placement. Opaque lid silhouette remains illustrative.</li>
 <li>Proposed reuse of the professor’s aluminum sheet, with stock measurement and aluminum bonding held open.</li>
 <li>Moved XA and the original adapter inside. XA uses the same 515CV SKU as the printer output, with a continuous 14/3 cord branch.</li>
 <li>Removed the round DC extension, KVT frame and insert from the active BOM and model. Restored XA and DC wall stock; one protected direct-cable opening supports closed-lid export.</li>
@@ -42,13 +42,13 @@
 <p>These watts-to-amps values assume unity power factor and are not current ratings. Q0 supplies the selected printer plus the logger adapter and voltage tap. A 15 A breaker / connector proposal is not approval for a 15 A continuous load. No simultaneous three-printer load or separately powered accessory is included.</p>
 <h2 id="simulation">Installation simulation</h2>
 
-<p>Axis-aligned body envelopes, continuous vertical swept volumes against the machined Hammond shell, nine lid rays per body and sourced interface arithmetic. Shell triangulation deflection is 0.3 mm; numerical seating-contact exclusion is 0.0001 mm. Neither is a manufacturing tolerance.</p>
+<p>Axis-aligned equipment envelopes, exact chamfered-panel clearance and continuous vertical swept volumes against the machined BUD common-base shell, nine lid rays per body and sourced interface arithmetic. Shell triangulation deflection is 0.3 mm; numerical seating-contact exclusion is 0.0001 mm. Neither is a manufacturing tolerance.</p>
 <p>The analysis uses the checked-in component coordinates and actual shell triangles. It is not an FEA, tolerance study, collision-free cable-routing proof, thermal test, electrical clearance assessment or physical dry fit. The closed-lid check samples nine rays against the lid skin; it does not establish the smallest clearance to every lid fastener or operating part.</p>
 <h3>1. Verify stock and machine empty parts</h3>
 <p>Measure the offered aluminum and received enclosure. Close thickness, mounting and bonding decisions; use the linked machining files. The right wall has one Ø22.2 mm USB cable exit; no USB flange fixing, XA or DC openings. Dry-fit the bushing and cable, deburr all holes and eight strap slots, and clear chips.</p>
 <p><strong>Result:</strong> Digital cut and restored-wall checks only; no material has been received or machined.</p>
 <h3>2. Fit underside hardware and panel</h3>
-<p>Fit the six cable mounts and carrier fasteners, thread four equipment straps and check underside projections. Seat the panel on its factory supports.</p>
+<p>Fit the six cable mounts and carrier fasteners, thread four equipment straps and check underside projections. Seat the panel on its factory supports. Install four separately purchased M5 × 10 mm panel screws after checking engagement.</p>
 <p><strong>Result:</strong> Nominal vertical insertion screen; actual stock thickness and fastener stacks need measurement.</p>
 <h3>3. Restrain logger, CT and terminals</h3>
 <p>Fit the logger with two adjustable straps; retain three WAGO groups, one CT and a dedicated aluminum-panel PE connection. Confirm CT label and cable slack.</p>
@@ -74,7 +74,7 @@
 <tbody><tr>
 <td>Q0 catalog body</td>
 <td><strong>PASS</strong></td>
-<td>Model 19.18 × 63.5 × 47 mm; Carling p.11 body envelope 19.18 × 63.50 × 47.00 mm. Body includes the front step; studs, handle and terminal protection is supplied by the screw-fixed outer enclosure.</td>
+<td>Model 19.18 × 63.5 × 47 mm; Carling p.11 body envelope 19.18 × 63.50 × 47.00 mm. Body includes the front step; studs, handle and terminal protection is supplied by the closed outer enclosure.</td>
 </tr>
 <tr>
 <td>Q0 terminal and mounting pitches</td>
@@ -109,7 +109,7 @@
 <tr>
 <td>Vertical insertion through open case</td>
 <td><strong>PASS</strong></td>
-<td>8/8 swept bounding boxes clear the manufacturer shell. 300 mm vertical translation, fixed orientation, wall fittings absent. Panel/support contact at Y=0 is excluded with a 0.0001 mm numerical offset. This tests shell access, not brackets, wires or tool motions.</td>
+<td>8/8 insertion sweeps clear the manufacturer shell; exact chamfered panel solid and seven equipment envelopes. 300 mm vertical translation, fixed orientation, wall fittings absent. Panel/support contact at Y=0 is excluded with a 0.0001 mm numerical offset. This tests shell access, not brackets, wires or tool motions.</td>
 </tr>
 <tr>
 <td>Internal power retention</td>
@@ -119,27 +119,27 @@
 <tr>
 <td>Machined wall geometry</td>
 <td><strong>PASS</strong></td>
-<td>Project openings in shell 0 and panel 33; build123d 0.11.1, 0.3 mm tessellation; other meshes retained. Carrier fixing holes transfer-drilled, not in mesh. Exact cut-through gauges are in fabrication/cad-checks.json. Axis-aligned wall-device illustrations do not model the 0.937 degree draft; body/shell triangle contacts here are not mounting proofs. Received-part fit and fastening remain physical checks.</td>
+<td>BUD common shell and custom aluminum panel machined; lid and latches retained from linked factory STEP. Opaque-cover silhouette illustrative. Carrier holes transfer-drilled. Exact cut-through gauges are in fabrication/cad-checks.json. Axis-aligned wall-device illustrations do not model the 1 degree draft; body/shell triangle contacts here are not mounting proofs. Received-part fit and fastening remain physical checks.</td>
 </tr>
 <tr>
 <td>Closed lid screen</td>
 <td><strong>SCREEN ONLY</strong></td>
-<td>meter: 159.012 mm (9/9 rays); ct: 168.315 mm (9/9 rays); outlet: 170.112 mm (9/9 rays); q0: 32.992 mm (9/9 rays) Nine upward rays per body against lid mesh 15. Not a minimum-distance proof; excludes lid hardware, guards, wire bundles and tolerances.</td>
+<td>meter: 93.9 mm (9/9 rays); ct: 103.203 mm (9/9 rays); outlet: 105 mm (9/9 rays); q0: 35.05 mm (9/9 rays) Nine upward rays per body against the factory lid mesh. Not a minimum-distance proof; excludes lid hardware, guards, wire bundles and tolerances.</td>
 </tr>
 <tr>
 <td>No XA wall opening</td>
 <td><strong>PASS</strong></td>
-<td>Former XA center has 2 wall-surface intersections; right wall stock restored. A cross-section screen; exact source-CAD stock gauges are also recorded.</td>
+<td>XA remains inside; the machining schedule contains Q0, SUPPLY, OUTPUT and one USB bore only. Cut-through gauges in fabrication/cad-checks.json check the new shell.</td>
 </tr>
 <tr>
 <td>No DC wall opening</td>
 <td><strong>PASS</strong></td>
-<td>Former DC center has 2 wall-surface intersections; right wall stock restored. A cross-section screen; exact source-CAD stock gauges are also recorded.</td>
+<td>DC remains inside; the machining schedule contains Q0, SUPPLY, OUTPUT and one USB bore only. Cut-through gauges in fabrication/cad-checks.json check the new shell.</td>
 </tr>
 <tr>
 <td>Closed-lid USB cable exit</td>
 <td><strong>PASS</strong></td>
-<td>USB center Y/Z = 55/167 mm has 0 obstructing wall intersections. Standard-B overmold diagonal 15.57 mm fits the 17.5 mm nominal passage. Published standard envelope and mesh centerline checks; actual bushing locking fit, cable passage and external-pull restraint need dry fit. One mounting hole, no flange screws. No ingress or isolation rating is claimed.</td>
+<td>USB center Y/Z = 55/167 mm has 0 obstructing wall intersections. USB-B overmold diagonal 15.57 mm fits the 17.5 mm passage. Published envelope and mesh centerline only; accept actual snap fit, cable passage and pull restraint. No ingress or isolation rating claimed.</td>
 </tr>
 <tr>
 <td>One existing USB cable</td>
@@ -172,9 +172,9 @@
 <p>The old illustration had 4.5 turns rising only 6 mm, giving 1.33 mm pitch against its assumed 3 mm cable diameter. The new illustration separates turns and lead layers and adjusts turns for 2 m of flexible cable per lead. Connector body lengths are outside that flexible-length target. Actual leads have not been measured.</p>
 <p>| Lead | Modeled flexible length | Turns | Pitch / assumed OD |
 |---|---|---|
-| A1 | 2000.0 mm | 5.90 | 4 / 3 mm |
-| A2 | 2000.0 mm | 5.14 | 4 / 3 mm |
-| A3 | 2000.0 mm | 4.97 | 4 / 3 mm |</p>
+| A1 | 2000.0 mm | 5.88 | 4 / 3 mm |
+| A2 | 2000.0 mm | 5.13 | 4 / 3 mm |
+| A3 | 2000.0 mm | 4.96 | 4 / 3 mm |</p>
 <p>Cable-to-meter screen: 301 points per curve; 0 sampled intrusions against the logger body expanded by wire radius. This does not check all other objects or wire-to-wire clearances.</p>
 <p>The elliptical coil centerline uses 44 and 37 mm radii (minimum planar radius of curvature about 31.1 mm). No manufacturer bend limit is available for the actual leads. Transitions between coils, plugs, supports and other wires still need routing and physical inspection. <a href="installation_cables.json">Rendered cable measurements</a>.</p>
 <h2>All materials and interfaces</h2>
@@ -219,22 +219,22 @@
 <td>Owned. Verify full plug seating, restraint, cable slack and temperature during the closed-enclosure pilot.</td>
 </tr>
 <tr>
-<td><a href="index.html#material-enclosure">Enclosure</a><br>Hammond PCJ16148 · opaque screw cover<br>□ To buy</td>
+<td><a href="index.html#material-enclosure">Enclosure</a><br>BUD NBF-32126 · opaque hinged cover<br>□ To buy</td>
 <td><strong>Conditional</strong></td>
-<td>Same PCJ 16 × 14 × 8 in enclosure and opaque gray cover. Buy from Master Electronics with Q0: $160.56, checked 2026-09-23. This adds $23.45 versus the former enclosure seller and removes one order source. X-ray display is a website viewing aid; the purchased lid is opaque. <a href="https://www.hammfg.com/files/parts/pdf/PCJ16148.pdf">case</a></td>
-<td>Same selected enclosure; manufacturer stock listed, estimated ship date October 5, 2026. Recheck delivery at checkout. Common base/panel dimensions match the Hammond drawing; inherited clear-cover CAD remains a layout template, not a verified opaque-lid model.</td>
+<td>400 × 300 × 160 mm enclosure, $90.81 from DigiKey. Smaller than the former box; panel, placement, wall openings and screw lengths have been updated together. Retains three sellers and reduces the total parts budget. The cover is opaque; X-ray is a website viewing aid. <a href="https://www.budind.com/wp-content/uploads/2019/01/hbnbf32226.pdf">case</a></td>
+<td>DigiKey lists 1 in stock at the quantity-one price, checked September 24, 2026. All-new distributor offer; verify stock and delivery at checkout. The manufacturer-linked NBF-32226 STEP supplies the common base; the opaque lid silhouette is illustrative. Inspect actual lid, latches and component fit before machining.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-panel">Mounting panel</a><br>Professor-supplied aluminum · fabricate after measuring<br>◇ Reuse / fabricate</td>
 <td><strong>Measure</strong></td>
-<td>Use the scrap aluminum offered by Professor Clemon instead of buying 14R1513. Target outline 327.025 × 374.65 mm; modeled thickness 1.89738 mm is a provisional 1.90 mm template, not a measurement of his stock. Confirm thickness, flatness, stiffness and usable area before cutting. Retain a dedicated PE bond using hardware and a method suitable for aluminum. <a href="https://www.hammfg.com/electrical/products/accessories/pcjp">panel</a>, <a href="https://www1.futureelectronics.com/doc/WAGO/221-505.pdf">carrier</a></td>
+<td>Fabricate the professor’s offered aluminum into a 260 × 340 mm panel with 10 mm corner chamfers. The 1.89738 mm thickness is a provisional template, not measured stock. Verify thickness, stiffness, the 229.8 × 325.3 mm M5 support pattern and the aluminum-compatible PE bond before cutting. <a href="https://www.budind.com/wp-content/uploads/2019/01/hbnbf32226.pdf">panel</a>, <a href="https://www1.futureelectronics.com/doc/WAGO/221-505.pdf">carrier</a></td>
 <td>Reuse proposed, not received or measured. Verify mounting pattern, bonding, screw stacks and stiffness before fabrication.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-breaker">Q0 operating breaker</a><br>Carling CA1-B0-24-615-121-DG<br>□ To buy</td>
 <td><strong>Conditional</strong></td>
-<td>19.18 × 63.5 × 47 mm body; #10 studs; #6-32 mount. Direct wall rectangle and 52.37 mm fixing pitch supplied. Manufacturer UL489 table: 10 kA at 120 V AC. Delay 24: 12 × rated current for a 60 Hz half-cycle pulse (180 A, 8.33 ms at 15 A), under the stated test conditions. Master Electronics: $40.32 quantity one; 16 listed in stock, checked 2026-09-23. <a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">carling</a>, <a href="https://www.carlingtech.com/sites/default/files/documents/Carling-HM-CB-Time-Delays.pdf">carling-delay</a>, <a href="https://mechse.illinois.edu/undergraduate/makerworks">jis</a>, <a href="https://www.masterelectronics.com/en/productdetail/littelfuse-carling-technologies/ca1b024615121dg-16947583.html">q0-buy</a></td>
-<td>Manufacturer table confirms 10 kA interruption at 120 V AC for the selected UL489 configuration; delay 24 has specified half-cycle inrush tolerance. Actual JIS outlet fault current and combined startup waveform are not published. Check washer stack, body shoulder and terminal spacing on receipt.</td>
+<td>Single 15 A operating breaker, 50/60 Hz medium-delay, UL489/CSA option DG. Mount directly on the front wall using the manufacturer pattern. No custom wall insert. Keep the enclosure closed with both latches engaged; Q0 OFF leaves its supply terminal live. <a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">carling</a>, <a href="https://www.carlingtech.com/sites/default/files/documents/Carling-HM-CB-Time-Delays.pdf">carling-delay</a>, <a href="https://mechse.illinois.edu/undergraduate/makerworks">jis</a>, <a href="https://www.masterelectronics.com/en/productdetail/littelfuse-carling-technologies/ca1b024615121dg-16947583.html">q0-buy</a></td>
+<td>Retain the user-selected 15 A / UL489 DG configuration. Master Electronics lists one piece at $40.32 and 16 in stock on 2026-09-23. The sourcing review compares the DIN alternative; direct mounting and the existing trip curve are retained. Delivery and price remain checkout-dependent; pre-use application checks are in protection.html.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-receptacle">XA adapter receptacle</a><br>Leviton 515CV · internal NEMA 5-15R<br>□ To buy</td>
@@ -276,7 +276,7 @@
 <td><a href="index.html#material-cord-glands">Mains / printer strain relief</a><br>Hammond 1427NCGPG13LB · long PG13.5 thread<br>□ To buy</td>
 <td><strong>Conditional</strong></td>
 <td>Long-thread 1427NCGPG13LB has 15 mm thread, 6–12 mm clamp and Ø21 mm hole. This removes the earlier short-thread limitation. <a href="https://www.hammfg.com/electronics/small-case/accessories/1427ncg">gland</a>, <a href="https://cabletechsupport.southwire.com/cablespec/download_spec/?country=US&spec=70126">cord</a></td>
-<td>Inspect locknut and seal seating on the ~4.775 mm drafted wall; pull-test each complete cord grip.</td>
+<td>Inspect locknut and seal seating on the ~3 mm drafted wall; pull-test each complete cord grip.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-usb">Existing USB data cable</a><br>Existing USB-A to USB-B data cable · retain full length<br>✓ Owned</td>
@@ -300,7 +300,7 @@
 <td><a href="index.html#material-tie-mounts">Screw-fixed cable mounts</a><br>Panduit TM2S8-C<br>□ To buy</td>
 <td><strong>Conditional</strong></td>
 <td>Six screw-fixed bases retain the mains bundle, XA branch conductors, CT pair, both sides of the voltage-lead coils, and the original internal DC cable and sleeved USB lead. DigiKey lists individual pieces, avoiding the previous 100-piece purchase. <a href="https://www.panduit.com/content/dam/panduit/en/website/support/catalogs/pdf/iei-catalog-2023-web-cpcb294-sa-eng.pdf">mount</a></td>
-<td>Six panel locations; M4 × 16 mm screws, underside washers and locknuts in the fastener schedule.</td>
+<td>Six panel locations; M4 × 10 mm screws, underside washers and locknuts in the fastener schedule.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-cable-ties">Cable ties</a><br>Panduit PLT2S-C · 188 × 4.8 mm<br>□ To buy</td>
@@ -311,8 +311,8 @@
 <tr>
 <td><a href="index.html#material-fasteners">Mounting and bonding hardware</a><br>Screw / nut / washer schedule in Build_Package.md<br>□ To buy</td>
 <td><strong>Conditional</strong></td>
-<td>Q0, three WAGO carriers, six cable mounts and the dedicated panel PE bond. Source all screws, nuts and washers from DigiKey and Home Depot; no lab fastener stock is assumed. Installed quantities and purchase packs are separated in the fastener schedule. <a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">carling</a>, <a href="https://www1.futureelectronics.com/doc/WAGO/221-505.pdf">carrier</a>, <a href="https://www.panduit.com/content/dam/panduit/en/website/support/catalogs/pdf/iei-catalog-2023-web-cpcb294-sa-eng.pdf">mount</a></td>
-<td>Selected threads and screw lengths preserve the existing hole layout. Metric pan screws and some washers/nuts are zinc-plated steel; other pieces are stainless. Check actual stacks and the accepted aluminum bond.</td>
+<td>Purchase all screws, washers and nuts in the build schedule: Q0 #6-32 × 1/4 in; carriers M3 × 12 mm; anchors M4 × 10 mm; panel supports M5 × 10 mm; dedicated #10 PE stud. Full packs and spares are priced, with no assumed lab hardware stock. <a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">carling</a>, <a href="https://www1.futureelectronics.com/doc/WAGO/221-505.pdf">carrier</a>, <a href="https://www.panduit.com/content/dam/panduit/en/website/support/catalogs/pdf/iei-catalog-2023-web-cpcb294-sa-eng.pdf">mount</a></td>
+<td>Thirteen order lines, including four separately purchased panel screws. Verify received stack thickness, thread engagement, aluminum bonding and at least 3 mm screw-to-floor clearance.</td>
 </tr>
 <tr>
 <td><a href="index.html#material-logger-restraint">Adjustable equipment straps</a><br>VELCRO ONE-WRAP 90340 · 19.05 mm (3/4 in) wide roll<br>□ To buy</td>
@@ -340,7 +340,7 @@
 <li>Measure aluminum sheet size, thickness and stiffness; approve aluminum-compatible panel bonding and adjust machining/fasteners before fabrication.</li>
 <li>Verify internal XA/adapter seating, independent restraint, intact DC cable slack, separation and closed-enclosure temperature. Opaque lid prevents live viewing of logger LEDs; verify logging by offline export after the pilot.</li>
 <li>Commissioning: verify fastener stacks, CT latch and cable slack, supply conditions, PE/insulation/polarity, total load and restart/recording behavior before routine operation.</li>
-<li>USB assembly: verify B-out/A-in orientation, received cable/sleeve dimensions, accepted sleeve application and end coverage, retention, separation and shield treatment. Prove setup/export with mains unplugged and the lid closed; then remove the external USB lead before restoring mains. No isolation or ingress rating is claimed.</li>
+<li>USB assembly: verify B-out/A-in orientation, received cable/sleeve dimensions, accepted sleeve application and end coverage, retention, separation and shield treatment. Prove setup/export with mains unplugged and the lid closed; then disconnect its exterior USB-A end from the PC before restoring mains. No isolation or ingress rating is claimed.</li>
 </ul>
 <p>Record receiving checks, update any affected drawings if substitutions are needed, then conduct a documented dry fit and qualified electrical acceptance. There is no hardware test result or energizing approval in this audit.</p>
 <h2>Reproduce the checks</h2>

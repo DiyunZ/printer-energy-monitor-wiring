@@ -25,10 +25,15 @@ export function addInstallationHardware({ dimensions, instances, parts, box, cyl
       if(throughPanel)annulus(4,diameter/2+.2,4,[x,-2.8,z],'#89979c',part,'y',6);
     });
   }
-  for(const y of [-1,1]) fixing(`q0-${y}`,`Q0 mounting screw ${y<0?1:2}`,[parts.q0.position[0],parts.q0.position[1]+y*parts.q0.mountPitch/2,208.5],'q0',3.5,'z',9.525);
+  for(const y of [-1,1]) fixing(`q0-${y}`,`Q0 mounting screw ${y<0?1:2}`,[parts.q0.position[0],parts.q0.position[1]+y*parts.q0.mountPitch/2,parts.q0.wallOuterZ+.787],'q0',3.5,'z',parts.q0.mountingScrewLengthMm);
   dimensions.instances.filter(p=>p.part==='terminals').forEach(p=>{
-    for(const x of [-10,10]) fixing(`${p.id}-${x}`,`${p.id} carrier fixing ${x<0?1:2}`,[p.position[0]+x,6.3,p.position[2]+17],'terminals',3,'y',16);
+    for(const x of [-10,10]) fixing(`${p.id}-${x}`,`${p.id} carrier fixing ${x<0?1:2}`,[p.position[0]+x,6.3,p.position[2]+17],'terminals',3,'y',h.carrierScrewLengthMm);
   });
+  h.panelSupportsXZ.forEach(([x,z],i)=>capture('fasteners',`panel-${i}`,`Panel mounting screw ${i+1}`,()=>{
+    const y=parts.panel.size[1];
+    cylinder(2.5,10,[x,y-5,z],'#8c969a','panel');
+    cylinder(4.75,3.4,[x,y+1.7,z],'#89979c','panel');
+  }));
   const supportChecks=[];
   h.cableSupports.forEach((support,i)=>{
     const [x,z]=support.holeXZ, alongX=support.axis==='x';
@@ -47,7 +52,7 @@ export function addInstallationHardware({ dimensions, instances, parts, box, cyl
       for(const side of [-1,1])box(size([10.8,3.8,1]),local(0,5.8,-8+side*2.95),'#dbded5','terminals');
       box(size([10.8,1.2,7]),local(0,8.3,-8),'#dbded5','terminals',.3);
     });
-    fixing(`anchor-${i}`,`Cable anchor ${i+1} fixing`,[x,3.89738,z],'terminals',4,'y',16,true);
+    fixing(`anchor-${i}`,`Cable anchor ${i+1} fixing`,[x,3.89738,z],'terminals',4,'y',h.anchorScrewLengthMm,true);
     const fit=fitSupport(cableRoutes,support),p=fit.profile;
     supportChecks.push(auditSupport(fit,support.routes));
     function roundedPath(path,l,b,r,t,c) {
@@ -95,8 +100,8 @@ export function addInstallationHardware({ dimensions, instances, parts, box, cyl
     });
   }
   for(const [id,text,pos,facing] of [
-    ['supply','SUPPLY IN',[-186.2,66,128],'right'],['printer','TO PRINTER',[0,62,-211.4],'front'],
-    ['panel-pe','PE',[-125,2.1,77],'up']
+    ['supply','SUPPLY IN',[instances['supply-entry'].position[0]+4,66,128],'right'],['printer','TO PRINTER',[0,62,instances['printer-entry'].position[2]+4],'front'],
+    ['panel-pe','PE',[h.panelBondXZ[0],2.1,77],'up']
   ]) decal(text,22,8,pos,'entries',facing);
   return supportChecks;
 }

@@ -34,12 +34,12 @@ export function sweptBox(part) {
 export function audit(dimensions, manifest, buffer, procurement) {
   const parts = Object.fromEntries(dimensions.parts.map(p => [p.id, p]));
   const instances = Object.fromEntries(dimensions.instances.map(p => [p.id, p]));
-  const shell = surface(manifest.meshes[0], buffer), lid = surface(manifest.meshes[15], buffer);
+  const shell = surface(manifest.meshes.find(m=>m.role==='shell'), buffer), lid = surface(manifest.meshes.find(m=>m.role==='lid'), buffer);
   const checks = [];
   const record = (id, result, evidence, limits = '') => checks.push({ id, result, evidence, limits });
   const q = parts.q0;
   record('Q0 catalog body', q.size.every((v, i) => Math.abs(v - [19.18, 63.5, 47][i]) < .02) ? 'pass' : 'fail',
-    `Model ${q.size.join(' × ')} mm; Carling p.11 body envelope 19.18 × 63.50 × 47.00 mm.`, 'Body includes the front step; studs, handle and terminal protection is supplied by the screw-fixed outer enclosure.');
+    `Model ${q.size.join(' × ')} mm; Carling p.11 body envelope 19.18 × 63.50 × 47.00 mm.`, 'Body includes the front step; studs, handle and terminal protection is supplied by the closed outer enclosure.');
   record('Q0 terminal and mounting pitches', q.terminalPitch === 49.28 && q.mountPitch === 52.37 ? 'pass' : 'fail',
     `Stud pitch ${q.terminalPitch ?? 'unspecified'} mm; mounting pitch ${q.mountPitch ?? 'unspecified'} mm. Carling: 49.28 / 52.37 mm.`);
   const lugs = procurement.items.find(p => p.id === 'ring-lugs');
@@ -69,16 +69,20 @@ export function audit(dimensions, manifest, buffer, procurement) {
     'CT uses the matched Mini HSC family envelope; exact scale remains unconfirmed. No connectors, open levers, flexible wires, mounting tolerances or screw-tool envelopes are certified by this check.');
   const sweeps = [];
   for (const p of [parts.panel, ...internal]) {
+    if(p.id==='panel') {
+      const proof=manifest.panel_insertion;
+      const matches=proof?.outline_mm[0]===p.size[0] && proof?.outline_mm[1]===p.size[2] && proof.corner_chamfer_mm===dimensions.installationHardware.panelCornerChamferMm && proof.thickness_mm===p.size[1] && proof.position_mm?.every((v,i)=>v===p.position[i]);
+      sweeps.push({id:p.id,travel_mm:300,method:proof?.method,intrusion_mm3:matches?proof.intrusion_mm3:null,
+        result:matches && proof.result==='pass'?'pass':'review'});
+      continue;
+    }
     const swept = sweptBox(p), contactHits = hits(swept, shell);
-    // Panel underside intentionally seats on the factory supports at Y=0.
-    // Remove only numerical surface contact (0.0001 mm), not a fit allowance.
-    if (p.id === 'panel') swept.min.y += .0001;
     const n = hits(swept, shell);
     sweeps.push({ id: p.id, travel_mm: 300, shell_triangle_hits: n,
       seated_contact_triangles: contactHits - n, result: n ? 'review' : 'pass' });
   }
-  record('Vertical insertion through open case', sweeps.every(s => !s.shell_triangle_hits) ? 'pass' : 'review',
-    `${sweeps.filter(s => !s.shell_triangle_hits).length}/${sweeps.length} swept bounding boxes clear the manufacturer shell.`,
+  record('Vertical insertion through open case', sweeps.every(s => s.result==='pass') ? 'pass' : 'review',
+    `${sweeps.filter(s => s.result==='pass').length}/${sweeps.length} insertion sweeps clear the manufacturer shell; exact chamfered panel solid and seven equipment envelopes.`,
     '300 mm vertical translation, fixed orientation, wall fittings absent. Panel/support contact at Y=0 is excluded with a 0.0001 mm numerical offset. This tests shell access, not brackets, wires or tool motions.');
   record('Internal power retention', 'hold', 'Separate XA and adapter straps replace the wall mount; physical plug retention and closed-enclosure temperature are untested.');
   const bodyChecks = [];
@@ -93,22 +97,23 @@ export function audit(dimensions, manifest, buffer, procurement) {
   }
   record('Machined wall geometry', manifest.fabrication ? 'pass' : 'hold',
     manifest.fabrication || 'Factory shell remains uncut.',
-    'Exact cut-through gauges are in fabrication/cad-checks.json. Axis-aligned wall-device illustrations do not model the 0.937 degree draft; body/shell triangle contacts here are not mounting proofs. Received-part fit and fastening remain physical checks.');
+    'Exact cut-through gauges are in fabrication/cad-checks.json. Axis-aligned wall-device illustrations do not model the 1 degree draft; body/shell triangle contacts here are not mounting proofs. Received-part fit and fastening remain physical checks.');
   record('Closed lid screen', 'screen only',
     bodyChecks.map(p => `${p.id}: ${p.minimum_sampled_lid_gap_mm} mm (${p.lid_samples}/9 rays)`).join('; '),
-    'Nine upward rays per body against lid mesh 15. Not a minimum-distance proof; excludes lid hardware, guards, wire bundles and tolerances.');
+    'Nine upward rays per body against the factory lid mesh. Not a minimum-distance proof; excludes lid hardware, guards, wire bundles and tolerances.');
   const wallEntries = [];
-  for(const [label,y,z] of [['XA',121,13],['DC',78,106]]) {
-    const xs=rayHits([130,y,z],[1,0,0],shell).map(v=>v.x).filter(x=>x>170&&x<195);
-    record(`No ${label} wall opening`,xs.length>=2?'pass':'fail',`Former ${label} center has ${xs.length} wall-surface intersections; right wall stock restored.`,'A cross-section screen; exact source-CAD stock gauges are also recorded.');
-  }
-  const usbWallHits = rayHits([130,55,167],[1,0,0],shell).map(v=>v.x).filter(x=>x>170&&x<195);
+  // Current topology and cut list, rather than historical coordinates on a different enclosure.
+  for(const label of ['XA','DC']) record(`No ${label} wall opening`,manifest.wall_opening_ids?.length===6 && !manifest.wall_opening_ids.some(id=>id.includes(label))?'pass':'fail',
+    `${label} remains inside; the machining schedule contains Q0, SUPPLY, OUTPUT and one USB bore only.`,
+    'Cut-through gauges in fabrication/cad-checks.json check the new shell.');
   const service=dimensions.usbService, port=instances['usb-entry'];
-  const plugDiagonal = Math.hypot(...(service?.standardBOvermoldMaxMm || [Infinity]));
-  record('Closed-lid USB cable exit', port?.model==='Heyco 3104' && port.position[1]===55 && port.position[2]===167 && port.boreDiameterMm===22.2 &&
-    usbWallHits.length===0 && service.bushingPassageMm>plugDiagonal && service.maximumPanelThicknessMm>=4.7752 ? 'pass':'fail',
-    `USB center Y/Z = 55/167 mm has ${usbWallHits.length} obstructing wall intersections. Standard-B overmold diagonal ${plugDiagonal.toFixed(2)} mm fits the ${service?.bushingPassageMm} mm nominal passage.`,
-    'Published standard envelope and mesh centerline checks; actual bushing locking fit, cable passage and external-pull restraint need dry fit. One mounting hole, no flange screws. No ingress or isolation rating is claimed.');
+  const [uy,uz]=service.wallCenterYZ;
+  const usbWallHits=rayHits([130,uy,uz],[1,0,0],shell).map(v=>v.x).filter(x=>x>130&&x<160);
+  const plugDiagonal=Math.hypot(...(service?.standardBOvermoldMaxMm||[Infinity]));
+  record('Closed-lid USB cable exit',port?.model==='Heyco 3104' && port.position[1]===uy && port.position[2]===uz && port.boreDiameterMm===22.2 &&
+    usbWallHits.length===0 && service.bushingPassageMm>plugDiagonal && service.maximumPanelThicknessMm>=service.wallThicknessMm?'pass':'fail',
+    `USB center Y/Z = ${uy}/${uz} mm has ${usbWallHits.length} obstructing wall intersections. USB-B overmold diagonal ${plugDiagonal.toFixed(2)} mm fits the ${service.bushingPassageMm} mm passage.`,
+    'Published envelope and mesh centerline only; accept actual snap fit, cable passage and pull restraint. No ingress or isolation rating claimed.');
   const existingUsb=procurement.items.find(p=>p.id==='usb');
   record('One existing USB cable', service?.topology==='single-continuous-cable' && service.intermediateConnections===0 &&
     service.externalConnector==='USB-A' && service.loggerConnector==='USB-B' && existingUsb?.availability==='owned' &&
@@ -125,8 +130,8 @@ export function audit(dimensions, manifest, buffer, procurement) {
     'Published variants are not a manufacturing tolerance. Measure purchased cord; clamping, jacket preparation and pull resistance remain physical checks.');
   record('Ring barrel and internal wire', 'review', 'The selected 15-104 accepts 14–16 AWG. Its manufacturer does not publish an insulation-barrel limit on the cited page; do not reuse the former 3M value.', 'Fit the actual 2.87 mm nominal-OD wire, use the specified crimp tooling and inspect/pull-test before accepting the termination.');
   record('Physical and electrical release', 'hold', 'No built assembly, nameplate verification, qualified acceptance or energized test has been recorded.');
-  return { revision: 'Build package D, 2026-09-23', release: 'NOT RELEASED: close the receiving and electrical items in Build_Package.md', units: 'mm',
-    method: 'Axis-aligned body envelopes, continuous vertical swept volumes against the machined Hammond shell, nine lid rays per body and sourced interface arithmetic. Shell triangulation deflection is 0.3 mm; numerical seating-contact exclusion is 0.0001 mm. Neither is a manufacturing tolerance.',
+  return { revision: '2026-09-24', release: 'NOT RELEASED: close the receiving and electrical items in Build_Package.md', units: 'mm',
+    method: 'Axis-aligned equipment envelopes, exact chamfered-panel clearance and continuous vertical swept volumes against the machined BUD common-base shell, nine lid rays per body and sourced interface arithmetic. Shell triangulation deflection is 0.3 mm; numerical seating-contact exclusion is 0.0001 mm. Neither is a manufacturing tolerance.',
     checks, insertion_sweeps: sweeps, body_screen: bodyChecks, wall_entries: wallEntries,
     material_groups: procurement.items.length, owned_groups: procurement.items.filter(p => p.availability === 'owned').length };
 }

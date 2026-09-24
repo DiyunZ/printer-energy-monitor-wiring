@@ -11,11 +11,11 @@
         "cord:supply-pe"
       ],
       "missingRoutes": [],
-      "minimumOpeningClearanceMm": 0.8999999999999997,
+      "minimumOpeningClearanceMm": 0.8999999999999979,
       "bandWidthMm": 4.8,
-      "loopWidthMm": 15.270276125330907,
-      "loopHeightMm": 9.599944446206695,
-      "lengthWithLockAllowanceMm": 70.8218561652805,
+      "loopWidthMm": 18.640307621282183,
+      "loopHeightMm": 19.77150542793202,
+      "lengthWithLockAllowanceMm": 97.90504112063371,
       "pass": true
     },
     {
@@ -30,9 +30,9 @@
       "missingRoutes": [],
       "minimumOpeningClearanceMm": 0.8999999999999997,
       "bandWidthMm": 4.8,
-      "loopWidthMm": 21.260118533945313,
+      "loopWidthMm": 17.256638373562975,
       "loopHeightMm": 9.6,
-      "lengthWithLockAllowanceMm": 82.80165209009591,
+      "lengthWithLockAllowanceMm": 74.79469176933124,
       "pass": true
     },
     {
@@ -61,11 +61,11 @@
         "voltage:A3"
       ],
       "missingRoutes": [],
-      "minimumOpeningClearanceMm": 0.899999999999995,
+      "minimumOpeningClearanceMm": 0.8999999999999986,
       "bandWidthMm": 4.8,
-      "loopWidthMm": 12.920886811131542,
-      "loopHeightMm": 29.04933811385252,
-      "lengthWithLockAllowanceMm": 105.02186487217344,
+      "loopWidthMm": 12.921025825462113,
+      "loopHeightMm": 29.049330598205543,
+      "lengthWithLockAllowanceMm": 105.02212786954061,
       "pass": true
     },
     {
@@ -80,25 +80,25 @@
       "missingRoutes": [],
       "minimumOpeningClearanceMm": 0.8999999999999986,
       "bandWidthMm": 4.8,
-      "loopWidthMm": 12.921494797547247,
-      "loopHeightMm": 31.049328608451525,
-      "lengthWithLockAllowanceMm": 109.02306183420285,
+      "loopWidthMm": 12.921367879781407,
+      "loopHeightMm": 31.04932154504673,
+      "lengthWithLockAllowanceMm": 109.02279387186158,
       "pass": true
     },
     {
       "id": "dc",
       "label": "Original DC cable and sleeved USB lead",
-      "crossings": 2,
+      "crossings": 3,
       "routeIds": [
         "adapter:dc-internal",
         "usb-sleeve:internal"
       ],
       "missingRoutes": [],
-      "minimumOpeningClearanceMm": 0.8999999999999968,
+      "minimumOpeningClearanceMm": 0.9000000000000004,
       "bandWidthMm": 4.8,
-      "loopWidthMm": 16.14900293439922,
-      "loopHeightMm": 22.829007452011012,
-      "lengthWithLockAllowanceMm": 99.03743579502577,
+      "loopWidthMm": 19.058988209777368,
+      "loopHeightMm": 45.13542304676499,
+      "lengthWithLockAllowanceMm": 149.47023753529004,
       "pass": true
     }
   ],
@@ -108,24 +108,24 @@
         "voltage:A1",
         "voltage:A2"
       ],
-      "sampledSurfaceGapMm": 0.945963240483616,
-      "conservativePolylineGapMm": 0.4381584433030039
+      "sampledSurfaceGapMm": 0.942775539851918,
+      "conservativePolylineGapMm": 0.43681741874346636
     },
     {
       "pair": [
         "voltage:A1",
         "voltage:A3"
       ],
-      "sampledSurfaceGapMm": 4.946955204636473,
-      "conservativePolylineGapMm": 4.424087361587175
+      "sampledSurfaceGapMm": 4.946998555957756,
+      "conservativePolylineGapMm": 4.425858775562496
     },
     {
       "pair": [
         "voltage:A2",
         "voltage:A3"
       ],
-      "sampledSurfaceGapMm": 0.9762677967643847,
-      "conservativePolylineGapMm": 0.4604633771066713
+      "sampledSurfaceGapMm": 0.9659526701030319,
+      "conservativePolylineGapMm": 0.4517200689550287
     }
   ],
   "componentBodyIntrusions": [],

@@ -48,12 +48,12 @@ Click photos to enlarge them. Reference images and design concepts are labeled; 
 
 **Concept layout; use the build package for machining.** Manufacturer CAD, published sizes and estimates share one scale. Small hardware and cable dressing are simplified; spare stock is excluded. Received parts still need a physical fit check.
 
-Amber marks the selected material; hidden housings become transparent. Top view matches the wiring plan. The selected case has gray walls and an opaque lid. X-ray mode is a visualization aid, not a transparent product cover. The lid silhouette is inherited from the earlier common-base CAD. Drag to rotate, scroll or pinch to zoom; keyboard controls are arrow keys, + / − and Home.
+Amber marks the selected material; hidden housings become transparent. Top view matches the wiring plan. The selected case has gray walls and an opaque lid. X-ray mode is a visualization aid, not a transparent product cover. The lid silhouette comes from the manufacturer-linked common-base STEP; compare the actual opaque lid. Drag to rotate, scroll or pinch to zoom; keyboard controls are arrow keys, + / − and Home.
 
 | Component | Model envelope (mm) | Evidence / limit |
 |---|---|---|
-| Hammond PCJ16148 · opaque cover | 393.8 × 240.2 × 479.4 | PCJ common-base layout template; solid lid not independently modeled · [Source](https://www.hammfg.com/files/parts/pdf/PCJ16148.pdf) |
-| Reused aluminum panel · provisional 1.90 mm | 327.0 × 1.9 × 374.6 | Proposed fabrication template; stock not measured · [Source](https://www.hammfg.com/files/parts/pdf/PCJ16148.pdf) |
+| BUD NBF-32126 · opaque hinged cover | 318.5 × 164.3 × 411.1 | Manufacturer common-base STEP; opaque lid silhouette illustrative · [Source](https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/) |
+| Reused aluminum panel · provisional 1.90 mm | 260.0 × 1.9 × 340.0 | Proposed fabrication template; stock not measured · [Source](https://www.budind.com/wp-content/uploads/2019/01/hbnbf32226.pdf) |
 | DENT ELITEpro XC | 63.0 × 47.0 × 216.0 | Catalog dimensions; verify actual unit · [Source](https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf) |
 | CT1 · printer hot only | 29.4 × 41.7 × 26.4 | Mini HSC family matched; 50 A variant probable · [Source](https://www.dentinstruments.com/shop/current-sensors/hinged-current-transformers-sensors-for-energy-metering/) |
 | Q0 · single operating breaker | 19.2 × 63.5 × 47.0 | Catalog body; direct wall mount · [Source](https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf) |

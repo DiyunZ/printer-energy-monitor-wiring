@@ -1,14 +1,14 @@
 {
-  "revision": "Revision D · September 23, 2026",
-  "baseline_commit": "3c36b4e",
+  "revision": "2026-09-24",
+  "baseline_commit": "1242846",
   "scope": "One grounded 120 V supply, one printer at a time. The design uses an opaque-cover enclosure, proposed reuse of the professor’s aluminum sheet and an internal adapter connection. Six owned equipment groups, including the existing USB cable, are retained. The selected 15 A Q0 and upstream-only voltage-lead protection still require application acceptance. No purchase, physical fit, thermal test or electrical release is claimed. Closed-lid USB export is used only after unplugging mains; the internal portion of the existing USB cable requires rated insulation and accepted assembly.",
   "result": "STOCK, USB ASSEMBLY AND ELECTRICAL ACCEPTANCE OPEN",
   "sources": {
     "dent": "https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf",
     "dent-size": "https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf",
     "ct": "https://www.dentinstruments.com/wp-content/uploads/2022/08/20A_Mini_Hinged_CT_Specs.pdf",
-    "case": "https://www.hammfg.com/files/parts/pdf/PCJ16148.pdf",
-    "panel": "https://www.hammfg.com/electrical/products/accessories/pcjp",
+    "case": "https://www.budind.com/wp-content/uploads/2019/01/hbnbf32226.pdf",
+    "panel": "https://www.budind.com/wp-content/uploads/2019/01/hbnbf32226.pdf",
     "carling": "https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf",
     "outlet": "https://leviton.com/products/515cv",
     "outlet-drawing": "https://leviton.com/content/dam/leviton/residential/product_documents/none/Document-31435-Dimensional%20Data.jpg",
@@ -112,11 +112,11 @@
     {
       "id": "enclosure",
       "item": "Enclosure",
-      "model": "Hammond PCJ16148 · opaque screw cover",
+      "model": "BUD NBF-32126 · opaque hinged cover",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "Same PCJ 16 × 14 × 8 in enclosure and opaque gray cover. Buy from Master Electronics with Q0: $160.56, checked 2026-09-23. This adds $23.45 versus the former enclosure seller and removes one order source. X-ray display is a website viewing aid; the purchased lid is opaque.",
-      "remaining": "Same selected enclosure; manufacturer stock listed, estimated ship date October 5, 2026. Recheck delivery at checkout. Common base/panel dimensions match the Hammond drawing; inherited clear-cover CAD remains a layout template, not a verified opaque-lid model.",
+      "checked": "400 × 300 × 160 mm enclosure, $90.81 from DigiKey. Smaller than the former box; panel, placement, wall openings and screw lengths have been updated together. Retains three sellers and reduces the total parts budget. The cover is opaque; X-ray is a website viewing aid.",
+      "remaining": "DigiKey lists 1 in stock at the quantity-one price, checked September 24, 2026. All-new distributor offer; verify stock and delivery at checkout. The manufacturer-linked NBF-32226 STEP supplies the common base; the opaque lid silhouette is illustrative. Inspect actual lid, latches and component fit before machining.",
       "sources": [
         "case"
       ]
@@ -127,7 +127,7 @@
       "model": "Professor-supplied aluminum · fabricate after measuring",
       "availability": "fabricate",
       "result": "Measure",
-      "checked": "Use the scrap aluminum offered by Professor Clemon instead of buying 14R1513. Target outline 327.025 × 374.65 mm; modeled thickness 1.89738 mm is a provisional 1.90 mm template, not a measurement of his stock. Confirm thickness, flatness, stiffness and usable area before cutting. Retain a dedicated PE bond using hardware and a method suitable for aluminum.",
+      "checked": "Fabricate the professor’s offered aluminum into a 260 × 340 mm panel with 10 mm corner chamfers. The 1.89738 mm thickness is a provisional template, not measured stock. Verify thickness, stiffness, the 229.8 × 325.3 mm M5 support pattern and the aluminum-compatible PE bond before cutting.",
       "remaining": "Reuse proposed, not received or measured. Verify mounting pattern, bonding, screw stacks and stiffness before fabrication.",
       "sources": [
         "panel",
@@ -140,8 +140,8 @@
       "model": "Carling CA1-B0-24-615-121-DG",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "19.18 × 63.5 × 47 mm body; #10 studs; #6-32 mount. Direct wall rectangle and 52.37 mm fixing pitch supplied. Manufacturer UL489 table: 10 kA at 120 V AC. Delay 24: 12 × rated current for a 60 Hz half-cycle pulse (180 A, 8.33 ms at 15 A), under the stated test conditions. Master Electronics: $40.32 quantity one; 16 listed in stock, checked 2026-09-23.",
-      "remaining": "Manufacturer table confirms 10 kA interruption at 120 V AC for the selected UL489 configuration; delay 24 has specified half-cycle inrush tolerance. Actual JIS outlet fault current and combined startup waveform are not published. Check washer stack, body shoulder and terminal spacing on receipt.",
+      "checked": "Single 15 A operating breaker, 50/60 Hz medium-delay, UL489/CSA option DG. Mount directly on the front wall using the manufacturer pattern. No custom wall insert. Keep the enclosure closed with both latches engaged; Q0 OFF leaves its supply terminal live.",
+      "remaining": "Retain the user-selected 15 A / UL489 DG configuration. Master Electronics lists one piece at $40.32 and 16 in stock on 2026-09-23. The sourcing review compares the DIN alternative; direct mounting and the existing trip curve are retained. Delivery and price remain checkout-dependent; pre-use application checks are in protection.html.",
       "sources": [
         "carling",
         "carling-delay",
@@ -234,7 +234,7 @@
       "availability": "buy",
       "result": "Conditional",
       "checked": "Long-thread 1427NCGPG13LB has 15 mm thread, 6–12 mm clamp and Ø21 mm hole. This removes the earlier short-thread limitation.",
-      "remaining": "Inspect locknut and seal seating on the ~4.775 mm drafted wall; pull-test each complete cord grip.",
+      "remaining": "Inspect locknut and seal seating on the ~3 mm drafted wall; pull-test each complete cord grip.",
       "sources": [
         "gland",
         "cord"
@@ -289,7 +289,7 @@
       "availability": "buy",
       "result": "Conditional",
       "checked": "Six screw-fixed bases retain the mains bundle, XA branch conductors, CT pair, both sides of the voltage-lead coils, and the original internal DC cable and sleeved USB lead. DigiKey lists individual pieces, avoiding the previous 100-piece purchase.",
-      "remaining": "Six panel locations; M4 × 16 mm screws, underside washers and locknuts in the fastener schedule.",
+      "remaining": "Six panel locations; M4 × 10 mm screws, underside washers and locknuts in the fastener schedule.",
       "sources": [
         "mount"
       ]
@@ -313,8 +313,8 @@
       "model": "Screw / nut / washer schedule in Build_Package.md",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "Q0, three WAGO carriers, six cable mounts and the dedicated panel PE bond. Source all screws, nuts and washers from DigiKey and Home Depot; no lab fastener stock is assumed. Installed quantities and purchase packs are separated in the fastener schedule.",
-      "remaining": "Selected threads and screw lengths preserve the existing hole layout. Metric pan screws and some washers/nuts are zinc-plated steel; other pieces are stainless. Check actual stacks and the accepted aluminum bond.",
+      "checked": "Purchase all screws, washers and nuts in the build schedule: Q0 #6-32 × 1/4 in; carriers M3 × 12 mm; anchors M4 × 10 mm; panel supports M5 × 10 mm; dedicated #10 PE stud. Full packs and spares are priced, with no assumed lab hardware stock.",
+      "remaining": "Thirteen order lines, including four separately purchased panel screws. Verify received stack thickness, thread engagement, aluminum bonding and at least 3 mm screw-to-floor clearance.",
       "sources": [
         "carling",
         "carrier",
@@ -388,7 +388,7 @@
     }
   ],
   "corrections": [
-    "Replaced the clear-cover box selection with the same-size opaque PCJ16148; CAD retains the common-base template and an illustrative lid silhouette.",
+    "Selected the in-stock BUD NBF-32126 and regenerated the common-base machining, chamfered aluminum panel, fasteners and placement. Opaque lid silhouette remains illustrative.",
     "Proposed reuse of the professor’s aluminum sheet, with stock measurement and aluminum bonding held open.",
     "Moved XA and the original adapter inside. XA uses the same 515CV SKU as the printer output, with a continuous 14/3 cord branch.",
     "Removed the round DC extension, KVT frame and insert from the active BOM and model. Restored XA and DC wall stock; one protected direct-cable opening supports closed-lid export.",
@@ -406,7 +406,7 @@
     {
       "stage": 2,
       "title": "Fit underside hardware and panel",
-      "action": "Fit the six cable mounts and carrier fasteners, thread four equipment straps and check underside projections. Seat the panel on its factory supports.",
+      "action": "Fit the six cable mounts and carrier fasteners, thread four equipment straps and check underside projections. Seat the panel on its factory supports. Install four separately purchased M5 × 10 mm panel screws after checking engagement.",
       "result": "Nominal vertical insertion screen; actual stock thickness and fastener stacks need measurement."
     },
     {
@@ -440,6 +440,6 @@
     "Measure aluminum sheet size, thickness and stiffness; approve aluminum-compatible panel bonding and adjust machining/fasteners before fabrication.",
     "Verify internal XA/adapter seating, independent restraint, intact DC cable slack, separation and closed-enclosure temperature. Opaque lid prevents live viewing of logger LEDs; verify logging by offline export after the pilot.",
     "Commissioning: verify fastener stacks, CT latch and cable slack, supply conditions, PE/insulation/polarity, total load and restart/recording behavior before routine operation.",
-    "USB assembly: verify B-out/A-in orientation, received cable/sleeve dimensions, accepted sleeve application and end coverage, retention, separation and shield treatment. Prove setup/export with mains unplugged and the lid closed; then remove the external USB lead before restoring mains. No isolation or ingress rating is claimed."
+    "USB assembly: verify B-out/A-in orientation, received cable/sleeve dimensions, accepted sleeve application and end coverage, retention, separation and shield treatment. Prove setup/export with mains unplugged and the lid closed; then disconnect its exterior USB-A end from the PC before restoring mains. No isolation or ingress rating is claimed."
   ]
 }

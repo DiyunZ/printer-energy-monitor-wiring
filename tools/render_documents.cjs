@@ -138,7 +138,7 @@ Click photos to enlarge them. Reference images and design concepts are labeled; 
 
 **Concept layout; use the build package for machining.** Manufacturer CAD, published sizes and estimates share one scale. Small hardware and cable dressing are simplified; spare stock is excluded. Received parts still need a physical fit check.
 
-Amber marks the selected material; hidden housings become transparent. Top view matches the wiring plan. The selected case has gray walls and an opaque lid. X-ray mode is a visualization aid, not a transparent product cover. The lid silhouette is inherited from the earlier common-base CAD. Drag to rotate, scroll or pinch to zoom; keyboard controls are arrow keys, + / − and Home.
+Amber marks the selected material; hidden housings become transparent. Top view matches the wiring plan. The selected case has gray walls and an opaque lid. X-ray mode is a visualization aid, not a transparent product cover. The lid silhouette comes from the manufacturer-linked common-base STEP; compare the actual opaque lid. Drag to rotate, scroll or pinch to zoom; keyboard controls are arrow keys, + / − and Home.
 
 | Component | Model envelope (mm) | Evidence / limit |
 |---|---|---|

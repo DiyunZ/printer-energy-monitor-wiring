@@ -48,9 +48,9 @@
 </tr>
 <tr>
 <td id="r7">R7</td>
-<td><a href="https://www.hammfg.com/files/parts/pdf/PCJ16148.pdf">PCJ16148 drawing</a>, <a href="https://www.hammfg.com/electrical/products/non-metallic/pcj-sc">series / standards</a>, <a href="https://www.hammfg.com/files/parts/stp/PCJ16148CC.zip">inherited PCJ16148CC STEP</a></td>
-<td>Same-size opaque cover and 327.025 × 374.65 mm panel template.</td>
-<td>Common-base CAD retained; opaque lid geometry not independently modeled. Aluminum stock thickness is unmeasured. No finished-assembly certification.</td>
+<td><a href="https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/">BUD NBF-32126 product / linked STEP</a>, <a href="https://www.budind.com/wp-content/uploads/2019/01/hbnbf32226.pdf">common-base drawing</a></td>
+<td>400 × 300 × 160 mm case; 3 mm wall; M5 support pattern. Custom 260 × 340 mm panel with 10 mm corner chamfers.</td>
+<td>Linked NBF-32226 base at full scale; opaque lid silhouette illustrative. Stock thickness and received-part fit remain unverified. No finished-assembly certification.</td>
 </tr>
 <tr>
 <td id="r10">R10</td>
@@ -119,7 +119,7 @@
 <p>The partially visible CT label suggests the legacy 50 A model, but the full variant is physically obscured by black/white wires. The voltage-pigtail photograph has no legible conductor or current rating. Ruler photographs are not calibrated dimension drawings. Packaging text is evidence about an accessory, not an instruction to the assistant or proof that an arbitrary breaker protects it.</p>
 <h2>Project choices</h2>
 <ul>
-<li>Q0 is the single operating breaker. JL branches to printer hot through CT, the dedicated adapter outlet, and A1. Neutral and PE remain separate; PE stays continuous. Unplug the supply and verify absence of voltage before removing the screw-fixed cover. Q0 OFF alone does not isolate incoming terminals.</li>
+<li>Q0 is the single operating breaker. JL branches to printer hot through CT, the dedicated adapter outlet, and A1. Neutral and PE remain separate; PE stays continuous. Unplug the supply and verify absence of voltage before opening the latched cover. Q0 OFF alone does not isolate incoming terminals.</li>
 <li>A1 connects directly to JL after Q0, then to L1 through the original full voltage lead. Acceptance of upstream-only protection is required before use. A2 and A3 connect JN to L2 and N. The three OEM pigtails are sensing accessories, not load wires or PE conductors. Keep the mating pairs inside the enclosure.</li>
 <li>Only printer hot crosses CT once. Adapter and voltage-tap branch currents are outside the measured current. Voltage is sensed upstream, so downstream cord loss and voltage drop still affect the measurement boundary.</li>
 <li>XA is an internal Leviton 515CV cord connector. Its ground contact, printer earth and aluminum panel receive deliberate PE connections. Two 515CV connectors are required total.</li>
@@ -128,7 +128,7 @@
 </ul>
 <h2>Digital checks and limits</h2>
 <p><code>layout_dimensions.json</code> supplies the body locations for the 3D scene and wiring plan. Rear is at the top of both plan views. Browser checks compare actual rendered body bounds with SVG footprints for the 18 modeled envelopes; schematic terminal symbols and wire bends are simplified.</p>
-<p>The original Hammond STEP is retained at full scale. Project machining is generated with build123d 0.11.1; the case and panel are tessellated at 0.3 mm. Original cover/hardware meshes retain their earlier 0.45 mm triangulation. Numerical surface-contact exclusion at the seated panel is 0.0001 mm; these values are not manufacturing tolerances. Exact STEP cut-through gauges and the dated source hash are in <code>fabrication/cad-checks.json</code>.</p>
+<p>The BUD manufacturer-linked common-base STEP is used at full scale. Project machining is generated with build123d 0.11.1; the case and panel are tessellated at 0.3 mm. Cover and latch meshes use the same 0.3 mm tessellation. Numerical surface-contact exclusion at the seated panel is 0.0001 mm; these values are not manufacturing tolerances. Exact STEP cut-through gauges and the dated source hash are in <code>fabrication/cad-checks.json</code>.</p>
 <p>Nominal insertion sweeps are recorded in the current installation audit after excluding intentional panel-support contact. Install and restrain XA on the panel; there is no side outlet. Lid checks use nine sampled rays per body. These are geometric screens, not tolerance, thermal, electrical-clearance or flexible-cable proofs. The 2 m / 3 mm voltage-lead coil is an illustrative storage scenario, not a measurement of the supplied cables.</p>
 <p>The circuit checker validates 21 named paths, separated nets, printer-hot-only CT routing and Q0-open behavior. Regression tests reject selected wiring mistakes. Website tests verify gestures, views, alignment, images, links and responsive layout. No check constitutes a physical dry fit or energized acceptance result. See the <a href="build.html">build package</a> for the exact remaining work.</p>
 </body></html>

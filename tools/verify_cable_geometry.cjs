@@ -27,7 +27,7 @@ const distance=(a,b)=>Math.hypot(...a.map((v,i)=>v-b[i]));
   const crossing=g.routes.filter(r=>r.samples.some(p=>Math.abs(p[0]-cx)<ct.size[0]/2&&Math.hypot(p[1]-cy,p[2]-cz)<5.1+r.radius));
   assert.deepEqual(crossing.map(r=>r.id),['cord:printer-hot-ct'],'Exactly one hot conductor crosses the CT aperture');
   assert.ok(Math.abs(cy-ct.size[1]/2-d.parts.find(p=>p.id==='panel').size[1])<.001,'CT rests on the panel');
-  for(const [name,id,axis,value,radius] of [['Supply','cord:supply',0,-187,4.6],['Output','cord:printer',2,-213,4.6]]){
+  for(const [name,id,axis,value,radius] of [['Supply','cord:supply',0,d.instances.find(p=>p.id==='supply-entry').position[0],4.6],['Output','cord:printer',2,d.instances.find(p=>p.id==='printer-entry').position[2],4.6]]){
    const jacket=g.routes.find(r=>r.id===id&&r.radius===radius&&r.samples.some(p=>Math.abs(p[axis]-value)<1));
    assert.ok(jacket,`${name} gland must enclose the outer jacket`);
    const bare=g.routes.filter(r=>r.id?.startsWith(id+'-')&&r.radius<radius&&r.samples.some(p=>Math.abs(p[axis]-value)<1));
@@ -36,7 +36,7 @@ const distance=(a,b)=>Math.hypot(...a.map((v,i)=>v-b[i]));
   const diag=await page.evaluate(()=>enclosureDiagnostics());
   for(let i=0;i<6;i++){
    const f=diag.materialLocator.locations.fasteners.find(p=>p.key===`anchor-${i}`);
-   assert.ok(f.min[1]>-13 && f.min[1]<-12,'16 mm anchor screws stay above the case floor');
+   assert.ok(f.min[1]>-6.11 && f.min[1]<-6.09 && f.min[1]-(-9.5)>=3,'10 mm anchor screws leave at least 3 mm to the nominal case floor');
   }
   if(out){fs.mkdirSync(out,{recursive:true});
    for(let i=0;i<6;i++){

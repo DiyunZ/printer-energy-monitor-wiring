@@ -1,5 +1,5 @@
 {
-  "revision": "September 23, 2026 · revision D · one existing USB cable",
+  "revision": "2026-09-24",
   "scope": "One grounded 120 V supply, one printer at a time. The design uses an opaque-cover enclosure, proposed reuse of the professor’s aluminum sheet and an internal adapter connection. Six owned equipment groups, including the existing USB cable, are retained. The selected 15 A Q0 and upstream-only voltage-lead protection still require application acceptance. No purchase, physical fit, thermal test or electrical release is claimed. Closed-lid USB export is used only after unplugging mains; the internal portion of the existing USB cable requires rated insulation and accepted assembly.",
   "items": [
     {
@@ -173,53 +173,53 @@
     {
       "item": "Enclosure",
       "quantity": "1",
-      "model": "Hammond PCJ16148 · opaque screw cover",
-      "reason": "Same PCJ 16 × 14 × 8 in enclosure and opaque gray cover. Buy from Master Electronics with Q0: $160.56, checked 2026-09-23. This adds $23.45 versus the former enclosure seller and removes one order source. X-ray display is a website viewing aid; the purchased lid is opaque.",
-      "status": "Same selected enclosure; manufacturer stock listed, estimated ship date October 5, 2026. Recheck delivery at checkout. Common base/panel dimensions match the Hammond drawing; inherited clear-cover CAD remains a layout template, not a verified opaque-lid model.",
+      "model": "BUD NBF-32126 · opaque hinged cover",
+      "reason": "400 × 300 × 160 mm enclosure, $90.81 from DigiKey. Smaller than the former box; panel, placement, wall openings and screw lengths have been updated together. Retains three sellers and reduces the total parts budget. The cover is opaque; X-ray is a website viewing aid.",
+      "status": "DigiKey lists 1 in stock at the quantity-one price, checked September 24, 2026. All-new distributor offer; verify stock and delivery at checkout. The manufacturer-linked NBF-32226 STEP supplies the common base; the opaque lid silhouette is illustrative. Inspect actual lid, latches and component fit before machining.",
       "links": [
         {
-          "label": "Buy · Master Electronics",
-          "url": "https://www.masterelectronics.com/en/productdetail/hammond-manufacturing/pcj16148-49489596.html",
+          "label": "Buy · DigiKey",
+          "url": "https://www.digikey.com/en/products/detail/bud-industries/NBF-32126/2328550",
           "kind": "buy"
         },
         {
-          "label": "Hammond dimensions",
-          "url": "https://www.hammfg.com/files/parts/pdf/PCJ16148.pdf",
+          "label": "BUD product / standards",
+          "url": "https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/",
           "kind": "reference"
         },
         {
-          "label": "Hammond standards",
-          "url": "https://www.hammfg.com/electrical/products/non-metallic/pcj-sc",
+          "label": "BUD dimensional drawing",
+          "url": "https://www.budind.com/wp-content/uploads/2019/01/hbnbf32226.pdf",
           "kind": "reference"
         }
       ],
       "id": "enclosure",
       "availability": "buy",
       "image": {
-        "src": "assets/materials/enclosure-pcj16148.jpg",
+        "src": "assets/materials/enclosure-nbf32126.jpg",
         "kind": "product",
-        "alt": "Hammond PCJ16148 opaque-cover enclosure — product photo",
-        "caption": "Hammond PCJ16148 product photo; image credit is separate from the selected purchase source.",
-        "source_label": "Solutions Direct / Hammond",
-        "source_url": "https://www.solutionsdirectonline.com/hammond-16x14x8-polycarbonate-electrical-enclosure-with-solid-cover-pcj16148",
-        "source_image": "https://asset.solutionsdirectonline.com/img/Hammond_Manufacturing/hammond_pcj16148.jpg",
-        "width": 400,
-        "height": 400
+        "alt": "BUD NBF-32126 opaque hinged enclosure, open",
+        "caption": "BUD NBF-32126 product photo",
+        "source_label": "BUD Industries",
+        "source_url": "https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/",
+        "source_image": "https://www.budind.com/wp-content/uploads/NBF-32126-Open-348x348.jpg",
+        "width": 348,
+        "height": 348
       },
-      "installation": "Case and opaque gray screw cover. Q0, two power-cord glands and one protected USB cable opening penetrate the walls. XA and DC stay inside.",
+      "installation": "Opaque hinged case with two latches. Q0, two power glands and one USB cable opening penetrate the walls; XA and DC stay inside.",
       "location_summary": "Opaque enclosure; existing USB cable exits the right wall.",
-      "supplier": "Master Electronics",
+      "supplier": "DigiKey",
       "compliance": {
-        "status": "Manufacturer standards",
-        "detail": "UL 508A / cUL enclosure types; IEC 60529 IP66, unmodified enclosure only.",
-        "url": "https://www.hammfg.com/electrical/products/non-metallic/pcj-sc"
+        "status": "Manufacturer listing",
+        "detail": "UL508 Listed; NEMA 1, 2, 4, 4X for the unmodified enclosure. ABS/PC UL94-5VA, indoor use. The machined assembly does not inherit an enclosure seal or finished-product listing.",
+        "url": "https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/"
       }
     },
     {
       "item": "Mounting panel",
       "quantity": "1",
       "model": "Professor-supplied aluminum · fabricate after measuring",
-      "reason": "Use the scrap aluminum offered by Professor Clemon instead of buying 14R1513. Target outline 327.025 × 374.65 mm; modeled thickness 1.89738 mm is a provisional 1.90 mm template, not a measurement of his stock. Confirm thickness, flatness, stiffness and usable area before cutting. Retain a dedicated PE bond using hardware and a method suitable for aluminum.",
+      "reason": "Fabricate the professor’s offered aluminum into a 260 × 340 mm panel with 10 mm corner chamfers. The 1.89738 mm thickness is a provisional template, not measured stock. Verify thickness, stiffness, the 229.8 × 325.3 mm M5 support pattern and the aluminum-compatible PE bond before cutting.",
       "status": "Reuse proposed, not received or measured. Verify mounting pattern, bonding, screw stacks and stiffness before fabrication.",
       "links": [
         {
@@ -228,8 +228,8 @@
           "kind": "fabrication"
         },
         {
-          "label": "PCJ mounting-panel dimensions",
-          "url": "https://www.hammfg.com/files/parts/pdf/PCJ16148.pdf",
+          "label": "BUD mounting pattern",
+          "url": "https://www.budind.com/wp-content/uploads/2019/01/hbnbf32226.pdf",
           "kind": "reference"
         }
       ],
@@ -243,7 +243,7 @@
         "width": 320,
         "height": 240
       },
-      "installation": "Custom aluminum panel under the equipment, using the PCJ mounting interface. Includes six tie mounts, four logger slots and four internal-power restraint slots.",
+      "installation": "Custom aluminum panel on four M5 inserts. Four M5 × 10 mm mounting screws are purchased separately. Six anchors and eight strap slots retain the wiring, logger and internal power assembly.",
       "location_summary": "Aluminum panel with cable anchors and four adjustable straps.",
       "supplier": "Lab stock / fabrication",
       "compliance": {
@@ -256,7 +256,7 @@
       "item": "Q0 operating breaker",
       "quantity": "1",
       "model": "Carling CA1-B0-24-615-121-DG",
-      "reason": "Single 15 A operating breaker, 50/60 Hz medium-delay, UL489/CSA option DG. Mount directly on the front wall using the manufacturer pattern. No custom wall insert. Keep all four cover screws installed; Q0 OFF leaves its supply terminal live.",
+      "reason": "Single 15 A operating breaker, 50/60 Hz medium-delay, UL489/CSA option DG. Mount directly on the front wall using the manufacturer pattern. No custom wall insert. Keep the enclosure closed with both latches engaged; Q0 OFF leaves its supply terminal live.",
       "status": "Retain the user-selected 15 A / UL489 DG configuration. Master Electronics lists one piece at $40.32 and 16 in stock on 2026-09-23. The sourcing review compares the DIN alternative; direct mounting and the existing trip curve are retained. Delivery and price remain checkout-dependent; pre-use application checks are in protection.html.",
       "links": [
         {
@@ -748,7 +748,7 @@
       "quantity": "Buy 6 individual pieces; all 6 installed",
       "model": "Panduit TM2S8-C",
       "reason": "Six screw-fixed bases retain the mains bundle, XA branch conductors, CT pair, both sides of the voltage-lead coils, and the original internal DC cable and sleeved USB lead. DigiKey lists individual pieces, avoiding the previous 100-piece purchase.",
-      "status": "Six panel locations; M4 × 16 mm screws, underside washers and locknuts in the fastener schedule.",
+      "status": "Six panel locations; M4 × 10 mm screws, underside washers and locknuts in the fastener schedule.",
       "availability": "buy",
       "links": [
         {
@@ -819,8 +819,8 @@
       "item": "Mounting and bonding hardware",
       "quantity": "Four assembly groups; buy all required hardware",
       "model": "Screw / nut / washer schedule in Build_Package.md",
-      "reason": "Q0, three WAGO carriers, six cable mounts and the dedicated panel PE bond. Source all screws, nuts and washers from DigiKey and Home Depot; no lab fastener stock is assumed. Installed quantities and purchase packs are separated in the fastener schedule.",
-      "status": "Selected threads and screw lengths preserve the existing hole layout. Metric pan screws and some washers/nuts are zinc-plated steel; other pieces are stainless. Check actual stacks and the accepted aluminum bond.",
+      "reason": "Purchase all screws, washers and nuts in the build schedule: Q0 #6-32 × 1/4 in; carriers M3 × 12 mm; anchors M4 × 10 mm; panel supports M5 × 10 mm; dedicated #10 PE stud. Full packs and spares are priced, with no assumed lab hardware stock.",
+      "status": "Thirteen order lines, including four separately purchased panel screws. Verify received stack thickness, thread engagement, aluminum bonding and at least 3 mm screw-to-floor clearance.",
       "availability": "buy",
       "links": [
         {
@@ -1048,25 +1048,26 @@
     }
   ],
   "purchasing": {
-    "checked_on": "2026-09-23",
+    "checked_on": "2026-09-23–24",
     "currency": "USD",
     "scope": "Displayed purchase prices for the selected design, including purchase packs and fastener spares. Not an order or delivered project quote. Reused stock and fabrication are listed separately. Machining, bonding changes if required, tools, labor, freight and tax are excluded.",
-    "supplier_policy": "Three selected sellers: Master Electronics, DigiKey and Home Depot. All required fasteners are included in the purchase budget; no lab fastener stock is assumed. Use the listed DigiKey -ND offers, with no Marketplace partner selected. Factory stock may ship later or separately. Prices and availability can vary by location; recheck seller, quantity, delivery, freight and tax at checkout.",
+    "supplier_policy": "Three actual sellers: DigiKey, Master Electronics and Home Depot. Choose new distributor/retailer stock, not open-box or Marketplace partner offers. All required fasteners and retail packs are budgeted; no lab hardware stock is assumed. The enclosure and revised screws were checked September 24; unchanged lines retain their September 23 price snapshot. Recheck local availability, minimum quantities, shipping, tax and delivery before ordering.",
     "rows": [
       {
         "material_ids": [
           "enclosure"
         ],
-        "sku": "PCJ16148",
-        "supplier": "Master Electronics",
-        "seller": "Master Electronics",
+        "sku": "NBF-32126",
+        "supplier": "DigiKey",
+        "seller": "DigiKey",
         "quantity": 1,
         "unit": "each",
         "pieces_per_unit": 1,
-        "unit_price_usd": 160.56,
-        "extended_usd": 160.56,
-        "url": "https://www.masterelectronics.com/en/productdetail/hammond-manufacturing/pcj16148-49489596.html",
-        "availability_note": "Quantity-one offer; 12 at manufacturer, none at distributor; estimated ship October 5, 2026. Recheck before ordering."
+        "unit_price_usd": 90.81,
+        "extended_usd": 90.81,
+        "url": "https://www.digikey.com/en/products/detail/bud-industries/NBF-32126/2328550",
+        "availability_note": "377-1778-ND; 1 at DigiKey, quantity-one tier, checked 2026-09-24. New distributor stock; recheck delivery before ordering.",
+        "checked_on": "2026-09-24"
       },
       {
         "material_ids": [
@@ -1081,7 +1082,8 @@
         "unit_price_usd": 40.32,
         "extended_usd": 40.32,
         "url": "https://www.masterelectronics.com/en/productdetail/littelfuse-carling-technologies/ca1b024615121dg-16947583.html",
-        "availability_note": "16 listed in stock; quantity-one tier"
+        "availability_note": "16 listed in stock; quantity-one tier",
+        "checked_on": "2026-09-23"
       },
       {
         "material_ids": [
@@ -1101,7 +1103,8 @@
         "unit_price_usd": 6.99,
         "extended_usd": 13.98,
         "url": "https://www.homedepot.com/p/301304939",
-        "availability_note": "One internal XA and one printer output; buy two total"
+        "availability_note": "One internal XA and one printer output; buy two total",
+        "checked_on": "2026-09-23"
       },
       {
         "material_ids": [
@@ -1116,7 +1119,8 @@
         "unit_price_usd": 1.17,
         "extended_usd": 3.51,
         "url": "https://www.digikey.com/en/products/detail/wago-corporation/221-415/13549457",
-        "availability_note": "171,735 listed in stock; 2946-221-415-ND"
+        "availability_note": "171,735 listed in stock; 2946-221-415-ND",
+        "checked_on": "2026-09-23"
       },
       {
         "material_ids": [
@@ -1131,7 +1135,8 @@
         "unit_price_usd": 2.23,
         "extended_usd": 6.69,
         "url": "https://www.digikey.com/en/products/detail/wago-corporation/221-505/15568477",
-        "availability_note": "2,982 listed in stock; 2946-221-505-ND"
+        "availability_note": "2,982 listed in stock; 2946-221-505-ND",
+        "checked_on": "2026-09-23"
       },
       {
         "material_ids": [
@@ -1146,7 +1151,8 @@
         "unit_price_usd": 1.53,
         "extended_usd": 19.89,
         "url": "https://www.homedepot.com/p/Southwire-By-the-Foot-14-3-300-Volt-CU-Black-Flexible-Portable-Power-SJOOW-Cord-55808699/204633006",
-        "availability_note": "Minimum 6 ft; order one continuous 13 ft length"
+        "availability_note": "Minimum 6 ft; order one continuous 13 ft length",
+        "checked_on": "2026-09-23"
       },
       {
         "material_ids": [
@@ -1161,7 +1167,8 @@
         "unit_price_usd": 3.96,
         "extended_usd": 3.96,
         "url": "https://www.homedepot.com/p/Leviton-15-Amp-125-Volt-3-Wire-Plug-Yellow-515PV-YL-R10-515PV-0YL/309610976",
-        "availability_note": "Store / delivery availability varies"
+        "availability_note": "Store / delivery availability varies",
+        "checked_on": "2026-09-23"
       },
       {
         "material_ids": [
@@ -1176,7 +1183,8 @@
         "unit_price_usd": 2.97,
         "extended_usd": 5.94,
         "url": "https://www.digikey.com/en/products/detail/hammond-manufacturing/1427NCGPG13LB/22152326",
-        "availability_note": "Factory stock 1,242; check lead time (not immediate DigiKey stock); 164-1427NCGPG13LB-ND"
+        "availability_note": "Factory stock 1,242; check lead time (not immediate DigiKey stock); 164-1427NCGPG13LB-ND",
+        "checked_on": "2026-09-23"
       },
       {
         "material_ids": [
@@ -1191,7 +1199,8 @@
         "unit_price_usd": 0.42,
         "extended_usd": 1.68,
         "url": "https://www.homedepot.com/p/204632031",
-        "availability_note": "One continuous 4 ft length; not a 100 ft roll"
+        "availability_note": "One continuous 4 ft length; not a 100 ft roll",
+        "checked_on": "2026-09-23"
       },
       {
         "material_ids": [
@@ -1206,7 +1215,8 @@
         "unit_price_usd": 0.42,
         "extended_usd": 1.68,
         "url": "https://www.homedepot.com/p/204632154",
-        "availability_note": "One continuous 4 ft length; not a 100 ft roll"
+        "availability_note": "One continuous 4 ft length; not a 100 ft roll",
+        "checked_on": "2026-09-23"
       },
       {
         "material_ids": [
@@ -1221,7 +1231,8 @@
         "unit_price_usd": 3.63,
         "extended_usd": 3.63,
         "url": "https://www.homedepot.com/p/202522492",
-        "availability_note": "15 pieces supplied for a single pack price"
+        "availability_note": "15 pieces supplied for a single pack price",
+        "checked_on": "2026-09-23"
       },
       {
         "material_ids": [
@@ -1236,7 +1247,8 @@
         "unit_price_usd": 0.68,
         "extended_usd": 4.08,
         "url": "https://www.digikey.com/en/products/detail/panduit-corp/TM2S8-C/1306625",
-        "availability_note": "14,724 listed in stock; 298-10245-ND; individual pieces"
+        "availability_note": "14,724 listed in stock; 298-10245-ND; individual pieces",
+        "checked_on": "2026-09-23"
       },
       {
         "material_ids": [
@@ -1251,7 +1263,8 @@
         "unit_price_usd": 0.316,
         "extended_usd": 3.16,
         "url": "https://www.digikey.com/en/products/detail/panduit-corp/PLT2S-C/280043",
-        "availability_note": "113,092 listed in stock; 298-1030-ND; ten-piece price tier"
+        "availability_note": "113,092 listed in stock; 298-1030-ND; ten-piece price tier",
+        "checked_on": "2026-09-23"
       },
       {
         "material_ids": [
@@ -1266,23 +1279,25 @@
         "unit_price_usd": 10.77,
         "extended_usd": 10.77,
         "url": "https://www.homedepot.com/p/202261925",
-        "availability_note": "One roll supplies four blanks totaling 1.30 m"
+        "availability_note": "One roll supplies four blanks totaling 1.30 m",
+        "checked_on": "2026-09-23"
       },
       {
         "material_ids": [
           "fasteners"
         ],
-        "sku": "9904 · #6-32 × 3/8 stainless pan screws",
+        "sku": "9903 · #6-32 × 1/4 stainless pan screws",
         "supplier": "DigiKey",
         "seller": "DigiKey",
         "quantity": 4,
         "unit": "each",
         "pieces_per_unit": 1,
-        "unit_price_usd": 0.22,
-        "extended_usd": 0.88,
-        "url": "https://www.digikey.com/en/products/detail/keystone-electronics/9904/317325",
-        "availability_note": "Q0; 36-9904-ND, listed in stock",
-        "installed_quantity": 2
+        "unit_price_usd": 0.16,
+        "extended_usd": 0.64,
+        "url": "https://www.digikey.com/en/products/detail/keystone-electronics/9903/317324",
+        "availability_note": "Q0; 36-9903-ND; 33,195 listed in stock. Shorter screw for the 3 mm wall.",
+        "installed_quantity": 2,
+        "checked_on": "2026-09-24"
       },
       {
         "material_ids": [
@@ -1298,23 +1313,25 @@
         "extended_usd": 0.48,
         "url": "https://www.digikey.com/en/products/detail/keystone-electronics/4699/316268",
         "availability_note": "Q0; 36-4699-ND, 0.031 in nominal thickness",
-        "installed_quantity": 2
+        "installed_quantity": 2,
+        "checked_on": "2026-09-23"
       },
       {
         "material_ids": [
           "fasteners"
         ],
-        "sku": "837781 · M3-0.5 × 16 zinc pan screws",
+        "sku": "837761 · M3-0.5 × 12 zinc pan screws",
         "supplier": "Home Depot",
         "seller": "Home Depot",
         "quantity": 2,
         "unit": "pack",
         "pieces_per_unit": 4,
-        "unit_price_usd": 1.95,
-        "extended_usd": 3.9,
-        "url": "https://www.homedepot.com/p/321071713",
+        "unit_price_usd": 1.75,
+        "extended_usd": 3.5,
+        "url": "https://www.homedepot.com/p/321071719",
         "availability_note": "Carriers; 8 screws supplied, 6 installed; displayed store price; availability varies by location",
-        "installed_quantity": 6
+        "installed_quantity": 6,
+        "checked_on": "2026-09-24"
       },
       {
         "material_ids": [
@@ -1330,7 +1347,8 @@
         "extended_usd": 0.66,
         "url": "https://www.digikey.com/en/products/detail/keystone-electronics/4692/316261",
         "availability_note": "Carriers; 36-4692-ND, 3.25 mm bore",
-        "installed_quantity": 6
+        "installed_quantity": 6,
+        "checked_on": "2026-09-23"
       },
       {
         "material_ids": [
@@ -1346,23 +1364,25 @@
         "extended_usd": 3.9,
         "url": "https://www.homedepot.com/p/321071866",
         "availability_note": "Carriers; 8 nuts supplied, 6 installed; displayed store price; availability varies by location",
-        "installed_quantity": 6
+        "installed_quantity": 6,
+        "checked_on": "2026-09-23"
       },
       {
         "material_ids": [
           "fasteners"
         ],
-        "sku": "836371 · M4-0.7 × 16 zinc pan screws",
+        "sku": "836351 · M4-0.7 × 10 zinc pan screws",
         "supplier": "Home Depot",
         "seller": "Home Depot",
         "quantity": 2,
         "unit": "pack",
         "pieces_per_unit": 4,
-        "unit_price_usd": 1.95,
-        "extended_usd": 3.9,
-        "url": "https://www.homedepot.com/p/321071606",
+        "unit_price_usd": 1.75,
+        "extended_usd": 3.5,
+        "url": "https://www.homedepot.com/p/321071623",
         "availability_note": "Tie anchors; 8 screws supplied, 6 installed; displayed store price; availability varies by location",
-        "installed_quantity": 6
+        "installed_quantity": 6,
+        "checked_on": "2026-09-24"
       },
       {
         "material_ids": [
@@ -1378,7 +1398,8 @@
         "extended_usd": 4.96,
         "url": "https://www.homedepot.com/p/204801237",
         "availability_note": "Tie anchors; one 50-piece pack, 6 installed; retain the remainder; displayed store price; availability varies by location",
-        "installed_quantity": 6
+        "installed_quantity": 6,
+        "checked_on": "2026-09-23"
       },
       {
         "material_ids": [
@@ -1394,7 +1415,8 @@
         "extended_usd": 3.9,
         "url": "https://www.homedepot.com/p/321071795",
         "availability_note": "Tie anchors; 8 nuts supplied, 6 installed; displayed store price; availability varies by location",
-        "installed_quantity": 6
+        "installed_quantity": 6,
+        "checked_on": "2026-09-23"
       },
       {
         "material_ids": [
@@ -1410,7 +1432,8 @@
         "extended_usd": 0.78,
         "url": "https://www.digikey.com/en/products/detail/keystone-electronics/9911/317331",
         "availability_note": "Panel PE stud; 36-9911-ND, listed in stock",
-        "installed_quantity": 1
+        "installed_quantity": 1,
+        "checked_on": "2026-09-23"
       },
       {
         "material_ids": [
@@ -1426,7 +1449,8 @@
         "extended_usd": 0.4,
         "url": "https://www.digikey.com/en/products/detail/keystone-electronics/4705/316276",
         "availability_note": "Panel PE stud; 36-4705-ND, listed in stock",
-        "installed_quantity": 2
+        "installed_quantity": 2,
+        "checked_on": "2026-09-23"
       },
       {
         "material_ids": [
@@ -1442,7 +1466,8 @@
         "extended_usd": 1.57,
         "url": "https://www.homedepot.com/p/317479556",
         "availability_note": "Panel PE stud; one 18-piece pack, 2 installed; retain the remainder; displayed store price; availability varies by location",
-        "installed_quantity": 2
+        "installed_quantity": 2,
+        "checked_on": "2026-09-23"
       },
       {
         "material_ids": [
@@ -1458,7 +1483,25 @@
         "extended_usd": 0.52,
         "url": "https://www.digikey.com/en/products/detail/keystone-electronics/4703/316274",
         "availability_note": "Panel PE stud; 36-4703-ND, 0.033 in nominal thickness",
-        "installed_quantity": 2
+        "installed_quantity": 2,
+        "checked_on": "2026-09-23"
+      },
+      {
+        "material_ids": [
+          "fasteners"
+        ],
+        "sku": "863468 · M5-0.8 × 10 stainless pan screws",
+        "supplier": "Home Depot",
+        "seller": "Home Depot",
+        "quantity": 2,
+        "unit": "pack",
+        "pieces_per_unit": 2,
+        "unit_price_usd": 1.25,
+        "extended_usd": 2.5,
+        "url": "https://www.homedepot.com/p/323370995",
+        "availability_note": "Panel mounting; 4 screws supplied and installed. Not included with the enclosure. Store price / delivery varies by location.",
+        "installed_quantity": 4,
+        "checked_on": "2026-09-24"
       },
       {
         "material_ids": [
@@ -1473,7 +1516,8 @@
         "unit_price_usd": 9.39,
         "extended_usd": 9.39,
         "url": "https://www.digikey.com/en/products/detail/alpha-wire/F2213-4-BK105/3718418",
-        "availability_note": "F2213/4BK105-ND; 1,182 listed in stock; one 4 ft stick"
+        "availability_note": "F2213/4BK105-ND; 1,182 listed in stock; one 4 ft stick",
+        "checked_on": "2026-09-23"
       },
       {
         "material_ids": [
@@ -1488,9 +1532,10 @@
         "unit_price_usd": 0.14,
         "extended_usd": 0.14,
         "url": "https://www.digikey.com/en/products/detail/heyco-products-corporation/3104/15907204",
-        "availability_note": "3720-3104-ND; 6,537 listed in stock; quantity-one price. Verify actual passage and stock at checkout."
+        "availability_note": "3720-3104-ND; 6,537 listed in stock; quantity-one price. Verify actual passage and stock at checkout.",
+        "checked_on": "2026-09-23"
       }
     ],
-    "material_subtotal_usd": 315.23
+    "material_subtotal_usd": 246.94
   }
 }

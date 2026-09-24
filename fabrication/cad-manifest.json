@@ -1,0 +1,12 @@
+{
+  "generator": "tools/cad/enclosure_model.py",
+  "generator_sha256": "65e96dd1b773472f0bf4a13c44f3c1d7f63a2baee4e6acdb73aa9df769963b7b",
+  "source_step_sha256": "1363ffb8a4be8935dc20f692d2b5acd265d9a9dffb4feb9b93d896c250324148",
+  "source_url": "https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/",
+  "outputs": {
+    "case-machined.step": "d239f45aba24807403761fc016d44fd8b98b289cde10c555cb47db71e3c55466",
+    "case-machined.stl": "a11cc4a74fef7aad9b55541640ccecff1f876869d302662be80c292c3aefae92",
+    "panel-machined.step": "845c789ca5ff1a6b0536ddcb22a7315c76c20704a6f0f495ff3cfa7347ce1828",
+    "panel-machined.stl": "01f705cc1507f33e969114d7f159f7bcc38c8979c13c28058ec4fdfdc45c7f5f"
+  }
+}

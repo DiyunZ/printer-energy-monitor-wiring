@@ -61,13 +61,13 @@ After geometry changes, `node tools/audit_installation.mjs` refreshes `installat
 
 ## CAD regeneration
 
-Use Python 3.12 with `build123d==0.11.1`, `ezdxf` and `matplotlib` in a separate environment. Obtain the original [Hammond PCJ16148CC STEP](https://www.hammfg.com/files/parts/stp/PCJ16148CC.zip).
+Use Python 3.12 with `build123d==0.11.1`, `ezdxf` and `matplotlib` in a separate environment. Obtain the factory STEP linked on the [BUD NBF-32126 page](https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/). It supplies the NBF-32226 common base and an illustrative cover silhouette.
 
 ```sh
-python tools/cad/enclosure_model.py --source-step /path/to/PCJ16148CC.step
+python tools/cad/enclosure_model.py --source-step /path/to/NBF-32126.step
 python tools/cad/draw_fabrication.py
 ```
 
-`tools/convert_enclosure.cjs` imports the original factory assembly using `occt-import-js` 0.0.23. It overwrites the shell and panel meshes; if used, run the machining generator afterward.
+The generator writes the machined solids, five assembly meshes, exact clearance checks and `fabrication/cad-manifest.json` with source/generator/output hashes.
 
 Inspect regenerated CAD and drawings before publication. Software checks do not replace the receiving, fit and electrical checks in the [installation audit](../Installation_Audit.md).

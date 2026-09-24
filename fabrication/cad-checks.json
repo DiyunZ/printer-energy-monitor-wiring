@@ -1,59 +1,59 @@
 {
   "units": "mm",
   "status": "Digital geometry checks only; open release conditions in build.html",
-  "source_step_sha256": "df50fe8c21b6777720d72a9c30f8983c156294afbf1cdb82c1c4a936318eb318",
+  "source_step_sha256": "1363ffb8a4be8935dc20f692d2b5acd265d9a9dffb4feb9b93d896c250324148",
   "unchecked_standard_interfaces": "Vendor interfaces outside bundled standards database; dimensions from linked drawings, no physical qualification.",
   "results": [
     {
       "id": "case-machined",
-      "valid": true,
+      "valid": false,
       "solids": 1,
-      "volume_mm3": 2240687.74799073,
+      "volume_mm3": 957235.5951227882,
       "bounds_mm": [
-        392.2499770979982,
-        207.39100020000006,
-        433.22092349841625
+        316.56169320913943,
+        140.30000009600002,
+        411.0990002000001
       ]
     },
     {
       "id": "panel-machined",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 230780.64553944682,
+      "volume_mm3": 165620.18270170785,
       "bounds_mm": [
-        327.0250000000001,
-        1.8973800000000831,
-        374.65
+        260.0,
+        1.89738,
+        340.0
       ]
     },
     {
       "id": "Q0 toggle",
-      "removed_mm3": 1926.6109744068235,
+      "removed_mm3": 1210.324185766629,
       "result": "pass"
     },
     {
       "id": "Q0 fixing -1",
-      "removed_mm3": 58.74299837136641,
+      "removed_mm3": 36.94645831594244,
       "result": "pass"
     },
     {
       "id": "Q0 fixing +1",
-      "removed_mm3": 58.742988066747785,
+      "removed_mm3": 36.944582910393365,
       "result": "pass"
     },
     {
       "id": "SUPPLY",
-      "removed_mm3": 1653.8714826796204,
+      "removed_mm3": 1038.9928155061789,
       "result": "pass"
     },
     {
       "id": "OUTPUT",
-      "removed_mm3": 1653.8718264363706,
+      "removed_mm3": 1038.9931188266492,
       "result": "pass"
     },
     {
       "id": "USB cable exit",
-      "removed_mm3": 1848.2935096123256,
+      "removed_mm3": 1161.1272126857657,
       "result": "pass"
     },
     {
@@ -68,7 +68,7 @@
     },
     {
       "id": "Tie anchor 3",
-      "removed_mm3": 30.176525037182728,
+      "removed_mm3": 30.17652503721183,
       "result": "pass"
     },
     {
@@ -83,7 +83,7 @@
     },
     {
       "id": "Tie anchor 6",
-      "removed_mm3": 30.176525037153624,
+      "removed_mm3": 30.176525037182728,
       "result": "pass"
     },
     {
@@ -93,7 +93,7 @@
     },
     {
       "id": "Strap slot 1",
-      "removed_mm3": 152.86502027633833,
+      "removed_mm3": 152.86502027630922,
       "result": "pass"
     },
     {
@@ -103,7 +103,7 @@
     },
     {
       "id": "Strap slot 3",
-      "removed_mm3": 152.86502027628012,
+      "removed_mm3": 152.86502027630922,
       "result": "pass"
     },
     {
@@ -113,12 +113,12 @@
     },
     {
       "id": "Power strap slot 1",
-      "removed_mm3": 152.86502027630922,
+      "removed_mm3": 152.86502027628012,
       "result": "pass"
     },
     {
       "id": "Power strap slot 2",
-      "removed_mm3": 152.86502027633833,
+      "removed_mm3": 152.86502027628012,
       "result": "pass"
     },
     {
@@ -128,7 +128,27 @@
     },
     {
       "id": "Power strap slot 4",
-      "removed_mm3": 152.86502027625102,
+      "removed_mm3": 152.86502027630922,
+      "result": "pass"
+    },
+    {
+      "id": "Panel mounting 1",
+      "removed_mm3": 53.647155621642014,
+      "result": "pass"
+    },
+    {
+      "id": "Panel mounting 2",
+      "removed_mm3": 76.4157156216097,
+      "result": "pass"
+    },
+    {
+      "id": "Panel mounting 3",
+      "removed_mm3": 76.41571562166791,
+      "result": "pass"
+    },
+    {
+      "id": "Panel mounting 4",
+      "removed_mm3": 76.4157156216097,
       "result": "pass"
     },
     {
@@ -237,48 +257,46 @@
       "result": "pass"
     },
     {
-      "id": "Restored panel stock (-95, -28)",
-      "missing_mm3": 0.0,
+      "id": "Panel mount 1 M5 gauge",
+      "intrusion_mm3": 0,
       "result": "pass"
     },
     {
-      "id": "Restored panel stock (-15, -28)",
-      "missing_mm3": 0.0,
+      "id": "Panel mount 2 M5 gauge",
+      "intrusion_mm3": 0,
       "result": "pass"
     },
     {
-      "id": "Restored panel stock (-27, -28)",
-      "missing_mm3": 0.0,
+      "id": "Panel mount 3 M5 gauge",
+      "intrusion_mm3": 0,
       "result": "pass"
     },
     {
-      "id": "Restored right wall XA",
-      "stock_mm3": 33.75389978869949,
+      "id": "Panel mount 4 M5 gauge",
+      "intrusion_mm3": 0,
       "result": "pass"
     },
     {
-      "id": "Restored right wall XA upper fixing",
-      "stock_mm3": 33.7538997886995,
+      "id": "Custom panel to factory base",
+      "intrusion_mm3": 0.0,
       "result": "pass"
     },
     {
-      "id": "Restored right wall XA lower fixing",
-      "stock_mm3": 33.753899788699485,
-      "result": "pass"
-    },
-    {
-      "id": "Restored right wall DC",
-      "stock_mm3": 33.753899788699464,
-      "result": "pass"
-    },
-    {
-      "id": "Restored right wall old USB upper fixing",
-      "stock_mm3": 33.75389978869944,
-      "result": "pass"
-    },
-    {
-      "id": "Restored right wall old USB lower fixing",
-      "stock_mm3": 33.753899788699435,
+      "id": "panel",
+      "travel_mm": 300,
+      "outline_mm": [
+        260.0,
+        340.0
+      ],
+      "corner_chamfer_mm": 10.0,
+      "thickness_mm": 1.89738,
+      "position_mm": [
+        0,
+        0.94869,
+        0
+      ],
+      "intrusion_mm3": 0.0,
+      "method": "Exact chamfered blank swept vertically; support contact excluded by 0.0001 mm.",
       "result": "pass"
     }
   ]

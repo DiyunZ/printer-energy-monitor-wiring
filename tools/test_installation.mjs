@@ -12,7 +12,7 @@ const result = run();
 test('priced order covers every purchased group and counts each retail increment', () => {
   const order=p.purchasing, rows=order.rows;
   assert.deepEqual([...new Set(rows.flatMap(r=>r.material_ids))].sort(),p.items.filter(r=>r.availability==='buy').map(r=>r.id).sort());
-  assert.equal(new Set(rows.map(r=>r.seller)).size,5);
+  assert.equal(new Set(rows.map(r=>r.seller)).size,3);
   for(const r of rows){
     assert.ok(r.quantity>0 && Number.isInteger(r.quantity));
     assert.ok(r.unit_price_usd>0 && r.pieces_per_unit>=1);
@@ -37,7 +37,7 @@ test('current nominal checks pass while unresolved release gates stay visible', 
   assert.ok(result.checks.some(c => c.id === 'Machined wall geometry' && c.result === 'pass'));
   assert.match(result.release, /NOT RELEASED/);
   assert.equal(result.insertion_sweeps.length, 8);
-  assert.ok(result.insertion_sweeps.every(s => s.shell_triangle_hits === 0));
+  assert.ok(result.insertion_sweeps.every(s => s.result === 'pass'));
 });
 test('one owned USB cable exits directly through one protected hole', () => {
   assert.equal(d.instances.some(p => p.id === 'usb-entry'), true);
@@ -119,4 +119,15 @@ test('historical PE routes cut through the meter instead of passing around it', 
     const c = new T.CatmullRomCurve3(route.map(p => new T.Vector3(...p)), false, 'centripetal');
     assert.ok(c.getSpacedPoints(300).some(p => meter.containsPoint(p)));
   }
+});
+
+test('a changed panel cannot inherit the generated insertion proof',()=>{
+  for(const mutate of [p=>p.position[0]+=5,p=>p.size[1]+=1]){
+    const wrong=structuredClone(d);mutate(wrong.parts.find(p=>p.id==='panel'));
+    assert.equal(run(wrong).insertion_sweeps.find(p=>p.id==='panel').result,'review');
+  }
+});
+test('extra wall penetrations are rejected by the machining schedule check',()=>{
+  const wrong=structuredClone(m);wrong.wall_opening_ids.push('XA');
+  assert.equal(audit(d,wrong,buffer,p).checks.find(c=>c.id==='No XA wall opening').result,'fail');
 });

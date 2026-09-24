@@ -31,7 +31,7 @@ const close = (a,b) => Math.abs(a-b) < .05;
     assert.equal(await page.evaluate(()=>enclosureDiagnostics().usbCableVisible),true,'Existing USB cable stays attached to the box');
     const allMeshes = Object.values(initial.locations).flatMap(ps => ps.flatMap(p => p.meshes));
     assert.equal(new Set(allMeshes).size, allMeshes.length, 'Each physical mesh belongs to exactly one material');
-    const counts = { connectors: 3, carriers: 3, 'blue-leads': 3, 'voltage-leads': 3, 'ring-lugs': 3, 'tie-mounts': 6, 'cable-ties': 6, 'logger-restraint': 4, fasteners: 15, usb: 1, 'usb-bushing': 1, 'usb-sleeve': 1 };
+    const counts = { connectors: 3, carriers: 3, 'blue-leads': 3, 'voltage-leads': 3, 'ring-lugs': 3, 'tie-mounts': 6, 'cable-ties': 6, 'logger-restraint': 4, fasteners: 19, usb: 1, 'usb-bushing': 1, 'usb-sleeve': 1 };
     for (const [id,count] of Object.entries(counts)) assert.equal(initial.locations[id].length, count, id);
     // Rendered fasteners retain the actual machining datums; avoid importing the CAD runtime.
     for (const [i,point] of dimensions.installationHardware.cableMountsXZ.entries()) {

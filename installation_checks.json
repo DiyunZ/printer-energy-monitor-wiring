@@ -1,14 +1,14 @@
 {
-  "revision": "Build package D, 2026-09-23",
+  "revision": "2026-09-24",
   "release": "NOT RELEASED: close the receiving and electrical items in Build_Package.md",
   "units": "mm",
-  "method": "Axis-aligned body envelopes, continuous vertical swept volumes against the machined Hammond shell, nine lid rays per body and sourced interface arithmetic. Shell triangulation deflection is 0.3 mm; numerical seating-contact exclusion is 0.0001 mm. Neither is a manufacturing tolerance.",
+  "method": "Axis-aligned equipment envelopes, exact chamfered-panel clearance and continuous vertical swept volumes against the machined BUD common-base shell, nine lid rays per body and sourced interface arithmetic. Shell triangulation deflection is 0.3 mm; numerical seating-contact exclusion is 0.0001 mm. Neither is a manufacturing tolerance.",
   "checks": [
     {
       "id": "Q0 catalog body",
       "result": "pass",
       "evidence": "Model 19.18 × 63.5 × 47 mm; Carling p.11 body envelope 19.18 × 63.50 × 47.00 mm.",
-      "limits": "Body includes the front step; studs, handle and terminal protection is supplied by the screw-fixed outer enclosure."
+      "limits": "Body includes the front step; studs, handle and terminal protection is supplied by the closed outer enclosure."
     },
     {
       "id": "Q0 terminal and mounting pitches",
@@ -49,7 +49,7 @@
     {
       "id": "Vertical insertion through open case",
       "result": "pass",
-      "evidence": "8/8 swept bounding boxes clear the manufacturer shell.",
+      "evidence": "8/8 insertion sweeps clear the manufacturer shell; exact chamfered panel solid and seven equipment envelopes.",
       "limits": "300 mm vertical translation, fixed orientation, wall fittings absent. Panel/support contact at Y=0 is excluded with a 0.0001 mm numerical offset. This tests shell access, not brackets, wires or tool motions."
     },
     {
@@ -61,32 +61,32 @@
     {
       "id": "Machined wall geometry",
       "result": "pass",
-      "evidence": "Project openings in shell 0 and panel 33; build123d 0.11.1, 0.3 mm tessellation; other meshes retained. Carrier fixing holes transfer-drilled, not in mesh.",
-      "limits": "Exact cut-through gauges are in fabrication/cad-checks.json. Axis-aligned wall-device illustrations do not model the 0.937 degree draft; body/shell triangle contacts here are not mounting proofs. Received-part fit and fastening remain physical checks."
+      "evidence": "BUD common shell and custom aluminum panel machined; lid and latches retained from linked factory STEP. Opaque-cover silhouette illustrative. Carrier holes transfer-drilled.",
+      "limits": "Exact cut-through gauges are in fabrication/cad-checks.json. Axis-aligned wall-device illustrations do not model the 1 degree draft; body/shell triangle contacts here are not mounting proofs. Received-part fit and fastening remain physical checks."
     },
     {
       "id": "Closed lid screen",
       "result": "screen only",
-      "evidence": "meter: 159.012 mm (9/9 rays); ct: 168.315 mm (9/9 rays); outlet: 170.112 mm (9/9 rays); q0: 32.992 mm (9/9 rays)",
-      "limits": "Nine upward rays per body against lid mesh 15. Not a minimum-distance proof; excludes lid hardware, guards, wire bundles and tolerances."
+      "evidence": "meter: 93.9 mm (9/9 rays); ct: 103.203 mm (9/9 rays); outlet: 105 mm (9/9 rays); q0: 35.05 mm (9/9 rays)",
+      "limits": "Nine upward rays per body against the factory lid mesh. Not a minimum-distance proof; excludes lid hardware, guards, wire bundles and tolerances."
     },
     {
       "id": "No XA wall opening",
       "result": "pass",
-      "evidence": "Former XA center has 2 wall-surface intersections; right wall stock restored.",
-      "limits": "A cross-section screen; exact source-CAD stock gauges are also recorded."
+      "evidence": "XA remains inside; the machining schedule contains Q0, SUPPLY, OUTPUT and one USB bore only.",
+      "limits": "Cut-through gauges in fabrication/cad-checks.json check the new shell."
     },
     {
       "id": "No DC wall opening",
       "result": "pass",
-      "evidence": "Former DC center has 2 wall-surface intersections; right wall stock restored.",
-      "limits": "A cross-section screen; exact source-CAD stock gauges are also recorded."
+      "evidence": "DC remains inside; the machining schedule contains Q0, SUPPLY, OUTPUT and one USB bore only.",
+      "limits": "Cut-through gauges in fabrication/cad-checks.json check the new shell."
     },
     {
       "id": "Closed-lid USB cable exit",
       "result": "pass",
-      "evidence": "USB center Y/Z = 55/167 mm has 0 obstructing wall intersections. Standard-B overmold diagonal 15.57 mm fits the 17.5 mm nominal passage.",
-      "limits": "Published standard envelope and mesh centerline checks; actual bushing locking fit, cable passage and external-pull restraint need dry fit. One mounting hole, no flange screws. No ingress or isolation rating is claimed."
+      "evidence": "USB center Y/Z = 55/167 mm has 0 obstructing wall intersections. USB-B overmold diagonal 15.57 mm fits the 17.5 mm passage.",
+      "limits": "Published envelope and mesh centerline only; accept actual snap fit, cable passage and pull restraint. No ingress or isolation rating claimed."
     },
     {
       "id": "One existing USB cable",
@@ -123,8 +123,8 @@
     {
       "id": "panel",
       "travel_mm": 300,
-      "shell_triangle_hits": 0,
-      "seated_contact_triangles": 504,
+      "method": "Exact chamfered blank swept vertically; support contact excluded by 0.0001 mm.",
+      "intrusion_mm3": 0,
       "result": "pass"
     },
     {
@@ -182,25 +182,25 @@
       "id": "meter",
       "shell_triangle_hits": 0,
       "lid_samples": 9,
-      "minimum_sampled_lid_gap_mm": 159.012
+      "minimum_sampled_lid_gap_mm": 93.9
     },
     {
       "id": "ct",
       "shell_triangle_hits": 0,
       "lid_samples": 9,
-      "minimum_sampled_lid_gap_mm": 168.315
+      "minimum_sampled_lid_gap_mm": 103.203
     },
     {
       "id": "outlet",
       "shell_triangle_hits": 0,
       "lid_samples": 9,
-      "minimum_sampled_lid_gap_mm": 170.112
+      "minimum_sampled_lid_gap_mm": 105
     },
     {
       "id": "q0",
       "shell_triangle_hits": 138,
       "lid_samples": 9,
-      "minimum_sampled_lid_gap_mm": 32.992
+      "minimum_sampled_lid_gap_mm": 35.05
     }
   ],
   "wall_entries": [],
