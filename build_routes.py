@@ -152,7 +152,7 @@ def start_svg(w,h,label,extra='',viewbox=None):
     parts.clear()
     box=' '.join(map(str,viewbox or (0,0,w,h)))
     add(f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="{box}" role="img" aria-label="{label}" {extra}>')
-    add('<style>text{font-family:Arial,Helvetica,sans-serif}.wire{cursor:pointer;transition:opacity .15s}.muted{opacity:.09}.selected .core{stroke-width:9}.wire:focus{outline:none}.wire:focus .core{stroke-width:9}</style>')
+    add('<style>text{font-family:Arial,Helvetica,sans-serif}.wire{cursor:pointer;transition:opacity .15s}.selected .core{stroke-width:9}.wire:focus{outline:none}.wire:focus .core{stroke-width:9}</style>')
     rect(*(viewbox or (0,0,w,h)),'#fff','#fff',0)
 
 def footprint(part, fill='#fff', stroke='#9eacb7', radius=4):
@@ -198,7 +198,8 @@ def make_diagram():
             px,py=project((x-13.75+i*5.8,z-6));rect(px,py,4.3*SCALE,12*SCALE,'#e58b3c','#bb6728',2)
         at(part,part,-14,22)
     for part in ['JL','JN','PE']:
-        line([project(pin(part,1)),project(pin(part,5))],C['L'] if part=='JL' else C['N'] if part=='JN' else C['PE'],4)
+        prefix = 'JPE' if part == 'PE' else part
+        line([project(pin(part,1)),project(pin(part,5))],C['L'] if part=='JL' else C['N'] if part=='JN' else C['PE'],4,extra=f'class="circuit-bus" data-bus="{prefix}"')
     footprint('ct','#e8e6da','#9d9d8d',6)
     l,t,r,b=CT_WINDOW;rect(l,t,r-l,b-t,'#fff','#979e9f',0)
     at('ct','CT1',-6,22);at('ct','LOAD →',11,18)
@@ -237,7 +238,7 @@ def make_diagram():
         add('</g>')
     for prefix in ['JL.','JN.','JPE.']:
         for name,xy in A.items():
-            if name.startswith(prefix):circle(*xy,3.7,C['L'] if prefix=='JL.' else C['N'] if prefix=='JN.' else C['PE'],'#fff')
+            if name.startswith(prefix):circle(*xy,3.7,C['L'] if prefix=='JL.' else C['N'] if prefix=='JN.' else C['PE'],'#fff',extra=f'class="circuit-bus" data-bus="{prefix[:-1]}"')
     circle(*A['PLATE'],7,'#e9d69d','#9b7f40')
     add('<g style="paint-order:stroke;stroke:#fff;stroke-width:4;stroke-linejoin:round">')
     for name,label,dx,dy in [('D.N','N',0,-11),('D.L2','L2',0,-11),('D.L1','L1',0,-11),('D.+','CH1 +',12,-8),('D.-','CH1 −',12,17),('D.DC+','DC',0,-63),('D.USB','USB',0,-63)]:

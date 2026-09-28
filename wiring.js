@@ -2,12 +2,17 @@ const $ = id => document.getElementById(id);
 const stage = $('main-stage'), diagram = stage.querySelector('svg');
 const viewer = $('wiring-viewer'), dialog = $('wiring-fullscreen');
 const viewerHome = viewer.parentNode, viewerNext = viewer.nextSibling;
-const wires = [...diagram.querySelectorAll('.wire')];
+const wires = [...diagram.querySelectorAll('.wire-route, .wire-badge')];
 const routes = [...diagram.querySelectorAll('.wire-route')];
+const buses = [...diagram.querySelectorAll('.circuit-bus')];
 const groups = {
-  all: null, main: ['01','02','03'], voltage: ['01','02','05','06','08','09'],
+  all: null, main: ['01','02','03'], voltage: ['05','08','09'],
   neutral: ['06','07','08','09','18','21'], earth: ['10','11','12','19'],
-  aux: ['01','02','06','10','17','18','19','20','21','22','23'], signal: ['14','15','16'],
+  aux: ['17','18','19','20','21','22','23'], signal: ['14','15','16'],
+};
+const sharedSupply = {
+  voltage: ['01','02','06'],
+  aux: ['01','02','06','10'],
 };
 const hints = {
   all: 'Drag to pan · Select a wire for endpoints.',
@@ -25,17 +30,26 @@ function activate(mode) {
     button.classList.toggle('active', on); button.setAttribute('aria-pressed', String(on));
   });
 }
-function show(ids, label) {
-  activeIds = ids;
+function show(ids, label, contextIds = []) {
+  activeIds = ids ? [...ids, ...contextIds] : null;
   for (const wire of wires) {
-    wire.classList.toggle('muted', Boolean(ids && !ids.includes(wire.dataset.id)));
+    wire.classList.toggle('muted', Boolean(activeIds && !activeIds.includes(wire.dataset.id)));
+    wire.classList.toggle('wire-context', contextIds.includes(wire.dataset.id));
     wire.classList.toggle('selected', Boolean(ids?.length === 1 && ids.includes(wire.dataset.id)));
   }
+  for (const bus of buses) {
+    const prefix = bus.dataset.bus + '.';
+    const connections = routes.filter(route => route.dataset.start.startsWith(prefix) || route.dataset.end.startsWith(prefix));
+    const primary = !ids || connections.some(route => ids.includes(route.dataset.id));
+    const context = !primary && connections.some(route => contextIds.includes(route.dataset.id));
+    bus.classList.toggle('muted', !primary && !context);
+    bus.classList.toggle('wire-context', context);
+  }
   document.querySelectorAll('.row').forEach(row => {
-    row.classList.toggle('dimrow', Boolean(ids && !ids.includes(row.dataset.id)));
+    row.classList.toggle('dimrow', Boolean(activeIds && !activeIds.includes(row.dataset.id)));
     row.classList.toggle('selected-row', Boolean(ids?.length === 1 && ids.includes(row.dataset.id)));
   });
-  $('status').textContent = label;
+  $('status').textContent = label + (contextIds.length ? ' · Gray: shared supply connections.' : '');
   $('trace-endpoints').hidden = true;
   $('zoom-focus').hidden = !ids;
   if (viewMode === 'selection') viewMode = 'manual';
@@ -62,10 +76,10 @@ function trace(id) {
 }
 document.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click', () => {
   const refocus = viewMode === 'selection';
-  activate(button.dataset.mode); show(groups[button.dataset.mode], hints[button.dataset.mode]);
+  activate(button.dataset.mode); show(groups[button.dataset.mode], hints[button.dataset.mode], sharedSupply[button.dataset.mode]);
   if (refocus) activeIds ? focusSelection() : readable();
 }));
-for (const wire of wires) {
+for (const wire of diagram.querySelectorAll('.wire')) {
   wire.addEventListener('click', () => trace(wire.dataset.id));
   wire.addEventListener('keydown', event => {
     if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); trace(wire.dataset.id); focusSelection(); }

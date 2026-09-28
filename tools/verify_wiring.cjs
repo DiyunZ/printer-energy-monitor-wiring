@@ -36,6 +36,53 @@ const near = (a, b, epsilon = .001) => Math.abs(a - b) < epsilon;
     assert.ok(Math.min(...labels) >= 14, 'Default labels must be readable, not the former 5–7 px');
     if (out) await page.locator('#wiring-viewer').screenshot({ path: path.join(out, 'wiring-readable-desktop.png') });
 
+    // Circuit tabs distinguish the narrated paths from shared supply connections.
+    const circuitViews = {
+      main: { primary: ['01','02','03'], context: [] },
+      voltage: { primary: ['05','08','09'], context: ['01','02','06'] },
+      neutral: { primary: ['06','07','08','09','18','21'], context: [] },
+      earth: { primary: ['10','11','12','19'], context: [] },
+      aux: { primary: ['17','18','19','20','21','22','23'], context: ['01','02','06','10'] },
+      signal: { primary: ['14','15','16'], context: [] },
+    };
+    const originalStrokes = await page.locator('.wire-route').evaluateAll(es => Object.fromEntries(es.map(e => [e.dataset.id, getComputedStyle(e.querySelector('.core')).stroke])));
+    await page.locator('#zoom-fit').click();
+    for (const [mode, expected] of Object.entries(circuitViews)) {
+      await page.locator(`[data-mode="${mode}"]`).click();
+      if (out) await page.locator('#wiring-viewer').screenshot({ path: path.join(out, `wiring-circuit-${mode}.png`), animations: 'disabled' });
+      const visible = await page.locator('#main-stage .wire-route:visible').evaluateAll(es => es.map(e => e.dataset.id).sort());
+      assert.deepEqual(visible, [...expected.primary, ...expected.context].sort(), mode + ': unrelated wires must be hidden');
+      assert.equal(await page.locator('#main-stage .component-footprint:visible').count(), 18, mode + ': component outlines remain visible');
+      const strokes = await page.locator('#main-stage .wire-route:visible').evaluateAll(es => Object.fromEntries(es.map(e => [e.dataset.id, getComputedStyle(e.querySelector('.core')).stroke])));
+      for (const id of expected.primary) assert.equal(strokes[id], originalStrokes[id], mode + ': keep the selected circuit colors');
+      for (const id of expected.context) {
+        assert.notEqual(strokes[id], originalStrokes[id], mode + ': shared supplies use a neutral context color');
+        assert.equal(strokes[id], strokes[expected.context[0]], mode + ': shared supplies use the same gray');
+      }
+      assert.equal(await page.locator('#main-stage .wire-badge:visible').count(), 0);
+      if (mode === 'main') {
+        await page.locator('#wire-14').evaluate(e => e.focus());
+        assert.equal(await page.locator('#wire-14').evaluate(e => e === document.activeElement), false, 'Hidden wires cannot receive keyboard focus');
+        assert.equal(await page.locator('[data-bus="JN"]:visible, [data-bus="JPE"]:visible').count(), 0, 'Unrelated colored bus lines are hidden too');
+      }
+    }
+    await page.locator('[data-mode="voltage"]').click();
+    await page.emulateMedia({ media: 'print' });
+    assert.equal(await page.locator('#main-stage .wire-route:visible').count(), 21, 'Printing still includes the complete wiring diagram');
+    const printedStrokes = await page.locator('#main-stage .wire-route').evaluateAll(es => Object.fromEntries(es.map(e => [e.dataset.id, getComputedStyle(e.querySelector('.core')).stroke])));
+    assert.deepEqual(printedStrokes, originalStrokes, 'Printing restores original colors for the shared supplies');
+    await page.emulateMedia({ media: 'screen' });
+    await page.locator('#wire-01').focus(); await page.keyboard.press('Enter');
+    assert.equal(await page.locator('#trace-endpoints').textContent(), 'Supply L → Q0 IN', 'Shared supplies remain selectable');
+    assert.equal(await page.locator('#main-stage .wire-route:visible').count(), 1, 'Single-wire tracing hides the other paths');
+    await page.locator('[data-mode="all"]').click();
+    await page.locator('[data-layout-id="A1"]').click({ position: { x: 4, y: 4 } });
+    assert.match(await page.locator('#status').textContent(), /Connection 05/, 'Voltage connector bodies still select their associated wire');
+    await page.locator('[data-mode="all"]').click();
+    assert.equal(await page.locator('#main-stage .wire-route:visible').count(), 21, 'All restores every wire');
+    assert.equal(await page.locator('#main-stage .wire-context').count(), 0, 'All restores the original colors');
+    await page.locator('#zoom-reset').click();
+
     // Table, pointer, and keyboard selection show one number plus correct physical endpoints.
     await page.locator('#connections summary').click();
     await page.locator('.trace[data-id="14"]').click();
@@ -51,6 +98,7 @@ const near = (a, b, epsilon = .001) => Math.abs(a - b) < epsilon;
     assert.match(await page.locator('#trace-endpoints').textContent(), /XA hot contact/);
     await page.locator('.trace[data-id="21"]').click();
     assert.match(await page.locator('#trace-endpoints').textContent(), /XA neutral contact/);
+    await page.locator('[data-mode="all"]').click();
     await page.locator('#wire-19').focus(); await page.keyboard.press('Enter');
     assert.equal(await page.locator('#trace-endpoints').textContent(), 'PE port 4 → XA PE');
     await page.locator('[data-mode="signal"]').click();
@@ -110,7 +158,7 @@ const near = (a, b, epsilon = .001) => Math.abs(a - b) < epsilon;
     assert.match(await page.locator('#connectors').innerText(), /White gaps are insulated crossings/);
     await page.locator('#connectors summary').click();
     assert.deepEqual(errors, []);
-    const report = { defaultVisibleLabels: 20, allPaths: 21, defaultLabelMinimumPx: Math.min(...labels), fitAll: true, focusWireAndGroup: true, physicalEndpointNames: true, dragAndKeyboardPan: true, fullscreenAndEscape: true, viewportWidths: [1440,768,390,320], errors };
+    const report = { defaultVisibleLabels: 20, allPaths: 21, circuitViews, unrelatedWiresHidden: true, sharedSuppliesGray: true, componentOutlinesPreserved: true, completePrintDiagram: true, defaultLabelMinimumPx: Math.min(...labels), fitAll: true, focusWireAndGroup: true, physicalEndpointNames: true, dragAndKeyboardPan: true, fullscreenAndEscape: true, viewportWidths: [1440,768,390,320], errors };
     if (out) fs.writeFileSync(path.join(out, 'wiring-validation.json'), JSON.stringify(report,null,2)+'\n');
     console.log(JSON.stringify(report, null, 2));
   } finally { await browser.close(); }

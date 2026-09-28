@@ -206,15 +206,16 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  await page.locator('#model-more > summary').click();
  // Existing circuit controls remain functional.
  await page.locator('#tab-wiring').click();
- const ids=await page.locator('#main-stage .wire').evaluateAll(es=>[...new Set(es.map(e=>e.dataset.id))]);assert.equal(ids.length,21);
+ const ids=await page.locator('#main-stage .wire-route').evaluateAll(es=>es.map(e=>e.dataset.id));assert.equal(ids.length,21);
  const expected={all:null,main:['01','02','03'],voltage:['01','02','05','06','08','09'],neutral:['06','07','08','09','18','21'],earth:['10','11','12','19'],aux:['01','02','06','10','17','18','19','20','21','22','23'],signal:['14','15','16']};
  for(const [mode,want] of Object.entries(expected)){
   await page.locator(`[data-mode="${mode}"]`).click();
-  const actual=await page.locator('#main-stage .wire:not(.muted)').evaluateAll(es=>[...new Set(es.map(e=>e.dataset.id))].sort());
+  const actual=await page.locator('#main-stage .wire-route:visible').evaluateAll(es=>es.map(e=>e.dataset.id).sort());
   assert.deepEqual(actual,want||ids.slice().sort());
  }
  await page.locator('#connections summary').click();
  for(const id of ids){await page.locator(`.trace[data-id="${id}"]`).click();assert.match(await page.locator('#status').textContent(),new RegExp('Connection '+id+' ·'));}
+ await page.locator('[data-mode="all"]').click();
  await page.locator('#wire-19').focus();await page.keyboard.press('Enter');assert.match(await page.locator('#status').textContent(),/Connection 19/);
  await page.locator('[data-mode="all"]').click();
  const wiringScale=Number(await page.locator('#main-stage').getAttribute('data-scale'));
