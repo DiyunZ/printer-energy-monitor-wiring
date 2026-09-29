@@ -6,12 +6,12 @@ September 28, 2026 · 120 V grounded supply · one printer at a time.
 
 | Item | Verified | Decision |
 |---|---|---|
-| Q0, Phoenix 2907571 | 15 A, 1 pole, C curve; UL489 / cUL Listed E320373; 277 V AC; 10 kA | Selected from DigiKey at $21.57 + $5.34 estimated tariff. Startup and original voltage-lead protection require application acceptance. |
+| Q0, Phoenix 2907571 | 15 A, 1 pole, C curve; UL489 / cUL Listed E320373; 277 V AC; 10 kA | Selected from DigiKey at a material price of $21.57. Startup and original voltage-lead protection require application acceptance. |
 | Voltage tap | A1 connects to JL after Q0; no dedicated fuse | Confirm that upstream Q0 protection is suitable for the original DENT leads before energizing. |
 | USB cable | Existing A-to-B cable confirmed owned | Reuse intact through one protected wall opening. Keep its internal portion sleeved and restrained; connect the free USB-A end to the PC only after unplugging mains. |
 | Internal adapter power | XA 515CV + original CUI cable, entirely inside | No DC extension or wall feedthrough. Verify plug retention and closed-enclosure temperature. |
 
-The [delivered-cost comparison](revision.html#breaker-options) includes the rail, end stops, fasteners, estimated tariffs and one consolidated DigiKey shipment. Two sellers remain: DigiKey and Home Depot.
+The [material-cost comparison](revision.html#breaker-options) includes the breaker, rail, end stops and purchased fastener packs. Shipping, tariffs, sales tax, fabrication and labor are excluded from the selection total. Two sellers remain: DigiKey and Home Depot.
 
 ## Q0: what the rating proves
 
@@ -53,7 +53,7 @@ The user confirms the three differently colored pigtails as original DENT kit co
 
 > For our proposed 120 V measurement enclosure, may original DENT LD-SKTSP pigtails and voltage leads connect to a circuit protected by a Phoenix TMC 81C 15A / 2907571 15 A breaker without a dedicated voltage-tap fuse? A1 feeds L1 from switched hot; L2 and N connect to neutral. Please confirm the permitted upstream protection and terminal preparation, or identify any additional protection required. The original 9 V adapter is also powered from the switched circuit.
 
-The [Q0 purchase link](https://www.wolfautomation.com/mini-circuit-breaker-1p-c-curve-15a-ul489-1) identifies the selected product. Exact-SKU stock, site fault-current suitability and startup behavior remain to be confirmed.
+The [Q0 purchase link](https://www.digikey.com/en/products/detail/phoenix-contact/2907571/6109707) identifies the selected product. Exact-SKU stock, site fault-current suitability and startup behavior remain to be confirmed.
 
 ## Experiment data workflow
 

@@ -257,10 +257,10 @@
       "quantity": "1",
       "model": "Phoenix Contact TMC 81C 15A · 2907571",
       "reason": "15 A, one pole, C curve, UL489 / cUL Listed E320373; 10 kA, 277 V AC. Consolidates the breaker into the existing DigiKey order. Manufacturer STEP defines the wall opening, short DIN rail and bonded aluminum bracket. Review the thermal-magnetic curve against startup and original voltage-lead protection.",
-      "status": "DigiKey direct stock: $21.57 plus $5.34 estimated tariff = $26.91; 3,691 in stock when checked 2026-09-28. No separate breaker shipment assumed if consolidated. Quote only; tax and final delivery depend on school checkout.",
+      "status": "DigiKey direct stock: material price $21.57; 3,691 in stock when checked 2026-09-28. Reconfirm price and stock before ordering. Shipping, tariffs, sales tax and fabrication are excluded from the selection total.",
       "links": [
         {
-          "label": "Buy 1 · DigiKey · $21.57 + estimated tariff",
+          "label": "Buy 1 · DigiKey · $21.57",
           "url": "https://www.digikey.com/en/products/detail/phoenix-contact/2907571/6109707",
           "kind": "buy"
         },
@@ -275,7 +275,7 @@
           "kind": "reference"
         },
         {
-          "label": "Delivered-cost comparison",
+          "label": "Material costs and seller comparison",
           "url": "revision.html#breaker-options",
           "kind": "reference"
         }
@@ -308,7 +308,7 @@
       "quantity_summary": "60 mm installed + 2 stops",
       "model": "Phoenix Contact 1207639 + Altech CA802 × 2",
       "reason": "35 × 7.5 × 1 mm galvanized steel rail. Buy the complete 250 mm piece for $4.79; two $0.62 CA802 stops restrain the breaker laterally. The short stock avoids adding a one-metre package to the enclosure shipment.",
-      "status": "DigiKey checked 2026-09-28: rail $4.79 + $0.38 estimated tariff; two stops $1.24 with no displayed tariff. Total $6.41 before shared freight/tax. Confirm snap fit and shipment consolidation; cut and deburr away from components.",
+      "status": "DigiKey checked 2026-09-28: rail $4.79; two stops $1.24. Material subtotal $6.03. Confirm snap fit; cut and deburr away from components.",
       "availability": "buy",
       "supplier": "DigiKey",
       "links": [
@@ -1123,8 +1123,9 @@
   "purchasing": {
     "checked_on": "2026-09-23–28",
     "currency": "USD",
-    "scope": "Materials include complete purchase packs and spares. September 28 breaker/rail/stop checks and estimated tariffs are separated below; unchanged items retain September 23–24 prices. Freight, tax, fabrication and possible additional tariffs remain explicit.",
-    "supplier_policy": "Two actual sellers: DigiKey and Home Depot. Select DigiKey direct stock and consolidate the breaker, rail and accessories with the enclosure shipment. Factory-stock glands may cause extra shipment charges. Home Depot delivery is unquoted; $0 is only an eligible free-pickup scenario. No new retailer or invented purchasing fee.",
+    "cost_basis": "materials_only",
+    "scope": "Selection totals count materials only, including complete purchase packs and spares. Shipping, tariffs, sales tax, fabrication and labor are excluded. Breaker, rail and stop prices were checked September 28; unchanged items retain September 23–24 prices.",
+    "supplier_policy": "Minimize the number of actual sellers while comparing material costs. The selected plan uses two sellers: DigiKey and Home Depot. Choose DigiKey direct stock; Marketplace partners count as separate sellers. Do not add shipping or a fee per seller to the material total.",
     "rows": [
       {
         "material_ids": [
@@ -1155,7 +1156,7 @@
         "unit_price_usd": 21.57,
         "extended_usd": 21.57,
         "url": "https://www.digikey.com/en/products/detail/phoenix-contact/2907571/6109707",
-        "availability_note": "3,691 DigiKey direct stock; $5.34 estimated tariff, separate below. Consolidate with existing shipment.",
+        "availability_note": "3,691 DigiKey direct stock at the September 28 check. Material price only.",
         "checked_on": "2026-09-28",
         "estimated_tariff_usd": 5.34
       },
@@ -1588,7 +1589,7 @@
         "unit_price_usd": 4.79,
         "extended_usd": 4.79,
         "url": "https://www.digikey.com/en/products/detail/phoenix-contact/1207639/10645207",
-        "availability_note": "250 × 35 × 7.5 mm, t=1 mm; cut 60 mm. 2,067 stock; $0.38 estimated tariff, separate below.",
+        "availability_note": "250 × 35 × 7.5 mm, t=1 mm; cut 60 mm. 2,067 stock at the September 28 check. Material price only.",
         "checked_on": "2026-09-28",
         "estimated_tariff_usd": 0.38
       },
@@ -1605,12 +1606,13 @@
         "unit_price_usd": 0.62,
         "extended_usd": 1.24,
         "url": "https://www.digikey.com/en/products/detail/altech-corporation/CA802/8547037",
-        "availability_note": "Two 8 mm-wide end stops; 35 × 7.5 DIN-compatible. 6,021 stock; no displayed tariff.",
+        "availability_note": "Two 8 mm-wide end stops; 35 × 7.5 DIN-compatible. 6,021 stock at the September 28 check.",
         "checked_on": "2026-09-28"
       }
     ],
     "material_subtotal_usd": 233.54,
     "delivery_estimate": {
+      "usage_note": "Historical checkout reference only; excluded from the materials-only selection total.",
       "destination": "Sidney Lu Mechanical Engineering Building, Urbana, IL 61801",
       "checked_on": "2026-09-28",
       "digikey_ground_budget_usd": 8.49,

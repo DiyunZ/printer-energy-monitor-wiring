@@ -11,6 +11,8 @@ const run = (dimensions = d, procurement = p) => audit(dimensions, m, buffer, pr
 const result = run();
 test('priced order covers every purchased group and counts each retail increment', () => {
   const order=p.purchasing, rows=order.rows;
+  assert.equal(order.cost_basis,'materials_only');
+  assert.equal(order.material_subtotal_usd,233.54);
   assert.deepEqual([...new Set(rows.flatMap(r=>r.material_ids))].sort(),p.items.filter(r=>r.availability==='buy').map(r=>r.id).sort());
   assert.equal(new Set(rows.map(r=>r.seller)).size,2);
   for(const r of rows){
@@ -21,7 +23,7 @@ test('priced order covers every purchased group and counts each retail increment
   }
   assert.equal(rows.reduce((n,r)=>n+Math.round(r.extended_usd*100),0),Math.round(order.material_subtotal_usd*100));
   const tariffCents=rows.reduce((n,r)=>n+Math.round((r.estimated_tariff_usd||0)*100),0);
-  assert.equal(tariffCents,572,'Cart estimates include breaker and rail tariffs');
+  assert.equal(tariffCents,572,'Retained cart estimates are separate from the materials-only selection total');
   assert.equal(Math.round(order.material_subtotal_usd*100)+tariffCents+Math.round(order.delivery_estimate.digikey_ground_budget_usd*100),24775);
   assert.equal(order.delivery_estimate.known_pre_sales_tax_cost_usd,247.75);
   assert.equal(order.delivery_estimate.home_depot_shipping_usd,null,'Unquoted delivery is not zero');

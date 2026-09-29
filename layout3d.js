@@ -17,8 +17,8 @@ async function start() {
     fetch('./layout_dimensions.json?v=32').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
     fetch('./assets/enclosure.json?v=32').then(r => { if (!r.ok) throw Error('CAD manifest unavailable'); return r.json(); }),
     fetch('./assets/enclosure.bin?v=32').then(r => { if (!r.ok) throw Error('CAD geometry unavailable'); return r.arrayBuffer(); }),
-    fetch('./installation_review.json?v=32').then(r => { if (!r.ok) throw Error('Installation review unavailable'); return r.json(); }),
-    fetch('./procurement.json?v=32').then(r => { if (!r.ok) throw Error('Materials unavailable'); return r.json(); })
+    fetch('./installation_review.json?v=33').then(r => { if (!r.ok) throw Error('Installation review unavailable'); return r.json(); }),
+    fetch('./procurement.json?v=33').then(r => { if (!r.ok) throw Error('Materials unavailable'); return r.json(); })
   ]);
   const parts = Object.fromEntries(dimensions.parts.map(p => [p.id, p]));
   const instances = Object.fromEntries(dimensions.instances.map(p => [p.id, p]));

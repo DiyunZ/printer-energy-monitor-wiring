@@ -142,7 +142,7 @@
       "availability": "buy",
       "result": "Conditional",
       "checked": "15 A, one pole, C curve, UL489 / cUL Listed E320373; 10 kA, 277 V AC. Consolidates the breaker into the existing DigiKey order. Manufacturer STEP defines the wall opening, short DIN rail and bonded aluminum bracket. Review the thermal-magnetic curve against startup and original voltage-lead protection.",
-      "remaining": "DigiKey direct stock: $21.57 plus $5.34 estimated tariff = $26.91; 3,691 in stock when checked 2026-09-28. No separate breaker shipment assumed if consolidated. Quote only; tax and final delivery depend on school checkout.",
+      "remaining": "DigiKey direct stock: material price $21.57; 3,691 in stock when checked 2026-09-28. Reconfirm price and stock before ordering. Shipping, tariffs, sales tax and fabrication are excluded from the selection total.",
       "sources": [
         "phoenix-q0",
         "q0-buy"
@@ -363,7 +363,7 @@
       "availability": "buy",
       "result": "Conditional",
       "checked": "35 × 7.5 × 1 mm galvanized steel rail. Buy the complete 250 mm piece for $4.79; two $0.62 CA802 stops restrain the breaker laterally. The short stock avoids adding a one-metre package to the enclosure shipment.",
-      "remaining": "DigiKey checked 2026-09-28: rail $4.79 + $0.38 estimated tariff; two stops $1.24 with no displayed tariff. Total $6.41 before shared freight/tax. Confirm snap fit and shipment consolidation; cut and deburr away from components.",
+      "remaining": "DigiKey checked 2026-09-28: rail $4.79; two stops $1.24. Material subtotal $6.03. Confirm snap fit; cut and deburr away from components.",
       "sources": [
         "rail-buy",
         "stop"
@@ -417,7 +417,7 @@
     "Retained six cable anchor points and added separate straps for XA and adapter.",
     "Consolidated purchase sources and added exact-part approval evidence and a conditional DIN-breaker comparison.",
     "Simplified to one confirmed-owned USB cable through a snap bushing. Deleted the panel coupler, short cable and two M3 flange sets. Existing six supports and required internal insulation remain; direct-cable pull retention and plug passage need physical acceptance.",
-    "Selected Phoenix 2907571 from the existing DigiKey order; reduced active sellers to two. Manufacturer STEP drives the terminal guards, nose, formed bracket and exact clearance checks. Materials $233.54, known tariffs $5.72 and one DigiKey ground shipment $8.49 give $247.75 before unquoted costs."
+    "Selected Phoenix 2907571 from the existing DigiKey order; reduced active sellers to two. Manufacturer STEP drives the terminal guards, nose, formed bracket and exact clearance checks. The selection total is $233.54 in materials, excluding shipping, tariffs, sales tax, fabrication and labor."
   ],
   "assembly": [
     {

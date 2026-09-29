@@ -293,9 +293,6 @@ def material_price(p, order):
     breakdown = ''.join(lines)
     if len(rows) > 2 and not direct_links:
         breakdown = f'<details class="price-details"><summary>{len(rows)} item prices</summary>'+breakdown+'</details>'
-    tariff = sum(Decimal(str(r.get('estimated_tariff_usd',0))) for r in rows)
-    if tariff:
-        breakdown += f'<p>+ ${tariff:.2f} estimated tariff = ${subtotal+tariff:.2f} before freight / sales tax</p>'
     return '<div class="material-price" data-material-id="'+E(p['id'])+f'" data-subtotal-usd="{subtotal:.2f}"><strong class="price-total">${subtotal:.2f}</strong> <span class="price-label">subtotal</span><div class="price-breakdown">'+breakdown+'</div></div>'
 
 
@@ -337,9 +334,6 @@ def main():
     html=html.replace('{{SELLER_COUNT}}',str(len({r['seller'] for r in materials['purchasing']['rows']})))
     html=html.replace('{{MATERIAL_TOTAL}}',format(materials['purchasing']['material_subtotal_usd'],'.2f'))
     html=html.replace('{{PRICE_DATE}}',E(materials['purchasing']['checked_on']))
-    delivery=materials['purchasing']['delivery_estimate']
-    for key,value in [('KNOWN_BUDGET',delivery['known_pre_sales_tax_cost_usd']),('KNOWN_TARIFFS',delivery['known_estimated_tariffs_usd']),('DK_FREIGHT',delivery['digikey_ground_budget_usd'])]:
-        html=html.replace('{{'+key+'}}',format(value,'.2f'))
     (OUT/'index.html').write_text(html)
     (OUT/'routes.json').write_text(json.dumps({'revision':REV,'anchors':A,'projection':PLAN,'wires':wires},indent=2)+'\n')
     (OUT/'validation.json').write_text(json.dumps(validation,indent=2)+'\n')
