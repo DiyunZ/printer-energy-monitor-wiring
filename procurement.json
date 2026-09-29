@@ -1,5 +1,5 @@
 {
-  "revision": "2026-09-24",
+  "revision": "2026-09-28",
   "scope": "One grounded 120 V supply, one printer at a time. The design uses an opaque-cover enclosure, proposed reuse of the professor’s aluminum sheet and an internal adapter connection. Six owned equipment groups, including the existing USB cable, are retained. The selected 15 A Q0 and upstream-only voltage-lead protection still require application acceptance. No purchase, physical fit, thermal test or electrical release is claimed. Closed-lid USB export is used only after unplugging mains; the internal portion of the existing USB cable requires rated insulation and accepted assembly.",
   "items": [
     {
@@ -174,7 +174,7 @@
       "item": "Enclosure",
       "quantity": "1",
       "model": "BUD NBF-32126 · opaque hinged cover",
-      "reason": "400 × 300 × 160 mm enclosure, $90.81 from DigiKey. Smaller than the former box; panel, placement, wall openings and screw lengths have been updated together. Retains three sellers and reduces the total parts budget. The cover is opaque; X-ray is a website viewing aid.",
+      "reason": "400 × 300 × 160 mm enclosure, $90.81 from DigiKey. Smaller than the former box; panel, placement, wall openings and screw lengths have been updated together. The updated sourcing plan uses three sellers. The cover is opaque; X-ray is a website viewing aid.",
       "status": "DigiKey lists 1 in stock at the quantity-one price, checked September 24, 2026. All-new distributor offer; verify stock and delivery at checkout. The manufacturer-linked NBF-32226 STEP supplies the common base; the opaque lid silhouette is illustrative. Inspect actual lid, latches and component fit before machining.",
       "links": [
         {
@@ -255,27 +255,27 @@
     {
       "item": "Q0 operating breaker",
       "quantity": "1",
-      "model": "Carling CA1-B0-24-615-121-DG",
-      "reason": "Single 15 A operating breaker, 50/60 Hz medium-delay, UL489/CSA option DG. Mount directly on the front wall using the manufacturer pattern. No custom wall insert. Keep the enclosure closed with both latches engaged; Q0 OFF leaves its supply terminal live.",
-      "status": "Retain the user-selected 15 A / UL489 DG configuration. Master Electronics lists one piece at $40.32 and 16 in stock on 2026-09-23. The sourcing review compares the DIN alternative; direct mounting and the existing trip curve are retained. Delivery and price remain checkout-dependent; pre-use application checks are in protection.html.",
+      "model": "Phoenix Contact TMC 81C 15A · 2907571",
+      "reason": "15 A, one pole, C curve, UL489 / cUL Listed E320373; 10 kA, 277 V AC. Consolidates the breaker into the existing DigiKey order. Manufacturer STEP defines the wall opening, short DIN rail and bonded aluminum bracket. Review the thermal-magnetic curve against startup and original voltage-lead protection.",
+      "status": "DigiKey direct stock: $21.57 plus $5.34 estimated tariff = $26.91; 3,691 in stock when checked 2026-09-28. No separate breaker shipment assumed if consolidated. Quote only; tax and final delivery depend on school checkout.",
       "links": [
         {
-          "label": "Buy 1 · Master Electronics · $40.32",
-          "url": "https://www.masterelectronics.com/en/productdetail/littelfuse-carling-technologies/ca1b024615121dg-16947583.html",
+          "label": "Buy 1 · DigiKey · $21.57 + estimated tariff",
+          "url": "https://www.digikey.com/en/products/detail/phoenix-contact/2907571/6109707",
           "kind": "buy"
         },
         {
-          "label": "Carling specification",
-          "url": "https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf",
+          "label": "Phoenix specifications, approvals and C curve",
+          "url": "https://www.phoenixcontact.com/en-us/products/thermomagnetic-device-circuit-breakers-tmc-81c-15a-2907571",
           "kind": "reference"
         },
         {
-          "label": "Carling delay curves",
-          "url": "https://www.carlingtech.com/sites/default/files/documents/Carling-HM-CB-Time-Delays.pdf",
+          "label": "Manufacturer STEP reference",
+          "url": "fabrication/phoenix-2907571-reference.step",
           "kind": "reference"
         },
         {
-          "label": "Q0 cost and DIN alternative",
+          "label": "Delivered-cost comparison",
           "url": "revision.html#breaker-options",
           "kind": "reference"
         }
@@ -283,23 +283,102 @@
       "id": "breaker",
       "availability": "buy",
       "image": {
-        "src": "assets/materials/breaker.jpg",
-        "source_image": "https://www.mouser.kr/images/carlingtechnologies/images/CA1_gen_series_SPL.jpg",
-        "kind": "reference",
-        "alt": "Carling CA1-B0-24-615-121-DG — reference image",
-        "caption": "C-series reference image from the selected part listing.",
-        "source_label": "Mouser",
-        "source_url": "https://www.mouser.kr/ProductDetail/Carling-Technologies/CA1-B0-24-615-121-DG?qs=vln4JGBFwFoweMB2W4WfRg%3D%3D",
-        "width": 150,
-        "height": 150
+        "src": "assets/materials/breaker-phoenix.jpg",
+        "kind": "product",
+        "alt": "Phoenix Contact TMC 81 single-pole breaker family product photo",
+        "caption": "Manufacturer family photo; confirm 2907571 / 15 A marking on receipt.",
+        "width": 408,
+        "height": 408,
+        "source_url": "https://www.phoenixcontact.com/en-us/products/thermomagnetic-device-circuit-breakers-tmc-81c-15a-2907571",
+        "source_label": "Phoenix Contact STEP"
       },
-      "installation": "Q0 mounts in the front wall: handle outside, supply and load studs inside.",
-      "location_summary": "In the front wall, with its handle outside.",
-      "supplier": "Master Electronics",
+      "installation": "Front-wall nose opening, bonded formed aluminum support, 60 mm DIN rail and two CA802 stops. Single 14 AWG Cu per screw clamp, strip 11–12 mm, 2 N·m. No power ring terminals.",
+      "location_summary": "Front wall; external handle, DIN rail and bonded metal bracket inside.",
+      "supplier": "DigiKey",
       "compliance": {
-        "status": "Manufacturer configuration",
-        "detail": "DG option: UL489 / CSA; verify exact ordered suffix.",
-        "url": "https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf"
+        "status": "UL489 / cUL Listed",
+        "detail": "Exact 2907571 product: UL / cUL Listed file E320373, 15 A C curve, 277 V AC, 10 kA. Confirm received markings and application. Component listing is not assembly approval.",
+        "url": "https://www.phoenixcontact.com/en-us/products/thermomagnetic-device-circuit-breakers-tmc-81c-15a-2907571"
+      }
+    },
+    {
+      "id": "breaker-rail",
+      "item": "Q0 DIN rail and end stops",
+      "quantity": "1 × 250 mm rail; cut 60 mm, plus 2 end stops",
+      "quantity_summary": "60 mm installed + 2 stops",
+      "model": "Phoenix Contact 1207639 + Altech CA802 × 2",
+      "reason": "35 × 7.5 × 1 mm galvanized steel rail. Buy the complete 250 mm piece for $4.79; two $0.62 CA802 stops restrain the breaker laterally. The short stock avoids adding a one-metre package to the enclosure shipment.",
+      "status": "DigiKey checked 2026-09-28: rail $4.79 + $0.38 estimated tariff; two stops $1.24 with no displayed tariff. Total $6.41 before shared freight/tax. Confirm snap fit and shipment consolidation; cut and deburr away from components.",
+      "availability": "buy",
+      "supplier": "DigiKey",
+      "links": [
+        {
+          "label": "250 mm rail · DigiKey · $4.79",
+          "url": "https://www.digikey.com/en/products/detail/phoenix-contact/1207639/10645207",
+          "kind": "buy"
+        },
+        {
+          "label": "2 end stops · DigiKey · $0.62 each",
+          "url": "https://www.digikey.com/en/products/detail/altech-corporation/CA802/8547037",
+          "kind": "buy"
+        },
+        {
+          "label": "Altech stop dimensions",
+          "url": "https://legacy.altechcorp.com/Blocks/Block-Accessories.pdf",
+          "kind": "reference"
+        }
+      ],
+      "image": {
+        "src": "assets/materials/breaker-rail.svg",
+        "kind": "design",
+        "alt": "60 mm installed rail and two DIN end stops",
+        "caption": "Installation outline, not a product photograph.",
+        "width": 320,
+        "height": 240
+      },
+      "installation": "Rail sits on the bracket rear web; two stops border Q0. Dedicated #10 bond contacts the steel rail and aluminum bracket using the accepted contact stack.",
+      "location_summary": "Behind Q0, on the formed aluminum bracket.",
+      "compliance": {
+        "status": "Mechanical accessories",
+        "detail": "Manufacturer rail geometry and CA802 compatibility; no separate branch protection function or assembly certification.",
+        "url": "build.html#q0-mount"
+      }
+    },
+    {
+      "id": "breaker-mount",
+      "item": "Q0 formed metal bracket",
+      "quantity": "1 fabricated part",
+      "model": "Professor-supplied aluminum · 88 × 40 × 66.30 mm nominal formed envelope",
+      "reason": "Four-bend metal support retains the short DIN rail. Reuse the offered aluminum; nominal thickness 1.89738 mm and R2 bends are provisional until stock and a bend coupon are measured. M3 wall fixings reuse two spare screws/nuts already in the purchase packs.",
+      "status": "Digital solid and clearance checks only. Measure alloy, thickness, stiffness, bend springback and operator alignment; revise dimensions before fabrication. Shop labor is unquoted and not assumed free.",
+      "availability": "fabricate",
+      "supplier": "Lab stock / fabrication",
+      "links": [
+        {
+          "label": "Bracket STEP",
+          "url": "fabrication/q0_mount.step",
+          "kind": "fabrication"
+        },
+        {
+          "label": "Bracket construction / bond",
+          "url": "build.html#q0-mount",
+          "kind": "reference"
+        }
+      ],
+      "image": {
+        "src": "assets/materials/q0-mount.png",
+        "kind": "design",
+        "alt": "CAD orthographic views of the formed metal DIN support",
+        "caption": "Parametric design, not fabricated hardware.",
+        "width": 1826,
+        "height": 1242
+      },
+      "installation": "Bolted to the inside of the front wall. M3 wall pitch 76 mm; rail fixings 48 mm apart; one dedicated #10 rail/bracket PE stud.",
+      "location_summary": "Front wall around and behind Q0.",
+      "compliance": {
+        "status": "Custom mechanical part",
+        "detail": "Requires aluminum-compatible bonding and mechanical acceptance; do not fabricate a plastic substitute for this support.",
+        "url": "build.html#q0-mount"
       }
     },
     {
@@ -356,7 +435,7 @@
       "item": "Distribution connectors",
       "quantity": "3",
       "model": "WAGO 221-415",
-      "reason": "One five-port connector each for JL, JN and PE. JL accepts Q0 output, printer hot, A1 and adapter hot; JN accepts supply, printer, A2, A3 and adapter neutrals; PE accepts supply, printer, panel and outlet earth. One accepted conductor per port. Confirm original DENT pigtail preparation and protective-bonding suitability.",
+      "reason": "One five-port connector each for JL, JN and PE. JL accepts Q0 output, printer hot, A1 and adapter hot; JN accepts supply, printer, A2, A3 and adapter neutrals; PE accepts supply, printer, panel, outlet and Q0-mount earth (all five PE ports used). One accepted conductor per port. Confirm original DENT pigtail preparation and protective-bonding suitability.",
       "status": "Three mounting positions in the panel drawing. Conductor acceptance is checked at assembly.",
       "links": [
         {
@@ -643,7 +722,7 @@
       "item": "Internal L / N / PE wire",
       "quantity": "Buy 4 ft black + 4 ft green (1.2192 m of each).",
       "model": "Southwire 14 AWG, 19-strand Class C, THHN/THWN/MTW, 600 V",
-      "reason": "Separate 14 AWG conductors remain for Q0 OUT → JL and PE → panel. XA hot, neutral and PE are the conductors of its 14/3 cord; no separate white roll is required. Both lengths are included in the purchase budget.",
+      "reason": "Separate 14 AWG conductors remain for Q0 OUT → JL and PE → panel and PE → rail/bracket. XA hot, neutral and PE are the conductors of its 14/3 cord; no separate white roll is required. Both lengths are included in the purchase budget.",
       "status": "Same 14 AWG stranded construction, sold by the foot; 4 ft of each color exceeds the 1 m cutting allowance. Confirm the received wire markings and crimp fit.",
       "availability": "buy",
       "links": [
@@ -674,8 +753,8 @@
         "width": 1200,
         "height": 240
       },
-      "installation": "Q0 output to JL and the dedicated aluminum-panel PE bond. XA uses the separate cord item.",
-      "location_summary": "Q0 → JL and PE → aluminum panel.",
+      "installation": "Q0 output to JL; separate PE conductors to the panel and rail/bracket bonds.",
+      "location_summary": "Q0 → JL; PE → panel and rail/bracket.",
       "quantity_summary": "4 ft per color",
       "supplier": "Home Depot",
       "compliance": {
@@ -687,9 +766,9 @@
     {
       "id": "ring-lugs",
       "item": "Ring terminals",
-      "quantity": "1 pack of 15; 3 installed, 12 available as spares",
+      "quantity": "1 pack of 15; 2 installed, 13 spares",
       "model": "Gardner Bender 15-104 · #8–10 stud, 16–14 AWG",
-      "reason": "The #8–10 stud range includes the Q0 #10-32 studs. This UL/CSA-listed 15-pack replaces the $105.36 100-piece bottle with a $3.63 purchase. Use only on 14–16 AWG conductors; the aluminum-panel bond still requires an accepted contact method.",
+      "reason": "Two #8–10 rings fit the dedicated #10 panel and rail/bracket bond studs. The Phoenix screw-clamp terminals accept bare prepared copper and do not use ring lugs. Aluminum and steel contact methods still need electrical acceptance.",
       "status": "Manufacturer: UL listed, CSA listed, 600 V building wire, 75°C. Use the specified insulated-terminal crimp tooling; inspect wire insertion, insulation fit and pull retention. No unpublished barrel diameter or crimp setting is assumed.",
       "availability": "buy",
       "links": [
@@ -714,9 +793,9 @@
         "source_label": "Home Depot / Gardner Bender",
         "kind": "product"
       },
-      "installation": "Two Q0 rings and one proposed panel PE ring. The other 12 remain outside the enclosure as spares.",
-      "location_summary": "At both Q0 studs and the panel PE bond.",
-      "quantity_summary": "15-pack; 3 installed",
+      "installation": "One panel PE ring and one Q0 rail/bracket PE ring; thirteen spare rings remain outside the case.",
+      "location_summary": "Panel bond and Q0 rail/bracket bond.",
+      "quantity_summary": "15-pack; 2 installed",
       "supplier": "Home Depot",
       "compliance": {
         "status": "Manufacturer UL Listed / CSA Listed",
@@ -817,10 +896,10 @@
     {
       "id": "fasteners",
       "item": "Mounting and bonding hardware",
-      "quantity": "13 item lines; purchase quantities and full packs listed below",
+      "quantity": "11 item lines; full packs and spare pieces counted",
       "model": "Screws, nuts and washers",
-      "reason": "Purchase all screws, washers and nuts in the build schedule: Q0 #6-32 × 1/4 in; carriers M3 × 12 mm; anchors M4 × 10 mm; panel supports M5 × 10 mm; dedicated #10 PE stud. Full packs and spares are priced, with no assumed lab hardware stock.",
-      "status": "Thirteen order lines, including four separately purchased panel screws. Verify received stack thickness, thread engagement, aluminum bonding and at least 3 mm screw-to-floor clearance.",
+      "reason": "Carriers and Q0 wall bracket use eight M3 × 12 screws/nuts total; cable anchors and rail use seven M4 × 10 total; four M5 × 10 panel screws and two dedicated #10 PE studs. Four additional M3 washers are purchased. No lab hardware stock is assumed.",
+      "status": "Verify actual stock, full locknut engagement and enclosure-floor clearance. Accept aluminum-compatible bonding on both custom metal parts before use.",
       "availability": "buy",
       "links": [],
       "image": {
@@ -834,9 +913,9 @@
         "width": 548,
         "height": 548
       },
-      "installation": "Mounting hardware for Q0, three carriers, six cable bases, four panel supports and the panel PE bond. XA uses straps and the USB bushing snaps in. Use the build-package sizes and transfer-drilling instructions.",
-      "location_summary": "Q0, carriers, six cable mounts, four panel supports and panel PE bond.",
-      "quantity_summary": "13 items",
+      "installation": "Carriers, Q0 bracket/rail, six cable bases, four panel supports and two PE bond stacks.",
+      "location_summary": "Bracket/rail, carriers, cable mounts, panel supports and two bonds.",
+      "quantity_summary": "11 items",
       "supplier": "DigiKey / Home Depot",
       "compliance": {
         "status": "Mechanical accessory",
@@ -1042,10 +1121,10 @@
     }
   ],
   "purchasing": {
-    "checked_on": "2026-09-23–24",
+    "checked_on": "2026-09-23–28",
     "currency": "USD",
-    "scope": "Displayed purchase prices for the selected design, including purchase packs and fastener spares. Not an order or delivered project quote. Reused stock and fabrication are listed separately. Machining, bonding changes if required, tools, labor, freight and tax are excluded.",
-    "supplier_policy": "Three actual sellers: DigiKey, Master Electronics and Home Depot. Choose new distributor/retailer stock, not open-box or Marketplace partner offers. All required fasteners and retail packs are budgeted; no lab hardware stock is assumed. The enclosure and revised screws were checked September 24; unchanged lines retain their September 23 price snapshot. Recheck local availability, minimum quantities, shipping, tax and delivery before ordering.",
+    "scope": "Materials include complete purchase packs and spares. September 28 breaker/rail/stop checks and estimated tariffs are separated below; unchanged items retain September 23–24 prices. Freight, tax, fabrication and possible additional tariffs remain explicit.",
+    "supplier_policy": "Two actual sellers: DigiKey and Home Depot. Select DigiKey direct stock and consolidate the breaker, rail and accessories with the enclosure shipment. Factory-stock glands may cause extra shipment charges. Home Depot delivery is unquoted; $0 is only an eligible free-pickup scenario. No new retailer or invented purchasing fee.",
     "rows": [
       {
         "material_ids": [
@@ -1067,17 +1146,18 @@
         "material_ids": [
           "breaker"
         ],
-        "sku": "CA1-B0-24-615-121-DG",
-        "supplier": "Master Electronics",
-        "seller": "Master Electronics",
+        "sku": "2907571 · TMC 81C 15A",
+        "supplier": "DigiKey",
+        "seller": "DigiKey",
         "quantity": 1,
         "unit": "each",
         "pieces_per_unit": 1,
-        "unit_price_usd": 40.32,
-        "extended_usd": 40.32,
-        "url": "https://www.masterelectronics.com/en/productdetail/littelfuse-carling-technologies/ca1b024615121dg-16947583.html",
-        "availability_note": "16 listed in stock; quantity-one tier",
-        "checked_on": "2026-09-23"
+        "unit_price_usd": 21.57,
+        "extended_usd": 21.57,
+        "url": "https://www.digikey.com/en/products/detail/phoenix-contact/2907571/6109707",
+        "availability_note": "3,691 DigiKey direct stock; $5.34 estimated tariff, separate below. Consolidate with existing shipment.",
+        "checked_on": "2026-09-28",
+        "estimated_tariff_usd": 5.34
       },
       {
         "material_ids": [
@@ -1280,40 +1360,6 @@
         "material_ids": [
           "fasteners"
         ],
-        "sku": "9903 · #6-32 × 1/4 stainless pan screws",
-        "supplier": "DigiKey",
-        "seller": "DigiKey",
-        "quantity": 4,
-        "unit": "each",
-        "pieces_per_unit": 1,
-        "unit_price_usd": 0.16,
-        "extended_usd": 0.64,
-        "url": "https://www.digikey.com/en/products/detail/keystone-electronics/9903/317324",
-        "availability_note": "Q0; 36-9903-ND; 33,195 listed in stock. Shorter screw for the 3 mm wall.",
-        "installed_quantity": 2,
-        "checked_on": "2026-09-24"
-      },
-      {
-        "material_ids": [
-          "fasteners"
-        ],
-        "sku": "4699 · #6 zinc-plated steel flat washers",
-        "supplier": "DigiKey",
-        "seller": "DigiKey",
-        "quantity": 4,
-        "unit": "each",
-        "pieces_per_unit": 1,
-        "unit_price_usd": 0.12,
-        "extended_usd": 0.48,
-        "url": "https://www.digikey.com/en/products/detail/keystone-electronics/4699/316268",
-        "availability_note": "Q0; 36-4699-ND, 0.031 in nominal thickness",
-        "installed_quantity": 2,
-        "checked_on": "2026-09-23"
-      },
-      {
-        "material_ids": [
-          "fasteners"
-        ],
         "sku": "837761 · M3-0.5 × 12 zinc pan screws",
         "supplier": "Home Depot",
         "seller": "Home Depot",
@@ -1323,8 +1369,8 @@
         "unit_price_usd": 1.75,
         "extended_usd": 3.5,
         "url": "https://www.homedepot.com/p/321071719",
-        "availability_note": "Carriers; 8 screws supplied, 6 installed; displayed store price; availability varies by location",
-        "installed_quantity": 6,
+        "availability_note": "6 carriers + 2 Q0 wall bracket; all 8 purchased pieces installed.",
+        "installed_quantity": 8,
         "checked_on": "2026-09-24"
       },
       {
@@ -1334,14 +1380,14 @@
         "sku": "4692 · M3 / #4 zinc-plated steel flat washers",
         "supplier": "DigiKey",
         "seller": "DigiKey",
-        "quantity": 6,
+        "quantity": 10,
         "unit": "each",
         "pieces_per_unit": 1,
         "unit_price_usd": 0.11,
-        "extended_usd": 0.66,
+        "extended_usd": 1.1,
         "url": "https://www.digikey.com/en/products/detail/keystone-electronics/4692/316261",
-        "availability_note": "Carriers; 36-4692-ND, 3.25 mm bore",
-        "installed_quantity": 6,
+        "availability_note": "6 carrier washers + 4 Q0 wall washers; both faces of the plastic wall supported.",
+        "installed_quantity": 10,
         "checked_on": "2026-09-23"
       },
       {
@@ -1357,8 +1403,8 @@
         "unit_price_usd": 1.95,
         "extended_usd": 3.9,
         "url": "https://www.homedepot.com/p/321071866",
-        "availability_note": "Carriers; 8 nuts supplied, 6 installed; displayed store price; availability varies by location",
-        "installed_quantity": 6,
+        "availability_note": "6 carriers + 2 Q0 wall bracket; all 8 purchased pieces installed.",
+        "installed_quantity": 8,
         "checked_on": "2026-09-23"
       },
       {
@@ -1374,8 +1420,8 @@
         "unit_price_usd": 1.75,
         "extended_usd": 3.5,
         "url": "https://www.homedepot.com/p/321071623",
-        "availability_note": "Tie anchors; 8 screws supplied, 6 installed; displayed store price; availability varies by location",
-        "installed_quantity": 6,
+        "availability_note": "6 cable anchors + 1 DIN rail fixing; 8 purchased, 7 installed.",
+        "installed_quantity": 7,
         "checked_on": "2026-09-24"
       },
       {
@@ -1391,8 +1437,8 @@
         "unit_price_usd": 4.96,
         "extended_usd": 4.96,
         "url": "https://www.homedepot.com/p/204801237",
-        "availability_note": "Tie anchors; one 50-piece pack, 6 installed; retain the remainder; displayed store price; availability varies by location",
-        "installed_quantity": 6,
+        "availability_note": "6 anchor washers + 3 rail spacer/head/nut washers; 50-piece pack covers all.",
+        "installed_quantity": 9,
         "checked_on": "2026-09-23"
       },
       {
@@ -1408,8 +1454,8 @@
         "unit_price_usd": 1.95,
         "extended_usd": 3.9,
         "url": "https://www.homedepot.com/p/321071795",
-        "availability_note": "Tie anchors; 8 nuts supplied, 6 installed; displayed store price; availability varies by location",
-        "installed_quantity": 6,
+        "availability_note": "6 cable anchors + 1 DIN rail fixing; 8 purchased, 7 installed.",
+        "installed_quantity": 7,
         "checked_on": "2026-09-23"
       },
       {
@@ -1425,8 +1471,8 @@
         "unit_price_usd": 0.39,
         "extended_usd": 0.78,
         "url": "https://www.digikey.com/en/products/detail/keystone-electronics/9911/317331",
-        "availability_note": "Panel PE stud; 36-9911-ND, listed in stock",
-        "installed_quantity": 1,
+        "availability_note": "Two dedicated #10 bond studs: panel and Q0 rail/bracket.",
+        "installed_quantity": 2,
         "checked_on": "2026-09-23"
       },
       {
@@ -1442,8 +1488,8 @@
         "unit_price_usd": 0.1,
         "extended_usd": 0.4,
         "url": "https://www.digikey.com/en/products/detail/keystone-electronics/4705/316276",
-        "availability_note": "Panel PE stud; 36-4705-ND, listed in stock",
-        "installed_quantity": 2,
+        "availability_note": "Two PE bond stacks; all 4 purchased pieces installed.",
+        "installed_quantity": 4,
         "checked_on": "2026-09-23"
       },
       {
@@ -1459,8 +1505,8 @@
         "unit_price_usd": 1.57,
         "extended_usd": 1.57,
         "url": "https://www.homedepot.com/p/317479556",
-        "availability_note": "Panel PE stud; one 18-piece pack, 2 installed; retain the remainder; displayed store price; availability varies by location",
-        "installed_quantity": 2,
+        "availability_note": "2 panel bond + 3 rail/bracket bond contact washers; verify approved contact stack.",
+        "installed_quantity": 5,
         "checked_on": "2026-09-23"
       },
       {
@@ -1476,8 +1522,8 @@
         "unit_price_usd": 0.13,
         "extended_usd": 0.52,
         "url": "https://www.digikey.com/en/products/detail/keystone-electronics/4703/316274",
-        "availability_note": "Panel PE stud; 36-4703-ND, 0.033 in nominal thickness",
-        "installed_quantity": 2,
+        "availability_note": "Two PE bond stacks; all 4 purchased pieces installed.",
+        "installed_quantity": 4,
         "checked_on": "2026-09-23"
       },
       {
@@ -1528,8 +1574,56 @@
         "url": "https://www.digikey.com/en/products/detail/heyco-products-corporation/3104/15907204",
         "availability_note": "3720-3104-ND; 6,537 listed in stock; quantity-one price. Verify actual passage and stock at checkout.",
         "checked_on": "2026-09-23"
+      },
+      {
+        "material_ids": [
+          "breaker-rail"
+        ],
+        "sku": "1207639 · NS 35/7.5 PERF 250MM",
+        "supplier": "DigiKey",
+        "seller": "DigiKey",
+        "quantity": 1,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 4.79,
+        "extended_usd": 4.79,
+        "url": "https://www.digikey.com/en/products/detail/phoenix-contact/1207639/10645207",
+        "availability_note": "250 × 35 × 7.5 mm, t=1 mm; cut 60 mm. 2,067 stock; $0.38 estimated tariff, separate below.",
+        "checked_on": "2026-09-28",
+        "estimated_tariff_usd": 0.38
+      },
+      {
+        "material_ids": [
+          "breaker-rail"
+        ],
+        "sku": "CA802",
+        "supplier": "DigiKey",
+        "seller": "DigiKey",
+        "quantity": 2,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 0.62,
+        "extended_usd": 1.24,
+        "url": "https://www.digikey.com/en/products/detail/altech-corporation/CA802/8547037",
+        "availability_note": "Two 8 mm-wide end stops; 35 × 7.5 DIN-compatible. 6,021 stock; no displayed tariff.",
+        "checked_on": "2026-09-28"
       }
     ],
-    "material_subtotal_usd": 246.94
+    "material_subtotal_usd": 233.54,
+    "delivery_estimate": {
+      "destination": "Sidney Lu Mechanical Engineering Building, Urbana, IL 61801",
+      "checked_on": "2026-09-28",
+      "digikey_ground_budget_usd": 8.49,
+      "home_depot_shipping_usd": null,
+      "known_estimated_tariffs_usd": 5.72,
+      "fabrication_usd": null,
+      "tax_exempt_eligibility": "School procurement must confirm exemption and submit the appropriate certificate. Exemption does not remove import tariffs.",
+      "known_pre_sales_tax_cost_usd": 247.75,
+      "unquoted": "Add Home Depot delivery, any extra DigiKey shipment or other-item tariff, applicable sales tax and fabrication. Pickup scenario uses $0 Home Depot freight; travel/labor excluded.",
+      "sources": [
+        "https://www.digikey.com/en/help-support/delivery-information/delivery-time-and-cost",
+        "https://www.busfin.uillinois.edu/buying_contracts/procurement_laws_and_regulations/tax_exempt_status"
+      ]
+    }
   }
 }

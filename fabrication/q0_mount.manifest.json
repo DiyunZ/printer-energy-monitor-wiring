@@ -1,0 +1,253 @@
+{
+  "artifact_name": "q0_mount",
+  "artifacts": {
+    "step": "fabrication/q0_mount.step",
+    "stl": "fabrication/q0_mount.stl"
+  },
+  "dxf_error": null,
+  "dxf_section_z_mm": null,
+  "environment": {
+    "build123d": "0.11.1",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "python": "3.12.14"
+  },
+  "geometry": {
+    "area_mm2": 18018.5802,
+    "bounding_box_mm": {
+      "max": [
+        44.0,
+        20.0,
+        0.0
+      ],
+      "min": [
+        -44.0,
+        -20.0,
+        -66.2974
+      ],
+      "x": 88.0,
+      "y": 40.0,
+      "z": 66.2974
+    },
+    "center_mm": [
+      -0.054,
+      -0.0,
+      -39.426
+    ],
+    "center_of": "mass",
+    "is_valid": true,
+    "solid_count": 1,
+    "volume_mm3": 16311.0672
+  },
+  "geometry_checks": {
+    "declared": [
+      {
+        "feature": "Both M3 wall shafts clear",
+        "kind": "clear",
+        "min_mm3": 0.01,
+        "region": {
+          "at": [
+            [
+              -38.0,
+              0.0
+            ],
+            [
+              38.0,
+              0.0
+            ]
+          ],
+          "axis": "z",
+          "dia": 3.0,
+          "shape": "cylinder",
+          "span": [
+            -4.0,
+            1.0
+          ]
+        },
+        "tol_mm3": 0.01
+      },
+      {
+        "feature": "Dedicated #10 bonding shaft clears web",
+        "kind": "clear",
+        "min_mm3": 0.01,
+        "region": {
+          "at": [
+            [
+              -24.0,
+              0.0
+            ]
+          ],
+          "axis": "z",
+          "dia": 4.83,
+          "shape": "cylinder",
+          "span": [
+            -67.4,
+            -63.400000000000006
+          ]
+        },
+        "tol_mm3": 0.01
+      },
+      {
+        "feature": "Rail M4 shaft clears web",
+        "kind": "clear",
+        "min_mm3": 0.01,
+        "region": {
+          "at": [
+            [
+              24.0,
+              0.0
+            ]
+          ],
+          "axis": "z",
+          "dia": 4.0,
+          "shape": "cylinder",
+          "span": [
+            -67.4,
+            -63.400000000000006
+          ]
+        },
+        "tol_mm3": 0.01
+      },
+      {
+        "feature": "Body clearance between arms",
+        "kind": "clear",
+        "min_mm3": 0.01,
+        "region": {
+          "at": [
+            [
+              0.0,
+              0.0,
+              -28.0
+            ]
+          ],
+          "shape": "box",
+          "size": [
+            20.0,
+            35.0,
+            50.0
+          ]
+        },
+        "tol_mm3": 0.01
+      }
+    ],
+    "pass": true,
+    "results": [
+      {
+        "feature": "Both M3 wall shafts clear",
+        "kind": "clear",
+        "min_mm3": 0.01,
+        "pass": true,
+        "region": {
+          "at": [
+            [
+              -38.0,
+              0.0
+            ],
+            [
+              38.0,
+              0.0
+            ]
+          ],
+          "axis": "z",
+          "dia": 3.0,
+          "shape": "cylinder",
+          "span": [
+            -4.0,
+            1.0
+          ]
+        },
+        "tol_mm3": 0.01,
+        "total_mm3": 0.0,
+        "volumes_mm3": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "feature": "Dedicated #10 bonding shaft clears web",
+        "kind": "clear",
+        "min_mm3": 0.01,
+        "pass": true,
+        "region": {
+          "at": [
+            [
+              -24.0,
+              0.0
+            ]
+          ],
+          "axis": "z",
+          "dia": 4.83,
+          "shape": "cylinder",
+          "span": [
+            -67.4,
+            -63.400000000000006
+          ]
+        },
+        "tol_mm3": 0.01,
+        "total_mm3": 0.0,
+        "volumes_mm3": [
+          0.0
+        ]
+      },
+      {
+        "feature": "Rail M4 shaft clears web",
+        "kind": "clear",
+        "min_mm3": 0.01,
+        "pass": true,
+        "region": {
+          "at": [
+            [
+              24.0,
+              0.0
+            ]
+          ],
+          "axis": "z",
+          "dia": 4.0,
+          "shape": "cylinder",
+          "span": [
+            -67.4,
+            -63.400000000000006
+          ]
+        },
+        "tol_mm3": 0.01,
+        "total_mm3": 0.0,
+        "volumes_mm3": [
+          0.0
+        ]
+      },
+      {
+        "feature": "Body clearance between arms",
+        "kind": "clear",
+        "min_mm3": 0.01,
+        "pass": true,
+        "region": {
+          "at": [
+            [
+              0.0,
+              0.0,
+              -28.0
+            ]
+          ],
+          "shape": "box",
+          "size": [
+            20.0,
+            35.0,
+            50.0
+          ]
+        },
+        "tol_mm3": 0.01,
+        "total_mm3": 0.0,
+        "volumes_mm3": [
+          0.0
+        ]
+      }
+    ]
+  },
+  "interfaces": [],
+  "overrides": {},
+  "parameters": {},
+  "source": {
+    "path": "tools/cad/q0_mount_model.py",
+    "sha256": "4484774e77de9977c340dd7cfb236c67925aee2e1a8621d414ca9c57c57b495c"
+  },
+  "units": "mm"
+}

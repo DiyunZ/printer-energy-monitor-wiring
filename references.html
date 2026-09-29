@@ -42,9 +42,9 @@
 </tr>
 <tr>
 <td id="r6">R6</td>
-<td><a href="https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf">Carling C-Series</a>, ordering code and p.11</td>
-<td>CA1-B0-24-615-121-DG; body 19.18 × 63.5 × 47 mm, 49.28 mm stud pitch, 52.37 mm mounting pitch; #10-32 studs / #6-32 inserts.</td>
-<td>Other suffixes are not equivalent. Fault level, inrush, duty and exact SKU availability still need acceptance.</td>
+<td><a href="https://www.phoenixcontact.com/en-us/products/thermomagnetic-device-circuit-breakers-tmc-81c-15a-2907571">Phoenix TMC 81C 15A / 2907571</a>, <a href="fabrication/phoenix-2907571-reference.step">manufacturer STEP</a></td>
+<td>UL489 / cUL Listed E320373, 15 A, 1P C curve, 277 V AC, 10 kA; 17.6 × 116 × 75.9 mm including rail. Screw centers 67.8 mm from STEP; 11–12 mm strip, 2 N·m.</td>
+<td>Confirm received dimensions, startup curve and installed protection; no former Carling pulse claim retained.</td>
 </tr>
 <tr>
 <td id="r7">R7</td>
@@ -130,5 +130,5 @@
 <p><code>layout_dimensions.json</code> supplies the body locations for the 3D scene and wiring plan. Rear is at the top of both plan views. Browser checks compare actual rendered body bounds with SVG footprints for the 18 modeled envelopes; schematic terminal symbols and wire bends are simplified.</p>
 <p>The BUD manufacturer-linked common-base STEP is used at full scale. Project machining is generated with build123d 0.11.1; the case and panel are tessellated at 0.3 mm. Cover and latch meshes use the same 0.3 mm tessellation. Numerical surface-contact exclusion at the seated panel is 0.0001 mm; these values are not manufacturing tolerances. Exact STEP cut-through gauges and the dated source hash are in <code>fabrication/cad-checks.json</code>.</p>
 <p>Nominal insertion sweeps are recorded in the current installation audit after excluding intentional panel-support contact. Install and restrain XA on the panel; there is no side outlet. Lid checks use nine sampled rays per body. These are geometric screens, not tolerance, thermal, electrical-clearance or flexible-cable proofs. The 2 m / 3 mm voltage-lead coil is an illustrative storage scenario, not a measurement of the supplied cables.</p>
-<p>The circuit checker validates 21 named paths, separated nets, printer-hot-only CT routing and Q0-open behavior. Regression tests reject selected wiring mistakes. Website tests verify gestures, views, alignment, images, links and responsive layout. No check constitutes a physical dry fit or energized acceptance result. See the <a href="build.html">build package</a> for the exact remaining work.</p>
+<p>The circuit checker validates 22 named paths, including independent PE to the added metalwork, separated nets, printer-hot-only CT routing and Q0-open behavior. Regression tests reject selected wiring mistakes. Website tests verify gestures, views, alignment, images, links and responsive layout. No check constitutes a physical dry fit or energized acceptance result. See the <a href="build.html">build package</a> for the exact remaining work.</p>
 </body></html>

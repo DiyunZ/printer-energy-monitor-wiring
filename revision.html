@@ -1,79 +1,82 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Design, sourcing and component evidence · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=19"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Design_Revision_B.md" download>Download Markdown</a></nav><h1>Design and sourcing decisions</h1>
-<p>The selected plan uses <strong>three sellers and $246.94 in materials</strong>, including all retail packs and fastener spares. It saves <strong>$68.29 (21.7%)</strong> against the preceding $315.23 three-seller plan. Freight, tax, machining, tools, labor and any required bonding changes are excluded. Prices checked September 23–24, 2026; no order has been placed.</p>
-<h2>Selected purchasing plan</h2>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Design, sourcing and component evidence · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=19"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Design_Revision_B.md" download>Download Markdown</a></nav><h1>Design and delivered-cost decision</h1>
+<p><strong>Select Phoenix Contact TMC 81C 15A / 2907571 from DigiKey direct stock.</strong> This 15 A, one-pole, C-curve breaker has UL489 / cUL Listed evidence. The selected order uses <strong>two sellers: DigiKey and Home Depot</strong>, with no separate breaker retailer. Materials are <strong>$233.54</strong>; known estimated tariffs add <strong>$5.72</strong>. The mounting design uses the manufacturer STEP, a short DIN rail and proposed professor-supplied aluminum.</p>
+<h2>Order and shipping budget</h2>
 <div class="table-wrap"><table>
 <thead>
 <tr>
 <th>Seller</th>
-<th>Purchase scope</th>
-<th>Subtotal</th>
+<th align="right">Materials</th>
+<th align="right">Known estimated tariffs</th>
+<th>Freight basis</th>
+<th align="right">Known pre-sales-tax sum</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><strong>DigiKey</strong></td>
-<td>BUD enclosure, WAGO connectors/carriers, glands, cable supports, USB protection and individual hardware</td>
-<td><strong>$127.20</strong></td>
+<td>DigiKey</td>
+<td align="right">$154.12</td>
+<td align="right">$5.72</td>
+<td>$8.49 for one consolidated ground shipment</td>
+<td align="right">$168.33</td>
 </tr>
 <tr>
-<td><strong>Master Electronics</strong></td>
-<td>Exact Carling Q0 breaker</td>
-<td><strong>$40.32</strong></td>
-</tr>
-<tr>
-<td><strong>Home Depot</strong></td>
-<td>Cord, plugs/connectors, internal wire, rings, straps and packaged hardware</td>
-<td><strong>$79.42</strong></td>
+<td>Home Depot</td>
+<td align="right">$79.42</td>
+<td align="right">Not quoted</td>
+<td>Delivery unquoted; $0 only for eligible pickup</td>
+<td align="right">$79.42 + delivery</td>
 </tr>
 <tr>
 <td><strong>Total</strong></td>
-<td>17 purchase groups; 29 order lines</td>
-<td><strong>$246.94</strong></td>
+<td align="right"><strong>$233.54</strong></td>
+<td align="right"><strong>$5.72</strong></td>
+<td><strong>$8.49 + unquoted costs</strong></td>
+<td align="right"><strong>$247.75 + unquoted costs</strong></td>
 </tr>
 </tbody></table></div>
-<p><a href="materials.html#order-plan">Exact purchase quantities, prices and links</a>. Six owned equipment groups and the professor&#39;s offered aluminum remain separate. No lab fastener stock is assumed. Count the actual seller, not manufacturer references or image credits. Choose new distributor/retailer stock; no open-box or DigiKey Marketplace partner offers are selected.</p>
-<p>The <strong>BUD NBF-32126 is $90.81, with one unit listed in DigiKey stock</strong> at the quantity-one tier on September 24. <a href="https://www.digikey.com/en/products/detail/bud-industries/NBF-32126/2328550">Selected enclosure</a>. Replacing the delayed $160.56 Hammond box saves $69.75; the complete revised fastener budget adds $1.46 net, giving the $68.29 system saving. Stock is a snapshot, not a delivery commitment.</p>
-<p>The smaller <strong>400 × 300 × 160 mm</strong> box requires a <strong>260 × 340 mm chamfered aluminum panel</strong>, repositioned components, new wall machining and shorter Q0/M3/M4 screws. Four M5 panel screws are purchased separately. These changes are included in the CAD, drawings and order plan. The manufacturer-linked STEP provides the common base; the opaque cover silhouette is illustrative. The new cover uses two latches, so actual fit and access protection must be accepted before use.</p>
-<h2 id="breaker-options">Why keep three sellers</h2>
+<p>Destination: Sidney Lu Mechanical Engineering Building, Urbana, IL 61801. September 28 DigiKey cart checks showed <strong>$21.57 + $5.34 estimated tariff for the breaker</strong> and <strong>$4.79 + $0.38 for the rail</strong>. Two CA802 stops cost $1.24 with no tariff displayed. The Q0 + rail + stops subtotal is <strong>$33.32 including these tariffs</strong>, before shared shipping, sales tax and bracket fabrication. <a href="https://www.digikey.com/en/products/detail/phoenix-contact/2907571/6109707">Breaker</a>, <a href="https://www.digikey.com/en/products/detail/phoenix-contact/1207639/10645207">rail</a>, <a href="https://www.digikey.com/en/products/detail/altech-corporation/CA802/8547037">stops</a>.</p>
+<p><strong>$247.75 is a conditional budget, not a final checkout quote.</strong> It includes one $8.49 DigiKey ground shipment; factory-stock glands could cause additional shipping. Add Home Depot delivery unless eligible pickup is used, tariffs on other items if shown at checkout, applicable sales tax and fabrication. No administrative fee per retailer is invented. <a href="https://www.digikey.com/en/help-support/delivery-information/delivery-time-and-cost">DigiKey delivery policy</a>.</p>
+<p>School procurement must confirm sales-tax exemption and provide the appropriate certificate. Submitting a school purchase request does not establish exemption; exemption does not remove import tariffs. Until confirmed, sales tax remains unquoted rather than zero. <a href="https://www.busfin.uillinois.edu/buying_contracts/procurement_laws_and_regulations/tax_exempt_status">University purchasing guidance</a>.</p>
+<h2 id="breaker-options">Options without adding a retailer</h2>
 
-<p>Retain the <strong>$40.32 Carling CA1-B0-24-615-121-DG</strong> from <a href="https://www.masterelectronics.com/en/productdetail/littelfuse-carling-technologies/ca1b024615121dg-16947583.html">Master Electronics</a>. This preserves the selected 15 A UL489/CSA configuration, external handle and existing delay curve. A switch-only device or UL1077 protector is not an equivalent substitute.</p>
-<p>The previously priced Altech DIN breaker, rail and two stops totaled $39.39 before rail fasteners and an external operator arrangement—only $0.93 below Q0. That does not justify changing the operating arrangement merely to remove one seller. Home Depot supplies short wire/cord lengths and small packs; DigiKey supplies individual electronic and installation parts. Three sellers is the balanced plan among the reviewed offers, not a claim of a globally cheapest solution.</p>
-<h2 id="checkout">Cost and delivery boundaries</h2>
-
-<ul>
-<li>Recheck the enclosure&#39;s single-unit stock before ordering. Do not substitute the old delayed box or a different size without updating the design.</li>
-<li>The glands remain listed as factory stock; confirm their ship date. Home Depot fulfillment and prices depend on location. The website does not claim that every line is immediately available.</li>
-<li>Compare the <strong>delivered total</strong>: $246.94 materials plus the three sellers&#39; freight and tax, then fabrication and any accepted bonding changes. These costs are not yet quoted.</li>
-<li>Buy the full listed packs, including four M5 panel screws. Measure the offered aluminum and verify the new enclosure before machining.</li>
-</ul>
-<h2>Professor&#39;s requested changes</h2>
 <div class="table-wrap"><table>
 <thead>
 <tr>
-<th>Request</th>
-<th>Current design</th>
+<th>DigiKey direct-stock option</th>
+<th align="right">Breaker price</th>
+<th align="right">Estimated tariff</th>
+<th align="right">Incremental breaker cost before shared freight/tax</th>
+<th>Decision</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>Fewer suppliers and lower cost</td>
-<td>Three actual sellers; $68.29 below the preceding plan.</td>
+<td><strong>Phoenix 2907571 / TMC 81C 15A</strong></td>
+<td align="right"><strong>$21.57</strong></td>
+<td align="right"><strong>$5.34</strong></td>
+<td align="right"><strong>$26.91</strong></td>
+<td>Selected. Lowest verified viable option among these direct-stock candidates; 3,691 in stock at check.</td>
 </tr>
 <tr>
-<td>Cheaper box, plate and switch</td>
-<td>Lower-cost stocked BUD box; offered aluminum; retain economical direct-mount Q0 after the DIN comparison.</td>
+<td><a href="https://www.digikey.com/en/products/detail/altech-corporation/1C15UL/8547287">Altech 1C15UL</a></td>
+<td align="right">$33.53</td>
+<td align="right">None displayed</td>
+<td align="right">$33.53</td>
+<td>$6.62 more; its geometry and application would need a separate substitution review.</td>
 </tr>
 <tr>
-<td>Mounting and wire restraints</td>
-<td>Fabricated plate, six screw-fixed cable mounts and four equipment straps.</td>
-</tr>
-<tr>
-<td>Certification evidence</td>
-<td>Exact manufacturer evidence below; complete assembly acceptance remains open.</td>
-</tr>
-<tr>
-<td>Internal adapter and fewer penetrations</td>
-<td>XA and original DC cable stay inside. No DC extension. One existing USB cable exits through a protected hole for export with the lid closed and mains unplugged.</td>
+<td>E-T-A 4230-T110-K0CU-15A</td>
+<td align="right">$30.62</td>
+<td align="right">$6.68</td>
+<td align="right">$37.30</td>
+<td>$10.39 more; different geometry, not interchangeable in these fabrication files.</td>
 </tr>
 </tbody></table></div>
+<p>All three assume consolidation into the existing DigiKey shipment. These are checked candidates, not a claim of the cheapest breaker across the entire market. Do not substitute an inexpensive UL1077 supplementary protector for the selected UL489 branch-circuit breaker.</p>
+<p>The prior NOARK proposal was $17.57 + $14.12 separate Wolf shipping = <strong>$31.69 for Q0 before tax</strong>. Phoenix&#39;s $26.91 price plus tariff saves <strong>$4.78</strong>, assuming the same rail/hardware/fabrication cost and no additional DigiKey shipment. Putting both plans on the same $0.38 rail-tariff basis gives <strong>$252.53 versus $247.75</strong>. Wolf is removed from the active order.</p>
+<p>Against the earlier Carling material plan of <strong>$246.94</strong>, Phoenix materials plus the known new tariffs are <strong>$239.26</strong>: a <strong>$7.68 reduction before avoided Master Electronics freight and additional bracket fabrication</strong>. Actual net savings require the fabrication quote and final shipment/tax amounts. Offered aluminum stock does not imply free machining labor.</p>
+<h2 id="checkout">What is ready and what is unquoted</h2>
+
+<p><a href="materials.html#order-plan">Order quantities and links</a> include the full 250 mm rail, two stops, fastener packs and spares. Updated breaker/rail/stop prices are September 28 checks; unchanged September 23–24 lines remain dated snapshots. No order has been submitted. Reconfirm stock, tariffs, consolidated shipment and school tax treatment at checkout.</p>
+<p>The mounting package uses an <strong>18.6 × 46 mm operator window</strong>, <strong>88 × 40 × 66.30 mm formed aluminum bracket</strong>, and <strong>60 mm installed DIN rail</strong>. Only the insulating nose and handle reach the opening. Guards remain 1.5 mm behind the nominal inner wall. Wire preparation is <strong>11–12 mm strip, 2 N·m</strong>, one 14 AWG copper conductor per clamp. The new C curve must be checked against actual startup; former Carling pulse-tolerance claims do not carry over. <a href="build.html#q0-mount">Fabrication and receiving checks</a>.</p>
 <h2>Certification evidence</h2>
 <div class="table-wrap"><table>
 <thead>
@@ -89,9 +92,9 @@
 <td>Confirm received label and exact variant. Machining and custom assembly do not inherit a finished-product listing.</td>
 </tr>
 <tr>
-<td>Carling Q0</td>
-<td>Manufacturer ordering code and UL489 table for the selected DG configuration</td>
-<td>Confirm exact SKU, receiving marks and application suitability.</td>
+<td>Phoenix Contact TMC 81C 15A / 2907571</td>
+<td><a href="https://www.phoenixcontact.com/en-us/products/thermomagnetic-device-circuit-breakers-tmc-81c-15a-2907571">Exact manufacturer product</a>: UL489 / cUL Listed E320373; 15 A, 1 pole, C curve, 277 V AC, 10 kA</td>
+<td>Verify receiving marks, startup suitability, available fault current and original voltage-lead protection.</td>
 </tr>
 <tr>
 <td>Leviton 515PV / 515CV</td>

@@ -6,7 +6,7 @@ BUD drawing hbnbf32226.pdf specifies 3 mm walls and 229.8 x 325.3 mm
 M5 support pattern. Factory STEP places centers 229.75 x 325.25 mm;
 that 0.05 mm difference is inside the drawing's +/-1 mm tolerance.
 The custom 260 x 340 mm panel has 10 mm corner chamfers to clear raised features.
-Carling C-series and Heyco drawings define wall interfaces, outside the
+Phoenix 2907571 STEP and Heyco drawings define wall interfaces, outside the
 skill's bundled standards database. No finished assembly certification.
 Carrier holes are transfer-drilled from the received 221-505 carriers.
 Run: python tools/cad/enclosure_model.py --source-step NBF-32126.step
@@ -16,16 +16,23 @@ import argparse, hashlib, json, math, struct
 from build123d import (BuildPart, BuildSketch, Mode, Plane, Locations, Circle,
                       Rectangle, SlotOverall, add, extrude, import_step,
                       export_step, export_stl,
-                      Pos, Rot, Part, Polygon)
+                      Pos, Rot, Part, Polygon, Compound)
+from OCP.BRepAlgoAPI import BRepAlgoAPI_Common
+import q0_mount_model
+layout_source = Path(__file__).resolve().parents[2]/'layout_dimensions.json'
+layout = json.loads(layout_source.read_text())
+q0_mount = layout['q0Mount']
+q0 = next(p for p in layout['parts'] if p['id']=='q0')
+breaker_step = layout_source.parent/'fabrication/phoenix-2907571-reference.step'
 
 # INTERFACE: manufacturer drawing/STEP, not a bundled standard.
 wall_slope = math.tan(math.radians(1.0))
 front_reference_mm = (50.315160, 193.495690)
 side_reference_mm = (50.111830, 142.692040)
 wall_normal_thickness_mm = 3.0
-q0_rectangle_mm = (10.97, 36.78)
-q0_hole_d_mm = 3.96
-q0_pitch_mm = 52.37
+q0_rectangle_mm = tuple(q0_mount['windowMm'])
+q0_hole_d_mm = q0_mount['wallHoleDiameterMm']
+q0_pitch_mm = 2*q0_mount['wallScrewHalfPitchMm']
 power_entry_d_mm = 21.0
 # Heyco thick-panel bushing 3104: manufacturer hole 22.2 mm. Actual
 # cable plug passage and snap fit must be accepted before drilling.
@@ -34,7 +41,7 @@ usb_yz_mm = (55.0, 167.0)
 panel_thickness_mm = 1.89738
 # DESIGN: project locations and tooling allowances.
 cut_depth_mm = 20.0
-q0_xy_mm = (-107.0, 80.0)
+q0_xy_mm = tuple(q0_mount['wallCenterXY'])
 supply_yz_mm = (43.0, 128.0)
 printer_xy_mm = (0.0, 36.0)
 panel_bond_xz_mm = (-110.0, 60.0)
@@ -79,7 +86,7 @@ def wall_features():
                    rect=q0_rectangle_mm, tolerance_mm=.12)]
     for sign in [-1,1]:
         result.append(dict(id=f'Q0 fixing {sign:+}',wall='front',plane=f('front',q0_xy_mm),
-                           at=(0,sign*q0_pitch_mm/2), diameter=q0_hole_d_mm, tolerance_mm=.12))
+                           at=(sign*q0_pitch_mm/2,0), diameter=q0_hole_d_mm, tolerance_mm=.12))
     for name,wall,p in [('SUPPLY','left',supply_yz_mm),('OUTPUT','rear',printer_xy_mm)]:
         result.append(dict(id=name,wall=wall,plane=f(wall,p),diameter=power_entry_d_mm,tolerance_mm=.1))
     result.append(dict(id='USB cable exit',wall='right',plane=f('right',usb_yz_mm),diameter=usb_bore_d_mm,tolerance_mm=.1))
@@ -122,9 +129,12 @@ def panel_blank(height=panel_thickness_mm, y=0):
 
 
 def intersection_volume(a,b):
-    result=a.intersect(b)
-    if result is None: return 0.0
-    return result.volume if hasattr(result,'volume') else sum(p.volume for p in result)
+    # Preserve the vendor topology: automatic cleanup of its tiny edges can
+    # return spurious solids even for disjoint bodies. Count only solid common.
+    op=BRepAlgoAPI_Common(a.wrapped,b.wrapped)
+    op.SetNonDestructive(True);op.SetFuzzyValue(1e-6);op.Build()
+    if not op.IsDone(): raise ValueError('Clearance boolean failed')
+    return sum(s.volume for s in Compound(op.Shape()).solids())
 
 
 def originals():
@@ -163,16 +173,33 @@ def checks():
     ]
 
 
+def mounted_q0_bracket():
+    return frames()('front',q0_xy_mm).location * Pos(0,0,-wall_normal_thickness_mm) * q0_mount_model.build()
+
+def mounted_breaker():
+    return frames()('front',q0_xy_mm).location * Pos(*q0['factoryLocalTranslationMm']) * import_step(breaker_step)
+
+def mounted_rail():
+    rear=-wall_normal_thickness_mm-q0_mount['railRearDepthMm']
+    with BuildPart() as rail:
+        with BuildSketch(Plane((-30,q0_mount['railCenterOffsetYMm'],rear),x_dir=(0,1,0),z_dir=(1,0,0))):
+            Polygon((-17.5,7.5),(-11.5,7.5),(-11.5,1),(11.5,1),(11.5,7.5),(17.5,7.5),
+                    (17.5,6.5),(12.5,6.5),(12.5,0),(-12.5,0),(-12.5,6.5),(-17.5,6.5),align=None)
+        extrude(amount=60)
+    return frames()('front',q0_xy_mm).location*rail.part
+
 def update_meshes(parts, destination, panel_sweep):
     source=factory_parts()
-    bodies=[parts[0],source[1],source[2],source[3],parts[1]]
-    roles=['shell','lid','hardware','hardware','panel']
-    names=['BUD NBF common base','Opaque cover silhouette','Latch 1','Latch 2','Reused aluminum panel']
+    bodies=[parts[0],source[1],source[2],source[3],parts[1],mounted_q0_bracket(),mounted_breaker()]
+    roles=['shell','lid','hardware','hardware','panel','q0-bracket','q0-body']
+    names=['BUD NBF common base','Opaque cover silhouette','Latch 1','Latch 2','Reused aluminum panel','Formed Q0 rail bracket','Phoenix 2907571 manufacturer STEP']
     meta={'source':'https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/',
           'drawing':'https://www.budind.com/wp-content/uploads/2019/01/hbnbf32226.pdf',
           'units':'mm','conversion':'Factory STEP; rotate Y -90 deg, translate Y +119.30026 mm. No scaling. build123d 0.11.1.',
           'fabrication':'BUD common shell and custom aluminum panel machined; lid and latches retained from linked factory STEP. Opaque-cover silhouette illustrative. Carrier holes transfer-drilled.',
           'panel_insertion':panel_sweep,
+          'breaker_source':q0['source'],
+          'breaker_step_sha256':hashlib.sha256(breaker_step.read_bytes()).hexdigest(),
           'wall_opening_ids':[f['id'] for f in wall_features()],
           'meshes':[]}
     chunks=[];offset=0
@@ -217,13 +244,36 @@ def main():
         with BuildPart() as gauge:
             with BuildSketch(f['plane']):
                 with Locations(f.get('at',(0,0))):
-                    if 'rect' in f: Rectangle(10.8,36.5)
+                    if 'rect' in f: Rectangle(17.6,45)
                     else: Circle((f['diameter']-.2)/2)
             extrude(amount=cut_depth_mm,both=True)
         interference=parts[0].intersect(gauge.part)
         volume=0 if interference is None else interference.volume
         if volume>1e-4: raise ValueError(f['id']+' blocked')
         report.append(dict(id=f['id']+' through gauge',intrusion_mm3=volume,result='pass'))
+    # Mount is checked in the actual drafted wall frame, not an axis-aligned proxy.
+    bracket=mounted_q0_bracket()
+    volume=intersection_volume(bracket,parts[0])
+    if volume>0.1: raise ValueError('Q0 bracket intersects shell: '+str(volume))
+    report.append(dict(id='Q0 bracket to machined shell',intrusion_mm3=volume,result='pass'))
+    breaker=mounted_breaker()
+    for label,body in [('machined shell',parts[0]),('closed factory lid',factory_parts()[1]),
+                       ('panel',parts[1]),('formed bracket',bracket),('nominal DIN rail',mounted_rail())]:
+        volume=intersection_volume(breaker,body)
+        if volume>0.1: raise ValueError('Phoenix STEP intersects '+label+': '+str(volume))
+        report.append(dict(id='Phoenix STEP to '+label,intrusion_mm3=volume,
+                           minimum_distance_mm=breaker.distance_to(body),result='pass'))
+    # Independent 3.4 mm insulated-wire go-gauges follow the STEP's top and
+    # bottom terminal bores. No cavity is inferred from a rectangular box.
+    for label,y,sign in [('supply',100,1),('output',16,-1)]:
+        with BuildPart() as wire:
+            with BuildSketch(Plane((8.8,y,23.3),x_dir=(1,0,0),z_dir=(0,sign,0))): Circle(1.7)
+            extrude(amount=24)
+        gauge=frames()('front',q0_xy_mm).location*Pos(*q0['factoryLocalTranslationMm'])*wire.part
+        for name,body in [('breaker',breaker),('shell',parts[0]),('closed lid',factory_parts()[1]),('panel',parts[1])]:
+            volume=intersection_volume(gauge,body)
+            if volume>.01: raise ValueError(label+' wire gauge intersects '+name+': '+str(volume))
+            report.append(dict(id='Q0 '+label+' wire approach to '+name,intrusion_mm3=volume,result='pass'))
     # Independent strap width/thickness and M4 shaft gauges at the panel interfaces.
     panel_plane = Plane((0,0,0),x_dir=(1,0,0),z_dir=(0,-1,0))
     for name,at,rect,diameter in (
@@ -258,6 +308,7 @@ def main():
     report.append(panel_sweep)
     (target/'cad-checks.json').write_text(json.dumps({'units':'mm','status':'Digital geometry checks only; open release conditions in build.html',
         'source_step_sha256': hashlib.sha256(Path(source_step).read_bytes()).hexdigest() if source_step else None,
+        'breaker_step_sha256': hashlib.sha256(breaker_step.read_bytes()).hexdigest(),
         'unchecked_standard_interfaces':'Vendor interfaces outside bundled standards database; dimensions from linked drawings, no physical qualification.',
         'results':report},indent=2)+'\n')
     features=[]
@@ -267,6 +318,10 @@ def main():
     (target/'wall-openings.json').write_text(json.dumps(features,indent=2)+'\n')
     update_meshes(parts,Path(__file__).resolve().parents[2]/'assets',panel_sweep)
     manifest={'generator':'tools/cad/enclosure_model.py','generator_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        'layout_sha256':hashlib.sha256(layout_source.read_bytes()).hexdigest(),
+        'q0_generator_sha256':hashlib.sha256(Path(q0_mount_model.__file__).read_bytes()).hexdigest(),
+        'breaker_step_sha256':hashlib.sha256(breaker_step.read_bytes()).hexdigest(),
+        'breaker_source_url':q0['source'],
         'source_step_sha256':hashlib.sha256(Path(source_step).read_bytes()).hexdigest(),
         'source_url':'https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/',
         'outputs':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(target.glob('*-machined.*'))}}

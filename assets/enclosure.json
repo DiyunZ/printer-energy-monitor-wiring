@@ -18,10 +18,12 @@
       0.94869,
       0
     ],
-    "intrusion_mm3": 0.0,
+    "intrusion_mm3": 0,
     "method": "Exact chamfered blank swept vertically; support contact excluded by 0.0001 mm.",
     "result": "pass"
   },
+  "breaker_source": "https://www.phoenixcontact.com/en-us/products/thermomagnetic-device-circuit-breakers-tmc-81c-15a-2907571",
+  "breaker_step_sha256": "bc2e767952fc2a2d349f95bc0699f4b35c449a3614de03e6de218deedf0cf861",
   "wall_opening_ids": [
     "Q0 toggle",
     "Q0 fixing -1",
@@ -70,6 +72,22 @@
       "positionCount": 10296,
       "indexOffset": 2154768,
       "indexCount": 10152
+    },
+    {
+      "name": "Formed Q0 rail bracket",
+      "role": "q0-bracket",
+      "positionOffset": 2195376,
+      "positionCount": 2988,
+      "indexOffset": 2207328,
+      "indexCount": 2856
+    },
+    {
+      "name": "Phoenix 2907571 manufacturer STEP",
+      "role": "q0-body",
+      "positionOffset": 2218752,
+      "positionCount": 5706,
+      "indexOffset": 2241576,
+      "indexCount": 4884
     }
   ],
   "bounds": {

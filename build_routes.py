@@ -6,7 +6,7 @@ import json
 from draw_external import draw_external
 
 OUT = Path(__file__).resolve().parent
-REV = 'Rev. 14 · one existing USB cable · 2026-09-23'
+REV = 'Rev. 16 · Phoenix 2907571 and two-seller procurement · 2026-09-28'
 C = {'L':'#202d3a','N':'#65758a','PE':'#18814a','CT':'#8544a5','USB':'#23739d','DC':'#aa621e','V':'#1567c1'}
 # Shared physical placement. The SVG is an X/Z projection of the same millimetre
 # coordinates consumed by layout3d.js. Electrical port symbols are spaced for clarity.
@@ -27,21 +27,22 @@ def pin(part, index):
 
 M = {
  'IN.L':position('supply-entry',18.5,-12), 'IN.N':position('supply-entry',18.5), 'IN.PE':position('supply-entry',18.5,12),
- 'Q0.IN':position('q0',-5,-BODIES['q0']['size'][2]/2-BODIES['q0']['studProjection']),
- 'Q0.OUT':position('q0',5,-BODIES['q0']['size'][2]/2-BODIES['q0']['studProjection']),
+ 'Q0.IN':position('q0',-5,BODIES['q0']['terminalWireZ']-BODIES['q0']['position'][2]),
+ 'Q0.OUT':position('q0',5,BODIES['q0']['terminalWireZ']-BODIES['q0']['position'][2]),
  'OUT.L':position('printer-entry',0,-18.5), 'OUT.N':position('printer-entry',-4,-18.5), 'OUT.PE':position('printer-entry',-8,-18.5),
  'D.L1':position('meter',23,-113), 'D.L2':position('meter',8,-113), 'D.N':position('meter',-23,-113),
  'D.+':position('meter',34.5,-93), 'D.-':position('meter',34.5,-75), 'D.USB':position('meter',16,118),
  'D.DC+':position('meter',-17,118), 'D.DC-':position('meter',-10,118),
  'CT.+':position('ct',-8,BODIES['ct']['size'][2]/2), 'CT.-':position('ct',8,BODIES['ct']['size'][2]/2),
  'PLATE':tuple(DIMENSIONS['installationHardware']['panelBondXZ']),
+ 'MOUNT':tuple(DIMENSIONS['q0Mount']['bondPointXYZ'][i] for i in (0,2)),
  'AUX.L':position('outlet',-32.15,-10), 'AUX.N':position('outlet',-32.15), 'AUX.PE':position('outlet',-32.15,12),
  'AUX.FACE.L':position('outlet',33.15,-6.35), 'AUX.FACE.N':position('outlet',33.15,6.35),
  'PSU.L':position('adapter',0,-6.35), 'PSU.N':position('adapter',0,6.35),
  'PSU.DC+':position('adapter',0,32), 'PSU.DC-':position('adapter',7,38), 'PC':(280,180),
  **{f'JL.{i}':pin('JL',i) for i in range(1,5)},
  **{f'JN.{i}':pin('JN',i) for i in range(1,6)},
- **{f'JPE.{i}':pin('PE',i) for i in range(1,5)},
+ **{f'JPE.{i}':pin('PE',i) for i in range(1,6)},
 }
 A = {name:project(point) for name,point in M.items()}
 # 16: one continuous existing USB cable; sleeved inside, PC connected offline.
@@ -69,6 +70,7 @@ raw = [
  ('21','N','AUX.FACE.N','PSU.N',[],(-12,-33.65),'Internal adapter AC blade: neutral contact','aux'),
  ('22','DC','PSU.DC+','D.DC+',[(M['PSU.DC+'][0],17),(30,17),(30,179),(126,179),(126,118),(M['D.DC+'][0],118)],(126,153),'Original adapter cable → logger: center positive; entirely inside','aux'),
  ('23','DC','PSU.DC-','D.DC-',[(M['PSU.DC-'][0],23),(36,23),(36,185),(130,185),(130,125),(M['D.DC-'][0],125)],(130,140),'Original adapter cable → logger: sleeve negative; entirely inside','aux'),
+ ('24','PE','JPE.5','MOUNT',[(M['JPE.5'][0],57),(-125,57),(-125,M['MOUNT'][1])],(-125,101),'PE → dedicated bond for Q0 rail and metal bracket','earth'),
 ]
 wires = [dict(id=n,kind=k,start=a,end=b,points=[A[a],*[project(p) for p in m],A[b]],badge=project(lab),description=d,group=g) for n,k,a,b,m,lab,d,g in raw]
 CT_WINDOW = (*project(position('ct',-BODIES['ct']['size'][0]/2,-3)), *project(position('ct',BODIES['ct']['size'][0]/2,3)))
@@ -78,7 +80,7 @@ def validate():
     breakers={name.split('.')[0] for name in A if name.startswith('Q')}
     assert breakers=={'Q0'}
     # Retain surviving IDs so existing connection references do not change.
-    assert [w['id'] for w in wires] == [f'{i:02}' for i in range(1,24) if i not in (4,13)]
+    assert [w['id'] for w in wires] == [f'{i:02}' for i in range(1,25) if i not in (4,13)]
     for w in wires:
         if w['id'] in ['03','05','17']: assert w['start'].startswith('JL.'), 'Hot branches must start at JL after Q0, before CT'
     left,top,right,bottom = CT_WINDOW
@@ -114,11 +116,11 @@ def validate():
                 assert not on_segment, f'Wire {w["id"]} crosses an unrelated terminal dot: {name}'
     for node in ['OUT.L','D.L1','AUX.L','PSU.L']: assert closed(node)==closed('IN.L'), f'{node} must be supplied by hot through Q0'
     for node in ['OUT.N','D.L2','D.N','AUX.N','PSU.N']: assert closed(node)==closed('IN.N'), f'{node} must remain on neutral'
-    for node in ['OUT.PE','AUX.PE','PLATE']: assert closed(node)==closed('IN.PE'), f'{node} must remain on protective earth'
+    for node in ['OUT.PE','AUX.PE','PLATE','MOUNT']: assert closed(node)==closed('IN.PE'), f'{node} must remain on protective earth'
     assert len({closed(n) for n in ['IN.L','IN.N','IN.PE','D.+','D.-','D.DC+','D.DC-','PC']})==8, 'Mains, PE, CT, DC and USB nets must remain separate'
     opened=graph(False)
     for node in ['OUT.L','D.L1','AUX.L','PSU.L']: assert opened(node)!=opened('IN.L')
-    for node in ['OUT.PE','AUX.PE','PLATE']: assert opened(node)==opened('IN.PE')
+    for node in ['OUT.PE','AUX.PE','PLATE','MOUNT']: assert opened(node)==opened('IN.PE')
     for i,w in enumerate(wires):
         for other in wires[i+1:]:
             for p,q in zip(w['points'],w['points'][1:]):
@@ -171,9 +173,9 @@ def at(part, label, dz=0, size=18, color='#203346', weight=600):
 
 def make_diagram():
     # Crop annotation margins without moving any physical footprint or wire endpoint.
-    start_svg(1760,1500,'ELITEpro enclosure wiring plan, aligned with the 3D top view',
+    start_svg(1840,1500,'ELITEpro enclosure wiring plan, aligned with the 3D top view',
         f'data-layout-scale="{SCALE}" data-layout-origin-x="{PLAN["origin"][0]}" data-layout-origin-y="{PLAN["origin"][1]}"',
-        viewbox=(130,80,1760,1500))
+        viewbox=(130,80,1840,1500))
     add('<desc>120 V, one printer. Body footprints match the 3D top view; terminal symbols and wire bends are simplified. Physical fit and electrical acceptance remain pending.</desc>')
     footprint('case','#edf1f4','#9dabb8',20)
     footprint('panel','#fafbfc','#b6c3cb',3)
@@ -204,8 +206,8 @@ def make_diagram():
     l,t,r,b=CT_WINDOW;rect(l,t,r-l,b-t,'#fff','#979e9f',0)
     at('ct','CT1',-6,22);at('ct','LOAD →',11,18)
     footprint('q0','#3c4a56','#273542',4);at('q0','Q0',3,22,'#fff')
-    # Direct-mounted Q0 handle; its mounting pattern is in the fabrication package.
-    px,py=project(position('q0',-6,32.14));rect(px,py,12*SCALE,15*SCALE,'#e9eeea','#63717a',2)
+    # DIN-mounted Q0 nose and handle; exact wall/bracket files are separate.
+    px,py=project(position('q0',-6,32));rect(px,py,12*SCALE,15*SCALE,'#e9eeea','#63717a',2)
     footprint('outlet','#e9c658','#a39254',6)
     at('outlet','XA · inside',-27,20)
     footprint('adapter','#293744','#293744',6)
@@ -291,6 +293,9 @@ def material_price(p, order):
     breakdown = ''.join(lines)
     if len(rows) > 2 and not direct_links:
         breakdown = f'<details class="price-details"><summary>{len(rows)} item prices</summary>'+breakdown+'</details>'
+    tariff = sum(Decimal(str(r.get('estimated_tariff_usd',0))) for r in rows)
+    if tariff:
+        breakdown += f'<p>+ ${tariff:.2f} estimated tariff = ${subtotal+tariff:.2f} before freight / sales tax</p>'
     return '<div class="material-price" data-material-id="'+E(p['id'])+f'" data-subtotal-usd="{subtotal:.2f}"><strong class="price-total">${subtotal:.2f}</strong> <span class="price-label">subtotal</span><div class="price-breakdown">'+breakdown+'</div></div>'
 
 
@@ -332,6 +337,9 @@ def main():
     html=html.replace('{{SELLER_COUNT}}',str(len({r['seller'] for r in materials['purchasing']['rows']})))
     html=html.replace('{{MATERIAL_TOTAL}}',format(materials['purchasing']['material_subtotal_usd'],'.2f'))
     html=html.replace('{{PRICE_DATE}}',E(materials['purchasing']['checked_on']))
+    delivery=materials['purchasing']['delivery_estimate']
+    for key,value in [('KNOWN_BUDGET',delivery['known_pre_sales_tax_cost_usd']),('KNOWN_TARIFFS',delivery['known_estimated_tariffs_usd']),('DK_FREIGHT',delivery['digikey_ground_budget_usd'])]:
+        html=html.replace('{{'+key+'}}',format(value,'.2f'))
     (OUT/'index.html').write_text(html)
     (OUT/'routes.json').write_text(json.dumps({'revision':REV,'anchors':A,'projection':PLAN,'wires':wires},indent=2)+'\n')
     (OUT/'validation.json').write_text(json.dumps(validation,indent=2)+'\n')

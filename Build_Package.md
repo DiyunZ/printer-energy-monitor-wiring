@@ -1,6 +1,6 @@
 # Machining and assembly guide
 
-September 24, 2026 · one grounded 120 V supply · one printer at a time.
+September 28, 2026 · one grounded 120 V supply · one printer at a time.
 
 **Engineering review package. Complete-order, machining and energizing release remain open.** The design uses internal adapter power and proposed aluminum reuse. [Cost, sourcing and certification review](revision.html). The drawings do not represent a physically assembled or certified product.
 
@@ -10,9 +10,10 @@ September 24, 2026 · one grounded 120 V supply · one printer at a time.
 
 | File | Use |
 |---|---|
-| [Five-page machining drawing](fabrication/Machining_Drawings.pdf) | Hole coordinates, viewing directions, dimensions and tolerances. Print for reference, not as a scale template. |
+| [Six-page machining drawing](fabrication/Machining_Drawings.pdf) | Hole coordinates, viewing directions, dimensions and tolerances. Print for reference, not as a scale template. |
 | [Machined case STEP](fabrication/case-machined.step) · [Machined panel STEP](fabrication/panel-machined.step) | Exact solid geometry for shop review and fixturing. Use the BUD common-base template and proposed aluminum plate; actual stock and opaque lid remain to be checked. Do not print a substitute mains enclosure. |
 | [Front DXF](fabrication/front.dxf) · [Right DXF](fabrication/right.dxf) · [Left DXF](fabrication/left.dxf) · [Rear DXF](fabrication/rear.dxf) · [Panel DXF](fabrication/panel.dxf) | Millimetres, 1:1. The chamfered outline and internal features are on `CUT`; verify stock and the support pattern before using them. `REFERENCE` and `TEXT` are non-cutting. The right-wall file contains one Ø22.2 mm USB cable-exit bore; no USB fixing holes. |
+| [Q0 bracket STEP](fabrication/q0_mount.step) · [Provisional flat DXF](fabrication/q0-mount-flat.dxf) | Four-bend aluminum bracket; requires measured stock and a bend coupon before shop release. |
 | [Cut and clearance results](fabrication/cad-checks.json) · [Wall opening coordinates](fabrication/wall-openings.json) | Reproducible digital checks and shared datums. |
 | [Wiring drawing](wiring_routes.svg) · [Connector detail](connector_detail.svg) · [Connection schedule](routes.json) | Electrical topology. These drawings are not machining templates. |
 
@@ -27,7 +28,7 @@ The existing photos were compared with manufacturer product pictures, original d
 | Three OEM voltage pigtails | User confirms three original DENT kit pigtails in different colors. Matched family: **DENT LD-SKTSP**, **10 in / 254 mm nominal**, female safety connector to factory-tinned end. A1 = hot/L1; A2 = neutral/L2; A3 = neutral/N. | [DENT original accessory](https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/). Photo connector, tinned end and ESIS card agree. Online data does not publish AWG/ampacity. Qualified acceptance of termination and upstream Q0 protection remains necessary. |
 | Internal DC | Original CUI adapter and intact flat cord connect directly to the logger inside. | No extension, external coupling, KVT frame or insert. Check original plug seating, restraint, slack and closed-enclosure temperature. |
 | Existing USB cable | One intact owned A-to-B cable: B stays in DENT, cable passes through Heyco 3104, free A end connects to the PC. Sleeve the internal portion. | [DENT manual](https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf), printed pp. 16, 18, 29: USB power and insulation requirements. Export with mains unplugged and the lid closed. |
-| Q0 / supply | Carling CA1-B0-24-615-121-DG, 15 A, single pole; manufacturer confirms 10 kA at 120 V. | Actual JIS receptacle fault current and combined startup waveform remain unknown. [Detailed protection review](protection.html). |
+| Q0 / supply | Phoenix TMC 81C 15A / 2907571, 15 A, single pole, C curve; UL489 / cUL Listed E320373, 277 V AC, 10 kA. | Actual JIS receptacle fault current and combined startup waveform remain unknown. [Detailed protection review](protection.html). |
 
 **Voltage-lead protection:** A1 now connects directly to JL after Q0; no dedicated voltage-tap fuse is installed. Suitability of the upstream 15 A Q0 for the original DENT lead set remains unverified. Accept that protection scheme before energizing. The meter's internal fuse cannot clear an external lead short that bypasses the meter. See the [protection review](protection.html).
 
@@ -61,9 +62,25 @@ Fabricate the professor's offered aluminum as a **260 × 340 mm panel with four 
 
 Provide a dedicated PE bond with a reviewed method and hardware suitable for the actual aluminum. Do not assume the former steel-panel bonding stack is qualified for aluminum, or rely on ordinary mounting screws for electrical continuity. The existing #10 hardware is a dimensional proposal pending that review.
 
-Q0 retains its front-wall mounting. Three WAGO **221-415 / 221-505** connector/carrier pairs provide JL, JN and PE. A1 feeds from JL; A2/A3 from JN. PE joins supply earth, printer earth, internal XA earth and panel bond. One accepted conductor per port.
+Q0 uses the new metal DIN support behind the front wall, with its operator accessible outside. Three WAGO **221-415 / 221-505** connector/carrier pairs provide JL, JN and PE. A1 feeds from JL; A2/A3 from JN. PE joins supply earth, printer earth, internal XA earth, panel bond and Q0 rail/bracket bond. One accepted conductor per port.
 
 The logger retains two **19.05 mm ONE-WRAP** straps, with a **216 × 69 × 58 mm** receiving envelope. Add two straps for XA and adapter. Eight **21 × 4 mm** smooth panel slots support all four straps. Fit and trim the flexible straps; do not drill equipment housings or cover required adapter markings/heat-dissipation surfaces.
+
+<h2 id="q0-mount">Q0 metal support and protective bond</h2>
+
+The **Phoenix 2907571** catalog envelope is **17.6 × 116 × 75.9 mm including the 7.5 mm DIN rail**. The [manufacturer STEP reference](fabrication/phoenix-2907571-reference.step) includes its 73.8788 mm body/handle depth. The 18.6 × 46 mm window clears the 17.6 × 45 mm nose nominally. The protruding terminal guards remain **1.5 mm behind the inner wall**, with the nose face about 1.1 mm beyond the outer wall in the local wall frame. Do not use the old NOARK or Carling mounting depth. Check the received part, full handle travel and access protection before cutting.
+
+The top and bottom wire entries are retained in the factory model. Each uses one **14 AWG Cu** conductor, **11–12 mm strip length** and **2 N·m terminal torque**. The model provides a straight 24 mm entry approach before the routing bends; it does not certify bend radius or tool access. No power ring terminals are used. [Manufacturer terminal and rating data](https://www.phoenixcontact.com/en-us/products/thermomagnetic-device-circuit-breakers-tmc-81c-15a-2907571).
+
+The parametric bracket is **88 × 40 × 66.30 mm** at the provisional 1.89738 mm stock thickness: 60 mm between the arms, 64.40 mm inner web depth, four R2 bends. Wall fixing centers are 76 mm apart; rail fixing centers are 48 mm apart. Cut **60 mm** from the purchased **250 mm 35 × 7.5 mm rail**, deburr and transfer-drill the mounting holes. Rail center is 0.4 mm above the operator-window center in the local wall frame, derived from the STEP retaining lips. Two 8 mm CA802 end stops flank the breaker. Their fasteners must not obstruct the breaker latch. The nominal 0.8 mm spacer at the ordinary M4 rail fixing must match the accepted bonding-contact stack at the other end.
+
+Use two M3 × 12 wall screws/nuts from the already purchased eight-piece totals and four additional washers. Use one spare M4 × 10 screw/nut and three washers from the anchor purchase packs for one rail fixing. Use the second already purchased #10 × 3/4 in stud with two nuts, two flat washers and three external-tooth washers for the dedicated rail/bracket bond; keep the original panel bond separate. These are two complete bond stacks, not one shared stud. Add **connection 24, PE.5 → rail/bracket**, with 350 mm green 14 AWG starting blank. No extra WAGO connector or green-wire roll is needed.
+
+Have the electrical reviewer approve a contact method that bonds **both steel rail and aluminum support**, including surface preparation and material compatibility; ordinary mounting screws are not the PE path. The displayed stud stack is a proposal and may require a listed aluminum-compatible lug/contact change. No electrical continuity or mechanical load test has been performed.
+
+The manufacturer STEP has no solid overlap with the machined shell, closed lid, panel, bracket or nominal rail. Its minimum modeled gap to the closed factory lid is **2.30 mm** and to the window edge is **0.50 mm**; these are nominal CAD results, not tolerance allowances. Accept the received part and the full ON/OFF/TRIP handle travel before fabrication.
+
+The flat pattern assumes **K = 0.4** only to produce a reviewable starting blank. Make a bend coupon in the measured offered stock, correct for tooling and springback, then form to the STEP dimensions. Check bracket deflection while operating the breaker and locknut retention. Record fabrication cost separately; offered stock does not imply free shop labor.
 
 ## Machining datums
 
@@ -73,7 +90,7 @@ For outside views: front U = X; rear U = −X; right U = −Z; left U = Z. V run
 
 | Feature | Cut geometry | Datum in assembly coordinates |
 |---|---|---|
-| Q0 handle | 10.97 × 36.78 mm rectangle; two Ø3.96 mm holes at 52.37 mm vertical pitch | Front wall; X = −107, Y = 80 mm |
+| Q0 operator / bracket | 18.60 × 46.00 mm rectangle; two Ø3.30 mm holes at 76 mm horizontal pitch | Front wall; X = −93, Y = 75 mm; local drafted-wall frame |
 | Supply gland | Ø21.00 mm | Left wall; Y = 43, Z = 128 mm |
 | Printer gland | Ø21.00 mm | Rear wall; X = 0, Y = 36 mm |
 | USB cable exit | One Ø22.20 mm mounting hole; no fixing holes | Right wall; Y/Z = 55/167 mm. [Heyco 3104 dimensions](https://www.heyco.com/products/bushings-grommets-heycaps-plugs/tubing-caps-and-plugs/heyco-thick-panel-snap-bushings/): 17.5 mm passage, 24.2 mm head, 14.3 mm overall height; wall up to 6.4 mm. Dry-fit before machining. |
@@ -89,21 +106,21 @@ Retain the verified enclosure support pattern and original lid features. The pan
 
 <h2 id="fasteners">Fasteners and purchase quantities</h2>
 
-Buy all required hardware from **DigiKey and Home Depot**. Counts below distinguish **installed pieces** from the actual **purchase packs**, including unused pieces. No lab fastener stock is assumed. The complete hardware purchase is **$27.31**, before freight and tax. Metric and US threads are deliberately distinguished.
+Buy all required hardware from **DigiKey and Home Depot**. Counts below distinguish **installed pieces** from the actual **purchase packs**, including unused pieces. No lab fastener stock is assumed. The complete hardware purchase is **$26.63**, before freight and tax. Metric and US threads are deliberately distinguished.
 
 | Assembly | Installed hardware | Exact purchase links |
 |---|---|---|
-| Q0 | 2 × #6-32 × 1/4 in screws; 2 × #6 flat washers | DigiKey: 4 [Keystone 9903 stainless pan screws](https://www.digikey.com/en/products/detail/keystone-electronics/9903/317324) and 4 [4699 zinc-plated steel washers](https://www.digikey.com/en/products/detail/keystone-electronics/4699/316268). No nut on Q0's threaded inserts. |
-| Three WAGO carriers | 6 × M3-0.5 × 12 mm pan screws; 6 × M3 washers; 6 × M3-0.5 locknuts | Home Depot: 2 four-piece packs of [837761 zinc pan screws](https://www.homedepot.com/p/321071719), 2 four-piece packs of [837221 stainless locknuts](https://www.homedepot.com/p/321071866). DigiKey: 6 [Keystone 4692 M3 / #4 zinc-plated steel washers](https://www.digikey.com/en/products/detail/keystone-electronics/4692/316261). |
-| Six tie anchors | 6 × M4-0.7 × 10 mm pan screws; 6 × M4 washers; 6 × M4-0.7 locknuts | Home Depot: 2 four-piece packs of [836351 zinc pan screws](https://www.homedepot.com/p/321071623), 2 four-piece packs of [837171 stainless locknuts](https://www.homedepot.com/p/321071795), 1 fifty-piece pack of [Hillman 4118 M4 stainless flat washers](https://www.homedepot.com/p/204801237). Install six of each; retain unused pieces. |
+| Q0 wall bracket | 2 × M3 × 12 screws; 4 × M3 washers; 2 × M3 locknuts | Use the two spare screws/nuts in the carrier packs below. Buy four additional 4692 washers: ten total including carriers. |
+| Three WAGO carriers | 6 × M3-0.5 × 12 mm pan screws; 6 × M3 washers; 6 × M3-0.5 locknuts | Home Depot: 2 four-piece packs of [837761 zinc pan screws](https://www.homedepot.com/p/321071719), 2 four-piece packs of [837221 stainless locknuts](https://www.homedepot.com/p/321071866). DigiKey: 10 total (6 here + 4 Q0) [Keystone 4692 M3 / #4 zinc-plated steel washers](https://www.digikey.com/en/products/detail/keystone-electronics/4692/316261). |
+| Six tie anchors | 6 × M4-0.7 × 10 mm pan screws; 6 × M4 washers; 6 × M4-0.7 locknuts | Home Depot: 2 four-piece packs of [836351 zinc pan screws](https://www.homedepot.com/p/321071623), 2 four-piece packs of [837171 stainless locknuts](https://www.homedepot.com/p/321071795), 1 fifty-piece pack of [Hillman 4118 M4 stainless flat washers](https://www.homedepot.com/p/204801237). Six screws/nuts here; one spare screw/nut plus three spare washers serve the rail fixing. Eight screw/nut pieces and fifty washers cover the total. |
 | Panel to case | 4 × M5-0.8 × 10 mm pan screws | Home Depot: 2 two-piece packs of [863468 stainless pan screws](https://www.homedepot.com/p/323370995). Fit directly through the panel into the factory M5 inserts; check head coverage and engagement. |
-| Panel PE stud | 1 × #10-32 × 3/4 in screw; 2 plain nuts; 2 external-tooth washers; 2 flat washers; 1 ring lug | DigiKey: 2 [Keystone 9911 stainless pan screws](https://www.digikey.com/en/products/detail/keystone-electronics/9911/317331), 4 [4705 zinc-plated steel nuts](https://www.digikey.com/en/products/detail/keystone-electronics/4705/316276), 4 [4703 zinc-plated steel flat washers](https://www.digikey.com/en/products/detail/keystone-electronics/4703/316274). Home Depot: 1 eighteen-piece pack of [827311 zinc-plated external-tooth washers](https://www.homedepot.com/p/317479556). Rings come from the 15-104 pack in the main BOM. |
+| Two PE studs: panel and rail/bracket | 2 × #10-32 × 3/4 in screws; 4 plain nuts; 5 external-tooth washers; 4 flat washers; 2 ring lugs total | DigiKey: 2 [Keystone 9911 stainless pan screws](https://www.digikey.com/en/products/detail/keystone-electronics/9911/317331), 4 [4705 zinc-plated steel nuts](https://www.digikey.com/en/products/detail/keystone-electronics/4705/316276), 4 [4703 zinc-plated steel flat washers](https://www.digikey.com/en/products/detail/keystone-electronics/4703/316274). Home Depot: 1 eighteen-piece pack of [827311 zinc-plated external-tooth washers](https://www.homedepot.com/p/317479556). Rings come from the 15-104 pack in the main BOM. |
 
-Check the separately purchased panel screws against the actual aluminum thickness. Keep both lid latches and the gasket intact. Q0 power studs use the manufacturer's supplied terminal hardware and two #10 ring lugs. Do not substitute #8-only lugs or metric nuts on these studs.
+Check separately purchased panel screws against actual stock. Keep both latches and gasket intact. Q0 has box lugs: use bare prepared copper, one wire per selected terminal; rings are used only at the two dedicated #10 bond studs.
 
 Each anchor uses an M4 × 10 mm pan screw with its head directly on the base, then an underside washer and locknut. The illustrated stack leaves about 3.4 mm to the case floor. Confirm actual base thickness, nut engagement and floor clearance on receipt; small molded details are illustrative.
 
-**Stack checks:** the nominal case wall is 3 mm. The selected Keystone 4699 washer is nominally 0.031 in (about 0.79 mm), giving 6.350 − 3.000 − 0.787 = **2.56 mm** nominal Q0 insert engagement, below the 4.95 mm insert depth. [Keystone washer dimensions](https://www.digikey.com/htmldatasheets/production/1006814/0/0/1/washers.pdf). Measure the received stack and reject bottoming before clamping; do not substitute the old 3/8 in screw. XA has no wall fixing screws. The USB bushing snaps into the wall; no USB fixing hardware is required. Do not overtighten the molded wall.
+**Stack checks:** each M3 wall stack is nominally 3.0 mm wall + 1.897 mm bracket + two approximately 0.8 mm washers + approximately 4 mm locknut = 10.50 mm, leaving about 1.50 mm of a 12 mm screw. The 10 mm rail screw crosses 1 mm rail + 0.8 mm spacer + 1.897 mm bracket + 0.8 mm washer + approximately 4 mm locknut, leaving about 1.50 mm. Measure actual washers/nuts and verify complete locking engagement without deforming the plastic wall. These stack estimates do not prove wall or bracket strength. XA has no wall screws; the USB bushing snaps in.
 
 Fit carrier/anchor fasteners while the panel is out. There is about **9.50 mm** between the panel underside and the inner case floor in the source CAD. Check actual screw projections and washers against this space and the molded supports. For the six revised M4 × 10 mm anchor screws, verify full locking-nut engagement and at least 3 mm clearance to the actual case floor before installing the panel.
 
@@ -113,15 +130,16 @@ For the proposed panel PE stud, first approve the hardware/contact method for th
 
 Buy **13 ft of 14/3 SJOOW** and start with 2.0 m supply, 1.0 m printer-output and 0.8 m internal-XA blanks. Their internal conductors extend directly to the specified terminals. Keep sufficient PE slack so that jacket displacement does not pull PE free first. Measure the desired exterior reach before cutting.
 
-Use the selected 14 AWG black and green internal wire for Q0 output and the panel bond. XA uses conductors from its continuous 14/3 cord. The following are conservative **cutting blanks**, not proved finished lengths; final routing, bends and stripping are done with the assembly de-energized. Allow 1 m black and 1 m green including spare wire. Buy 4 ft (1.2192 m) of each color by the foot; both lengths are budgeted. No separate white-wire roll is required.
+Use the selected 14 AWG black and green internal wire for Q0 output and both metal bonds. XA uses conductors from its continuous 14/3 cord. The following are conservative **cutting blanks**, not proved finished lengths; final routing, bends and stripping are done with the assembly de-energized. Allow 1 m black and 1 m green including spare wire. Buy 4 ft (1.2192 m) of each color by the foot; both lengths are budgeted. No separate white-wire roll is required.
 
 | Connection | Starting blank | Termination |
 |---|---|---|
-| 02 Q0 OUT → JL | Black, 500 mm | #10 ring at Q0; bare prepared copper at JL |
+| 02 Q0 OUT → JL | Black, 500 mm | Bare prepared copper in Q0 box lug and WAGO port |
 | 17/18/19 distribution → XA | One 800 mm 14/3 cord blank | JL hot, JN neutral, PE earth → corresponding 515CV terminals; jacket in clamp |
 | 12 PE → panel bond | Green, 200 mm | WAGO to #10 ring |
+| 24 PE.5 → rail/bracket bond | Green, 350 mm | WAGO to dedicated #10 ring; accepted conductive contact to both metals |
 
-Connections 01/03/06/07/10/11 use the supply/output cord conductors. Connections 05/08/09 use the three existing pigtail + full-lead chains; retain their full factory length. Connections 14/15 use the CT pair; 16 is one existing USB cable, sleeved inside and passed directly through the wall, used with mains unplugged and the lid closed. Connections 20–23 illustrate factory adapter contacts and DC wiring, **not** instructions to open or modify the adapter. The site provides the full 21-path schedule; retained connection IDs stay unchanged.
+Connections 01/03/06/07/10/11 use the supply/output cord conductors. Connections 05/08/09 use the three existing pigtail + full-lead chains; retain their full factory length. Connections 14/15 use the CT pair; 16 is one existing USB cable, sleeved inside and passed directly through the wall, used with mains unplugged and the lid closed. Connections 20–23 illustrate factory adapter contacts and DC wiring, **not** instructions to open or modify the adapter. The site provides the full 22-path schedule; retained connection IDs stay unchanged.
 
 Label both ends of every conductor. A1 is hot; A2 and A3 are neutral. The three original pigtails have different colors; drawing colors are schematic, so follow connection IDs. Grounding uses the separate green conductors. The full voltage-lead storage model assumes 2 m of flexible cable per lead and 3 mm OD; real cable lengths, connector bodies and minimum bends must fit without loading meter sockets.
 
@@ -130,8 +148,8 @@ Label both ends of every conductor. A1 is hot; A2 and A3 are neutral. The three 
 1. Close the identification/entry/protection items above, obtain the exact parts and compare them with the machining setups. Keep the case and all cords disconnected while machining or wiring.
 2. Machine the **empty** case and removable panel. Transfer-drill carrier fixings, deburr, clean, and inspect for cracks. Complete underside nuts, PE studs, carrier/anchor fixings and thread the straps before lowering the panel.
 3. Install and secure the panel, then fit the three carriers, logger, CT and internal XA/adapter assembly. Leave access to the CT latch and WAGO levers; verify the four adjustable straps.
-4. Install Q0 and two power glands. Route intact supply/output jackets through the glands. Clamp the internal XA cord jacket in the 515CV body, fully seat and independently restrain the original adapter, and route its original DC cable inside. Fit the direct USB cable exit as described above, with accepted 600 V sleeve/end protection and restraint at the existing front/right support. Disconnect only the PC end before mains operation; leave the intact cable attached to the box. XA/DC stay inside.
-5. Bond panel, output and XA; then complete neutral, protected hot, voltage sensing, CT and low-voltage wiring. Only the printer hot conductor goes through CT once, arrow toward the printer. Keep voltage taps and adapter consumption upstream of CT.
+4. Fit Q0 to the supported DIN rail, install both end stops, verify full latch engagement and free operator travel through the new opening. Install two power glands. Route intact supply/output jackets through the glands. Clamp the internal XA cord jacket in the 515CV body, fully seat and independently restrain the original adapter, and route its original DC cable inside. Fit the direct USB cable exit as described above, with accepted 600 V sleeve/end protection and restraint at the existing front/right support. Disconnect only the PC end before mains operation; leave the intact cable attached to the box. XA/DC stay inside.
+5. Bond panel, Q0 rail/bracket, output and XA; then complete neutral, protected hot, voltage sensing, CT and low-voltage wiring. Only the printer hot conductor goes through CT once, arrow toward the printer. Keep voltage taps and adapter consumption upstream of CT.
 6. Check every termination, strain relief, bend, clearance and fastener. Verify CT latch travel and plug removal access. Confirm that both latches close the lid without pressing on cables or components; accept the access protection for this enclosure. This dry fit is still outstanding.
 7. Qualified personnel document PE continuity, polarity, insulation/isolation, protection and supply suitability using the applicable test procedure. Disconnect sensitive electronics where the manufacturer requires it for insulation testing. Q0 OFF leaves incoming terminals live while the supply is plugged in.
 8. Check closed-enclosure adapter temperature and restrained plug seating in a supervised pilot. The opaque lid hides indicators; confirm logging by an offline export after unplugging mains. Configure ELOG for single-phase/two-wire measurement and the **identified** CT. Verify positive real power and reasonable readings with an independent reference. Test start/stop and power-return recording behavior, then check each printer's cold start and sustained load. Do not release daily use from a browser simulation alone.
@@ -139,7 +157,7 @@ Label both ends of every conductor. A1 is hot; A2 and A3 are neutral. The three 
 | Manufacturer termination | Published preparation / torque |
 |---|---|
 | WAGO 221-415 | Strip 11 mm; one accepted conductor per port, lever fully closed. Identify the factory-tinned pigtail ends before selecting preparation; do not add solder. |
-| Carling Q0 | Mounting screws 0.8–1.0 N·m; #10-32 terminal hardware 1.7–2.3 N·m. Check the received device's instructions. |
+| Phoenix 2907571 Q0 | One 14 AWG Cu conductor per screw clamp, within the published 18–2 AWG range; strip 11–12 mm, tighten to 2 N·m. Follow received instructions. Custom bracket and aluminum-bond torques require their own acceptance. |
 | 515PV / 515CV, glands and enclosure | Follow the exact supplied instructions. The Q0 or outlet torque must not be reused for unrelated parts. |
 
 Manufacturer sources and per-material limits are linked in the [installation audit](installation.html) and [reference schedule](references.html). The public project records digital geometry and circuit checks; it does not yet record a built, tested or approved assembly.
@@ -152,7 +170,7 @@ No measurements, acceptance signatures or live tests are recorded yet. Use this 
 | Stage / owner | Record | Acceptance or next action |
 |---|---|---|
 | Aluminum / fabricator | Usable length ___ mm × width ___ mm; thickness ___ mm; alloy/finish ___; flatness/support assessment ___ | Finished outline is 260 × 340 mm with 10 mm corner chamfers. Stock must cover it plus the shop's trimming allowance. The current 1.89738 mm thickness is a template only. Measure and update the solid, support heights and every screw stack for the actual thickness; do not approve strength from thickness alone. |
-| Stock unavailable / designer | Reuse result ___; fallback decision ___ | Source a suitable blank for the verified BUD mounting pattern and revise the budget if the offered stock fails. No replacement panel is included in the active $246.94 material subtotal. |
+| Stock unavailable / designer | Reuse result ___; fallback decision ___ | Source a suitable blank for the verified BUD mounting pattern and revise the budget if the offered stock fails. No replacement panel is included in the active $229.54 material subtotal. |
 | Purchased case / fabricator | NBF-32126 label ___; four M5 inserts ___; actual opaque-lid clearance ___ | Match the support pattern and lid before machining. Verify both latches, gasket, screw engagement and accepted access protection. |
 | Aluminum PE bond / electrical reviewer | Accepted lug/contact stack ___; aluminum surface treatment ___; anti-rotation method ___; torque basis ___; measured bond result ___ | The generic #10 stud/ring arrangement is a proposal, not a listed aluminum-bond system. Accept an aluminum-compatible contact method and any required replacement hardware before fabrication or energizing. No unsupported bonding torque is assigned. |
 | Terminations / assembler | Received 15-104 markings ___; tool/die and manufacturer instruction ___; sample crimp/pull result ___; all terminal torques ___ | #8–10 is compatible with #10 studs; #8-only is not. Validate the actual 14 AWG insulation fit. Preserve the 75°C terminal rating and the lower applicable temperature limit of every component. |

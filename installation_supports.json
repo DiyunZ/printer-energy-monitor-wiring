@@ -131,5 +131,5 @@
   "componentBodyIntrusions": [],
   "ctAperture": "One straight printer-hot conductor",
   "entries": "Outer jackets extend through both power glands; bare conductor breakouts stay inside",
-  "limitations": "Sampled curves with assumed wire diameters. Named WAGO terminations exclude a 20 mm endpoint region because port cavities are simplified. Does not certify every wire-to-wire clearance, cable stiffness, torque, pull retention or manufactured fit."
+  "limitations": "Sampled curves with assumed wire diameters. WAGO terminations exclude a 20 mm endpoint region. Phoenix Q0 entries permit only bounded manufacturer channels and 2 mm at the correct endpoint; separate STEP gauges check the channels. Does not establish every wire-to-wire clearance, stiffness, torque, retention or manufactured fit."
 }

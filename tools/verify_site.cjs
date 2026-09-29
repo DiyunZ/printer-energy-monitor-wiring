@@ -9,9 +9,10 @@ const base=process.env.CHECK_URL||'http://127.0.0.1:8770/';
 const out=process.env.QA_OUTPUT;
 const root=path.resolve(__dirname,'..');
 const bom=JSON.parse(fs.readFileSync(path.join(root,'procurement.json')));
-const expectedPrices={enclosure:90.81,breaker:40.32,receptacle:6.99,connectors:3.51,carriers:6.69,cord:19.89,'supply-plug':3.96,'printer-connector':6.99,'cord-glands':5.94,'internal-wire':3.36,'ring-lugs':3.63,'tie-mounts':4.08,'cable-ties':3.16,fasteners:27.31,'logger-restraint':10.77,'usb-bushing':0.14,'usb-sleeve':9.39};
+const dimensions=JSON.parse(fs.readFileSync(path.join(root,'layout_dimensions.json')));
+const expectedPrices={enclosure:90.81,breaker:21.57,receptacle:6.99,connectors:3.51,carriers:6.69,cord:19.89,'supply-plug':3.96,'printer-connector':6.99,'cord-glands':5.94,'internal-wire':3.36,'ring-lugs':3.63,'tie-mounts':4.08,'cable-ties':3.16,fasteners:26.63,'breaker-rail':6.03,'logger-restraint':10.77,'usb-bushing':0.14,'usb-sleeve':9.39};
 async function checkPrices(page){
- assert.deepEqual([...new Set(bom.purchasing.rows.map(r=>r.seller))].sort(),['DigiKey','Home Depot','Master Electronics']);
+ assert.deepEqual([...new Set(bom.purchasing.rows.map(r=>r.seller))].sort(),['DigiKey','Home Depot']);
  for(const r of bom.purchasing.rows.filter(r=>r.material_ids.includes('fasteners')))assert.ok(r.quantity*r.pieces_per_unit>=r.installed_quantity,'Purchase packs must cover installed hardware: '+r.sku);
  const prices=await page.locator('.material-price').evaluateAll(es=>Object.fromEntries(es.map(e=>[e.dataset.materialId,Number(e.dataset.subtotalUsd)])));
  assert.deepEqual(prices,expectedPrices,'Pack costs and shared connectors must be counted once');
@@ -44,7 +45,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  assert.match(await page.title(),/3D enclosure/);
  assert.doesNotMatch(await page.locator('body').textContent(),/\brevision(?:\s+[a-d])?\b|\brev\.\s*\d+/i,'Main page should describe the current design without revision labels');
  assert.equal(await page.locator('.revision-note').count(),0);
- for(const p of bom.items.filter(p=>p.availability==='buy')){
+ for(const p of bom.items.filter(p=>p.availability==='buy' && p.id!=='breaker-rail')){
   assert.notEqual(p.image.kind,'design',p.id+' should use a catalog product photo');
   assert.match(p.image.src,/\.(jpg|png)$/i);
  }
@@ -54,9 +55,9 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  assert.equal(await page.locator('details[open]').count(),0,'Supporting details should be collapsed initially');
  assert.equal(await page.locator('#layout').isVisible(),true);
  assert.equal(await page.locator('#wiring').isVisible(),false);
- assert.equal(await page.locator('.materials tbody tr:visible').count(),18);
- assert.equal(await page.locator('#purchase-materials tbody tr').count(),17);
- assert.match(await page.locator('#hardware > .meta').innerText(),/17 purchase groups from 3 sellers/);
+ assert.equal(await page.locator('.materials tbody tr:visible').count(),20);
+ assert.equal(await page.locator('#purchase-materials tbody tr').count(),18);
+ assert.match(await page.locator('#hardware > .meta').innerText(),/18 purchase groups from 2 sellers/);
  assert.equal(await page.locator('#purchase-materials [data-availability]:not([data-availability="buy"])').count(),0);
  assert.equal(await page.locator('#fabrication-materials #material-panel').count(),1);
  assert.equal(await page.locator('#fabrication-materials .material-price').count(),0);
@@ -88,9 +89,9 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  const openOwned=async()=>{if(await page.locator('#owned-materials').getAttribute('open')===null)await page.locator('#owned-materials > summary').click();};
  const diag=()=>page.evaluate(()=>window.enclosureDiagnostics());
  const initial=await diag();assert.equal(initial.units,'mm');assert.ok(initial.triangles>100000);
- assert.ok(close(initial.fitBodies.q0.size[2],47),'Q0 actual rendered body depth');
- assert.ok(close(initial.breakerTerminals[1][1]-initial.breakerTerminals[0][1],49.28),'Actual terminal pitch');
- assert.ok(close(initial.breakerMounts[1][1]-initial.breakerMounts[0][1],52.37),'Actual mounting pitch');
+ assert.ok(close(initial.fitBodies.q0.size[2],dimensions.parts.find(p=>p.id==='q0').size[2]),'Q0 actual rendered body depth');
+ assert.ok(close(Math.hypot(...initial.breakerTerminals[1].map((v,i)=>v-initial.breakerTerminals[0][i])),67.8),'Actual terminal pitch');
+ assert.ok(close(initial.breakerMounts[1][0]-initial.breakerMounts[0][0],76),'Actual mounting pitch');
  assert.deepEqual(initial.meterRouteIntrusions,[],'Illustrated cable routes must not cut through the meter body');
  const lengths=initial.voltageLeadLengths;
  assert.equal(lengths.length,3);
@@ -206,8 +207,8 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  await page.locator('#model-more > summary').click();
  // Existing circuit controls remain functional.
  await page.locator('#tab-wiring').click();
- const ids=await page.locator('#main-stage .wire-route').evaluateAll(es=>es.map(e=>e.dataset.id));assert.equal(ids.length,21);
- const expected={all:null,main:['01','02','03'],voltage:['01','02','05','06','08','09'],neutral:['06','07','08','09','18','21'],earth:['10','11','12','19'],aux:['01','02','06','10','17','18','19','20','21','22','23'],signal:['14','15','16']};
+ const ids=await page.locator('#main-stage .wire-route').evaluateAll(es=>es.map(e=>e.dataset.id));assert.equal(ids.length,22);
+ const expected={all:null,main:['01','02','03'],voltage:['01','02','05','06','08','09'],neutral:['06','07','08','09','18','21'],earth:['10','11','12','19','24'],aux:['01','02','06','10','17','18','19','20','21','22','23'],signal:['14','15','16']};
  for(const [mode,want] of Object.entries(expected)){
   await page.locator(`[data-mode="${mode}"]`).click();
   const actual=await page.locator('#main-stage .wire-route:visible').evaluateAll(es=>es.map(e=>e.dataset.id).sort());
@@ -304,7 +305,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
    assert.equal(await page.locator('tbody tr').filter({hasText:'◇ Reuse / fabricate'}).count(),1);
    const purchaseTable=page.locator('#purchase-list').locator('xpath=following-sibling::div[contains(@class,"table-wrap")][1]');
    const fabricationTable=page.locator('#fabrication-list').locator('xpath=following-sibling::div[contains(@class,"table-wrap")][1]');
-   assert.equal(await purchaseTable.locator('tbody tr').count(),17);
+   assert.equal(await purchaseTable.locator('tbody tr').count(),18);
    assert.equal(await purchaseTable.locator('a[data-material="panel"]').count(),0);
    assert.equal(await fabricationTable.locator('a[data-material="panel"]').count(),1);
    assert.equal(await fabricationTable.locator('.material-price').count(),0);
@@ -325,9 +326,9 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
    for(const href of localLinks)assert.equal((await page.request.get(new URL(href,base).href)).status(),200,href);
   } else if(file==='revision.html') {
    const text=await page.locator('body').innerText();
-   assert.match(text,/three sellers/);
+   assert.match(text,/Three sellers/);
    assert.match(text,/68.29/);
-   assert.match(text,/Altech DIN breaker/);
+   assert.match(text,/Altech 1C15UL/);
    assert.equal(await page.locator('#breaker-options').count(),1);
   } else if(file==='protection.html') {
    const text=await page.locator('body').innerText();
@@ -356,7 +357,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   const render=await browser.newPage({viewport:{width:1800,height:1300},deviceScaleFactor:2});
   for(const name of ['wiring_routes','connector_detail']){await render.goto(new URL(name+'.svg',base).href);await render.locator('svg').screenshot({path:path.join(root,name+'.png')});}
  }
- const report={date:new Date().toISOString(),base,connections:21,circuitGroups:7,alignedComponentFootprints:plan.bodies.length,planTo3DMaximumToleranceMm:.05,compareTopView:true,renderedMeterBody:initial.fitBodies.meter.size,primaryBodyOverlaps:false,mouseOrbit:true,wheelZoom:true,keyboardOrbit:true,picking:true,shellModes:4,pngExport:true,viewportWidths:[1440,768,390],pageOverflow:false,internalLinks:true,materialsRows:bom.items.length,materialImagesLoaded:bom.items.length,ownedGroups:ownedIds.length,kitGroups:bom.items.filter(p=>p.availability==='kit').length,purchaseGroups:bom.items.filter(p=>p.availability==='buy').length,fabricationGroups:bom.items.filter(p=>p.availability==='fabricate').length,ownedGroupCollapsedByDefault:true,designTabs:true,buildDocumentHub:true,assemblyStages:6,panelInsertionSlider:true,progressiveDisclosure:true,criticalNoticesVisible:true,advancedControlsKeyboard:true,coilScenarioLengthMm:2000,jsErrors:errors,physicalBuildValidated:false};
+ const report={date:new Date().toISOString(),base,connections:22,circuitGroups:7,alignedComponentFootprints:plan.bodies.length,planTo3DMaximumToleranceMm:.05,compareTopView:true,renderedMeterBody:initial.fitBodies.meter.size,primaryBodyOverlaps:false,mouseOrbit:true,wheelZoom:true,keyboardOrbit:true,picking:true,shellModes:4,pngExport:true,viewportWidths:[1440,768,390],pageOverflow:false,internalLinks:true,materialsRows:bom.items.length,materialImagesLoaded:bom.items.length,ownedGroups:ownedIds.length,kitGroups:bom.items.filter(p=>p.availability==='kit').length,purchaseGroups:bom.items.filter(p=>p.availability==='buy').length,fabricationGroups:bom.items.filter(p=>p.availability==='fabricate').length,ownedGroupCollapsedByDefault:true,designTabs:true,buildDocumentHub:true,assemblyStages:6,panelInsertionSlider:true,progressiveDisclosure:true,criticalNoticesVisible:true,advancedControlsKeyboard:true,coilScenarioLengthMm:2000,jsErrors:errors,physicalBuildValidated:false};
  if(out)fs.writeFileSync(path.join(out,'browser-validation.json'),JSON.stringify(report,null,2)+'\n');
  console.log(JSON.stringify(report,null,2));
  }finally{await browser.close();}

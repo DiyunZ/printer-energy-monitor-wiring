@@ -2,13 +2,14 @@
   "units": "mm",
   "status": "Digital geometry checks only; open release conditions in build.html",
   "source_step_sha256": "1363ffb8a4be8935dc20f692d2b5acd265d9a9dffb4feb9b93d896c250324148",
+  "breaker_step_sha256": "bc2e767952fc2a2d349f95bc0699f4b35c449a3614de03e6de218deedf0cf861",
   "unchecked_standard_interfaces": "Vendor interfaces outside bundled standards database; dimensions from linked drawings, no physical qualification.",
   "results": [
     {
       "id": "case-machined",
       "valid": false,
       "solids": 1,
-      "volume_mm3": 957235.5951227882,
+      "volume_mm3": 955901.9192605125,
       "bounds_mm": [
         316.56169320913943,
         140.30000009600002,
@@ -28,17 +29,17 @@
     },
     {
       "id": "Q0 toggle",
-      "removed_mm3": 1210.324185766629,
+      "removed_mm3": 2566.577602089499,
       "result": "pass"
     },
     {
       "id": "Q0 fixing -1",
-      "removed_mm3": 36.94645831594244,
+      "removed_mm3": 25.656711954739876,
       "result": "pass"
     },
     {
       "id": "Q0 fixing +1",
-      "removed_mm3": 36.944582910393365,
+      "removed_mm3": 25.6567890268052,
       "result": "pass"
     },
     {
@@ -182,6 +183,81 @@
       "result": "pass"
     },
     {
+      "id": "Q0 bracket to machined shell",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Phoenix STEP to machined shell",
+      "intrusion_mm3": 0,
+      "minimum_distance_mm": 0.4999999999999779,
+      "result": "pass"
+    },
+    {
+      "id": "Phoenix STEP to closed factory lid",
+      "intrusion_mm3": 0,
+      "minimum_distance_mm": 2.296402871926935,
+      "result": "pass"
+    },
+    {
+      "id": "Phoenix STEP to panel",
+      "intrusion_mm3": 0,
+      "minimum_distance_mm": 15.509062262385022,
+      "result": "pass"
+    },
+    {
+      "id": "Phoenix STEP to formed bracket",
+      "intrusion_mm3": 0,
+      "minimum_distance_mm": 2.7999999999997467,
+      "result": "pass"
+    },
+    {
+      "id": "Phoenix STEP to nominal DIN rail",
+      "intrusion_mm3": 0,
+      "minimum_distance_mm": 0.0,
+      "result": "pass"
+    },
+    {
+      "id": "Q0 supply wire approach to breaker",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Q0 supply wire approach to shell",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Q0 supply wire approach to closed lid",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Q0 supply wire approach to panel",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Q0 output wire approach to breaker",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Q0 output wire approach to shell",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Q0 output wire approach to closed lid",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
+      "id": "Q0 output wire approach to panel",
+      "intrusion_mm3": 0,
+      "result": "pass"
+    },
+    {
       "id": "Strap 1 19.3 x 2.0 mm gauge",
       "intrusion_mm3": 0,
       "result": "pass"
@@ -278,7 +354,7 @@
     },
     {
       "id": "Custom panel to factory base",
-      "intrusion_mm3": 0.0,
+      "intrusion_mm3": 0,
       "result": "pass"
     },
     {
@@ -295,7 +371,7 @@
         0.94869,
         0
       ],
-      "intrusion_mm3": 0.0,
+      "intrusion_mm3": 0,
       "method": "Exact chamfered blank swept vertically; support contact excluded by 0.0001 mm.",
       "result": "pass"
     }

@@ -25,7 +25,7 @@ const near = (a, b, epsilon = .001) => Math.abs(a - b) < epsilon;
       assert.ok(v.x <= box[0] + .01 && v.y <= box[1] + .01, 'Fit includes top and left');
       assert.ok(v.x + v.w >= box[0] + box[2] - .01 && v.y + v.h >= box[1] + box[3] - .01, 'Fit includes bottom and right');
     };
-    assert.equal(await page.locator('#main-stage .wire-route').count(), 21);
+    assert.equal(await page.locator('#main-stage .wire-route').count(), 22);
     assert.equal(await page.locator('#main-stage .wire-badge:visible').count(), 0, 'Default hides wire numbers');
     assert.equal(await page.locator('#main-stage text:visible').count(), 20, 'Overview keeps short labels only');
     assert.equal(await page.locator('#zoom-focus').isVisible(), false);
@@ -41,7 +41,7 @@ const near = (a, b, epsilon = .001) => Math.abs(a - b) < epsilon;
       main: { primary: ['01','02','03'], context: [] },
       voltage: { primary: ['05','08','09'], context: ['01','02','06'] },
       neutral: { primary: ['06','07','08','09','18','21'], context: [] },
-      earth: { primary: ['10','11','12','19'], context: [] },
+      earth: { primary: ['10','11','12','19','24'], context: [] },
       aux: { primary: ['17','18','19','20','21','22','23'], context: ['01','02','06','10'] },
       signal: { primary: ['14','15','16'], context: [] },
     };
@@ -68,7 +68,7 @@ const near = (a, b, epsilon = .001) => Math.abs(a - b) < epsilon;
     }
     await page.locator('[data-mode="voltage"]').click();
     await page.emulateMedia({ media: 'print' });
-    assert.equal(await page.locator('#main-stage .wire-route:visible').count(), 21, 'Printing still includes the complete wiring diagram');
+    assert.equal(await page.locator('#main-stage .wire-route:visible').count(), 22, 'Printing still includes the complete wiring diagram');
     const printedStrokes = await page.locator('#main-stage .wire-route').evaluateAll(es => Object.fromEntries(es.map(e => [e.dataset.id, getComputedStyle(e.querySelector('.core')).stroke])));
     assert.deepEqual(printedStrokes, originalStrokes, 'Printing restores original colors for the shared supplies');
     await page.emulateMedia({ media: 'screen' });
@@ -79,7 +79,7 @@ const near = (a, b, epsilon = .001) => Math.abs(a - b) < epsilon;
     await page.locator('[data-layout-id="A1"]').click({ position: { x: 4, y: 4 } });
     assert.match(await page.locator('#status').textContent(), /Connection 05/, 'Voltage connector bodies still select their associated wire');
     await page.locator('[data-mode="all"]').click();
-    assert.equal(await page.locator('#main-stage .wire-route:visible').count(), 21, 'All restores every wire');
+    assert.equal(await page.locator('#main-stage .wire-route:visible').count(), 22, 'All restores every wire');
     assert.equal(await page.locator('#main-stage .wire-context').count(), 0, 'All restores the original colors');
     await page.locator('#zoom-reset').click();
 
@@ -158,7 +158,7 @@ const near = (a, b, epsilon = .001) => Math.abs(a - b) < epsilon;
     assert.match(await page.locator('#connectors').innerText(), /White gaps are insulated crossings/);
     await page.locator('#connectors summary').click();
     assert.deepEqual(errors, []);
-    const report = { defaultVisibleLabels: 20, allPaths: 21, circuitViews, unrelatedWiresHidden: true, sharedSuppliesGray: true, componentOutlinesPreserved: true, completePrintDiagram: true, defaultLabelMinimumPx: Math.min(...labels), fitAll: true, focusWireAndGroup: true, physicalEndpointNames: true, dragAndKeyboardPan: true, fullscreenAndEscape: true, viewportWidths: [1440,768,390,320], errors };
+    const report = { defaultVisibleLabels: 20, allPaths: 22, circuitViews, unrelatedWiresHidden: true, sharedSuppliesGray: true, componentOutlinesPreserved: true, completePrintDiagram: true, defaultLabelMinimumPx: Math.min(...labels), fitAll: true, focusWireAndGroup: true, physicalEndpointNames: true, dragAndKeyboardPan: true, fullscreenAndEscape: true, viewportWidths: [1440,768,390,320], errors };
     if (out) fs.writeFileSync(path.join(out, 'wiring-validation.json'), JSON.stringify(report,null,2)+'\n');
     console.log(JSON.stringify(report, null, 2));
   } finally { await browser.close(); }

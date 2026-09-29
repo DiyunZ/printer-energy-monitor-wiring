@@ -88,4 +88,6 @@ with PdfPages(out/'Machining_Drawings.pdf') as pdf:
     fig=drawing('panel',features,*model.panel_outline_mm,
         'View from lid. U = X; V = -Z. Origin: center of aluminum template. Rear = +V. 260 x 340 mm blank; four 10 mm corner chamfers. Confirm M5 support pattern.\nDashed WAGO carrier envelopes: locate as shown, then transfer-drill two D3.3 holes per actual carrier; do not cut outlines.')
     pdf.savefig(fig);plt.close(fig)
-print('Generated five DXFs, five SVGs and five-page machining drawing PDF.')
+    from draw_q0_mount import drawing as q0_drawing
+    fig=q0_drawing(out);pdf.savefig(fig);plt.close(fig)
+print('Generated six DXFs, six SVGs and six-page machining drawing PDF.')

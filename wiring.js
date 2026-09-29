@@ -7,7 +7,7 @@ const routes = [...diagram.querySelectorAll('.wire-route')];
 const buses = [...diagram.querySelectorAll('.circuit-bus')];
 const groups = {
   all: null, main: ['01','02','03'], voltage: ['05','08','09'],
-  neutral: ['06','07','08','09','18','21'], earth: ['10','11','12','19'],
+  neutral: ['06','07','08','09','18','21'], earth: ['10','11','12','19','24'],
   aux: ['17','18','19','20','21','22','23'], signal: ['14','15','16'],
 };
 const sharedSupply = {
@@ -19,7 +19,7 @@ const hints = {
   main: 'CT1 measures printer hot only.',
   voltage: 'A1 → L1 (hot) · A2 → L2 (neutral) · A3 → N (neutral)',
   neutral: 'Neutral remains separate from protective earth.',
-  earth: 'PE bonds the printer, outlet and panel.',
+  earth: 'PE bonds the printer, outlet, panel and Q0 rail/bracket.',
   aux: 'Internal adapter power branches before CT1; its original DC cable connects directly to the logger.',
   signal: 'CT → CH1. PC USB is offline only: unplug SUPPLY IN from the wall, keep the lid closed, then connect the existing cable’s free USB-A end to the PC.',
 };
@@ -64,7 +64,7 @@ function endpoint(name) {
   if (exact[name]) return exact[name];
   const [part, ...rest] = name.split('.'), port = rest.join(' ');
   if (part === 'JPE') return 'PE port ' + port;
-  const names = { IN: 'Supply', OUT: 'Printer', D: 'ELITEpro', AUX: 'XA', PSU: 'Adapter', CT: 'CT1', PLATE: 'Panel PE', PC: 'ELOG computer' };
+  const names = { IN: 'Supply', OUT: 'Printer', D: 'ELITEpro', AUX: 'XA', PSU: 'Adapter', CT: 'CT1', PLATE: 'Panel PE', MOUNT: 'Q0 rail/bracket PE', PC: 'ELOG computer' };
   return (names[part] || part) + (port ? (/^\d+$/.test(port) ? ' port ' : ' ') + port : '');
 }
 function trace(id) {

@@ -12,7 +12,7 @@ const result = run();
 test('priced order covers every purchased group and counts each retail increment', () => {
   const order=p.purchasing, rows=order.rows;
   assert.deepEqual([...new Set(rows.flatMap(r=>r.material_ids))].sort(),p.items.filter(r=>r.availability==='buy').map(r=>r.id).sort());
-  assert.equal(new Set(rows.map(r=>r.seller)).size,3);
+  assert.equal(new Set(rows.map(r=>r.seller)).size,2);
   for(const r of rows){
     assert.ok(r.quantity>0 && Number.isInteger(r.quantity));
     assert.ok(r.unit_price_usd>0 && r.pieces_per_unit>=1);
@@ -20,6 +20,11 @@ test('priced order covers every purchased group and counts each retail increment
     assert.match(r.url,/^https:\/\//);
   }
   assert.equal(rows.reduce((n,r)=>n+Math.round(r.extended_usd*100),0),Math.round(order.material_subtotal_usd*100));
+  const tariffCents=rows.reduce((n,r)=>n+Math.round((r.estimated_tariff_usd||0)*100),0);
+  assert.equal(tariffCents,572,'Cart estimates include breaker and rail tariffs');
+  assert.equal(Math.round(order.material_subtotal_usd*100)+tariffCents+Math.round(order.delivery_estimate.digikey_ground_budget_usd*100),24775);
+  assert.equal(order.delivery_estimate.known_pre_sales_tax_cost_usd,247.75);
+  assert.equal(order.delivery_estimate.home_depot_shipping_usd,null,'Unquoted delivery is not zero');
   const cv=rows.filter(r=>r.sku==='515CV');
   assert.equal(cv.length,1);assert.equal(cv[0].quantity,2);
   assert.deepEqual(cv[0].material_ids,['receptacle','printer-connector']);
@@ -86,13 +91,13 @@ test('old breaker body depth and #8 ring option are rejected', () => {
   wrong.items.find(p => p.id === 'ring-lugs').model = '3M MV14-8R/LX-BOTTLE';
   const checks = run(old, wrong).checks;
   assert.equal(checks.find(c => c.id === 'Q0 catalog body').result, 'fail');
-  assert.equal(checks.find(c => c.id === 'Q0 ring size').result, 'fail');
+  assert.equal(checks.find(c => c.id === 'Bond ring size').result, 'fail');
 });
 test('the selected #8–10 ring accepts #10 without inventing a barrel rating', () => {
-  assert.equal(result.checks.find(c => c.id === 'Q0 ring size').result, 'pass');
+  assert.equal(result.checks.find(c => c.id === 'Bond ring size').result, 'pass');
   const wrong = structuredClone(p);
   wrong.items.find(p => p.id === 'ring-lugs').terminal_compatibility.stud_numbers = [8];
-  assert.equal(run(d, wrong).checks.find(c => c.id === 'Q0 ring size').result, 'fail');
+  assert.equal(run(d, wrong).checks.find(c => c.id === 'Bond ring size').result, 'fail');
   assert.equal(result.checks.find(c => c.id === 'Ring barrel and internal wire').result, 'review');
 });
 test('internal power is above the plate and requires a documented assembly sequence', () => {

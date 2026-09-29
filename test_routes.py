@@ -39,8 +39,15 @@ class RoutingChecks(unittest.TestCase):
     def test_panel_bond_cannot_connect_to_neutral(self):
         self.reconnect('12', 'JN.5')
         a, b = drawing.A['JN.5'], drawing.A['PLATE']
-        self.wire('12')['points'] = [a, (a[0], b[1]), b]
+        x=drawing.project((-150,0))[0]
+        self.wire('12')['points'] = [a, (x,a[1]), (x,b[1]), b]
         self.assert_rejected('must remain on protective earth')
+
+    def test_q0_metalwork_cannot_connect_to_neutral(self):
+        self.reconnect('24','JN.5')
+        a,b=drawing.A['JN.5'],drawing.A['MOUNT'];x=drawing.project((-151,0))[0]
+        self.wire('24')['points']=[a,(x,a[1]),(x,b[1]),b]
+        self.assert_rejected('MOUNT must remain on protective earth')
 
     def test_l2_cannot_be_connected_to_pe(self):
         self.reconnect('08', 'JPE.3')

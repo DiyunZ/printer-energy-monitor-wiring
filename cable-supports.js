@@ -56,13 +56,13 @@ export function auditSupport(fit,requiredIds,profile=fit.profile) {
     pass:clearance>=.15&&requiredIds.every(id=>present.includes(id))&&bandCenterPerimeter+20<=188};
 }
 
-export function screenCableBodies(routes,bodies,ct) {
+export function screenCableBodies(routes,bodies,ct,q0Channels=[]) {
   const contacts={
     'internal-wire:q0-jl':['JL'], 'cord:printer-hot-in':['JL'],
     'cord:supply-neutral':['JN'], 'cord:printer-neutral':['JN'],
     'cord:supply-pe':['PE'], 'cord:printer-pe':['PE'],
     'cord:aux-hot':['JL'], 'cord:aux-neutral':['JN'],
-    'cord:aux-pe':['PE'], 'internal-wire:panel-pe':['PE'],
+    'cord:aux-pe':['PE'], 'internal-wire:panel-pe':['PE'], 'internal-wire:mount-pe':['PE'],
     'cord:aux-jacket':['outlet'], 'adapter:dc-internal':['adapter'],
     'blue:A1':['JL'], 'blue:A2':['JN'], 'blue:A3':['JN']
   };
@@ -74,6 +74,18 @@ export function screenCableBodies(routes,bodies,ct) {
       if(surface>=r.radius-.1)return false;
       // The CT's through aperture is empty, unlike its outer bounding box.
       if(id==='ct'&&Math.hypot(p[1]-ct.position[1],p[2]-ct.position[2])+r.radius<=5.1)return false;
+      // Manufacturer STEP recesses lie inside the overall Q0 box. Only the
+      // named terminal's bounded entry channel is exempt, not a body crossing.
+      if(id==='q0') {
+        const channel=q0Channels.find(c=>c.route===r.id);
+        if(channel){
+          const a=channel.entry,b=channel.outer,d=b.map((v,i)=>v-a[i]);
+          const t=p.reduce((sum,v,i)=>sum+(v-a[i])*d[i],0)/d.reduce((sum,v)=>sum+v*v,0);
+          if(t>=-.01&&t<=1&&distance(p,a.map((v,i)=>v+t*d[i]))+r.radius<=channel.radiusMm)return false;
+        }
+        const endpoint=r.id==='cord:supply-hot'?r.samples.at(-1):r.id==='internal-wire:q0-jl'?r.samples[0]:null;
+        if(endpoint&&distance(p,endpoint)<=2)return false;
+      }
       // WAGO electrical terminations lack molded port cavities. Exempt only
       // the endpoint neighborhood of a named electrical connection (20 mm).
       if(contacts[r.id]?.includes(id)&&[r.samples[0],r.samples.at(-1)].some(e=>distance(p,e)<=20))return false;

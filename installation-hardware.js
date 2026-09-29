@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { fitSupport, auditSupport } from './cable-supports.js?v=26';
+import { fitSupport, auditSupport } from './cable-supports.js?v=32';
 
 // Secondary hardware is an installation illustration, not a machining template.
 // Panel datums come from the same schedule as the existing CAD openings.
@@ -25,7 +25,22 @@ export function addInstallationHardware({ dimensions, instances, parts, box, cyl
       if(throughPanel)annulus(4,diameter/2+.2,4,[x,-2.8,z],'#89979c',part,'y',6);
     });
   }
-  for(const y of [-1,1]) fixing(`q0-${y}`,`Q0 mounting screw ${y<0?1:2}`,[parts.q0.position[0],parts.q0.position[1]+y*parts.q0.mountPitch/2,parts.q0.wallOuterZ+.787],'q0',3.5,'z',parts.q0.mountingScrewLengthMm);
+  const qm=dimensions.q0Mount,qw=parts.q0.wallOuterZ;
+  const railShift=qm.railRearDepthMm-57.5;
+  for(const sign of [-1,1]){
+    const x=parts.q0.position[0]+sign*qm.wallScrewHalfPitchMm,y=qm.wallCenterXY[1];
+    fixing(`q0-${sign}`,`Q0 bracket wall fixing ${sign<0?1:2}`,[x,y,qw+.8],'q0',3,'z',12);
+    capture('fasteners',`q0-${sign}`,'M3 wall washer and locknut',()=>{
+      annulus(3.5,1.65,.8,[x,y,qw-5.3],'#acb5b7','q0','z');
+      annulus(3.2,1.5,4,[x,y,qw-7.7],'#89979c','q0','z',6);
+    });
+  }
+  fixing('rail-m4','DIN rail M4 fixing',[parts.q0.position[0]+24,qm.wallCenterXY[1],qw-59.7-railShift],'q0',4,'z',10);
+  capture('fasteners','rail-m4','DIN rail spacer and locknut',()=>{
+    const x=parts.q0.position[0]+24,y=qm.wallCenterXY[1];
+    annulus(4,2.15,.8,[x,y,qw-60.9-railShift],'#acb5b7','q0','z');
+    annulus(4,2,4,[x,y,qw-66-railShift],'#89979c','q0','z',6);
+  });
   dimensions.instances.filter(p=>p.part==='terminals').forEach(p=>{
     for(const x of [-10,10]) fixing(`${p.id}-${x}`,`${p.id} carrier fixing ${x<0?1:2}`,[p.position[0]+x,6.3,p.position[2]+17],'terminals',3,'y',h.carrierScrewLengthMm);
   });
@@ -71,10 +86,9 @@ export function addInstallationHardware({ dimensions, instances, parts, box, cyl
       box(size([4,4,6]),alongX?[center[0],p.bottom+2,center[2]+p.right+2]:[center[0]+p.right+2,p.bottom+2,center[2]],'#aeb5a5','ties',.4);
     });
   });
-  const q=parts.q0,terminalZ=q.position[2]-q.size[2]/2-q.studProjection;
+  const q=parts.q0;
   const lugPlaces=[
-    ['q0-in','Q0 input stud',[q.position[0],q.position[1]+q.terminalPitch/2,terminalZ+8],'q0','z'],
-    ['q0-out','Q0 output stud',[q.position[0],q.position[1]-q.terminalPitch/2,terminalZ+8],'q0','z'],
+    ['mount-pe','Q0 rail and bracket bond',qm.bondPointXYZ,'q0','z'],
     ['panel-pe','Panel PE bond',[h.panelBondXZ[0],6.4,h.panelBondXZ[1]],'panel','y']
   ];
   for(const [key,label,[x,y,z],part,axis] of lugPlaces) {
@@ -86,7 +100,7 @@ export function addInstallationHardware({ dimensions, instances, parts, box, cyl
       box(axis==='y'?[4,1,12]:[4,12,1],axis==='y'?[x,y,z+8]:[x,y-8,z],'#babbb0',part);
       annulus(3.175,1.9,11,sleeve,'#3387bf',part,axis==='y'?'z':'y');
     });
-    if(key.endsWith('pe'))capture('fasteners',key,label+' hardware',()=>{
+    if(key==='panel-pe')capture('fasteners',key,label+' hardware',()=>{
       // The dedicated PE stud starts beneath the panel. Thread and tooth details
       // remain simplified.
       cylinder(2.413,19.05,[x,8.725,z],'#8c969a',part);
@@ -99,6 +113,13 @@ export function addInstallationHardware({ dimensions, instances, parts, box, cyl
       annulus(5.5,2.413,3.2,[x,y+3.7,z],'#89979c',part,'y',6);
     });
   }
+  capture('fasteners','mount-pe','Dedicated rail and bracket #10 bond hardware',()=>{
+    const x=qm.wallCenterXY[0]-24,y=qm.bondPointXYZ[1];
+    cylinder(2.413,19.05,[x,y,qw-67.5-railShift],'#8c969a','q0','z');
+    cylinder(4.6,3.2,[x,y,qw-58.3-railShift],'#89979c','q0','z');
+    for(const z of [-60.9,-63.6,-65.8])annulus(5.3,2.65,.8,[x,y,qw+z-railShift],'#acb5b7','q0','z');
+    for(const z of [-62,-68])annulus(5.5,2.413,3.2,[x,y,qw+z-railShift],'#89979c','q0','z',6);
+  });
   for(const [id,text,pos,facing] of [
     ['supply','SUPPLY IN',[instances['supply-entry'].position[0]+4,66,128],'right'],['printer','TO PRINTER',[0,62,instances['printer-entry'].position[2]+4],'front'],
     ['panel-pe','PE',[h.panelBondXZ[0],2.1,77],'up']

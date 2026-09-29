@@ -1,5 +1,5 @@
 {
-  "revision": "2026-09-24",
+  "revision": "2026-09-28",
   "release": "NOT RELEASED: close the receiving and electrical items in Build_Package.md",
   "units": "mm",
   "method": "Axis-aligned equipment envelopes, exact chamfered-panel clearance and continuous vertical swept volumes against the machined BUD common-base shell, nine lid rays per body and sourced interface arithmetic. Shell triangulation deflection is 0.3 mm; numerical seating-contact exclusion is 0.0001 mm. Neither is a manufacturing tolerance.",
@@ -7,19 +7,25 @@
     {
       "id": "Q0 catalog body",
       "result": "pass",
-      "evidence": "Model 19.18 × 63.5 × 47 mm; Carling p.11 body envelope 19.18 × 63.50 × 47.00 mm.",
-      "limits": "Body includes the front step; studs, handle and terminal protection is supplied by the closed outer enclosure."
+      "evidence": "Mounted box 17.600 × 116.534 × 74.315 mm; Phoenix manufacturer STEP: 17.6 × 116 × 73.8788 mm before wall-frame rotation.",
+      "limits": "Catalog depth 75.9 mm includes 7.5 mm DIN rail; STEP depth includes the depicted handle. Receiving and full operator travel remain unverified."
     },
     {
-      "id": "Q0 terminal and mounting pitches",
+      "id": "Q0 terminal and mounting interfaces",
       "result": "pass",
-      "evidence": "Stud pitch 49.28 mm; mounting pitch 52.37 mm. Carling: 49.28 / 52.37 mm.",
-      "limits": ""
+      "evidence": "Phoenix 2907571 screw clamps: 14 AWG Cu accepted; strip 11–12 mm, 2 N·m. Short 35 × 7.5 mm DIN rail; no ring tongues on Q0.",
+      "limits": "Confirm supplied instructions, strip length, snap fit and 76 mm M3 bracket-wall pattern."
     },
     {
-      "id": "Q0 ring size",
+      "id": "Q0 bonded mounting provision",
       "result": "pass",
-      "evidence": "Selected 15-104 rings accept #8–10 studs, including Q0 terminal code 1 (#10-32). A #8-only ring is not acceptable. Crimp qualification remains a physical check.",
+      "evidence": "Metal bracket, steel rail and dedicated PE.5 branch are specified. Two #10 bond stacks are included in procurement.",
+      "limits": "The bond method, contact preparation, torque and continuity require physical acceptance."
+    },
+    {
+      "id": "Bond ring size",
+      "result": "pass",
+      "evidence": "Selected 15-104 rings accept #8–10 studs for the panel and rail/bracket bonds. Crimp and aluminum contact qualification remain physical checks.",
       "limits": ""
     },
     {
@@ -62,12 +68,12 @@
       "id": "Machined wall geometry",
       "result": "pass",
       "evidence": "BUD common shell and custom aluminum panel machined; lid and latches retained from linked factory STEP. Opaque-cover silhouette illustrative. Carrier holes transfer-drilled.",
-      "limits": "Exact cut-through gauges are in fabrication/cad-checks.json. Axis-aligned wall-device illustrations do not model the 1 degree draft; body/shell triangle contacts here are not mounting proofs. Received-part fit and fastening remain physical checks."
+      "limits": "Exact cut-through gauges are in fabrication/cad-checks.json. Phoenix STEP and bracket are transformed to the 1 degree wall frame; the summary AABB contacts here are not mounting proofs. Received-part fit and fastening remain physical checks."
     },
     {
       "id": "Closed lid screen",
       "result": "screen only",
-      "evidence": "meter: 93.9 mm (9/9 rays); ct: 103.203 mm (9/9 rays); outlet: 105 mm (9/9 rays); q0: 35.05 mm (9/9 rays)",
+      "evidence": "meter: 93.9 mm (9/9 rays); ct: 103.203 mm (9/9 rays); outlet: 105 mm (9/9 rays); q0: 12.919 mm (6/9 rays)",
       "limits": "Nine upward rays per body against the factory lid mesh. Not a minimum-distance proof; excludes lid hardware, guards, wire bundles and tolerances."
     },
     {
@@ -198,12 +204,12 @@
     },
     {
       "id": "q0",
-      "shell_triangle_hits": 138,
-      "lid_samples": 9,
-      "minimum_sampled_lid_gap_mm": 35.05
+      "shell_triangle_hits": 66,
+      "lid_samples": 6,
+      "minimum_sampled_lid_gap_mm": 12.919
     }
   ],
   "wall_entries": [],
-  "material_groups": 24,
+  "material_groups": 26,
   "owned_groups": 6
 }

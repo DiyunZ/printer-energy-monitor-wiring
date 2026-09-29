@@ -1,12 +1,16 @@
 {
   "generator": "tools/cad/enclosure_model.py",
-  "generator_sha256": "65e96dd1b773472f0bf4a13c44f3c1d7f63a2baee4e6acdb73aa9df769963b7b",
+  "generator_sha256": "45b9774f715f7acf83e19fb3ecbccdca6cf6e1fc25c75969af7e7f16c9d8319b",
+  "layout_sha256": "c8c76cb5a38cc5feb57364323934ff6bcc754bbd2e8f4927db303fff6ebbb599",
+  "q0_generator_sha256": "4484774e77de9977c340dd7cfb236c67925aee2e1a8621d414ca9c57c57b495c",
+  "breaker_step_sha256": "bc2e767952fc2a2d349f95bc0699f4b35c449a3614de03e6de218deedf0cf861",
+  "breaker_source_url": "https://www.phoenixcontact.com/en-us/products/thermomagnetic-device-circuit-breakers-tmc-81c-15a-2907571",
   "source_step_sha256": "1363ffb8a4be8935dc20f692d2b5acd265d9a9dffb4feb9b93d896c250324148",
   "source_url": "https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/",
   "outputs": {
-    "case-machined.step": "d239f45aba24807403761fc016d44fd8b98b289cde10c555cb47db71e3c55466",
-    "case-machined.stl": "a11cc4a74fef7aad9b55541640ccecff1f876869d302662be80c292c3aefae92",
-    "panel-machined.step": "845c789ca5ff1a6b0536ddcb22a7315c76c20704a6f0f495ff3cfa7347ce1828",
+    "case-machined.step": "9c6ee4a3b4efb416a13bad705e20bfebc181688d5c328063583608e934725c22",
+    "case-machined.stl": "0d7d81f8c5a1e4c9ba5d5197288c4e291536a00a6e31abb19396617e21b65a56",
+    "panel-machined.step": "c9b12b996934b52c67d30e72910de43a7839b6c857b998e0175d6f74e4a34fa1",
     "panel-machined.stl": "01f705cc1507f33e969114d7f159f7bcc38c8979c13c28058ec4fdfdc45c7f5f"
   }
 }

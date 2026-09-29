@@ -43,7 +43,9 @@ function materialPrice(p) {
   }
   return `<p>${sku}${escape(calculation)}${rows.length>1?` = $${(cents/100).toFixed(2)}`:''}</p>`;
  }).join('');
- const breakdown=rows.length>2&&!directLinks?`<details class="price-details"><summary>${rows.length} item prices</summary>${lines}</details>`:lines;
+ let breakdown=rows.length>2&&!directLinks?`<details class="price-details"><summary>${rows.length} item prices</summary>${lines}</details>`:lines;
+ const tariff=rows.reduce((sum,r)=>sum+Math.round((r.estimated_tariff_usd||0)*100),0);
+ if(tariff)breakdown+=`<p>+ $${(tariff/100).toFixed(2)} estimated tariff = $${((subtotal+tariff)/100).toFixed(2)} before freight / sales tax</p>`;
  return `<div class="material-price" data-material-id="${escape(p.id)}" data-subtotal-usd="${(subtotal/100).toFixed(2)}"><strong class="price-total">$${(subtotal/100).toFixed(2)}</strong> <span class="price-label">subtotal</span><div class="price-breakdown">${breakdown}</div></div>`;
 }
 let text = `# Materials checklist\n\n**□ ${toBuy.length} purchase groups · ◇ ${toFabricate.length} reuse / fabrication group · ✓ ${owned.length} confirmed owned groups${kit.length ? ` · ✓ ${kit.length} kit supplied` : ''}**\n\n${bom.scope}\n\n**Inventory basis:** ${bom.inventory_basis}\n\nA check means on hand, not electrically approved. Counts refer to material groups, not individual pieces. Needed quantities and vendor pack sizes differ. The user confirms the existing USB cable is owned. Reuse it intact; no additional data cable or USB coupler is ordered.\n\nBuy links go to specific products; Select / Configure links need a size or rating first; Quote links require a supplier quote. Reused stock and fabrication are listed separately from purchases. Check current stock, minimum orders and lead times with each supplier. No orders have been placed.\n`;
@@ -59,10 +61,16 @@ for(const r of order.rows)text+=`| ${r.seller} · [${r.sku}](${r.url}) | ${r.qua
 text+='\n| Seller | Materials subtotal (USD) |\n|---|---|\n';
 for(const seller of [...new Set(order.rows.map(r=>r.seller))])text+=`| ${seller} | $${(order.rows.filter(r=>r.seller===seller).reduce((sum,r)=>sum+Math.round(r.extended_usd*100),0)/100).toFixed(2)} |\n`;
 text+=`| **All selected materials** | **$${total.toFixed(2)}** |\n\nThe two 515CV installation rows below share the **single two-piece order line above**. Do not order two for each location. Aluminum stock and electrical acceptance remain open; see the [receiving record](build.html#receiving-record).\n`;
+const delivery=order.delivery_estimate;
+if(delivery){
+ const tariffs=order.rows.reduce((sum,r)=>sum+Math.round((r.estimated_tariff_usd||0)*100),0)/100;
+ if(Math.abs(tariffs-delivery.known_estimated_tariffs_usd)>.001 || Math.abs(total+tariffs+delivery.digikey_ground_budget_usd-delivery.known_pre_sales_tax_cost_usd)>.001)throw new Error('Delivered-cost arithmetic does not match purchase rows');
+ text+=`\n**Known pre-sales-tax budget: $${delivery.known_pre_sales_tax_cost_usd.toFixed(2)}** = $${total.toFixed(2)} materials + $${tariffs.toFixed(2)} estimated tariffs + $${delivery.digikey_ground_budget_usd.toFixed(2)} for one DigiKey ground shipment. Breaker tariff $5.34; rail tariff $0.38. Two sellers: DigiKey and Home Depot. ${delivery.unquoted} School tax exemption is unconfirmed and does not remove tariffs. [Cost comparison and checkout conditions](revision.html#checkout).\n`;
+}
 for (const [id, title, items, sourceLabel] of [['purchase-list',`□ Purchase list · ${toBuy.length} groups`,toBuy,'Price & purchase (USD)'],['fabrication-list',`◇ Reuse / fabrication · ${toFabricate.length}`,toFabricate,'Fabrication / source'],['owned-list',`✓ Existing equipment · ${owned.length+kit.length}`,[...owned,...kit],'Source']]) {
  text += `\n<h2 id="${id}">${title}</h2>\n\n`;
  if(id==='purchase-list')text+=`Prices checked ${order.checked_on}; subtotals include purchase packs and spares. Shared 515CV stock is allocated as one connector per location. [Full order quantities and seller totals](#order-plan).\n\n`;
- if(id==='fabrication-list')text+='Mounting panel: use the professor’s offered aluminum after checking the stock. **Fabrication cost is pending and excluded from the purchase subtotal.**\n\n';
+ if(id==='fabrication-list')text+='Mounting panel and Q0 bracket: use the professor’s offered aluminum after checking the stock. **Fabrication cost is pending and excluded from the purchase subtotal.**\n\n';
  text += `| Inventory | Item | Quantity needed | Part and purpose | ${sourceLabel} | Remaining checks |\n|---|---|---|---|---|---|\n`;
  for (const p of items) text += `| ${p.availability === 'owned' ? '✓ Owned' : p.availability === 'kit' ? '✓ Kit included' : p.availability === 'fabricate' ? '◇ Reuse / fabricate' : '□ To buy'} | <span class="material-name">${escape(p.item)}</span>${materialPhoto(p)}<a class="locate-material" data-material="${escape(p.id)}" href="index.html?material=${escape(p.id)}#layout" aria-label="View ${escape(p.item)} in 3D">View in 3D ↑</a> | ${p.quantity} | **${p.model}** — ${p.reason} | ${materialPrice(p)}${p.links.length ? p.links.map(l=>`[${l.label}](${l.url})`).join('<br>') : p.availability==='buy' ? '' : 'Reuse · No purchase needed'} | ${p.status}${p.compliance ? `<br>**${p.compliance.status}:** ${p.compliance.detail} [Evidence](${p.compliance.url})` : ''} |\n`;
 }

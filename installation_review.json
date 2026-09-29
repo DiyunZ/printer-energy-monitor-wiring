@@ -1,5 +1,5 @@
 {
-  "revision": "2026-09-24",
+  "revision": "September 28, 2026 · Phoenix Q0 / two-seller design",
   "baseline_commit": "1242846",
   "scope": "One grounded 120 V supply, one printer at a time. The design uses an opaque-cover enclosure, proposed reuse of the professor’s aluminum sheet and an internal adapter connection. Six owned equipment groups, including the existing USB cable, are retained. The selected 15 A Q0 and upstream-only voltage-lead protection still require application acceptance. No purchase, physical fit, thermal test or electrical release is claimed. Closed-lid USB export is used only after unplugging mains; the internal portion of the existing USB cable requires rated insulation and accepted assembly.",
   "result": "STOCK, USB ASSEMBLY AND ELECTRICAL ACCEPTANCE OPEN",
@@ -9,7 +9,6 @@
     "ct": "https://www.dentinstruments.com/wp-content/uploads/2022/08/20A_Mini_Hinged_CT_Specs.pdf",
     "case": "https://www.budind.com/wp-content/uploads/2019/01/hbnbf32226.pdf",
     "panel": "https://www.budind.com/wp-content/uploads/2019/01/hbnbf32226.pdf",
-    "carling": "https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf",
     "outlet": "https://leviton.com/products/515cv",
     "outlet-drawing": "https://leviton.com/content/dam/leviton/residential/product_documents/none/Document-31435-Dimensional%20Data.jpg",
     "wago": "https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415",
@@ -34,14 +33,16 @@
     "ct-current": "https://www.dentinstruments.com/wp-content/uploads/CT-HSC-XXX-U_Datasheet_06132024.pdf",
     "usb-drawing": "https://www.heyco.com/products/bushings-grommets-heycaps-plugs/tubing-caps-and-plugs/heyco-thick-panel-snap-bushings/",
     "dent-fused-clip": "https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-fused-crocodile-clip/",
-    "carling-delay": "https://www.carlingtech.com/sites/default/files/documents/Carling-HM-CB-Time-Delays.pdf",
     "jis": "https://mechse.illinois.edu/undergraduate/makerworks",
     "prusa-psu-spec": "https://www.prusa3d.com/product/psu-24v-240w/",
-    "q0-buy": "https://www.masterelectronics.com/en/productdetail/littelfuse-carling-technologies/ca1b024615121dg-16947583.html",
+    "q0-buy": "https://www.digikey.com/en/products/detail/phoenix-contact/2907571/6109707",
     "usb-sleeve": "https://www.alphawire.com/products/accessories/fit-heat-shrink-tubing/shrink-tubing/fit2213_4",
     "usb-bushing": "https://www.heyco.com/products/bushings-grommets-heycaps-plugs/tubing-caps-and-plugs/heyco-thick-panel-snap-bushings/",
     "usb-standard": "https://www.usb.org/document-library/usb-20-specification",
-    "usb-original": "https://www.dentinstruments.com/shop/powerscout-accessories/replacement-usb-a-to-b-communications-cable/"
+    "usb-original": "https://www.dentinstruments.com/shop/powerscout-accessories/replacement-usb-a-to-b-communications-cable/",
+    "rail-buy": "https://www.digikey.com/en/products/detail/phoenix-contact/1207639/10645207",
+    "stop": "https://legacy.altechcorp.com/Blocks/Block-Accessories.pdf",
+    "phoenix-q0": "https://www.phoenixcontact.com/en-us/products/thermomagnetic-device-circuit-breakers-tmc-81c-15a-2907571"
   },
   "materials": [
     {
@@ -137,15 +138,13 @@
     {
       "id": "breaker",
       "item": "Q0 operating breaker",
-      "model": "Carling CA1-B0-24-615-121-DG",
+      "model": "Phoenix Contact TMC 81C 15A · 2907571",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "Single 15 A operating breaker, 50/60 Hz medium-delay, UL489/CSA option DG. Mount directly on the front wall using the manufacturer pattern. No custom wall insert. Keep the enclosure closed with both latches engaged; Q0 OFF leaves its supply terminal live.",
-      "remaining": "Retain the user-selected 15 A / UL489 DG configuration. Master Electronics lists one piece at $40.32 and 16 in stock on 2026-09-23. The sourcing review compares the DIN alternative; direct mounting and the existing trip curve are retained. Delivery and price remain checkout-dependent; pre-use application checks are in protection.html.",
+      "checked": "15 A, one pole, C curve, UL489 / cUL Listed E320373; 10 kA, 277 V AC. Consolidates the breaker into the existing DigiKey order. Manufacturer STEP defines the wall opening, short DIN rail and bonded aluminum bracket. Review the thermal-magnetic curve against startup and original voltage-lead protection.",
+      "remaining": "DigiKey direct stock: $21.57 plus $5.34 estimated tariff = $26.91; 3,691 in stock when checked 2026-09-28. No separate breaker shipment assumed if consolidated. Quote only; tax and final delivery depend on school checkout.",
       "sources": [
-        "carling",
-        "carling-delay",
-        "jis",
+        "phoenix-q0",
         "q0-buy"
       ]
     },
@@ -170,8 +169,8 @@
       "model": "WAGO 221-415",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "One five-port connector each for JL, JN and PE. JL accepts Q0 output, printer hot, A1 and adapter hot; JN accepts supply, printer, A2, A3 and adapter neutrals; PE accepts supply, printer, panel and outlet earth. One accepted conductor per port. Confirm original DENT pigtail preparation and protective-bonding suitability.",
-      "remaining": "Verify allowed conductor preparation, one wire per port and protective-bonding use.",
+      "checked": "One five-port connector each for JL, JN and PE. JL accepts Q0 output, printer hot, A1 and adapter hot; JN accepts supply, printer, A2, A3 and adapter neutrals; PE accepts supply, printer, panel, outlet and Q0-mount earth (all five PE ports used). One accepted conductor per port. Confirm original DENT pigtail preparation and protective-bonding suitability.",
+      "remaining": "Three mounting positions in the panel drawing. Conductor acceptance is checked at assembly.",
       "sources": [
         "wago"
       ]
@@ -260,7 +259,7 @@
       "model": "Southwire 14 AWG, 19-strand Class C, THHN/THWN/MTW, 600 V",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "Separate 14 AWG conductors remain for Q0 OUT → JL and PE → panel. XA hot, neutral and PE are the conductors of its 14/3 cord; no separate white roll is required. Both lengths are included in the purchase budget.",
+      "checked": "Separate 14 AWG conductors remain for Q0 OUT → JL and PE → panel and PE → rail/bracket. XA hot, neutral and PE are the conductors of its 14/3 cord; no separate white roll is required. Both lengths are included in the purchase budget.",
       "remaining": "Same 14 AWG stranded construction, sold by the foot; 4 ft of each color exceeds the 1 m cutting allowance. Confirm the received wire markings and crimp fit.",
       "sources": [
         "wire",
@@ -274,11 +273,10 @@
       "model": "Gardner Bender 15-104 · #8–10 stud, 16–14 AWG",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "Exact Gardner Bender 15-104 manufacturer listing confirms UL/CSA Listed, 600 V, 75°C, 16–14 AWG and #8–10 stud compatibility. Overall published envelope 25.4 × 7.874 × 6.35 mm. Small-package source: 15 for $3.63.",
+      "checked": "Two #8–10 rings fit the dedicated #10 panel and rail/bracket bond studs. The Phoenix screw-clamp terminals accept bare prepared copper and do not use ring lugs. Aluminum and steel contact methods still need electrical acceptance.",
       "remaining": "Manufacturer: UL listed, CSA listed, 600 V building wire, 75°C. Use the specified insulated-terminal crimp tooling; inspect wire insertion, insulation fit and pull retention. No unpublished barrel diameter or crimp setting is assumed.",
       "sources": [
         "ring",
-        "carling",
         "wire"
       ]
     },
@@ -310,13 +308,12 @@
     {
       "id": "fasteners",
       "item": "Mounting and bonding hardware",
-      "model": "Screw / nut / washer schedule in Build_Package.md",
+      "model": "Screws, nuts and washers",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "Purchase all screws, washers and nuts in the build schedule: Q0 #6-32 × 1/4 in; carriers M3 × 12 mm; anchors M4 × 10 mm; panel supports M5 × 10 mm; dedicated #10 PE stud. Full packs and spares are priced, with no assumed lab hardware stock.",
-      "remaining": "Thirteen order lines, including four separately purchased panel screws. Verify received stack thickness, thread engagement, aluminum bonding and at least 3 mm screw-to-floor clearance.",
+      "checked": "Carriers and Q0 wall bracket use eight M3 × 12 screws/nuts total; cable anchors and rail use seven M4 × 10 total; four M5 × 10 panel screws and two dedicated #10 PE studs. Four additional M3 washers are purchased. No lab hardware stock is assumed.",
+      "remaining": "Verify actual stock, full locknut engagement and enclosure-floor clearance. Accept aluminum-compatible bonding on both custom metal parts before use.",
       "sources": [
-        "carling",
         "carrier",
         "mount"
       ]
@@ -358,6 +355,31 @@
         "usb-bushing",
         "usb-standard"
       ]
+    },
+    {
+      "id": "breaker-rail",
+      "item": "Q0 DIN rail and end stops",
+      "model": "Phoenix Contact 1207639 + Altech CA802 × 2",
+      "availability": "buy",
+      "result": "Conditional",
+      "checked": "35 × 7.5 × 1 mm galvanized steel rail. Buy the complete 250 mm piece for $4.79; two $0.62 CA802 stops restrain the breaker laterally. The short stock avoids adding a one-metre package to the enclosure shipment.",
+      "remaining": "DigiKey checked 2026-09-28: rail $4.79 + $0.38 estimated tariff; two stops $1.24 with no displayed tariff. Total $6.41 before shared freight/tax. Confirm snap fit and shipment consolidation; cut and deburr away from components.",
+      "sources": [
+        "rail-buy",
+        "stop"
+      ]
+    },
+    {
+      "id": "breaker-mount",
+      "item": "Q0 formed metal bracket",
+      "model": "Professor-supplied aluminum · 88 × 40 × 66.30 mm nominal formed envelope",
+      "availability": "fabricate",
+      "result": "Measure",
+      "checked": "Four-bend metal support retains the short DIN rail. Reuse the offered aluminum; nominal thickness 1.89738 mm and R2 bends are provisional until stock and a bend coupon are measured. M3 wall fixings reuse two spare screws/nuts already in the purchase packs.",
+      "remaining": "Digital solid and clearance checks only. Measure alloy, thickness, stiffness, bend springback and operator alignment; revise dimensions before fabrication. Shop labor is unquoted and not assumed free.",
+      "sources": [
+        "phoenix-q0"
+      ]
     }
   ],
   "printers": [
@@ -394,7 +416,8 @@
     "Removed the round DC extension, KVT frame and insert from the active BOM and model. Restored XA and DC wall stock; one protected direct-cable opening supports closed-lid export.",
     "Retained six cable anchor points and added separate straps for XA and adapter.",
     "Consolidated purchase sources and added exact-part approval evidence and a conditional DIN-breaker comparison.",
-    "Simplified to one confirmed-owned USB cable through a snap bushing. Deleted the panel coupler, short cable and two M3 flange sets. Existing six supports and required internal insulation remain; direct-cable pull retention and plug passage need physical acceptance."
+    "Simplified to one confirmed-owned USB cable through a snap bushing. Deleted the panel coupler, short cable and two M3 flange sets. Existing six supports and required internal insulation remain; direct-cable pull retention and plug passage need physical acceptance.",
+    "Selected Phoenix 2907571 from the existing DigiKey order; reduced active sellers to two. Manufacturer STEP drives the terminal guards, nose, formed bracket and exact clearance checks. Materials $233.54, known tariffs $5.72 and one DigiKey ground shipment $8.49 give $247.75 before unquoted costs."
   ],
   "assembly": [
     {
@@ -418,7 +441,7 @@
     {
       "stage": 4,
       "title": "Install Q0, glands and internal power",
-      "action": "Install Q0 and two power glands. Restrain the internal 515CV XA connector and original adapter separately; verify full blade seating, cord clamp and support. Fit the snap-in USB cable bushing; no USB flange screws.",
+      "action": "Install the formed metal bracket, 60 mm DIN rail, two stops and Q0 with the handle through the new front window. Fit the dedicated rail/bracket bond. Install two glands, restrained internal XA/adapter and direct USB bushing. Do not force DIN parts into the old Carling opening.",
       "result": "Internal layout proposal; actual plug engagement, anti-unplug retention and thermal suitability remain open."
     },
     {
@@ -440,6 +463,7 @@
     "Measure aluminum sheet size, thickness and stiffness; approve aluminum-compatible panel bonding and adjust machining/fasteners before fabrication.",
     "Verify internal XA/adapter seating, independent restraint, intact DC cable slack, separation and closed-enclosure temperature. Opaque lid prevents live viewing of logger LEDs; verify logging by offline export after the pilot.",
     "Commissioning: verify fastener stacks, CT latch and cable slack, supply conditions, PE/insulation/polarity, total load and restart/recording behavior before routine operation.",
-    "USB assembly: verify B-out/A-in orientation, received cable/sleeve dimensions, accepted sleeve application and end coverage, retention, separation and shield treatment. Prove setup/export with mains unplugged and the lid closed; then disconnect its exterior USB-A end from the PC before restoring mains. No isolation or ingress rating is claimed."
+    "USB assembly: verify B-out/A-in orientation, received cable/sleeve dimensions, accepted sleeve application and end coverage, retention, separation and shield treatment. Prove setup/export with mains unplugged and the lid closed; then disconnect its exterior USB-A end from the PC before restoring mains. No isolation or ingress rating is claimed.",
+    "Measure Q0/rail engagement, bracket wall fit, operator travel and support stiffness; accept both metal bonds. Recheck the Phoenix C curve against printer startup; Carling pulse-tolerance evidence no longer applies."
   ]
 }

@@ -38,13 +38,16 @@ export function audit(dimensions, manifest, buffer, procurement) {
   const checks = [];
   const record = (id, result, evidence, limits = '') => checks.push({ id, result, evidence, limits });
   const q = parts.q0;
-  record('Q0 catalog body', q.size.every((v, i) => Math.abs(v - [19.18, 63.5, 47][i]) < .02) ? 'pass' : 'fail',
-    `Model ${q.size.join(' × ')} mm; Carling p.11 body envelope 19.18 × 63.50 × 47.00 mm.`, 'Body includes the front step; studs, handle and terminal protection is supplied by the closed outer enclosure.');
-  record('Q0 terminal and mounting pitches', q.terminalPitch === 49.28 && q.mountPitch === 52.37 ? 'pass' : 'fail',
-    `Stud pitch ${q.terminalPitch ?? 'unspecified'} mm; mounting pitch ${q.mountPitch ?? 'unspecified'} mm. Carling: 49.28 / 52.37 mm.`);
+  record('Q0 catalog body', q.catalogBodySizeMm?.every((v, i) => Math.abs(v - [17.6, 116, 73.8788][i]) < .02) && q.size.every((v,i)=>Math.abs(v-[17.6,116.53448,74.31523][i])<.02) ? 'pass' : 'fail',
+    `Mounted box ${q.size.map(n=>n.toFixed(3)).join(' × ')} mm; Phoenix manufacturer STEP: 17.6 × 116 × 73.8788 mm before wall-frame rotation.`, 'Catalog depth 75.9 mm includes 7.5 mm DIN rail; STEP depth includes the depicted handle. Receiving and full operator travel remain unverified.');
+  const mount=dimensions.q0Mount;
+  record('Q0 terminal and mounting interfaces', q.terminalPitch === 67.8 && q.terminalType === 'screw-clamp' && q.terminalWireAWG === 14 && q.terminalTorqueNm === 2 && q.terminalStripMm?.join(',')==='11,12' && mount?.railSectionMm.join(',')==='35,7.5,1' && mount?.railLengthMm===60 ? 'pass':'fail',
+    'Phoenix 2907571 screw clamps: 14 AWG Cu accepted; strip 11–12 mm, 2 N·m. Short 35 × 7.5 mm DIN rail; no ring tongues on Q0.', 'Confirm supplied instructions, strip length, snap fit and 76 mm M3 bracket-wall pattern.');
+  record('Q0 bonded mounting provision', procurement.items.some(p=>p.id==='breaker-mount' && p.availability==='fabricate') && procurement.items.some(p=>p.id==='breaker-rail') && mount?.bondPointXYZ.length===3 ? 'pass':'fail',
+    'Metal bracket, steel rail and dedicated PE.5 branch are specified. Two #10 bond stacks are included in procurement.', 'The bond method, contact preparation, torque and continuity require physical acceptance.');
   const lugs = procurement.items.find(p => p.id === 'ring-lugs');
-  record('Q0 ring size', lugs.model.includes('Gardner Bender 15-104') && lugs.terminal_compatibility?.stud_numbers.includes(10) ? 'pass' : 'fail',
-    'Selected 15-104 rings accept #8–10 studs, including Q0 terminal code 1 (#10-32). A #8-only ring is not acceptable. Crimp qualification remains a physical check.');
+  record('Bond ring size', lugs.model.includes('Gardner Bender 15-104') && lugs.terminal_compatibility?.stud_numbers.includes(10) ? 'pass' : 'fail',
+    'Selected 15-104 rings accept #8–10 studs for the panel and rail/bracket bonds. Crimp and aluminum contact qualification remain physical checks.');
   const removed=['dc-entry','dc-coupling'];
   const unwanted=['dc-extension','split-entries','kt-inserts'];
   record('Internal original DC connection', removed.every(id=>!instances[id]) && unwanted.every(id=>!procurement.items.some(p=>p.id===id)) ? 'pass':'fail',
@@ -97,7 +100,7 @@ export function audit(dimensions, manifest, buffer, procurement) {
   }
   record('Machined wall geometry', manifest.fabrication ? 'pass' : 'hold',
     manifest.fabrication || 'Factory shell remains uncut.',
-    'Exact cut-through gauges are in fabrication/cad-checks.json. Axis-aligned wall-device illustrations do not model the 1 degree draft; body/shell triangle contacts here are not mounting proofs. Received-part fit and fastening remain physical checks.');
+    'Exact cut-through gauges are in fabrication/cad-checks.json. Phoenix STEP and bracket are transformed to the 1 degree wall frame; the summary AABB contacts here are not mounting proofs. Received-part fit and fastening remain physical checks.');
   record('Closed lid screen', 'screen only',
     bodyChecks.map(p => `${p.id}: ${p.minimum_sampled_lid_gap_mm} mm (${p.lid_samples}/9 rays)`).join('; '),
     'Nine upward rays per body against the factory lid mesh. Not a minimum-distance proof; excludes lid hardware, guards, wire bundles and tolerances.');
@@ -130,7 +133,7 @@ export function audit(dimensions, manifest, buffer, procurement) {
     'Published variants are not a manufacturing tolerance. Measure purchased cord; clamping, jacket preparation and pull resistance remain physical checks.');
   record('Ring barrel and internal wire', 'review', 'The selected 15-104 accepts 14–16 AWG. Its manufacturer does not publish an insulation-barrel limit on the cited page; do not reuse the former 3M value.', 'Fit the actual 2.87 mm nominal-OD wire, use the specified crimp tooling and inspect/pull-test before accepting the termination.');
   record('Physical and electrical release', 'hold', 'No built assembly, nameplate verification, qualified acceptance or energized test has been recorded.');
-  return { revision: '2026-09-24', release: 'NOT RELEASED: close the receiving and electrical items in Build_Package.md', units: 'mm',
+  return { revision: '2026-09-28', release: 'NOT RELEASED: close the receiving and electrical items in Build_Package.md', units: 'mm',
     method: 'Axis-aligned equipment envelopes, exact chamfered-panel clearance and continuous vertical swept volumes against the machined BUD common-base shell, nine lid rays per body and sourced interface arithmetic. Shell triangulation deflection is 0.3 mm; numerical seating-contact exclusion is 0.0001 mm. Neither is a manufacturing tolerance.',
     checks, insertion_sweeps: sweeps, body_screen: bodyChecks, wall_entries: wallEntries,
     material_groups: procurement.items.length, owned_groups: procurement.items.filter(p => p.availability === 'owned').length };

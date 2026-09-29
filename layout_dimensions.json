@@ -1,11 +1,11 @@
 {
   "units": "mm",
-  "revision": "September 24, 2026 · BUD NBF-32126 procurement and layout",
-  "coordinates": "X across the panel; Y above the panel underside; Z along the panel, negative toward the printer exit (rear), positive toward Q0 (front). One scene unit is one millimetre. The wiring plan projects the same X/Z positions with rear at the top. Dimensions below are X × Y × Z unless noted.",
+  "revision": "September 28, 2026 \u00b7 Phoenix 2907571, two-seller procurement and manufacturer STEP",
+  "coordinates": "X across the panel; Y above the panel underside; Z along the panel, negative toward the printer exit (rear), positive toward Q0 (front). One scene unit is one millimetre. The wiring plan projects the same X/Z positions with rear at the top. Dimensions below are X \u00d7 Y \u00d7 Z unless noted.",
   "parts": [
     {
       "id": "case",
-      "name": "BUD NBF-32126 · opaque hinged cover",
+      "name": "BUD NBF-32126 \u00b7 opaque hinged cover",
       "size": [
         318.475376100268,
         164.30000004,
@@ -13,7 +13,7 @@
       ],
       "status": "Manufacturer common-base STEP; opaque lid silhouette illustrative",
       "source": "https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/",
-      "note": "Selected ABS/PC NBF-32126, nominal 400 × 300 × 160 mm. The displayed CAD envelope includes projecting hinges and latches. Factory STEP linked on its page uses the NBF-32226 common base and lid outline; opaque cover is rendered gray. Preserve the hinges, latches and gasket. Custom openings remove any claim to the original ingress rating. Closed-cover operation and qualified electrical acceptance remain required. Unplug supply before opening the latches.",
+      "note": "Selected ABS/PC NBF-32126, nominal 400 \u00d7 300 \u00d7 160 mm. The displayed CAD envelope includes projecting hinges and latches. Factory STEP linked on its page uses the NBF-32226 common base and lid outline; opaque cover is rendered gray. Preserve the hinges, latches and gasket. Custom openings remove any claim to the original ingress rating. Closed-cover operation and qualified electrical acceptance remain required. Unplug supply before opening the latches.",
       "position": [
         -0.7376879501339886,
         67.65025992400001,
@@ -22,7 +22,7 @@
     },
     {
       "id": "panel",
-      "name": "Reused aluminum panel · provisional 1.90 mm",
+      "name": "Reused aluminum panel \u00b7 provisional 1.90 mm",
       "size": [
         260,
         1.89738,
@@ -30,7 +30,7 @@
       ],
       "status": "Proposed fabrication template; stock not measured",
       "source": "https://www.budind.com/wp-content/uploads/2019/01/hbnbf32226.pdf",
-      "note": "Proposed 260 × 340 mm aluminum panel with 10 mm corner chamfers. Thickness 1.89738 mm is provisional; measure stock and verify M5 support pattern before fabrication.",
+      "note": "Proposed 260 \u00d7 340 mm aluminum panel with 10 mm corner chamfers. Thickness 1.89738 mm is provisional; measure stock and verify M5 support pattern before fabrication.",
       "position": [
         0,
         0.94869,
@@ -52,11 +52,11 @@
       ],
       "status": "Catalog dimensions; verify actual unit",
       "source": "https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf",
-      "note": "Long blue body uses the current 216 × 63 × 47 mm specification. The older ELOG manual gives 203 × 69 × 58 mm. Measure the photographed instrument before finalizing. Ports, feet and grip details are visual approximations; plug space is additional. Adjustable two-strap mounting uses slots 82 mm apart; reserve a 216 × 69 × 58 mm acceptance envelope. No close-fitting cradle or drilling into the logger."
+      "note": "Long blue body uses the current 216 \u00d7 63 \u00d7 47 mm specification. The older ELOG manual gives 203 \u00d7 69 \u00d7 58 mm. Measure the photographed instrument before finalizing. Ports, feet and grip details are visual approximations; plug space is additional. Adjustable two-strap mounting uses slots 82 mm apart; reserve a 216 \u00d7 69 \u00d7 58 mm acceptance envelope. No close-fitting cradle or drilling into the logger."
     },
     {
       "id": "ct",
-      "name": "CT1 · printer hot only",
+      "name": "CT1 \u00b7 printer hot only",
       "size": [
         29.4,
         41.7,
@@ -69,29 +69,115 @@
       ],
       "status": "Mini HSC family matched; 50 A variant probable",
       "source": "https://www.dentinstruments.com/shop/current-sensors/hinged-current-transformers-sensors-for-energy-metering/",
-      "note": "White Mini HSC 20 A and 50 A versions use the same 29.4 × 41.7 × 26.4 mm body and nominal 10 mm window (legacy drawing 10.2 mm). The partially visible DENT 50… label resembles legacy CTHSC-050-U/B; complete model digits remain covered. This establishes the family envelope, not the final ELOG scale. White is + and black is −; arrow toward printer, one hot conductor only. The illustrated body rests on the panel; it has no added mounting screw."
+      "note": "White Mini HSC 20 A and 50 A versions use the same 29.4 \u00d7 41.7 \u00d7 26.4 mm body and nominal 10 mm window (legacy drawing 10.2 mm). The partially visible DENT 50\u2026 label resembles legacy CTHSC-050-U/B; complete model digits remain covered. This establishes the family envelope, not the final ELOG scale. White is + and black is \u2212; arrow toward printer, one hot conductor only. The illustrated body rests on the panel; it has no added mounting screw."
     },
     {
       "id": "q0",
-      "name": "Q0 · single operating breaker",
+      "name": "Q0 \u00b7 Phoenix TMC 81C 15A",
       "size": [
-        19.18,
-        63.5,
-        47
+        17.60000000220002,
+        116.53448252101903,
+        74.31522879422388
       ],
       "position": [
-        -107,
-        80,
-        167.513841
+        -92.9999999989,
+        75.61411229431175,
+        165.73309385428615
       ],
-      "status": "Catalog body; direct wall mount",
-      "source": "https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf",
-      "note": "Carling CA1-B0-24-615-121-DG retained. Mount in the front wall at Y=80 mm to fit the shallower enclosure. Two Keystone 9903 #6-32 × 1/4 in screws and 4699 washers give about 2.56 mm nominal engagement into 4.95 mm inserts through the 3 mm wall. Verify actual engagement, clamping and no bottoming. Mounting torque 0.8–1.0 N·m; #10-32 studs 1.7–2.3 N·m. Operate only with the cover closed; unplug supply and verify dead before opening.",
-      "terminalPitch": 49.28,
-      "mountPitch": 52.37,
-      "studProjection": 15.87,
-      "wallOuterZ": 194.013841,
-      "mountingScrewLengthMm": 6.35
+      "status": "Manufacturer STEP; operating position shown, travel unverified",
+      "source": "https://www.phoenixcontact.com/en-us/products/thermomagnetic-device-circuit-breakers-tmc-81c-15a-2907571",
+      "note": "Phoenix Contact TMC 81C 15A / 2907571, 15 A, 1 pole, C curve, UL489 / cUL Listed E320373, 10 kA, 277 V AC. Catalog envelope 17.6 \u00d7 116 \u00d7 75.9 mm includes 7.5 mm DIN rail. Factory STEP body/handle depth is 73.8788 mm. Terminal guards held 1.5 mm behind the 3 mm inner wall; nose and handle pass through the 18.6 \u00d7 46 mm window. Manufacturer STEP is transformed without scaling to the 1\u00b0 wall frame. Verify received snap fit, operator travel, terminal access, bonds and closed-lid fit.",
+      "terminalPitch": 67.8,
+      "wallOuterZ": 193.92656548494267,
+      "terminalWireZ": 153.36585674534962,
+      "terminalType": "screw-clamp",
+      "terminalWireAWG": 14,
+      "terminalTorqueNm": 2,
+      "terminalStripMm": [
+        11,
+        12
+      ],
+      "terminalEntryXYZ": {
+        "in": [
+          -93,
+          117.71438758242826,
+          153.36585674534962
+        ],
+        "out": [
+          -93,
+          33.72718118929137,
+          151.89985460461781
+        ]
+      },
+      "terminalScrewXYZ": [
+        [
+          -93,
+          109.09903002111788,
+          182.8199840298368
+        ],
+        [
+          -93,
+          41.309356289514554,
+          181.636710873389
+        ]
+      ],
+      "factoryLocalTranslationMm": [
+        -8.8,
+        -58,
+        -64.6
+      ],
+      "catalogSizeWithRailMm": [
+        17.6,
+        116,
+        75.9
+      ],
+      "terminalApproachXYZ": {
+        "in": [
+          -93,
+          141.71073226618165,
+          153.78471449984443
+        ],
+        "out": [
+          -93,
+          9.730836505537987,
+          151.480996850123
+        ]
+      },
+      "terminalChannels": [
+        {
+          "route": "cord:supply-hot",
+          "entry": [
+            -93,
+            117.71438758242826,
+            153.36585674534962
+          ],
+          "outer": [
+            -93,
+            135.71164609524328,
+            153.68000006122074
+          ],
+          "radiusMm": 3.5
+        },
+        {
+          "route": "internal-wire:q0-jl",
+          "entry": [
+            -93,
+            33.72718118929137,
+            151.89985460461781
+          ],
+          "outer": [
+            -93,
+            15.729922676476335,
+            151.5857112887467
+          ],
+          "radiusMm": 3.5
+        }
+      ],
+      "catalogBodySizeMm": [
+        17.6,
+        116,
+        73.8788
+      ]
     },
     {
       "id": "terminals",
@@ -107,7 +193,7 @@
     },
     {
       "id": "outlet",
-      "name": "XA · internal Leviton 515CV",
+      "name": "XA \u00b7 internal Leviton 515CV",
       "size": [
         66.3,
         39.1,
@@ -124,7 +210,7 @@
     },
     {
       "id": "adapter",
-      "name": "CUI SMI6-9-V-P5 · existing adapter",
+      "name": "CUI SMI6-9-V-P5 \u00b7 existing adapter",
       "size": [
         30,
         40.5,
@@ -180,7 +266,7 @@
         205.5495
       ]
     },
-    "note": "Top-view shell envelope from the BUD common-base factory STEP. The aluminum panel is a custom 260 × 340 mm blank. Plan is a placement reference; use the machining files and received-part checks."
+    "note": "Top-view shell envelope from the BUD common-base factory STEP. The aluminum panel is a custom 260 \u00d7 340 mm blank. Plan is a placement reference; use the machining files and received-part checks."
   },
   "instances": [
     {
@@ -196,7 +282,7 @@
         10.45,
         -128
       ],
-      "label": "JL · HOT"
+      "label": "JL \u00b7 HOT"
     },
     {
       "id": "JN",
@@ -211,7 +297,7 @@
         10.45,
         -58
       ],
-      "label": "JN · NEUTRAL"
+      "label": "JN \u00b7 NEUTRAL"
     },
     {
       "id": "PE",
@@ -226,7 +312,7 @@
         10.45,
         17
       ],
-      "label": "JPE · EARTH"
+      "label": "JPE \u00b7 EARTH"
     },
     {
       "id": "supply-entry",
@@ -303,7 +389,7 @@
         22,
         69
       ],
-      "label": "A1 · L1 hot"
+      "label": "A1 \u00b7 L1 hot"
     },
     {
       "id": "A2",
@@ -318,7 +404,7 @@
         22,
         82
       ],
-      "label": "A2 · L2 neutral"
+      "label": "A2 \u00b7 L2 neutral"
     },
     {
       "id": "A3",
@@ -333,7 +419,7 @@
         22,
         95
       ],
-      "label": "A3 · N neutral"
+      "label": "A3 \u00b7 N neutral"
     },
     {
       "id": "lead-slack",
@@ -626,5 +712,55 @@
     "dimensionSource": "https://www.usb.org/document-library/usb-20-specification",
     "cableLengthBasis": "Conservative 1.8 m routing allowance from the kit datasheet; the current replacement is listed as 2 m. Retain the full owned cable; actual reach is checked during assembly.",
     "wallThicknessMm": 3
+  },
+  "q0Mount": {
+    "model": "Phoenix Contact TMC 81C 15A / 2907571",
+    "wallCenterXY": [
+      -93,
+      75
+    ],
+    "windowMm": [
+      18.6,
+      46
+    ],
+    "wallThicknessMm": 3,
+    "stockThicknessMm": 1.89738,
+    "insideBendRadiusMm": 2,
+    "heightMm": 40,
+    "armInnerHalfWidthMm": 30,
+    "outerHalfWidthMm": 44,
+    "wallScrewHalfPitchMm": 38,
+    "webFrontDepthMm": 64.4,
+    "railLengthMm": 60,
+    "railSectionMm": [
+      35,
+      7.5,
+      1
+    ],
+    "railRearDepthMm": 63.6,
+    "railScrewOffsetsX": [
+      -24,
+      24
+    ],
+    "stopSizeMm": [
+      8,
+      45,
+      32
+    ],
+    "stopCentersX": [
+      -12.8,
+      12.8
+    ],
+    "bondPointXYZ": [
+      -117,
+      76.24086609769085,
+      122.83739435932326
+    ],
+    "normalDraftDeg": 1,
+    "note": "Formed bracket and rail in local wall coordinates; 1 degree case draft. 0.8 mm washer spacing between rail and bracket is provisional. Slot permits lateral adjustment; set depth from an offcut fit before folding. Combined dedicated #10 bond must contact both metal pieces by an accepted method. No ordinary mounting-screw-only bonding assumption.",
+    "wallHoleDiameterMm": 3.3,
+    "wallScrewLengthMm": 12,
+    "wallScrewDiameterMm": 3,
+    "railCenterOffsetYMm": 0.4
   }
 }

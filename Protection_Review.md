@@ -1,21 +1,23 @@
 # Protection and data review
 
-September 23, 2026 · 120 V grounded supply · one printer at a time.
+September 28, 2026 · 120 V grounded supply · one printer at a time.
 
 **Q0 and voltage-lead protection still need acceptance.** The checks below resolve published component ratings and fit. Actual outlet fault current, combined startup duty and protection of the existing voltage leads remain unverified. No hardware test or qualified acceptance has been recorded.
 
 | Item | Verified | Decision |
 |---|---|---|
-| Q0, CA1-B0-24-615-121-DG | 15 A, delay 24, UL489 option; 10 kA interrupting rating at 120 V AC | Selected for purchase by the user on September 21, 2026, following the professor's confirmation of the 15 A design limit. Site and startup checks remain pre-use acceptance items; Master Electronics lists one at $40.32 and 16 in stock on September 23; delivery remains checkout-dependent. |
+| Q0, Phoenix 2907571 | 15 A, 1 pole, C curve; UL489 / cUL Listed E320373; 277 V AC; 10 kA | Selected from DigiKey at $21.57 + $5.34 estimated tariff. Startup and original voltage-lead protection require application acceptance. |
 | Voltage tap | A1 connects to JL after Q0; no dedicated fuse | Confirm that upstream Q0 protection is suitable for the original DENT leads before energizing. |
 | USB cable | Existing A-to-B cable confirmed owned | Reuse intact through one protected wall opening. Keep its internal portion sleeved and restrained; connect the free USB-A end to the PC only after unplugging mains. |
 | Internal adapter power | XA 515CV + original CUI cable, entirely inside | No DC extension or wall feedthrough. Verify plug retention and closed-enclosure temperature. |
 
-The [completed sourcing comparison](revision.html#breaker-options) retains the exact Carling at $40.32. Altech 1C15UL plus one compatible rail and two CA802 stops totals $39.39 before fasteners, operator access, fabrication and freight. Its different trip curve and mounting do not justify an unreviewed substitution for that small component-price difference. The remaining protection decisions concern the physical application, not an unresolved supplier quote.
+The [delivered-cost comparison](revision.html#breaker-options) includes the rail, end stops, fasteners, estimated tariffs and one consolidated DigiKey shipment. Two sellers remain: DigiKey and Home Depot.
 
 ## Q0: what the rating proves
 
-The selected Carling ordering code specifies a 15 A, single-pole, 50/60 Hz medium-delay breaker with UL489/CSA approval. The manufacturer's UL489 table lists **10,000 A at 120 V AC** for this configuration. Its published half-cycle pulse tolerance is **12 times rated current at 60 Hz**: calculated as **180 A for 8.33 ms** for this 15 A selection. These are the stated unloaded test conditions; an arbitrary startup pulse cannot be compared using peak current alone. [Carling C-Series datasheet, pp. 2, 4, 8](https://www.carlingtech.com/sites/default/files/documents/C-Series_datasheet.pdf), [time-delay curves](https://www.carlingtech.com/sites/default/files/documents/Carling-HM-CB-Time-Delays.pdf).
+The selected **Phoenix Contact TMC 81C 15A / 2907571** is a 15 A, one-pole, C-curve thermal-magnetic breaker, with UL489 / cUL Listed file E320373, 277 V AC and 10 kA interrupting rating. Its catalog envelope is 17.6 × 116 × 75.9 mm including the DIN rail. The specified screw connection accepts the selected 14 AWG copper conductor; strip 11–12 mm and tighten to 2 N·m. [Phoenix exact product and characteristic curve](https://www.phoenixcontact.com/en-us/products/thermomagnetic-device-circuit-breakers-tmc-81c-15a-2907571).
+
+The former Carling delay-24 pulse specification does **not** apply. Review actual startup amplitude, duration, repetition, ambient temperature and sustained current against Phoenix's published C characteristic. A C-curve label alone is not proof that the printer will start without tripping. Do not raise the 15 A limit to hide nuisance trips.
 
 The application check still needs the **available RMS symmetrical fault current at the actual receptacle** and the combined startup waveform of the selected printer, adapter and logger. An upstream breaker's marked interrupting rating is not a measurement of available fault current. The breaker rating is also not the short-circuit rating of this complete custom enclosure.
 
@@ -27,7 +29,7 @@ The public pages and renovation summaries inspected do not supply the chosen out
 
 **Request to pass to JIS / Facilities — draft, not sent:**
 
-> For a proposed 120 V printer-energy measurement box in JIS, Room 0100, could the responsible electrical staff identify the intended receptacle and its panel/circuit, and confirm the maximum available RMS symmetrical fault current there? The proposed breaker is Carling CA1-B0-24-615-121-DG, 15 A UL489, rated 10 kA at 120 V AC. Please review the complete assembly's protection and supply suitability; the breaker rating alone is not an assembly SCCR. If a current study is unavailable, please advise the appropriate engineering assessment. We do not need to access or open energized panels ourselves.
+> For a proposed 120 V printer-energy measurement box in JIS, Room 0100, could the responsible electrical staff identify the intended receptacle and its panel/circuit, and confirm the maximum available RMS symmetrical fault current there? The proposed breaker is Phoenix TMC 81C 15A / 2907571, 15 A UL489, rated 10 kA at 120 V AC. Please review the complete assembly's protection and supply suitability; the breaker rating alone is not an assembly SCCR. If a current study is unavailable, please advise the appropriate engineering assessment. We do not need to access or open energized panels ourselves.
 
 ### Printer startup evidence
 
@@ -41,7 +43,7 @@ Manufacturer data for startup amplitude, duration, repetitions, input voltage an
 
 ## Voltage tap: upstream protection review
 
-The revised design omits Fv, its holder, DIN rail, stops and JV. The hot sensing path is **Q0 → JL → original DENT A1 pigtail → full voltage lead → ELITEpro L1**. L2 and N remain connected to neutral. The adapter and voltage tap branch off before CT; only printer hot passes through CT. The sensing leads do not carry printer load current.
+The design omits Fv, its holder and JV. The short DIN rail and stops now support Q0 only; they do not add voltage-lead protection. The hot sensing path is **Q0 → JL → original DENT A1 pigtail → full voltage lead → ELITEpro L1**. L2 and N remain connected to neutral. The adapter and voltage tap branch off before CT; only printer hot passes through CT. The sensing leads do not carry printer load current.
 
 The user confirms the three differently colored pigtails as original DENT kit components, matched to the LD-SKTSP family. DENT lists these leads for hard-wiring and also offers standard non-fused and optional fused clips. That does not establish that this custom enclosure and its 15 A breaker adequately protect the original lead set. [DENT pigtails](https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/), [DENT clip options](https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-fused-crocodile-clip/).
 
@@ -49,9 +51,9 @@ The user confirms the three differently colored pigtails as original DENT kit co
 
 **Manufacturer question — draft, not sent:**
 
-> For our proposed 120 V measurement enclosure, may original DENT LD-SKTSP pigtails and voltage leads connect to a circuit protected by a Carling CA1-B0-24-615-121-DG 15 A breaker without a dedicated voltage-tap fuse? A1 feeds L1 from switched hot; L2 and N connect to neutral. Please confirm the permitted upstream protection and terminal preparation, or identify any additional protection required. The original 9 V adapter is also powered from the switched circuit.
+> For our proposed 120 V measurement enclosure, may original DENT LD-SKTSP pigtails and voltage leads connect to a circuit protected by a Phoenix TMC 81C 15A / 2907571 15 A breaker without a dedicated voltage-tap fuse? A1 feeds L1 from switched hot; L2 and N connect to neutral. Please confirm the permitted upstream protection and terminal preparation, or identify any additional protection required. The original 9 V adapter is also powered from the switched circuit.
 
-The [Q0 purchase link](https://www.masterelectronics.com/en/productdetail/littelfuse-carling-technologies/ca1b024615121dg-16947583.html) identifies the selected product. Exact-SKU stock, site fault-current suitability and startup behavior remain to be confirmed.
+The [Q0 purchase link](https://www.wolfautomation.com/mini-circuit-breaker-1p-c-curve-15a-ul489-1) identifies the selected product. Exact-SKU stock, site fault-current suitability and startup behavior remain to be confirmed.
 
 ## Experiment data workflow
 
