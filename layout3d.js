@@ -494,7 +494,11 @@ async function start() {
   ['model-shell','model-wires','model-dimensions','model-label-toggle'].forEach(id=>$(id).addEventListener('change',appearance));
   function zoom(factor){camera.zoom=THREE.MathUtils.clamp(camera.zoom*factor,.65,10);camera.updateProjectionMatrix();render();}
   $('model-zoom-in').onclick=()=>zoom(1.2);$('model-zoom-out').onclick=()=>zoom(1/1.2);
-  $('model-reset').onclick=()=>{setAssembly(0);$('model-shell').value='xray';appearance();info('meter');view('iso');};
+  $('model-reset').onclick=()=>{
+    $('model-shell').value='closed';
+    ['model-label-toggle','model-dimensions','model-wires'].forEach(id=>{$(id).checked=$(id).defaultChecked;});
+    setAssembly(0);info('meter');view('iso');
+  };
   $('compare-layout').onclick=()=>{document.getElementById('tab-layout').click();setAssembly(0);$('model-shell').value='xray';appearance();view('top');$('design').scrollIntoView({block:'start'});};
   $('model-save').onclick=()=>{render();const link=document.createElement('a');link.download='elitepro-enclosure-3d.png';link.href=renderer.domElement.toDataURL('image/png');link.click();};
   const more=$('model-more');

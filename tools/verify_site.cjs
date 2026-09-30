@@ -126,7 +126,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
   const overlaps=A.min.every((v,k)=>Math.min(A.max[k],B.max[k])-Math.max(v,B.min[k])>.1);
   assert.ok(!overlaps,`Modeled primary body overlap: ${a} / ${b}`);
  }
- assert.equal(initial.mode,'xray');assert.ok(initial.shellOpacity<.2);
+ assert.equal(initial.mode,'closed');assert.equal(initial.shellOpacity,1);
  if(out)await page.locator('#design').screenshot({path:path.join(out,'layout-desktop.png')});
  await page.locator('#tab-wiring').click();await page.locator('#compare-layout').click();
  assert.equal(await page.locator('[data-view="top"]').getAttribute('aria-pressed'),'true');
