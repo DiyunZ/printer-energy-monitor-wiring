@@ -1,14 +1,14 @@
 # Selected design, material costs and sellers
 
-**BUD NBF-32226 clear-cover enclosure + Phoenix 2907571 + flat bridge on 65 mm posts. Estimated materials: $262.86 from DigiKey and Home Depot.** Cut and drill only; no bending. Whole purchase packs and spare pieces are counted. Shipping, tariffs, sales tax, fabrication and labor are excluded.
+**BUD NBF-32226 clear-cover enclosure + Phoenix 2907571 + flat bridge on 65 mm posts. Estimated materials: $273.00 from DigiKey and Home Depot.** Cut and drill only; no bending. Whole purchase packs, minimum order lengths and spare pieces are counted. Shipping, tariffs, sales tax, fabrication and labor are excluded.
 
 ## Material total
 
 | Seller | Materials |
 |---|---:|
-| DigiKey | $175.55 |
-| Home Depot | $87.31 |
-| **Total** | **$262.86** |
+| DigiKey | $175.37 |
+| Home Depot | $97.63 |
+| **Total** | **$273.00** |
 
 | Change from the previous $233.54 Phoenix plan | Materials change |
 |---|---:|
@@ -16,6 +16,17 @@
 | Two 65 mm posts $2.78 + four M5 screws $1.95 + eight M5 washers $5.94 | +$10.67 |
 | Two Heyco M3231 glands and two 8463 nuts $3.52 replace factory-stock Hammond glands $5.94 | −$2.42 |
 | **Net change** | **+$29.32** |
+
+That design revision produced the previous **$262.86** snapshot. The purchase-form verification on September 29 adds **$10.14**, with the same parts and sellers:
+
+| Current price / order correction | Materials change |
+|---|---:|
+| Black wire: 6 ft × $0.95; green wire: 6 ft × $0.91. Both online minimums are 6 ft; previous estimate used 4 ft × $0.42 per color. | +$7.80 |
+| M5 × 10 screws: two 2-piece packs at $2.97, previously $1.25 per pack | +$3.44 |
+| M3 × 12 and M4 × 10 screws: two packs each at $1.95, previously $1.75 | +$0.80 |
+| SJOOW cord, supply plug and VELCRO roll at current prices | −$1.72 |
+| DigiKey 4692 ten-piece tier and current 4705 unit price | −$0.18 |
+| **Net change from $262.86** | **+$10.14** |
 
 Q0 remains **$21.57**. The full 250 mm rail is **$4.79** and two stops **$1.24**; breaker plus rail/stops is **$27.60**, included above. The increase purchases a direct-stock transparent-cover box and eliminates sheet bending; it is not an increase in the breaker price. The earlier $246.94 Carling plan used different stock assumptions and three retailers and is not a current like-for-like order.
 
@@ -27,7 +38,9 @@ The flat 88 × 40 mm aluminum bridge uses two purchased M5 posts. The post hardw
 
 <h2 id="checkout">Price and stock basis</h2>
 
-Case, Q0, rail, stops, posts, post hardware and Heyco glands/nuts were rechecked September 29. **Unchanged items retain September 23–24 price snapshots**; $262.86 is an estimate, not a refreshed complete cart or reserved stock. Every line's date, quantity, pack and link are in the [order plan](materials.html#order-plan). No order has been placed. Offered aluminum is counted as no purchased stock; confirm its actual availability and thickness.
+All 33 unit prices and retailer descriptions were checked September 29 for the selected quantities. Home Depot prices use Champaign / ZIP 61820. **Three cut-to-length wire lines require store pickup; delivery is unavailable.** Arrange collection before submitting the request. Black and green wire orders are 6 ft each to meet the current online minimum; the installation cutting allowance remains 1 m each. $273.00 is a product-page estimate, not a cart quote or reserved stock. Older stock snapshots retain their dates in the [order plan](materials.html#order-plan). No order has been placed. Offered aluminum is counted as no purchased stock; confirm its actual availability and thickness.
+
+The [purchase request page](purchase-request.html) reproduces retailer descriptions and maps selling units to the school menu. Its [Excel download](downloads/purchase-request.xlsx) separates DigiKey and Home Depot. Consumable / under-one-year classification is **Professor to confirm**; the new assembly uses physical goods, so repair/service is No and No Delivery Expected remains unchecked.
 
 ## Model and photo evidence
 

@@ -265,7 +265,7 @@
       "availability": "buy",
       "result": "Conditional",
       "checked": "Separate 14 AWG conductors remain for Q0 OUT → JL and PE → panel and PE → rail/bracket. XA hot, neutral and PE are the conductors of its 14/3 cord; no separate white roll is required. Both lengths are included in the purchase budget.",
-      "remaining": "Same 14 AWG stranded construction, sold by the foot; 4 ft of each color exceeds the 1 m cutting allowance. Confirm the received wire markings and crimp fit.",
+      "remaining": "Each 6 ft purchase covers the 1 m cutting allowance plus spare wire. Champaign store pickup is required. Confirm received wire markings and crimp fit.",
       "sources": [
         "wire",
         "wago",
@@ -435,7 +435,7 @@
     "Retained six cable anchor points and added separate straps for XA and adapter.",
     "Consolidated purchase sources and added exact-part approval evidence and a conditional DIN-breaker comparison.",
     "Simplified to one confirmed-owned USB cable through a snap bushing. Deleted the panel coupler, short cable and two M3 flange sets. Existing six supports and required internal insulation remain; direct-cable pull retention and plug passage need physical acceptance.",
-    "Phoenix 2907571 remains selected. Replaced the folded bracket with a flat bridge and two 65 mm M5 posts; added all purchased post hardware. Updated cordgrips to self-stock Heyco M3231 / 8463, with Ø22.2 mm wall bores. Materials total $262.86 from DigiKey and Home Depot; per-line price dates remain visible.",
+    "Phoenix 2907571 remains selected. Replaced the folded bracket with a flat bridge and two 65 mm M5 posts; added all purchased post hardware. Updated cordgrips to self-stock Heyco M3231 / 8463, with Ø22.2 mm wall bores. The refreshed purchase request totals $273.00 from DigiKey and Home Depot; current prices and minimum order lengths are included.",
     "Re-routed the printer PE curve around the left/rear corner; regression screening of the displayed 1.7 mm-radius wire against the machined shell rejects the former spline overshoot. Physical routing remains an assembly check."
   ],
   "assembly": [

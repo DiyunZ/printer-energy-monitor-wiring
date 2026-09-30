@@ -6,6 +6,7 @@
 - [Protection review](protection.html) — Q0, upstream voltage-lead protection and the remaining evidence.
 - [Installation audit](installation.html) — checks completed and remaining acceptance items.
 - [Full materials list](materials.html) · [Download BOM](Procurement_BOM.md)
+- [School purchase request](purchase-request.html) · [Download Excel](downloads/purchase-request.xlsx)
 - [Manufacturer sources and design limits](references.html)
 
 ## Drawings

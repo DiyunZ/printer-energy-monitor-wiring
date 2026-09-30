@@ -2,7 +2,7 @@
 
 Interactive wiring, 3D enclosure layout and materials for one 120 V printer using a DENT ELITEpro XC.
 
-[Website](https://diyunz.github.io/printer-energy-monitor-wiring/) · [Purchase list](https://diyunz.github.io/printer-energy-monitor-wiring/#hardware) · [Build documents](https://diyunz.github.io/printer-energy-monitor-wiring/documents.html)
+[Website](https://diyunz.github.io/printer-energy-monitor-wiring/) · [Purchase list](https://diyunz.github.io/printer-energy-monitor-wiring/#hardware) · [School purchase request](https://diyunz.github.io/printer-energy-monitor-wiring/purchase-request.html) · [Build documents](https://diyunz.github.io/printer-energy-monitor-wiring/documents.html)
 
 ## Local preview
 

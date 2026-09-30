@@ -7,6 +7,9 @@ Run commands from the repository root. The checked-in site can be served with Py
 | Location | Purpose |
 |---|---|
 | `procurement.json` | Materials, ownership, prices, photos and purchase links |
+| `purchasing.rows[].request` in `procurement.json` | Exact retailer Description/title, ordering identifier, matched listing photo and verification date |
+| `tools/purchase_request.cjs`, `purchase-request.js`, `purchase-request.css` | Shared purchase-form mapping, generated page and clipboard interaction |
+| `tools/export_purchase_request.mjs`, `downloads/purchase-request.xlsx` | Excel generator and its two-vendor download |
 | `layout_dimensions.json` | Shared dimensions, placement and provenance |
 | `installation_review.json` | Review evidence and outstanding hardware checks |
 | `build_routes.py`, `draw_external.py`, `page_template.html` | Generate the main page, circuit drawings, `routes.json` and `validation.json` |
@@ -30,13 +33,17 @@ python3 build_routes.py
 node tools/render_documents.cjs
 ```
 
-`render_documents.cjs` regenerates `Procurement_BOM.md`, `Installation_Audit.md`, `Build_Documents.md` and all supporting HTML pages. Other engineering Markdown files are maintained directly.
+`render_documents.cjs` regenerates `Procurement_BOM.md`, `Installation_Audit.md`, `Build_Documents.md`, `purchase-request.html` and all supporting HTML pages. Other engineering Markdown files are maintained directly.
+
+For the Excel download, use the bundled `@oai/artifact-tool` runtime located by `load_workspace_dependencies`. Create a temporary `node_modules` symlink to that runtime, set `ARTIFACT_WORKDIR` to the temporary directory and run `node tools/export_purchase_request.mjs` using the bundled Node executable. `REQUEST_OUTPUT` optionally sets the artifact output directory. The generator checks calculations and source strings, renders both worksheets for inspection, exports one workbook and copies it to `downloads/purchase-request.xlsx`. Rebuild the workbook and HTML together after changing order fields or prices. `python3 tools/check_purchase_workbook.py` checks the saved export against current procurement data.
+
+Copy DigiKey's **Description**, not Detailed Description, and Home Depot's visible product title without rewording. Record the seller order number separately from the manufacturer/model. Preserve fractional-cent price tiers. Packs and rolls map to the school unit `each`; by-the-foot purchases map to `feet`. Keep the consumable classification unresolved until the professor confirms it. Retailer minimums affect ordered quantities, not installation cutting allowances. Do not use a new description-check date to relabel an old stock snapshot as current.
 
 ## Checks
 
 ```sh
 python3 -m unittest -v test_routes.py test_material_locations.py
-node --test tools/test_installation.mjs tools/test_cable_supports.mjs
+node --test tools/test_installation.mjs tools/test_cable_supports.mjs tools/test_purchase_request.mjs
 python3 -m http.server 8770
 ```
 

@@ -136,7 +136,7 @@ For the proposed panel PE stud, first approve the hardware/contact method for th
 
 Buy **13 ft of 14/3 SJOOW** and start with 2.0 m supply, 1.0 m printer-output and 0.8 m internal-XA blanks. Their internal conductors extend directly to the specified terminals. Keep sufficient PE slack so that jacket displacement does not pull PE free first. Measure the desired exterior reach before cutting.
 
-Use the selected 14 AWG black and green internal wire for Q0 output and both metal bonds. XA uses conductors from its continuous 14/3 cord. The following are conservative **cutting blanks**, not proved finished lengths; final routing, bends and stripping are done with the assembly de-energized. Allow 1 m black and 1 m green including spare wire. Buy 4 ft (1.2192 m) of each color by the foot; both lengths are budgeted. No separate white-wire roll is required.
+Use the selected 14 AWG black and green internal wire for Q0 output and both metal bonds. XA uses conductors from its continuous 14/3 cord. The following are conservative **cutting blanks**, not proved finished lengths; final routing, bends and stripping are done with the assembly de-energized. Allow 1 m black and 1 m green including spare wire. Buy 6 ft (1.8288 m) of each color to meet Home Depot's current online minimum; both lengths are budgeted. All three by-the-foot wire lines require Champaign store pickup. No separate white-wire roll is required.
 
 | Connection | Starting blank | Termination |
 |---|---|---|

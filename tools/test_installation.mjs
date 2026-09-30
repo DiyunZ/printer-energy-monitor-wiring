@@ -12,7 +12,7 @@ const result = run();
 test('priced order covers every purchased group and counts each retail increment', () => {
   const order=p.purchasing, rows=order.rows;
   assert.equal(order.cost_basis,'materials_only');
-  assert.equal(order.material_subtotal_usd,262.86);
+  assert.equal(order.material_subtotal_usd,273.00);
   assert.deepEqual([...new Set(rows.flatMap(r=>r.material_ids))].sort(),p.items.filter(r=>r.availability==='buy').map(r=>r.id).sort());
   assert.equal(new Set(rows.map(r=>r.seller)).size,2);
   for(const r of rows){

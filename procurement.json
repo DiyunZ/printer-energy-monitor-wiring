@@ -800,19 +800,19 @@
     {
       "id": "internal-wire",
       "item": "Internal L / N / PE wire",
-      "quantity": "Buy 4 ft black + 4 ft green (1.2192 m of each).",
+      "quantity": "Buy 6 ft black + 6 ft green (1.8288 m of each); online minimum length.",
       "model": "Southwire 14 AWG, 19-strand Class C, THHN/THWN/MTW, 600 V",
       "reason": "Separate 14 AWG conductors remain for Q0 OUT → JL and PE → panel and PE → rail/bracket. XA hot, neutral and PE are the conductors of its 14/3 cord; no separate white roll is required. Both lengths are included in the purchase budget.",
-      "status": "Same 14 AWG stranded construction, sold by the foot; 4 ft of each color exceeds the 1 m cutting allowance. Confirm the received wire markings and crimp fit.",
+      "status": "Each 6 ft purchase covers the 1 m cutting allowance plus spare wire. Champaign store pickup is required. Confirm received wire markings and crimp fit.",
       "availability": "buy",
       "links": [
         {
-          "label": "Black 22955999 · buy 4 ft · $1.68",
+          "label": "Black 22955999 · buy 6 ft · $5.70",
           "url": "https://www.homedepot.com/p/204632031",
           "kind": "buy"
         },
         {
-          "label": "Green 22959199 · buy 4 ft · $1.68",
+          "label": "Green 22959199 · buy 6 ft · $5.46",
           "url": "https://www.homedepot.com/p/204632154",
           "kind": "buy"
         },
@@ -835,7 +835,7 @@
       },
       "installation": "Q0 output to JL; separate PE conductors to the panel and rail/bracket bonds.",
       "location_summary": "Q0 → JL; PE → panel and rail/bracket.",
-      "quantity_summary": "4 ft per color",
+      "quantity_summary": "6 ft per color",
       "supplier": "Home Depot",
       "compliance": {
         "status": "Manufacturer UL/cUL product",
@@ -1214,10 +1214,10 @@
     }
   ],
   "purchasing": {
-    "checked_on": "2026-09-23–29",
+    "checked_on": "2026-09-29",
     "currency": "USD",
     "cost_basis": "materials_only",
-    "scope": "Materials only, including whole packs and spare pieces. Clear-cover case, Q0, rail, stops, posts, M5 post hardware and cordgrips checked September 29. Unchanged lines retain September 23–24 price snapshots, with the per-line date shown below. Shipping, tariffs, sales tax, fabrication and labor are excluded.",
+    "scope": "Materials only, including whole packs, minimum order lengths and spare pieces. All unit prices rechecked September 29 at the selected quantities; Home Depot uses Champaign / ZIP 61820. Shipping, tariffs, sales tax, fabrication and labor are excluded. Stock snapshots retain their separate per-line dates.",
     "supplier_policy": "Two sellers only: DigiKey and Home Depot. Selected DigiKey parts must be DigiKey direct stock; Marketplace, manufacturer direct shipping and factory-only stock are excluded. No fee per retailer is added.",
     "rows": [
       {
@@ -1234,7 +1234,23 @@
         "extended_usd": 111.88,
         "url": "https://www.digikey.com/en/products/detail/bud-industries/NBF-32226/2328561",
         "availability_note": "103 in DigiKey direct stock; 377-1789-ND; clear PC cover.",
-        "checked_on": "2026-09-29"
+        "checked_on": "2026-09-29",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "377-1789-ND",
+          "catalog_label": "DigiKey Part Number",
+          "manufacturer_part_number": "NBF-32226",
+          "description": "BOX ABS/PC 15.74\"L X 11.81\"W",
+          "description_field": "Description",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.digikey.com/en/products/detail/bud-industries/NBF-32226/2328561",
+          "image": {
+            "src": "assets/materials/enclosure-nbf32226.jpg",
+            "alt": "Box Plastic, ABS/PC Blend Gray, Clear Cover/Door Hinged Door, Lid 15.740\" L x 11.810\" W (399.80mm x 299.97mm) X 6.290\" (159.77mm)",
+            "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/010/134/742/NBF-32226_sml.jpg",
+            "caption": "Retailer listing photo; may represent the product family."
+          }
+        }
       },
       {
         "material_ids": [
@@ -1250,7 +1266,23 @@
         "extended_usd": 21.57,
         "url": "https://www.digikey.com/en/products/detail/phoenix-contact/2907571/6109707",
         "availability_note": "3,689 in DigiKey direct stock, quantity-one price; factory stock excluded.",
-        "checked_on": "2026-09-29"
+        "checked_on": "2026-09-29",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "277-11849-ND",
+          "catalog_label": "DigiKey Part Number",
+          "manufacturer_part_number": "2907571",
+          "description": "CIR BRKR 15A 277VAC 60VDC",
+          "description_field": "Description",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.digikey.com/en/products/detail/phoenix-contact/2907571/6109707",
+          "image": {
+            "src": "assets/materials/request-277-11849-ND.jpg",
+            "alt": "Circuit Breaker Thermal Magnetic 15A 277 V AC 60 V DC Lever DIN Rail",
+            "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/200/283/712/MFG_1-Pole_sml.jpg",
+            "caption": "Retailer listing photo; may represent the product family."
+          }
+        }
       },
       {
         "material_ids": [
@@ -1271,7 +1303,23 @@
         "extended_usd": 13.98,
         "url": "https://www.homedepot.com/p/301304939",
         "availability_note": "One internal XA and one printer output; buy two total",
-        "checked_on": "2026-09-23"
+        "checked_on": "2026-09-23",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "301304939",
+          "catalog_label": "Internet #",
+          "manufacturer_part_number": "515CV",
+          "description": "15 Amp 125-Volt Grounding Connector, Yellow 515CV",
+          "description_field": "Product title",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.homedepot.com/p/Leviton-15-Amp-125-Volt-Grounding-Connector-Yellow-515CV-515CV/301304939",
+          "image": {
+            "src": "assets/materials/request-301304939.jpg",
+            "alt": "Leviton 15 Amp 125-Volt Grounding Connector, Yellow 515CV",
+            "source_image": "https://images.thdstatic.com/productImages/a74e890c-2174-4707-a9e1-e83cbd6e09ed/svn/leviton-electrical-plugs-connectors-515cv-64_600.jpg",
+            "caption": "Photo from the selected retailer listing."
+          }
+        }
       },
       {
         "material_ids": [
@@ -1287,7 +1335,23 @@
         "extended_usd": 3.51,
         "url": "https://www.digikey.com/en/products/detail/wago-corporation/221-415/13549457",
         "availability_note": "171,735 listed in stock; 2946-221-415-ND",
-        "checked_on": "2026-09-23"
+        "checked_on": "2026-09-23",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "2946-221-415-ND",
+          "catalog_label": "DigiKey Part Number",
+          "manufacturer_part_number": "221-415",
+          "description": "SPLICE LEVER 24-12AWG 5POS",
+          "description_field": "Description",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.digikey.com/en/products/detail/wago-corporation/221-415/13549457",
+          "image": {
+            "src": "assets/materials/connectors.jpg",
+            "alt": "Terminal Butt Splice, Closed End, Individual Openings Connector Push In 12-24 AWG Transparent - Orange",
+            "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/003/238/226/MFG_221-415_sml%28200x200%29.jpg",
+            "caption": "Retailer listing photo; may represent the product family."
+          }
+        }
       },
       {
         "material_ids": [
@@ -1303,7 +1367,23 @@
         "extended_usd": 6.69,
         "url": "https://www.digikey.com/en/products/detail/wago-corporation/221-505/15568477",
         "availability_note": "2,982 listed in stock; 2946-221-505-ND",
-        "checked_on": "2026-09-23"
+        "checked_on": "2026-09-23",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "2946-221-505-ND",
+          "catalog_label": "DigiKey Part Number",
+          "manufacturer_part_number": "221-505",
+          "description": "CARRIER SCREW MNT 5POS WHITE",
+          "description_field": "Description",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.digikey.com/en/products/detail/wago-corporation/221-505/15568477",
+          "image": {
+            "src": "assets/materials/carriers.jpg",
+            "alt": "Connector Mounting Carrier For Terminal Blocks",
+            "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/030/804/749/MFG_221-505_sml.jpg",
+            "caption": "Retailer listing photo; may represent the product family."
+          }
+        }
       },
       {
         "material_ids": [
@@ -1315,11 +1395,30 @@
         "quantity": 13,
         "unit": "ft",
         "pieces_per_unit": 1,
-        "unit_price_usd": 1.53,
-        "extended_usd": 19.89,
+        "unit_price_usd": 1.46,
+        "extended_usd": 18.98,
         "url": "https://www.homedepot.com/p/Southwire-By-the-Foot-14-3-300-Volt-CU-Black-Flexible-Portable-Power-SJOOW-Cord-55808699/204633006",
-        "availability_note": "Minimum 6 ft; order one continuous 13 ft length",
-        "checked_on": "2026-09-23"
+        "availability_note": "Minimum 6 ft; order one continuous 13 ft length. Champaign pickup only; delivery unavailable for ZIP 61820.",
+        "checked_on": "2026-09-29",
+        "minimum_order_quantity": 6,
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "204633006",
+          "catalog_label": "Internet #",
+          "manufacturer_part_number": "55808699",
+          "description": "(By-the-Foot) 14/3 300-Volt CU Black Flexible Portable Power SJOOW Cord",
+          "description_field": "Product title",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.homedepot.com/p/Southwire-By-the-Foot-14-3-300-Volt-CU-Black-Flexible-Portable-Power-SJOOW-Cord-55808699/204633006",
+          "image": {
+            "src": "assets/materials/cord.jpg",
+            "alt": "Southwire (By-the-Foot) 14/3 300-Volt CU Black Flexible Portable Power SJOOW Cord",
+            "source_image": "https://images.thdstatic.com/productImages/d3b3ac19-f3ab-4f5b-b670-89de27696ab9/svn/southwire-portable-power-cords-55808699-64_600.jpg",
+            "caption": "Photo from the selected retailer listing."
+          },
+          "fulfillment_note": "Champaign store pickup required; delivery unavailable for ZIP 61820. Arrange collection before submitting.",
+          "store_sku": "562473"
+        }
       },
       {
         "material_ids": [
@@ -1331,11 +1430,28 @@
         "quantity": 1,
         "unit": "each",
         "pieces_per_unit": 1,
-        "unit_price_usd": 3.96,
-        "extended_usd": 3.96,
+        "unit_price_usd": 3.65,
+        "extended_usd": 3.65,
         "url": "https://www.homedepot.com/p/Leviton-15-Amp-125-Volt-3-Wire-Plug-Yellow-515PV-YL-R10-515PV-0YL/309610976",
         "availability_note": "Store / delivery availability varies",
-        "checked_on": "2026-09-23"
+        "checked_on": "2026-09-23",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "309610976",
+          "catalog_label": "Internet #",
+          "manufacturer_part_number": "R10-515PV-0YL",
+          "description": "15 Amp 125-Volt 3-Wire Plug, Yellow 515PV-YL",
+          "description_field": "Product title",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.homedepot.com/p/Leviton-15-Amp-125-Volt-3-Wire-Plug-Yellow-515PV-YL-R10-515PV-0YL/309610976",
+          "image": {
+            "src": "assets/materials/request-309610976.jpg",
+            "alt": "Leviton 15 Amp 125-Volt 3-Wire Plug, Yellow 515PV-YL",
+            "source_image": "https://images.thdstatic.com/productImages/24bc6ef0-ad4d-4fc8-a722-4b3f3dc0cc18/svn/leviton-electrical-plugs-connectors-r10-515pv-0yl-64_600.jpg",
+            "caption": "Photo from the selected retailer listing."
+          },
+          "store_sku": "1004406874"
+        }
       },
       {
         "material_ids": [
@@ -1351,7 +1467,23 @@
         "extended_usd": 2.88,
         "url": "https://www.digikey.com/en/products/detail/heyco-products-corporation/M3231/15906457",
         "availability_note": "13,830 DigiKey direct stock; separate 8463 locknut required.",
-        "checked_on": "2026-09-29"
+        "checked_on": "2026-09-29",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "3720-M3231-ND",
+          "catalog_label": "DigiKey Part Number",
+          "manufacturer_part_number": "M3231",
+          "description": "CABLE GRIP 4.32-11.43MM 1/2\" NPT",
+          "description_field": "Description",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.digikey.com/en/products/detail/heyco-products-corporation/M3231/15906457",
+          "image": {
+            "src": "assets/materials/cord-glands-m3231.jpg",
+            "alt": "Cable Grip Polyamide (PA66), Nylon 6/6 1/2\" NPT Black",
+            "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/003/118/482/MFG_M5020_sml%28200x200%29.jpg",
+            "caption": "Retailer listing photo; may represent the product family."
+          }
+        }
       },
       {
         "material_ids": [
@@ -1360,14 +1492,33 @@
         "sku": "22955999 · black 14 AWG stranded",
         "supplier": "Home Depot",
         "seller": "Home Depot",
-        "quantity": 4,
+        "quantity": 6,
         "unit": "ft",
         "pieces_per_unit": 1,
-        "unit_price_usd": 0.42,
-        "extended_usd": 1.68,
+        "unit_price_usd": 0.95,
+        "extended_usd": 5.7,
         "url": "https://www.homedepot.com/p/204632031",
-        "availability_note": "One continuous 4 ft length; not a 100 ft roll",
-        "checked_on": "2026-09-23"
+        "availability_note": "Minimum online order 6 ft; one continuous length, with spare wire beyond the 1 m cutting allowance. Champaign pickup only; delivery unavailable for ZIP 61820.",
+        "checked_on": "2026-09-29",
+        "minimum_order_quantity": 6,
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "204632031",
+          "catalog_label": "Internet #",
+          "manufacturer_part_number": "22955999",
+          "description": "(By-the-Foot) 14 Black Stranded CU THHN Wire",
+          "description_field": "Product title",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.homedepot.com/p/Southwire-By-the-Foot-14-Black-Stranded-CU-THHN-Wire-22955999/204632031",
+          "image": {
+            "src": "assets/materials/request-204632031.jpg",
+            "alt": "Southwire (By-the-Foot) 14 Black Stranded CU THHN Wire",
+            "source_image": "https://images.thdstatic.com/productImages/434c595c-79e3-49c0-9855-ded570829f10/svn/southwire-thhn-wires-22955999-64_600.jpg",
+            "caption": "Photo from the selected retailer listing."
+          },
+          "fulfillment_note": "Champaign store pickup required; delivery unavailable for ZIP 61820. Arrange collection before submitting.",
+          "store_sku": "320161"
+        }
       },
       {
         "material_ids": [
@@ -1376,14 +1527,33 @@
         "sku": "22959199 · green 14 AWG stranded",
         "supplier": "Home Depot",
         "seller": "Home Depot",
-        "quantity": 4,
+        "quantity": 6,
         "unit": "ft",
         "pieces_per_unit": 1,
-        "unit_price_usd": 0.42,
-        "extended_usd": 1.68,
+        "unit_price_usd": 0.91,
+        "extended_usd": 5.46,
         "url": "https://www.homedepot.com/p/204632154",
-        "availability_note": "One continuous 4 ft length; not a 100 ft roll",
-        "checked_on": "2026-09-23"
+        "availability_note": "Minimum online order 6 ft; one continuous length, with spare wire beyond the 1 m cutting allowance. Champaign pickup only; delivery unavailable for ZIP 61820.",
+        "checked_on": "2026-09-29",
+        "minimum_order_quantity": 6,
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "204632154",
+          "catalog_label": "Internet #",
+          "manufacturer_part_number": "22959199",
+          "description": "(By-the-Foot) 14 Green Stranded CU THHN Wire",
+          "description_field": "Product title",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.homedepot.com/p/Southwire-By-the-Foot-14-Green-Stranded-CU-THHN-Wire-22959199/204632154",
+          "image": {
+            "src": "assets/materials/request-204632154.jpg",
+            "alt": "Southwire (By-the-Foot) 14 Green Stranded CU THHN Wire",
+            "source_image": "https://images.thdstatic.com/productImages/baf109b0-a292-4a06-b75c-ed63feb8ce25/svn/southwire-thhn-wires-22959199-64_600.jpg",
+            "caption": "Photo from the selected retailer listing."
+          },
+          "fulfillment_note": "Champaign store pickup required; delivery unavailable for ZIP 61820. Arrange collection before submitting.",
+          "store_sku": "320242"
+        }
       },
       {
         "material_ids": [
@@ -1399,7 +1569,24 @@
         "extended_usd": 3.63,
         "url": "https://www.homedepot.com/p/202522492",
         "availability_note": "15 pieces supplied for a single pack price",
-        "checked_on": "2026-09-23"
+        "checked_on": "2026-09-23",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "202522492",
+          "catalog_label": "Internet #",
+          "manufacturer_part_number": "15-104",
+          "description": "16 - 14 AWG #8 - 10 Stud Size Ring Terminals in Blue (15-Pack)",
+          "description_field": "Product title",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.homedepot.com/p/Gardner-Bender-16-14-AWG-8-10-Stud-Size-Ring-Terminals-in-Blue-15-Pack-15-104/202522492",
+          "image": {
+            "src": "assets/materials/request-202522492.jpg",
+            "alt": "Gardner Bender 16 - 14 AWG #8 - 10 Stud Size Ring Terminals in Blue (15-Pack)",
+            "source_image": "https://images.thdstatic.com/productImages/bc51fdfe-0cc2-46df-8edf-3b1157de5ed9/svn/gardner-bender-wire-connectors-wire-terminals-15-104-64_600.jpg",
+            "caption": "Photo from the selected retailer listing."
+          },
+          "store_sku": "410578"
+        }
       },
       {
         "material_ids": [
@@ -1415,7 +1602,23 @@
         "extended_usd": 4.08,
         "url": "https://www.digikey.com/en/products/detail/panduit-corp/TM2S8-C/1306625",
         "availability_note": "14,724 listed in stock; 298-10245-ND; individual pieces",
-        "checked_on": "2026-09-23"
+        "checked_on": "2026-09-23",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "298-10245-ND",
+          "catalog_label": "DigiKey Part Number",
+          "manufacturer_part_number": "TM2S8-C",
+          "description": "CABLE TIE HLDR DUAL SCREW #8 NAT",
+          "description_field": "Description",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.digikey.com/en/products/detail/panduit-corp/TM2S8-C/1306625",
+          "image": {
+            "src": "assets/materials/request-298-10245-ND.jpg",
+            "alt": "Dual Opening Cable Tie Holder Natural Screw, #8 (M4)",
+            "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/010/131/786/TM2S8-C_sml.jpg",
+            "caption": "Retailer listing photo; may represent the product family."
+          }
+        }
       },
       {
         "material_ids": [
@@ -1431,7 +1634,23 @@
         "extended_usd": 3.16,
         "url": "https://www.digikey.com/en/products/detail/panduit-corp/PLT2S-C/280043",
         "availability_note": "113,092 listed in stock; 298-1030-ND; ten-piece price tier",
-        "checked_on": "2026-09-23"
+        "checked_on": "2026-09-23",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "298-1030-ND",
+          "catalog_label": "DigiKey Part Number",
+          "manufacturer_part_number": "PLT2S-C",
+          "description": "CBL TIE LOCKING NAT 50LB 7.40\"",
+          "description_field": "Description",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.digikey.com/en/products/detail/panduit-corp/PLT2S-C/280043",
+          "image": {
+            "src": "assets/materials/request-298-1030-ND.jpg",
+            "alt": "Standard, Locking Natural 1.88\" (47.75mm) 0.190\" (4.83mm) 50 lbs (22.68 kg)",
+            "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/002/673/443/PLT%20SERIES%20NATURAL_sml%28200x200%29.jpg",
+            "caption": "Retailer listing photo; may represent the product family."
+          }
+        }
       },
       {
         "material_ids": [
@@ -1443,11 +1662,28 @@
         "quantity": 1,
         "unit": "roll",
         "pieces_per_unit": 1,
-        "unit_price_usd": 10.77,
-        "extended_usd": 10.77,
+        "unit_price_usd": 10.27,
+        "extended_usd": 10.27,
         "url": "https://www.homedepot.com/p/202261925",
         "availability_note": "One roll supplies four blanks totaling 1.30 m",
-        "checked_on": "2026-09-23"
+        "checked_on": "2026-09-23",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "202261925",
+          "catalog_label": "Internet #",
+          "manufacturer_part_number": "90340",
+          "description": "12 ft. x 3/4 in. One-Wrap Strap",
+          "description_field": "Product title",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.homedepot.com/p/VELCRO-12-ft-x-3-4-in-One-Wrap-Strap-90340/202261925",
+          "image": {
+            "src": "assets/materials/request-202261925.jpg",
+            "alt": "VELCRO 12 ft. x 3/4 in. One-Wrap Strap",
+            "source_image": "https://images.thdstatic.com/productImages/096296cd-c1c6-47e2-a1c6-6da40e60e11b/svn/velcro-hook-and-loop-90340-64_600.jpg",
+            "caption": "Photo from the selected retailer listing."
+          },
+          "store_sku": "734394"
+        }
       },
       {
         "material_ids": [
@@ -1459,12 +1695,29 @@
         "quantity": 2,
         "unit": "pack",
         "pieces_per_unit": 4,
-        "unit_price_usd": 1.75,
-        "extended_usd": 3.5,
+        "unit_price_usd": 1.95,
+        "extended_usd": 3.9,
         "url": "https://www.homedepot.com/p/321071719",
         "availability_note": "6 carrier fixings installed; buy 8, retain 2 spare. Q0 now uses M5 posts.",
         "installed_quantity": 6,
-        "checked_on": "2026-09-24"
+        "checked_on": "2026-09-24",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "321071719",
+          "catalog_label": "Internet #",
+          "manufacturer_part_number": "837761",
+          "description": "M3-0.5 x 12mm Zinc Pan Head Phillips Drive Machine Screw 4-Pieces",
+          "description_field": "Product title",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.homedepot.com/p/Everbilt-M3-0-5-x-12mm-Zinc-Pan-Head-Phillips-Drive-Machine-Screw-4-Pieces-837761/321071719",
+          "image": {
+            "src": "assets/materials/request-321071719.jpg",
+            "alt": "Everbilt M3-0.5 x 12mm Zinc Pan Head Phillips Drive Machine Screw 4-Pieces",
+            "source_image": "https://images.thdstatic.com/productImages/e11a3e1a-79a6-4829-84bb-225ddc758fab/svn/everbilt-machine-screws-837761-64_600.jpg",
+            "caption": "Photo from the selected retailer listing."
+          },
+          "store_sku": "1008004748"
+        }
       },
       {
         "material_ids": [
@@ -1476,12 +1729,28 @@
         "quantity": 10,
         "unit": "each",
         "pieces_per_unit": 1,
-        "unit_price_usd": 0.11,
-        "extended_usd": 1.1,
+        "unit_price_usd": 0.084,
+        "extended_usd": 0.84,
         "url": "https://www.digikey.com/en/products/detail/keystone-electronics/4692/316261",
         "availability_note": "6 carrier washers installed; retain 4 spare from the ten-piece price tier.",
         "installed_quantity": 6,
-        "checked_on": "2026-09-23"
+        "checked_on": "2026-09-23",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "36-4692-ND",
+          "catalog_label": "DigiKey Part Number",
+          "manufacturer_part_number": "4692",
+          "description": "WASHER FLAT #4 STEEL",
+          "description_field": "Description",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.digikey.com/en/products/detail/keystone-electronics/4692/316261",
+          "image": {
+            "src": "assets/materials/request-36-4692-ND.jpg",
+            "alt": "#4 Flat Washer 0.025\" (0.64mm) Thick Steel Zinc",
+            "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/100/964/846/MFG_36_4692_sml.jpg",
+            "caption": "Retailer listing photo; may represent the product family."
+          }
+        }
       },
       {
         "material_ids": [
@@ -1498,7 +1767,24 @@
         "url": "https://www.homedepot.com/p/321071866",
         "availability_note": "6 carrier fixings installed; buy 8, retain 2 spare. Q0 now uses M5 posts.",
         "installed_quantity": 6,
-        "checked_on": "2026-09-23"
+        "checked_on": "2026-09-23",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "321071866",
+          "catalog_label": "Internet #",
+          "manufacturer_part_number": "837221",
+          "description": "M3-0.5 Stainless Steel Lock Nut 4-Pieces",
+          "description_field": "Product title",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.homedepot.com/p/Everbilt-M3-0-5-Stainless-Steel-Lock-Nut-4-Pieces-837221/321071866",
+          "image": {
+            "src": "assets/materials/request-321071866.jpg",
+            "alt": "Everbilt M3-0.5 Stainless Steel Lock Nut 4-Pieces",
+            "source_image": "https://images.thdstatic.com/productImages/8645c30e-ec74-44c2-a69a-811efaf864d5/svn/everbilt-lock-nuts-837221-64_600.jpg",
+            "caption": "Photo from the selected retailer listing."
+          },
+          "store_sku": "1008004776"
+        }
       },
       {
         "material_ids": [
@@ -1510,12 +1796,29 @@
         "quantity": 2,
         "unit": "pack",
         "pieces_per_unit": 4,
-        "unit_price_usd": 1.75,
-        "extended_usd": 3.5,
+        "unit_price_usd": 1.95,
+        "extended_usd": 3.9,
         "url": "https://www.homedepot.com/p/321071623",
         "availability_note": "6 cable anchors + 1 DIN rail fixing; 8 purchased, 7 installed.",
         "installed_quantity": 7,
-        "checked_on": "2026-09-24"
+        "checked_on": "2026-09-24",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "321071623",
+          "catalog_label": "Internet #",
+          "manufacturer_part_number": "836351",
+          "description": "M4-0.7 x 10mm Zinc Pan Head Phillips Drive Machine Screw 4-Pieces",
+          "description_field": "Product title",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.homedepot.com/p/Everbilt-M4-0-7-x-10mm-Zinc-Pan-Head-Phillips-Drive-Machine-Screw-4-Pieces-836351/321071623",
+          "image": {
+            "src": "assets/materials/request-321071623.jpg",
+            "alt": "Everbilt M4-0.7 x 10mm Zinc Pan Head Phillips Drive Machine Screw 4-Pieces",
+            "source_image": "https://images.thdstatic.com/productImages/3014a72d-51e6-4f30-b1d3-5cf63de9926f/svn/everbilt-machine-screws-836351-64_600.jpg",
+            "caption": "Photo from the selected retailer listing."
+          },
+          "store_sku": "1008004701"
+        }
       },
       {
         "material_ids": [
@@ -1532,7 +1835,23 @@
         "url": "https://www.homedepot.com/p/204801237",
         "availability_note": "6 anchor washers + 3 rail spacer/head/nut washers; 50-piece pack covers all.",
         "installed_quantity": 9,
-        "checked_on": "2026-09-23"
+        "checked_on": "2026-09-23",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "204801237",
+          "catalog_label": "Internet #",
+          "manufacturer_part_number": "4118",
+          "description": "Stainless Steel Metric Flat Washer (M4 Screw Size)",
+          "description_field": "Product title",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.homedepot.com/p/Hillman-Stainless-Steel-Metric-Flat-Washer-M4-Screw-Size-4118/204801237",
+          "image": {
+            "src": "assets/materials/request-204801237.jpg",
+            "alt": "Hillman Stainless Steel Metric Flat Washer (M4 Screw Size)",
+            "source_image": "https://images.thdstatic.com/productImages/a12d6281-480d-4302-a2af-68d70b241dff/svn/hillman-flat-washers-4118-64_600.jpg",
+            "caption": "Photo from the selected retailer listing."
+          }
+        }
       },
       {
         "material_ids": [
@@ -1549,7 +1868,24 @@
         "url": "https://www.homedepot.com/p/321071795",
         "availability_note": "6 cable anchors + 1 DIN rail fixing; 8 purchased, 7 installed.",
         "installed_quantity": 7,
-        "checked_on": "2026-09-23"
+        "checked_on": "2026-09-23",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "321071795",
+          "catalog_label": "Internet #",
+          "manufacturer_part_number": "837171",
+          "description": "M4-0.7 Stainless Steel Lock Nut 4-Pieces",
+          "description_field": "Product title",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.homedepot.com/p/Everbilt-M4-0-7-Stainless-Steel-Lock-Nut-4-Pieces-837171/321071795",
+          "image": {
+            "src": "assets/materials/request-321071795.jpg",
+            "alt": "Everbilt M4-0.7 Stainless Steel Lock Nut 4-Pieces",
+            "source_image": "https://images.thdstatic.com/productImages/8645c30e-ec74-44c2-a69a-811efaf864d5/svn/everbilt-lock-nuts-837171-64_600.jpg",
+            "caption": "Photo from the selected retailer listing."
+          },
+          "store_sku": "1008005715"
+        }
       },
       {
         "material_ids": [
@@ -1566,7 +1902,23 @@
         "url": "https://www.digikey.com/en/products/detail/keystone-electronics/9911/317331",
         "availability_note": "Two dedicated #10 bond studs: panel and Q0 rail/bracket.",
         "installed_quantity": 2,
-        "checked_on": "2026-09-23"
+        "checked_on": "2026-09-23",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "36-9911-ND",
+          "catalog_label": "DigiKey Part Number",
+          "manufacturer_part_number": "9911",
+          "description": "MACH SCREW PAN PHILLIPS #10-32",
+          "description_field": "Description",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.digikey.com/en/products/detail/keystone-electronics/9911/317331",
+          "image": {
+            "src": "assets/materials/request-36-9911-ND.jpg",
+            "alt": "#10-32 Pan Head Machine Screw Phillips Drive Stainless Steel",
+            "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/200/140/423/MFG_99xy_sml.jpg",
+            "caption": "Retailer listing photo; may represent the product family."
+          }
+        }
       },
       {
         "material_ids": [
@@ -1578,12 +1930,28 @@
         "quantity": 4,
         "unit": "each",
         "pieces_per_unit": 1,
-        "unit_price_usd": 0.1,
-        "extended_usd": 0.4,
+        "unit_price_usd": 0.12,
+        "extended_usd": 0.48,
         "url": "https://www.digikey.com/en/products/detail/keystone-electronics/4705/316276",
         "availability_note": "Two PE bond stacks; all 4 purchased pieces installed.",
         "installed_quantity": 4,
-        "checked_on": "2026-09-23"
+        "checked_on": "2026-09-23",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "36-4705-ND",
+          "catalog_label": "DigiKey Part Number",
+          "manufacturer_part_number": "4705",
+          "description": "NUT HEX STEEL #10-32",
+          "description_field": "Description",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.digikey.com/en/products/detail/keystone-electronics/4705/316276",
+          "image": {
+            "src": "assets/materials/request-36-4705-ND.jpg",
+            "alt": "#10-32 Hex Nut 0.375\" (9.53mm) 3/8\" Steel",
+            "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/100/960/390/MFG_36_4705_sml.jpg",
+            "caption": "Retailer listing photo; may represent the product family."
+          }
+        }
       },
       {
         "material_ids": [
@@ -1600,7 +1968,24 @@
         "url": "https://www.homedepot.com/p/317479556",
         "availability_note": "5 PE-stud contacts + 6 proposed M5 post contact/retention washers; 18-piece pack. Verify M5 fit and approved bonding stack.",
         "installed_quantity": 11,
-        "checked_on": "2026-09-23"
+        "checked_on": "2026-09-23",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "317479556",
+          "catalog_label": "Internet #",
+          "manufacturer_part_number": "827311",
+          "description": "#10 Zinc-Plated External Tooth Lock Washer (18-Piece)",
+          "description_field": "Product title",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.homedepot.com/p/Everbilt-10-Zinc-Plated-External-Tooth-Lock-Washer-18-Piece-827311/317479556",
+          "image": {
+            "src": "assets/materials/request-317479556.jpg",
+            "alt": "Everbilt #10 Zinc-Plated External Tooth Lock Washer (18-Piece)",
+            "source_image": "https://images.thdstatic.com/productImages/91ed5b6d-2e2c-4514-896b-ac86d5f95b19/svn/everbilt-external-tooth-lock-washers-827311-64_600.jpg",
+            "caption": "Photo from the selected retailer listing."
+          },
+          "store_sku": "1006562749"
+        }
       },
       {
         "material_ids": [
@@ -1617,7 +2002,23 @@
         "url": "https://www.digikey.com/en/products/detail/keystone-electronics/4703/316274",
         "availability_note": "Two PE bond stacks; all 4 purchased pieces installed.",
         "installed_quantity": 4,
-        "checked_on": "2026-09-23"
+        "checked_on": "2026-09-23",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "36-4703-ND",
+          "catalog_label": "DigiKey Part Number",
+          "manufacturer_part_number": "4703",
+          "description": "WASHER FLAT #10 STEEL",
+          "description_field": "Description",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.digikey.com/en/products/detail/keystone-electronics/4703/316274",
+          "image": {
+            "src": "assets/materials/request-36-4703-ND.jpg",
+            "alt": "#10 Flat Washer 0.033\" (0.84mm) Thick Steel Zinc",
+            "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/200/136/319/MFG_4703_sml.jpg",
+            "caption": "Retailer listing photo; may represent the product family."
+          }
+        }
       },
       {
         "material_ids": [
@@ -1629,12 +2030,29 @@
         "quantity": 2,
         "unit": "pack",
         "pieces_per_unit": 2,
-        "unit_price_usd": 1.25,
-        "extended_usd": 2.5,
+        "unit_price_usd": 2.97,
+        "extended_usd": 5.94,
         "url": "https://www.homedepot.com/p/323370995",
         "availability_note": "Panel mounting; 4 screws supplied and installed. Not included with the enclosure. Store price / delivery varies by location.",
         "installed_quantity": 4,
-        "checked_on": "2026-09-24"
+        "checked_on": "2026-09-24",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "323370995",
+          "catalog_label": "Internet #",
+          "manufacturer_part_number": "863468",
+          "description": "M5-0.8x10mm Stainless Steel Pan Head Phillips Drive Machine Screw 2-Pieces",
+          "description_field": "Product title",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.homedepot.com/p/M5-0-8x10mm-Stainless-Steel-Pan-Head-Phillips-Drive-Machine-Screw-2-Pieces-863468/323370995",
+          "image": {
+            "src": "assets/materials/request-323370995.jpg",
+            "alt": "Everbilt M5-0.8x10mm Stainless Steel Pan Head Phillips Drive Machine Screw 2-Pieces",
+            "source_image": "https://images.thdstatic.com/productImages/4d76cdbf-922e-40b4-9f96-a3b8c8139e3b/svn/machine-screws-863468-64_600.jpg",
+            "caption": "Photo from the selected retailer listing."
+          },
+          "store_sku": "750756"
+        }
       },
       {
         "material_ids": [
@@ -1650,7 +2068,23 @@
         "extended_usd": 9.39,
         "url": "https://www.digikey.com/en/products/detail/alpha-wire/F2213-4-BK105/3718418",
         "availability_note": "F2213/4BK105-ND; 1,182 listed in stock; one 4 ft stick",
-        "checked_on": "2026-09-23"
+        "checked_on": "2026-09-23",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "F2213/4BK105-ND",
+          "catalog_label": "DigiKey Part Number",
+          "manufacturer_part_number": "F2213/4 BK105",
+          "description": "HEATSHRINK 3/4\" X 4' BLACK",
+          "description_field": "Description",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.digikey.com/en/products/detail/alpha-wire/F2213-4-BK105/3718418",
+          "image": {
+            "src": "assets/materials/usb-sleeve-fit221.jpg",
+            "alt": "Heat Shrink Tubing, Flexible 0.750\" (19.05mm) 2 to 1 Black 4.00' (1.22m)",
+            "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/010/223/260/F221B1IN-BK_sml.jpg",
+            "caption": "Retailer listing photo; may represent the product family."
+          }
+        }
       },
       {
         "material_ids": [
@@ -1666,7 +2100,23 @@
         "extended_usd": 0.14,
         "url": "https://www.digikey.com/en/products/detail/heyco-products-corporation/3104/15907204",
         "availability_note": "3720-3104-ND; 6,537 listed in stock; quantity-one price. Verify actual passage and stock at checkout.",
-        "checked_on": "2026-09-23"
+        "checked_on": "2026-09-23",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "3720-3104-ND",
+          "catalog_label": "DigiKey Part Number",
+          "manufacturer_part_number": "3104",
+          "description": "BUSHING 0.690\" PA66 BLACK",
+          "description_field": "Description",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.digikey.com/en/products/detail/heyco-products-corporation/3104/15907204",
+          "image": {
+            "src": "assets/materials/request-3720-3104-ND.jpg",
+            "alt": "Circular - 0.875\" (22.22mm) Bushing 0.690\" (17.53mm) Black",
+            "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/003/151/103/3720-2840_sml%28200x200%29.jpg",
+            "caption": "Retailer listing photo; may represent the product family."
+          }
+        }
       },
       {
         "material_ids": [
@@ -1682,7 +2132,23 @@
         "extended_usd": 4.79,
         "url": "https://www.digikey.com/en/products/detail/phoenix-contact/1207639/10645207",
         "availability_note": "2,061 in DigiKey direct stock; buy full 250 mm rail, cut 60 mm.",
-        "checked_on": "2026-09-29"
+        "checked_on": "2026-09-29",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "277-1207639-ND",
+          "catalog_label": "DigiKey Part Number",
+          "manufacturer_part_number": "1207639",
+          "description": "DIN RAIL 35MMX7MM SLOT 9.8\" STL",
+          "description_field": "Description",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.digikey.com/en/products/detail/phoenix-contact/1207639/10645207",
+          "image": {
+            "src": "assets/materials/breaker-rail-1207639.jpg",
+            "alt": "Din Rail Top Hat 1.378\" W x 0.295\" H (35.00mm x 7.50mm) Slotted Steel 9.843\" (250.00mm)",
+            "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/100/372/232/1207639_sml.jpg",
+            "caption": "Retailer listing photo; may represent the product family."
+          }
+        }
       },
       {
         "material_ids": [
@@ -1698,7 +2164,23 @@
         "extended_usd": 1.24,
         "url": "https://www.digikey.com/en/products/detail/altech-corporation/CA802/8547037",
         "availability_note": "6,001 in DigiKey direct stock; two 8 mm end stops.",
-        "checked_on": "2026-09-29"
+        "checked_on": "2026-09-29",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "1920-1246-ND",
+          "catalog_label": "DigiKey Part Number",
+          "manufacturer_part_number": "CA802",
+          "description": "CONN TERM BLK END STOP",
+          "description_field": "Description",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.digikey.com/en/products/detail/altech-corporation/CA802/8547037",
+          "image": {
+            "src": "assets/materials/breaker-stop-ca802.jpg",
+            "alt": "Connector End Stop For Multiple Series",
+            "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/200/499/564/MFG_CA802_sml.jpg",
+            "caption": "Retailer listing photo; may represent the product family."
+          }
+        }
       },
       {
         "material_ids": [
@@ -1714,7 +2196,23 @@
         "extended_usd": 0.64,
         "url": "https://www.digikey.com/en/products/detail/heyco-products-corporation/8463/15906932",
         "availability_note": "66,153 in DigiKey direct stock; one per M3231.",
-        "checked_on": "2026-09-29"
+        "checked_on": "2026-09-29",
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "3720-8463-ND",
+          "catalog_label": "DigiKey Part Number",
+          "manufacturer_part_number": "8463",
+          "description": "NLN 1/2 NPT BLACK",
+          "description_field": "Description",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.digikey.com/en/products/detail/heyco-products-corporation/8463/15906932",
+          "image": {
+            "src": "assets/materials/gland-nut-8463.jpg",
+            "alt": "Locknut For Cable Glands",
+            "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/003/117/307/MFG_M8438_sml%28200x200%29.jpg",
+            "caption": "Retailer listing photo; may represent the product family."
+          }
+        }
       },
       {
         "material_ids": [
@@ -1731,7 +2229,23 @@
         "url": "https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/970650581/6174896",
         "availability_note": "67 in DigiKey direct stock; 11 mm internal thread per end.",
         "checked_on": "2026-09-29",
-        "installed_quantity": 2
+        "installed_quantity": 2,
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "732-10676-ND",
+          "catalog_label": "DigiKey Part Number",
+          "manufacturer_part_number": "970650581",
+          "description": "HEX STANDOFF M5 STEEL 65MM",
+          "description_field": "Description",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/970650581/6174896",
+          "image": {
+            "src": "assets/materials/breaker-posts-970650581.jpg",
+            "alt": "Hex Standoff Threaded M5 Steel 2.559\" (65.00mm)",
+            "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/002/447/825/MFG_WA-SSTII-Series-25-95_sml%28200x200%29.jpg",
+            "caption": "Retailer listing photo; may represent the product family."
+          }
+        }
       },
       {
         "material_ids": [
@@ -1748,7 +2262,24 @@
         "url": "https://www.homedepot.com/p/321071519",
         "availability_note": "Champaign: 8 packs in stock; four screws installed.",
         "checked_on": "2026-09-29",
-        "installed_quantity": 4
+        "installed_quantity": 4,
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "321071519",
+          "catalog_label": "Internet #",
+          "manufacturer_part_number": "836521",
+          "description": "M5-0.8 x 12mm Zinc Pan Head Phillips Drive Machine Screw 4-Pieces",
+          "description_field": "Product title",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.homedepot.com/p/Everbilt-M5-0-8-x-12mm-Zinc-Pan-Head-Phillips-Drive-Machine-Screw-4-Pieces-836521/321071519",
+          "image": {
+            "src": "assets/materials/screw-m5-836521.jpg",
+            "alt": "Everbilt M5-0.8 x 12mm Zinc Pan Head Phillips Drive Machine Screw 4-Pieces",
+            "source_image": "https://images.thdstatic.com/productImages/cc1fb05b-74f7-4244-a4e7-254dfa97432f/svn/everbilt-machine-screws-836521-64_600.jpg",
+            "caption": "Photo from the selected retailer listing."
+          },
+          "store_sku": "1008004655"
+        }
       },
       {
         "material_ids": [
@@ -1765,9 +2296,169 @@
         "url": "https://www.homedepot.com/p/323371831",
         "availability_note": "Champaign: 4 packs in stock; buy 8 washers, install 6.",
         "checked_on": "2026-09-29",
-        "installed_quantity": 6
+        "installed_quantity": 6,
+        "price_checked_on": "2026-09-29",
+        "request": {
+          "catalog_number": "323371831",
+          "catalog_label": "Internet #",
+          "manufacturer_part_number": "864408",
+          "description": "M5 Stainless Steel Flat Washer 4-Pieces",
+          "description_field": "Product title",
+          "verified_on": "2026-09-29",
+          "verified_url": "https://www.homedepot.com/p/M5-Stainless-Steel-Flat-Washer-4-Pieces-864408/323371831",
+          "image": {
+            "src": "assets/materials/washer-m5-864408.jpg",
+            "alt": "Everbilt M5 Stainless Steel Flat Washer 4-Pieces",
+            "source_image": "https://images.thdstatic.com/productImages/954da34f-9595-4f1f-bd86-a67ce8d10108/svn/flat-washers-864408-64_600.jpg",
+            "caption": "Photo from the selected retailer listing."
+          },
+          "store_sku": "366757"
+        }
       }
     ],
-    "material_subtotal_usd": 262.86
+    "material_subtotal_usd": 273.0,
+    "request_form": {
+      "consumable_or_under_one_year": null,
+      "consumable_note": "Professor to confirm",
+      "repair_part_or_service": false,
+      "no_delivery_expected": false,
+      "classification_basis": "New assembly using physical goods. Consumable / under-one-year classification is reserved for the professor."
+    },
+    "price_refresh": {
+      "checked_on": "2026-09-29",
+      "previous_material_subtotal_usd": 262.86,
+      "changes": [
+        {
+          "sku": "55808699 · 14/3 SJOOW",
+          "old": [
+            13,
+            1.53,
+            19.89
+          ],
+          "new": [
+            13,
+            1.46,
+            18.98
+          ]
+        },
+        {
+          "sku": "515PV-YL",
+          "old": [
+            1,
+            3.96,
+            3.96
+          ],
+          "new": [
+            1,
+            3.65,
+            3.65
+          ]
+        },
+        {
+          "sku": "22955999 · black 14 AWG stranded",
+          "old": [
+            4,
+            0.42,
+            1.68
+          ],
+          "new": [
+            6,
+            0.95,
+            5.7
+          ]
+        },
+        {
+          "sku": "22959199 · green 14 AWG stranded",
+          "old": [
+            4,
+            0.42,
+            1.68
+          ],
+          "new": [
+            6,
+            0.91,
+            5.46
+          ]
+        },
+        {
+          "sku": "90340 · 12 ft × 3/4 in",
+          "old": [
+            1,
+            10.77,
+            10.77
+          ],
+          "new": [
+            1,
+            10.27,
+            10.27
+          ]
+        },
+        {
+          "sku": "837761 · M3-0.5 × 12 zinc pan screws",
+          "old": [
+            2,
+            1.75,
+            3.5
+          ],
+          "new": [
+            2,
+            1.95,
+            3.9
+          ]
+        },
+        {
+          "sku": "4692 · M3 / #4 zinc-plated steel flat washers",
+          "old": [
+            10,
+            0.11,
+            1.1
+          ],
+          "new": [
+            10,
+            0.084,
+            0.84
+          ]
+        },
+        {
+          "sku": "836351 · M4-0.7 × 10 zinc pan screws",
+          "old": [
+            2,
+            1.75,
+            3.5
+          ],
+          "new": [
+            2,
+            1.95,
+            3.9
+          ]
+        },
+        {
+          "sku": "4705 · #10-32 zinc-plated steel plain nuts",
+          "old": [
+            4,
+            0.1,
+            0.4
+          ],
+          "new": [
+            4,
+            0.12,
+            0.48
+          ]
+        },
+        {
+          "sku": "863468 · M5-0.8 × 10 stainless pan screws",
+          "old": [
+            2,
+            1.25,
+            2.5
+          ],
+          "new": [
+            2,
+            2.97,
+            5.94
+          ]
+        }
+      ]
+    }
   }
 }

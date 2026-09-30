@@ -3,6 +3,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { marked } = require('marked');
+const { renderPurchaseRequest } = require('./purchase_request.cjs');
 const root = path.resolve(__dirname, '..');
 const bom = JSON.parse(fs.readFileSync(path.join(root, 'procurement.json')));
 const owned = bom.items.filter(p => p.availability === 'owned');
@@ -47,6 +48,7 @@ function materialPrice(p) {
  return `<div class="material-price" data-material-id="${escape(p.id)}" data-subtotal-usd="${(subtotal/100).toFixed(2)}"><strong class="price-total">$${(subtotal/100).toFixed(2)}</strong> <span class="price-label">subtotal</span><div class="price-breakdown">${breakdown}</div></div>`;
 }
 let text = `# Materials checklist\n\n**□ ${toBuy.length} purchase groups · ◇ ${toFabricate.length} reuse / fabrication group · ✓ ${owned.length} confirmed owned groups${kit.length ? ` · ✓ ${kit.length} kit supplied` : ''}**\n\n${bom.scope}\n\n**Inventory basis:** ${bom.inventory_basis}\n\nA check means on hand, not electrically approved. Counts refer to material groups, not individual pieces. Needed quantities and vendor pack sizes differ. The user confirms the existing USB cable is owned. Reuse it intact; no additional data cable or USB coupler is ordered.\n\nBuy links go to specific products; Select / Configure links need a size or rating first; Quote links require a supplier quote. Reused stock and fabrication are listed separately from purchases. Check current stock, minimum orders and lead times with each supplier. No orders have been placed.\n`;
+text += '\n**[Prepare the school purchase request](purchase-request.html)** — exact retailer descriptions, per-field copy buttons and a [two-vendor Excel download](downloads/purchase-request.xlsx).\n';
 text += `\n${bom.image_note} Click an image to view the original. Use **View in 3D** to highlight each material’s installation locations. Image sources are credited below each picture.\n`;
 const order=bom.purchasing;
 const total=order.rows.reduce((sum,r)=>sum+Math.round(r.quantity*r.unit_price_usd*100),0)/100;
@@ -55,7 +57,7 @@ for(const r of order.rows){
  if(r.material_ids.length>1 && (!r.quantity_by_material || Object.keys(r.quantity_by_material).length!==r.material_ids.length || r.material_ids.reduce((sum,id)=>sum+r.quantity_by_material[id],0)!==r.quantity))throw new Error('Shared purchase quantities do not match: '+r.sku);
 }
 text += `\n<h2 id="order-plan">Priced order plan · $${total.toFixed(2)} materials</h2>\n\nChecked ${order.checked_on}. ${order.scope}\n\n${order.supplier_policy}\n\n| Seller / exact item | Quantity to enter | Unit price (USD) | Line total (USD) | Availability / packaging |\n|---|---|---|---|---|\n`;
-for(const r of order.rows)text+=`| ${r.seller} · [${r.sku}](${r.url}) | ${r.quantity} ${r.unit}${r.pieces_per_unit>1?` (${r.pieces_per_unit} pieces per ${r.unit})`:''} | $${r.unit_price_usd.toFixed(Number(r.unit_price_usd.toFixed(2))===r.unit_price_usd?2:3)} | $${r.extended_usd.toFixed(2)} | ${r.availability_note} Checked ${r.checked_on}. |\n`;
+for(const r of order.rows)text+=`| ${r.seller} · [${r.sku}](${r.url}) | ${r.quantity} ${r.unit}${r.pieces_per_unit>1?` (${r.pieces_per_unit} pieces per ${r.unit})`:''} | $${r.unit_price_usd.toFixed(Number(r.unit_price_usd.toFixed(2))===r.unit_price_usd?2:3)}<br>Price checked ${r.price_checked_on || r.checked_on} | $${r.extended_usd.toFixed(2)} | ${r.availability_note} Stock / packaging note dated ${r.checked_on}. |\n`;
 text+='\n| Seller | Materials subtotal (USD) |\n|---|---|\n';
 for(const seller of [...new Set(order.rows.map(r=>r.seller))])text+=`| ${seller} | $${(order.rows.filter(r=>r.seller===seller).reduce((sum,r)=>sum+Math.round(r.extended_usd*100),0)/100).toFixed(2)} |\n`;
 text+=`| **All selected materials** | **$${total.toFixed(2)}** |\n\nThe two 515CV installation rows below share the **single two-piece order line above**. Do not order two for each location. Aluminum stock and electrical acceptance remain open; see the [receiving record](build.html#receiving-record).\n`;
@@ -104,6 +106,7 @@ let documents=`# Build documents
 - [Protection review](protection.html) — Q0, upstream voltage-lead protection and the remaining evidence.
 - [Installation audit](installation.html) — checks completed and remaining acceptance items.
 - [Full materials list](materials.html) · [Download BOM](Procurement_BOM.md)
+- [School purchase request](purchase-request.html) · [Download Excel](downloads/purchase-request.xlsx)
 - [Manufacturer sources and design limits](references.html)
 
 ## Drawings
@@ -157,6 +160,7 @@ const styles=`:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;colo
 for(const [input, output, title] of [['Procurement_BOM.md','materials.html','Materials and purchase links'],['Wiring_References_EN.md','references.html','Sources and design limits'],['Installation_Audit.md','installation.html','Installation audit'],['Build_Package.md','build.html','Machining and assembly package'],['Build_Documents.md','documents.html','Build documents'],['Protection_Review.md','protection.html','Protection and data review'],['Design_Revision_B.md','revision.html','Design, sourcing and component evidence']]) {
  const raw=fs.readFileSync(path.join(root,input),'utf8');
  const rendered=marked.parse(raw).replace(/<table>/g,'<div class="table-wrap"><table>').replace(/<\/table>/g,'</table></div>').replace(/<td>(R\d+)<\/td>/g,(_,id)=>`<td id="${id.toLowerCase()}">${id}</td>`);
- fs.writeFileSync(path.join(root,output),`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title} · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=20"><style>${styles}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="${input}" download>Download Markdown</a></nav>${rendered}</body></html>\n`);
+ fs.writeFileSync(path.join(root,output),`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title} · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=20"><style>${styles}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="purchase-request.html">Purchase request</a><a href="documents.html">Build documents</a><a href="${input}" download>Download Markdown</a></nav>${rendered}</body></html>\n`);
 }
+renderPurchaseRequest(bom, root);
 console.log('Generated BOM, build document hub, reference pages and installation audit');
