@@ -334,7 +334,6 @@ def main():
     html=(OUT/'page_template.html').read_text().replace('<!-- MAIN_DIAGRAM -->',svg).replace('<!-- DETAIL_DIAGRAM -->',detail).replace('<!-- CONNECTION_ROWS -->',rows).replace('<!-- BUY_ROWS -->',''.join(material_rows['buy'])).replace('<!-- FABRICATE_ROWS -->',''.join(material_rows['fabricate'])).replace('<!-- OWNED_ROWS -->',''.join(material_rows['owned'])).replace('{{BUY_COUNT}}',str(len(material_rows['buy']))).replace('{{FABRICATE_COUNT}}',str(len(material_rows['fabricate']))).replace('{{OWNED_COUNT}}',str(len(material_rows['owned']))).replace('{{REV}}',REV)
     html=html.replace('{{SELLER_COUNT}}',str(len({r['seller'] for r in materials['purchasing']['rows']})))
     html=html.replace('{{MATERIAL_TOTAL}}',format(materials['purchasing']['material_subtotal_usd'],'.2f'))
-    html=html.replace('{{PRICE_DATE}}',E(materials['purchasing']['checked_on']))
     (OUT/'index.html').write_text(html)
     (OUT/'routes.json').write_text(json.dumps({'revision':REV,'anchors':A,'projection':PLAN,'wires':wires},indent=2)+'\n')
     (OUT/'validation.json').write_text(json.dumps(validation,indent=2)+'\n')
