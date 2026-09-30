@@ -6,7 +6,7 @@ import json
 from draw_external import draw_external
 
 OUT = Path(__file__).resolve().parent
-REV = 'Rev. 16 · Phoenix 2907571 and two-seller procurement · 2026-09-28'
+REV = 'Rev. 17 · Clear cover and no-bend Phoenix mounting · 2026-09-29'
 C = {'L':'#202d3a','N':'#65758a','PE':'#18814a','CT':'#8544a5','USB':'#23739d','DC':'#aa621e','V':'#1567c1'}
 # Shared physical placement. The SVG is an X/Z projection of the same millimetre
 # coordinates consumed by layout3d.js. Electrical port symbols are spaced for clarity.
@@ -254,8 +254,9 @@ def make_diagram():
     text(1010,1563,'Design reference · See build package for ratings and acceptance limits.',18,'#63768a',anchor='middle',extra='class="drawing-note"')
     add('</svg>');return ''.join(parts)
 
-def material_photo(p):
-    photo = p['image']
+def material_photo(p, photo=None):
+    if photo is None:
+        return '<div class="material-gallery">'+''.join(material_photo(p, image) for image in [p['image'], *p.get('additional_images', [])])+'</div>'
     style = ''
     if 'crop' in photo:
         x, y, w, h = photo['crop']
@@ -264,8 +265,8 @@ def material_photo(p):
     img = '<img src="'+E(photo['src'])+'" alt="'+E(photo['alt'])+'" width="'+str(photo['width'])+'" height="'+str(photo['height'])+'" loading="lazy" decoding="async"'+style+'>'
     if 'crop' in photo:
         img = f'<span class="material-crop" style="max-width:{140*ratio:.5f}px;aspect-ratio:{ratio:.5f}">'+img+'</span>'
-    caption = {'reference':'Reference image', 'design':'Design concept'}.get(photo['kind'])
-    return '<figure class="material-photo" data-image-kind="'+E(photo['kind'])+'"><a class="material-image" href="'+E(photo['src'])+'" target="_blank" rel="noopener" aria-label="View full image: '+E(p['item'])+'">'+img+'</a>'+('<figcaption>'+caption+'</figcaption>' if caption else '')+'</figure>'
+    credit = '<a href="'+E(photo['source_url'])+'">'+E(photo['source_label'])+' ↗</a>' if photo.get('source_url') else ''
+    return '<figure class="material-photo" data-image-kind="'+E(photo['kind'])+'"><a class="material-image" href="'+E(photo['src'])+'" target="_blank" rel="noopener" aria-label="View full image: '+E(p['item'])+'">'+img+'</a><figcaption>'+E(photo['caption'])+credit+'</figcaption></figure>'
 
 def material_price(p, order):
     if p['availability'] != 'buy':

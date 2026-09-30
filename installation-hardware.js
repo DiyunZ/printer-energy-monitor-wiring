@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { fitSupport, auditSupport } from './cable-supports.js?v=32';
+import { fitSupport, auditSupport } from './cable-supports.js?v=34';
 
 // Secondary hardware is an installation illustration, not a machining template.
 // Panel datums come from the same schedule as the existing CAD openings.
@@ -27,12 +27,23 @@ export function addInstallationHardware({ dimensions, instances, parts, box, cyl
   }
   const qm=dimensions.q0Mount,qw=parts.q0.wallOuterZ;
   const railShift=qm.railRearDepthMm-57.5;
+  const angle=qm.normalDraftDeg*Math.PI/180;
+  const wallPoint=([x,y,z])=>[qm.wallCenterXY[0]+x,qm.wallCenterXY[1]+y*Math.cos(angle)-z*Math.sin(angle),qw+y*Math.sin(angle)+z*Math.cos(angle)];
+  const wallWasher=(x,z,thickness=.8)=>{
+    const obj=annulus(5,2.65,thickness,wallPoint([x,0,z]),'#acb5b7','q0','z');obj.rotation.x=angle;
+  };
+  function postScrew(x,underHead,direction){
+    const shaft=cylinder(2.5,12,wallPoint([x,0,underHead+direction*6]),'#8c969a','q0','z');
+    const head=cylinder(4.75,3.4,wallPoint([x,0,underHead-direction*1.7]),'#89979c','q0','z');
+    shaft.rotation.x+=angle;head.rotation.x+=angle;
+  }
   for(const sign of [-1,1]){
-    const x=parts.q0.position[0]+sign*qm.wallScrewHalfPitchMm,y=qm.wallCenterXY[1];
-    fixing(`q0-${sign}`,`Q0 bracket wall fixing ${sign<0?1:2}`,[x,y,qw+.8],'q0',3,'z',12);
-    capture('fasteners',`q0-${sign}`,'M3 wall washer and locknut',()=>{
-      annulus(3.5,1.65,.8,[x,y,qw-5.3],'#acb5b7','q0','z');
-      annulus(3.2,1.5,4,[x,y,qw-7.7],'#89979c','q0','z',6);
+    const x=sign*qm.wallScrewHalfPitchMm;
+    capture('fasteners',`q0-${sign}`,`M5 post fixing ${sign<0?1:2} — both ends`,()=>{
+      // Outer screw: tooth + flat + 3 mm wall + inner flat, then female post.
+      wallWasher(x,.4);wallWasher(x,1.05,.5);wallWasher(x,-3.4);postScrew(x,1.3,-1);
+      const front=-qm.wallThicknessMm-qm.webFrontDepthMm,back=front-qm.stockThicknessMm;
+      wallWasher(x,front+.25,.5);wallWasher(x,back-.4);wallWasher(x,back-1.05,.5);postScrew(x,back-1.3,1);
     });
   }
   fixing('rail-m4','DIN rail M4 fixing',[parts.q0.position[0]+24,qm.wallCenterXY[1],qw-59.7-railShift],'q0',4,'z',10);

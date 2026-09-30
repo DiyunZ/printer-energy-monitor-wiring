@@ -12,7 +12,7 @@ const result = run();
 test('priced order covers every purchased group and counts each retail increment', () => {
   const order=p.purchasing, rows=order.rows;
   assert.equal(order.cost_basis,'materials_only');
-  assert.equal(order.material_subtotal_usd,233.54);
+  assert.equal(order.material_subtotal_usd,262.86);
   assert.deepEqual([...new Set(rows.flatMap(r=>r.material_ids))].sort(),p.items.filter(r=>r.availability==='buy').map(r=>r.id).sort());
   assert.equal(new Set(rows.map(r=>r.seller)).size,2);
   for(const r of rows){
@@ -22,11 +22,7 @@ test('priced order covers every purchased group and counts each retail increment
     assert.match(r.url,/^https:\/\//);
   }
   assert.equal(rows.reduce((n,r)=>n+Math.round(r.extended_usd*100),0),Math.round(order.material_subtotal_usd*100));
-  const tariffCents=rows.reduce((n,r)=>n+Math.round((r.estimated_tariff_usd||0)*100),0);
-  assert.equal(tariffCents,572,'Retained cart estimates are separate from the materials-only selection total');
-  assert.equal(Math.round(order.material_subtotal_usd*100)+tariffCents+Math.round(order.delivery_estimate.digikey_ground_budget_usd*100),24775);
-  assert.equal(order.delivery_estimate.known_pre_sales_tax_cost_usd,247.75);
-  assert.equal(order.delivery_estimate.home_depot_shipping_usd,null,'Unquoted delivery is not zero');
+  assert.equal(order.delivery_estimate,undefined,'Only material prices belong in the selection total');
   const cv=rows.filter(r=>r.sku==='515CV');
   assert.equal(cv.length,1);assert.equal(cv[0].quantity,2);
   assert.deepEqual(cv[0].material_ids,['receptacle','printer-connector']);
@@ -137,4 +133,46 @@ test('a changed panel cannot inherit the generated insertion proof',()=>{
 test('extra wall penetrations are rejected by the machining schedule check',()=>{
   const wrong=structuredClone(m);wrong.wall_opening_ids.push('XA');
   assert.equal(audit(d,wrong,buffer,p).checks.find(c=>c.id==='No XA wall opening').result,'fail');
+});
+
+test('purchased groups use real photos, including rail and posts',()=>{
+  for(const item of p.items.filter(item=>item.availability==='buy')){
+    for(const photo of [item.image,...(item.additional_images||[])]){
+      assert.ok(['product','reference'].includes(photo.kind));
+      assert.match(photo.src,/\.(jpg|png)$/i);
+      assert.ok(fs.existsSync(new URL('../'+photo.src,import.meta.url)));
+      assert.ok(photo.source_url);
+    }
+  }
+});
+test('no-bend stacks catch wrong depth, short screws and bottoming',()=>{
+  const check=x=>run(x).checks.find(c=>c.id==='Q0 no-bend post and screw stacks').result;
+  assert.equal(check(d),'pass');
+  for(const [key,value] of [['postLengthMm',60],['wallScrewLengthMm',8],['wallScrewLengthMm',20],['wallHoleDiameterMm',3.3]]){
+    const changed=structuredClone(d);changed.q0Mount[key]=value;assert.equal(check(changed),'fail',key);
+  }
+});
+
+test('printer PE curve stays inside the machined shell instead of bowing through it',()=>{
+  const line=fs.readFileSync(new URL('../layout3d.js',import.meta.url),'utf8').split('\n').find(l=>l.includes("locatedCable('cord','printer-pe',"));
+  const current=JSON.parse(line.match(/\[\[.*\]\]/)[0]);
+  const old=[[-113,13,7],[-133,25,-10],[-133,25,-174],[-24,21,-181],[2,35,-176]];
+  const shell=m.meshes.find(entry=>entry.role==='shell');
+  const positions=new Float32Array(buffer,shell.positionOffset,shell.positionCount);
+  const indices=new Uint32Array(buffer,shell.indexOffset,shell.indexCount);
+  const triangles=Array.from({length:indices.length/3},(_,i)=>{
+    const vertices=[0,1,2].map(j=>new T.Vector3(...positions.slice(indices[i*3+j]*3,indices[i*3+j]*3+3)));
+    return {face:new T.Triangle(...vertices),box:new T.Box3().setFromPoints(vertices)};
+  });
+  const clearance=points=>{
+    const curve=new T.CatmullRomCurve3(points.map(p=>new T.Vector3(...p)),false,'centripetal');
+    const closest=new T.Vector3();let minimum=Infinity;
+    for(const point of curve.getSpacedPoints(1200))for(const {face,box} of triangles){
+      if(box.distanceToPoint(point)>=minimum)continue;
+      minimum=Math.min(minimum,point.distanceTo(face.closestPointToPoint(point,closest)));
+    }
+    return minimum;
+  };
+  assert.ok(clearance(old)<1.7,'Reproduce the old insulation/shell intersection');
+  assert.ok(clearance(current)>2,'1.7 mm insulation radius plus 0.3 mm mesh margin');
 });

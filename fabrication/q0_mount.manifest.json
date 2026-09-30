@@ -12,7 +12,7 @@
     "python": "3.12.14"
   },
   "geometry": {
-    "area_mm2": 18018.5802,
+    "area_mm2": 7460.7352,
     "bounding_box_mm": {
       "max": [
         44.0,
@@ -22,26 +22,26 @@
       "min": [
         -44.0,
         -20.0,
-        -66.2974
+        -1.8974
       ],
       "x": 88.0,
       "y": 40.0,
-      "z": 66.2974
+      "z": 1.8974
     },
     "center_mm": [
-      -0.054,
+      -0.1095,
       -0.0,
-      -39.426
+      -0.9487
     ],
     "center_of": "mass",
     "is_valid": true,
     "solid_count": 1,
-    "volume_mm3": 16311.0672
+    "volume_mm3": 6490.4954
   },
   "geometry_checks": {
     "declared": [
       {
-        "feature": "Both M3 wall shafts clear",
+        "feature": "Both M5 support screws clear",
         "kind": "clear",
         "min_mm3": 0.01,
         "region": {
@@ -56,17 +56,17 @@
             ]
           ],
           "axis": "z",
-          "dia": 3.0,
+          "dia": 5.0,
           "shape": "cylinder",
           "span": [
-            -4.0,
+            -3.0,
             1.0
           ]
         },
         "tol_mm3": 0.01
       },
       {
-        "feature": "Dedicated #10 bonding shaft clears web",
+        "feature": "Dedicated #10 bond shaft clears",
         "kind": "clear",
         "min_mm3": 0.01,
         "region": {
@@ -80,14 +80,14 @@
           "dia": 4.83,
           "shape": "cylinder",
           "span": [
-            -67.4,
-            -63.400000000000006
+            -3.0,
+            1.0
           ]
         },
         "tol_mm3": 0.01
       },
       {
-        "feature": "Rail M4 shaft clears web",
+        "feature": "Rail M4 shaft clears",
         "kind": "clear",
         "min_mm3": 0.01,
         "region": {
@@ -101,38 +101,59 @@
           "dia": 4.0,
           "shape": "cylinder",
           "span": [
-            -67.4,
-            -63.400000000000006
+            -3.0,
+            1.0
           ]
         },
         "tol_mm3": 0.01
       },
       {
-        "feature": "Body clearance between arms",
-        "kind": "clear",
+        "feature": "Central web remains",
+        "kind": "material",
         "min_mm3": 0.01,
         "region": {
           "at": [
             [
               0.0,
               0.0,
-              -28.0
+              -0.95
             ]
           ],
           "shape": "box",
           "size": [
-            20.0,
-            35.0,
-            50.0
+            12.0,
+            12.0,
+            1.0
           ]
         },
         "tol_mm3": 0.01
+      },
+      {
+        "feature": "88 mm blank width",
+        "kind": "measure",
+        "max": 88.1,
+        "measure": "bbox_x",
+        "min": null
+      },
+      {
+        "feature": "40 mm blank height",
+        "kind": "measure",
+        "max": 40.1,
+        "measure": "bbox_y",
+        "min": null
+      },
+      {
+        "feature": "Flat sheet, no formed depth",
+        "kind": "measure",
+        "max": 2.0,
+        "measure": "bbox_z",
+        "min": null
       }
     ],
     "pass": true,
     "results": [
       {
-        "feature": "Both M3 wall shafts clear",
+        "feature": "Both M5 support screws clear",
         "kind": "clear",
         "min_mm3": 0.01,
         "pass": true,
@@ -148,10 +169,10 @@
             ]
           ],
           "axis": "z",
-          "dia": 3.0,
+          "dia": 5.0,
           "shape": "cylinder",
           "span": [
-            -4.0,
+            -3.0,
             1.0
           ]
         },
@@ -163,7 +184,7 @@
         ]
       },
       {
-        "feature": "Dedicated #10 bonding shaft clears web",
+        "feature": "Dedicated #10 bond shaft clears",
         "kind": "clear",
         "min_mm3": 0.01,
         "pass": true,
@@ -178,8 +199,8 @@
           "dia": 4.83,
           "shape": "cylinder",
           "span": [
-            -67.4,
-            -63.400000000000006
+            -3.0,
+            1.0
           ]
         },
         "tol_mm3": 0.01,
@@ -189,7 +210,7 @@
         ]
       },
       {
-        "feature": "Rail M4 shaft clears web",
+        "feature": "Rail M4 shaft clears",
         "kind": "clear",
         "min_mm3": 0.01,
         "pass": true,
@@ -204,8 +225,8 @@
           "dia": 4.0,
           "shape": "cylinder",
           "span": [
-            -67.4,
-            -63.400000000000006
+            -3.0,
+            1.0
           ]
         },
         "tol_mm3": 0.01,
@@ -215,8 +236,8 @@
         ]
       },
       {
-        "feature": "Body clearance between arms",
-        "kind": "clear",
+        "feature": "Central web remains",
+        "kind": "material",
         "min_mm3": 0.01,
         "pass": true,
         "region": {
@@ -224,21 +245,48 @@
             [
               0.0,
               0.0,
-              -28.0
+              -0.95
             ]
           ],
           "shape": "box",
           "size": [
-            20.0,
-            35.0,
-            50.0
+            12.0,
+            12.0,
+            1.0
           ]
         },
         "tol_mm3": 0.01,
-        "total_mm3": 0.0,
+        "total_mm3": 144.0,
         "volumes_mm3": [
-          0.0
+          144.0
         ]
+      },
+      {
+        "actual_mm": 88.0,
+        "feature": "88 mm blank width",
+        "kind": "measure",
+        "max": 88.1,
+        "measure": "bbox_x",
+        "min": null,
+        "pass": true
+      },
+      {
+        "actual_mm": 40.0,
+        "feature": "40 mm blank height",
+        "kind": "measure",
+        "max": 40.1,
+        "measure": "bbox_y",
+        "min": null,
+        "pass": true
+      },
+      {
+        "actual_mm": 1.8974,
+        "feature": "Flat sheet, no formed depth",
+        "kind": "measure",
+        "max": 2.0,
+        "measure": "bbox_z",
+        "min": null,
+        "pass": true
       }
     ]
   },
@@ -246,8 +294,8 @@
   "overrides": {},
   "parameters": {},
   "source": {
-    "path": "tools/cad/q0_mount_model.py",
-    "sha256": "4484774e77de9977c340dd7cfb236c67925aee2e1a8621d414ca9c57c57b495c"
+    "path": "/Users/maxwellzheng/2026Fall/Waste_Management/printer-energy-monitor-wiring/tools/cad/q0_mount_model.py",
+    "sha256": "f4e67d967a72aad9c09018617b1fd579fc45738efe71b30662152d33a130f84b"
   },
   "units": "mm"
 }

@@ -104,7 +104,7 @@ export function installMaterialLocator({ items, locations, scene, camera, contro
   }
   function sync() {
     if (!selected) return;
-    // A closed opaque case must conceal the internal portion of a selected cable.
+    // Closed gray walls conceal cables; the clear lid keeps its real transparency.
     tint.depthTest = outline.depthTest = $('model-shell').value === 'closed';
     scene.updateMatrixWorld(true);
     for (const overlayMesh of overlay.children) {

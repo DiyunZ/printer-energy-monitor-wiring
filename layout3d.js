@@ -1,9 +1,9 @@
 import * as THREE from 'three';
 import { OrbitControls } from './vendor/OrbitControls.js';
 import { RoundedBoxGeometry } from './vendor/RoundedBoxGeometry.js';
-import { installMaterialLocator } from './material-locator.js?v=32';
-import { addInstallationHardware } from './installation-hardware.js?v=32';
-import { screenCableBodies } from './cable-supports.js?v=32';
+import { installMaterialLocator } from './material-locator.js?v=34';
+import { addInstallationHardware } from './installation-hardware.js?v=34';
+import { screenCableBodies } from './cable-supports.js?v=34';
 import { showDesignPanel } from './site-navigation.js?v=15';
 
 // All geometry is in millimetres. Only the camera changes the screen scale.
@@ -14,11 +14,11 @@ const V = a => new THREE.Vector3(...a);
 
 async function start() {
   const [dimensions, cad, buffer, review, procurement] = await Promise.all([
-    fetch('./layout_dimensions.json?v=32').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
-    fetch('./assets/enclosure.json?v=32').then(r => { if (!r.ok) throw Error('CAD manifest unavailable'); return r.json(); }),
-    fetch('./assets/enclosure.bin?v=32').then(r => { if (!r.ok) throw Error('CAD geometry unavailable'); return r.arrayBuffer(); }),
-    fetch('./installation_review.json?v=33').then(r => { if (!r.ok) throw Error('Installation review unavailable'); return r.json(); }),
-    fetch('./procurement.json?v=33').then(r => { if (!r.ok) throw Error('Materials unavailable'); return r.json(); })
+    fetch('./layout_dimensions.json?v=34').then(r => { if (!r.ok) throw Error('Dimensions unavailable'); return r.json(); }),
+    fetch('./assets/enclosure.json?v=34').then(r => { if (!r.ok) throw Error('CAD manifest unavailable'); return r.json(); }),
+    fetch('./assets/enclosure.bin?v=34').then(r => { if (!r.ok) throw Error('CAD geometry unavailable'); return r.arrayBuffer(); }),
+    fetch('./installation_review.json?v=34').then(r => { if (!r.ok) throw Error('Installation review unavailable'); return r.json(); }),
+    fetch('./procurement.json?v=34').then(r => { if (!r.ok) throw Error('Materials unavailable'); return r.json(); })
   ]);
   const parts = Object.fromEntries(dimensions.parts.map(p => [p.id, p]));
   const instances = Object.fromEntries(dimensions.instances.map(p => [p.id, p]));
@@ -133,9 +133,11 @@ async function start() {
     geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(buffer, entry.positionOffset, entry.positionCount), 3));
     geo.setIndex(new THREE.BufferAttribute(new Uint32Array(buffer, entry.indexOffset, entry.indexCount), 1));
     geo.computeVertexNormals();
-    let mat = entry.role === 'shell' ? shellMat : entry.role === 'lid' ? lidMat : entry.role === 'panel' ? material('#bcc2c6', .6) : entry.role === 'q0-body' ? material('#e0e3dc') : material('#9aa4a7', .55);
+    let mat = entry.role === 'shell' ? shellMat : entry.role === 'lid' ? lidMat : entry.role === 'panel' ? material('#bcc2c6', .6) : entry.role === 'q0-body' ? material('#e0e3dc') : entry.role === 'q0-stop' ? material('#91999e') : material('#9aa4a7', .55);
     const obj = mesh(geo, mat, [0,0,0], entry.role === 'panel' ? 'panel' : entry.role.startsWith('q0-') ? 'q0' : 'case');
-    if(entry.role === 'q0-bracket')mark('breaker-mount','bracket','Formed aluminum DIN support',[obj]);
+    if(entry.role === 'q0-bracket')mark('breaker-mount','bracket','Flat aluminum DIN bridge',[obj]);
+    if(entry.role === 'q0-post')mark('breaker-posts',entry.name,entry.name,[obj]);
+    if(entry.role === 'q0-stop')mark('breaker-rail',entry.name,entry.name,[obj]);
     if(entry.role === 'q0-body')fitBodies.q0=[obj];
     obj.name = entry.name; obj.castShadow = false;
     if (index === 0) planBodies.case = [obj];
@@ -203,7 +205,6 @@ async function start() {
       wallBox([60,6,1],[0,y+sign*14.5,rear+7],'#929fa4');
     }
   });
-  for(const x of qm.stopCentersX)capture('breaker-rail',`stop-${x}`,'Altech CA802 end stop',()=>wallBox(qm.stopSizeMm,[x,qm.railCenterOffsetYMm,-3-qm.railRearDepthMm+16],'#727d82'));
   decal('Q0  15 A',38,9,[qx,qy+28,qw+1],'q0','front');
   tag('Q0 · external handle',[qx-9,qy+55,qw+4],'q0');
   // Three secured five-port connectors keep hot, neutral and PE separate.
@@ -237,21 +238,32 @@ async function start() {
     for(const z of strap.slotZ)box([19.05,strap.topY+1,1.2],[strap.x,(strap.topY-1)/2,z],'#404a50',strap.part,.3);
   });
   function gland(id) {
-    const p=instances[id], pos=p.position, axis=p.axis;
-    const r=p.size[1]/2, length=p.size[axis==='x'?0:2];
-    function hollow(outer,depth,at,color) {
-      const shape=new THREE.Shape();shape.absarc(0,0,outer,0,Math.PI*2,false);
+    const p=instances[id], g=dimensions.powerGlands, left=p.axis==='x';
+    const angle=Math.PI/180, y=left?43:36;
+    const wall=left?[-(142.692040+Math.tan(angle)*(y-50.111830)),y,128]:[0,y,-(193.495690+Math.tan(angle)*(y-50.315160))];
+    const normal=left?new THREE.Vector3(-Math.cos(angle),-Math.sin(angle),0):new THREE.Vector3(0,-Math.sin(angle),-Math.cos(angle));
+    const orient=new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,0,1),normal);
+    function hollow(outer,depth,z,sides=0) {
+      const shape=new THREE.Shape();
+      if(sides){for(let i=0;i<sides;i++){const a=i*Math.PI*2/sides;shape[i?'lineTo':'moveTo'](outer*Math.cos(a),outer*Math.sin(a));}shape.closePath();}
+      else shape.absarc(0,0,outer,0,Math.PI*2,false);
       const hole=new THREE.Path();
       hole.absarc(0,0,4.7,0,Math.PI*2,true);
       shape.holes.push(hole);
-      const g=new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:false,curveSegments:32});g.translate(0,0,-depth/2);
-      if(axis==='x')g.rotateY(Math.PI/2);
-      return mesh(g,material(color),at,'entries');
+      const geo=new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:false,curveSegments:32});geo.translate(0,0,-depth/2);
+      const at=new THREE.Vector3(...wall).addScaledVector(normal,z);
+      const obj=mesh(geo,material('#343e45'),at.toArray(),'entries');obj.quaternion.copy(orient);return obj;
     }
-    planBodies[id]=[hollow(r,length,pos,'#343e45')];
-    const v=[...pos],axisN=axis==='x'?0:axis==='y'?1:2;v[axisN]+=length/2;
-    const trim=hollow(r*.68,4,v,'#171e23');
-    mark('cord-glands', id, p.label, [...planBodies[id],trim]);
+    const outside=g.overallLengthMm-g.threadLengthMm;
+    // Published overall/thread/hex sizes; cap partition and threads are simplified.
+    planBodies[id]=[
+      hollow(g.threadDiameterMm/2,g.threadLengthMm,-g.threadLengthMm/2),
+      hollow(g.bodyAcrossFlatsMm/Math.sqrt(3),g.bodyHexThicknessMm,g.bodyHexThicknessMm/2,6),
+      hollow(g.bodyAcrossFlatsMm/2-.8,outside-g.bodyHexThicknessMm,(outside+g.bodyHexThicknessMm)/2),
+      hollow(g.bodyAcrossFlatsMm/Math.sqrt(3),10.4,outside-5.2,6),
+      hollow(g.locknutAcrossFlatsMm/Math.sqrt(3),g.locknutThicknessMm,-3-g.locknutThicknessMm/2,6)
+    ];
+    mark('cord-glands', id, p.label+' — M3231 and 8463 locknut',planBodies[id]);
   }
   ['supply-entry','printer-entry'].forEach(gland);
   tag('SUPPLY IN · to wall',[-239,54,144],'entries'); tag('TO PRINTER · plug printer here',[3,44,-254],'entries');
@@ -271,7 +283,7 @@ async function start() {
   locatedCable('cord','supply-neutral','Supply neutral',[[-118,42,130],[-132,30,115],[-132,17,100],[-132,17,72],[-132,25,-30],[-119,14,-48]],neutral,1.7,'terminals');
   locatedCable('cord','printer-neutral','Printer neutral',[[-106,13,-68],[-96,24,-91],[-95,24,-151],[-20,20,-159],[-2,35,-176]],neutral,1.7,'entries');
   locatedCable('cord','supply-pe','Supply protective earth',[[-118,41,126],[-132,32,109],[-132,22,100],[-132,22,72],[-131,24,48],[-124,13,28]],pe,1.7,'terminals');
-  locatedCable('cord','printer-pe','Printer protective earth',[[-113,13,7],[-133,25,-10],[-133,25,-174],[-24,21,-181],[2,35,-176]],pe,1.7,'entries');
+  locatedCable('cord','printer-pe','Printer protective earth',[[-113,13,7],[-133,25,-10],[-133,25,-45],[-133,25,-90],[-133,25,-135],[-127,25,-162],[-110,23,-176],[-60,21,-179],[-24,21,-181],[2,35,-176]],pe,1.7,'entries');
   locatedCable('cord','printer','Jacket through output gland',[[0,36,-176],[0,36,-226]],'#2a333c',4.6,'entries',false);
   locatedCable('cord','printer','Printer cord outside enclosure',[[0,36,-226],[0,36,-258],[18,36,-283]],'#2a333c',4.6,'entries');
   planBodies['printer-plug']=[box(instances['printer-plug'].size,instances['printer-plug'].position,'#e2b837','entries',6)];
@@ -360,7 +372,7 @@ async function start() {
     const objects=allMeshes.filter(m=>m.userData.part===part&&!m.userData.materialId&&!m.userData.annotation);
     if(id==='enclosure') {
       mark(id,'case','Case and factory fittings',objects.filter(m=>!lidObjects.includes(m)));
-      mark(id,'lid','Opaque lid and factory fittings',objects.filter(m=>lidObjects.includes(m)));
+      mark(id,'lid','Clear polycarbonate lid and factory fittings',objects.filter(m=>lidObjects.includes(m)));
     } else mark(id,id==='adapter'?'adapter':part,parts[part].name,objects);
   }
   for(const p of procurement.items) if(!materialLocations[p.id]?.length) throw Error(`Missing installation geometry: ${p.id}`);
@@ -448,7 +460,7 @@ async function start() {
     shellObjects.forEach(m=>m.visible=mode!=='cutaway');hideWithCase.forEach(m=>m.visible=mode!=='cutaway');
     lidObjects.forEach(m=>{m.visible=mode!=='cutaway';m.position.y=mode==='lifted'?230:0;});
     shellMat.opacity=mode==='closed'?1:.12;shellMat.depthWrite=mode==='closed';shellMat.transparent=mode!=='closed';shellMat.needsUpdate=true;
-    lidMat.opacity=mode==='closed'?1:.08;lidMat.color.set('#a4b2bd');lidMat.depthWrite=mode==='closed';lidMat.transparent=mode!=='closed';lidMat.needsUpdate=true;wires.visible=$('model-wires').checked;dims.visible=$('model-dimensions').checked;
+    lidMat.opacity=mode==='closed'?.24:mode==='lifted'?.3:.08;lidMat.color.set('#c6dfe4');lidMat.depthWrite=false;lidMat.transparent=true;lidMat.needsUpdate=true;wires.visible=$('model-wires').checked;dims.visible=$('model-dimensions').checked;
     applyAssembly();
     render();
   }

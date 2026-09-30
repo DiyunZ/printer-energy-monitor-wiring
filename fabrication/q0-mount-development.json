@@ -1,16 +1,10 @@
 {
   "blank_mm": [
-    210.54548666961375,
+    88,
     40
   ],
   "thickness_mm": 1.89738,
-  "inside_radius_mm": 2,
-  "assumed_K": 0.4,
-  "bend_centers_mm": [
-    12.269495833701717,
-    75.10586750110517,
-    135.43961916850859,
-    198.27599083591204
-  ],
-  "status": "Provisional: measure stock and bend coupon before release"
+  "process": "Cut, drill, slot and deburr; no bends",
+  "post_length_mm": 65,
+  "status": "Nominal design; measure stock and dry-fit before machining"
 }

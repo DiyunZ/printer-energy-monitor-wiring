@@ -1,19 +1,19 @@
 {
   "units": "mm",
-  "revision": "September 28, 2026 \u00b7 Phoenix 2907571, two-seller procurement and manufacturer STEP",
-  "coordinates": "X across the panel; Y above the panel underside; Z along the panel, negative toward the printer exit (rear), positive toward Q0 (front). One scene unit is one millimetre. The wiring plan projects the same X/Z positions with rear at the top. Dimensions below are X \u00d7 Y \u00d7 Z unless noted.",
+  "revision": "September 29, 2026 · clear cover and cut-and-drill Phoenix mount",
+  "coordinates": "X across the panel; Y above the panel underside; Z along the panel, negative toward the printer exit (rear), positive toward Q0 (front). One scene unit is one millimetre. The wiring plan projects the same X/Z positions with rear at the top. Dimensions below are X × Y × Z unless noted.",
   "parts": [
     {
       "id": "case",
-      "name": "BUD NBF-32126 \u00b7 opaque hinged cover",
+      "name": "BUD NBF-32226 · clear hinged cover",
       "size": [
         318.475376100268,
         164.30000004,
         411.0990002000001
       ],
-      "status": "Manufacturer common-base STEP; opaque lid silhouette illustrative",
-      "source": "https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/",
-      "note": "Selected ABS/PC NBF-32126, nominal 400 \u00d7 300 \u00d7 160 mm. The displayed CAD envelope includes projecting hinges and latches. Factory STEP linked on its page uses the NBF-32226 common base and lid outline; opaque cover is rendered gray. Preserve the hinges, latches and gasket. Custom openings remove any claim to the original ingress rating. Closed-cover operation and qualified electrical acceptance remain required. Unplug supply before opening the latches.",
+      "status": "Manufacturer STEP, unscaled; clear polycarbonate lid",
+      "source": "https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32226/",
+      "note": "Nominal 400 × 300 × 160 mm; gray ABS/PC body, clear polycarbonate lid. Manufacturer-linked series STEP (internal filename hbnbf32026.step) includes hinges and latches; the displayed envelope includes their projections. Preserve gasket and latches. Custom openings invalidate any inherited ingress claim. Unplug supply before opening.",
       "position": [
         -0.7376879501339886,
         67.65025992400001,
@@ -22,7 +22,7 @@
     },
     {
       "id": "panel",
-      "name": "Reused aluminum panel \u00b7 provisional 1.90 mm",
+      "name": "Reused aluminum panel · provisional 1.90 mm",
       "size": [
         260,
         1.89738,
@@ -30,7 +30,7 @@
       ],
       "status": "Proposed fabrication template; stock not measured",
       "source": "https://www.budind.com/wp-content/uploads/2019/01/hbnbf32226.pdf",
-      "note": "Proposed 260 \u00d7 340 mm aluminum panel with 10 mm corner chamfers. Thickness 1.89738 mm is provisional; measure stock and verify M5 support pattern before fabrication.",
+      "note": "Proposed 260 × 340 mm aluminum panel with 10 mm corner chamfers. Thickness 1.89738 mm is provisional; measure stock and verify M5 support pattern before fabrication.",
       "position": [
         0,
         0.94869,
@@ -52,11 +52,11 @@
       ],
       "status": "Catalog dimensions; verify actual unit",
       "source": "https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf",
-      "note": "Long blue body uses the current 216 \u00d7 63 \u00d7 47 mm specification. The older ELOG manual gives 203 \u00d7 69 \u00d7 58 mm. Measure the photographed instrument before finalizing. Ports, feet and grip details are visual approximations; plug space is additional. Adjustable two-strap mounting uses slots 82 mm apart; reserve a 216 \u00d7 69 \u00d7 58 mm acceptance envelope. No close-fitting cradle or drilling into the logger."
+      "note": "Long blue body uses the current 216 × 63 × 47 mm specification. The older ELOG manual gives 203 × 69 × 58 mm. Measure the photographed instrument before finalizing. Ports, feet and grip details are visual approximations; plug space is additional. Adjustable two-strap mounting uses slots 82 mm apart; reserve a 216 × 69 × 58 mm acceptance envelope. No close-fitting cradle or drilling into the logger."
     },
     {
       "id": "ct",
-      "name": "CT1 \u00b7 printer hot only",
+      "name": "CT1 · printer hot only",
       "size": [
         29.4,
         41.7,
@@ -69,11 +69,11 @@
       ],
       "status": "Mini HSC family matched; 50 A variant probable",
       "source": "https://www.dentinstruments.com/shop/current-sensors/hinged-current-transformers-sensors-for-energy-metering/",
-      "note": "White Mini HSC 20 A and 50 A versions use the same 29.4 \u00d7 41.7 \u00d7 26.4 mm body and nominal 10 mm window (legacy drawing 10.2 mm). The partially visible DENT 50\u2026 label resembles legacy CTHSC-050-U/B; complete model digits remain covered. This establishes the family envelope, not the final ELOG scale. White is + and black is \u2212; arrow toward printer, one hot conductor only. The illustrated body rests on the panel; it has no added mounting screw."
+      "note": "White Mini HSC 20 A and 50 A versions use the same 29.4 × 41.7 × 26.4 mm body and nominal 10 mm window (legacy drawing 10.2 mm). The partially visible DENT 50… label resembles legacy CTHSC-050-U/B; complete model digits remain covered. This establishes the family envelope, not the final ELOG scale. White is + and black is −; arrow toward printer, one hot conductor only. The illustrated body rests on the panel; it has no added mounting screw."
     },
     {
       "id": "q0",
-      "name": "Q0 \u00b7 Phoenix TMC 81C 15A",
+      "name": "Q0 · Phoenix TMC 81C 15A",
       "size": [
         17.60000000220002,
         116.53448252101903,
@@ -81,15 +81,15 @@
       ],
       "position": [
         -92.9999999989,
-        75.61411229431175,
-        165.73309385428615
+        75.6472718665426,
+        163.833383233489
       ],
       "status": "Manufacturer STEP; operating position shown, travel unverified",
       "source": "https://www.phoenixcontact.com/en-us/products/thermomagnetic-device-circuit-breakers-tmc-81c-15a-2907571",
-      "note": "Phoenix Contact TMC 81C 15A / 2907571, 15 A, 1 pole, C curve, UL489 / cUL Listed E320373, 10 kA, 277 V AC. Catalog envelope 17.6 \u00d7 116 \u00d7 75.9 mm includes 7.5 mm DIN rail. Factory STEP body/handle depth is 73.8788 mm. Terminal guards held 1.5 mm behind the 3 mm inner wall; nose and handle pass through the 18.6 \u00d7 46 mm window. Manufacturer STEP is transformed without scaling to the 1\u00b0 wall frame. Verify received snap fit, operator travel, terminal access, bonds and closed-lid fit.",
+      "note": "Phoenix Contact TMC 81C 15A / 2907571, 15 A, 1 pole, C curve, UL489 / cUL Listed E320373, 10 kA, 277 V AC. Catalog envelope 17.6 × 116 × 75.9 mm includes 7.5 mm DIN rail. Factory STEP body/handle depth is 73.8788 mm. Terminal guards held 3.4 mm behind the 3 mm inner wall; handle projects through the 18.6 × 46 mm window. Manufacturer STEP is transformed without scaling to the 1° wall frame. Verify received snap fit, operator travel, terminal access, bonds and closed-lid fit. Flat bridge on two 65 mm posts; shown handle projection 7.38 mm beyond the outer wall. Full operating travel is not represented by the static STEP.",
       "terminalPitch": 67.8,
       "wallOuterZ": 193.92656548494267,
-      "terminalWireZ": 153.36585674534962,
+      "terminalWireZ": 151.46614612455247,
       "terminalType": "screw-clamp",
       "terminalWireAWG": 14,
       "terminalTorqueNm": 2,
@@ -100,31 +100,31 @@
       "terminalEntryXYZ": {
         "in": [
           -93,
-          117.71438758242826,
-          153.36585674534962
+          117.7475471546591,
+          151.46614612455247
         ],
         "out": [
           -93,
-          33.72718118929137,
-          151.89985460461781
+          33.76034076152221,
+          150.00014398382066
         ]
       },
       "terminalScrewXYZ": [
         [
           -93,
-          109.09903002111788,
-          182.8199840298368
+          109.13218959334873,
+          180.92027340903965
         ],
         [
           -93,
-          41.309356289514554,
-          181.636710873389
+          41.34251586174539,
+          179.73700025259186
         ]
       ],
       "factoryLocalTranslationMm": [
         -8.8,
         -58,
-        -64.6
+        -66.5
       ],
       "catalogSizeWithRailMm": [
         17.6,
@@ -134,13 +134,13 @@
       "terminalApproachXYZ": {
         "in": [
           -93,
-          141.71073226618165,
-          153.78471449984443
+          141.74389183841248,
+          151.88500387904728
         ],
         "out": [
           -93,
-          9.730836505537987,
-          151.480996850123
+          9.763996077768825,
+          149.58128622932585
         ]
       },
       "terminalChannels": [
@@ -148,13 +148,13 @@
           "route": "cord:supply-hot",
           "entry": [
             -93,
-            117.71438758242826,
-            153.36585674534962
+            117.7475471546591,
+            151.46614612455247
           ],
           "outer": [
             -93,
-            135.71164609524328,
-            153.68000006122074
+            135.7448056674741,
+            151.7802894404236
           ],
           "radiusMm": 3.5
         },
@@ -162,13 +162,13 @@
           "route": "internal-wire:q0-jl",
           "entry": [
             -93,
-            33.72718118929137,
-            151.89985460461781
+            33.76034076152221,
+            150.00014398382066
           ],
           "outer": [
             -93,
-            15.729922676476335,
-            151.5857112887467
+            15.763082248707173,
+            149.68600066794954
           ],
           "radiusMm": 3.5
         }
@@ -193,7 +193,7 @@
     },
     {
       "id": "outlet",
-      "name": "XA \u00b7 internal Leviton 515CV",
+      "name": "XA · internal Leviton 515CV",
       "size": [
         66.3,
         39.1,
@@ -210,7 +210,7 @@
     },
     {
       "id": "adapter",
-      "name": "CUI SMI6-9-V-P5 \u00b7 existing adapter",
+      "name": "CUI SMI6-9-V-P5 · existing adapter",
       "size": [
         30,
         40.5,
@@ -229,12 +229,12 @@
       "id": "entries",
       "name": "Power glands and direct USB cable exit",
       "size": [
-        27,
-        37,
-        27
+        28.8,
+        43.2,
+        28.8
       ],
-      "status": "Catalog power-gland envelopes",
-      "source": "https://www.hammfg.com/electronics/small-case/accessories/1427ncg",
+      "status": "Manufacturer-dimensioned Heyco cordgrips; small details simplified",
+      "source": "https://www.heyco.com/products/liquid-tight-cordgrips/nylon-cordgrips/heyco-tite-liquid-tight-cordgrips-straight-thru-npt-hubs/",
       "note": "Two power glands plus one protected USB cable passage. The existing USB cable is continuous from DENT to the PC. XA and DC remain inside. PC connects only after mains is unplugged."
     },
     {
@@ -266,7 +266,7 @@
         205.5495
       ]
     },
-    "note": "Top-view shell envelope from the BUD common-base factory STEP. The aluminum panel is a custom 260 \u00d7 340 mm blank. Plan is a placement reference; use the machining files and received-part checks."
+    "note": "Top-view shell envelope from the BUD common-base factory STEP. The aluminum panel is a custom 260 × 340 mm blank. Plan is a placement reference; use the machining files and received-part checks."
   },
   "instances": [
     {
@@ -282,7 +282,7 @@
         10.45,
         -128
       ],
-      "label": "JL \u00b7 HOT"
+      "label": "JL · HOT"
     },
     {
       "id": "JN",
@@ -297,7 +297,7 @@
         10.45,
         -58
       ],
-      "label": "JN \u00b7 NEUTRAL"
+      "label": "JN · NEUTRAL"
     },
     {
       "id": "PE",
@@ -312,39 +312,45 @@
         10.45,
         17
       ],
-      "label": "JPE \u00b7 EARTH"
+      "label": "JPE · EARTH"
     },
     {
       "id": "supply-entry",
       "part": "entries",
       "size": [
-        42,
-        27,
-        27
+        43.604132,
+        27.550752,
+        31.526184
       ],
       "position": [
-        -148.567903,
-        43,
-        128
+        -148.683246,
+        43.110823,
+        128.0
       ],
       "axis": "x",
-      "label": "Supply entry"
+      "label": "Supply entry",
+      "model": "Heyco M3231 + 8463",
+      "boreDiameterMm": 22.2,
+      "envelope_basis": "Axis-aligned bounds of the catalog-dimensioned gland and locknut at the 1 degree wall angle; not catalog axial dimensions. Thread and cap details are simplified."
     },
     {
       "id": "printer-entry",
       "part": "entries",
       "size": [
-        27,
-        27,
-        42
+        31.061445,
+        27.012834,
+        43.596571
       ],
       "position": [
-        0,
-        36,
-        -199.245818
+        0.0,
+        36.110823,
+        -199.360596
       ],
       "axis": "z",
-      "label": "Printer exit"
+      "label": "Printer exit",
+      "model": "Heyco M3231 + 8463",
+      "boreDiameterMm": 22.2,
+      "envelope_basis": "Axis-aligned bounds of the catalog-dimensioned gland and locknut at the 1 degree wall angle; not catalog axial dimensions. Thread and cap details are simplified."
     },
     {
       "id": "supply-plug",
@@ -389,7 +395,7 @@
         22,
         69
       ],
-      "label": "A1 \u00b7 L1 hot"
+      "label": "A1 · L1 hot"
     },
     {
       "id": "A2",
@@ -404,7 +410,7 @@
         22,
         82
       ],
-      "label": "A2 \u00b7 L2 neutral"
+      "label": "A2 · L2 neutral"
     },
     {
       "id": "A3",
@@ -419,7 +425,7 @@
         22,
         95
       ],
-      "label": "A3 \u00b7 N neutral"
+      "label": "A3 · N neutral"
     },
     {
       "id": "lead-slack",
@@ -725,27 +731,25 @@
     ],
     "wallThicknessMm": 3,
     "stockThicknessMm": 1.89738,
-    "insideBendRadiusMm": 2,
     "heightMm": 40,
-    "armInnerHalfWidthMm": 30,
     "outerHalfWidthMm": 44,
     "wallScrewHalfPitchMm": 38,
-    "webFrontDepthMm": 64.4,
+    "webFrontDepthMm": 66.3,
     "railLengthMm": 60,
     "railSectionMm": [
       35,
       7.5,
       1
     ],
-    "railRearDepthMm": 63.6,
+    "railRearDepthMm": 65.5,
     "railScrewOffsetsX": [
       -24,
       24
     ],
     "stopSizeMm": [
       8,
-      45,
-      32
+      45.5999204,
+      30.61693394
     ],
     "stopCentersX": [
       -12.8,
@@ -753,14 +757,41 @@
     ],
     "bondPointXYZ": [
       -117,
-      76.24086609769085,
-      122.83739435932326
+      76.2740256699217,
+      120.93768373852612
     ],
     "normalDraftDeg": 1,
-    "note": "Formed bracket and rail in local wall coordinates; 1 degree case draft. 0.8 mm washer spacing between rail and bracket is provisional. Slot permits lateral adjustment; set depth from an offcut fit before folding. Combined dedicated #10 bond must contact both metal pieces by an accepted method. No ordinary mounting-screw-only bonding assumption.",
-    "wallHoleDiameterMm": 3.3,
+    "note": "Flat cut-and-drill bridge; no bends. Two purchased M5 female posts, 65 mm long, 8 mm across flats. Inner wall washer 0.8 mm and post/bridge tooth contact 0.5 mm are provisional compressed stacks. Plate front depth 66.3 mm; rail rear depth 65.5 mm. Verify real washer thickness, thread engagement, operator travel, wall retention and an accepted PE path to rail, bridge and both steel posts.",
+    "wallHoleDiameterMm": 5.5,
     "wallScrewLengthMm": 12,
-    "wallScrewDiameterMm": 3,
-    "railCenterOffsetYMm": 0.4
+    "wallScrewDiameterMm": 5,
+    "railCenterOffsetYMm": 0.4,
+    "postLengthMm": 65,
+    "postAcrossFlatsMm": 8,
+    "postThreadDepthMm": 11,
+    "wallFlatWasherMm": 0.8,
+    "postContactWasherMm": 0.5,
+    "railSpacerMm": 0.8,
+    "postModel": "Würth 970650581",
+    "postSource": "https://www.we-online.com/components/products/datasheet/970xxxxx1_overview.pdf",
+    "stopSource": "https://legacy.altechcorp.com/CAD/2dr/Accessories/End_Stop/CA802/CA802.stp",
+    "stopNote": "Manufacturer STEP at 1:1; 8 mm thickness. Published drawing 45.4 × 30.5 mm; STEP 45.60 × 30.62 mm. Static spring position; verify received rail seating."
+  },
+  "powerGlands": {
+    "model": "Heyco M3231 + 8463",
+    "boreDiameterMm": 22.2,
+    "threadLengthMm": 15.5,
+    "overallLengthMm": 43.2,
+    "bodyAcrossFlatsMm": 24.9,
+    "bodyHexThicknessMm": 5.3,
+    "locknutAcrossFlatsMm": 26.9,
+    "locknutThicknessMm": 6.7,
+    "threadDiameterMm": 21.3,
+    "cableSealRangeMm": [
+      4.32,
+      11.43
+    ],
+    "source": "https://www.heyco.com/products/liquid-tight-cordgrips/nylon-cordgrips/heyco-tite-liquid-tight-cordgrips-straight-thru-npt-hubs/",
+    "note": "Overall, thread, hex and locknut dimensions from Heyco drawings. Thread ridges and clamping fingers simplified; grip shown around nominal 9.2 mm cord. Published seal range does not establish UL cord compatibility."
   }
 }

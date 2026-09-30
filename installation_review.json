@@ -1,7 +1,7 @@
 {
-  "revision": "September 28, 2026 · Phoenix Q0 / two-seller design",
-  "baseline_commit": "1242846",
-  "scope": "One grounded 120 V supply, one printer at a time. The design uses an opaque-cover enclosure, proposed reuse of the professor’s aluminum sheet and an internal adapter connection. Six owned equipment groups, including the existing USB cable, are retained. The selected 15 A Q0 and upstream-only voltage-lead protection still require application acceptance. No purchase, physical fit, thermal test or electrical release is claimed. Closed-lid USB export is used only after unplugging mains; the internal portion of the existing USB cable requires rated insulation and accepted assembly.",
+  "revision": "September 29, 2026 · clear cover, Phoenix and no-bend mounting",
+  "baseline_commit": "4dbaced",
+  "scope": "One grounded 120 V supply, one printer at a time. The design uses a clear-cover BUD NBF-32226 enclosure, proposed reuse of the professor’s aluminum sheet and an internal adapter connection. Six owned equipment groups, including the existing USB cable, are retained. The selected 15 A Q0 and upstream-only voltage-lead protection still require application acceptance. No purchase, physical fit, thermal test or electrical release is claimed. Closed-lid USB export is used only after unplugging mains; the internal portion of the existing USB cable requires rated insulation and accepted assembly.",
   "result": "STOCK, USB ASSEMBLY AND ELECTRICAL ACCEPTANCE OPEN",
   "sources": {
     "dent": "https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf",
@@ -15,7 +15,7 @@
     "carrier": "https://www1.futureelectronics.com/doc/WAGO/221-505.pdf",
     "cord": "https://cabletechsupport.southwire.com/cablespec/download_spec/?country=US&spec=70126",
     "plug": "https://leviton.com/content/dam/leviton/residential/product_documents/instruction_sheet/515_Instruction_Sheet.pdf",
-    "gland": "https://www.hammfg.com/electronics/small-case/accessories/1427ncg",
+    "gland": "https://www.heyco.com/products/liquid-tight-cordgrips/nylon-cordgrips/heyco-tite-liquid-tight-cordgrips-straight-thru-npt-hubs/",
     "usb": "https://www.dentinstruments.com/wp-content/uploads/EXC_ELOG19_11-15-24.pdf",
     "wire": "https://www.southwire.com/wire-cable/building-wire/thhn-thwn-copper-silicone-free/p/22955984",
     "ring": "https://www.gardnerbender.com/en/p/15-104/-16-14-AWG-2-mm-sq-Bnes-%C3%A0-anneau",
@@ -42,7 +42,10 @@
     "usb-original": "https://www.dentinstruments.com/shop/powerscout-accessories/replacement-usb-a-to-b-communications-cable/",
     "rail-buy": "https://www.digikey.com/en/products/detail/phoenix-contact/1207639/10645207",
     "stop": "https://legacy.altechcorp.com/Blocks/Block-Accessories.pdf",
-    "phoenix-q0": "https://www.phoenixcontact.com/en-us/products/thermomagnetic-device-circuit-breakers-tmc-81c-15a-2907571"
+    "phoenix-q0": "https://www.phoenixcontact.com/en-us/products/thermomagnetic-device-circuit-breakers-tmc-81c-15a-2907571",
+    "case-product": "https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32226/",
+    "post": "https://www.we-online.com/components/products/datasheet/970xxxxx1_overview.pdf",
+    "gland-nut": "https://www.heyco.com/products/liquid-tight-flexible-conduit-tubing-fittings/accessories/heyco-nylon-locknuts-npt-thread/"
   },
   "materials": [
     {
@@ -113,13 +116,14 @@
     {
       "id": "enclosure",
       "item": "Enclosure",
-      "model": "BUD NBF-32126 · opaque hinged cover",
+      "model": "BUD NBF-32226 · clear hinged cover",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "400 × 300 × 160 mm enclosure, $90.81 from DigiKey. Smaller than the former box; panel, placement, wall openings and screw lengths have been updated together. Retains three sellers and reduces the total parts budget. The cover is opaque; X-ray is a website viewing aid.",
-      "remaining": "DigiKey lists 1 in stock at the quantity-one price, checked September 24, 2026. All-new distributor offer; verify stock and delivery at checkout. The manufacturer-linked NBF-32226 STEP supplies the common base; the opaque lid silhouette is illustrative. Inspect actual lid, latches and component fit before machining.",
+      "checked": "400 × 300 × 160 mm ABS/PC box with a clear polycarbonate cover. Same manufacturer base and panel pattern; the exact factory STEP is displayed without scaling.",
+      "remaining": "103 in DigiKey direct stock at $111.88, checked September 29, 2026. Reconfirm at checkout. Received-part fit, latches, access protection and machining acceptance remain required.",
       "sources": [
-        "case"
+        "case",
+        "case-product"
       ]
     },
     {
@@ -142,7 +146,7 @@
       "availability": "buy",
       "result": "Conditional",
       "checked": "15 A, one pole, C curve, UL489 / cUL Listed E320373; 10 kA, 277 V AC. Consolidates the breaker into the existing DigiKey order. Manufacturer STEP defines the wall opening, short DIN rail and bonded aluminum bracket. Review the thermal-magnetic curve against startup and original voltage-lead protection.",
-      "remaining": "DigiKey direct stock: material price $21.57; 3,691 in stock when checked 2026-09-28. Reconfirm price and stock before ordering. Shipping, tariffs, sales tax and fabrication are excluded from the selection total.",
+      "remaining": "DigiKey direct stock: material price $21.57; 3,689 in stock when checked 2026-09-29. Reconfirm price and stock before ordering. Shipping, tariffs, sales tax and fabrication are excluded from the selection total.",
       "sources": [
         "phoenix-q0",
         "q0-buy"
@@ -229,13 +233,14 @@
     {
       "id": "cord-glands",
       "item": "Mains / printer strain relief",
-      "model": "Hammond 1427NCGPG13LB · long PG13.5 thread",
+      "model": "Heyco M3231 × 2 + 8463 locknuts × 2",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "Long-thread 1427NCGPG13LB has 15 mm thread, 6–12 mm clamp and Ø21 mm hole. This removes the earlier short-thread limitation.",
-      "remaining": "Inspect locknut and seal seating on the ~3 mm drafted wall; pull-test each complete cord grip.",
+      "checked": "DigiKey direct-stock replacement for the factory-stock Hammond part. 1/2 NPT, 15.5 mm thread, Ø22.2 mm mounting bore. Published 4.32–11.43 mm seal range contains the nominal 9.2 mm SJOOW cord.",
+      "remaining": "September 29: M3231 $1.44, 13,830 in direct stock; 8463 $0.32, 66,153 in direct stock. Locknuts are separate purchases. Confirm the UL-approved cable range, grip and sealing with the actual cord.",
       "sources": [
         "gland",
+        "gland-nut",
         "cord"
       ]
     },
@@ -311,7 +316,7 @@
       "model": "Screws, nuts and washers",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "Carriers and Q0 wall bracket use eight M3 × 12 screws/nuts total; cable anchors and rail use seven M4 × 10 total; four M5 × 10 panel screws and two dedicated #10 PE studs. Four additional M3 washers are purchased. No lab hardware stock is assumed.",
+      "checked": "Six M3 carrier sets, seven M4 anchor/rail sets, four M5 × 10 panel screws, four M5 × 12 post screws, six M5 flat washers and two #10 PE studs. No lab hardware stock assumed.",
       "remaining": "Verify actual stock, full locknut engagement and enclosure-floor clearance. Accept aluminum-compatible bonding on both custom metal parts before use.",
       "sources": [
         "carrier",
@@ -363,7 +368,7 @@
       "availability": "buy",
       "result": "Conditional",
       "checked": "35 × 7.5 × 1 mm galvanized steel rail. Buy the complete 250 mm piece for $4.79; two $0.62 CA802 stops restrain the breaker laterally. The short stock avoids adding a one-metre package to the enclosure shipment.",
-      "remaining": "DigiKey checked 2026-09-28: rail $4.79; two stops $1.24. Material subtotal $6.03. Confirm snap fit; cut and deburr away from components.",
+      "remaining": "September 29 direct stock: 2,061 rails and 6,001 stops; $4.79 + 2 × $0.62 = $6.03. Cut and deburr the rail before fitting.",
       "sources": [
         "rail-buy",
         "stop"
@@ -371,14 +376,27 @@
     },
     {
       "id": "breaker-mount",
-      "item": "Q0 formed metal bracket",
-      "model": "Professor-supplied aluminum · 88 × 40 × 66.30 mm nominal formed envelope",
+      "item": "Q0 flat aluminum bridge",
+      "model": "Professor-supplied aluminum · 88 × 40 × nominal 1.89738 mm",
       "availability": "fabricate",
       "result": "Measure",
-      "checked": "Four-bend metal support retains the short DIN rail. Reuse the offered aluminum; nominal thickness 1.89738 mm and R2 bends are provisional until stock and a bend coupon are measured. M3 wall fixings reuse two spare screws/nuts already in the purchase packs.",
-      "remaining": "Digital solid and clearance checks only. Measure alloy, thickness, stiffness, bend springback and operator alignment; revise dimensions before fabrication. Shop labor is unquoted and not assumed free.",
+      "checked": "Cut-and-drill flat bridge, supported by two purchased 65 mm M5 steel posts. No bending, tapped holes or fabricated angle brackets. Measure the offered sheet before machining.",
+      "remaining": "Digital geometry only. Check actual thickness, stiffness, washer stack, operator travel and accepted bonding. Shop labor excluded.",
       "sources": [
+        "post",
         "phoenix-q0"
+      ]
+    },
+    {
+      "id": "breaker-posts",
+      "item": "Q0 threaded support posts",
+      "model": "Würth 970650581 · M5 female/female · 65 mm",
+      "availability": "buy",
+      "result": "Conditional",
+      "checked": "Two zinc-plated steel SW8 hex posts hold the flat bridge at the required DIN-rail depth. M5 internal thread depth 11 mm per end; no bending or tapping required.",
+      "remaining": "67 in DigiKey direct stock; $1.39 each, checked September 29, 2026. Verify screw engagement, wall loading and accepted PE continuity through the metal support.",
+      "sources": [
+        "post"
       ]
     }
   ],
@@ -410,14 +428,15 @@
     }
   ],
   "corrections": [
-    "Selected the in-stock BUD NBF-32126 and regenerated the common-base machining, chamfered aluminum panel, fasteners and placement. Opaque lid silhouette remains illustrative.",
+    "Selected direct-stock BUD NBF-32226 with a clear polycarbonate lid. Factory shell, lid and latches are modeled at 1:1 scale.",
     "Proposed reuse of the professor’s aluminum sheet, with stock measurement and aluminum bonding held open.",
     "Moved XA and the original adapter inside. XA uses the same 515CV SKU as the printer output, with a continuous 14/3 cord branch.",
     "Removed the round DC extension, KVT frame and insert from the active BOM and model. Restored XA and DC wall stock; one protected direct-cable opening supports closed-lid export.",
     "Retained six cable anchor points and added separate straps for XA and adapter.",
     "Consolidated purchase sources and added exact-part approval evidence and a conditional DIN-breaker comparison.",
     "Simplified to one confirmed-owned USB cable through a snap bushing. Deleted the panel coupler, short cable and two M3 flange sets. Existing six supports and required internal insulation remain; direct-cable pull retention and plug passage need physical acceptance.",
-    "Selected Phoenix 2907571 from the existing DigiKey order; reduced active sellers to two. Manufacturer STEP drives the terminal guards, nose, formed bracket and exact clearance checks. The selection total is $233.54 in materials, excluding shipping, tariffs, sales tax, fabrication and labor."
+    "Phoenix 2907571 remains selected. Replaced the folded bracket with a flat bridge and two 65 mm M5 posts; added all purchased post hardware. Updated cordgrips to self-stock Heyco M3231 / 8463, with Ø22.2 mm wall bores. Materials total $262.86 from DigiKey and Home Depot; per-line price dates remain visible.",
+    "Re-routed the printer PE curve around the left/rear corner; regression screening of the displayed 1.7 mm-radius wire against the machined shell rejects the former spline overshoot. Physical routing remains an assembly check."
   ],
   "assembly": [
     {
@@ -441,7 +460,7 @@
     {
       "stage": 4,
       "title": "Install Q0, glands and internal power",
-      "action": "Install the formed metal bracket, 60 mm DIN rail, two stops and Q0 with the handle through the new front window. Fit the dedicated rail/bracket bond. Install two glands, restrained internal XA/adapter and direct USB bushing. Do not force DIN parts into the old Carling opening.",
+      "action": "Fit two 65 mm M5 posts, the flat aluminum bridge, 60 mm DIN rail, two stops and Phoenix Q0. No bending is required. Check the external handle, full travel and accepted bonding of rail, bridge and posts. Fit two Heyco M3231 glands with separate 8463 nuts, then the restrained internal XA/adapter and USB bushing.",
       "result": "Internal layout proposal; actual plug engagement, anti-unplug retention and thermal suitability remain open."
     },
     {
@@ -453,7 +472,7 @@
     {
       "stage": 6,
       "title": "Close and verify the pilot",
-      "action": "Disconnect the exterior USB-A end from the PC, stow it and close the opaque lid before mains operation. The complete cable remains attached to the box. Qualified personnel complete electrical and closed-enclosure thermal checks. After the pilot, unplug mains and connect that same USB-A end to export with the lid closed.",
+      "action": "Disconnect the exterior USB-A end from the PC, stow it and close the clear lid before mains operation. The complete cable remains attached to the box. Qualified personnel complete electrical and closed-enclosure thermal checks. After the pilot, unplug mains and connect that same USB-A end to export with the lid closed.",
       "result": "No energized test, temperature test or finished-assembly certification recorded."
     }
   ],
@@ -461,9 +480,9 @@
     "CT commissioning: Mini HSC family is matched; 50 A is probable. Read the unobscured label during assembly and set that exact range/output in ELOG.",
     "Voltage-lead acceptance: the user confirms the original DENT kit pigtails; do not re-request OEM identity. Accept terminal preparation and upstream-only protection with responsible electrical personnel; original-kit status alone does not establish protection by the 15 A main breaker.",
     "Measure aluminum sheet size, thickness and stiffness; approve aluminum-compatible panel bonding and adjust machining/fasteners before fabrication.",
-    "Verify internal XA/adapter seating, independent restraint, intact DC cable slack, separation and closed-enclosure temperature. Opaque lid prevents live viewing of logger LEDs; verify logging by offline export after the pilot.",
+    "Verify internal XA/adapter seating, independent restraint, intact DC cable slack, separation and closed-enclosure temperature. Clear cover allows visual inspection; verify recording by offline export after the pilot.",
     "Commissioning: verify fastener stacks, CT latch and cable slack, supply conditions, PE/insulation/polarity, total load and restart/recording behavior before routine operation.",
     "USB assembly: verify B-out/A-in orientation, received cable/sleeve dimensions, accepted sleeve application and end coverage, retention, separation and shield treatment. Prove setup/export with mains unplugged and the lid closed; then disconnect its exterior USB-A end from the PC before restoring mains. No isolation or ingress rating is claimed.",
-    "Measure Q0/rail engagement, bracket wall fit, operator travel and support stiffness; accept both metal bonds. Recheck the Phoenix C curve against printer startup; Carling pulse-tolerance evidence no longer applies."
+    "Measure Q0/rail engagement, bracket wall fit, operator travel and support stiffness; accept the rail, bridge and both steel-post bonding paths. Recheck the Phoenix C curve against printer startup; Carling pulse-tolerance evidence no longer applies."
   ]
 }

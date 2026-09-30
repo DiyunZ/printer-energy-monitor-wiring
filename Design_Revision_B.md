@@ -1,52 +1,48 @@
-# Design, material costs and sellers
+# Selected design, material costs and sellers
 
-**Select Phoenix Contact TMC 81C 15A / 2907571 from DigiKey direct stock: $233.54 in materials from two sellers, DigiKey and Home Depot.** Compare material costs while minimizing the number of actual sellers. Shipping, tariffs, sales tax, fabrication and labor are excluded from all selection totals. Complete purchase packs and spare pieces remain included.
+**BUD NBF-32226 clear-cover enclosure + Phoenix 2907571 + flat bridge on 65 mm posts. Estimated materials: $262.86 from DigiKey and Home Depot.** Cut and drill only; no bending. Whole purchase packs and spare pieces are counted. Shipping, tariffs, sales tax, fabrication and labor are excluded.
 
 ## Material total
 
 | Seller | Materials |
 |---|---:|
-| DigiKey | $154.12 |
-| Home Depot | $79.42 |
-| **Total** | **$233.54** |
+| DigiKey | $175.55 |
+| Home Depot | $87.31 |
+| **Total** | **$262.86** |
 
-The September 28 material prices are **$21.57 for Q0**, **$4.79 for the complete 250 mm rail**, and **$1.24 for two CA802 stops**. These three items total **$27.60** and are included in the project total above. The purchased fastener packs are also included; proposed reuse of the professor's aluminum adds no purchased stock. [Breaker](https://www.digikey.com/en/products/detail/phoenix-contact/2907571/6109707), [rail](https://www.digikey.com/en/products/detail/phoenix-contact/1207639/10645207), [stops](https://www.digikey.com/en/products/detail/altech-corporation/CA802/8547037).
+| Change from the previous $233.54 Phoenix plan | Materials change |
+|---|---:|
+| Clear-cover NBF-32226 $111.88 replaces out-of-stock NBF-32126 $90.81 | +$21.07 |
+| Two 65 mm posts $2.78 + four M5 screws $1.95 + eight M5 washers $5.94 | +$10.67 |
+| Two Heyco M3231 glands and two 8463 nuts $3.52 replace factory-stock Hammond glands $5.94 | −$2.42 |
+| **Net change** | **+$29.32** |
 
-| Project version | Actual sellers | Material total |
-|---|---|---:|
-| Earlier Carling direct panel mount | 3: DigiKey, Home Depot, Master Electronics | $246.94 |
-| **Current Phoenix DIN mount** | **2: DigiKey, Home Depot** | **$233.54** |
+Q0 remains **$21.57**. The full 250 mm rail is **$4.79** and two stops **$1.24**; breaker plus rail/stops is **$27.60**, included above. The increase purchases a direct-stock transparent-cover box and eliminates sheet bending; it is not an increase in the breaker price. The earlier $246.94 Carling plan used different stock assumptions and three retailers and is not a current like-for-like order.
 
-**Phoenix saves $13.40 in materials and removes one seller.** Installation work is considered separately: Carling mounts directly to the panel; Phoenix needs the short DIN rail, end stops and formed aluminum support. The material saving does not imply simpler installation.
+<h2 id="breaker-options">Selected two-retailer arrangement</h2>
 
-<h2 id="breaker-options">Options without adding a retailer</h2>
+Keep **Phoenix 2907571 / TMC 81C 15A**, 15 A, 1 pole, C curve, UL489 / cUL Listed E320373, 277 V AC, 10 kA. On September 29 DigiKey showed **3,689 direct-stock units at $21.57**; the clear case showed **103 at $111.88**. Factory and Marketplace inventory are excluded. [Q0](https://www.digikey.com/en/products/detail/phoenix-contact/2907571/6109707) · [clear case](https://www.digikey.com/en/products/detail/bud-industries/NBF-32226/2328561).
 
-| DigiKey direct-stock option | Breaker material price | With the same $6.03 rail / stops | Decision |
-|---|---:|---:|---|
-| **Phoenix 2907571 / TMC 81C 15A** | **$21.57** | **$27.60** | Selected. Lowest checked material price among these viable direct-stock candidates; 3,691 in stock at the September 28 check. |
-| [E-T-A 4230-T110-K0CU-15A](https://www.digikey.com/en/products/detail/e-t-a/4230-T110-K0CU-15A/7930030) | $30.62 | $36.65 | $9.05 more in materials; different geometry, not interchangeable in these fabrication files. |
-| [Altech 1C15UL](https://www.digikey.com/en/products/detail/altech-corporation/1C15UL/8547287) | $33.53 | $39.56 | $11.96 more in materials; its geometry and application need a separate substitution review. |
+The flat 88 × 40 mm aluminum bridge uses two purchased M5 posts. The post hardware is additional to the four M5 × 10 panel screws. The actual manufacturer Q0 model sets the front window and terminal approaches; the bridge, posts and rail are placed in the case's 1° wall frame. [Assembly, screw stacks and receiving checks](build.html#q0-mount).
 
-All three retain the same two sellers. The rail / stop figures compare the same purchase quantities; they do not establish mechanical interchangeability. These are checked candidates, not a claim of the cheapest breaker across the entire market. Do not substitute an inexpensive UL1077 supplementary protector for the selected UL489 branch-circuit breaker.
+<h2 id="checkout">Price and stock basis</h2>
 
-The earlier NOARK candidate cost **$17.57 from Wolf**, $4.00 less for the breaker than Phoenix. Holding other material quantities fixed, it saves $4.00 but introduces Wolf as a **third actual seller**. Phoenix is preferred for the two-seller plan. Shipping is not used to rank these options.
+Case, Q0, rail, stops, posts, post hardware and Heyco glands/nuts were rechecked September 29. **Unchanged items retain September 23–24 price snapshots**; $262.86 is an estimate, not a refreshed complete cart or reserved stock. Every line's date, quantity, pack and link are in the [order plan](materials.html#order-plan). No order has been placed. Offered aluminum is counted as no purchased stock; confirm its actual availability and thickness.
 
-<h2 id="checkout">Price basis and purchase checks</h2>
+## Model and photo evidence
 
-[Order quantities and links](materials.html#order-plan) include the full 250 mm rail, two stops, fastener packs and spares. Updated breaker/rail/stop prices are September 28 checks; unchanged September 23–24 lines remain dated snapshots. No order has been submitted. Reconfirm material prices, stock and the offered aluminum before ordering. Shipping, tariffs, sales tax, fabrication and labor are outside this comparison; their exclusion does not mean they are free.
-
-The mounting package uses an **18.6 × 46 mm operator window**, **88 × 40 × 66.30 mm formed aluminum bracket**, and **60 mm installed DIN rail**. Only the insulating nose and handle reach the opening. Guards remain 1.5 mm behind the nominal inner wall. Wire preparation is **11–12 mm strip, 2 N·m**, one 14 AWG copper conductor per clamp. The new C curve must be checked against actual startup; former Carling pulse-tolerance claims do not carry over. [Fabrication and receiving checks](build.html#q0-mount).
+The purchase list uses real product photos; manufacturer family images are labeled. Flat aluminum fabrication parts use labeled CAD drawings. BUD's linked series STEP and Phoenix's exact 2907571 STEP remain at original millimetre scale. Catalog-dimensioned parts and flexible cables are distinguished from manufacturer solids in the dimension schedule. Closed mode renders a genuinely clear cover and opaque walls; X-ray additionally fades the walls. The digital fit checks do not replace full handle travel, receiving measurements or qualified electrical acceptance.
 
 ## Certification evidence
 
 | Part | Evidence available | What remains |
 |---|---|---|
-| BUD NBF-32126 | [Manufacturer listing](https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/): UL508; NEMA 1, 2, 4, 4X for the unmodified enclosure; ABS/PC UL94-5VA, indoor use | Confirm received label and exact variant. Machining and custom assembly do not inherit a finished-product listing. |
+| BUD NBF-32226 | [Manufacturer listing](https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32226/): UL508; NEMA 1, 2, 4, 4X for the unmodified enclosure; ABS/PC body UL94-5VA; clear PC lid UL94-V0, indoor use | Confirm received label and exact variant. Machining and custom assembly do not inherit a finished-product listing. |
 | Phoenix Contact TMC 81C 15A / 2907571 | [Exact manufacturer product](https://www.phoenixcontact.com/en-us/products/thermomagnetic-device-circuit-breakers-tmc-81c-15a-2907571): UL489 / cUL Listed E320373; 15 A, 1 pole, C curve, 277 V AC, 10 kA | Verify receiving marks, startup suitability, available fault current and original voltage-lead protection. |
 | Leviton 515PV / 515CV | [515PV manufacturer page](https://leviton.com/products/515pv) and [515CV](https://leviton.com/products/515cv): UL498 File E13393; CSA C22.2 No.42 File LR-406 | Confirm received markings, approved cord preparation and clamp. |
 | Southwire internal wire | [UL/cUL product description](https://www.southwire.com/wire-cable/building-wire/thhn-thwn-copper-silicone-free/p/22955984) | Check markings on actual stock and accepted wiring method. |
 | WAGO 221-415 | [Manufacturer datasheet, p.5, distributor-hosted](https://www.netxl.com/wago/docs/221-415-data-sheet.pdf): UL486C cULus Listed E69654; UL467 E201573 | Apply the exact conductor and installation conditions; confirm received marks. Carrier 221-505 is a mechanical accessory. |
-| Hammond 1427NCGPG13LB glands | [Manufacturer series page](https://www.hammfg.com/electronics/small-case/accessories/1427ncg): UL Listed; IP68; exact long-thread part included in its table | Verify actual cord diameter, clamp and sealing. Component rating does not certify the machined box. |
+| Heyco M3231 + 8463 cordgrips / nuts | [Manufacturer series](https://www.heyco.com/products/liquid-tight-cordgrips/nylon-cordgrips/heyco-tite-liquid-tight-cordgrips-straight-thru-npt-hubs/): UL514B E51579 / CSA 93876; 1/2 NPT, 15.5 mm thread | Accept exact UL cord range, clamp, sealing and locknut engagement. |
 | Southwire 558086 cord | [Manufacturer cable specification](https://cabletechsupport.southwire.com/en/tile/1/cable/7386/): UL62 / CSA C22.2 No.49; E46194 / LL90458 | Verify actual jacket marks and installation method. |
 | Gardner Bender 15-104 rings | [Exact manufacturer product](https://www.gardnerbender.com/en/p/15-104/-16-14-AWG-2-mm-sq-Bnes-%C3%A0-anneau): UL Listed, CSA Listed, 600 V building wire, 75°C; #8–10 studs and 16–14 AWG | Certification wording is resolved for the replacement. Actual crimp tooling/fit and the aluminum bond still require acceptance; the manufacturer page does not publish a barrel-insulation diameter. |
 | Custom aluminum and mechanical restraints | Material/interface review, not standalone equipment certification | Record stock and bonding method; verify retention, stiffness and temperature. Straps are not electrical insulation. |

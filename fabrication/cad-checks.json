@@ -7,20 +7,20 @@
   "results": [
     {
       "id": "case-machined",
-      "valid": false,
+      "valid": true,
       "solids": 1,
-      "volume_mm3": 955901.9192605125,
+      "volume_mm3": 955566.42820971,
       "bounds_mm": [
-        316.56169320913943,
-        140.30000009600002,
-        411.0990002000001
+        316.5616932091381,
+        140.300000096,
+        411.09900020000003
       ]
     },
     {
       "id": "panel-machined",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 165620.18270170785,
+      "volume_mm3": 165620.18270170758,
       "bounds_mm": [
         260.0,
         1.89738,
@@ -34,22 +34,22 @@
     },
     {
       "id": "Q0 fixing -1",
-      "removed_mm3": 25.656711954739876,
+      "removed_mm3": 71.2686850145692,
       "result": "pass"
     },
     {
       "id": "Q0 fixing +1",
-      "removed_mm3": 25.6567890268052,
+      "removed_mm3": 71.26876209827606,
       "result": "pass"
     },
     {
       "id": "SUPPLY",
-      "removed_mm3": 1038.9928155061789,
+      "removed_mm3": 1161.127352119307,
       "result": "pass"
     },
     {
       "id": "OUTPUT",
-      "removed_mm3": 1038.9931188266492,
+      "removed_mm3": 1161.1276546698064,
       "result": "pass"
     },
     {
@@ -196,25 +196,97 @@
     {
       "id": "Phoenix STEP to closed factory lid",
       "intrusion_mm3": 0,
-      "minimum_distance_mm": 2.296402871926935,
+      "minimum_distance_mm": 4.191797766841508,
       "result": "pass"
     },
     {
       "id": "Phoenix STEP to panel",
       "intrusion_mm3": 0,
-      "minimum_distance_mm": 15.509062262385022,
+      "minimum_distance_mm": 15.509062262385012,
       "result": "pass"
     },
     {
-      "id": "Phoenix STEP to formed bracket",
+      "id": "Phoenix STEP to flat bridge",
       "intrusion_mm3": 0,
-      "minimum_distance_mm": 2.7999999999997467,
+      "minimum_distance_mm": 2.7999999999997183,
       "result": "pass"
     },
     {
       "id": "Phoenix STEP to nominal DIN rail",
       "intrusion_mm3": 0,
-      "minimum_distance_mm": 0.0,
+      "minimum_distance_mm": 2.929642751054232e-14,
+      "result": "pass"
+    },
+    {
+      "id": "flat bridge to shell",
+      "intrusion_mm3": 0,
+      "minimum_distance_mm": 2.7979058516703996,
+      "result": "pass"
+    },
+    {
+      "id": "flat bridge to closed lid",
+      "intrusion_mm3": 0,
+      "minimum_distance_mm": 23.524743313379137,
+      "result": "pass"
+    },
+    {
+      "id": "flat bridge to panel",
+      "intrusion_mm3": 0,
+      "minimum_distance_mm": 54.315117862975946,
+      "result": "pass"
+    },
+    {
+      "id": "flat bridge to breaker",
+      "intrusion_mm3": 0,
+      "minimum_distance_mm": 2.7999999999997183,
+      "result": "pass"
+    },
+    {
+      "id": "M5 post 1 to shell",
+      "intrusion_mm3": 0,
+      "minimum_distance_mm": 0.8002606563204296,
+      "result": "pass"
+    },
+    {
+      "id": "M5 post 1 to closed lid",
+      "intrusion_mm3": 0,
+      "minimum_distance_mm": 39.97967983445247,
+      "result": "pass"
+    },
+    {
+      "id": "M5 post 1 to panel",
+      "intrusion_mm3": 0,
+      "minimum_distance_mm": 69.65012769058326,
+      "result": "pass"
+    },
+    {
+      "id": "M5 post 1 to breaker",
+      "intrusion_mm3": 0,
+      "minimum_distance_mm": 24.581197846482993,
+      "result": "pass"
+    },
+    {
+      "id": "M5 post 2 to shell",
+      "intrusion_mm3": 0,
+      "minimum_distance_mm": 0.8002606563204013,
+      "result": "pass"
+    },
+    {
+      "id": "M5 post 2 to closed lid",
+      "intrusion_mm3": 0,
+      "minimum_distance_mm": 40.297548178756905,
+      "result": "pass"
+    },
+    {
+      "id": "M5 post 2 to panel",
+      "intrusion_mm3": 0,
+      "minimum_distance_mm": 69.50906226238502,
+      "result": "pass"
+    },
+    {
+      "id": "M5 post 2 to breaker",
+      "intrusion_mm3": 0,
+      "minimum_distance_mm": 24.581197846482993,
       "result": "pass"
     },
     {

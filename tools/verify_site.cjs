@@ -10,7 +10,7 @@ const out=process.env.QA_OUTPUT;
 const root=path.resolve(__dirname,'..');
 const bom=JSON.parse(fs.readFileSync(path.join(root,'procurement.json')));
 const dimensions=JSON.parse(fs.readFileSync(path.join(root,'layout_dimensions.json')));
-const expectedPrices={enclosure:90.81,breaker:21.57,receptacle:6.99,connectors:3.51,carriers:6.69,cord:19.89,'supply-plug':3.96,'printer-connector':6.99,'cord-glands':5.94,'internal-wire':3.36,'ring-lugs':3.63,'tie-mounts':4.08,'cable-ties':3.16,fasteners:26.63,'breaker-rail':6.03,'logger-restraint':10.77,'usb-bushing':0.14,'usb-sleeve':9.39};
+const expectedPrices={enclosure:111.88,breaker:21.57,receptacle:6.99,connectors:3.51,carriers:6.69,cord:19.89,'supply-plug':3.96,'printer-connector':6.99,'cord-glands':3.52,'internal-wire':3.36,'ring-lugs':3.63,'tie-mounts':4.08,'cable-ties':3.16,fasteners:34.52,'breaker-posts':2.78,'breaker-rail':6.03,'logger-restraint':10.77,'usb-bushing':0.14,'usb-sleeve':9.39};
 async function checkPrices(page){
  assert.deepEqual([...new Set(bom.purchasing.rows.map(r=>r.seller))].sort(),['DigiKey','Home Depot']);
  for(const r of bom.purchasing.rows.filter(r=>r.material_ids.includes('fasteners')))assert.ok(r.quantity*r.pieces_per_unit>=r.installed_quantity,'Purchase packs must cover installed hardware: '+r.sku);
@@ -45,7 +45,7 @@ const close=(a,b,t=.05)=>Math.abs(a-b)<t;
  assert.match(await page.title(),/3D enclosure/);
  assert.doesNotMatch(await page.locator('body').textContent(),/\brevision(?:\s+[a-d])?\b|\brev\.\s*\d+/i,'Main page should describe the current design without revision labels');
  assert.equal(await page.locator('.revision-note').count(),0);
- for(const p of bom.items.filter(p=>p.availability==='buy' && p.id!=='breaker-rail')){
+ for(const p of bom.items.filter(p=>p.availability==='buy')){
   assert.notEqual(p.image.kind,'design',p.id+' should use a catalog product photo');
   assert.match(p.image.src,/\.(jpg|png)$/i);
  }

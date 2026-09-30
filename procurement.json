@@ -1,6 +1,6 @@
 {
-  "revision": "2026-09-28",
-  "scope": "One grounded 120 V supply, one printer at a time. The design uses an opaque-cover enclosure, proposed reuse of the professor’s aluminum sheet and an internal adapter connection. Six owned equipment groups, including the existing USB cable, are retained. The selected 15 A Q0 and upstream-only voltage-lead protection still require application acceptance. No purchase, physical fit, thermal test or electrical release is claimed. Closed-lid USB export is used only after unplugging mains; the internal portion of the existing USB cable requires rated insulation and accepted assembly.",
+  "revision": "2026-09-29",
+  "scope": "One grounded 120 V supply, one printer at a time. The design uses a clear-cover BUD NBF-32226 enclosure, proposed reuse of the professor’s aluminum sheet and an internal adapter connection. Six owned equipment groups, including the existing USB cable, are retained. The selected 15 A Q0 and upstream-only voltage-lead protection still require application acceptance. No purchase, physical fit, thermal test or electrical release is claimed. Closed-lid USB export is used only after unplugging mains; the internal portion of the existing USB cable requires rated insulation and accepted assembly.",
   "items": [
     {
       "id": "meter",
@@ -173,18 +173,18 @@
     {
       "item": "Enclosure",
       "quantity": "1",
-      "model": "BUD NBF-32126 · opaque hinged cover",
-      "reason": "400 × 300 × 160 mm enclosure, $90.81 from DigiKey. Smaller than the former box; panel, placement, wall openings and screw lengths have been updated together. The updated sourcing plan uses three sellers. The cover is opaque; X-ray is a website viewing aid.",
-      "status": "DigiKey lists 1 in stock at the quantity-one price, checked September 24, 2026. All-new distributor offer; verify stock and delivery at checkout. The manufacturer-linked NBF-32226 STEP supplies the common base; the opaque lid silhouette is illustrative. Inspect actual lid, latches and component fit before machining.",
+      "model": "BUD NBF-32226 · clear hinged cover",
+      "reason": "400 × 300 × 160 mm ABS/PC box with a clear polycarbonate cover. Same manufacturer base and panel pattern; the exact factory STEP is displayed without scaling.",
+      "status": "103 in DigiKey direct stock at $111.88, checked September 29, 2026. Reconfirm at checkout. Received-part fit, latches, access protection and machining acceptance remain required.",
       "links": [
         {
           "label": "Buy · DigiKey",
-          "url": "https://www.digikey.com/en/products/detail/bud-industries/NBF-32126/2328550",
+          "url": "https://www.digikey.com/en/products/detail/bud-industries/NBF-32226/2328561",
           "kind": "buy"
         },
         {
           "label": "BUD product / standards",
-          "url": "https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/",
+          "url": "https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32226/",
           "kind": "reference"
         },
         {
@@ -196,23 +196,23 @@
       "id": "enclosure",
       "availability": "buy",
       "image": {
-        "src": "assets/materials/enclosure-nbf32126.jpg",
+        "src": "assets/materials/enclosure-nbf32226.jpg",
         "kind": "product",
-        "alt": "BUD NBF-32126 opaque hinged enclosure, open",
-        "caption": "BUD NBF-32126 product photo",
-        "source_label": "BUD Industries",
-        "source_url": "https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/",
-        "source_image": "https://www.budind.com/wp-content/uploads/NBF-32126-Open-348x348.jpg",
-        "width": 348,
-        "height": 348
+        "alt": "BUD NBF-32226 clear-cover enclosure — distributor product photo",
+        "caption": "BUD NBF-32226 clear-cover enclosure — distributor product photo",
+        "source_label": "DigiKey / manufacturer",
+        "source_url": "https://www.digikey.com/en/products/detail/bud-industries/NBF-32226/2328561",
+        "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/010/134/742/NBF-32226_sml.jpg",
+        "width": 200,
+        "height": 200
       },
-      "installation": "Opaque hinged case with two latches. Q0, two power glands and one USB cable opening penetrate the walls; XA and DC stay inside.",
-      "location_summary": "Opaque enclosure; existing USB cable exits the right wall.",
+      "installation": "Gray case and clear hinged lid. Q0, two Ø22.2 mm power-gland bores and one USB exit penetrate the walls; XA and DC remain inside.",
+      "location_summary": "Gray enclosure with a clear hinged cover.",
       "supplier": "DigiKey",
       "compliance": {
         "status": "Manufacturer listing",
-        "detail": "UL508 Listed; NEMA 1, 2, 4, 4X for the unmodified enclosure. ABS/PC UL94-5VA, indoor use. The machined assembly does not inherit an enclosure seal or finished-product listing.",
-        "url": "https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/"
+        "detail": "Manufacturer UL508 listing; NEMA 1, 2, 4, 4X for the unmodified enclosure. ABS/PC body UL94-5VA; clear PC door UL94-V0. Machining does not confer a finished-assembly or ingress rating.",
+        "url": "https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32226/"
       }
     },
     {
@@ -257,7 +257,7 @@
       "quantity": "1",
       "model": "Phoenix Contact TMC 81C 15A · 2907571",
       "reason": "15 A, one pole, C curve, UL489 / cUL Listed E320373; 10 kA, 277 V AC. Consolidates the breaker into the existing DigiKey order. Manufacturer STEP defines the wall opening, short DIN rail and bonded aluminum bracket. Review the thermal-magnetic curve against startup and original voltage-lead protection.",
-      "status": "DigiKey direct stock: material price $21.57; 3,691 in stock when checked 2026-09-28. Reconfirm price and stock before ordering. Shipping, tariffs, sales tax and fabrication are excluded from the selection total.",
+      "status": "DigiKey direct-stock price $21.57, rechecked September 29, 2026. Reconfirm stock at checkout. Full mounting hardware is included in the materials-only total.",
       "links": [
         {
           "label": "Buy 1 · DigiKey · $21.57",
@@ -290,9 +290,9 @@
         "width": 408,
         "height": 408,
         "source_url": "https://www.phoenixcontact.com/en-us/products/thermomagnetic-device-circuit-breakers-tmc-81c-15a-2907571",
-        "source_label": "Phoenix Contact STEP"
+        "source_label": "Phoenix Contact product photo"
       },
-      "installation": "Front-wall nose opening, bonded formed aluminum support, 60 mm DIN rail and two CA802 stops. Single 14 AWG Cu per screw clamp, strip 11–12 mm, 2 N·m. No power ring terminals.",
+      "installation": "Front-wall handle opening; flat aluminum bridge on two 65 mm M5 posts, 60 mm DIN rail and two CA802 stops. One 14 AWG Cu per clamp; strip 11–12 mm, 2 N·m.",
       "location_summary": "Front wall; external handle, DIN rail and bonded metal bracket inside.",
       "supplier": "DigiKey",
       "compliance": {
@@ -308,7 +308,7 @@
       "quantity_summary": "60 mm installed + 2 stops",
       "model": "Phoenix Contact 1207639 + Altech CA802 × 2",
       "reason": "35 × 7.5 × 1 mm galvanized steel rail. Buy the complete 250 mm piece for $4.79; two $0.62 CA802 stops restrain the breaker laterally. The short stock avoids adding a one-metre package to the enclosure shipment.",
-      "status": "DigiKey checked 2026-09-28: rail $4.79; two stops $1.24. Material subtotal $6.03. Confirm snap fit; cut and deburr away from components.",
+      "status": "September 29 direct stock: 2,061 rails and 6,001 stops; $4.79 + 2 × $0.62 = $6.03. Cut and deburr the rail before fitting.",
       "availability": "buy",
       "supplier": "DigiKey",
       "links": [
@@ -326,31 +326,92 @@
           "label": "Altech stop dimensions",
           "url": "https://legacy.altechcorp.com/Blocks/Block-Accessories.pdf",
           "kind": "reference"
+        },
+        {
+          "label": "CA802 manufacturer STEP (1:1 visual reference)",
+          "url": "fabrication/altech-ca802-reference.step",
+          "kind": "reference"
         }
       ],
       "image": {
-        "src": "assets/materials/breaker-rail.svg",
-        "kind": "design",
-        "alt": "60 mm installed rail and two DIN end stops",
-        "caption": "Installation outline, not a product photograph.",
-        "width": 320,
-        "height": 240
+        "src": "assets/materials/breaker-rail-1207639.jpg",
+        "kind": "product",
+        "alt": "Phoenix 1207639 — purchased 250 mm rail; cut 60 mm",
+        "caption": "Phoenix 1207639 — purchased 250 mm rail; cut 60 mm",
+        "source_label": "DigiKey / manufacturer",
+        "source_url": "https://www.digikey.com/en/products/detail/phoenix-contact/1207639/10645207",
+        "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/100/372/232/1207639_sml.jpg",
+        "width": 200,
+        "height": 200
       },
-      "installation": "Rail sits on the bracket rear web; two stops border Q0. Dedicated #10 bond contacts the steel rail and aluminum bracket using the accepted contact stack.",
-      "location_summary": "Behind Q0, on the formed aluminum bracket.",
+      "installation": "Rail sits on the flat bridge, with two stops flanking Q0. Dedicated #10 bond contacts rail and aluminum using an accepted contact stack.",
+      "location_summary": "Behind Q0, on the flat aluminum bridge.",
       "compliance": {
         "status": "Mechanical accessories",
         "detail": "Manufacturer rail geometry and CA802 compatibility; no separate branch protection function or assembly certification.",
+        "url": "build.html#q0-mount"
+      },
+      "additional_images": [
+        {
+          "src": "assets/materials/breaker-stop-ca802.jpg",
+          "kind": "product",
+          "alt": "Altech CA802 — two end stops",
+          "caption": "Altech CA802 — two end stops",
+          "source_label": "DigiKey / manufacturer",
+          "source_url": "https://www.digikey.com/en/products/detail/altech-corporation/CA802/8547037",
+          "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/200/499/564/MFG_CA802_sml.jpg",
+          "width": 200,
+          "height": 200
+        }
+      ]
+    },
+    {
+      "id": "breaker-posts",
+      "item": "Q0 threaded support posts",
+      "quantity": "2",
+      "model": "Würth 970650581 · M5 female/female · 65 mm",
+      "reason": "Two zinc-plated steel SW8 hex posts hold the flat bridge at the required DIN-rail depth. M5 internal thread depth 11 mm per end; no bending or tapping required.",
+      "status": "67 in DigiKey direct stock; $1.39 each, checked September 29, 2026. Verify screw engagement, wall loading and accepted PE continuity through the metal support.",
+      "availability": "buy",
+      "supplier": "DigiKey",
+      "links": [
+        {
+          "label": "Buy 2 · DigiKey",
+          "url": "https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/970650581/6174896",
+          "kind": "buy"
+        },
+        {
+          "label": "Würth dimensional drawing",
+          "url": "https://www.we-online.com/components/products/datasheet/970xxxxx1_overview.pdf",
+          "kind": "reference"
+        }
+      ],
+      "image": {
+        "src": "assets/materials/breaker-posts-970650581.jpg",
+        "kind": "reference",
+        "alt": "Würth WA-SSTII family product photo; ordered 970650581 is 65 mm, M5",
+        "caption": "Würth WA-SSTII family product photo; ordered 970650581 is 65 mm, M5",
+        "source_label": "DigiKey / manufacturer",
+        "source_url": "https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/970650581/6174896",
+        "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/002/447/825/MFG_WA-SSTII-Series-25-95_sml%28200x200%29.jpg",
+        "width": 200,
+        "height": 200
+      },
+      "installation": "Two posts inside the front wall, at 76 mm pitch. Four M5 × 12 screws and six M5 flat washers are specified separately in mounting hardware.",
+      "location_summary": "Left and right of Q0, between case wall and flat bridge.",
+      "compliance": {
+        "status": "Mechanical support",
+        "detail": "Published dimensions; PE contact and mechanical retention are assembly acceptance items.",
         "url": "build.html#q0-mount"
       }
     },
     {
       "id": "breaker-mount",
-      "item": "Q0 formed metal bracket",
+      "item": "Q0 flat aluminum bridge",
       "quantity": "1 fabricated part",
-      "model": "Professor-supplied aluminum · 88 × 40 × 66.30 mm nominal formed envelope",
-      "reason": "Four-bend metal support retains the short DIN rail. Reuse the offered aluminum; nominal thickness 1.89738 mm and R2 bends are provisional until stock and a bend coupon are measured. M3 wall fixings reuse two spare screws/nuts already in the purchase packs.",
-      "status": "Digital solid and clearance checks only. Measure alloy, thickness, stiffness, bend springback and operator alignment; revise dimensions before fabrication. Shop labor is unquoted and not assumed free.",
+      "model": "Professor-supplied aluminum · 88 × 40 × nominal 1.89738 mm",
+      "reason": "Cut-and-drill flat bridge, supported by two purchased 65 mm M5 steel posts. No bending, tapped holes or fabricated angle brackets. Measure the offered sheet before machining.",
+      "status": "Digital geometry only. Check actual thickness, stiffness, washer stack, operator travel and accepted bonding. Shop labor excluded.",
       "availability": "fabricate",
       "supplier": "Lab stock / fabrication",
       "links": [
@@ -368,13 +429,13 @@
       "image": {
         "src": "assets/materials/q0-mount.png",
         "kind": "design",
-        "alt": "CAD orthographic views of the formed metal DIN support",
-        "caption": "Parametric design, not fabricated hardware.",
+        "alt": "CAD views of the flat cut-and-drill Q0 bridge",
+        "caption": "Custom flat aluminum part — CAD drawing, not a product photo.",
         "width": 1826,
         "height": 1242
       },
-      "installation": "Bolted to the inside of the front wall. M3 wall pitch 76 mm; rail fixings 48 mm apart; one dedicated #10 rail/bracket PE stud.",
-      "location_summary": "Front wall around and behind Q0.",
+      "installation": "Post centers 76 mm apart: Ø5.5 left hole and 8 × 5.5 right slot. Rail M4 and dedicated #10 PE holes are 48 mm apart. The plate front is nominally 66.3 mm behind the inner front wall.",
+      "location_summary": "Flat crosspiece behind Q0, on two M5 posts.",
       "compliance": {
         "status": "Custom mechanical part",
         "detail": "Requires aluminum-compatible bonding and mechanical acceptance; do not fabricate a plastic substitute for this support.",
@@ -634,42 +695,61 @@
     },
     {
       "item": "Mains / printer strain relief",
-      "quantity": "2",
-      "model": "Hammond 1427NCGPG13LB · long PG13.5 thread",
-      "reason": "Two long-thread glands for the selected 14/3 SJOOW mains cords. 6–12 mm clamp range covers the published ~9.2 mm cord OD. The 15 mm thread replaces the former short-thread candidate. Includes nylon locknut and EPDM O-ring.",
-      "status": "15 mm long thread selected for the ~4.8 mm wall; verify full locknut engagement on receipt.",
+      "quantity": "2 glands + 2 separate locknuts",
+      "model": "Heyco M3231 × 2 + 8463 locknuts × 2",
+      "reason": "DigiKey direct-stock replacement for the factory-stock Hammond part. 1/2 NPT, 15.5 mm thread, Ø22.2 mm mounting bore. Published 4.32–11.43 mm seal range contains the nominal 9.2 mm SJOOW cord.",
+      "status": "September 29: M3231 $1.44, 13,830 in direct stock; 8463 $0.32, 66,153 in direct stock. Locknuts are separate purchases. Confirm the UL-approved cable range, grip and sealing with the actual cord.",
       "links": [
         {
-          "label": "Buy · DigiKey",
-          "url": "https://www.digikey.com/en/products/detail/hammond-manufacturing/1427NCGPG13LB/22152326",
+          "label": "Buy 2 M3231 · DigiKey",
+          "url": "https://www.digikey.com/en/products/detail/heyco-products-corporation/M3231/15906457",
           "kind": "buy"
         },
         {
-          "label": "Hammond dimensions",
-          "url": "https://www.hammfg.com/part/1427NCGPG13LB",
+          "label": "Buy 2 8463 locknuts · DigiKey",
+          "url": "https://www.digikey.com/en/products/detail/heyco-products-corporation/8463/15906932",
+          "kind": "buy"
+        },
+        {
+          "label": "Heyco dimensions and approvals",
+          "url": "https://www.heyco.com/products/liquid-tight-cordgrips/nylon-cordgrips/heyco-tite-liquid-tight-cordgrips-straight-thru-npt-hubs/",
           "kind": "reference"
         }
       ],
       "id": "cord-glands",
       "availability": "buy",
       "image": {
-        "src": "assets/materials/cord-glands.jpg",
-        "alt": "Hammond 1427NCGPG13LB long-thread gland",
-        "caption": "Hammond 1427NCGPG13LB long-thread gland",
+        "src": "assets/materials/cord-glands-m3231.jpg",
+        "kind": "reference",
+        "alt": "Heyco cordgrip family product photo from M3231 listing; 1/2 NPT, 15.5 mm thread",
+        "caption": "Heyco cordgrip family product photo from M3231 listing; 1/2 NPT, 15.5 mm thread",
+        "source_label": "DigiKey / manufacturer",
+        "source_url": "https://www.digikey.com/en/products/detail/heyco-products-corporation/M3231/15906457",
+        "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/003/118/482/MFG_M5020_sml%28200x200%29.jpg",
         "width": 200,
-        "height": 200,
-        "source_url": "https://www.hammfg.com/part/1427NCGPG13LB",
-        "source_label": "Hammond",
-        "kind": "product"
+        "height": 200
       },
       "installation": "Two jacket clamps: supply at the left wall and printer output at the rear wall.",
       "location_summary": "One at each mains cord opening: left and rear walls.",
       "supplier": "DigiKey",
       "compliance": {
-        "status": "Manufacturer UL Listed",
-        "detail": "Hammond lists the 1427NCG family, including 1427NCGPG13LB, as UL Listed with IP68 protection. Verify installed sealing and clamp; the modified assembly is not certified by this component listing.",
-        "url": "https://www.hammfg.com/electronics/small-case/accessories/1427ncg"
-      }
+        "status": "Manufacturer component approvals",
+        "detail": "Heyco series UL514B file E51579 / CSA 93876. The listed 4.32–11.43 mm seal range is not proof of the UL-approved cord range; verify application. Custom wall openings do not retain the enclosure ingress rating.",
+        "url": "https://www.heyco.com/products/liquid-tight-cordgrips/nylon-cordgrips/heyco-tite-liquid-tight-cordgrips-straight-thru-npt-hubs/"
+      },
+      "additional_images": [
+        {
+          "src": "assets/materials/gland-nut-8463.jpg",
+          "kind": "reference",
+          "alt": "Heyco nylon locknut family product photo; ordered 8463 is 1/2 NPT",
+          "caption": "Heyco nylon locknut family product photo; ordered 8463 is 1/2 NPT",
+          "source_label": "DigiKey / manufacturer",
+          "source_url": "https://www.digikey.com/en/products/detail/heyco-products-corporation/8463/15906932",
+          "source_image": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/003/117/307/MFG_M8438_sml%28200x200%29.jpg",
+          "width": 200,
+          "height": 200
+        }
+      ]
     },
     {
       "id": "usb",
@@ -896,32 +976,45 @@
     {
       "id": "fasteners",
       "item": "Mounting and bonding hardware",
-      "quantity": "11 item lines; full packs and spare pieces counted",
+      "quantity": "13 item lines; whole packs and spare pieces counted",
       "model": "Screws, nuts and washers",
-      "reason": "Carriers and Q0 wall bracket use eight M3 × 12 screws/nuts total; cable anchors and rail use seven M4 × 10 total; four M5 × 10 panel screws and two dedicated #10 PE studs. Four additional M3 washers are purchased. No lab hardware stock is assumed.",
+      "reason": "Six M3 carrier sets, seven M4 anchor/rail sets, four M5 × 10 panel screws, four M5 × 12 post screws, six M5 flat washers and two #10 PE studs. No lab hardware stock assumed.",
       "status": "Verify actual stock, full locknut engagement and enclosure-floor clearance. Accept aluminum-compatible bonding on both custom metal parts before use.",
       "availability": "buy",
       "links": [],
       "image": {
-        "src": "assets/materials/fasteners-photo.jpg",
-        "source_image": "https://simfix.com/cdn/shop/files/SIM7985A203010_20_28285P3010_29_203_e57dfe80-c934-474e-8153-6d3a3a35c121.jpg?v=1787228850&width=548",
-        "kind": "reference",
-        "alt": "Stainless Phillips pan-head machine screw — reference product photo",
-        "caption": "Pan-head screw reference photo. Each screw, nut and washer, including its finish, is specified in the purchase list; this is not a complete hardware kit.",
-        "source_label": "SIMFIX",
-        "source_url": "https://simfix.com/products/simfix-phil-pan-machine-screw-din-7985-a2-stainless-steel-m3-x-16",
-        "width": 548,
-        "height": 548
+        "src": "assets/materials/screw-m5-836521.jpg",
+        "kind": "product",
+        "alt": "Everbilt 836521 M5 × 12 screw product photo; other sizes listed individually",
+        "caption": "Everbilt 836521 M5 × 12 screw product photo; other sizes listed individually",
+        "source_label": "Home Depot / Everbilt",
+        "source_url": "https://www.homedepot.com/p/321071519",
+        "source_image": "https://images.thdstatic.com/productImages/cc1fb05b-74f7-4244-a4e7-254dfa97432f/svn/everbilt-machine-screws-836521-64_600.jpg",
+        "width": 600,
+        "height": 600
       },
-      "installation": "Carriers, Q0 bracket/rail, six cable bases, four panel supports and two PE bond stacks.",
+      "installation": "Carriers, six cable mounts, panel supports, two M5 posts and two PE bonds. The 18-piece tooth-washer pack covers 11 proposed contact/retention locations.",
       "location_summary": "Bracket/rail, carriers, cable mounts, panel supports and two bonds.",
-      "quantity_summary": "11 items",
+      "quantity_summary": "13 items",
       "supplier": "DigiKey / Home Depot",
       "compliance": {
         "status": "Mechanical accessory",
         "detail": "Verify mechanical/material suitability; this accessory does not provide mains insulation or confer assembly certification.",
         "url": "build.html#fasteners"
-      }
+      },
+      "additional_images": [
+        {
+          "src": "assets/materials/washer-m5-864408.jpg",
+          "kind": "product",
+          "alt": "Everbilt 864408 M5 stainless flat washer",
+          "caption": "Everbilt 864408 M5 flat washer product photo; buy two four-piece packs",
+          "source_label": "Home Depot / Everbilt",
+          "source_url": "https://www.homedepot.com/p/323371831",
+          "source_image": "https://images.thdstatic.com/productImages/954da34f-9595-4f1f-bd86-a67ce8d10108/svn/flat-washers-864408-64_600.jpg",
+          "width": 600,
+          "height": 600
+        }
+      ]
     },
     {
       "id": "logger-restraint",
@@ -1064,7 +1157,7 @@
       "reason": "Calipers, wire stripper, terminal-matched crimper, torque tools, machining/deburring tools, PE/polarity/insulation test equipment and an independent power reference. Arrange access before assembly; tool ratings and procedures belong to the approved build process."
     }
   ],
-  "image_note": "Photos identify the equipment or candidate part. Family examples and unfinished custom parts are labeled. Images are not at a common scale; use the dimension schedule and 3D layout for size comparisons.",
+  "image_note": "Purchased groups show real manufacturer or distributor product photos. Family photos are identified; the two custom aluminum parts use labeled CAD drawings. Photos are not to scale; the 3D layout uses millimetres.",
   "removed_items": [
     {
       "id": "outlet-box",
@@ -1121,27 +1214,27 @@
     }
   ],
   "purchasing": {
-    "checked_on": "2026-09-23–28",
+    "checked_on": "2026-09-23–29",
     "currency": "USD",
     "cost_basis": "materials_only",
-    "scope": "Selection totals count materials only, including complete purchase packs and spares. Shipping, tariffs, sales tax, fabrication and labor are excluded. Breaker, rail and stop prices were checked September 28; unchanged items retain September 23–24 prices.",
-    "supplier_policy": "Minimize the number of actual sellers while comparing material costs. The selected plan uses two sellers: DigiKey and Home Depot. Choose DigiKey direct stock; Marketplace partners count as separate sellers. Do not add shipping or a fee per seller to the material total.",
+    "scope": "Materials only, including whole packs and spare pieces. Clear-cover case, Q0, rail, stops, posts, M5 post hardware and cordgrips checked September 29. Unchanged lines retain September 23–24 price snapshots, with the per-line date shown below. Shipping, tariffs, sales tax, fabrication and labor are excluded.",
+    "supplier_policy": "Two sellers only: DigiKey and Home Depot. Selected DigiKey parts must be DigiKey direct stock; Marketplace, manufacturer direct shipping and factory-only stock are excluded. No fee per retailer is added.",
     "rows": [
       {
         "material_ids": [
           "enclosure"
         ],
-        "sku": "NBF-32126",
+        "sku": "NBF-32226",
         "supplier": "DigiKey",
         "seller": "DigiKey",
         "quantity": 1,
         "unit": "each",
         "pieces_per_unit": 1,
-        "unit_price_usd": 90.81,
-        "extended_usd": 90.81,
-        "url": "https://www.digikey.com/en/products/detail/bud-industries/NBF-32126/2328550",
-        "availability_note": "377-1778-ND; 1 at DigiKey, quantity-one tier, checked 2026-09-24. New distributor stock; recheck delivery before ordering.",
-        "checked_on": "2026-09-24"
+        "unit_price_usd": 111.88,
+        "extended_usd": 111.88,
+        "url": "https://www.digikey.com/en/products/detail/bud-industries/NBF-32226/2328561",
+        "availability_note": "103 in DigiKey direct stock; 377-1789-ND; clear PC cover.",
+        "checked_on": "2026-09-29"
       },
       {
         "material_ids": [
@@ -1156,9 +1249,8 @@
         "unit_price_usd": 21.57,
         "extended_usd": 21.57,
         "url": "https://www.digikey.com/en/products/detail/phoenix-contact/2907571/6109707",
-        "availability_note": "3,691 DigiKey direct stock at the September 28 check. Material price only.",
-        "checked_on": "2026-09-28",
-        "estimated_tariff_usd": 5.34
+        "availability_note": "3,689 in DigiKey direct stock, quantity-one price; factory stock excluded.",
+        "checked_on": "2026-09-29"
       },
       {
         "material_ids": [
@@ -1249,17 +1341,17 @@
         "material_ids": [
           "cord-glands"
         ],
-        "sku": "1427NCGPG13LB",
+        "sku": "M3231 · long-thread 1/2 NPT cordgrip",
         "supplier": "DigiKey",
         "seller": "DigiKey",
         "quantity": 2,
         "unit": "each",
         "pieces_per_unit": 1,
-        "unit_price_usd": 2.97,
-        "extended_usd": 5.94,
-        "url": "https://www.digikey.com/en/products/detail/hammond-manufacturing/1427NCGPG13LB/22152326",
-        "availability_note": "Factory stock 1,242; check lead time (not immediate DigiKey stock); 164-1427NCGPG13LB-ND",
-        "checked_on": "2026-09-23"
+        "unit_price_usd": 1.44,
+        "extended_usd": 2.88,
+        "url": "https://www.digikey.com/en/products/detail/heyco-products-corporation/M3231/15906457",
+        "availability_note": "13,830 DigiKey direct stock; separate 8463 locknut required.",
+        "checked_on": "2026-09-29"
       },
       {
         "material_ids": [
@@ -1370,8 +1462,8 @@
         "unit_price_usd": 1.75,
         "extended_usd": 3.5,
         "url": "https://www.homedepot.com/p/321071719",
-        "availability_note": "6 carriers + 2 Q0 wall bracket; all 8 purchased pieces installed.",
-        "installed_quantity": 8,
+        "availability_note": "6 carrier fixings installed; buy 8, retain 2 spare. Q0 now uses M5 posts.",
+        "installed_quantity": 6,
         "checked_on": "2026-09-24"
       },
       {
@@ -1387,8 +1479,8 @@
         "unit_price_usd": 0.11,
         "extended_usd": 1.1,
         "url": "https://www.digikey.com/en/products/detail/keystone-electronics/4692/316261",
-        "availability_note": "6 carrier washers + 4 Q0 wall washers; both faces of the plastic wall supported.",
-        "installed_quantity": 10,
+        "availability_note": "6 carrier washers installed; retain 4 spare from the ten-piece price tier.",
+        "installed_quantity": 6,
         "checked_on": "2026-09-23"
       },
       {
@@ -1404,8 +1496,8 @@
         "unit_price_usd": 1.95,
         "extended_usd": 3.9,
         "url": "https://www.homedepot.com/p/321071866",
-        "availability_note": "6 carriers + 2 Q0 wall bracket; all 8 purchased pieces installed.",
-        "installed_quantity": 8,
+        "availability_note": "6 carrier fixings installed; buy 8, retain 2 spare. Q0 now uses M5 posts.",
+        "installed_quantity": 6,
         "checked_on": "2026-09-23"
       },
       {
@@ -1506,8 +1598,8 @@
         "unit_price_usd": 1.57,
         "extended_usd": 1.57,
         "url": "https://www.homedepot.com/p/317479556",
-        "availability_note": "2 panel bond + 3 rail/bracket bond contact washers; verify approved contact stack.",
-        "installed_quantity": 5,
+        "availability_note": "5 PE-stud contacts + 6 proposed M5 post contact/retention washers; 18-piece pack. Verify M5 fit and approved bonding stack.",
+        "installed_quantity": 11,
         "checked_on": "2026-09-23"
       },
       {
@@ -1589,9 +1681,8 @@
         "unit_price_usd": 4.79,
         "extended_usd": 4.79,
         "url": "https://www.digikey.com/en/products/detail/phoenix-contact/1207639/10645207",
-        "availability_note": "250 × 35 × 7.5 mm, t=1 mm; cut 60 mm. 2,067 stock at the September 28 check. Material price only.",
-        "checked_on": "2026-09-28",
-        "estimated_tariff_usd": 0.38
+        "availability_note": "2,061 in DigiKey direct stock; buy full 250 mm rail, cut 60 mm.",
+        "checked_on": "2026-09-29"
       },
       {
         "material_ids": [
@@ -1606,26 +1697,77 @@
         "unit_price_usd": 0.62,
         "extended_usd": 1.24,
         "url": "https://www.digikey.com/en/products/detail/altech-corporation/CA802/8547037",
-        "availability_note": "Two 8 mm-wide end stops; 35 × 7.5 DIN-compatible. 6,021 stock at the September 28 check.",
-        "checked_on": "2026-09-28"
+        "availability_note": "6,001 in DigiKey direct stock; two 8 mm end stops.",
+        "checked_on": "2026-09-29"
+      },
+      {
+        "material_ids": [
+          "cord-glands"
+        ],
+        "sku": "8463 · 1/2 NPT nylon locknut",
+        "supplier": "DigiKey",
+        "seller": "DigiKey",
+        "quantity": 2,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 0.32,
+        "extended_usd": 0.64,
+        "url": "https://www.digikey.com/en/products/detail/heyco-products-corporation/8463/15906932",
+        "availability_note": "66,153 in DigiKey direct stock; one per M3231.",
+        "checked_on": "2026-09-29"
+      },
+      {
+        "material_ids": [
+          "breaker-posts"
+        ],
+        "sku": "970650581 · 65 mm M5 steel post",
+        "supplier": "DigiKey",
+        "seller": "DigiKey",
+        "quantity": 2,
+        "unit": "each",
+        "pieces_per_unit": 1,
+        "unit_price_usd": 1.39,
+        "extended_usd": 2.78,
+        "url": "https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/970650581/6174896",
+        "availability_note": "67 in DigiKey direct stock; 11 mm internal thread per end.",
+        "checked_on": "2026-09-29",
+        "installed_quantity": 2
+      },
+      {
+        "material_ids": [
+          "fasteners"
+        ],
+        "sku": "836521 · M5-0.8 × 12 zinc pan screws",
+        "supplier": "Home Depot",
+        "seller": "Home Depot",
+        "quantity": 1,
+        "unit": "pack",
+        "pieces_per_unit": 4,
+        "unit_price_usd": 1.95,
+        "extended_usd": 1.95,
+        "url": "https://www.homedepot.com/p/321071519",
+        "availability_note": "Champaign: 8 packs in stock; four screws installed.",
+        "checked_on": "2026-09-29",
+        "installed_quantity": 4
+      },
+      {
+        "material_ids": [
+          "fasteners"
+        ],
+        "sku": "864408 · M5 stainless flat washers",
+        "supplier": "Home Depot",
+        "seller": "Home Depot",
+        "quantity": 2,
+        "unit": "pack",
+        "pieces_per_unit": 4,
+        "unit_price_usd": 2.97,
+        "extended_usd": 5.94,
+        "url": "https://www.homedepot.com/p/323371831",
+        "availability_note": "Champaign: 4 packs in stock; buy 8 washers, install 6.",
+        "checked_on": "2026-09-29",
+        "installed_quantity": 6
       }
     ],
-    "material_subtotal_usd": 233.54,
-    "delivery_estimate": {
-      "usage_note": "Historical checkout reference only; excluded from the materials-only selection total.",
-      "destination": "Sidney Lu Mechanical Engineering Building, Urbana, IL 61801",
-      "checked_on": "2026-09-28",
-      "digikey_ground_budget_usd": 8.49,
-      "home_depot_shipping_usd": null,
-      "known_estimated_tariffs_usd": 5.72,
-      "fabrication_usd": null,
-      "tax_exempt_eligibility": "School procurement must confirm exemption and submit the appropriate certificate. Exemption does not remove import tariffs.",
-      "known_pre_sales_tax_cost_usd": 247.75,
-      "unquoted": "Add Home Depot delivery, any extra DigiKey shipment or other-item tariff, applicable sales tax and fabrication. Pickup scenario uses $0 Home Depot freight; travel/labor excluded.",
-      "sources": [
-        "https://www.digikey.com/en/help-support/delivery-information/delivery-time-and-cost",
-        "https://www.busfin.uillinois.edu/buying_contracts/procurement_laws_and_regulations/tax_exempt_status"
-      ]
-    }
+    "material_subtotal_usd": 262.86
   }
 }

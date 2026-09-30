@@ -1,5 +1,5 @@
 {
-  "revision": "2026-09-28",
+  "revision": "2026-09-29",
   "release": "NOT RELEASED: close the receiving and electrical items in Build_Package.md",
   "units": "mm",
   "method": "Axis-aligned equipment envelopes, exact chamfered-panel clearance and continuous vertical swept volumes against the machined BUD common-base shell, nine lid rays per body and sourced interface arithmetic. Shell triangulation deflection is 0.3 mm; numerical seating-contact exclusion is 0.0001 mm. Neither is a manufacturing tolerance.",
@@ -14,13 +14,19 @@
       "id": "Q0 terminal and mounting interfaces",
       "result": "pass",
       "evidence": "Phoenix 2907571 screw clamps: 14 AWG Cu accepted; strip 11–12 mm, 2 N·m. Short 35 × 7.5 mm DIN rail; no ring tongues on Q0.",
-      "limits": "Confirm supplied instructions, strip length, snap fit and 76 mm M3 bracket-wall pattern."
+      "limits": "Confirm supplied instructions, strip length, snap fit and 76 mm M5 post pattern."
+    },
+    {
+      "id": "Q0 no-bend post and screw stacks",
+      "result": "pass",
+      "evidence": "65 mm M5 posts; nominal engagement 6.90 mm at wall / 8.30 mm at bridge, in 11 mm threads. Flat bridge and rail depths agree with the washer stack.",
+      "limits": "Design screen uses at least 5 mm engagement and 1 mm bottoming reserve. Actual washers, thread depth, tightening, wall strength and retention require physical checks."
     },
     {
       "id": "Q0 bonded mounting provision",
       "result": "pass",
-      "evidence": "Metal bracket, steel rail and dedicated PE.5 branch are specified. Two #10 bond stacks are included in procurement.",
-      "limits": "The bond method, contact preparation, torque and continuity require physical acceptance."
+      "evidence": "Flat aluminum bridge, steel rail, two steel posts and dedicated PE.5 branch are specified. Two #10 bond stacks are included in procurement.",
+      "limits": "Accept contact preparation, torque and continuity to rail, bridge and both steel posts."
     },
     {
       "id": "Bond ring size",
@@ -67,13 +73,13 @@
     {
       "id": "Machined wall geometry",
       "result": "pass",
-      "evidence": "BUD common shell and custom aluminum panel machined; lid and latches retained from linked factory STEP. Opaque-cover silhouette illustrative. Carrier holes transfer-drilled.",
+      "evidence": "BUD NBF-32226 shell and custom aluminum panel machined; lid and latches retained from factory STEP. Flat cut-and-drill Q0 bridge; no bends. Carrier holes transfer-drilled.",
       "limits": "Exact cut-through gauges are in fabrication/cad-checks.json. Phoenix STEP and bracket are transformed to the 1 degree wall frame; the summary AABB contacts here are not mounting proofs. Received-part fit and fastening remain physical checks."
     },
     {
       "id": "Closed lid screen",
       "result": "screen only",
-      "evidence": "meter: 93.9 mm (9/9 rays); ct: 103.203 mm (9/9 rays); outlet: 105 mm (9/9 rays); q0: 12.919 mm (6/9 rays)",
+      "evidence": "meter: 93.9 mm (9/9 rays); ct: 103.203 mm (9/9 rays); outlet: 105 mm (9/9 rays); q0: 12.886 mm (6/9 rays)",
       "limits": "Nine upward rays per body against the factory lid mesh. Not a minimum-distance proof; excludes lid hardware, guards, wire bundles and tolerances."
     },
     {
@@ -108,9 +114,9 @@
     },
     {
       "id": "Cord diameter interfaces",
-      "result": "pass",
-      "evidence": "Southwire published nominal OD 9.17–9.27 mm lies within Hammond 6–12 mm gland and Leviton 0.245–0.655 in cord ranges.",
-      "limits": "Published variants are not a manufacturing tolerance. Measure purchased cord; clamping, jacket preparation and pull resistance remain physical checks."
+      "result": "review",
+      "evidence": "Southwire nominal OD 9.17–9.27 mm lies within Heyco M3231 published 4.32–11.43 mm seal range and Leviton 0.245–0.655 in range. Ø22.2 mm bores; separate 8463 locknuts.",
+      "limits": "Seal range does not establish UL-approved cord range. Verify exact cable application, wall/nut stack, grip and pull resistance."
     },
     {
       "id": "Ring barrel and internal wire",
@@ -204,12 +210,12 @@
     },
     {
       "id": "q0",
-      "shell_triangle_hits": 66,
+      "shell_triangle_hits": 63,
       "lid_samples": 6,
-      "minimum_sampled_lid_gap_mm": 12.919
+      "minimum_sampled_lid_gap_mm": 12.886
     }
   ],
   "wall_entries": [],
-  "material_groups": 26,
+  "material_groups": 27,
   "owned_groups": 6
 }

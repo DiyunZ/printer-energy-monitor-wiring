@@ -1,7 +1,7 @@
-"""Machining template for the BUD NBF-32126 enclosure and reused aluminum.
+"""Machining template for the BUD NBF-32226 enclosure and reused aluminum.
 Units mm: X across, Y above panel underside, Z toward Q0.
-Factory STEP linked on the NBF-32126 page supplies the NBF-32226 common
-base, lid and two latches; opaque lid is an illustrative shared silhouette.
+Factory STEP linked on the NBF-32226 page supplies its base, clear-cover
+geometry and two latches, all at original scale.
 BUD drawing hbnbf32226.pdf specifies 3 mm walls and 229.8 x 325.3 mm
 M5 support pattern. Factory STEP places centers 229.75 x 325.25 mm;
 that 0.05 mm difference is inside the drawing's +/-1 mm tolerance.
@@ -9,21 +9,23 @@ The custom 260 x 340 mm panel has 10 mm corner chamfers to clear raised features
 Phoenix 2907571 STEP and Heyco drawings define wall interfaces, outside the
 skill's bundled standards database. No finished assembly certification.
 Carrier holes are transfer-drilled from the received 221-505 carriers.
-Run: python tools/cad/enclosure_model.py --source-step NBF-32126.step
+Run: python tools/cad/enclosure_model.py --source-step NBF-32226.step
 """
 from pathlib import Path
 import argparse, hashlib, json, math, struct
 from build123d import (BuildPart, BuildSketch, Mode, Plane, Locations, Circle,
                       Rectangle, SlotOverall, add, extrude, import_step,
                       export_step, export_stl,
-                      Pos, Rot, Part, Polygon, Compound)
+                      Pos, Rot, Part, Polygon, Compound, RegularPolygon)
 from OCP.BRepAlgoAPI import BRepAlgoAPI_Common
+from OCP.STEPControl import STEPControl_Reader
 import q0_mount_model
 layout_source = Path(__file__).resolve().parents[2]/'layout_dimensions.json'
 layout = json.loads(layout_source.read_text())
 q0_mount = layout['q0Mount']
 q0 = next(p for p in layout['parts'] if p['id']=='q0')
 breaker_step = layout_source.parent/'fabrication/phoenix-2907571-reference.step'
+stop_step = layout_source.parent/'fabrication/altech-ca802-reference.step'
 
 # INTERFACE: manufacturer drawing/STEP, not a bundled standard.
 wall_slope = math.tan(math.radians(1.0))
@@ -33,7 +35,7 @@ wall_normal_thickness_mm = 3.0
 q0_rectangle_mm = tuple(q0_mount['windowMm'])
 q0_hole_d_mm = q0_mount['wallHoleDiameterMm']
 q0_pitch_mm = 2*q0_mount['wallScrewHalfPitchMm']
-power_entry_d_mm = 21.0
+power_entry_d_mm = 22.2  # Heyco M3231 1/2 NPT clearance opening
 # Heyco thick-panel bushing 3104: manufacturer hole 22.2 mm. Actual
 # cable plug passage and snap fit must be accepted before drilling.
 usb_bore_d_mm = 22.2
@@ -111,7 +113,7 @@ def panel_features():
 
 def factory_parts():
     if not source_step:
-        raise ValueError('Provide the factory STEP linked on the BUD NBF-32126 page.')
+        raise ValueError('Provide the factory STEP linked on the BUD NBF-32226 page.')
     source=import_step(source_step)
     if len(source.solids()) != 4:
         raise ValueError('Vendor assembly changed; review the four-solid mapping.')
@@ -174,7 +176,32 @@ def checks():
 
 
 def mounted_q0_bracket():
-    return frames()('front',q0_xy_mm).location * Pos(0,0,-wall_normal_thickness_mm) * q0_mount_model.build()
+    return frames()('front',q0_xy_mm).location * Pos(0,0,-wall_normal_thickness_mm-q0_mount['webFrontDepthMm']) * q0_mount_model.build()
+
+def mounted_q0_posts():
+    """Wurth catalog envelope and 11 mm thread depths; no helical thread mesh."""
+    p=q0_mount
+    with BuildPart() as post:
+        with BuildSketch(): RegularPolygon(p['postAcrossFlatsMm']/math.sqrt(3),6)
+        extrude(amount=-p['postLengthMm'])
+        for z,direction in [(0,-1),(-p['postLengthMm'],1)]:
+            with BuildSketch(Plane((0,0,z))): Circle(2.1)  # M5 thread minor-bore illustration
+            extrude(amount=direction*p['postThreadDepthMm'],mode=Mode.SUBTRACT)
+    frame=frames()('front',q0_xy_mm).location
+    return [frame*Pos(x,0,-wall_normal_thickness_mm-p['wallFlatWasherMm'])*post.part
+            for x in [-p['wallScrewHalfPitchMm'],p['wallScrewHalfPitchMm']]]
+
+def mounted_stops():
+    # The vendor file contains a CompSolid, unsupported by build123d's XCAF
+    # assembly importer. Read its original topology directly, without rescaling.
+    reader=STEPControl_Reader();reader.ReadFile(str(stop_step));reader.TransferRoots()
+    original=Compound(reader.OneShape())
+    frame=frames()('front',q0_xy_mm).location
+    # Original Y is thickness 0..8; Z=0 is the nominal top-of-rail seating plane.
+    # The spring foot remains in the supplied static state; snap fit is physical.
+    return [frame*Pos(x+4,17+q0_mount['railCenterOffsetYMm'],
+                     -wall_normal_thickness_mm-q0_mount['railRearDepthMm']+7.5)*Rot(Z=90)*original
+            for x in q0_mount['stopCentersX']]
 
 def mounted_breaker():
     return frames()('front',q0_xy_mm).location * Pos(*q0['factoryLocalTranslationMm']) * import_step(breaker_step)
@@ -190,13 +217,17 @@ def mounted_rail():
 
 def update_meshes(parts, destination, panel_sweep):
     source=factory_parts()
-    bodies=[parts[0],source[1],source[2],source[3],parts[1],mounted_q0_bracket(),mounted_breaker()]
-    roles=['shell','lid','hardware','hardware','panel','q0-bracket','q0-body']
-    names=['BUD NBF common base','Opaque cover silhouette','Latch 1','Latch 2','Reused aluminum panel','Formed Q0 rail bracket','Phoenix 2907571 manufacturer STEP']
-    meta={'source':'https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/',
+    bodies=[parts[0],source[1],source[2],source[3],parts[1],mounted_q0_bracket(),mounted_breaker(),*mounted_q0_posts(),*mounted_stops()]
+    roles=['shell','lid','hardware','hardware','panel','q0-bracket','q0-body','q0-post','q0-post','q0-stop','q0-stop']
+    names=['BUD NBF-32226 base','Clear polycarbonate cover','Latch 1','Latch 2','Reused aluminum panel','Flat Q0 aluminum bridge','Phoenix 2907571 manufacturer STEP','Wurth 970650581 left post','Wurth 970650581 right post','Altech CA802 left end stop','Altech CA802 right end stop']
+    meta={'source':'https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32226/',
           'drawing':'https://www.budind.com/wp-content/uploads/2019/01/hbnbf32226.pdf',
           'units':'mm','conversion':'Factory STEP; rotate Y -90 deg, translate Y +119.30026 mm. No scaling. build123d 0.11.1.',
-          'fabrication':'BUD common shell and custom aluminum panel machined; lid and latches retained from linked factory STEP. Opaque-cover silhouette illustrative. Carrier holes transfer-drilled.',
+          'fabrication':'BUD NBF-32226 shell and custom aluminum panel machined; lid and latches retained from factory STEP. Flat cut-and-drill Q0 bridge; no bends. Carrier holes transfer-drilled.',
+          'post_source':q0_mount['postSource'],
+          'stop_source':'https://legacy.altechcorp.com/CAD/2dr/Accessories/End_Stop/CA802/CA802.stp',
+          'stop_step_sha256':hashlib.sha256(stop_step.read_bytes()).hexdigest(),
+          'model_fidelity':{'case':'Manufacturer-linked NBF-32226 series STEP, internal filename hbnbf32026.step; no scaling; specified wall cuts added.', 'breaker':'Exact Phoenix 2907571 STEP, no scaling; one static operating position.', 'stops':'Original CA802 STEP at 1:1; nominal seating pose. Vendor CompSolid has invalid topology; retained for visualization, excluded from exact-solid clearance claims. Check received snap fit.', 'posts':'Manufacturer dimensions 65 mm / SW8 / M5 / 11 mm thread depth; thread profile simplified.', 'fabricated_parts':'Parametric design at 1:1; aluminum thickness remains provisional.'},
           'panel_insertion':panel_sweep,
           'breaker_source':q0['source'],
           'breaker_step_sha256':hashlib.sha256(breaker_step.read_bytes()).hexdigest(),
@@ -229,8 +260,10 @@ def main():
     for name,p in zip(['case-machined','panel-machined'],parts):
         if not p.is_valid: raise ValueError(name+' invalid solid')
         export_step(p,target/(name+'.step'))
+        restored=import_step(target/(name+'.step'))
+        if not restored.is_valid: raise ValueError(name+' exported STEP is invalid')
+        report.append(dict(id=name,valid=restored.is_valid,solids=len(restored.solids()),volume_mm3=restored.volume,bounds_mm=list(restored.bounding_box().size)))
         export_stl(p,target/(name+'.stl'),tolerance=mesh_tolerance_mm,angular_tolerance=mesh_angle)
-        report.append(dict(id=name,valid=p.is_valid,solids=len(p.solids()),volume_mm3=p.volume,bounds_mm=list(p.bounding_box().size)))
     # Boolean clearance measured against the exported design; each cutter must remove stock.
     original=originals()
     for idx,features in enumerate([wall_features(),panel_features()]):
@@ -258,11 +291,20 @@ def main():
     report.append(dict(id='Q0 bracket to machined shell',intrusion_mm3=volume,result='pass'))
     breaker=mounted_breaker()
     for label,body in [('machined shell',parts[0]),('closed factory lid',factory_parts()[1]),
-                       ('panel',parts[1]),('formed bracket',bracket),('nominal DIN rail',mounted_rail())]:
+                       ('panel',parts[1]),('flat bridge',bracket),('nominal DIN rail',mounted_rail())]:
         volume=intersection_volume(breaker,body)
         if volume>0.1: raise ValueError('Phoenix STEP intersects '+label+': '+str(volume))
         report.append(dict(id='Phoenix STEP to '+label,intrusion_mm3=volume,
                            minimum_distance_mm=breaker.distance_to(body),result='pass'))
+    # Actual post envelopes in the drafted wall frame, plus bridge clearances.
+    posts=mounted_q0_posts()
+    for name,shape in [('flat bridge',bracket),*[(f'M5 post {i+1}',s) for i,s in enumerate(posts)]]:
+        for other_name,other in [('shell',parts[0]),('closed lid',factory_parts()[1]),('panel',parts[1]),('breaker',breaker)]:
+            volume=intersection_volume(shape,other)
+            if volume>.01: raise ValueError(name+' intersects '+other_name+': '+str(volume))
+            report.append(dict(id=name+' to '+other_name,intrusion_mm3=volume,
+                minimum_distance_mm=shape.distance_to(other),result='pass'))
+    export_step(Compound(children=[bracket,*posts,mounted_rail(),breaker]),target/'q0-installed-assembly.step')
     # Independent 3.4 mm insulated-wire go-gauges follow the STEP's top and
     # bottom terminal bores. No cavity is inferred from a rectangular box.
     for label,y,sign in [('supply',100,1),('output',16,-1)]:
@@ -322,9 +364,12 @@ def main():
         'q0_generator_sha256':hashlib.sha256(Path(q0_mount_model.__file__).read_bytes()).hexdigest(),
         'breaker_step_sha256':hashlib.sha256(breaker_step.read_bytes()).hexdigest(),
         'breaker_source_url':q0['source'],
+        'stop_step_sha256':hashlib.sha256(stop_step.read_bytes()).hexdigest(),
+        'stop_source_url':q0_mount['stopSource'],
+        'stop_limitation':'Original vendor topology is visualization only; nominal seating, no exact-solid clearance or snap-fit claim.',
         'source_step_sha256':hashlib.sha256(Path(source_step).read_bytes()).hexdigest(),
-        'source_url':'https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/',
-        'outputs':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(target.glob('*-machined.*'))}}
+        'source_url':'https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32226/',
+        'outputs':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted([*target.glob('*-machined.*'),target/'q0-installed-assembly.step'])}}
     (target/'cad-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print('Exported two machined solids; all '+str(len(report)-2)+' cut / through gauges passed.',flush=True)
 

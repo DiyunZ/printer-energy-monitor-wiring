@@ -25,7 +25,7 @@
       -38.0,
       0
     ],
-    "diameter": 3.3,
+    "diameter": 5.5,
     "tolerance_mm": 0.12,
     "center_xyz_mm": [
       -131.0,
@@ -45,7 +45,7 @@
       38.0,
       0
     ],
-    "diameter": 3.3,
+    "diameter": 5.5,
     "tolerance_mm": 0.12,
     "center_xyz_mm": [
       -55.0,
@@ -61,7 +61,7 @@
   {
     "id": "SUPPLY",
     "wall": "left",
-    "diameter": 21.0,
+    "diameter": 22.2,
     "tolerance_mm": 0.1,
     "center_xyz_mm": [
       -142.56790254559155,
@@ -77,7 +77,7 @@
   {
     "id": "OUTPUT",
     "wall": "rear",
-    "diameter": 21.0,
+    "diameter": 22.2,
     "tolerance_mm": 0.1,
     "center_xyz_mm": [
       0.0,

@@ -60,7 +60,7 @@ def drawing(name, features, width, height, note):
     else:
         ax.set_xlim(-width/2,width/2);ax.set_ylim(0,height)
     ax.set_aspect('equal');ax.grid(alpha=.12);ax.axhline(0,c='#617989',lw=.8);ax.axvline(0,c='#617989',lw=.8)
-    ax.set_xlabel('U (mm)');ax.set_ylabel('V (mm)');ax.set_title(name.upper()+' / BUD NBF-32126',loc='left',fontsize=13,weight='bold')
+    ax.set_xlabel('U (mm)');ax.set_ylabel('V (mm)');ax.set_title(name.upper()+' / BUD NBF-32226',loc='left',fontsize=13,weight='bold')
     fig.subplots_adjust(left=.07,right=.58,bottom=.22 if name=='panel' else .14,top=.88)
     fig.text(.06,.95,'ENGINEERING REVIEW — release conditions in Build_Package.md',fontsize=9,color='#8c4d13')
     tableax=fig.add_axes([.62,.2,.36,.63]);tableax.axis('off')

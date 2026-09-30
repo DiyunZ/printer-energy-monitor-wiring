@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sources and design limits · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=19"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Wiring_References_EN.md" download>Download Markdown</a></nav><h1>Sources and design decisions</h1>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sources and design limits · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=20"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Wiring_References_EN.md" download>Download Markdown</a></nav><h1>Sources and design decisions</h1>
 <p>September 23, 2026. One 120 V grounded supply and one printer at a time, confirmed by the user. This is an engineering review package; physical and electrical release remain open in the <a href="build.html">build package</a>.</p>
 <h2>Primary references</h2>
 <div class="table-wrap"><table>
@@ -48,9 +48,9 @@
 </tr>
 <tr>
 <td id="r7">R7</td>
-<td><a href="https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/">BUD NBF-32126 product / linked STEP</a>, <a href="https://www.budind.com/wp-content/uploads/2019/01/hbnbf32226.pdf">common-base drawing</a></td>
+<td><a href="https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32226/">BUD NBF-32226 product / linked STEP</a>, <a href="https://www.budind.com/wp-content/uploads/2019/01/hbnbf32226.pdf">common-base drawing</a></td>
 <td>400 × 300 × 160 mm case; 3 mm wall; M5 support pattern. Custom 260 × 340 mm panel with 10 mm corner chamfers.</td>
-<td>Linked NBF-32226 base at full scale; opaque lid silhouette illustrative. Stock thickness and received-part fit remain unverified. No finished-assembly certification.</td>
+<td>Manufacturer-linked series shell and clear lid at full scale; original filename hbnbf32026.step. Stock thickness and received-part fit remain unverified. No finished-assembly certification.</td>
 </tr>
 <tr>
 <td id="r10">R10</td>
@@ -66,8 +66,8 @@
 </tr>
 <tr>
 <td id="r12">R12</td>
-<td><a href="https://www.hammfg.com/part/1427NCGPG13LB">Hammond 1427NCGPG13LB</a></td>
-<td>Two long-thread power glands.</td>
+<td><a href="https://www.heyco.com/products/liquid-tight-cordgrips/nylon-cordgrips/heyco-tite-liquid-tight-cordgrips-straight-thru-npt-hubs/">Heyco M3231 + 8463</a></td>
+<td>Two 15.5 mm thread cordgrips with separate 1/2 NPT locknuts; Ø22.2 mm bores.</td>
 <td>Measure actual cord and wall stacks; no DC feedthrough; USB uses a protected direct-cable opening.</td>
 </tr>
 <tr>

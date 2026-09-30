@@ -17,7 +17,7 @@
 Daily use begins only after qualified electrical inspection and setup.
 
 1. **Configure offline.** With mains unplugged and the lid closed, connect the free exterior USB-A end of the existing cable to the ELOG computer; use ELOG to set the clock, actual CT range and interval. Confirm logging is enabled and sufficient memory remains. Disconnect from the PC before reconnecting mains; the whole cable stays attached to the box.
-2. **Run independently.** XA and the adapter stay secured inside. With Q0 OFF and the lid closed, connect one printer and the supply. Switch Q0 ON. The opaque lid hides the logger LEDs; verify recording by an offline export after the supervised pilot. Record each job's start, phase changes and finish times against the synchronized clock.
+2. **Run independently.** XA and the adapter stay secured inside. With Q0 OFF and the lid closed, connect one printer and the supply. Switch Q0 ON. The clear polycarbonate lid permits visual inspection; verify recording by an offline export after the supervised pilot. Record each job's start, phase changes and finish times against the synchronized clock.
 3. **Download in batches.** After the printer finishes its shutdown/cooldown, switch Q0 OFF, unplug mains and verify absence of mains voltage. Keep the lid closed, connect the same free USB-A end to the PC and export the records in ELOG. Preserve raw data before clearing memory. Disconnect from the PC and stow the free end before the next powered run.
 
 **Q0 OFF is not isolation; its input remains live. Unplug SUPPLY IN from the wall before connecting a PC or opening the box. The complete USB cable stays attached to the box during printing; its exterior end is disconnected from the PC.**
@@ -48,11 +48,11 @@ Click photos to enlarge them. Reference images and design concepts are labeled; 
 
 **Concept layout; use the build package for machining.** Manufacturer CAD, published sizes and estimates share one scale. Small hardware and cable dressing are simplified; spare stock is excluded. Received parts still need a physical fit check.
 
-Amber marks the selected material; hidden housings become transparent. Top view matches the wiring plan. The selected case has gray walls and an opaque lid. X-ray mode is a visualization aid, not a transparent product cover. The lid silhouette comes from the manufacturer-linked common-base STEP; compare the actual opaque lid. Drag to rotate, scroll or pinch to zoom; keyboard controls are arrow keys, + / − and Home.
+Amber marks the selected material; hidden housings become transparent. Top view matches the wiring plan. The selected NBF-32226 has gray walls and a clear polycarbonate lid. Closed mode keeps the walls opaque and the lid transparent; X-ray mode additionally reveals through the walls. BUD case/lid and Phoenix Q0 use manufacturer STEP geometry without scaling. The 65 mm posts use manufacturer dimensions; threads, flexible cables and some small parts remain simplified. Drag to rotate, scroll or pinch to zoom; keyboard controls are arrow keys, + / − and Home.
 
 | Component | Model envelope (mm) | Evidence / limit |
 |---|---|---|
-| BUD NBF-32126 · opaque hinged cover | 318.5 × 164.3 × 411.1 | Manufacturer common-base STEP; opaque lid silhouette illustrative · [Source](https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/) |
+| BUD NBF-32226 · clear hinged cover | 318.5 × 164.3 × 411.1 | Manufacturer STEP, unscaled; clear polycarbonate lid · [Source](https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32226/) |
 | Reused aluminum panel · provisional 1.90 mm | 260.0 × 1.9 × 340.0 | Proposed fabrication template; stock not measured · [Source](https://www.budind.com/wp-content/uploads/2019/01/hbnbf32226.pdf) |
 | DENT ELITEpro XC | 63.0 × 47.0 × 216.0 | Catalog dimensions; verify actual unit · [Source](https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf) |
 | CT1 · printer hot only | 29.4 × 41.7 × 26.4 | Mini HSC family matched; 50 A variant probable · [Source](https://www.dentinstruments.com/shop/current-sensors/hinged-current-transformers-sensors-for-energy-metering/) |
@@ -60,7 +60,7 @@ Amber marks the selected material; hidden housings become transparent. Top view 
 | JL / JN / JPE distribution | 29.8 × 8.2 × 18.3 | Manufacturer connector and carrier dimensions · [Source](https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415) |
 | XA · internal Leviton 515CV | 66.3 × 39.1 × 39.1 | Manufacturer dimensional envelope; strap installation proposed · [Source](https://leviton.com/content/dam/leviton/residential/product_documents/none/Document-31435-Dimensional%20Data.jpg) |
 | CUI SMI6-9-V-P5 · existing adapter | 30.0 × 40.5 × 64.0 | Photo-identified; manufacturer body dimensions · [Source](https://www.belfuse.com/media/datasheets/products/power-supplies/SMI6.pdf) |
-| Power glands and direct USB cable exit | 27.0 × 37.0 × 27.0 | Catalog power-gland envelopes · [Source](https://www.hammfg.com/electronics/small-case/accessories/1427ncg) |
+| Power glands and direct USB cable exit | 28.8 × 43.2 × 28.8 | Manufacturer-dimensioned Heyco cordgrips; small details simplified · [Source](https://www.heyco.com/products/liquid-tight-cordgrips/nylon-cordgrips/heyco-tite-liquid-tight-cordgrips-straight-thru-npt-hubs/) |
 | DENT adapters & retained lead slack | Routing only | Illustrative routing; length not validated · [Source](https://www.dentinstruments.com/shop/elitepro-accessories-replacement-parts/replacement-unterminated-voltage-leads-10-for-elitepro-series/) |
 
 [Dimensions JSON](layout_dimensions.json) · [Enclosure CAD provenance](assets/enclosure.json) · [Materials JSON](procurement.json) · [Cable-support checks](installation_supports.json)

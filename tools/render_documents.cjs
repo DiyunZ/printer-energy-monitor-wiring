@@ -10,8 +10,8 @@ const kit = bom.items.filter(p => p.availability === 'kit');
 const toBuy = bom.items.filter(p => p.availability === 'buy');
 const toFabricate = bom.items.filter(p => p.availability === 'fabricate');
 const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function materialPhoto(p) {
- const photo=p.image;
+function materialPhoto(p, photo) {
+ if(!photo)return `<div class="material-gallery">${[p.image,...(p.additional_images||[])].map(photo=>materialPhoto(p,photo)).join('')}</div>`;
  let style='', ratio;
  if(photo.crop){
   const [x,y,w,h]=photo.crop;
@@ -55,7 +55,7 @@ for(const r of order.rows){
  if(r.material_ids.length>1 && (!r.quantity_by_material || Object.keys(r.quantity_by_material).length!==r.material_ids.length || r.material_ids.reduce((sum,id)=>sum+r.quantity_by_material[id],0)!==r.quantity))throw new Error('Shared purchase quantities do not match: '+r.sku);
 }
 text += `\n<h2 id="order-plan">Priced order plan · $${total.toFixed(2)} materials</h2>\n\nChecked ${order.checked_on}. ${order.scope}\n\n${order.supplier_policy}\n\n| Seller / exact item | Quantity to enter | Unit price (USD) | Line total (USD) | Availability / packaging |\n|---|---|---|---|---|\n`;
-for(const r of order.rows)text+=`| ${r.seller} · [${r.sku}](${r.url}) | ${r.quantity} ${r.unit}${r.pieces_per_unit>1?` (${r.pieces_per_unit} pieces per ${r.unit})`:''} | $${r.unit_price_usd.toFixed(Number(r.unit_price_usd.toFixed(2))===r.unit_price_usd?2:3)} | $${r.extended_usd.toFixed(2)} | ${r.availability_note} |\n`;
+for(const r of order.rows)text+=`| ${r.seller} · [${r.sku}](${r.url}) | ${r.quantity} ${r.unit}${r.pieces_per_unit>1?` (${r.pieces_per_unit} pieces per ${r.unit})`:''} | $${r.unit_price_usd.toFixed(Number(r.unit_price_usd.toFixed(2))===r.unit_price_usd?2:3)} | $${r.extended_usd.toFixed(2)} | ${r.availability_note} Checked ${r.checked_on}. |\n`;
 text+='\n| Seller | Materials subtotal (USD) |\n|---|---|\n';
 for(const seller of [...new Set(order.rows.map(r=>r.seller))])text+=`| ${seller} | $${(order.rows.filter(r=>r.seller===seller).reduce((sum,r)=>sum+Math.round(r.extended_usd*100),0)/100).toFixed(2)} |\n`;
 text+=`| **All selected materials** | **$${total.toFixed(2)}** |\n\nThe two 515CV installation rows below share the **single two-piece order line above**. Do not order two for each location. Aluminum stock and electrical acceptance remain open; see the [receiving record](build.html#receiving-record).\n`;
@@ -63,7 +63,7 @@ text+=`\n**Selection total: $${total.toFixed(2)} in materials from ${new Set(ord
 for (const [id, title, items, sourceLabel] of [['purchase-list',`□ Purchase list · ${toBuy.length} groups`,toBuy,'Price & purchase (USD)'],['fabrication-list',`◇ Reuse / fabrication · ${toFabricate.length}`,toFabricate,'Fabrication / source'],['owned-list',`✓ Existing equipment · ${owned.length+kit.length}`,[...owned,...kit],'Source']]) {
  text += `\n<h2 id="${id}">${title}</h2>\n\n`;
  if(id==='purchase-list')text+=`Prices checked ${order.checked_on}; subtotals include purchase packs and spares. Shared 515CV stock is allocated as one connector per location. [Full order quantities and seller totals](#order-plan).\n\n`;
- if(id==='fabrication-list')text+='Mounting panel and Q0 bracket: use the professor’s offered aluminum after checking the stock. **Fabrication cost is pending and excluded from the purchase subtotal.**\n\n';
+ if(id==='fabrication-list')text+='Mounting panel and flat Q0 bridge: use the professor’s offered aluminum after checking the stock. **Fabrication cost is pending and excluded from the purchase subtotal.**\n\n';
  text += `| Inventory | Item | Quantity needed | Part and purpose | ${sourceLabel} | Remaining checks |\n|---|---|---|---|---|---|\n`;
  for (const p of items) text += `| ${p.availability === 'owned' ? '✓ Owned' : p.availability === 'kit' ? '✓ Kit included' : p.availability === 'fabricate' ? '◇ Reuse / fabricate' : '□ To buy'} | <span class="material-name">${escape(p.item)}</span>${materialPhoto(p)}<a class="locate-material" data-material="${escape(p.id)}" href="index.html?material=${escape(p.id)}#layout" aria-label="View ${escape(p.item)} in 3D">View in 3D ↑</a> | ${p.quantity} | **${p.model}** — ${p.reason} | ${materialPrice(p)}${p.links.length ? p.links.map(l=>`[${l.label}](${l.url})`).join('<br>') : p.availability==='buy' ? '' : 'Reuse · No purchase needed'} | ${p.status}${p.compliance ? `<br>**${p.compliance.status}:** ${p.compliance.detail} [Evidence](${p.compliance.url})` : ''} |\n`;
 }
@@ -115,7 +115,7 @@ let documents=`# Build documents
 Daily use begins only after qualified electrical inspection and setup.
 
 1. **Configure offline.** With mains unplugged and the lid closed, connect the free exterior USB-A end of the existing cable to the ELOG computer; use ELOG to set the clock, actual CT range and interval. Confirm logging is enabled and sufficient memory remains. Disconnect from the PC before reconnecting mains; the whole cable stays attached to the box.
-2. **Run independently.** XA and the adapter stay secured inside. With Q0 OFF and the lid closed, connect one printer and the supply. Switch Q0 ON. The opaque lid hides the logger LEDs; verify recording by an offline export after the supervised pilot. Record each job's start, phase changes and finish times against the synchronized clock.
+2. **Run independently.** XA and the adapter stay secured inside. With Q0 OFF and the lid closed, connect one printer and the supply. Switch Q0 ON. The clear polycarbonate lid permits visual inspection; verify recording by an offline export after the supervised pilot. Record each job's start, phase changes and finish times against the synchronized clock.
 3. **Download in batches.** After the printer finishes its shutdown/cooldown, switch Q0 OFF, unplug mains and verify absence of mains voltage. Keep the lid closed, connect the same free USB-A end to the PC and export the records in ELOG. Preserve raw data before clearing memory. Disconnect from the PC and stow the free end before the next powered run.
 
 **Q0 OFF is not isolation; its input remains live. Unplug SUPPLY IN from the wall before connecting a PC or opening the box. The complete USB cable stays attached to the box during printing; its exterior end is disconnected from the PC.**
@@ -145,7 +145,7 @@ Click photos to enlarge them. Reference images and design concepts are labeled; 
 
 **Concept layout; use the build package for machining.** Manufacturer CAD, published sizes and estimates share one scale. Small hardware and cable dressing are simplified; spare stock is excluded. Received parts still need a physical fit check.
 
-Amber marks the selected material; hidden housings become transparent. Top view matches the wiring plan. The selected case has gray walls and an opaque lid. X-ray mode is a visualization aid, not a transparent product cover. The lid silhouette comes from the manufacturer-linked common-base STEP; compare the actual opaque lid. Drag to rotate, scroll or pinch to zoom; keyboard controls are arrow keys, + / − and Home.
+Amber marks the selected material; hidden housings become transparent. Top view matches the wiring plan. The selected NBF-32226 has gray walls and a clear polycarbonate lid. Closed mode keeps the walls opaque and the lid transparent; X-ray mode additionally reveals through the walls. BUD case/lid and Phoenix Q0 use manufacturer STEP geometry without scaling. The 65 mm posts use manufacturer dimensions; threads, flexible cables and some small parts remain simplified. Drag to rotate, scroll or pinch to zoom; keyboard controls are arrow keys, + / − and Home.
 
 | Component | Model envelope (mm) | Evidence / limit |
 |---|---|---|
@@ -157,6 +157,6 @@ const styles=`:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;colo
 for(const [input, output, title] of [['Procurement_BOM.md','materials.html','Materials and purchase links'],['Wiring_References_EN.md','references.html','Sources and design limits'],['Installation_Audit.md','installation.html','Installation audit'],['Build_Package.md','build.html','Machining and assembly package'],['Build_Documents.md','documents.html','Build documents'],['Protection_Review.md','protection.html','Protection and data review'],['Design_Revision_B.md','revision.html','Design, sourcing and component evidence']]) {
  const raw=fs.readFileSync(path.join(root,input),'utf8');
  const rendered=marked.parse(raw).replace(/<table>/g,'<div class="table-wrap"><table>').replace(/<\/table>/g,'</table></div>').replace(/<td>(R\d+)<\/td>/g,(_,id)=>`<td id="${id.toLowerCase()}">${id}</td>`);
- fs.writeFileSync(path.join(root,output),`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title} · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=19"><style>${styles}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="${input}" download>Download Markdown</a></nav>${rendered}</body></html>\n`);
+ fs.writeFileSync(path.join(root,output),`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title} · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=20"><style>${styles}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="${input}" download>Download Markdown</a></nav>${rendered}</body></html>\n`);
 }
 console.log('Generated BOM, build document hub, reference pages and installation audit');

@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Build documents · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=19"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Build_Documents.md" download>Download Markdown</a></nav><h1>Build documents</h1>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Build documents · ELITEpro XC</title><link rel="stylesheet" href="material-images.css?v=20"><style>:root{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:#203346;background:#edf2f6}body{max-width:1250px;margin:25px auto;padding:28px;background:white;border-radius:8px}h1{font-size:30px;line-height:1.2}h2{font-size:22px;margin-top:30px}a{color:#17619c}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border:1px solid #d8e0e7;vertical-align:top;text-align:left}th{background:#edf3f8}.table-wrap{overflow-x:auto}.table-wrap .material-photo{width:180px;max-width:180px}table{min-width:760px}code{background:#edf2f6;padding:2px 4px}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}@media(max-width:600px){body{margin:0;padding:20px}h1{font-size:26px}}</style></head><body><nav><a href="index.html#design">← Design</a><a href="index.html#hardware">Materials</a><a href="documents.html">Build documents</a><a href="Build_Documents.md" download>Download Markdown</a></nav><h1>Build documents</h1>
 <ul>
 <li><a href="revision.html">Design, sourcing and component evidence</a></li>
 <li><a href="build.html">Machining files and assembly guide</a> — drawings, fasteners and assembly order.</li>
@@ -15,7 +15,7 @@
 <p>Daily use begins only after qualified electrical inspection and setup.</p>
 <ol>
 <li><strong>Configure offline.</strong> With mains unplugged and the lid closed, connect the free exterior USB-A end of the existing cable to the ELOG computer; use ELOG to set the clock, actual CT range and interval. Confirm logging is enabled and sufficient memory remains. Disconnect from the PC before reconnecting mains; the whole cable stays attached to the box.</li>
-<li><strong>Run independently.</strong> XA and the adapter stay secured inside. With Q0 OFF and the lid closed, connect one printer and the supply. Switch Q0 ON. The opaque lid hides the logger LEDs; verify recording by an offline export after the supervised pilot. Record each job&#39;s start, phase changes and finish times against the synchronized clock.</li>
+<li><strong>Run independently.</strong> XA and the adapter stay secured inside. With Q0 OFF and the lid closed, connect one printer and the supply. Switch Q0 ON. The clear polycarbonate lid permits visual inspection; verify recording by an offline export after the supervised pilot. Record each job&#39;s start, phase changes and finish times against the synchronized clock.</li>
 <li><strong>Download in batches.</strong> After the printer finishes its shutdown/cooldown, switch Q0 OFF, unplug mains and verify absence of mains voltage. Keep the lid closed, connect the same free USB-A end to the PC and export the records in ELOG. Preserve raw data before clearing memory. Disconnect from the PC and stow the free end before the next powered run.</li>
 </ol>
 <p><strong>Q0 OFF is not isolation; its input remains live. Unplug SUPPLY IN from the wall before connecting a PC or opening the box. The complete USB cable stays attached to the box during printing; its exterior end is disconnected from the PC.</strong></p>
@@ -36,7 +36,7 @@
 <h2 id="dimensions">Dimensions and model notes</h2>
 
 <p><strong>Concept layout; use the build package for machining.</strong> Manufacturer CAD, published sizes and estimates share one scale. Small hardware and cable dressing are simplified; spare stock is excluded. Received parts still need a physical fit check.</p>
-<p>Amber marks the selected material; hidden housings become transparent. Top view matches the wiring plan. The selected case has gray walls and an opaque lid. X-ray mode is a visualization aid, not a transparent product cover. The lid silhouette comes from the manufacturer-linked common-base STEP; compare the actual opaque lid. Drag to rotate, scroll or pinch to zoom; keyboard controls are arrow keys, + / − and Home.</p>
+<p>Amber marks the selected material; hidden housings become transparent. Top view matches the wiring plan. The selected NBF-32226 has gray walls and a clear polycarbonate lid. Closed mode keeps the walls opaque and the lid transparent; X-ray mode additionally reveals through the walls. BUD case/lid and Phoenix Q0 use manufacturer STEP geometry without scaling. The 65 mm posts use manufacturer dimensions; threads, flexible cables and some small parts remain simplified. Drag to rotate, scroll or pinch to zoom; keyboard controls are arrow keys, + / − and Home.</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -46,9 +46,9 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>BUD NBF-32126 · opaque hinged cover</td>
+<td>BUD NBF-32226 · clear hinged cover</td>
 <td>318.5 × 164.3 × 411.1</td>
-<td>Manufacturer common-base STEP; opaque lid silhouette illustrative · <a href="https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/">Source</a></td>
+<td>Manufacturer STEP, unscaled; clear polycarbonate lid · <a href="https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32226/">Source</a></td>
 </tr>
 <tr>
 <td>Reused aluminum panel · provisional 1.90 mm</td>
@@ -87,8 +87,8 @@
 </tr>
 <tr>
 <td>Power glands and direct USB cable exit</td>
-<td>27.0 × 37.0 × 27.0</td>
-<td>Catalog power-gland envelopes · <a href="https://www.hammfg.com/electronics/small-case/accessories/1427ncg">Source</a></td>
+<td>28.8 × 43.2 × 28.8</td>
+<td>Manufacturer-dimensioned Heyco cordgrips; small details simplified · <a href="https://www.heyco.com/products/liquid-tight-cordgrips/nylon-cordgrips/heyco-tite-liquid-tight-cordgrips-straight-thru-npt-hubs/">Source</a></td>
 </tr>
 <tr>
 <td>DENT adapters &amp; retained lead slack</td>

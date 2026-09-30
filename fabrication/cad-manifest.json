@@ -1,16 +1,20 @@
 {
   "generator": "tools/cad/enclosure_model.py",
-  "generator_sha256": "45b9774f715f7acf83e19fb3ecbccdca6cf6e1fc25c75969af7e7f16c9d8319b",
-  "layout_sha256": "c8c76cb5a38cc5feb57364323934ff6bcc754bbd2e8f4927db303fff6ebbb599",
-  "q0_generator_sha256": "4484774e77de9977c340dd7cfb236c67925aee2e1a8621d414ca9c57c57b495c",
+  "generator_sha256": "3c2850921f2ad2766b56e56da8d47b9184cc341b36090b98c4b41f2af9675d29",
+  "layout_sha256": "4a4abd769967984dff4b90adb775f3313ae26ae0f4f3a1e52c60a12daa07be48",
+  "q0_generator_sha256": "f4e67d967a72aad9c09018617b1fd579fc45738efe71b30662152d33a130f84b",
   "breaker_step_sha256": "bc2e767952fc2a2d349f95bc0699f4b35c449a3614de03e6de218deedf0cf861",
   "breaker_source_url": "https://www.phoenixcontact.com/en-us/products/thermomagnetic-device-circuit-breakers-tmc-81c-15a-2907571",
+  "stop_step_sha256": "c000f962757bda0de5fc6f6b2c6483ae3bacc12eb34a3fce932b64397f037bad",
+  "stop_source_url": "https://legacy.altechcorp.com/CAD/2dr/Accessories/End_Stop/CA802/CA802.stp",
+  "stop_limitation": "Original vendor topology is visualization only; nominal seating, no exact-solid clearance or snap-fit claim.",
   "source_step_sha256": "1363ffb8a4be8935dc20f692d2b5acd265d9a9dffb4feb9b93d896c250324148",
-  "source_url": "https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/",
+  "source_url": "https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32226/",
   "outputs": {
-    "case-machined.step": "9c6ee4a3b4efb416a13bad705e20bfebc181688d5c328063583608e934725c22",
-    "case-machined.stl": "0d7d81f8c5a1e4c9ba5d5197288c4e291536a00a6e31abb19396617e21b65a56",
-    "panel-machined.step": "c9b12b996934b52c67d30e72910de43a7839b6c857b998e0175d6f74e4a34fa1",
-    "panel-machined.stl": "01f705cc1507f33e969114d7f159f7bcc38c8979c13c28058ec4fdfdc45c7f5f"
+    "case-machined.step": "0ce06ba9af0c9d6a0e97216e4ac163e377163b4569ec7c791b276f867fc774c0",
+    "case-machined.stl": "fee797c8c2e361b2e06a4c9c50beabdbb332ca18e99df9d663da4f2b725a20db",
+    "panel-machined.step": "26fdce3fc15758da087e79de16c9f5d9087401183f0c6fd9e62c1b7b94d72670",
+    "panel-machined.stl": "01f705cc1507f33e969114d7f159f7bcc38c8979c13c28058ec4fdfdc45c7f5f",
+    "q0-installed-assembly.step": "50924f588895bcfbe85c41d2962276045d28bec6098b004b7dbe4174191e0f5a"
   }
 }

@@ -1,9 +1,19 @@
 {
-  "source": "https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32126/",
+  "source": "https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32226/",
   "drawing": "https://www.budind.com/wp-content/uploads/2019/01/hbnbf32226.pdf",
   "units": "mm",
   "conversion": "Factory STEP; rotate Y -90 deg, translate Y +119.30026 mm. No scaling. build123d 0.11.1.",
-  "fabrication": "BUD common shell and custom aluminum panel machined; lid and latches retained from linked factory STEP. Opaque-cover silhouette illustrative. Carrier holes transfer-drilled.",
+  "fabrication": "BUD NBF-32226 shell and custom aluminum panel machined; lid and latches retained from factory STEP. Flat cut-and-drill Q0 bridge; no bends. Carrier holes transfer-drilled.",
+  "post_source": "https://www.we-online.com/components/products/datasheet/970xxxxx1_overview.pdf",
+  "stop_source": "https://legacy.altechcorp.com/CAD/2dr/Accessories/End_Stop/CA802/CA802.stp",
+  "stop_step_sha256": "c000f962757bda0de5fc6f6b2c6483ae3bacc12eb34a3fce932b64397f037bad",
+  "model_fidelity": {
+    "case": "Manufacturer-linked NBF-32226 series STEP, internal filename hbnbf32026.step; no scaling; specified wall cuts added.",
+    "breaker": "Exact Phoenix 2907571 STEP, no scaling; one static operating position.",
+    "stops": "Original CA802 STEP at 1:1; nominal seating pose. Vendor CompSolid has invalid topology; retained for visualization, excluded from exact-solid clearance claims. Check received snap fit.",
+    "posts": "Manufacturer dimensions 65 mm / SW8 / M5 / 11 mm thread depth; thread profile simplified.",
+    "fabricated_parts": "Parametric design at 1:1; aluminum thickness remains provisional."
+  },
   "panel_insertion": {
     "id": "panel",
     "travel_mm": 300,
@@ -34,7 +44,7 @@
   ],
   "meshes": [
     {
-      "name": "BUD NBF common base",
+      "name": "BUD NBF-32226 base",
       "role": "shell",
       "positionOffset": 0,
       "positionCount": 117354,
@@ -42,7 +52,7 @@
       "indexCount": 158559
     },
     {
-      "name": "Opaque cover silhouette",
+      "name": "Clear polycarbonate cover",
       "role": "lid",
       "positionOffset": 1103652,
       "positionCount": 59727,
@@ -74,20 +84,52 @@
       "indexCount": 10152
     },
     {
-      "name": "Formed Q0 rail bracket",
+      "name": "Flat Q0 aluminum bridge",
       "role": "q0-bracket",
       "positionOffset": 2195376,
-      "positionCount": 2988,
-      "indexOffset": 2207328,
-      "indexCount": 2856
+      "positionCount": 2154,
+      "indexOffset": 2203992,
+      "indexCount": 2124
     },
     {
       "name": "Phoenix 2907571 manufacturer STEP",
       "role": "q0-body",
-      "positionOffset": 2218752,
+      "positionOffset": 2212488,
       "positionCount": 5706,
-      "indexOffset": 2241576,
+      "indexOffset": 2235312,
       "indexCount": 4884
+    },
+    {
+      "name": "Wurth 970650581 left post",
+      "role": "q0-post",
+      "positionOffset": 2254848,
+      "positionCount": 1128,
+      "indexOffset": 2259360,
+      "indexCount": 1068
+    },
+    {
+      "name": "Wurth 970650581 right post",
+      "role": "q0-post",
+      "positionOffset": 2263632,
+      "positionCount": 1128,
+      "indexOffset": 2268144,
+      "indexCount": 1068
+    },
+    {
+      "name": "Altech CA802 left end stop",
+      "role": "q0-stop",
+      "positionOffset": 2272416,
+      "positionCount": 16128,
+      "indexOffset": 2336928,
+      "indexCount": 14634
+    },
+    {
+      "name": "Altech CA802 right end stop",
+      "role": "q0-stop",
+      "positionOffset": 2395464,
+      "positionCount": 16128,
+      "indexOffset": 2459976,
+      "indexCount": 14634
     }
   ],
   "bounds": {
