@@ -169,10 +169,12 @@ async function start() {
   box([12,13,3],[mx+16,23,mz+ml/2+1],'#c3c8c9','meter',1);
   box([8,8,3.5],[mx+16,23,mz+ml/2+2],'#2a3138','meter');
   tag('ELITEpro XC', [mx,64,mz-1], 'meter');
+  // Straps follow the datasheet body: 0.6 mm over the top face, closing under the panel.
+  const [sx0,sx1]=dimensions.installationHardware.loggerStrapX, strapTop=my+mh/2+.6;
   for(const z of [-70,50]) capture('logger-restraint', String(z), z < 0 ? 'Rear logger strap' : 'Front logger strap', () => {
-    box([82,1.2,19.05],[mx,54.1,z],'#404a50','meter',.3);
-    box([82,1.2,19.05],[mx,-1.1,z],'#404a50','meter',.3);
-    for(const x of dimensions.installationHardware.loggerStrapX) box([1.2,54,19.05],[x,26.5,z],'#404a50','meter',.3);
+    box([sx1-sx0,1.2,19.05],[(sx0+sx1)/2,strapTop+.6,z],'#404a50','meter',.3);
+    box([sx1-sx0,1.2,19.05],[(sx0+sx1)/2,-1.1,z],'#404a50','meter',.3);
+    for(const x of [sx0,sx1]) box([1.2,strapTop+.5,19.05],[x,(strapTop-.5)/2,z],'#404a50','meter',.3);
   });
   // CT ring: the model aperture goes along X. Only the printer hot conductor crosses it.
   const [cx,cy,cz] = parts.ct.position;
@@ -385,7 +387,7 @@ async function start() {
   }
   dimension([-130,2,184],[130,2,184],'Panel 260 mm',[0,3,200]);
   dimension([-144,2,-170],[-144,2,170],'Panel 340 mm',[-168,2,0]);
-  dimension([132,7,mz-108],[132,7,mz+108],'Meter 216 mm',[139,7,mz]);
+  dimension([132,7,mz-ml/2],[132,7,mz+ml/2],`Meter ${ml} mm`,[139,7,mz]);
   dimension([-175,-22,257],[-75,-22,257],'100 mm',[-125,-22,269]);
   const floor = box([6000,2,6000],[0,-25.6,0],'#eef2f4',null,0,scene); floor.receiveShadow=true;floor.castShadow=false;
   const grid = new THREE.GridHelper(1000,20,'#cbd5dc','#e0e6ea'); grid.position.y=-24.5; scene.add(grid);

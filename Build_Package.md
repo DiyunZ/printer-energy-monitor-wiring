@@ -64,7 +64,7 @@ Provide a dedicated PE bond with a reviewed method and hardware suitable for the
 
 Q0 uses the new metal DIN support behind the front wall, with its operator accessible outside. Three WAGO **221-415 / 221-505** connector/carrier pairs provide JL, JN and PE. A1 feeds from JL; A2/A3 from JN. PE joins supply earth, printer earth, internal XA earth, panel bond and Q0 rail/bracket bond. One accepted conductor per port.
 
-The logger retains two **19.05 mm ONE-WRAP** straps, with a **216 × 69 × 58 mm** receiving envelope. Add two straps for XA and adapter. Eight **21 × 4 mm** smooth panel slots support all four straps. Fit and trim the flexible straps; do not drill equipment housings or cover required adapter markings/heat-dissipation surfaces.
+The logger (ELITEpro XC, serial XC1811023) retains two **19.05 mm ONE-WRAP** straps around the official datasheet case, **216 × 63 × 47 mm**. Add two straps for XA and adapter. Eight **21 × 4 mm** smooth panel slots support all four straps. Fit and trim the flexible straps; do not drill equipment housings or cover required adapter markings/heat-dissipation surfaces.
 
 <h2 id="q0-mount">Q0 flat bridge, posts and protective bond</h2>
 

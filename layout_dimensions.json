@@ -50,9 +50,9 @@
         29.4,
         -8
       ],
-      "status": "Catalog dimensions; verify actual unit",
+      "status": "Official datasheet dimensions; owner-selected basis for serial XC1811023",
       "source": "https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf",
-      "note": "Long blue body uses the current 216 × 63 × 47 mm specification. The older ELOG manual gives 203 × 69 × 58 mm. Measure the photographed instrument before finalizing. Ports, feet and grip details are visual approximations; plug space is additional. Adjustable two-strap mounting uses slots 82 mm apart; reserve a 216 × 69 × 58 mm acceptance envelope. No close-fitting cradle or drilling into the logger."
+      "note": "Owned unit: ELITEpro XC, serial XC1811023 (rear label). Body uses the official ELITEpro XC datasheet (rev. 01/27/2026, p.6): 21.6 × 6.3 × 4.7 cm, 340 g, ABS 94-V0 housing with mounting tab and housing magnets. The ELOG operator guide and quick start guide (rev. 11/15/2024) list 69 × 58 × 203 mm; the datasheet governs this design by owner decision. Neither document states whether the tab or magnets are included. Ports, magnets and grip details are visual approximations; plug space is additional. Housing magnets do not hold to the aluminum panel or ABS/PC enclosure, so two adjustable straps on slots 82 mm apart retain the logger. No close-fitting cradle or drilling into the logger."
     },
     {
       "id": "ct",

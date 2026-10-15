@@ -55,7 +55,7 @@ Amber marks the selected material; hidden housings become transparent. Top view 
 |---|---|---|
 | BUD NBF-32226 · clear hinged cover | 318.5 × 164.3 × 411.1 | Manufacturer STEP, unscaled; clear polycarbonate lid · [Source](https://www.budind.com/product/nema-ip-rated-boxes/nbf-series-fiberglass-enclosure/nbf-32226/) |
 | Reused aluminum panel · provisional 1.90 mm | 260.0 × 1.9 × 340.0 | Proposed fabrication template; stock not measured · [Source](https://www.budind.com/wp-content/uploads/2019/01/hbnbf32226.pdf) |
-| DENT ELITEpro XC | 63.0 × 47.0 × 216.0 | Catalog dimensions; verify actual unit · [Source](https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf) |
+| DENT ELITEpro XC | 63.0 × 47.0 × 216.0 | Official datasheet dimensions; owner-selected basis for serial XC1811023 · [Source](https://www.dentinstruments.com/wp-content/uploads/ELITEproXC_Datasheet_01272026.pdf) |
 | CT1 · printer hot only | 29.4 × 41.7 × 26.4 | Mini HSC family matched; 50 A variant probable · [Source](https://www.dentinstruments.com/shop/current-sensors/hinged-current-transformers-sensors-for-energy-metering/) |
 | Q0 · Phoenix TMC 81C 15A | 17.6 × 116.5 × 74.3 | Manufacturer STEP; operating position shown, travel unverified · [Source](https://www.phoenixcontact.com/en-us/products/thermomagnetic-device-circuit-breakers-tmc-81c-15a-2907571) |
 | JL / JN / JPE distribution | 29.8 × 8.2 × 18.3 | Manufacturer connector and carrier dimensions · [Source](https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415) |

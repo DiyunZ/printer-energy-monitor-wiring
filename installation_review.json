@@ -53,9 +53,9 @@
       "item": "Power logger",
       "model": "DENT ELITEpro XC",
       "availability": "owned",
-      "result": "Measure",
-      "checked": "Current published case is 216 × 63 × 47 mm; older guide gives 203 × 69 × 58 mm. Existing unit has the right voltage / CT / USB connector families.",
-      "remaining": "Measure this unit including plugs and magnetic feet. Verify the restraint, clearances, firmware and ELOG configuration.",
+      "result": "Conditional",
+      "checked": "Rear label identifies an ELITEpro XC, serial XC1811023. By owner decision the official datasheet case, 216 × 63 × 47 mm, governs; the ELOG guides list 69 × 58 × 203 mm. Existing unit has the right voltage / CT / USB connector families.",
+      "remaining": "Fit the adjustable straps and check plug clearances at dry fit. Verify firmware and ELOG configuration.",
       "sources": [
         "dent-size",
         "dent"
