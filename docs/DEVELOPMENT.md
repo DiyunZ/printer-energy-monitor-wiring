@@ -60,6 +60,7 @@ Run focused browser checks when their features change:
 | Script | Coverage |
 |---|---|
 | `tools/verify_material_locator.cjs` | Material links, mesh ownership, locations and navigation |
+| `tools/verify_delivery_checklist.cjs` | Delivery ticks: one per material, kept across reloads, status restored when cleared |
 | `tools/verify_wiring.cjs` | Circuit labels, endpoints, pan, zoom and fullscreen |
 | `tools/verify_usb_service.cjs` | Closed-lid USB export workflow and connector links |
 | `tools/verify_cable_geometry.cjs` | Supports, cable separation, CT passage and cord breakouts |
