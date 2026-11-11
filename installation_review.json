@@ -185,8 +185,8 @@
       "model": "WAGO 221-505",
       "availability": "buy",
       "result": "Conditional",
-      "checked": "Three 221-505 carriers, each with two M3 fasteners.",
-      "remaining": "Transfer-drill actual fixing holes and verify underside fastener clearance.",
+      "checked": "Three 221-505 carriers. Data sheet: two M3 openings inside the carrier body, 14.2 mm from the closed end and 20 mm apart, under the connector; the 25 mm end plate is a removable strain-relief plate.",
+      "remaining": "Transfer-drill actual fixing holes with the strain-relief plate toward Q0. Fasten each carrier before inserting its connector. Verify that the purchased pan-head M3 screw seats under the connector and that its length suits the 9.5 mm space under the panel.",
       "sources": [
         "carrier"
       ]
@@ -448,13 +448,13 @@
     {
       "stage": 2,
       "title": "Fit underside hardware and panel",
-      "action": "Fit the six cable mounts and carrier fasteners, thread four equipment straps and check underside projections. Seat the panel on its factory supports. Install four separately purchased M5 × 10 mm panel screws after checking engagement.",
+      "action": "Fit the six cable mounts, screw the three empty carriers to the panel, thread four equipment straps and check underside projections. Seat the panel on its factory supports. Install four separately purchased M5 × 10 mm panel screws after checking engagement.",
       "result": "Nominal vertical insertion screen; actual stock thickness and fastener stacks need measurement."
     },
     {
       "stage": 3,
       "title": "Restrain logger, CT and terminals",
-      "action": "Fit the logger with two adjustable straps; retain three WAGO groups, one CT and a dedicated aluminum-panel PE connection. Confirm CT label and cable slack.",
+      "action": "Fit the logger with two adjustable straps; snap the three WAGO connectors into their fastened carriers; retain one CT and a dedicated aluminum-panel PE connection. Confirm CT label and cable slack.",
       "result": "Catalog envelopes and routed cable geometry only; no physical retention test."
     },
     {

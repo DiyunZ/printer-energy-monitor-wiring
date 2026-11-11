@@ -536,8 +536,8 @@
       "item": "Connector carriers",
       "quantity": "3",
       "model": "WAGO 221-505",
-      "reason": "Secure each connector to the backpanel with its carrier. Carrier details are schematic; transfer-drill from received parts. Connectors must not rely on wires for support.",
-      "status": "Three carriers, two M3 fixings each; transfer-drill actual front-foot holes.",
+      "reason": "Secure each connector to the backpanel with its carrier. Body, strain-relief plate and fixing openings follow the WAGO data sheet; small molded details are schematic. Transfer-drill from received parts. Connectors must not rely on wires for support.",
+      "status": "Three carriers, two M3 fixings each inside the carrier body under the connector (14.2 mm from the closed end, 20 mm apart). Fasten each carrier before inserting its connector; check screw head height and length on the received part.",
       "links": [
         {
           "label": "Buy · DigiKey",
@@ -568,7 +568,7 @@
         "width": 200,
         "height": 200
       },
-      "installation": "Three carriers sit under JL, JN and PE and fasten to the panel.",
+      "installation": "Three carriers sit under JL, JN and PE and fasten to the panel, strain-relief plate toward Q0. Conductors enter from that side.",
       "location_summary": "One beneath each of the three distribution connectors.",
       "supplier": "DigiKey",
       "compliance": {

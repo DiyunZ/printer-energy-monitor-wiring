@@ -189,7 +189,7 @@
       ],
       "status": "Manufacturer connector and carrier dimensions",
       "source": "https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-415",
-      "note": "Three WAGO 221-415 connectors in three 221-505 carriers: JL, JN and PE. Each carrier uses two M3 fasteners, lateral 20 mm spacing, at the front foot. Insert one conductor per port; strip 11 mm. A1 connects at JL downstream of Q0; acceptance of the original DENT lead termination and upstream-only protection is required before use."
+      "note": "Three WAGO 221-415 connectors in three 221-505 carriers: JL, JN and PE. Each carrier has two M3 fixing openings inside its body, 14.2 mm from the closed end and 20 mm apart, beneath the connector; the 25 mm plate at the other end is a removable strain-relief plate, not a mounting foot (WAGO 221-505 data sheet). Fasten the carrier before snapping in the connector. Conductors enter from the strain-relief-plate side. Insert one conductor per port; strip 11 mm. A1 connects at JL downstream of Q0; acceptance of the original DENT lead termination and upstream-only protection is required before use."
     },
     {
       "id": "outlet",
@@ -776,6 +776,21 @@
     "postSource": "https://www.we-online.com/components/products/datasheet/970xxxxx1_overview.pdf",
     "stopSource": "https://legacy.altechcorp.com/CAD/2dr/Accessories/End_Stop/CA802/CA802.stp",
     "stopNote": "Manufacturer STEP at 1:1; 8 mm thickness. Published drawing 45.4 × 30.5 mm; STEP 45.60 × 30.62 mm. Static spring position; verify received rail seating."
+  },
+  "terminalCarrier": {
+    "model": "WAGO 221-505",
+    "bodyLengthMm": 27.8,
+    "strainReliefPlateLengthMm": 25,
+    "heightMm": 16.9,
+    "fixingFromClosedEndMm": 14.2,
+    "fixingPitchMm": 20,
+    "fixingScrew": "M3 fillister head or ST2.9 sheet-metal screw (data-sheet opening)",
+    "plateToward": "front (+Z, toward Q0)",
+    "seatThicknessMm": 1.5,
+    "connectorRiseMm": 2.6,
+    "endWallMm": 2.5,
+    "source": "https://www.wago.com/221-505",
+    "note": "Overall 35 x 16.9 x 52.8 mm, body 27.8 mm plus strain-relief plate 25 mm, and the two fixing openings 14.2 mm from the closed end at 20 mm pitch are data-sheet dimensions. Seat thickness, connector rise and end-wall thickness are illustrative assumptions; measure the received part. With a 1.5 mm seat, a 12 mm screw would end about 0.9 mm above the nominal case floor, so check screw length and head height (purchased pan head against the specified fillister head) before fitting. Plate toward the front keeps the JN fixings about 17 mm from the plain support boss at X/Z = -114.9/-54.2; the reversed orientation would put them about 10 mm away."
   },
   "powerGlands": {
     "model": "Heyco M3231 + 8463",

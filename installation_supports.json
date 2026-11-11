@@ -13,9 +13,9 @@
       "missingRoutes": [],
       "minimumOpeningClearanceMm": 0.8999999999999979,
       "bandWidthMm": 4.8,
-      "loopWidthMm": 18.640307621282183,
-      "loopHeightMm": 19.77150542793202,
-      "lengthWithLockAllowanceMm": 97.90504112063371,
+      "loopWidthMm": 18.640310191597145,
+      "loopHeightMm": 19.725366032852026,
+      "lengthWithLockAllowanceMm": 97.81276747110365,
       "pass": true
     },
     {
@@ -30,9 +30,9 @@
       "missingRoutes": [],
       "minimumOpeningClearanceMm": 0.8999999999999997,
       "bandWidthMm": 4.8,
-      "loopWidthMm": 17.256638373562975,
+      "loopWidthMm": 17.25673149104834,
       "loopHeightMm": 9.6,
-      "lengthWithLockAllowanceMm": 74.79469176933124,
+      "lengthWithLockAllowanceMm": 74.79487800430196,
       "pass": true
     },
     {
@@ -131,5 +131,5 @@
   "componentBodyIntrusions": [],
   "ctAperture": "One straight printer-hot conductor",
   "entries": "Outer jackets extend through both power glands; bare conductor breakouts stay inside",
-  "limitations": "Sampled curves with assumed wire diameters. WAGO terminations exclude a 20 mm endpoint region. Phoenix Q0 entries permit only bounded manufacturer channels and 2 mm at the correct endpoint; separate STEP gauges check the channels. Does not establish every wire-to-wire clearance, stiffness, torque, retention or manufactured fit."
+  "limitations": "Sampled curves with assumed wire diameters. Named WAGO terminations exclude a 20 mm endpoint region; named Q0 entries permit only the bounded manufacturer terminal channels and a 2 mm endpoint neighborhood; independent STEP wire gauges check these channels. Does not certify every wire-to-wire clearance, cable stiffness, torque, pull retention or manufactured fit."
 }

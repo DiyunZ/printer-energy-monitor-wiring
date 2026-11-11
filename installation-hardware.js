@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { fitSupport, auditSupport } from './cable-supports.js?v=34';
+import { fitSupport, auditSupport } from './cable-supports.js?v=35';
 
 // Secondary hardware is an installation illustration, not a machining template.
 // Panel datums come from the same schedule as the existing CAD openings.
@@ -15,7 +15,8 @@ export function addInstallationHardware({ dimensions, instances, parts, box, cyl
     return mesh(geo,material(color,.45),position,part);
   }
   // Representative washer/head/shank stacks; use the build package for threads,
-  // lengths and torque. Carrier longitudinal hole datums require transfer drilling.
+  // lengths and torque. Carrier openings follow the WAGO 221-505 data sheet (14.2 mm from
+  // the closed end, 20 mm pitch, under the connector); still transfer-drill from the part.
   function fixing(key,label,[x,y,z],part,diameter=4,axis='y',length=12,throughPanel=false) {
     capture('fasteners',key,label,()=>{
       const shift=(pos,t)=>pos.map((v,i)=>v+(i===({x:0,y:1,z:2}[axis])?t:0));
@@ -53,7 +54,8 @@ export function addInstallationHardware({ dimensions, instances, parts, box, cyl
     annulus(4,2,4,[x,y,qw-66-railShift],'#89979c','q0','z',6);
   });
   dimensions.instances.filter(p=>p.part==='terminals').forEach(p=>{
-    for(const x of [-10,10]) fixing(`${p.id}-${x}`,`${p.id} carrier fixing ${x<0?1:2}`,[p.position[0]+x,6.3,p.position[2]+17],'terminals',3,'y',h.carrierScrewLengthMm);
+    const c=dimensions.terminalCarrier, seat=parts.panel.size[1]+c.seatThicknessMm;
+    for(const x of [-c.fixingPitchMm/2,c.fixingPitchMm/2]) fixing(`${p.id}-${x}`,`${p.id} carrier fixing ${x<0?1:2}`,[p.position[0]+x,seat,p.position[2]-p.size[2]/2+c.fixingFromClosedEndMm],'terminals',3,'y',h.carrierScrewLengthMm);
   });
   h.panelSupportsXZ.forEach(([x,z],i)=>capture('fasteners',`panel-${i}`,`Panel mounting screw ${i+1}`,()=>{
     const y=parts.panel.size[1];
